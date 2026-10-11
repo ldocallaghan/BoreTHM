@@ -43,13 +43,37 @@ def test_stresses_must_keep_the_stated_regime():
         se.validate_site(replace(se.SOULTZ, stress_cases=(p,)))
 
 
-def test_a_basis_needs_a_source():
+def test_a_missing_source_is_a_warning():
     basis = dict(se.SOULTZ.data_basis, stress=("measured", ""))
-    with pytest.raises(ValueError, match="no source"):
-        se.validate_site(replace(se.SOULTZ, data_basis=basis))
+    assert "data basis 'stress' has no source" in se.validate_site(replace(se.SOULTZ, data_basis=basis))
 
 
 def test_a_layered_geotherm_follows_its_points():
     g = se.layered_geotherm([(0, 10.0), (2000, 90.0), (5000, 200.0)], 0.03)
     assert float(g(1000)) == pytest.approx(50.0)
     assert float(g(6000)) == pytest.approx(230.0)
+
+
+def test_public_evaluation_validates_before_solving(monkeypatch):
+    monkeypatch.setattr(se, '_evaluate_v13', lambda *args, **kwargs: pytest.fail('invalid input reached a solver'))
+    with pytest.raises(ValueError, match='target_depth'):
+        se.evaluate(replace(se.SOULTZ, target_depth=10.7))
+    with pytest.raises(ValueError, match='finite'):
+        se.evaluate(replace(se.SOULTZ, geotherm=lambda z: np.nan))
+
+
+def test_json_exports_the_effective_larderello_target():
+    from comparative_sites import LARDERELLO
+    data = se.result_dict(dict(site=LARDERELLO, z=LARDERELLO.target(), T_rock=LARDERELLO.target_T))
+    assert data['site']['target_depth_m'] == 2400.
+    assert data['site']['legacy_target_depth_m'] == 2850.
+
+
+def test_malformed_template_has_a_clear_cli_error(monkeypatch, capsys):
+    import new_site
+    monkeypatch.setattr(new_site, 'make_site', lambda: replace(se.SOULTZ, target_depth=10.7))
+    monkeypatch.setattr(sys, 'argv', ['new_site.py', '--evaluate'])
+    with pytest.raises(SystemExit) as error:
+        new_site.main()
+    assert error.value.code == 2
+    assert 'target_depth = 10.7 m is outside' in capsys.readouterr().err

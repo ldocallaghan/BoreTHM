@@ -33,8 +33,11 @@ def main():
     a = ap.parse_args()
 
     site = make_site()
-    for w in se.validate_site(site):
-        print("warning:", w)
+    try:
+        for w in se.validate_site(site):
+            print("warning:", w)
+    except ValueError as error:
+        ap.error(str(error))
     print(f"{site.name}: inputs valid; {site.tier}")
     print("same inputs as the repository's Soultz:", site == se.SOULTZ)
     if not (a.evaluate or a.json):
@@ -44,7 +47,7 @@ def main():
     if a.json:
         se.export_result(o, a.json)
         print(f"result written to {a.json}")
-    if os.path.exists(GOLDEN):
+    if site == se.SOULTZ and os.path.exists(GOLDEN):
         pinned = json.load(open(GOLDEN))[se.SOULTZ.name]
         now = cs.golden_rows_v133([o])[site.name]
         same = {k: now[k] == pinned[k] for k in ("status", "verdicts", "site_verdict")}

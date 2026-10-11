@@ -260,17 +260,21 @@ def validate_site(site):
       * every data-basis entry with a basis from BASES and a source."""
     errs, warns = [], []
     for k, (lo, hi, unit) in INPUT_RANGES.items():
-        v = getattr(site, k)
+        v = site.target() if k == 'target_depth' else getattr(site, k)
         if not lo <= v <= hi:
             errs.append(f"{k} = {v:g} {unit} is outside {lo:g} to {hi:g} {unit}")
+    if errs:
+        raise ValueError(f'{site.name}: ' + '; '.join(errs))
     for lab, ucs in site.strength_cases:
         lo, hi, unit = INPUT_RANGES["UCS"]
         if not lo <= ucs <= hi:
             errs.append(f"strength case {lab!r}: UCS {ucs:g} {unit} is outside {lo:g} to {hi:g} {unit}")
     z = site.target()
     shoe = min(wg.WU_SHOES[-1], 0.5 * z)       # as site_well sets it
-    zz = np.arange(0.0, z + 1.0, 100.0)
+    zz = np.unique(np.append(np.arange(0.0, z, 100.0), z))
     T = np.array([float(site.temperature()(x)) for x in zz])
+    if not np.all(np.isfinite(T)):
+        raise ValueError(f'{site.name}: temperature profile must be finite')
     falls = zz[1:][np.diff(T) <= 0]
     if np.any(falls >= shoe):
         errs.append(f"temperature does not rise with depth at {falls[falls >= shoe][0]:.0f} m "
@@ -285,6 +289,8 @@ def validate_site(site):
             S = dict(Sv=p.Sv(d), Shmin=p.Shmin(d), SHmax=p.SHmax(d))
             Pp = float(p.Pp(d))
             where = f"stress case {p.label!r} at {d:.0f} m"
+            if not all(np.isfinite(value) for value in (*S.values(), Pp)):
+                errs.append(f'{where}: stress and pore-pressure values must be finite'); break
             if min(S.values()) <= 0:
                 errs.append(f"{where}: a stress is not positive"); break
             if S["SHmax"] < S["Shmin"]:
@@ -308,7 +314,7 @@ def validate_site(site):
         if basis not in BASES:
             errs.append(f"data basis {k!r}: {basis!r} is not one of " + ", ".join(BASES))
         if not src:
-            errs.append(f"data basis {k!r} has no source")
+            warns.append(f"data basis {k!r} has no source")
     for k in ("stress", "strength", "pore pressure", "temperature", "well check"):
         if k not in site.data_basis:
             warns.append(f"no data basis for {k}: the site is speculative")
@@ -832,6 +838,7 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.3", c
     thermal stress nor cold-strength gain), the site-calibrated breakout
     limit, and the two together.
     """
+    input_warnings = validate_site(site)
     # coupled: on by default with the pressure budget; on with "v1.3" alone
     # shows what the coupling moves in the v1.3.2 table
     if coupled is None:
@@ -843,9 +850,13 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.3", c
     T_rock = float(geotherm(z))
 
     if circulation in ("v1.3", "v1.3.3") and not v10:
-        return _evaluate_v13(site, thermal, budget=circulation == "v1.3.3")
+        out = _evaluate_v13(site, thermal, budget=circulation == "v1.3.3")
+        out['input_warnings'] = input_warnings
+        return out
     if circulation == "v1.2" and not v10:
-        return _evaluate_v12(site, thermal)
+        out = _evaluate_v12(site, thermal)
+        out['input_warnings'] = input_warnings
+        return out
 
     # --- (1) SURVIVAL & ENERGY: Model 1 with the real LAYERED geotherm ---
     # scan flow for the minimum that keeps the bit < survival ceiling
@@ -882,6 +893,7 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.3", c
     out["MW_prod"] = rp["Q_product"] / 1e6
     out["Tret_prod"] = rp["T_return_surface"]
     out["circulation"] = "v1.1"
+    out['input_warnings'] = input_warnings
     return out
 
 
@@ -2360,7 +2372,8 @@ def result_dict(o):
     status, the margins, the sensitivities, and the versions."""
     s = o["site"]
     d = dict(
-        site=dict(name=s.name, tier=s.tier, target_depth_m=s.target_depth, target_T_C=s.target_T,
+        site=dict(name=s.name, tier=s.tier, target_depth_m=s.target(),
+                  legacy_target_depth_m=s.target_depth, target_T_C=s.target_T,
                   k_rock=s.k_rock, E_rock_Pa=s.E_rock, T_inj_C=s.T_inj, mu=s.mu,
                   data_basis={k: dict(basis=b, source=src) for k, (b, src) in s.data_basis.items()},
                   missing=s.missing(),
@@ -2399,6 +2412,7 @@ def result_dict(o):
         if k in o:
             d[k] = o[k]
     d["versions"] = versions()
+    d['input_warnings'] = o.get('input_warnings', [])
     return _jsonable(d)
 
 
@@ -2433,7 +2447,13 @@ if __name__ == "__main__":
         ("soultz", "larderello", "united-downs", "pannonian", "newberry")))
     ap.add_argument("--json", help="also write the result to this JSON file")
     a = ap.parse_args()
-    o = evaluate(find_site(a.site))
+    site = find_site(a.site)
+    try:
+        for warning in validate_site(site):
+            print('warning:', warning)
+        o = evaluate(site)
+    except ValueError as error:
+        ap.error(str(error))
     report(o)
     if a.json:
         export_result(o, a.json)
