@@ -134,6 +134,11 @@ def circulating_profile(ts, bit_ft, flow, tin, dp):
     if key not in _cache:
         s = dict(time=ts, bit_ft=bit, flow_gpm=key[2], T_in_F=key[3], motor_dp_psi=max(dp, 0.0))
         r, g = v.solve_at(run, s, 1.0, K_IDP_UNFITTED)
+        if not r["success"]:
+            # an unconverged solve is the solver's last iterate, which depends on
+            # floating-point detail and once made this check vary between machines
+            raise RuntimeError(f"Model 1 did not converge for {run} at {bit:.0f} ft, "
+                               f"{key[2]} gal/min, {key[3]} F")
         z = r["z"]
         ga = g.at(np.clip(z, 0.5, g.md_bit - 0.5))
         h = m1.h_dittus(r["m_dot"], ga["A_ann"], ga["Dh_ann"], r["Tu"], m1.P_of_z(ga["tvd"]))

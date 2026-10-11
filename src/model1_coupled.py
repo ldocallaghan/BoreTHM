@@ -124,7 +124,9 @@ def smooth_exposure(exposure, md_bit, dz=25.0):
     return lambda z: np.exp(f(np.clip(np.asarray(z, float), 0.0, md_bit)))
 
 
-SEED_YEARS = (1 / 365, 1 / 52, 1 / 12, 1.0)
+# tried in order; the last two converge where the first four do not, as for
+# FORGE 16B's BHA13 at 9,600 ft and 675 gal/min (validate_forge_pauses.py)
+SEED_YEARS = (1 / 365, 1 / 52, 1 / 12, 1.0, 1 / 730, 3.0)
 
 
 def solve_seeded(exposure, breaks=(), seeds=SEED_YEARS, **kw):

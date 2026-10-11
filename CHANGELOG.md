@@ -113,13 +113,22 @@ now 0.94 to 0.98 SG at the targets, against the 1.02 SG of the constant
   (1.142). At United Downs the flow ceiling rises from 60 to 70 kg/s and the
   Shmin margin at friction 1.0 from 2.2 to 2.6% (SHmax held) and 4.6 to 5.8%
   (scaled). Larderello does not change.
-- **The FORGE trip test.** The no-node fit factor is 0.357 on Python 3.14.4,
-  both with the lock file's packages (numpy 2.5.3, scipy 1.18.1) and from a
-  clean clone with numpy 2.4.4 and scipy 1.17.1, and the reviewers found
-  0.391 on Python 3.11, 3.12 and 3.13. v1.3.2 put the difference down to
-  Python 3.11 alone. The test's tolerance now covers the spread, and the
-  Pason times are read as UTC so that the pinned epochs do not depend on the
-  machine's time zone.
+- **The FORGE trip test.** The pinned results came from a Model 1 solve that
+  had not converged: the circulation before the 13.5-hour trip of 27 May
+  (BHA13 at 9,600 ft, 675 gal/min) failed from all four starting profiles,
+  and the last unconverged attempt, with 385 C at the bit, was used. What an
+  unconverged solve returns depends on floating-point detail, so the check
+  gave different results on different machines: the no-node factor was 0.357
+  here and 0.391 for the reviewers, and the continuous integration passed
+  and failed the same code on different runners. v1.3.2 put the difference
+  down to the Python version, which was wrong. Two more starting profiles
+  are tried after the four, and from them the solve converges to 106 C at the
+  bit, in agreement with the neighbouring flows and depths; the check now
+  refuses an unconverged circulation. The repinned factors are 0.555 (0.549
+  before) and 0.391 without the fluid node (0.357), the misfit 12.4 and
+  13.3 F (12.8 and 16.3), and the 13.5-hour trip's modelled anomaly falls
+  from 12.3 to 8.4 F. The Pason times are now read as UTC, so that the
+  pinned epochs do not depend on the machine's time zone.
 
 ## v1.3.2: the margins on the window (October 2026)
 
