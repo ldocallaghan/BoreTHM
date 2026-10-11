@@ -1,0 +1,38 @@
+{
+  "site": "pannonian",
+  "evaluation": "v1.3.3 historical threshold",
+  "base_peak_C": 199.9589976258142,
+  "base_margin_C": 0.04100237418580832,
+  "variants": {
+    "radial spacing halved": {
+      "peak_C": 199.95939356270753,
+      "change_in_margin_C": -0.0003959368933408314,
+      "unresolved": false,
+      "practice_tool_passes": true
+    },
+    "timesteps halved": {
+      "peak_C": 199.8603720875502,
+      "change_in_margin_C": 0.09862553826400244,
+      "unresolved": true,
+      "practice_tool_passes": true
+    },
+    "radial spacing and timesteps halved": {
+      "peak_C": 199.86076296160473,
+      "change_in_margin_C": 0.09823466420945692,
+      "unresolved": true,
+      "practice_tool_passes": true
+    }
+  },
+  "versions": {
+    "commit": "9763991439c93cc9446112bf944aab64cc16fdcd",
+    "dirty": false,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "source_sha256": "6e1bffcef0d4cd3a3d89ab17912c7d1b69b950bb38ebcf3da893bb0b7a2827d4"
+}
