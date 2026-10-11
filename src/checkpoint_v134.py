@@ -21,7 +21,8 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     root = Path(__file__).resolve().parent.parent
     baseline = json.loads((root / 'tests/golden/v133_site_table.json').read_text())
-    rows = []
+    comparison_path = args.output / 'comparison.json'
+    rows = json.loads(comparison_path.read_text()) if comparison_path.exists() else []
     for key in args.sites:
         site = se.find_site(key)
         print('Evaluating C1-C4:', key, flush=True)
@@ -48,8 +49,9 @@ def main():
             row['C1_fixed_profile_trip_pressure'] = dict(surface_density_kg_m3=rho,
                 legacy_Pa=before, conserved_Pa=after, change_Pa=after - before,
                 interpretation='same surface density and temperature profile; composition accounting only')
+        rows = [previous for previous in rows if previous['site'] != key]
         rows.append(row)
-        (args.output / 'comparison.json').write_text(json.dumps(rows, indent=2) + '\n')
+        comparison_path.write_text(json.dumps(rows, indent=2) + '\n')
         print(json.dumps(dict(site=key, status=data['status'],
             drilling_surface_SG=data['programme']['drilling_simulated_rho_surface'] / 1000.,
             trip_surface_SG=data['programme']['trip_simulated_rho_surface'] / 1000.,

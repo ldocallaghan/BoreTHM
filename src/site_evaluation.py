@@ -679,7 +679,13 @@ def circulate(site, z, geotherm, pipe, m_dot, exposure=None, film_mult=1.0,
         return r
 
     r = solve(P_surface)
-    bp = pr.backpressure(float(r["T_return_surface"])) if P_surface == m1.P_SURF else 0.0
+    T_return = float(r['T_return_surface'])
+    if not np.isfinite(T_return) or (P_surface == m1.P_SURF and T_return + 273.15 > 647.096):
+        r['success'] = False
+        r['failure'] = 'surface return is outside the saturation-pressure domain'
+        bp = 0.
+    else:
+        bp = pr.backpressure(T_return) if P_surface == m1.P_SURF else 0.0
     if bp > 0.0:
         r = solve(m1.P_SURF + bp)
     r["backpressure"] = r["old"]["backpressure"] = bp
@@ -779,6 +785,9 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
         for md in SITE_FLOWS:
             r = circulate(site, z, geotherm, pipe, mass_flow(md, fluid), exposure, film_mult,
                           P_surface, fluid, retry)
+            if r.get('failure') == 'surface return is outside the saturation-pressure domain':
+                t['failed'].append(md)
+                continue
             if r["hyd"]["over_pump_limit"]:
                 t["pump_limited_at"] = md
                 break
