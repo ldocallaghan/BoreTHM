@@ -842,15 +842,16 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.3", c
     # coupled: on by default with the pressure budget; on with "v1.3" alone
     # shows what the coupling moves in the v1.3.2 table
     if coupled is None:
-        coupled = circulation == "v1.3.3"
+        coupled = circulation in ('v1.3.3', 'v1.3.4')
     if coupled and not v10:
         site = replace(site, coupled=True)
     z = site.target(v10)
     geotherm = site.temperature(v10)
     T_rock = float(geotherm(z))
 
-    if circulation in ("v1.3", "v1.3.3") and not v10:
-        out = _evaluate_v13(site, thermal, budget=circulation == "v1.3.3")
+    if circulation in ("v1.3", "v1.3.3", 'v1.3.4') and not v10:
+        out = _evaluate_v13(site, thermal, budget=circulation != 'v1.3',
+                            corrected=circulation == 'v1.3.4')
         out['input_warnings'] = input_warnings
         return out
     if circulation == "v1.2" and not v10:
@@ -1114,7 +1115,10 @@ def trip_temperatures(site, out, run, trip_h, node=True):
     static, without the string, through the trip; without the fluid node, the
     fluid takes the wall's temperature. Above the shoe, Model 1's annulus
     temperatures at the start of the trip. Cached on the run."""
-    key = (round(trip_h, 6), node)
+    trip_fluid = out.get('trip_fluid', run.get('fluid')) if out.get('apply_trip_fluid') else run.get('fluid')
+    signature = None if trip_fluid is None else (trip_fluid.rho_surface, trip_fluid.mu_ratio,
+                                                trip_fluid.yield_point, trip_fluid.conserve_mass)
+    key = (round(trip_h, 6), node, signature) if out.get('apply_trip_fluid') else (round(trip_h, 6), node)
     cache = run.setdefault("trip_columns", {})
     if key in cache:
         return cache[key]
@@ -1130,7 +1134,7 @@ def trip_temperatures(site, out, run, trip_h, node=True):
     for d in depths:
         T_r = float(geotherm(d))
         bc = _bottom_conditions(run, d)
-        cap, hs = _static_node(T_r, d, bc["r_wall"], 0.0, run.get("fluid"))
+        cap, hs = _static_node(T_r, d, bc["r_wall"], 0.0, trip_fluid)
         hist = [wall_thermal.State("circulating", ((z_bit - d) / rop + bc["bu_h"]) * 3600,
                                    T_fluid=bc["Tu"], h=bc["h"]),
                 wall_thermal.State("static", trip_h * 3600, h=hs, C=cap if node else 0.0)]
@@ -1238,6 +1242,9 @@ def site_cycle(site, out, connection="p90", trip_scale=1.0, run=None, label="bas
     z = out["z"]
     T_rock = out["T_rock"]
     run = run or out["m1"]
+    corrected = out.get('apply_trip_fluid', False)
+    trip_fluid = out.get('trip_fluid', run.get('fluid')) if corrected else run.get('fluid')
+    make_fluid = out.get('_make_fluid', fluids.Mud)
     bc = _bottom_conditions(run, z)
     a = bc["r_wall"]
     rop = out["drill"]["ROP"] * 3600.0
@@ -1248,9 +1255,11 @@ def site_cycle(site, out, connection="p90", trip_scale=1.0, run=None, label="bas
     if budget:
         bp = run.get("backpressure", 0.0)
         temps_t = trip_temperatures(site, out, run, hist[-1].hours, node)
-        p_c = pr.bottomhole_pressure("connection", z, temps_c, P_surface=bp)
-        p_d = pr.bottomhole_pressure("drilling", z, temps_c, run=run, P_surface=bp)
-        p_t = pr.bottomhole_pressure("trip", z, temps_t, P_surface=bp,
+        actual_drill = run.get('fluid') if corrected else None
+        actual_trip = trip_fluid if corrected else None
+        p_c = pr.bottomhole_pressure("connection", z, temps_c, fluid=actual_drill, P_surface=bp)
+        p_d = pr.bottomhole_pressure("drilling", z, temps_c, fluid=actual_drill, run=run, P_surface=bp)
+        p_t = pr.bottomhole_pressure("trip", z, temps_t, fluid=actual_trip, P_surface=bp,
                                      allowance_SG=pr.TRIP_ALLOWANCE_SG)
     else:
         bp = 0.0
@@ -1259,14 +1268,16 @@ def site_cycle(site, out, connection="p90", trip_scale=1.0, run=None, label="bas
         p_t = p_c
     allow = p_t["allowance"] / sg
     Pw = p_c["P_static"]
-    d_ref = _ref_depth(site, z, T_rock, Pw, thermal)
+    reference_water = pr.bottomhole_pressure('connection', z, temps_c, P_surface=bp) if corrected and budget else p_c
+    d_ref = _ref_depth(site, z, T_rock, reference_water['P_static'], thermal)
     states = []
     for st in hist:
         if st.kind == "circulating":
             states.append(wall_thermal.State("circulating", st.hours * 3600, T_fluid=bc["Tu"], h=bc["h"]))
         else:
             r_str = bc["r_string"] if st.label == "connection" else 0.0
-            cap, hs = _static_node(T_rock, z, a, r_str, run.get("fluid"))
+            state_fluid = trip_fluid if corrected and st.label == 'trip' else run.get('fluid')
+            cap, hs = _static_node(T_rock, z, a, r_str, state_fluid)
             states.append(wall_thermal.State("static", st.hours * 3600, h=hs, C=cap if node else 0.0))
     total = sum(st.hours for st in hist) * 3600 + SAFE_PAUSE_MAX_H * 3600
     r_max = wall_thermal.r_max_for(a, site.k_rock / (C.RHO_ROCK * C.CP_ROCK), total)
@@ -1316,16 +1327,18 @@ def site_cycle(site, out, connection="p90", trip_scale=1.0, run=None, label="bas
     # The site takes the worst case, with the range across cases; the weights
     # and safe pause reported are the deciding case's (the worst verdict, then
     # the heaviest trip fluid).
-    water, water_t = p_c["SG"], p_t["SG"]
-    need = lambda w: w["SG_lo"] if w["verdict"] != "GO" else 0.0
+    water = reference_water['SG']
+    water_t = (pr.bottomhole_pressure('trip', z, temps_t, P_surface=bp)['SG']
+               if corrected and budget else p_t['SG'])
+    need = (lambda w: w['SG_lo']) if corrected else (lambda w: w['SG_lo'] if w['verdict'] != 'GO' else 0.)
 
     def trip_start(SG_end):
         """The trip fluid's equivalent density at the start of the trip, for
         the equivalent density SG_end at its end, and its surface density."""
         if not budget:
             return SG_end, None
-        rho_s = pr.surface_density_for(SG_end, z, temps_t, fluids.Mud, bp)
-        mud = None if rho_s is None else fluids.Mud(rho_s)
+        rho_s = pr.surface_density_for(SG_end, z, temps_t, make_fluid, bp)
+        mud = None if rho_s is None else make_fluid(rho_s)
         SG0 = (np.interp(z, temps_c[0], pr.column(*temps_c, mud, bp)) - bp) / sg
         return float(SG0), rho_s
 
@@ -1393,8 +1406,8 @@ def site_cycle(site, out, connection="p90", trip_scale=1.0, run=None, label="bas
         key = round(SG, 6)
         if key not in pause_P:
             tvd_p, hrs, T_p = pause_temperatures(site, out, run, node)
-            rho = pr.surface_density_for(SG, z, temps_c, fluids.Mud, bp)
-            mud = None if rho is None else fluids.Mud(rho)
+            rho = pr.surface_density_for(SG, z, temps_c, make_fluid, bp)
+            mud = None if rho is None else make_fluid(rho)
             pause_P[key] = (hrs, np.array([np.interp(z, tvd_p, pr.column(tvd_p, T_p[i], mud, bp))
                                            for i in range(len(hrs))]))
         hrs, P = pause_P[key]
@@ -1447,7 +1460,7 @@ def site_cycle(site, out, connection="p90", trip_scale=1.0, run=None, label="bas
                 for k in ("drilling", "connection", "connection, fresh rock", "trip")}
     # the surface density of each fluid, and the bottomhole pressure the trip
     # fluid loses as the column heats through the trip
-    drill_rho = pr.surface_density_for(w_drill_SG, z, temps_c, fluids.Mud, bp) if budget else None
+    drill_rho = pr.surface_density_for(w_drill_SG, z, temps_c, make_fluid, bp) if budget else None
     budget_out = dict(water_SG=water, water_SG_trip=water_t, allowance_SG=allow, backpressure=bp,
                       drill_rho_surface=drill_rho, trip_rho_surface=gov["trip_rho_surface"],
                       trip_SG_start=gov["trip_SG_start"],
@@ -1519,6 +1532,7 @@ def common_windows(site, out, cycle=None, run=None, node=True):
     z, geotherm = out["z"], site.temperature()
     thermal = out.get("thermal", True)
     fluid_w = fluids.water()
+    make_fluid = out.get('_make_fluid', fluids.Mud)
     bp = run.get("backpressure", 0.0)
     temps_c = pr.circulating_temperatures(run)
     trip_h = cycle["trip_h"]
@@ -1536,7 +1550,7 @@ def common_windows(site, out, cycle=None, run=None, node=True):
     # each column's pressure at every depth for a range of surface densities
     def table(temps):
         tvd, T = temps
-        rows = [pr.column(tvd, T, fluid_w, bp)] + [pr.column(tvd, T, fluids.Mud(r), bp)
+        rows = [pr.column(tvd, T, fluid_w, bp)] + [pr.column(tvd, T, make_fluid(r), bp)
                                                    for r in RHO_GRID[1:]]
         return np.array(rows), tvd
     P_c, tvd_c = table(temps_c)
@@ -1586,7 +1600,8 @@ def common_windows(site, out, cycle=None, run=None, node=True):
         d_ref = _ref_depth(site, d, T_r, Pw_c, thermal)
         r_max = wall_thermal.r_max_for(a, site.k_rock / rhocp_rock, (z - d) / rop * 3600 + 30 * 86400)
         cap_s, hs_s = _static_node(T_r, d, a, bc["r_string"], run.get("fluid"))
-        cap_o, hs_o = _static_node(T_r, d, a, 0.0, run.get("fluid"))
+        trip_material = out.get('trip_fluid', run.get('fluid')) if out.get('apply_trip_fluid') else run.get('fluid')
+        cap_o, hs_o = _static_node(T_r, d, a, 0.0, trip_material)
         # fresh rock at this depth, when the bit was here
         r_f = wall_thermal.run([wall_thermal.State("circulating", fresh_s, T_fluid=bc["Tu"], h=bc["h"]),
                                 wall_thermal.State("static", conn_s, h=hs_s, C=cap_s if node else 0.0,
@@ -1665,6 +1680,25 @@ def _films(run, md, T_flow, T_out):
     h_out = float(m1.h_dittus(run["m_dot"], ga["A_ann"], ga["Dh_ann"], np.array([T_out]), P,
                               fluid=f)[0])
     return h_in, h_out, ga
+
+
+def _trip_circulation(site, out, run):
+    """D3: uniform trip material, at the programme's existing flow and pipe."""
+    if not out.get('apply_trip_fluid'):
+        return run
+    trip_fluid = out.get('trip_fluid', run.get('fluid'))
+    if trip_fluid is run.get('fluid'):
+        return run
+    def signature(fluid):
+        return None if fluid is None else (fluid.rho_surface, fluid.mu_ratio, fluid.yield_point, fluid.conserve_mass)
+    if signature(trip_fluid) == signature(run.get('fluid')):
+        return run
+    if '_trip_circulation' not in out:
+        exposure = m1.exposure_from_rop(out['z'], out['circ']['rop'] * 3600.)
+        out['_trip_circulation'] = circulate(site, out['z'], site.temperature(), out['circ']['pipe'],
+                                            mass_flow(out['circ']['m_dot'], trip_fluid), exposure,
+                                            P_surface=run['P_surface'], fluid=trip_fluid)
+    return out['_trip_circulation']
 
 
 def tool_gates(site, out, run=None, node=True, trip_h=None):
@@ -1757,10 +1791,17 @@ def tool_gates(site, out, run=None, node=True, trip_h=None):
     column = lambda md: float(np.interp(g.survey.tvd(md), *temps_t))
     speed = t.trip_in_ft_h * dc.FT / 3600.0
     shoe = max(h.md_top for h in g.hole)
+    trip_run = _trip_circulation(site, out, run)
+    trip_fluid = trip_run.get('fluid')
+    rho_t, cp_t, _, k_t = (float(np.ravel(value)[0]) for value in
+        m1.fluid_props(np.array([Td]), m1.P_of_z(ga['tvd']), trip_fluid))
+    trip_bha = tt.Lump.of_pipe(float(ga['r_bore'][0]), float(ga['r_out'][0]), rho_t * cp_t)
+    _, trip_hs_out = _static_node(T_rock, z, a, bc['r_string'], trip_fluid)
+    trip_hs_in = wall_thermal.NU_LAMINAR * k_t / trip_bha.D_in
 
     def circulating(md):
-        T_flow = float(np.interp(md, run["z"], run["Td"]))
-        h_in, h_out, _ = _films(run, md, T_flow, T_flow)
+        T_flow = float(np.interp(md, trip_run["z"], trip_run["Td"]))
+        h_in, h_out, _ = _films(trip_run, md, T_flow, T_flow)
         return T_flow, h_in, h_out
 
     def stages_at(spacing):
@@ -1768,7 +1809,7 @@ def tool_gates(site, out, run=None, node=True, trip_h=None):
 
     def run_in(spacing=None, factor=1.0):
         st = stages_at(spacing) if spacing else []
-        hist, depth = tt.trip_in(bha, column, z, speed, C.SURFACE_TEMP, hs_out, hs_in, st,
+        hist, depth = tt.trip_in(trip_bha, column, z, speed, C.SURFACE_TEMP, trip_hs_out, trip_hs_in, st,
                                  factor * t.stage_minutes * 60, circulating)
         T, when = hist.peak()
         return T, float(depth[int(np.argmax(hist.T_f))])
@@ -1839,10 +1880,10 @@ def tool_gates(site, out, run=None, node=True, trip_h=None):
                   minutes_above=None if rating is None else float(60 * conn_h * np.mean(Tc > rating)))
     # running in: the deepest coated pipe, the BHA and heavy-weight pipe below it
     offset = z - md_c
-    dp = tt.Lump.of_pipe(pipe.r_bore, pipe.r_out, rho * cp)
+    dp = tt.Lump.of_pipe(pipe.r_bore, pipe.r_out, rho_t * cp_t)
     sch = trip["schedule"] or dict(spacing_m=forge_spacing, minutes=t.stage_minutes)
-    hist_c, _ = tt.trip_in(dp, column, md_c, speed, C.SURFACE_TEMP, hs_out,
-                           wall_thermal.NU_LAMINAR * k / dp.D_in,
+    hist_c, _ = tt.trip_in(dp, column, md_c, speed, C.SURFACE_TEMP, trip_hs_out,
+                           wall_thermal.NU_LAMINAR * k_t / dp.D_in,
                            [d - offset for d in stages_at(sch["spacing_m"]) if d - offset > 0],
                            sch["minutes"] * 60, circulating)
     trip_c = dict(max=float(hist_c.T_s.max()),
@@ -1855,7 +1896,8 @@ def tool_gates(site, out, run=None, node=True, trip_h=None):
         over = circ_max > rating or conn_c["max"] > rating or trip_c["max"] > rating
         coating["status"] = "INDETERMINATE" if over else "within rating"
     return dict(limit=limit, drilling=drilling, connection=conn, trip_in=trip, tool=tool,
-                coating=coating)
+                coating=coating, trip_fluid_SG=None if trip_fluid is None else trip_fluid.sg,
+                trip_circulation_success=bool(trip_run['success']))
 
 
 def component_statuses(out):
@@ -1867,10 +1909,13 @@ def component_statuses(out):
     circ, hyd, cycle = out["circ"], out["circ"]["hyd"], out["cycle"]
     passes = out.get("fluid_passes", [])
     solver_ok = bool(out["m1"]["success"]) and all(p["success"] for p in passes if "success" in p)
+    trip_run = out.get('_trip_circulation') if out.get('apply_trip_fluid') else None
+    if trip_run is not None:
+        solver_ok = solver_ok and bool(trip_run['success'])
     tl = out["tools"]
     gpm = flow_gpm(out["m1"])
     cases = cycle["cases"]["drilling"]
-    return dict(
+    result = dict(
         solver=dict(ok=solver_ok and out.get("fluid_converged", True),
                     converged=out.get("fluid_converged", True), runs_ok=solver_ok,
                     fluid_passes=len(passes)),
@@ -1887,6 +1932,12 @@ def component_statuses(out):
                               heavier_than_water=bool(w["open"] and w["fluid"] >
                                                       fluids.water().rho_surface + 1.0))
                       for k, w in out["windows"].items() if k in ("drilling_fluid", "trip_fluid")})
+    if trip_run is not None:
+        trip_gpm, trip_spp = flow_gpm(trip_run), float(trip_run['hyd']['spp'])
+        result['pumps'].update(trip_spp=trip_spp, trip_gpm=trip_gpm,
+            ok=result['pumps']['ok'] and not trip_run['hyd']['over_pump_limit'],
+            within_rig=result['pumps']['within_rig'] and trip_gpm <= rig_capacity_gpm(trip_spp))
+    return result
 
 
 def site_status(components, windows=None, tools=None):
@@ -2081,7 +2132,7 @@ ROP_TOL = 0.02                # convergence of the rate of penetration (coupled 
 ROP_MAX_PASSES = 10
 
 
-def drilling_fluid(site, thermal=True, rheology=None):
+def drilling_fluid(site, thermal=True, rheology=None, corrected=False):
     """The drilling fluid, iterated to consistency with the circulation it
     sets: from water, each pass runs the circulation, hydraulics and pressure
     budget with the fluid, takes the drilling fluid the cycle requires
@@ -2095,21 +2146,69 @@ def drilling_fluid(site, thermal=True, rheology=None):
     Returns the fluid (None for water), the passes, whether it converged,
     and Model 3's rate of penetration from the first pass."""
     pv, yp = rheology or (fluids.PV_REF, fluids.YP_REF)
+    make_fluid = lambda rho: fluids.Mud(rho, pv, yp, conserve_mass=corrected)
+    if corrected:
+        fluid, trip_fluid, rop, passes, visited = None, None, None, [], []
+        water_rho = fluids.water().rho_surface
+        for _ in range(FLUID_MAX_PASSES):
+            o = _evaluate_v12(site, thermal, True, fluid, rop=rop, light=True)
+            o.update(_make_fluid=make_fluid, apply_trip_fluid=True, trip_fluid=trip_fluid)
+            rop_used = o['circ']['rop']
+            next_rop = o['drill']['ROP'] if site.coupled else rop_used
+            o['cycle'] = site_cycle(site, o)
+            o['windows'] = common_windows(site, o)
+            o['tools'] = tool_gates(site, o)
+            rho_d = max(water_rho, o['windows']['drilling_fluid']['lo'])
+            rho_t = max(rho_d, o['windows']['trip_fluid']['lo'])
+            used_d = water_rho if fluid is None else fluid.rho_surface
+            used_t = water_rho if trip_fluid is None else trip_fluid.rho_surface
+            delta_d, delta_t = (rho_d - used_d) / 1000., (rho_t - used_t) / 1000.
+            valid = bool(o['m1']['success'] and o.get('_trip_circulation', o['m1'])['success'])
+            passes.append(dict(fluid_SG=None if fluid is None else fluid.sg,
+                               need_SG=o['cycle']['drill_SG'], rho_surface=rho_d,
+                               simulated_rho_surface=used_d, prescribed_rho_surface=rho_d,
+                               density_residual_SG=delta_d, trip_simulated_rho_surface=used_t,
+                               trip_prescribed_rho_surface=rho_t, trip_residual_SG=delta_t,
+                               ecd_SG=ecd_sg(o['m1'], o['z']), success=valid,
+                               rop_m_h=rop_used * 3600., rop_passes=len(o['rop_passes']),
+                               tool=o['tools']['tool']))
+            finite = bool(np.isfinite(rho_d) and np.isfinite(rho_t) and rho_t < fluids.BARITE_RHO)
+            if not valid or not finite:
+                passes[-1]['stop'] = 'failed solve' if not valid else 'unimplementable density'
+                return fluid, passes, False, rop_used
+            rop_ok = abs(next_rop - rop_used) <= ROP_TOL * rop_used
+            if abs(delta_d) < FLUID_TOL_SG and abs(delta_t) < FLUID_TOL_SG and rop_ok:
+                return fluid, passes, True, rop_used
+            # A return to an earlier distinct pair is a cycle. A stationary
+            # density with ROP still settling is allowed to take another pass.
+            if (abs(delta_d) >= FLUID_TOL_SG or abs(delta_t) >= FLUID_TOL_SG) and any(
+                    abs(rho_d - d) < FLUID_TOL_SG * 1000. and
+                    abs(rho_t - t) < FLUID_TOL_SG * 1000. for d, t in visited):
+                passes[-1]['stop'] = 'cycling'
+                return fluid, passes, False, rop_used
+            visited.append((used_d, used_t))
+            if len(passes) < FLUID_MAX_PASSES:
+                fluid = None if rho_d <= water_rho + 1e-6 else make_fluid(rho_d)
+                trip_fluid = None if rho_t <= water_rho + 1e-6 else make_fluid(rho_t)
+                rop = next_rop
+        passes[-1]['stop'] = 'iteration limit'
+        return fluid, passes, False, rop_used
     fluid, rop, passes = None, None, []
     for _ in range(FLUID_MAX_PASSES):
         o = _evaluate_v12(site, thermal, True, fluid, rop=rop, light=True)
+        o['_make_fluid'] = make_fluid
         rop_used = o["circ"]["rop"]
         rop = o["drill"]["ROP"] if site.coupled else rop_used
         rop_ok = abs(rop - rop_used) <= ROP_TOL * rop_used
         need = site_cycle(site, o, verdict_only=True)["drill_SG"]
         temps = pr.circulating_temperatures(o["m1"])
         bp = o["m1"].get("backpressure", 0.0)
-        rho = pr.surface_density_for(need, o["z"], temps, lambda r: fluids.Mud(r, pv, yp), bp)
+        rho = pr.surface_density_for(need, o["z"], temps, make_fluid, bp)
         passes.append(dict(fluid_SG=None if fluid is None else fluid.sg, need_SG=need,
                            rho_surface=rho, ecd_SG=ecd_sg(o["m1"], o["z"]),
                            success=bool(o["m1"]["success"]), rop_m_h=rop_used * 3600,
                            rop_passes=len(o["rop_passes"])))
-        new = None if rho is None else fluids.Mud(rho, pv, yp)
+        new = None if rho is None else make_fluid(rho)
         old_rho = fluids.water().rho_surface if fluid is None else fluid.rho_surface
         if abs((rho or old_rho) - old_rho) / 1000.0 < FLUID_TOL_SG and rop_ok:
             return fluid, passes, True, rop_used
@@ -2117,17 +2216,22 @@ def drilling_fluid(site, thermal=True, rheology=None):
     return fluid, passes, False, rop
 
 
-def _evaluate_v13(site, thermal=True, budget=False):
+def _evaluate_v13(site, thermal=True, budget=False, corrected=False):
     """The v1.2 evaluation, with the verdict through the drilling cycle;
     budget=True takes the pressures from the budget."""
     if budget:
-        fluid, passes, converged, rop = drilling_fluid(site, thermal)
-        out = _evaluate_v12(site, thermal, budget, fluid, rop=rop)
+        fluid, passes, converged, rop = drilling_fluid(site, thermal, corrected=corrected)
+        out = _evaluate_v12(site, thermal, budget, fluid, rop=rop, light=corrected)
         out["fluid_passes"], out["fluid_converged"] = passes, converged
+        out['_make_fluid'] = lambda rho: fluids.Mud(rho, conserve_mass=corrected)
+        if corrected:
+            trip_rho = passes[-1]['trip_simulated_rho_surface']
+            out['trip_fluid'] = None if trip_rho <= fluids.water().rho_surface + 1e-6 else out['_make_fluid'](trip_rho)
+            out['apply_trip_fluid'] = True
     else:
         fluid = None
         out = _evaluate_v12(site, thermal, budget)
-    out["circulation"] = "v1.3.3" if budget else "v1.3"
+    out["circulation"] = 'v1.3.4' if corrected else ("v1.3.3" if budget else "v1.3")
     P_wh = _wellhead(budget)
     out["cycle"] = site_cycle(site, out)
     if budget:
@@ -2135,6 +2239,10 @@ def _evaluate_v13(site, thermal=True, budget=False):
         out["tools"] = tool_gates(site, out)
         out["components"] = component_statuses(out)
         out["status"] = site_status(out["components"])
+    if corrected:
+        out['cycle_sensitivity'] = {}
+        out['trip_profile'] = []
+        return out
     z, geotherm = out["z"], site.temperature()
     rop = out["circ"]["rop"] * 3600.0
     exposure = m1.exposure_from_rop(z, rop, 0.0)
@@ -2154,6 +2262,7 @@ def _evaluate_v13(site, thermal=True, budget=False):
         f2, p2, conv2, _ = drilling_fluid(site, thermal,
                                           rheology=(0.5 * fluids.PV_REF, fluids.YP_REF))
         o2 = _evaluate_v12(site, thermal, True, f2, rop=out["circ"]["rop"], light=True)
+        o2['_make_fluid'] = lambda rho: fluids.Mud(rho, 0.5 * fluids.PV_REF, fluids.YP_REF, conserve_mass=False)
         k = "mud plastic viscosity halved"
         sens[k] = site_cycle(site, o2, label=k)
         sens[k].update(fluid=f2, fluid_passes=p2, fluid_converged=conv2)
@@ -2395,6 +2504,17 @@ def result_dict(o):
             bit_C=c["bhct"], return_C=c.get("T_return"), backpressure_Pa=c.get("backpressure"),
             spp_Pa=c["hyd"]["spp"], ecd_SG=c["ecd_SG"], v_ann_min=c["hyd"]["v_ann_min"],
             conflict=c["conflict"])
+        if o.get('apply_trip_fluid'):
+            trip = o.get('trip_fluid')
+            water_rho = fluids.water().rho_surface
+            prescribed = o['windows']['drilling_fluid']['lo']
+            d['programme'].update(drilling_simulated_rho_surface=water_rho if f is None else f.rho_surface,
+                                  drilling_prescribed_rho_surface=prescribed,
+                                  trip_simulated_rho_surface=water_rho if trip is None else trip.rho_surface,
+                                  trip_prescribed_rho_surface=max(prescribed, o['windows']['trip_fluid']['lo']),
+                                  trip_fluid_treatment='uniform column from the start of the trip',
+                                  barite_mass_fraction=0. if f is None else f.x,
+                                  trip_barite_mass_fraction=0. if trip is None else trip.x)
     if "cycle" in o:
         cy = o["cycle"]
         d["cycle"] = dict(
@@ -2446,12 +2566,13 @@ if __name__ == "__main__":
     ap.add_argument("--site", default="soultz", help="one of: " + ", ".join(
         ("soultz", "larderello", "united-downs", "pannonian", "newberry")))
     ap.add_argument("--json", help="also write the result to this JSON file")
+    ap.add_argument('--circulation', choices=('v1.3.3', 'v1.3.4'), default='v1.3.4')
     a = ap.parse_args()
     site = find_site(a.site)
     try:
         for warning in validate_site(site):
             print('warning:', warning)
-        o = evaluate(site)
+        o = evaluate(site, circulation=a.circulation)
     except ValueError as error:
         ap.error(str(error))
     report(o)
