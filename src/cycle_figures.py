@@ -89,7 +89,11 @@ def main():
     tp = o["trip_profile"]
     hgt = [r["height"] / 1000 for r in tp]
     axp.plot([r["SG_needed"] for r in tp], hgt, "o-", color="tab:green", label="needed at the end of the trip")
-    axp.plot([r["SG_hi"] for r in tp], hgt, "--", color="tab:red", label="fracture limit, pumps off")
+    axp.plot([r["SG_hi"] for r in tp], hgt, "--", color="tab:red", label="fracture limit, pumps off, less the surge allowance")
+    if c.get("budget", {}).get("trip_SG_start") is not None:
+        # the same fluid at the start of the trip, in the cooler, heavier column
+        axp.plot(c["budget"]["trip_SG_start"], 0.0, "D", color="tab:orange",
+                 label="the same fluid at the start of the trip")
     axp.set_xlabel("fluid weight [SG]")
     axp.set_ylabel("height above the bit [km]")
     axp.set_title("The trip, up the open hole", fontsize=9)

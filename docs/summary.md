@@ -73,10 +73,11 @@ cool the rock in the meantime and the drilling fluid at Soultz would fall
 from 1.31 to 1.18 SG; the trip would still close the window.
 
 **The breakout's width is judged at the wall, with the temperature of the
-rock at the depth the uncooled breakout reaches.** That depth is about
-1.6 cm at Soultz. A check with the full stress field over the first minutes
-of cooling finds the failed depth growing to 1.7 cm after one minute and
-falling below the uncooled depth within five, so the heuristic does not
+rock at the depth the uncooled breakout reaches.** That depth is taken with
+water in the hole, about 4 cm at Soultz. At the drilling fluid's weight, a
+check with the full stress field over the first minutes of cooling finds the
+failed depth growing from 1.6 cm to 1.7 cm after one minute and falling back
+within five, so the heuristic, which looks deeper into warmer rock, does not
 hide a worse case over that time.
 
 ## The open question about cooling

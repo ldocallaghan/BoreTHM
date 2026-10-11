@@ -28,7 +28,10 @@ ax[0].plot(r["Tu"], zkm, color="tab:red", lw=2, label="annulus (return)")
 ax[0].axvline(200, color="gray", ls=":", lw=1); ax[0].text(205, 1, "200C\nceiling", fontsize=7, color="gray")
 ax[0].axvline(374, color="purple", ls=":", lw=1); ax[0].text(330, 9.5, "supercrit\n374C", fontsize=7, color="purple")
 ax[0].invert_yaxis(); ax[0].set_xlabel("Temperature [C]"); ax[0].set_ylabel("Depth [km]")
-ax[0].set_title(f"Thermal: {c['pipe'].name} pipe, {c['m_dot']:.0f} kg/s\n"
+# a mud's flows are volumes at surface; water's are in kg/s, as before
+flow = (f"{c['m_dot']:.0f} kg/s" if o.get("fluid") is None
+        else f"{c['m_dot']:.0f} L/s ({c['mass_flow']:.0f} kg/s)")
+ax[0].set_title(f"Thermal: {c['pipe'].name} pipe, {flow}\n"
                 f"bit {r['T_bottom_delivered']:.0f}C, return {r['T_return_surface']:.0f}C, "
                 f"{r['Q_product']/1e6:.1f} MW", fontsize=9)
 ax[0].legend(fontsize=7, loc="lower left"); ax[0].grid(alpha=0.3)
@@ -57,8 +60,8 @@ rows = [
     ("Target", f"{o['T_rock']:.0f} C @ {o['z']/1000:.1f} km", "k"),
     ("", "", "k"),
     ("Tool survival", f"OK ({o['m1']['T_bottom_delivered']:.0f} C bit)", "g"),
-    ("Heat while drilling", f"{o['MW_prod']:.1f} MW_th at {c['m_dot']:.0f} kg/s", "k"),
-    ("Pipe and flow", f"{c['pipe'].name}, {c['m_dot']:.0f} kg/s: {c['bhct']:.0f} C wall", "k"),
+    ("Heat while drilling", f"{o['MW_prod']:.1f} MW_th at {flow}", "k"),
+    ("Pipe and flow", f"{c['pipe'].name}, {flow}: {c['bhct']:.0f} C wall", "k"),
     ("Drillability", f"{d['regime']}, {d['ROP']*3600:.1f} m/hr, {o['rop_gain']:.1f}x", "g"),
     ("Creep closure", f"controlled ({o['creep_hot']/max(o['creep_cold'],1e-30):.0e}x)", "g"),
     ("Isotropic stab.", f"{o['grc']['reg_c']}, {o['grc']['u_cold']*1000:.1f} mm", "g"),

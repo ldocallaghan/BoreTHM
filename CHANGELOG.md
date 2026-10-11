@@ -1,6 +1,97 @@
 # Changelog
 
-## v1.3.3: one consistent operating programme (in progress)
+## v1.3.3: one consistent operating programme (October 2026)
+
+Every part of an evaluation now works from the same operating programme:
+one pressure budget for the wall in every state, a weighted drilling fluid
+coupled to the circulation it sets, the tools and the coating through the
+cycle, one fluid for every case down the hole, and a status for each part.
+The two well-characterised sites become NO-GO in their worst case.
+
+| Site | v1.3.2 | v1.3.3 | Drilling fluid (limit while circulating), SG | Trip fluid at end and start (limit at start), SG | Safe pause | Margin | Reason |
+|---|---|---|---|---|---|---|---|
+| Soultz | CONDITIONAL | NO-GO | 1.31 (1.34) to 1.31 (1.30) | 1.30 (1.37) to 1.32 and 1.35 (1.35) | 47 to 23 h | Shmin 3.1% at friction 1.0 to already closed | the mud's friction lowers the circulating limit; the column heats through the trip |
+| United Downs | CONDITIONAL | NO-GO | 1.26 (1.29) to 1.27 (1.22) | 1.27 (1.32) to 1.28 and 1.31 (1.30) | 35 to 19 h | 2.2% to already closed | as Soultz; and the bit at 206 C with the mud |
+| Pannonian Basin | CONDITIONAL | INDETERMINATE | 1.42 (2.48) to 1.40 (2.43) | 1.39 (2.50) to 1.41 and 1.45 (2.48) | 77 to 17 h | 12.9% to 9.5% | the coating above its rating running in; no one fluid suits every stress case |
+| Larderello | GO | CONDITIONAL | water (1.32) to water (1.32) | water | more than a week | none within 20% | water too light for the rock just drilled at 1.5 km: 1.04 SG drilling and 1.09 SG trip fluid |
+| Newberry | GO | GO | water (1.34) | water | more than a week to 74 h | 15.2% to 18.3% | the column heats through the pause |
+
+The flow ceilings of 70 kg/s at Soultz and 60 kg/s at United Downs are no
+longer reported, as both sites are NO-GO at the flow used. Water's column is
+now 0.94 to 0.98 SG at the targets, against the 1.02 SG of the constant
+10 MPa/km gradient used before.
+
+- **One pressure budget** (`pressure.py`). The pressure on the wall in each
+  state is the wellhead pressure, the fluid column integrated at its
+  temperature in that state, the annular friction while circulating and an
+  allowance of 0.02 SG for surge and swab on each bound through a trip (an
+  assumption). The annulus is open at atmospheric pressure, with
+  backpressure only if the return would boil, which it does at no site;
+  Model 1's loop operating pressure of 5 MPa is kept only for the surface
+  heat product. While drilling and through a connection the column has
+  Model 1's annulus temperatures, and at the end of a trip the open hole has
+  the static fluid's temperature at depths no more than 250 m apart. The
+  water columns reproduce the review's figures within 0.001 SG. Every SG is
+  an equivalent static density at the target.
+- **A weighted drilling fluid** (`fluids.py`). A barite-weighted water-based
+  mud, its water following IAPWS-95 and its barite expanding only
+  thermally, with Bingham rheology from Anawe and Folayan (2018) and the
+  pressure losses of Bourgoyne et al. (1986). The weight is iterated with the
+  circulation, hydraulics and budget it sets, to 0.002 SG, in three passes at
+  each site that needs it. Flows are volumes at surface. The mud's plastic
+  viscosity, about thirty times water's at the bottom of the hole, triples
+  the circulating friction at the deep sites (0.07 to 0.10 SG); halving it is
+  a sensitivity, and it does not open the window. The circulating
+  temperature at the bit exceeds 150 C at the deep sites, where conventional
+  water-based muds start to break down, and is flagged.
+- **The tool and the coating through the cycle** (`tool_thermal.py`). The
+  bottom-hole assembly is lumped into the steel of the collars and the fluid
+  inside them, the tool. It is checked while drilling, through the
+  connection on fresh rock and running back in through the column at the
+  end of the trip. Above 200 C the circulation schedule is searched;
+  Soultz needs staging every 36 m on the way in (about 70% of the time
+  circulating), and United Downs fails, at 206 C at the bit while drilling.
+  The deepest coated pipe exceeds TK-Drakon's 204 C rating on the way in at
+  the three deep sites, which makes the status INDETERMINATE where nothing
+  else fails. A schedule counts as found however much it circulates, and
+  the coating's time above its rating on the way in is overstated, since
+  staging is taken to cool the string's fluid and not the column.
+- **The safe pause** lets the column heat through the pause, which shortens
+  it at every site but Larderello, where it stays above a week.
+- **Common windows.** For every case and state, the range of the fluid's
+  density at surface that holds the wall and stays below the fracture limit
+  is found at every 100 m from the bottom to the casing shoe, each depth with
+  its own history, and the prescription is the fluid within every range,
+  with the bound, state, case and depth that bind it. The upper bounds bind
+  at the casing shoe at Soultz and in the Pannonian Basin. The site verdict
+  is unchanged in meaning; the prescription is a separate result.
+- **Statuses.** Every evaluation carries a status for the solver, the tool,
+  the coating, hole cleaning, the pumps, the frictional admissibility of each
+  case and stability in each state. The label is INDETERMINATE when a run did
+  not converge, whatever else the evaluation says, or when only the coating
+  is above its rating; NO-GO with the failing parts; CONDITIONAL with its
+  conditions, among them the prescription where it is heavier than water or
+  empty; or GO. The searches over flow reject runs that did not converge.
+- **Outputs.** `report()` and `verdict_lines()` print from the result, with
+  no fixed narrative. `export_result()` writes the same result as JSON with
+  the versions behind it, and `python src/site_evaluation.py --site <name>
+  --json <path>` runs one site.
+- **New sites.** `examples/site_template.py` documents every input with its
+  units, range and source; `validate_site()` checks them; `examples/new_site.py`
+  rebuilds Soultz from the template and reproduces its row; `docs/new_site.md`
+  is the guide, and `docs/summary.md` a two-page summary for readers.
+- **Tests and reproducibility.** The v1.3.3 site table is pinned from a
+  golden made in the continuous integration, which runs the fast tests on
+  every push and the slow suite weekly and on demand, on Python 3.14.4 and the
+  lock file's versions; a minimal `pyproject.toml` records the package. A test
+  checks that the wall solver's early minutes converge at the breakout's
+  reference depth: within 0.7 K at the end of a connection, and within 1.3 K
+  after the first 20 seconds. The v1.2 and v1.3 tables stay pinned, and
+  `evaluate(circulation="v1.3")` reproduces v1.3.2.
+- **Housekeeping.** `data/materials.md` no longer says the site runs choose
+  the dual-wall pipe. The README gives the operating programme, the
+  assumption and the heuristic behind the verdict at exposure, and the
+  limitations this version adds.
 
 - **Coupling.** Model 3 now takes the coolant temperature at the face from
   the site's own circulation, where it used its own scalar-gradient Model 1;

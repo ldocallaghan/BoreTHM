@@ -23,12 +23,13 @@ range, with connections; 0.10 W/m·K matches none of the named products.
 
 ## Which pipe types can be bought
 
-The site runs choose the best-insulated pipe within the pump limit, and that
-is the dual-wall pipe. Its figures (80 mm bore, phenolic fill at
-0.092 W/m·K) come from Xiao, D. et al. (2022), "Wellbore cooling and heat
-energy utilization method for deep shale gas horizontal well drilling",
-*Applied Thermal Engineering* 213, 118684, as used by Wu et al. (2025). That
-is a modelling study, not a product. A search on 8 October 2026, in English
+The site runs use the best-insulated pipe that can be bought, which is pipe
+coated internally with NOV's TK-Drakōn (since v1.2.1); the dual-wall pipe,
+which insulates far better, is reported as a sensitivity. Its figures (80 mm
+bore, phenolic fill at 0.092 W/m·K) come from Xiao, D. et al. (2022),
+"Wellbore cooling and heat energy utilization method for deep shale gas
+horizontal well drilling", *Applied Thermal Engineering* 213, 118684, as used
+by Wu et al. (2025), a modelling study that describes no product. A search on 8 October 2026, in English
 and Chinese, found no dual-wall insulated drill pipe on sale or reported in a
 field trial, in China or elsewhere; the Chinese work found models insulating
 coatings. Sandia and Drill Cool Systems field-tested a prototype insulated
