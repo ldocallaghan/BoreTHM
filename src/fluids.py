@@ -8,10 +8,13 @@ by the mud's density at surface conditions (T_REF, atmospheric):
 
     phi = (rho_surface - rho_w(T_REF)) / (rho_barite(T_REF) - rho_w(T_REF))
 
-and down the hole the water follows IAPWS-95 at the local temperature and
-pressure while the barite, incompressible, expands only thermally:
+The surface volume fraction determines a barite mass fraction x. That mass
+fraction is conserved down the hole. Water follows IAPWS-95 at the local
+temperature and pressure; incompressible barite expands thermally:
 
-    rho(T, P) = phi rho_barite(T) + (1 - phi) rho_w(T, P)
+    rho(T, P) = 1 / (x / rho_barite(T) + (1 - x) / rho_w(T, P))
+
+The local volume fraction is x rho / rho_barite.
 
 so a weighted mud expands less with temperature than water does. Other
 solids (clay, polymers) are left out: at these weights barite is most of the
@@ -85,12 +88,20 @@ class Mud:
     T_REF and atmospheric pressure. With rho_surface at water's density and
     yield_point 0 it is water (pv_ref None takes water's own viscosity)."""
 
-    def __init__(self, rho_surface, pv_ref=PV_REF, yield_point=YP_REF, pv_ref_T=PV_REF_T):
+    def __init__(self, rho_surface, pv_ref=PV_REF, yield_point=YP_REF, pv_ref_T=PV_REF_T,
+                 conserve_mass=True):
+        if not np.isfinite(rho_surface) or rho_surface <= 0:
+            raise ValueError('surface mud density must be positive and finite')
         rho_w = _rho_water_ref()
-        if rho_surface < rho_w - 1e-6:
+        if rho_surface < rho_w:
             raise ValueError("a barite mud is no lighter than water")
+        if rho_surface >= BARITE_RHO:
+            raise ValueError('surface density implies a barite mass fraction at least one')
         self.rho_surface = float(rho_surface)
         self.phi = (rho_surface - rho_w) / (BARITE_RHO - rho_w)
+        self.x = self.phi * BARITE_RHO / self.rho_surface
+        # Explicit reproduction switch for the v1.3.3 regression table.
+        self.conserve_mass = bool(conserve_mass)
         self.yield_point = float(yield_point)
         mu_w_ref = float(np.ravel(_water([pv_ref_T], [P_ATM])[2])[0])
         self.mu_ratio = 1.0 if pv_ref is None else pv_ref / mu_w_ref
@@ -103,11 +114,18 @@ class Mud:
         """rho, cp, mu (the plastic viscosity), k at temperature T [C] and
         pressure P [Pa absolute], as model1_coupled.fluid_props."""
         rho_w, cp_w, mu_w, k_w = _water(T, P)
+        if self.x == 0.0:
+            return rho_w, cp_w, mu_w * self.mu_ratio, k_w
         T = np.asarray(T, float)
         rho_b = BARITE_RHO / (1.0 + BARITE_BETA * (T - T_REF))
-        phi = self.phi
-        rho = phi * rho_b + (1.0 - phi) * rho_w
-        x_b = phi * rho_b / rho                   # mass fraction of barite
+        if self.conserve_mass:
+            rho = 1.0 / (self.x / rho_b + (1.0 - self.x) / rho_w)
+            phi = self.x * rho / rho_b
+            x_b = self.x
+        else:
+            phi = self.phi
+            rho = phi * rho_b + (1.0 - phi) * rho_w
+            x_b = phi * rho_b / rho
         cp = x_b * BARITE_CP + (1.0 - x_b) * cp_w
         # Maxwell: spheres of conductivity k_b at volume fraction phi in water
         k_b = BARITE_K
