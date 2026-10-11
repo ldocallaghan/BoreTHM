@@ -1491,7 +1491,7 @@ WINDOW_DZ = 100.0                 # m between the depths checked down the hole
 RHO_GRID = np.arange(1000.0, 2601.0, 50.0)   # kg/m3, surface densities tabulated
 
 
-def common_windows(site, out, cycle=None, run=None, node=True):
+def common_windows(site, out, cycle=None, run=None, node=True, extra_depths=(), refine=True):
     """The fluid that suits every scenario in every state, down the hole.
 
     For each stress and strength case (scenario) and each state, the window
@@ -1542,10 +1542,15 @@ def common_windows(site, out, cycle=None, run=None, node=True):
     rop = out["drill"]["ROP"] * 3600.0
     stand = t.stand_ft * dc.FT
     shoe = max(h.md_top for h in g.hole)
-    depths = np.unique(np.concatenate([np.arange(z - stand, shoe, -WINDOW_DZ), [shoe]]))[::-1]
+    complete = out.get('coverage_corrected', False)
+    if complete:
+        depths = np.unique(np.r_[np.arange(z, shoe, -WINDOW_DZ), z, shoe, max(shoe, z - stand), extra_depths])[::-1]
+        depths = depths[(depths >= shoe) & (depths <= z)]
+    else:
+        depths = np.unique(np.concatenate([np.arange(z - stand, shoe, -WINDOW_DZ), [shoe]]))[::-1]
     # the fresh-rock connection is also checked at the target, on the rock
     # the bit has just drilled; the trip starts one stand up, as site_cycle's
-    all_depths = np.concatenate([[z - 0.5], depths])
+    all_depths = depths if complete else np.concatenate([[z - 0.5], depths])
 
     # each column's pressure at every depth for a range of surface densities
     def table(temps):
@@ -1615,6 +1620,12 @@ def common_windows(site, out, cycle=None, run=None, node=True):
                 wall_thermal.State("circulating", (stand_h / 2 + bc["bu_h"]) * 3600,
                                    T_fluid=bc["Tu"], h=bc["h"]),
                 wall_thermal.State("static", trip_h * 3600, h=hs_o, C=cap_o if node else 0.0)]
+        if complete and (z - d) / rop < stand_h / 2:
+            # Young rock in the final half stand did not exist at the earlier
+            # connection. Its circulation age ends at the actual target.
+            hist = [wall_thermal.State('circulating', ((z - d) / rop + bc['bu_h']) * 3600.,
+                                       T_fluid=bc['Tu'], h=bc['h']),
+                    wall_thermal.State('static', trip_h * 3600., h=hs_o, C=cap_o if node else 0.)]
         r_t = wall_thermal.run(hist, T_r, a, site.k_rock, rhocp_rock, n=120, r_max=r_max, growth=1.2)
         T_t = float(np.interp(a + d_ref, r_t.r, r_t.fields[-1]))
         _, cases_f = stability_inputs(site, d, T_r, T_wall=T_f, Pw=Pw_c, P_surface=bp,
@@ -1622,12 +1633,23 @@ def common_windows(site, out, cycle=None, run=None, node=True):
         _, cases_t = stability_inputs(site, d, T_r, T_wall=T_t, Pw=Pw_t - allow * sg_d,
                                       ecd_SG=allow, P_surface=bp, thermal=thermal)
         fric = pr.annulus_friction(run, d)
+        if complete:
+            _, exposure_cases = stability_inputs(site, d, T_r, T_wall=T_r, Pw=Pw_c + fric,
+                                                 P_surface=bp, thermal=thermal)
+            for c in exposure_cases:
+                w = c['window']
+                update('drilling', c['label'], lo=rho_for(w['Pw_lo'] - fric, d, 'c'),
+                       hi=rho_for(w['Pw_hi'] - fric, d, 'c'), md=d)
         for cf, ct in zip(cases_f, cases_t):
             wf, wt_ = cf["window"], ct["window"]
             update("fresh rock", cf["label"], lo=rho_for(wf["Pw_lo"], d, "c"), md=d)
+            if complete:
+                update('fresh rock', cf['label'], hi=rho_for(wf['Pw_hi'], d, 'c'), md=d)
+                update('connection', cf['label'], lo=rho_for(wf['Pw_lo'], d, 'c'),
+                       hi=rho_for(wf['Pw_hi'], d, 'c'), md=d)
             # the drilling fluid at circulating pressure below the fracture limit
             update("drilling", cf["label"], hi=rho_for(wf["Pw_hi"] - fric, d, "c"), md=d)
-            if d <= z - stand + 1e-6:
+            if complete or d <= z - stand + 1e-6:
                 update("trip", ct["label"], lo=rho_for(wt_["Pw_lo"] + allow * sg_d, d, "t"),
                        hi=rho_for(wt_["Pw_hi"], d, "c"), md=d)
 
@@ -1655,9 +1677,36 @@ def common_windows(site, out, cycle=None, run=None, node=True):
                 res["note"] = "none: the scenarios need different fluids"
         return res
 
-    return dict(depths=depths, states=per_state,
+    result = dict(depths=depths, states=per_state,
                 drilling_fluid=intersect(("drilling", "connection", "fresh rock")),
                 trip_fluid=intersect(("trip",)))
+    if complete and refine:
+        previous, refined, records = result, result, []
+        accumulated = list(extra_depths)
+        for spacing in (WINDOW_DZ / 2., WINDOW_DZ / 4.):
+            for name in ('drilling_fluid', 'trip_fluid'):
+                for side in ('lo_by', 'hi_by'):
+                    binding = previous[name][side]['md']
+                    if binding is not None:
+                        accumulated.extend(np.arange(max(shoe, binding - WINDOW_DZ),
+                                                     min(z, binding + WINDOW_DZ) + 0.5 * spacing, spacing))
+            refined = common_windows(site, out, cycle, run, node, extra_depths=accumulated, refine=False)
+            changes = {}
+            for name in ('drilling_fluid', 'trip_fluid'):
+                changes[name] = {side: abs(refined[name][side] - previous[name][side]) / 1000.
+                                 if np.isfinite(refined[name][side]) and np.isfinite(previous[name][side])
+                                 else (0. if refined[name][side] == previous[name][side] else float('inf'))
+                                 for side in ('lo', 'hi')}
+                changes[name]['binding_depth_change_m'] = max(
+                    abs((refined[name][side]['md'] or 0.) - (previous[name][side]['md'] or 0.))
+                    for side in ('lo_by', 'hi_by'))
+            records.append(dict(spacing_m=spacing, changes=changes))
+            previous = refined
+        refined['refinement'] = dict(levels=records, tolerance_SG=FLUID_TOL_SG,
+            converged=all(record['changes'][name][side] <= FLUID_TOL_SG
+                          for record in records for name in ('drilling_fluid', 'trip_fluid') for side in ('lo', 'hi')))
+        return refined
+    return result
 
 
 # ------------------------------------------------------- tools and coating
@@ -1937,6 +1986,12 @@ def component_statuses(out):
         result['pumps'].update(trip_spp=trip_spp, trip_gpm=trip_gpm,
             ok=result['pumps']['ok'] and not trip_run['hyd']['over_pump_limit'],
             within_rig=result['pumps']['within_rig'] and trip_gpm <= rig_capacity_gpm(trip_spp))
+    if out.get('coverage_corrected'):
+        bad = [name for name in ('drilling_fluid', 'trip_fluid') if not out['windows'][name]['open']]
+        if bad:
+            result['stability']['verdict'] = 'NO-GO'
+            result['stability']['states'].update({name.replace('_fluid', '') + ' common window': 'NO-GO' for name in bad})
+        result['window_refinement'] = out['windows'].get('refinement', {'converged': False})
     return result
 
 
@@ -1959,6 +2014,8 @@ def site_status(components, windows=None, tools=None):
         why = ("the fluid iteration did not converge" if not c["solver"]["converged"]
                else "a Model 1 run did not converge")
         return dict(label="INDETERMINATE", reasons=[why])
+    if not c.get('window_refinement', {'converged': True})['converged']:
+        return dict(label='INDETERMINATE', reasons=['the binding window did not settle within 0.002 SG'])
     fails = []
     st = c["stability"]
     if st["verdict"].split()[0] == "NO-GO":
@@ -2152,7 +2209,8 @@ def drilling_fluid(site, thermal=True, rheology=None, corrected=False):
         water_rho = fluids.water().rho_surface
         for _ in range(FLUID_MAX_PASSES):
             o = _evaluate_v12(site, thermal, True, fluid, rop=rop, light=True)
-            o.update(_make_fluid=make_fluid, apply_trip_fluid=True, trip_fluid=trip_fluid)
+            o.update(_make_fluid=make_fluid, apply_trip_fluid=True, trip_fluid=trip_fluid,
+                     coverage_corrected=True)
             rop_used = o['circ']['rop']
             next_rop = o['drill']['ROP'] if site.coupled else rop_used
             o['cycle'] = site_cycle(site, o)
@@ -2228,6 +2286,7 @@ def _evaluate_v13(site, thermal=True, budget=False, corrected=False):
             trip_rho = passes[-1]['trip_simulated_rho_surface']
             out['trip_fluid'] = None if trip_rho <= fluids.water().rho_surface + 1e-6 else out['_make_fluid'](trip_rho)
             out['apply_trip_fluid'] = True
+            out['coverage_corrected'] = True
     else:
         fluid = None
         out = _evaluate_v12(site, thermal, budget)
