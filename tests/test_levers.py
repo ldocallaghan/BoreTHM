@@ -123,3 +123,26 @@ def test_pair_selection_ranks_applied_margins_and_stops_after_single_success():
     assert [r['lever'] for r in lp.select_pair('soultz', summaries)] == ['L2', 'L3']
     summaries[1]['trials'][0]['assessment']['reopened'] = True
     assert lp.select_pair('soultz', summaries) == []
+
+
+def test_trial_cache_invalidates_for_schedule_data_and_runtime(tmp_path, monkeypatch):
+    monkeypatch.setattr(lv, 'ROOT', tmp_path)
+    source = tmp_path / 'src' / 'drill_cycle.py'
+    source.parent.mkdir()
+    source.write_text('stage_minutes = 15\n')
+    data = tmp_path / 'data' / 'forge.csv'
+    data.parent.mkdir()
+    data.write_text('flow_gpm\n600\n')
+    versions = dict(python='3.14.4', packages=dict(scipy='1.18.1'))
+    monkeypatch.setattr(lv.se, 'versions', lambda: versions)
+    original = lv.fingerprint()
+    source.write_text('stage_minutes = 20\n')
+    assert lv.fingerprint() != original
+    source.write_text('stage_minutes = 15\n')
+    assert lv.fingerprint() == original
+    data.write_text('flow_gpm\n700\n')
+    assert lv.fingerprint() != original
+    data.write_text('flow_gpm\n600\n')
+    assert lv.fingerprint() == original
+    versions['python'] = '3.11.15'
+    assert lv.fingerprint() != original

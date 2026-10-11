@@ -180,5 +180,13 @@
     "results/levers/united-downs/L8/summary.json": "a416cc85555bf60bafd072813757db84ed3d7410e39bb2d34ae2358640139c2c",
     "results/levers/united-downs/PAIR-L3-L7/56ee821042779c11.json": "548475006654a6ace41a2d99496a3de4624c0b331fc0785e713ce73c663a4acb",
     "results/levers/united-downs/PAIR-L3-L7/summary.json": "fba3bcfb3e2c51c4776d75015ada7a644780d4d1d33b05104b8165b73fbcc4c6"
+  },
+  "calculation_commit": "8b15a59be9fa2e769c682fdc0dcf019bfa3f18fc",
+  "cache_guard_source_sha256": "0f9ebfe1cd8dac55572cf54ea19a7c19335b29b438297399c45b3bbc9df54fa7",
+  "cache_guard_validation": {
+    "tests": 354,
+    "elapsed_seconds": 14.81,
+    "failures": 0,
+    "errors": 0
   }
 }

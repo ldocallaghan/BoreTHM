@@ -445,11 +445,19 @@ def evaluate_settings(key, settings):
 
 
 def fingerprint():
-    files = [Path(__file__), *[ROOT / 'src' / name for name in (
-        'site_evaluation.py', 'fluids.py', 'pressure.py', 'wall_thermal.py', 'tool_thermal.py',
-        'model1_coupled.py', 'model2_spallation.py', 'model3_optimiser.py',
-        'model5_convergence_confinement.py', 'well_geometry.py', 'geo_constants.py', 'comparative_sites.py')]]
-    return hashlib.sha256(b''.join(path.read_bytes() for path in files)).hexdigest()
+    # Schedule helpers and benchmark data affect the gates too. Include the
+    # runtime so CI cannot silently reuse a trial from a different environment.
+    files = {Path(__file__), *(ROOT / 'src').glob('*.py'),
+             *(p for p in (ROOT / 'data').rglob('*')
+               if p.is_file() and p.suffix in ('.csv', '.json', '.npy', '.npz'))}
+    versions = se.versions()
+    environment = dict(python=versions['python'], packages=versions['packages'])
+    digest = hashlib.sha256(json.dumps(environment, sort_keys=True).encode())
+    for path in sorted(files):
+        label = path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.name
+        digest.update(label.encode())
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
 
 
 def trial(key, lever, settings, root=RESULTS):

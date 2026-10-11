@@ -172,4 +172,8 @@ Each trial saves its source fingerprint, package versions, elapsed seconds and e
 
 The [evidence manifest](../results/levers/manifest.json) records the source files and checksums of the retained trial and summary files. The reconstructed base agrees with the reviewed checkpoint within 0.00003 C at the bit and 0.00005 kg/m3 at the common-window bounds.
 
+The calculations are preserved in commit `8b15a59be9fa2e769c682fdc0dcf019bfa3f18fc`. A subsequent cache-identity correction includes schedule helpers and benchmark data, together with Python and package versions. It changes no equation or physical gate. Rerunning with the corrected identity computes fresh trials, including when regenerating reviewed goldens in CI.
+
+After that correction, the full fast suite passed 354 tests in 14.82 s. The cache regression verifies invalidation after changing a schedule source, a benchmark CSV or the Python runtime.
+
 The final fast suite passed 353 tests in 18.47 s. The v1.3.3 golden regression passed all four tests in 1,836.02 s (30 min 36 s). Its legacy circulation search emitted three BVP/property warnings; the selected golden-table comparisons passed. Independent controller checks cover friction compensation, thermal density loss, the inability to subtract pressure, and the hot column's shallow fracture check. Search tests retain confirmed brackets when a numerical trial is unresolved. Pair-selection tests exclude unachievable MPD control and suppress pairs when a single lever passes.
