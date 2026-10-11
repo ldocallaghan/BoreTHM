@@ -1,0 +1,898 @@
+{
+  "site": "united-downs",
+  "lever": "L4",
+  "settings": {
+    "flow_L_s": 50,
+    "pipe": "vacuum-insulated (sensitivity)",
+    "shoe_m": 4000.0,
+    "pv_fraction": 1.0,
+    "coating_rating_C": 204.0,
+    "allowance_SG": 0.02,
+    "form_h": 0.0,
+    "bhp_Pa": null
+  },
+  "source_sha256": "058f93ee649ad6cf19e825ddd3fa97e189f91b8522d624bd88a14da1d29c2fb3",
+  "versions": {
+    "commit": "14eb25019371b8012a4b6a6c3f28f273429fcfd6",
+    "dirty": true,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "assessment": {
+    "reopened": false,
+    "verdict": "NO-GO",
+    "failures": [
+      "pump limit",
+      "rig capacity",
+      "drilling_fluid",
+      "trip_fluid",
+      "wall stability"
+    ],
+    "qualification_indeterminate": [
+      "coating qualification"
+    ],
+    "evaluated_status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, trip, drilling common window, trip common window",
+        "the standpipe pressure exceeds the pump limit"
+      ]
+    }
+  },
+  "metrics": {
+    "status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, trip, drilling common window, trip common window",
+        "the standpipe pressure exceeds the pump limit"
+      ]
+    },
+    "pressure_margin_SG": {
+      "drilling_fluid": -0.03773430647260238,
+      "trip_fluid": -0.05031572113117681
+    },
+    "actual_fluid_slack_SG": {
+      "drilling_fluid": {
+        "lower": -0.00025632697989431106,
+        "upper": -0.03747797949270807
+      },
+      "trip_fluid": {
+        "lower": -0.00021454036722116143,
+        "upper": -0.05010118076395565
+      }
+    },
+    "tool_peaks_C": {
+      "drilling": 97.00972722399527,
+      "connection": 97.4605207758182,
+      "run_in": 141.03526267786467
+    },
+    "tool_margin_C": 58.964737322135335,
+    "run_in_margin_C": 58.964737322135335,
+    "practice_run_in_peak_C": 141.03526267786467,
+    "practice_run_in_margin_C": 58.964737322135335,
+    "run_in_search": {
+      "attempts": [
+        {
+          "peak_C": 141.03526267786467,
+          "stage_seconds": 930.6,
+          "stages": 61,
+          "spacing_m": 144.87753599999996
+        }
+      ],
+      "best": {
+        "peak_C": 141.03526267786467,
+        "stage_seconds": 930.6,
+        "stages": 61,
+        "spacing_m": 144.87753599999996
+      }
+    },
+    "windows": {
+      "drilling_fluid": {
+        "lo": 1306.3251990315277,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1268.5908925589254,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "Reinecker et al. (2021), weak zones, 40 K",
+          "Reinecker et al. (2021), weak zones, 40 K"
+        ],
+        "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K"
+      },
+      "trip_fluid": {
+        "lo": 1399.5797830269566,
+        "lo_by": {
+          "state": "trip",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12857.142857142857
+        },
+        "hi": 1349.2640618957798,
+        "hi_by": {
+          "state": "trip",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "Reinecker et al. (2021), weak zones, 40 K",
+          "Reinecker et al. (2021), weak zones, 40 K"
+        ],
+        "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K"
+      }
+    },
+    "solver_ok": true,
+    "coating": {
+      "pipe": "vacuum-insulated (sensitivity)",
+      "rating": null,
+      "circulating_max": 140.75681707886727,
+      "connection": {
+        "max": 103.65995813061474,
+        "minutes_above": null
+      },
+      "trip_in": {
+        "max": 186.10962976214194,
+        "minutes_above": null
+      },
+      "status": "no rating"
+    },
+    "pumps": {
+      "ok": false,
+      "spp": 206515924.14544997,
+      "within_rig": false,
+      "gpm": 796.8483444979321,
+      "trip_spp": 216337412.76904204,
+      "trip_gpm": 796.7342288915271
+    }
+  },
+  "result": {
+    "site": {
+      "name": "United Downs / Carnmenellis (UK)",
+      "tier": "evidence-based",
+      "target_depth_m": 12857.142857142857,
+      "legacy_target_depth_m": 12500.0,
+      "target_T_C": 400.0,
+      "k_rock": 3.3,
+      "E_rock_Pa": 60000000000.0,
+      "T_inj_C": 40.0,
+      "mu": 0.8,
+      "data_basis": {
+        "stress": {
+          "basis": "measured",
+          "source": "Reinecker et al. (2021); Shmin data to 2.0 km, SHmax derived at mu 0.8"
+        },
+        "strength": {
+          "basis": "calibrated",
+          "source": "UD-1 breakouts, BGS image log (calibrate_ud1.py)"
+        },
+        "pore pressure": {
+          "basis": "measured",
+          "source": "Reinecker et al. (2021)"
+        },
+        "temperature": {
+          "basis": "extrapolated",
+          "source": "~180 C at 5 km (Reinecker et al. 2021); 28 C/km assumed below"
+        },
+        "well check": {
+          "basis": "calibrated",
+          "source": "UD-1 to 5,058 m TVD (calibrate_ud1.py)"
+        }
+      },
+      "missing": [],
+      "stress_cases": [
+        {
+          "label": "Reinecker et al. (2021)",
+          "source": "Reinecker et al. (2021), Geothermics 97, 102226",
+          "z_data_m": [
+            0.0,
+            2000.0
+          ],
+          "Sv": [
+            25275.0,
+            0.0
+          ],
+          "Shmin": [
+            13210.0,
+            3000000.0
+          ],
+          "SHmax": [
+            25990.0,
+            5900000.0
+          ],
+          "Pp": [
+            9494.0,
+            61.0
+          ],
+          "mu": null
+        }
+      ],
+      "strength_cases": [
+        {
+          "label": "intact, 0 K",
+          "UCS_Pa": 203000000.0
+        },
+        {
+          "label": "intact, 40 K",
+          "UCS_Pa": 172000000.0
+        },
+        {
+          "label": "weak zones, 0 K",
+          "UCS_Pa": 147000000.0
+        },
+        {
+          "label": "weak zones, 40 K",
+          "UCS_Pa": 118000000.0
+        }
+      ]
+    },
+    "evaluation": "v1.3.4",
+    "z_m": 12857.142857142857,
+    "T_rock_C": 400.0,
+    "programme": {
+      "pipe": "vacuum-insulated (sensitivity)",
+      "flow": 50,
+      "flow_unit": "L/s",
+      "mass_flow_kg_s": 65.30344360258167,
+      "fluid": {
+        "rho_surface": 1306.0688720516334,
+        "sg": 1.3060688720516334,
+        "yield_point_Pa": 13.406472800000001,
+        "pv_ratio_to_water": 31.513581287688968
+      },
+      "fluid_passes": [
+        {
+          "simulated_rho_surface": 998.2012723757281,
+          "prescribed_rho_surface": 1283.0,
+          "trip_simulated_rho_surface": 998.2012723757281,
+          "trip_prescribed_rho_surface": 1385.6927371190113,
+          "density_residual_SG": 0.28479872762427194,
+          "trip_residual_SG": 0.3874914647432832,
+          "fluid_SG": null,
+          "success": true,
+          "rop_m_h": 5.126638547083,
+          "tool": "PASS"
+        },
+        {
+          "simulated_rho_surface": 1283.0,
+          "prescribed_rho_surface": 1306.0688720516334,
+          "trip_simulated_rho_surface": 1385.6927371190113,
+          "trip_prescribed_rho_surface": 1399.3652426597355,
+          "density_residual_SG": 0.023068872051633434,
+          "trip_residual_SG": 0.01367250554072416,
+          "fluid_SG": 1.283,
+          "success": true,
+          "rop_m_h": 5.093075367363685,
+          "tool": "PASS"
+        },
+        {
+          "simulated_rho_surface": 1306.0688720516334,
+          "prescribed_rho_surface": 1306.3251990315277,
+          "trip_simulated_rho_surface": 1399.3652426597355,
+          "trip_prescribed_rho_surface": 1399.5797830269566,
+          "density_residual_SG": 0.00025632697989431106,
+          "trip_residual_SG": 0.00021454036722116143,
+          "fluid_SG": 1.3060688720516334,
+          "success": true,
+          "rop_m_h": 4.661436841561431,
+          "tool": "PASS"
+        }
+      ],
+      "fluid_converged": true,
+      "rop_m_h": 4.651113818630589,
+      "rop_passes": [],
+      "bit_C": 97.00972722399527,
+      "return_C": 135.03987666832646,
+      "backpressure_Pa": 213151.45758682978,
+      "spp_Pa": 206515924.14544997,
+      "ecd_SG": 0.10164186448038337,
+      "v_ann_min": 2.190651908731401,
+      "conflict": null,
+      "drilling_simulated_rho_surface": 1306.0688720516334,
+      "drilling_prescribed_rho_surface": 1306.3251990315277,
+      "trip_simulated_rho_surface": 1399.3652426597355,
+      "trip_prescribed_rho_surface": 1399.5797830269566,
+      "trip_fluid_treatment": "uniform column from the start of the trip",
+      "barite_mass_fraction": 0.30920974276914875,
+      "trip_barite_mass_fraction": 0.3760504396868342
+    },
+    "cycle": {
+      "site_verdict": "NO-GO [CONDITIONAL..NO-GO]",
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "verdicts": {
+        "drilling": "NO-GO",
+        "connection": "GO",
+        "connection, fresh rock": "GO",
+        "trip": "NO-GO"
+      },
+      "drill_SG": 1.2521757729915255,
+      "drill_SG_hi": 1.217038552097816,
+      "trip_SG": 1.272806619682527,
+      "trip_SG_hi": 1.2986804165781993,
+      "safe_pause_h": 15.047927856445312,
+      "trip_h": 51.84431580279911,
+      "T_ref": {
+        "drilling": 400.0,
+        "connection": 183.10287104838494,
+        "connection, fresh rock": 372.48945629580766,
+        "trip": 373.0079151124555,
+        "end of drilling": 158.11687878236833
+      },
+      "budget": {
+        "water_SG": 0.9455743575695437,
+        "water_SG_trip": 0.8932796843145903,
+        "allowance_SG": 0.02,
+        "backpressure": 213151.45758682978,
+        "drill_rho_surface": 1303.3602279801044,
+        "trip_rho_surface": 1383.4445255533485,
+        "trip_SG_start": 1.3333580175800521,
+        "trip_dP_heating": 7637261.314817854,
+        "water_dP_heating": 6595852.430971195
+      },
+      "cases": [
+        {
+          "label": "Reinecker et al. (2021), intact, 0 K",
+          "UCS": 203000000.0,
+          "verdict": "CONDITIONAL",
+          "states": {
+            "drilling": "CONDITIONAL",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.1534257072122789,
+          "drill_SG_hi": 1.217038552097816,
+          "trip_SG": 1.1741235999881112,
+          "trip_SG_start": 1.2330464557957421,
+          "trip_rho_surface": 1284.4511357231604,
+          "trip_SG_hi": 1.2986804165781993
+        },
+        {
+          "label": "Reinecker et al. (2021), intact, 40 K",
+          "UCS": 172000000.0,
+          "verdict": "CONDITIONAL",
+          "states": {
+            "drilling": "CONDITIONAL",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.18944043708471,
+          "drill_SG_hi": 1.217038552097816,
+          "trip_SG": 1.210113877759016,
+          "trip_SG_start": 1.2696695990160924,
+          "trip_rho_surface": 1320.6408395787694,
+          "trip_SG_hi": 1.2986804165781993
+        },
+        {
+          "label": "Reinecker et al. (2021), weak zones, 0 K",
+          "UCS": 147000000.0,
+          "verdict": "NO-GO",
+          "states": {
+            "drilling": "NO-GO",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "NO-GO"
+          },
+          "drill_SG": 1.218484574078606,
+          "drill_SG_hi": 1.217038552097816,
+          "trip_SG": 1.2391382953161967,
+          "trip_SG_start": 1.299171688563503,
+          "trip_rho_surface": 1349.749361117638,
+          "trip_SG_hi": 1.2986804165781993
+        },
+        {
+          "label": "Reinecker et al. (2021), weak zones, 40 K",
+          "UCS": 118000000.0,
+          "verdict": "NO-GO",
+          "states": {
+            "drilling": "NO-GO",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "NO-GO"
+          },
+          "drill_SG": 1.2521757729915255,
+          "drill_SG_hi": 1.217038552097816,
+          "trip_SG": 1.272806619682527,
+          "trip_SG_start": 1.3333580175800521,
+          "trip_rho_surface": 1383.4445255533485,
+          "trip_SG_hi": 1.2986804165781993
+        }
+      ]
+    },
+    "sensitivities": {},
+    "trip_profile": [],
+    "windows": {
+      "depths": [
+        12857.142857142857,
+        12832.142857142857,
+        12828.607481142857,
+        12807.142857142857,
+        12782.142857142857,
+        12757.142857142857,
+        12732.142857142857,
+        12707.142857142857,
+        12682.142857142857,
+        12657.142857142857,
+        12632.142857142857,
+        12607.142857142857,
+        12557.142857142857,
+        12457.142857142857,
+        12357.142857142857,
+        12257.142857142857,
+        12157.142857142857,
+        12057.142857142857,
+        11957.142857142857,
+        11857.142857142857,
+        11757.142857142857,
+        11657.142857142857,
+        11557.142857142857,
+        11457.142857142857,
+        11357.142857142857,
+        11257.142857142857,
+        11157.142857142857,
+        11057.142857142857,
+        10957.142857142857,
+        10857.142857142857,
+        10757.142857142857,
+        10657.142857142857,
+        10557.142857142857,
+        10457.142857142857,
+        10357.142857142857,
+        10257.142857142857,
+        10157.142857142857,
+        10057.142857142857,
+        9957.142857142857,
+        9857.142857142857,
+        9757.142857142857,
+        9657.142857142857,
+        9557.142857142857,
+        9457.142857142857,
+        9357.142857142857,
+        9257.142857142857,
+        9157.142857142857,
+        9057.142857142857,
+        8957.142857142857,
+        8857.142857142857,
+        8757.142857142857,
+        8657.142857142857,
+        8557.142857142857,
+        8457.142857142857,
+        8357.142857142857,
+        8257.142857142857,
+        8157.142857142857,
+        8057.142857142857,
+        7957.142857142857,
+        7857.142857142857,
+        7757.142857142857,
+        7657.142857142857,
+        7557.142857142857,
+        7457.142857142857,
+        7357.142857142857,
+        7257.142857142857,
+        7157.142857142857,
+        7057.142857142857,
+        6957.142857142857,
+        6857.142857142857,
+        6757.142857142857,
+        6657.142857142857,
+        6557.142857142857,
+        6457.142857142857,
+        6357.142857142857,
+        6257.142857142857,
+        6157.142857142857,
+        6057.142857142857,
+        5957.142857142857,
+        5857.142857142857,
+        5757.142857142857,
+        5657.142857142857,
+        5557.142857142857,
+        5457.142857142857,
+        5357.142857142857,
+        5257.142857142857,
+        5157.142857142857,
+        5057.142857142857,
+        4957.142857142857,
+        4857.142857142857,
+        4757.142857142857,
+        4657.142857142857,
+        4557.142857142857,
+        4457.142857142857,
+        4357.142857142857,
+        4257.142857142857,
+        4157.142857142857,
+        4057.142857142857,
+        4000.0
+      ],
+      "states": {
+        "drilling": {
+          "Reinecker et al. (2021), intact, 0 K": {
+            "lo": 1141.3897452800047,
+            "lo_md": 12732.142857142857,
+            "hi": 1268.5908925589254,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), intact, 40 K": {
+            "lo": 1176.4282380218986,
+            "lo_md": 12732.142857142857,
+            "hi": 1268.5908925589254,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), weak zones, 0 K": {
+            "lo": 1204.7254913266709,
+            "lo_md": 12707.142857142857,
+            "hi": 1268.5908925589254,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), weak zones, 40 K": {
+            "lo": 1237.5291567528004,
+            "lo_md": 12707.142857142857,
+            "hi": 1268.5908925589254,
+            "hi_md": 12857.142857142857
+          }
+        },
+        "connection": {
+          "Reinecker et al. (2021), intact, 0 K": {
+            "lo": 1207.252730544016,
+            "lo_md": 12707.142857142857,
+            "hi": 1368.9836090983101,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), intact, 40 K": {
+            "lo": 1243.4399740418949,
+            "lo_md": 12707.142857142857,
+            "hi": 1368.9836090983101,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), weak zones, 0 K": {
+            "lo": 1272.56950876903,
+            "lo_md": 12707.142857142857,
+            "hi": 1368.9836090983101,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), weak zones, 40 K": {
+            "lo": 1306.3251990315277,
+            "lo_md": 12707.142857142857,
+            "hi": 1368.9836090983101,
+            "hi_md": 12857.142857142857
+          }
+        },
+        "fresh rock": {
+          "Reinecker et al. (2021), intact, 0 K": {
+            "lo": 1207.252730544016,
+            "lo_md": 12707.142857142857,
+            "hi": 1368.9836090983101,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), intact, 40 K": {
+            "lo": 1243.4399740418949,
+            "lo_md": 12707.142857142857,
+            "hi": 1368.9836090983101,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), weak zones, 0 K": {
+            "lo": 1272.56950876903,
+            "lo_md": 12707.142857142857,
+            "hi": 1368.9836090983101,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), weak zones, 40 K": {
+            "lo": 1306.3251990315277,
+            "lo_md": 12707.142857142857,
+            "hi": 1368.9836090983101,
+            "hi_md": 12857.142857142857
+          }
+        },
+        "trip": {
+          "Reinecker et al. (2021), intact, 0 K": {
+            "lo": 1302.391844370375,
+            "lo_md": 12857.142857142857,
+            "hi": 1349.2640618957798,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), intact, 40 K": {
+            "lo": 1337.8894228282695,
+            "lo_md": 12857.142857142857,
+            "hi": 1349.2640618957798,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), weak zones, 0 K": {
+            "lo": 1366.4686269747635,
+            "lo_md": 12857.142857142857,
+            "hi": 1349.2640618957798,
+            "hi_md": 12857.142857142857
+          },
+          "Reinecker et al. (2021), weak zones, 40 K": {
+            "lo": 1399.5797830269566,
+            "lo_md": 12857.142857142857,
+            "hi": 1349.2640618957798,
+            "hi_md": 12857.142857142857
+          }
+        }
+      },
+      "drilling_fluid": {
+        "lo": 1306.3251990315277,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1268.5908925589254,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "Reinecker et al. (2021), weak zones, 40 K",
+          "Reinecker et al. (2021), weak zones, 40 K"
+        ],
+        "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K"
+      },
+      "trip_fluid": {
+        "lo": 1399.5797830269566,
+        "lo_by": {
+          "state": "trip",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12857.142857142857
+        },
+        "hi": 1349.2640618957798,
+        "hi_by": {
+          "state": "trip",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "Reinecker et al. (2021), weak zones, 40 K",
+          "Reinecker et al. (2021), weak zones, 40 K"
+        ],
+        "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K"
+      },
+      "refinement": {
+        "levels": [
+          {
+            "spacing_m": 50.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.00041147533512344127,
+                "hi": 0.0,
+                "binding_depth_change_m": 50.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              }
+            }
+          },
+          {
+            "spacing_m": 25.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              }
+            }
+          }
+        ],
+        "tolerance_SG": 0.002,
+        "converged": true
+      }
+    },
+    "tools": {
+      "limit": 200.0,
+      "drilling": {
+        "T": 97.00972722399527,
+        "ok": true
+      },
+      "connection": {
+        "practice": {
+          "precirc_min": 0.33,
+          "off_min": 6.33
+        },
+        "schedule": {
+          "precirc_min": 0.33,
+          "off_min": 6.33,
+          "peak": 97.4605207758182
+        },
+        "peak": 97.4605207758182,
+        "node_max": 147.47099744578512,
+        "ok": true
+      },
+      "trip_in": {
+        "unstaged": {
+          "peak": 305.7057562230897,
+          "md": 12857.142857142857
+        },
+        "staged": {
+          "peak": 141.03526267786467,
+          "md": 4144.877536,
+          "spacing_m": 144.8775360000002,
+          "minutes": 15.51
+        },
+        "ok": true,
+        "schedule": {
+          "spacing_m": 144.8775360000002,
+          "minutes": 15.51,
+          "peak": 141.03526267786467,
+          "md": 4144.877536,
+          "stages": 61,
+          "staging_h": 15.7685,
+          "circulating_fraction": 0.40661853393313885
+        }
+      },
+      "tool": "PASS",
+      "coating": {
+        "pipe": "vacuum-insulated (sensitivity)",
+        "rating": null,
+        "circulating_max": 140.75681707886727,
+        "connection": {
+          "max": 103.65995813061474,
+          "minutes_above": null
+        },
+        "trip_in": {
+          "max": 186.10962976214194,
+          "minutes_above": null
+        },
+        "status": "no rating"
+      },
+      "trip_fluid_SG": 1.3993652426597354,
+      "trip_circulation_success": true,
+      "robustness_search": {
+        "attempts": [
+          {
+            "peak_C": 141.03526267786467,
+            "stage_seconds": 930.6,
+            "stages": 61,
+            "spacing_m": 144.87753599999996
+          }
+        ],
+        "best": {
+          "peak_C": 141.03526267786467,
+          "stage_seconds": 930.6,
+          "stages": 61,
+          "spacing_m": 144.87753599999996
+        }
+      }
+    },
+    "status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, trip, drilling common window, trip common window",
+        "the standpipe pressure exceeds the pump limit"
+      ]
+    },
+    "components": {
+      "solver": {
+        "ok": true,
+        "converged": true,
+        "runs_ok": true,
+        "fluid_passes": 3
+      },
+      "tool": {
+        "ok": true,
+        "detail": "PASS"
+      },
+      "coating": {
+        "status": "no rating",
+        "pipe": "vacuum-insulated (sensitivity)"
+      },
+      "hole_cleaning": {
+        "ok": true,
+        "v_ann_min": 2.190651908731401,
+        "conflict": null
+      },
+      "pumps": {
+        "ok": false,
+        "spp": 206515924.14544997,
+        "within_rig": false,
+        "gpm": 796.8483444979321,
+        "trip_spp": 216337412.76904204,
+        "trip_gpm": 796.7342288915271
+      },
+      "admissibility": {
+        "inadmissible": []
+      },
+      "stability": {
+        "verdict": "NO-GO",
+        "states": {
+          "drilling": "NO-GO",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "NO-GO",
+          "drilling common window": "NO-GO",
+          "trip common window": "NO-GO"
+        }
+      },
+      "prescription": {
+        "drilling_fluid": {
+          "open": false,
+          "fluid": null,
+          "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K",
+          "heavier_than_water": false
+        },
+        "trip_fluid": {
+          "open": false,
+          "fluid": null,
+          "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K",
+          "heavier_than_water": false
+        }
+      },
+      "window_refinement": {
+        "levels": [
+          {
+            "spacing_m": 50.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.00041147533512344127,
+                "hi": 0.0,
+                "binding_depth_change_m": 50.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              }
+            }
+          },
+          {
+            "spacing_m": 25.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              }
+            }
+          }
+        ],
+        "tolerance_SG": 0.002,
+        "converged": true
+      }
+    },
+    "versions": {
+      "commit": "14eb25019371b8012a4b6a6c3f28f273429fcfd6",
+      "dirty": true,
+      "python": "3.14.4",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.18.1",
+        "iapws": "1.5.5",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "input_warnings": []
+  },
+  "mpd": null,
+  "elapsed_seconds": 71.76395320000302,
+  "evidence": "results/levers/united-downs/L4/ebc96b10ee1e7a7a.json",
+  "rating_only_physics_reused_from": null
+}

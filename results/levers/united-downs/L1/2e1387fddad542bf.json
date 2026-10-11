@@ -1,0 +1,722 @@
+{
+  "site": "united-downs",
+  "lever": "L1",
+  "settings": {
+    "flow_L_s": 50,
+    "pipe": "TK-Drakon coated",
+    "shoe_m": 4000.0,
+    "pv_fraction": 1.0,
+    "coating_rating_C": 204.0,
+    "allowance_SG": 0.02,
+    "form_h": 0.0,
+    "bhp_Pa": 164453380.10491478
+  },
+  "source_sha256": "4937fdc373141ba066a8e333ba556374b478759a722b171158cb7082b31a040c",
+  "versions": {
+    "commit": "14eb25019371b8012a4b6a6c3f28f273429fcfd6",
+    "dirty": true,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "assessment": {
+    "reopened": false,
+    "verdict": "NO-GO",
+    "failures": [
+      "tool",
+      "drilling_fluid",
+      "trip_fluid",
+      "wall stability",
+      "MPD pressure control / working-pressure rating"
+    ],
+    "qualification_indeterminate": [
+      "coating qualification",
+      "RCD thermal qualification at the evaluated return temperature"
+    ],
+    "evaluated_status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, connection, trip, drilling common window, trip common window",
+        "tool: 203 C at the bit while drilling"
+      ]
+    }
+  },
+  "metrics": {
+    "status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, connection, trip, drilling common window, trip common window",
+        "tool: 203 C at the bit while drilling"
+      ]
+    },
+    "pressure_margin_SG": {
+      "drilling_fluid": -0.0002506673233726815,
+      "trip_fluid": -0.0034847216382366923
+    },
+    "actual_fluid_slack_SG": {
+      "drilling_fluid": {
+        "lower": -0.00025447119048976674,
+        "upper": 3.803867117085247e-06
+      },
+      "trip_fluid": {
+        "lower": 0.27927122715342706,
+        "upper": -0.2827559487916637
+      }
+    },
+    "tool_peaks_C": {
+      "drilling": 202.99753592485226,
+      "connection": 203.3444102102819,
+      "run_in": 217.94863643216067
+    },
+    "tool_margin_C": -17.94863643216067,
+    "run_in_margin_C": -17.94863643216067,
+    "practice_run_in_peak_C": 217.94863643216067,
+    "practice_run_in_margin_C": -17.94863643216067,
+    "run_in_search": {
+      "attempts": [
+        {
+          "peak_C": 217.94863643216067,
+          "stage_seconds": 930.6,
+          "stages": 61,
+          "spacing_m": 144.87753599999996
+        }
+      ],
+      "best": {
+        "peak_C": 217.94863643216067,
+        "stage_seconds": 930.6,
+        "stages": 61,
+        "spacing_m": 144.87753599999996
+      }
+    },
+    "windows": {
+      "drilling_fluid": {
+        "lo": 1277.726970719645,
+        "hi": 1277.4763033962722,
+        "lo_by": {
+          "state": "connection",
+          "md": 10407.142857142857,
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "pa_per_SG": 102094071.42857143,
+          "pressure_bound": "upper"
+        },
+        "hi_by": {
+          "state": "drilling",
+          "md": 12857.142857142857,
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "pa_per_SG": 126128571.42857143,
+          "pressure_bound": "upper"
+        },
+        "open": false,
+        "fluid": null,
+        "note": "no density satisfies constant-BHP and equipment constraints"
+      },
+      "trip_fluid": {
+        "lo": 998.2012723757281,
+        "hi": 994.7165507374914,
+        "lo_by": {
+          "state": "trip",
+          "md": 12857.142857142857,
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "pa_per_SG": 126128571.42857143,
+          "pressure_bound": "upper"
+        },
+        "hi_by": {
+          "state": "trip",
+          "md": 12857.142857142857,
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "pa_per_SG": 126128571.42857143,
+          "pressure_bound": "upper"
+        },
+        "open": false,
+        "fluid": null,
+        "note": "no density satisfies constant-BHP and equipment constraints"
+      }
+    },
+    "solver_ok": true,
+    "coating": {
+      "pipe": "TK-Drakon coated",
+      "rating": 204.0,
+      "circulating_max": 206.21943549789916,
+      "connection": {
+        "max": 206.81545425225733,
+        "minutes_above": 6.33
+      },
+      "trip_in": {
+        "max": 283.87667591424946,
+        "minutes_above": 820.1367621716116
+      },
+      "status": "INDETERMINATE"
+    },
+    "pumps": {
+      "ok": true,
+      "spp": 41673320.895700954,
+      "within_rig": true,
+      "gpm": 796.9517932156845
+    }
+  },
+  "result": {
+    "site": {
+      "name": "United Downs / Carnmenellis (UK)",
+      "tier": "evidence-based",
+      "target_depth_m": 12857.142857142857,
+      "legacy_target_depth_m": 12500.0,
+      "target_T_C": 400.0,
+      "k_rock": 3.3,
+      "E_rock_Pa": 60000000000.0,
+      "T_inj_C": 40.0,
+      "mu": 0.8,
+      "data_basis": {
+        "stress": {
+          "basis": "measured",
+          "source": "Reinecker et al. (2021); Shmin data to 2.0 km, SHmax derived at mu 0.8"
+        },
+        "strength": {
+          "basis": "calibrated",
+          "source": "UD-1 breakouts, BGS image log (calibrate_ud1.py)"
+        },
+        "pore pressure": {
+          "basis": "measured",
+          "source": "Reinecker et al. (2021)"
+        },
+        "temperature": {
+          "basis": "extrapolated",
+          "source": "~180 C at 5 km (Reinecker et al. 2021); 28 C/km assumed below"
+        },
+        "well check": {
+          "basis": "calibrated",
+          "source": "UD-1 to 5,058 m TVD (calibrate_ud1.py)"
+        }
+      },
+      "missing": [],
+      "stress_cases": [
+        {
+          "label": "Reinecker et al. (2021)",
+          "source": "Reinecker et al. (2021), Geothermics 97, 102226",
+          "z_data_m": [
+            0.0,
+            2000.0
+          ],
+          "Sv": [
+            25275.0,
+            0.0
+          ],
+          "Shmin": [
+            13210.0,
+            3000000.0
+          ],
+          "SHmax": [
+            25990.0,
+            5900000.0
+          ],
+          "Pp": [
+            9494.0,
+            61.0
+          ],
+          "mu": null
+        }
+      ],
+      "strength_cases": [
+        {
+          "label": "intact, 0 K",
+          "UCS_Pa": 203000000.0
+        },
+        {
+          "label": "intact, 40 K",
+          "UCS_Pa": 172000000.0
+        },
+        {
+          "label": "weak zones, 0 K",
+          "UCS_Pa": 147000000.0
+        },
+        {
+          "label": "weak zones, 40 K",
+          "UCS_Pa": 118000000.0
+        }
+      ]
+    },
+    "evaluation": "v1.3.4",
+    "z_m": 12857.142857142857,
+    "T_rock_C": 400.0,
+    "programme": {
+      "pipe": "TK-Drakon coated",
+      "flow": 50,
+      "flow_unit": "L/s",
+      "mass_flow_kg_s": 63.87362497645776,
+      "fluid": {
+        "rho_surface": 1277.4724995291551,
+        "sg": 1.277472499529155,
+        "yield_point_Pa": 13.406472800000001,
+        "pv_ratio_to_water": 31.513581287688968
+      },
+      "fluid_passes": [
+        {
+          "simulated_rho_surface": 998.2012723757281,
+          "prescribed_rho_surface": 1329.8322673024481,
+          "trip_simulated_rho_surface": 998.2012723757281,
+          "trip_prescribed_rho_surface": 1329.8322673024481,
+          "density_residual_SG": 0.33163099492672005,
+          "trip_residual_SG": 0.33163099492672005,
+          "fluid_SG": null,
+          "success": true,
+          "rop_m_h": 3.7602651327973113,
+          "tool": "PASS with the schedule found"
+        },
+        {
+          "simulated_rho_surface": 1329.8322673024481,
+          "prescribed_rho_surface": 1277.4724995291551,
+          "trip_simulated_rho_surface": 1329.8322673024481,
+          "trip_prescribed_rho_surface": 1277.4724995291551,
+          "density_residual_SG": -0.052359767773293014,
+          "trip_residual_SG": -0.052359767773293014,
+          "fluid_SG": 1.329832267302448,
+          "success": true,
+          "rop_m_h": 3.764918550334439,
+          "tool": "FAIL: 206 C at the bit while drilling"
+        },
+        {
+          "simulated_rho_surface": 1277.4724995291551,
+          "prescribed_rho_surface": 1277.726970719645,
+          "trip_simulated_rho_surface": 1277.4724995291551,
+          "trip_prescribed_rho_surface": 1277.726970719645,
+          "density_residual_SG": 0.00025447119048976674,
+          "trip_residual_SG": 0.00025447119048976674,
+          "fluid_SG": 1.277472499529155,
+          "success": true,
+          "rop_m_h": 3.6374512818879294,
+          "tool": "FAIL: 203 C at the bit while drilling"
+        }
+      ],
+      "fluid_converged": true,
+      "rop_m_h": 3.658777234762727,
+      "rop_passes": [],
+      "bit_C": 202.99753592485226,
+      "return_C": 76.8957453259037,
+      "backpressure_Pa": 0.0,
+      "spp_Pa": 41673320.895700954,
+      "ecd_SG": 0.09726077694940041,
+      "v_ann_min": 2.255789793168978,
+      "conflict": null,
+      "drilling_simulated_rho_surface": 1277.4724995291551,
+      "drilling_prescribed_rho_surface": 1277.726970719645,
+      "trip_simulated_rho_surface": 1277.4724995291551,
+      "trip_prescribed_rho_surface": 1277.726970719645,
+      "trip_fluid_treatment": "uniform column from the start of the trip",
+      "barite_mass_fraction": 0.2867674776208341,
+      "trip_barite_mass_fraction": 0.2867674776208341
+    },
+    "cycle": {
+      "site_verdict": "NO-GO",
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "verdicts": {
+        "drilling": "NO-GO",
+        "connection": "NO-GO",
+        "trip": "NO-GO"
+      },
+      "drill_SG": null,
+      "drill_SG_hi": null,
+      "trip_SG": null,
+      "trip_SG_hi": null,
+      "safe_pause_h": null,
+      "trip_h": 51.84431580279911,
+      "T_ref": {
+        "drilling": 400.0,
+        "connection": 252.12814039343166,
+        "connection, fresh rock": 378.3969215162515,
+        "trip": 380.6835194082357,
+        "end of drilling": 237.41858954062658
+      },
+      "budget": {
+        "water_SG": 0.9417008697271344,
+        "water_SG_trip": 0.9070052707424379,
+        "allowance_SG": 0.02,
+        "backpressure": 10590820.097767409,
+        "drill_rho_surface": null,
+        "trip_rho_surface": null,
+        "trip_SG_start": null,
+        "trip_dP_heating": null,
+        "water_dP_heating": null
+      },
+      "cases": []
+    },
+    "sensitivities": {},
+    "trip_profile": [],
+    "windows": {
+      "depths": [
+        12857.142857142857,
+        12832.142857142857,
+        12828.607481142857,
+        12807.142857142857,
+        12782.142857142857,
+        12757.142857142857,
+        12657.142857142857,
+        12557.142857142857,
+        12457.142857142857,
+        12357.142857142857,
+        12257.142857142857,
+        12157.142857142857,
+        12057.142857142857,
+        11957.142857142857,
+        11857.142857142857,
+        11757.142857142857,
+        11657.142857142857,
+        11557.142857142857,
+        11457.142857142857,
+        11357.142857142857,
+        11257.142857142857,
+        11157.142857142857,
+        11057.142857142857,
+        10957.142857142857,
+        10857.142857142857,
+        10757.142857142857,
+        10657.142857142857,
+        10557.142857142857,
+        10507.142857142857,
+        10482.142857142857,
+        10457.142857142857,
+        10432.142857142857,
+        10407.142857142857,
+        10382.142857142857,
+        10357.142857142857,
+        10332.142857142857,
+        10307.142857142857,
+        10257.142857142857,
+        10157.142857142857,
+        10057.142857142857,
+        9957.142857142857,
+        9857.142857142857,
+        9757.142857142857,
+        9657.142857142857,
+        9557.142857142857,
+        9457.142857142857,
+        9357.142857142857,
+        9257.142857142857,
+        9157.142857142857,
+        9057.142857142857,
+        8957.142857142857,
+        8857.142857142857,
+        8757.142857142857,
+        8657.142857142857,
+        8557.142857142857,
+        8457.142857142857,
+        8357.142857142857,
+        8257.142857142857,
+        8157.142857142857,
+        8057.142857142857,
+        7957.142857142857,
+        7857.142857142857,
+        7757.142857142857,
+        7657.142857142857,
+        7557.142857142857,
+        7457.142857142857,
+        7357.142857142857,
+        7257.142857142857,
+        7157.142857142857,
+        7057.142857142857,
+        6957.142857142857,
+        6857.142857142857,
+        6757.142857142857,
+        6657.142857142857,
+        6557.142857142857,
+        6457.142857142857,
+        6357.142857142857,
+        6257.142857142857,
+        6157.142857142857,
+        6057.142857142857,
+        5957.142857142857,
+        5857.142857142857,
+        5757.142857142857,
+        5657.142857142857,
+        5557.142857142857,
+        5457.142857142857,
+        5357.142857142857,
+        5257.142857142857,
+        5157.142857142857,
+        5057.142857142857,
+        4957.142857142857,
+        4857.142857142857,
+        4757.142857142857,
+        4657.142857142857,
+        4557.142857142857,
+        4457.142857142857,
+        4357.142857142857,
+        4257.142857142857,
+        4157.142857142857,
+        4057.142857142857,
+        4000.0
+      ],
+      "states": {},
+      "mpd": true,
+      "mpd_target_interval_Pa": [
+        163508217.27357772,
+        164013857.14285713
+      ],
+      "drilling_fluid": {
+        "lo": 1277.726970719645,
+        "hi": 1277.4763033962722,
+        "lo_by": {
+          "state": "connection",
+          "md": 10407.142857142857,
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "pa_per_SG": 102094071.42857143,
+          "pressure_bound": "upper"
+        },
+        "hi_by": {
+          "state": "drilling",
+          "md": 12857.142857142857,
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "pa_per_SG": 126128571.42857143,
+          "pressure_bound": "upper"
+        },
+        "open": false,
+        "fluid": null,
+        "note": "no density satisfies constant-BHP and equipment constraints"
+      },
+      "trip_fluid": {
+        "lo": 998.2012723757281,
+        "hi": 994.7165507374914,
+        "lo_by": {
+          "state": "trip",
+          "md": 12857.142857142857,
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "pa_per_SG": 126128571.42857143,
+          "pressure_bound": "upper"
+        },
+        "hi_by": {
+          "state": "trip",
+          "md": 12857.142857142857,
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "pa_per_SG": 126128571.42857143,
+          "pressure_bound": "upper"
+        },
+        "open": false,
+        "fluid": null,
+        "note": "no density satisfies constant-BHP and equipment constraints"
+      },
+      "refinement": {
+        "levels": [
+          {
+            "spacing_m": 50.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0019344410357873584,
+                "hi": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0
+              }
+            }
+          },
+          {
+            "spacing_m": 25.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0,
+                "hi": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0
+              }
+            }
+          }
+        ],
+        "tolerance_SG": 0.002,
+        "converged": true
+      }
+    },
+    "tools": {
+      "limit": 200.0,
+      "drilling": {
+        "T": 202.99753592485226,
+        "ok": false
+      },
+      "connection": {
+        "practice": {
+          "precirc_min": 0.33,
+          "off_min": 6.33
+        },
+        "schedule": null,
+        "peak": 203.3444102102819,
+        "node_max": 235.6530089098072,
+        "ok": false
+      },
+      "trip_in": {
+        "unstaged": {
+          "peak": 330.0276260601016,
+          "md": 12857.142857142857
+        },
+        "staged": {
+          "peak": 217.94863643216067,
+          "md": 12837.529695999998,
+          "spacing_m": 144.8775360000002,
+          "minutes": 15.51
+        },
+        "ok": false,
+        "schedule": null
+      },
+      "tool": "FAIL: 203 C at the bit while drilling",
+      "coating": {
+        "pipe": "TK-Drakon coated",
+        "rating": 204.0,
+        "circulating_max": 206.21943549789916,
+        "connection": {
+          "max": 206.81545425225733,
+          "minutes_above": 6.33
+        },
+        "trip_in": {
+          "max": 283.87667591424946,
+          "minutes_above": 820.1367621716116
+        },
+        "status": "INDETERMINATE"
+      },
+      "trip_fluid_SG": 1.277472499529155,
+      "trip_circulation_success": true,
+      "robustness_search": {
+        "attempts": [
+          {
+            "peak_C": 217.94863643216067,
+            "stage_seconds": 930.6,
+            "stages": 61,
+            "spacing_m": 144.87753599999996
+          }
+        ],
+        "best": {
+          "peak_C": 217.94863643216067,
+          "stage_seconds": 930.6,
+          "stages": 61,
+          "spacing_m": 144.87753599999996
+        }
+      }
+    },
+    "status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, connection, trip, drilling common window, trip common window",
+        "tool: 203 C at the bit while drilling"
+      ]
+    },
+    "components": {
+      "solver": {
+        "ok": true,
+        "converged": true,
+        "runs_ok": true,
+        "fluid_passes": 3
+      },
+      "tool": {
+        "ok": false,
+        "detail": "FAIL: 203 C at the bit while drilling"
+      },
+      "coating": {
+        "status": "INDETERMINATE",
+        "pipe": "TK-Drakon coated"
+      },
+      "hole_cleaning": {
+        "ok": true,
+        "v_ann_min": 2.255789793168978,
+        "conflict": null
+      },
+      "pumps": {
+        "ok": true,
+        "spp": 41673320.895700954,
+        "within_rig": true,
+        "gpm": 796.9517932156845
+      },
+      "admissibility": {
+        "inadmissible": []
+      },
+      "stability": {
+        "verdict": "NO-GO",
+        "states": {
+          "drilling": "NO-GO",
+          "connection": "NO-GO",
+          "trip": "NO-GO",
+          "drilling common window": "NO-GO",
+          "trip common window": "NO-GO"
+        }
+      },
+      "prescription": {
+        "drilling_fluid": {
+          "open": false,
+          "fluid": null,
+          "note": "no density satisfies constant-BHP and equipment constraints",
+          "heavier_than_water": false
+        },
+        "trip_fluid": {
+          "open": false,
+          "fluid": null,
+          "note": "no density satisfies constant-BHP and equipment constraints",
+          "heavier_than_water": false
+        }
+      },
+      "window_refinement": {
+        "levels": [
+          {
+            "spacing_m": 50.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0019344410357873584,
+                "hi": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0
+              }
+            }
+          },
+          {
+            "spacing_m": 25.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0,
+                "hi": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0
+              }
+            }
+          }
+        ],
+        "tolerance_SG": 0.002,
+        "converged": true
+      }
+    },
+    "versions": {
+      "commit": "14eb25019371b8012a4b6a6c3f28f273429fcfd6",
+      "dirty": true,
+      "python": "3.14.4",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.18.1",
+        "iapws": "1.5.5",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "input_warnings": []
+  },
+  "mpd": {
+    "ok": false,
+    "target_bhp_Pa": 164453380.10491478,
+    "rating_Pa": 17236892.5,
+    "surface_backpressure_Pa": {
+      "drilling": 0.0,
+      "connection": 10590820.097767409,
+      "trip start": 10590820.097767409,
+      "trip end": 15114577.237268474
+    },
+    "control_errors_Pa": {
+      "drilling": 941508.3102955818,
+      "connection": 0.011556506156921387,
+      "trip start": 0.011556506156921387,
+      "trip end": 2.086162567138672e-07
+    }
+  },
+  "elapsed_seconds": 75.90986320000957,
+  "evidence": "results/levers/united-downs/L1/2e1387fddad542bf.json",
+  "rating_only_physics_reused_from": null
+}

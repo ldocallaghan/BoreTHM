@@ -1,0 +1,49 @@
+{
+  "site": "soultz",
+  "lever": "L8",
+  "settings": {
+    "flow_L_s": 5.0,
+    "pipe": "TK-Drakon coated",
+    "shoe_m": 4000.0,
+    "pv_fraction": 1.0,
+    "coating_rating_C": 204.0,
+    "allowance_SG": 0.02,
+    "form_h": 0.0,
+    "bhp_Pa": null
+  },
+  "source_sha256": "8407856b348d2173aad04a37082b57218fe3274428303d34fb40d61a2f5c0336",
+  "versions": {
+    "commit": "14eb25019371b8012a4b6a6c3f28f273429fcfd6",
+    "dirty": true,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "assessment": {
+    "reopened": false,
+    "verdict": "INDETERMINATE",
+    "failures": [
+      "solver"
+    ],
+    "qualification_indeterminate": [],
+    "evaluated_status": {
+      "label": "INDETERMINATE",
+      "reasons": [
+        "selected circulation did not converge"
+      ]
+    }
+  },
+  "metrics": null,
+  "result": {
+    "prerequisite_failure": "selected circulation did not converge",
+    "other_gates": "INDETERMINATE because the selected circulation failed"
+  },
+  "mpd": null,
+  "elapsed_seconds": 69.04792719999386,
+  "evidence": "results/levers/soultz/L8/a8cadf59b0fa1936.json",
+  "rating_only_physics_reused_from": null
+}

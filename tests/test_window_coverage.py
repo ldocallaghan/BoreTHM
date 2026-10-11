@@ -67,3 +67,16 @@ def test_an_unresolved_narrow_extremum_is_reported(synthetic, monkeypatch):
         return cases[0], cases
     monkeypatch.setattr(se, 'stability_inputs', inputs)
     assert not se.common_windows(site, output)['refinement']['converged']
+
+
+def test_failure_timing_lever_applies_at_a_shallow_exposure(synthetic, monkeypatch):
+    site, output = synthetic
+    def inputs(site, depth, rock, T_wall=None, **kwargs):
+        required = 1500. if depth == 300. and T_wall == rock else 1000.
+        cases = [dict(label='scenario', window=dict(Pw_lo=required * pr.G * depth,
+                                                   Pw_hi=2000. * pr.G * depth))]
+        return cases[0], cases
+    monkeypatch.setattr(se, 'stability_inputs', inputs)
+    assert se.common_windows(site, output)['drilling_fluid']['lo'] == pytest.approx(1500.)
+    output['form_h'] = 1.
+    assert se.common_windows(site, output)['drilling_fluid']['lo'] == pytest.approx(1000.)

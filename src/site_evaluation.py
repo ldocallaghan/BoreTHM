@@ -1552,6 +1552,7 @@ def common_windows(site, out, cycle=None, run=None, node=True, extra_depths=(), 
     stand = t.stand_ft * dc.FT
     shoe = max(h.md_top for h in g.hole)
     complete = out.get('coverage_corrected', False)
+    form_h = out.get('form_h', 0.0)
     if complete:
         depths = np.unique(np.r_[np.arange(z, shoe, -WINDOW_DZ), z, shoe, max(shoe, z - stand), extra_depths])[::-1]
         depths = depths[(depths >= shoe) & (depths <= z)]
@@ -1617,9 +1618,13 @@ def common_windows(site, out, cycle=None, run=None, node=True, extra_depths=(), 
         trip_material = out.get('trip_fluid', run.get('fluid')) if out.get('apply_trip_fluid') else run.get('fluid')
         cap_o, hs_o = _static_node(T_r, d, a, 0.0, trip_material)
         # fresh rock at this depth, when the bit was here
-        r_f = wall_thermal.run([wall_thermal.State("circulating", fresh_s, T_fluid=bc["Tu"], h=bc["h"]),
-                                wall_thermal.State("static", conn_s, h=hs_s, C=cap_s if node else 0.0,
-                                                   T_node0=bc["Tu"])],
+        fresh_history = [wall_thermal.State("circulating", fresh_s, T_fluid=bc["Tu"], h=bc["h"]),
+                         wall_thermal.State("static", conn_s, h=hs_s, C=cap_s if node else 0.0,
+                                            T_node0=bc["Tu"])]
+        if form_h * 3600. > fresh_s + conn_s:
+            fresh_history.append(wall_thermal.State('circulating', form_h * 3600. - fresh_s - conn_s,
+                                                     T_fluid=bc['Tu'], h=bc['h']))
+        r_f = wall_thermal.run(fresh_history,
                                T_r, a, site.k_rock, rhocp_rock, n=120, r_max=r_max, growth=1.2)
         T_f = float(np.interp(a + d_ref, r_f.r, r_f.fields[-1]))
         # the trip, with this element's history since the bit passed it
@@ -1643,7 +1648,13 @@ def common_windows(site, out, cycle=None, run=None, node=True, extra_depths=(), 
                                       ecd_SG=allow, P_surface=bp, thermal=thermal)
         fric = pr.annulus_friction(run, d)
         if complete:
-            _, exposure_cases = stability_inputs(site, d, T_r, T_wall=T_r, Pw=Pw_c + fric,
+            exposure_T = T_r
+            if form_h > 0.:
+                exposure = wall_thermal.run([wall_thermal.State('circulating', form_h * 3600.,
+                                                                  T_fluid=bc['Tu'], h=bc['h'])],
+                    T_r, a, site.k_rock, rhocp_rock, n=120, r_max=r_max, growth=1.2)
+                exposure_T = float(np.interp(a + d_ref, exposure.r, exposure.fields[-1]))
+            _, exposure_cases = stability_inputs(site, d, T_r, T_wall=exposure_T, Pw=Pw_c + fric,
                                                  P_surface=bp, thermal=thermal)
             for c in exposure_cases:
                 w = c['window']
@@ -1985,7 +1996,7 @@ def component_statuses(out):
                    within_rig=gpm <= rig_capacity_gpm(float(hyd["spp"])), gpm=gpm),
         admissibility=dict(inadmissible=[c["label"] for c in cases
                                          if not c["admissible"]["admissible"]]),
-        stability=dict(verdict=cycle["site_verdict"], states=cycle["verdicts"]),
+        stability=dict(verdict=cycle["site_verdict"], states=dict(cycle["verdicts"])),
         prescription={k: dict(open=w["open"], fluid=w["fluid"], note=w.get("note"),
                               heavier_than_water=bool(w["open"] and w["fluid"] >
                                                       fluids.water().rho_surface + 1.0))
