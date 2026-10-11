@@ -14,6 +14,12 @@ Expects the raw files in data/forge16b/raw/ (not committed; see README.md):
 
 run_observations.csv is transcribed by hand from the Eavor trial report, so it
 is not rebuilt here. cycle_timings.csv is built from pason_trial_1min.csv.
+
+    python data/forge16b/build_extracts.py --image-logs
+
+reads the file listing of the GDR 1531 image-log zips from their central
+directories by HTTP range requests, without downloading them, into
+gdr1531_listing.csv (image_logs_inventory.md).
 """
 import csv
 import io
@@ -352,7 +358,97 @@ def connections_10s(full_gpm=500.0):
     return len(rows)
 
 
+# ------------------------------------------------- GDR 1531 image logs, headers only
+GDR1531 = "https://gdr.openei.org/files/1531/"
+GDR1531_ZIPS = ("Log though the end of build at 6938 ft.zip",
+                "Log halfway down tangent at 8585 ft.zip",
+                "Processed FMI and UBI.zip", "Wireline data.zip",
+                "11.5 inch intermediate casing.zip")
+
+
+def _range(url, start, end):
+    import urllib.request
+    req = urllib.request.Request(url, headers={"Range": f"bytes={start}-{end}"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return r.read()
+
+
+def _size(url):
+    import urllib.request
+    req = urllib.request.Request(url, method="HEAD")
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return int(r.headers["Content-Length"])
+
+
+def zip_listing(url, detail=False):
+    """The members of a remote zip file from its central directory alone,
+    fetched by HTTP range requests: (name, uncompressed bytes, modified)."""
+    import struct
+    size = _size(url)
+    tail = _range(url, max(0, size - 65558), size - 1)
+    i = tail.rfind(b"PK\x05\x06")
+    n, cd_size, cd_off = struct.unpack("<HII", tail[i + 10:i + 20])
+    if cd_off == 0xFFFFFFFF or n == 0xFFFF:          # ZIP64: read its end record
+        j = tail.rfind(b"PK\x06\x06")
+        n, cd_size, cd_off = struct.unpack("<QQQ", tail[j + 32:j + 56])
+    cd = _range(url, cd_off, cd_off + cd_size - 1)
+    out, k = [], 0
+    while k < len(cd) and cd[k:k + 4] == b"PK\x01\x02":
+        mtime, mdate = struct.unpack("<HH", cd[k + 12:k + 16])
+        usize = struct.unpack("<I", cd[k + 24:k + 28])[0]
+        ln, le, lc = struct.unpack("<HHH", cd[k + 28:k + 34])
+        name = cd[k + 46:k + 46 + ln].decode("utf-8", "replace")
+        extra = cd[k + 46 + ln:k + 46 + ln + le]
+        if usize == 0xFFFFFFFF and extra[:2] == b"\x01\x00":
+            usize = struct.unpack("<Q", extra[4:12])[0]
+        when = (f"{1980 + (mdate >> 9):04d}-{(mdate >> 5) & 15:02d}-{mdate & 31:02d} "
+                f"{mtime >> 11:02d}:{(mtime >> 5) & 63:02d}")
+        method = struct.unpack("<H", cd[k + 10:k + 12])[0]
+        csize = struct.unpack("<I", cd[k + 20:k + 24])[0]
+        offset = struct.unpack("<I", cd[k + 42:k + 46])[0]
+        if offset == 0xFFFFFFFF and extra[:2] == b"\x01\x00":
+            vals = struct.unpack("<" + "Q" * ((len(extra) - 4) // 8), extra[4:4 + 8 * ((len(extra) - 4) // 8)])
+            offset = vals[-1]
+        out.append((name, usize, when) if not detail else (name, usize, when, method, csize, offset))
+        k += 46 + ln + le + lc
+    return out
+
+
+def las_header(url, member, nbytes=200000):
+    """The header sections of a LAS file inside a remote zip, up to its data
+    (~A), from the first nbytes of the member alone."""
+    import struct
+    import zlib
+    entry = next(e for e in zip_listing(url, detail=True) if e[0] == member)
+    _, usize, _, method, csize, offset = entry
+    head = _range(url, offset, offset + 29)
+    ln, le = struct.unpack("<HH", head[26:30])
+    start = offset + 30 + ln + le
+    raw = _range(url, start, start + min(nbytes, csize) - 1)
+    text = (zlib.decompressobj(-15).decompress(raw) if method == 8 else raw).decode("latin-1")
+    return text.split("~A")[0]
+
+
+def image_log_listing(path=os.path.join(HERE, "gdr1531_listing.csv")):
+    """The file listing of the GDR 1531 zips that hold the image logs, read
+    from their central directories without downloading them."""
+    import urllib.parse
+    rows = []
+    for z in GDR1531_ZIPS:
+        for name, usize, when in zip_listing(GDR1531 + urllib.parse.quote(z)):
+            rows.append((z, name, usize, when))
+    with open(path, "w", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(("zip", "member", "bytes", "modified"))
+        w.writerows(rows)
+    return len(rows)
+
+
 if __name__ == "__main__":
+    import sys
+    if "--image-logs" in sys.argv:
+        print("gdr1531_listing.csv:", image_log_listing(), "files")
+        sys.exit()
     print("survey_16b.csv:", survey(), "stations")
     print("formation_temperature_16a.csv:", formation_temperature(), "points")
     print("pason_trial_1min.csv:", pason_trial(), "minutes")
