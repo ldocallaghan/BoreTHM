@@ -1,20 +1,13 @@
 # BoreTHM: models of circulating temperature and borehole stability for drilling into superhot rock
 
-BoreTHM is an open-source Python tool for screening sites for drilling into rock at around 400 °C. This v1.3.5 reader update retains the v1.3.4 calculation and evidence.
+BoreTHM is an open-source Python toolkit for assessing drilling programmes in superhot geothermal rock. It couples fluid circulation and heat transfer with borehole stability to help researchers and engineers examine pressure windows and equipment temperatures under different well designs and operating conditions.
 
-At Soultz, eight of nine stress/strength cases have an open target-depth drilling-fluid interval in the saved reference calculation; at United Downs, two of four do. These are local stability checks, not successful drilling programmes. The stated programme remains **NO-GO for this programme and these assumptions** at both sites because its whole-hole pressure windows close and tool-temperature limits are exceeded. Stress, strength, fluid properties and full-cycle equipment qualification remain key uncertainties.
+The circulation model is checked against Utah FORGE field data. Worked site assessments show how the models are applied, with assumptions and limitations reported alongside the results.
 
-The five-site headline is NO-GO at Soultz, United Downs and Pannonian, CONDITIONAL at Larderello with weighted drilling and trip fluids, and GO at Newberry with water. Every status belongs to the programme and assumptions evaluated here. The engineering goal is partially answered: one defined programme has been screened. Whether these sites can be drilled with any existing technology remains open, as does the cooling question.
-
-The circulation model has been validated against temperatures measured in the insulated drill pipe trial in Utah FORGE well 16B. The model of the borehole wall reheating when circulation stops rests on analytic solutions; a comparison with the return temperatures after five trips in the same well is too coarse to confirm or reject it. The stability model has been calibrated against breakouts in the UD-1 well at United Downs, Cornwall, and checked against wells at Soultz-sous-Forêts and Newberry.
-
-At Soultz and United Downs the common drilling and trip windows close when intersected across the evaluated depths, states and stress/strength cases. The corrected evaluation simulates surface drilling weights of 1.379 and 1.332 SG, and trip weights of 1.444 and 1.401 SG. These are attempted weights at the lower-bound demands; no weight satisfies both bounds of a closed common window. Circulating friction limits the drilling fluid, while column heating through a trip increases the surface weight needed at its end. The tool at United Downs also reaches 205.7 °C while drilling. Pannonian's closed all-depth windows now give NO-GO, with coating qualification still unknown. Larderello simulates the prescribed 1.036 SG drilling and 1.094 SG trip fluids over its 2,400 m target.
-
-The corrected mud conserves the mass of barite and water as it heats. Every fluid pass feeds the whole-hole requirement back into circulation and hydraulics, with the drilling rate and exposure updated with it. The youngest rock at the target is included. Soultz's bit remains below 200 °C at 197.0 °C, but the best run-in schedule attempted reaches 201.2 °C. The immediate-exposure rule and the skin-depth heuristic remain the base assumptions. An hour or two of failure-free cooling is studied separately as a hypothesis whose timing is unsupported by the cited observations.
-
-The wall is held by the weight of the fluid. When the bit exposes the rock, the rock a few centimetres behind the wall, into which a breakout grows, is still at formation temperature, and breakouts have been imaged at the bit within minutes of drilling (Moore et al., 2011). In the base model, immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand. Insulated pipe can cool the tools, and cooling slows modeled creep. Near-bit pre-cooling and breakout growth remain separate unresolved questions; the delay experiments do not establish an hour of failure-free cooling in hot crystalline rock.
-
-The targets at both sites lie 6 to 11 km below the deepest stress measurements, so the results are projections from much shallower data.
+- [Get started](#7-reproducing-the-results): set up Python and run a site assessment.
+- [Read the summary](docs/summary.md): the findings and open research questions.
+- [Explore the site results](#5-site-assessment): evaluated programmes and their controlling constraints.
+- [Understand the models](#3-drilling-with-a-single-loop): methods and field comparisons.
 
 ## 1. Introduction
 
@@ -265,9 +258,7 @@ python src/drilling_cycle.py      # drilling-cycle timings from FORGE 16B
 python src/validate_forge_pauses.py  # check of the reheating against FORGE 16B's trips and Fig. 3 (about 5 min)
 ```
 
-The retained v1.3.4 goldens were generated by the manual CI workflow with `v134-goldens` enabled. It reruns every corrected reference and lever in a fresh evidence directory, compares them with the reviewed checkpoints, and checks the complete test suite. Its artifact contains the new site and lever pins with all bracketing runs. Earlier golden tables retain their release modes. The [v1.3.4 release verification](docs/v134-release.md) records the successful 455-test CI run, the new pins and their evidence checksums.
-
-Package v1.3.5 preserves calculation mode v1.3.4 and its numerical pins. The [v1.3.5 release record](docs/v135-release.md) describes the reader changes and verification.
+Release history and verification are documented in the [changelog](CHANGELOG.md) and [release records](docs/v135-release.md).
 
 Each model file also runs on its own and prints its analysis, for example `python src/model1_coupled.py`. Historical figure scripts retain earlier diagnostic programmes; their saved figures are not the corrected release table. The scripts `src/*_figures.py` regenerate those figures in `figures/`. The test suite is run with `pytest`, which takes a few seconds and doesn't need the property table, or `pytest -m slow` to include the full runs, which do (the table is built on first use if it isn't there). A set of reference results is held fixed by the tests, so that any change to the models shows up as a difference. The FORGE and Newberry extracts can be rebuilt from the public datasets with the scripts in their data folders.
 
