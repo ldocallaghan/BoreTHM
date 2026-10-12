@@ -18,7 +18,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'output/pdf/summary-v135.pdf'
-BASE = 'https://github.com/ldocallaghan/geothermal-thermo-hydraulic-model/blob/codex/v1.3.5/'
+BASE = 'https://github.com/ldocallaghan/geothermal-thermo-hydraulic-model/blob/release/v1.3.5/'
 
 
 def font_files():
