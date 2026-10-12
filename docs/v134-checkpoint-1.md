@@ -2,7 +2,7 @@
 
 This is the first STOP review in the supplied v1.3.4 specification. These are verdicts for the stated programme and assumptions. C5 and C6 have not begun, and the v1.3.3 goldens are unchanged.
 
-The earlier development-plan changes were reverted to `6170a12`. The new work is on `codex/v1.3.4`, with separate commits for C1 (`3028b17`), C4 (`1c69f19`), C2 (`42d0f99`) and C3 (`1a5da44`). Commit `b9b666b` rejects invalid circulation candidates encountered in the United Downs search and adds checkpoint resumption.
+The earlier development-plan changes were reverted to `6170a12`. The v1.3.4 work has separate commits for C1 (`3028b17`), C4 (`1c69f19`), C2 (`42d0f99`) and C3 (`1a5da44`). Commit `b9b666b` rejects invalid circulation candidates encountered in the United Downs search and adds checkpoint resumption.
 
 ## Site verdicts
 
