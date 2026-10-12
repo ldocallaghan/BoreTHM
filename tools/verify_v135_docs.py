@@ -1,0 +1,135 @@
+"""Offline checks of reader tables against retained v1.3.4 evidence.
+
+No model imports or coupled solves. Run: python tools/verify_v135_docs.py
+"""
+import hashlib
+import json
+from pathlib import Path
+import re
+import tomllib
+
+ROOT = Path(__file__).resolve().parents[1]
+EVIDENCE = ROOT / 'results/v1.3.4/ci/38186784798-1'
+SITES = {'soultz': 'Soultz', 'united-downs': 'United Downs'}
+
+
+def read(path):
+    return json.loads(path.read_text(encoding='utf-8'))
+
+
+def source(key):
+    return read(EVIDENCE / f'reference/{key}.json')
+
+
+def label(key, case):
+    # Strength is in its own table column; preserve the complete stress case.
+    text = case['label']
+    if key == 'soultz':
+        suffix = f", lab UCS {case['UCS'] / 1e6:.0f}"
+        assert text.endswith(suffix)
+        text = text.removesuffix(suffix)
+    else:
+        prefix = 'Reinecker et al. (2021), '
+        assert text.startswith(prefix)
+        text = text.removeprefix(prefix)
+    return f'{SITES[key]}: {text}'
+
+
+def case_table():
+    rows = ['| Case | UCS, MPa | Drilling need / limit, SG-equivalent | Target stability-cycle verdict |',
+            '|---|---:|---|---|']
+    for key in SITES:
+        for case in source(key)['cycle']['cases']:
+            rows.append(f"| {label(key, case)} | {case['UCS'] / 1e6:.0f} | "
+                        f"{case['drill_SG']:.3f} / {case['drill_SG_hi']:.3f} | {case['verdict']} |")
+    return '\n'.join(rows)
+
+
+def window_table():
+    rows = ['| Site and state | Lower / upper, surface SG | Width, SG |',
+            '|---|---|---:|']
+    for key, name in SITES.items():
+        for field, state in [('drilling_fluid', 'drilling'), ('trip_fluid', 'trip')]:
+            w = source(key)['windows'][field]
+            rows.append(f"| {name} {state} | {w['lo'] / 1000:.5f} / {w['hi'] / 1000:.5f} | "
+                        f"{(w['hi'] - w['lo']) / 1000:+.5f} |")
+    return '\n'.join(rows)
+
+
+def base_trial(key):
+    expected = dict(pipe='TK-Drakon coated', shoe_m=4000.0,
+                    flow_L_s=40 if key == 'soultz' else 50, pv_fraction=1.0,
+                    allowance_SG=0.02, form_h=0.0, bhp_Pa=None, coating_rating_C=204.0)
+    matches = [t for t in read(EVIDENCE / f'levers/{key}/L4/summary.json')['trials']
+               if t['settings'] == expected]
+    assert len(matches) == 1, (key, len(matches))
+    trial = matches[0]
+    peaks = trial['metrics']['tool_peaks_C']
+    attempts = trial['metrics']['run_in_search']['attempts']
+    assert peaks['run_in'] == min(t['peak_C'] for t in attempts)
+    return trial
+
+
+def tool_sentence():
+    groups = []
+    for key, name in SITES.items():
+        peaks = base_trial(key)['metrics']['tool_peaks_C']
+        groups.append(f"{name}: {peaks['drilling']:.1f} / {peaks['connection']:.1f} / {peaks['run_in']:.1f} °C")
+    return '; '.join(groups) + '.'
+
+
+def coating_sentence():
+    coatings = [source(k)['tools']['coating'] for k in SITES]
+    assert all(c['rating'] == 204.0 and c['status'] == 'INDETERMINATE' for c in coatings)
+    return (f"Reference-practice coating run-in maxima are {coatings[0]['trip_in']['max']:.1f} °C "
+            f"at Soultz and {coatings[1]['trip_in']['max']:.1f} °C at United Downs, against the stated 204 °C rating.")
+
+
+def verify():
+    hashes = read(EVIDENCE / 'manifest.json')['evidence_files_sha256']
+    assert len(hashes) == 112
+    for path, expected in hashes.items():
+        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected, path
+    counts = {}
+    for key, expected in [('soultz', (9, 8)), ('united-downs', (4, 2))]:
+        cases = source(key)['cycle']['cases']
+        # Matches site_evaluation.py's saved diagnostic comparison tolerance.
+        opened = sum(c['drill_SG'] <= c['drill_SG_hi'] + 1e-9 for c in cases)
+        assert (len(cases), opened) == expected
+        assert source(key)['status']['label'] == 'NO-GO'
+        counts[key] = opened
+    assert round(source('soultz')['site']['target_depth_m'] / 1000, 2) == 10.70
+    assert round(source('united-downs')['site']['target_depth_m'] / 1000, 2) == 12.86
+    assert f"{base_trial('soultz')['metrics']['practice_run_in_peak_C']:.1f}" == '214.5'
+    case_deficit = max(c['drill_SG'] - c['drill_SG_hi'] for c in source('soultz')['cycle']['cases'])
+    assert f'{case_deficit:.3f}' == '0.017'
+    excess = base_trial('soultz')['metrics']['tool_peaks_C']['run_in'] - source('soultz')['tools']['limit']
+    assert f'{excess:.1f}' == '1.2'
+    l2 = read(EVIDENCE / 'levers/soultz/L2/summary.json')
+    shoe_trials = [t for t in l2['trials'] if t['settings']['shoe_m'] == 10200.0]
+    assert len(shoe_trials) == 1
+    assert f"{shoe_trials[0]['metrics']['pressure_margin_SG']['trip_fluid']:.5f}" == '0.00137'
+    pair = read(EVIDENCE / 'levers/soultz/PAIR-L2-L4/summary.json')
+    assert pair['pair'] == ['L2', 'L4']
+    assert f"{-pair['trial']['metrics']['pressure_margin_SG']['drilling_fluid']:.5f}" == '0.00949'
+    expected_status = {'soultz': 'NO-GO', 'united-downs': 'NO-GO', 'pannonian': 'NO-GO',
+                       'larderello': 'CONDITIONAL', 'newberry': 'GO'}
+    assert {k: source(k)['status']['label'] for k in expected_status} == expected_status
+    for doc in ['README.md', 'docs/summary.md']:
+        text = (ROOT / doc).read_text(encoding='utf-8')
+        for table in [case_table(), window_table(), tool_sentence(), coating_sentence()]:
+            assert table in text, f'{doc}: missing or mismatched evidence panel'
+    for doc in ['README.md', 'docs/summary.md', 'docs/v135-release.md', 'CHANGELOG.md']:
+        text = (ROOT / doc).read_text(encoding='utf-8')
+        for link in re.findall(r'\[[^\]]*\]\(([^)]+)\)', text):
+            if '://' not in link and not link.startswith('#'):
+                assert ((ROOT / doc).parent / link.split('#')[0]).exists(), (doc, link)
+    metadata = tomllib.loads((ROOT / 'pyproject.toml').read_text(encoding='utf-8'))
+    assert metadata['project']['version'] == '1.3.5'
+    assert 'version: "1.3.5"' in (ROOT / 'CITATION.cff').read_text(encoding='utf-8')
+    print('13 case rows, counts 8/9 and 2/4, 4 signed common windows, selected tool schedules,')
+    print('coating status, 5 site statuses, 112 evidence checksums, reader links and version metadata verified.')
+
+
+if __name__ == '__main__':
+    verify()

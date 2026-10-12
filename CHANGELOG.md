@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.3.5: reader framing and a deliberate development pause (release candidate)
+
+The README and two-page reader summary now place the favourable target-depth stress/strength cases beside the complete programme's independent failures. The saved reference calculation has open target drilling intervals in eight of nine Soultz cases and two of four United Downs cases. These local diagnostics do not establish successful drilling programmes; both sites remain NO-GO for this programme and these assumptions.
+
+The patch distinguishes target SG-equivalent pressures from surface-SG common windows, the best attempted tool schedule from reference practice, and temperature-rating exceedance from coating qualification. It narrows robustness, lever and validation claims to the comparisons performed. H-01's already-met proximity trigger is explicitly deferred by project priority while coolant-delivery and fluid-displacement triggers remain distinct; the cooling question and historical Pannonian threshold remain unresolved.
+
+Package and citation metadata advance to 1.3.5. Calculation mode v1.3.4, model source, inputs, physical defaults and numerical goldens remain unchanged. The reader tables are checked against retained evidence, all 112 checksums match, and the fast suite passes 357 tests in 14.41 s. The [release record](docs/v135-release.md) preserves the original CI provenance and records the pending author editorial pass. Outreach and new modelling remain separate work.
+
 ## v1.3.4: NO-GO for this programme and these assumptions at the deep sites (12 October 2026)
 
 The confirmed mixture, fluid-feedback and depth-coverage errors are corrected. Each verdict belongs to the stated programme and assumptions. No evaluated design lever or permitted pair reopens either deep site; no full-site minimum or complete operating envelope is established.

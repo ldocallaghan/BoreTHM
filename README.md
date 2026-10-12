@@ -1,14 +1,18 @@
 # Quenchwell: models of circulating temperature and borehole stability for drilling into superhot rock
 
-Quenchwell is an open-source Python tool for screening sites for drilling into rock at around 400 °C. For the stated v1.3.4 programme and assumptions, Soultz and United Downs are NO-GO, Pannonian is NO-GO, Larderello is CONDITIONAL on weighted drilling and trip fluids, and Newberry is GO with water. Every status belongs to the well design, fluid and operating schedule evaluated here. The deep-site conclusion is NO-GO for this programme and these assumptions.
+Quenchwell is an open-source Python tool for screening sites for drilling into rock at around 400 °C. This v1.3.5 reader update retains the v1.3.4 calculation and evidence.
+
+At Soultz, eight of nine stress/strength cases have an open target-depth drilling-fluid interval in the saved reference calculation; at United Downs, two of four do. These are local stability checks, not successful drilling programmes. The stated programme remains **NO-GO for this programme and these assumptions** at both sites because its whole-hole pressure windows close and tool-temperature limits are exceeded. Stress, strength, fluid properties and full-cycle equipment qualification remain key uncertainties.
+
+The five-site headline is NO-GO at Soultz, United Downs and Pannonian, CONDITIONAL at Larderello with weighted drilling and trip fluids, and GO at Newberry with water. Every status belongs to the programme and assumptions evaluated here. The engineering goal is partially answered: one defined programme has been screened. Whether these sites can be drilled with any existing technology remains open, as does the cooling question.
 
 The circulation model has been validated against temperatures measured in the insulated drill pipe trial in Utah FORGE well 16B. The model of the borehole wall reheating when circulation stops rests on analytic solutions; a comparison with the return temperatures after five trips in the same well is too coarse to confirm or reject it. The stability model has been calibrated against breakouts in the UD-1 well at United Downs, Cornwall, and checked against wells at Soultz-sous-Forêts and Newberry.
 
-At Soultz and United Downs the drilling and trip windows are closed across the stated cases of stress and strength. The corrected evaluation simulates surface drilling weights of 1.379 and 1.332 SG, and trip weights of 1.444 and 1.401 SG. These are attempted weights at the lower-bound demands; no weight satisfies both bounds of a closed common window. Circulating friction limits the drilling fluid, while column heating through a trip increases the surface weight needed at its end. The tool at United Downs also reaches 205.7 °C while drilling. Pannonian's closed all-depth windows now give NO-GO, with coating qualification still unknown. Larderello simulates the prescribed 1.036 SG drilling and 1.094 SG trip fluids over its 2,400 m target.
+At Soultz and United Downs the common drilling and trip windows close when intersected across the evaluated depths, states and stress/strength cases. The corrected evaluation simulates surface drilling weights of 1.379 and 1.332 SG, and trip weights of 1.444 and 1.401 SG. These are attempted weights at the lower-bound demands; no weight satisfies both bounds of a closed common window. Circulating friction limits the drilling fluid, while column heating through a trip increases the surface weight needed at its end. The tool at United Downs also reaches 205.7 °C while drilling. Pannonian's closed all-depth windows now give NO-GO, with coating qualification still unknown. Larderello simulates the prescribed 1.036 SG drilling and 1.094 SG trip fluids over its 2,400 m target.
 
 The corrected mud conserves the mass of barite and water as it heats. Every fluid pass feeds the whole-hole requirement back into circulation and hydraulics, with the drilling rate and exposure updated with it. The youngest rock at the target is included. Soultz's bit remains below 200 °C at 197.0 °C, but the best run-in schedule attempted reaches 201.2 °C. The immediate-exposure rule and the skin-depth heuristic remain the base assumptions. An hour or two of failure-free cooling is studied separately as a hypothesis whose timing is unsupported by the cited observations.
 
-The wall is held by the weight of the fluid. When the bit exposes the rock, the rock a few centimetres behind the wall, into which a breakout grows, is still at formation temperature, and breakouts have been imaged at the bit within minutes of drilling (Moore et al., 2011). Cooling the wall therefore does not lighten the drilling fluid. The insulated pipe keeps the drilling tools below their temperature limit, and the cooling it provides slows the creep of the hot rock into the hole.
+The wall is held by the weight of the fluid. When the bit exposes the rock, the rock a few centimetres behind the wall, into which a breakout grows, is still at formation temperature, and breakouts have been imaged at the bit within minutes of drilling (Moore et al., 2011). In the base model, immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand. Insulated pipe can cool the tools, and cooling slows modeled creep. Near-bit pre-cooling and breakout growth remain separate unresolved questions; the delay experiments do not establish an hour of failure-free cooling in hot crystalline rock.
 
 The targets at both sites lie 6 to 11 km below the deepest stress measurements, so the results are projections from much shallower data.
 
@@ -129,6 +133,49 @@ NWG 55-29 at Newberry, Oregon, was imaged with a borehole televiewer in 2008 dur
 
 The five sites were assessed for a target rock temperature of 400 °C (`comparative_sites.py`). They are not equally well characterised, and the results are reported in two groups accordingly. At Soultz and United Downs the stress magnitudes and rock strength have been measured or calibrated at the site, and the stability model has been checked against wells drilled there. At Larderello and in the Pannonian Basin, no stress magnitudes or rock strengths were found in the literature; the stresses are bounded only by the type of faulting observed (Liotta and Brogi, manuscript; Bada et al., 2007), and the strengths have no source. Newberry has stresses from a breakout analysis and strengths derived from logs, but its well check did not reproduce the breakout pattern, so it is grouped with them. Mazama Energy is developing Newberry as an open-loop enhanced geothermal system, and the table assesses drilling there; production is outside its scope. For the Pannonian Basin the table covers the transtensional part of the strike-slip regime described for the basin interior, with the maximum horizontal stress close to the vertical.
 
+### Target-depth stability in the saved reference calculation
+
+At Soultz, eight of nine stress/strength cases have an open target-depth drilling-fluid interval in the saved reference calculation; at United Downs, two of four do. These are local stability checks, not successful drilling programmes. The stated programme remains **NO-GO for this programme and these assumptions** at both sites because its whole-hole pressure windows close and tool-temperature limits are exceeded. Stress, strength, fluid properties and full-cycle equipment qualification remain key uncertainties.
+
+Need and limit are static-column SG-equivalent values at the target, with the existing friction/backpressure treatment. They are not surface mud-density prescriptions. The target stability-cycle verdict also checks connections and the trip; it excludes the separate whole-hole, tool and equipment gates. Each site's saved reference thermal/hydraulic solution is reused across its cases, without a fresh coupled design evaluation for each case. A positive local interval neither proves one fluid works throughout the hole nor proves the saved attempted fluid lies inside that interval.
+
+| Case | UCS, MPa | Drilling need / limit, SG-equivalent | Target stability-cycle verdict |
+|---|---:|---|---|
+| Soultz: SHmax lower bound (0.90 Sv) | 100 | 1.230 / 1.296 | CONDITIONAL |
+| Soultz: SHmax lower bound (0.90 Sv) | 115 | 1.209 / 1.296 | CONDITIONAL |
+| Soultz: SHmax lower bound (0.90 Sv) | 130 | 1.189 / 1.296 | CONDITIONAL |
+| Soultz: SHmax mid-range | 100 | 1.271 / 1.296 | CONDITIONAL |
+| Soultz: SHmax mid-range | 115 | 1.251 / 1.296 | CONDITIONAL |
+| Soultz: SHmax mid-range | 130 | 1.230 / 1.296 | CONDITIONAL |
+| Soultz: SHmax upper bound (1.05 Sv) | 100 | 1.313 / 1.296 | NO-GO |
+| Soultz: SHmax upper bound (1.05 Sv) | 115 | 1.292 / 1.296 | CONDITIONAL |
+| Soultz: SHmax upper bound (1.05 Sv) | 130 | 1.272 / 1.296 | CONDITIONAL |
+| United Downs: intact, 0 K | 203 | 1.169 / 1.220 | CONDITIONAL |
+| United Downs: intact, 40 K | 172 | 1.205 / 1.220 | CONDITIONAL |
+| United Downs: weak zones, 0 K | 147 | 1.234 / 1.220 | NO-GO |
+| United Downs: weak zones, 40 K | 118 | 1.267 / 1.220 | NO-GO |
+
+Soultz target 10.70 km; United Downs target 12.86 km. Sv is vertical stress. United Downs retains the existing 0 K / 40 K strength-calibration cases; these labels do not specify a newly applied cooling intervention. The 13 cases are selected scenarios, not samples from a probability distribution. Eight of nine and two of four describe open target drilling intervals, not probabilities of successful drilling. All verdicts refer to this programme and these assumptions.
+
+### Common-programme failures beside the local cases
+
+These common-programme windows intersect the evaluated depths, states and stress/strength cases. Surface SG at 20 °C is density divided by 1,000 kg/m³. Width is upper minus lower; negative means closed. Both sites remain **NO-GO for this programme and these assumptions**.
+
+| Site and state | Lower / upper, surface SG | Width, SG |
+|---|---|---:|
+| Soultz drilling | 1.37892 / 1.31256 | -0.06637 |
+| Soultz trip | 1.44362 / 1.36461 | -0.07901 |
+| United Downs drilling | 1.33132 / 1.28519 | -0.04613 |
+| United Downs trip | 1.40134 / 1.36503 | -0.03631 |
+
+**Tools, drilling / connection / best attempted run-in:** Soultz: 197.0 / 197.3 / 201.2 °C; United Downs: 205.7 / 206.1 / 224.5 °C. The tool limit is 200 °C. Best attempted means the lowest peak in the saved schedule search, not an optimum over all possible schedules. Soultz's reference FORGE-practice run-in reaches 214.5 °C; it is separate from the 201.2 °C search result.
+
+Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C at United Downs, against the stated 204 °C rating. Both retain **INDETERMINATE qualification**. Exceeding the stated rating is not a validated prediction of a particular failure mode. These coating histories are not necessarily those of the best attempted tool schedule.
+
+Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are useful local facts. They do not mean the entire programme is that close to passing: whole-hole deficits and coating qualification remain independent issues.
+
+Sources: retained [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json) and [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), `cycle.cases[]`, `windows` and `tools.coating`; tool searches in the settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json).
+
 ### The corrected programme
 
 The reference design uses Wu et al.'s well geometry, with the intermediate shoe at 4,000 m where the target is deeper, and TK-Drakon coated pipe. The flow search includes the fluid's effects on friction and tool temperature, together with the pump limit and the rig's pressure-dependent capacity. Surface volume flow is reported in L/s for weighted fluids. Newberry's water flow remains 30 kg/s.
@@ -157,7 +204,7 @@ The depth of extrapolation remains the largest site-input uncertainty. Soultz's 
 
 ### 5.1 What would reopen the deep sites: NO-GO for this programme and these assumptions
 
-The [lever study](docs/levers.md) applies L1 to L8 separately to the corrected base, then evaluates one pair per site. No evaluated single lever or pair reopens either deep site. Continuous searches sampled the base, midpoint and endpoint, with additional MPD target-pressure checks. They establish no full-site minimum and no complete operating envelope. Numerical failures remain unresolved. Coating-only thresholds and Soultz's bit-only flow boundary were confirmed at half the search tolerance.
+The [lever study](docs/levers.md) applies L1 to L8 separately to the corrected base, then evaluates one pair per site. No evaluated single-lever setting or evaluated pair reopened either deep site. Continuous searches sampled the base, midpoint and endpoint, with additional MPD target-pressure checks. They establish no full-site minimum and no complete operating envelope. Numerical failures remain unresolved. Coating-only thresholds and Soultz's bit-only flow boundary were confirmed at half the search tolerance.
 
 | Lever | Soultz | United Downs | Availability of the evaluated intervention |
 |---|---|---|---|
@@ -176,7 +223,7 @@ The pair of deeper casing and dual-wall pipe at Soultz cools the tools but leave
 
 ## 6. Limitations and further work
 
-The [robustness ledger](docs/robustness.md) compares A1 to A9 at the deep sites, covering property pressures and face heat, delivery and staging of coolant, the changing trip column and the uniform-fluid bound, shallow circulation, surge and swab, and numerical resolution. NO-GO holds for this programme across A1 to A9 at Soultz and United Downs. None of the optimistic comparisons reopens a site. This statement concerns the stated programme, with each comparison changing one approximation. It assigns no probability to extrapolated inputs and does not establish robustness of every lever or combination.
+The [robustness ledger](docs/robustness.md) compares A1 to A9 at the deep sites, covering property pressures and face heat, delivery and staging of coolant, the changing trip column and the uniform-fluid bound, shallow circulation, surge and swab, and numerical resolution. The base deep-site verdicts remain NO-GO for this programme and these assumptions across the A1-A9 comparisons performed. None of the optimistic comparisons reopens a site. These comparisons generally change one approximation at a time and do not cover every joint uncertainty. They assign no probability to extrapolated inputs and do not establish robustness of every lever or combination.
 
 Pannonian's historical 199.959 °C tool peak leaves 0.041 °C below its limit. Halving the timestep changes the peak by about 0.099 °C, above 20% of that margin, so the historical threshold is unresolved. The corrected closer-staging result has a larger tool margin; its pressure windows are still closed.
 
@@ -195,11 +242,11 @@ The deferred work has explicit triggers:
 | Coolant advection in the string, H-02 | A3 straddles tool survival at a site whose verdict depends on it |
 | Fluid displacement, W-03 | A6 straddles the site verdict |
 | Full flow and stress envelopes, D-03 | A lever reopens a site and an operating range must be claimed |
-| Near-bit thermal model, growth law and thermo-poroelasticity | After this release, if L7 governs the decision, alongside the FORGE paired-log study |
+| Near-bit thermal model, growth law and thermo-poroelasticity | Specialist interest, usable observations or a clearly discriminating hypothesis justify a separately scoped study; L7 becoming decision-relevant is another trigger |
 
-The H-01 trigger is met by Soultz L2's 0.00137 SG trip width and the pair's 0.00949 SG drilling deficit. That timeline work is a follow-up to this release. Both evaluated programmes retain other failures, so no operating-range claim is made. The source files and retained trial checksums keep this release's comparisons traceable; the trial cache checks model and schedule sources, benchmark data and runtime versions.
+**H-01 trigger met; implementation deferred by project priority.** Soultz L2's 0.00137 SG trip width and its L2+L4 pair's 0.00949 SG drilling deficit meet the proximity trigger. The evaluated programmes still fail other gates, and no operating range is claimed. Revisit before claiming a near-threshold programme is feasible, or when specialist feedback or new data makes the timing approximation decision-relevant. Coolant delivery (H-02) and fluid displacement (W-03) retain their distinct triggers above. Model expansion is paused to seek external feedback; a demonstrated defect can still require correction. This pause leaves the cooling question open. The source files and retained trial checksums keep this release's comparisons traceable; the trial cache checks model and schedule sources, benchmark data and runtime versions.
 
-The most useful next evidence is early and repeated image logs in hot crystalline rock, and qualified fluid rheology at the reported weights and temperatures. Full-cycle coating and MPD-equipment qualification is also needed. The focused questions are set out in [the reader summary](docs/summary.md).
+The most useful next evidence is early and repeated image logs in hot crystalline rock, and qualified fluid rheology at the reported weights and temperatures. Full-cycle coating and MPD-equipment qualification is also needed. The focused questions are set out in [the reader summary](docs/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf). The FORGE image-log study and near-bit thermal work remain possible follow-ups under separate specifications. Breakout-timing data is one possible basis for near-bit pre-cooling work, alongside reader interest, usable observations or a discriminating hypothesis. Software interfaces and examples enable external use; practical usefulness remains for readers and users to establish.
 
 ## 7. Reproducing the results
 
@@ -220,7 +267,9 @@ python src/drilling_cycle.py      # drilling-cycle timings from FORGE 16B
 python src/validate_forge_pauses.py  # check of the reheating against FORGE 16B's trips and Fig. 3 (about 5 min)
 ```
 
-Reviewed v1.3.4 goldens are generated by the manual CI workflow with `v134-goldens` enabled. It reruns every corrected reference and lever in a fresh evidence directory, compares them with the reviewed checkpoints, and checks the complete test suite. Its artifact contains the new site and lever pins with all bracketing runs. Earlier golden tables retain their release modes. The [v1.3.4 release verification](docs/v134-release.md) records the successful 455-test CI run, the new pins and their evidence checksums.
+The retained v1.3.4 goldens were generated by the manual CI workflow with `v134-goldens` enabled. It reruns every corrected reference and lever in a fresh evidence directory, compares them with the reviewed checkpoints, and checks the complete test suite. Its artifact contains the new site and lever pins with all bracketing runs. Earlier golden tables retain their release modes. The [v1.3.4 release verification](docs/v134-release.md) records the successful 455-test CI run, the new pins and their evidence checksums.
+
+Package v1.3.5 preserves calculation mode v1.3.4 and its numerical pins. The [v1.3.5 release record](docs/v135-release.md) describes the reader changes and verification.
 
 Each model file also runs on its own and prints its analysis, for example `python src/model1_coupled.py`. Historical figure scripts retain earlier diagnostic programmes; their saved figures are not the corrected release table. The scripts `src/*_figures.py` regenerate those figures in `figures/`. The test suite is run with `pytest`, which takes a few seconds and doesn't need the property table, or `pytest -m slow` to include the full runs, which do (the table is built on first use if it isn't there). A set of reference results is held fixed by the tests, so that any change to the models shows up as a difference. The FORGE and Newberry extracts can be rebuilt from the public datasets with the scripts in their data folders.
 
