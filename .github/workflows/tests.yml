@@ -15,6 +15,10 @@ on:
         description: "Also write the v1.3.3 golden table and upload it"
         type: boolean
         default: false
+      v134-goldens:
+        description: "Regenerate reviewed v1.3.4 site and lever goldens with their evidence"
+        type: boolean
+        default: false
   schedule:
     - cron: "0 3 * * 1"
 
@@ -30,7 +34,7 @@ jobs:
       - run: pytest
 
   slow:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    if: (github.event_name == 'workflow_dispatch' && !inputs.v134-goldens) || github.event_name == 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 240
     env:
@@ -70,3 +74,32 @@ jobs:
           path: |
             tests/golden/v133_site_table.json
             site_table.txt
+
+  v134-goldens:
+    if: github.event_name == 'workflow_dispatch' && inputs.v134-goldens
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14.4"
+      - run: pip install -r requirements-lock.txt
+      - run: python src/water_table.py
+      - name: Generate fresh reviewed reference and lever tables
+        run: python src/release_v134.py --output results/v1.3.4/ci/${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Verify every fast and slow regression against the generated pins
+        run: pytest -m "slow or not slow" --durations=12 --junitxml=v134-tests.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v134-release
+          path: |
+            tests/golden/v134_site_table.json
+            tests/golden/v134_lever_tables.json
+            results/v1.3.4/ci/
+            v134-tests.xml

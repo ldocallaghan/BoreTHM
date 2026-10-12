@@ -682,7 +682,8 @@ def print_basis(site):
 
 if __name__ == "__main__":
     import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    results = [evaluate(s) for s in SITES]
+    mode = 'v1.3.3' if '--write-golden' in sys.argv else 'v1.3.4'
+    results = [evaluate(s, circulation=mode) for s in SITES]
     olds = [evaluate(s, circulation="v1.1") for s in SITES]
     if "--write-golden" in sys.argv:
         # the v1.3.3 table; the v1.2 and v1.3 tables stay pinned as their

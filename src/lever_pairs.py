@@ -33,12 +33,13 @@ def select_pair(key, summaries):
     return sorted(ranked, key=lambda item: (-item['improvement_SG'], item['lever']))[:2]
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sites', nargs='+', choices=['soultz', 'united-downs'], default=['soultz', 'united-downs'])
-    args = parser.parse_args()
+    parser.add_argument('--output', type=Path, default=lv.RESULTS)
+    args = parser.parse_args(argv)
     for key in args.sites:
-        summaries = [json.loads((lv.RESULTS / key / ('L' + str(i)) / 'summary.json').read_text())
+        summaries = [json.loads((args.output / key / ('L' + str(i)) / 'summary.json').read_text())
                      for i in range(1, 9)]
         selected = select_pair(key, summaries)
         if not selected:
@@ -53,14 +54,14 @@ def main():
                            if value != asdict(base)[name]})
         label = 'PAIR-' + '-'.join(item['lever'] for item in selected)
         print(key, 'selected', label, [item['improvement_SG'] for item in selected], flush=True)
-        combined = lv.trial(key, label, lv.Settings(**values))
+        combined = lv.trial(key, label, lv.Settings(**values), root=args.output)
         summary = dict(site=key, pair=[item['lever'] for item in selected],
             ranking='increase in the narrower common pressure-window width, surface SG; '
                     'converged and refined trials only, with achievable MPD control',
             selected=[dict(lever=item['lever'], improvement_SG=item['improvement_SG'],
                            evidence=item['record']['evidence']) for item in selected],
             trial=combined, driver_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
-        destination = lv.RESULTS / key / label / 'summary.json'
+        destination = args.output / key / label / 'summary.json'
         destination.write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8', newline='\n')
 
 

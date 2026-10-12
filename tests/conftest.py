@@ -19,6 +19,9 @@ def evaluated():
     cache = {}
 
     def get(site, **kw):
+        # Existing model and historical-table regressions retain their mode.
+        # Corrected reference tests request v1.3.4 explicitly.
+        kw.setdefault('circulation', 'v1.3.3')
         key = (site.name, tuple(sorted(kw.items())))
         if key not in cache:
             cache[key] = se.evaluate(site, **kw)

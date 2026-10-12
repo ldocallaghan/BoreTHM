@@ -1,102 +1,35 @@
-# Quenchwell: a summary for readers
+# Quenchwell v1.3.4: a summary for readers
 
-*Draft for the author to edit. Figures are from v1.3.3, pinned in
-`tests/golden/v133_site_table.json`.*
+*Draft for Liam O'Callaghan to edit. The figures quoted here are from the reviewed v1.3.4 checkpoint and lever study; release regression files are generated in CI.*
 
-## What the tool does
+## Soultz: NO-GO for this programme and these assumptions
 
-Quenchwell is a set of screening models for drilling into rock at about
-400 °C with a single circulating loop. It calculates the temperature of the
-circulating fluid and of the rock around the hole, the stability of the
-borehole wall through the drilling cycle (drilling, connections and trips),
-and the fluid weight, flow and circulation schedule that the cycle requires,
-together with the temperatures the downhole tools and the coated drill pipe
-reach. The circulation model is checked against the FORGE 16B
-insulated-drill-pipe trial and against the calculations of Wu et al. (2025);
-the stability model is calibrated against breakouts logged in UD-1 and
-checked against the Soultz wells GPK3 and GPK4 and against NWG 55-29 at
-Newberry. Every input carries its source, and a site is reported as
-evidence-based only where its stresses and rock strength were measured there
-and the stability model has been checked against a well at the site.
+The reference case reaches 400 °C at 10.7 km at Soultz-sous-Forêts. Its measured stresses cover 1.5 to 5 km and are extrapolated to the target; laboratory granite strengths span 100 to 130 MPa. The corrected programme uses TK-Drakon coated pipe at 40 L/s and simulates a 1.379 SG drilling fluid and 1.444 SG trip fluid at surface.
 
-Each evaluation ends in a status: GO; CONDITIONAL with its conditions; NO-GO
-with the parts that fail; or INDETERMINATE where a prerequisite is unknown,
-such as the behaviour of the pipe coating above its rated temperature.
+The worst cases leave both whole-hole fluid windows closed. Drilling needs at least 1.378925 SG against a 1.312559 SG upper bound; trip needs 1.443624 SG against 1.364611 SG. No surface weight satisfies a closed window. The bit is below its 200 °C limit at 197.0 °C, but the best attempted run-in schedule reaches 201.2 °C. The pipe coating also exceeds its stated cycle rating.
 
-## The reference case: Soultz-sous-Forêts
+Conserving the barite and water masses makes hot mud lighter than the previous constant-volume mixture. Holding the temperature profile and surface weight fixed, that correction lowers Soultz's trip bottomhole pressure by 3.263 MPa. The full calculation feeds the required drilling and trip fluids back through circulation and every gate. It checks every depth at its own exposure, including the target and final stand. These corrections are documented beside the previous result in [the first checkpoint](v134-checkpoint-1.md).
 
-At Soultz the rock reaches 400 °C at 10.7 km. The stress magnitudes of
-Valley and Evans (2007) cover 1.5 to 5 km and are extrapolated to the
-target, and the rock strength is the laboratory range of 100 to 130 MPa.
+Across the five sites, the stated programme gives NO-GO at Soultz, United Downs and Pannonian, CONDITIONAL at Larderello with 1.036 SG drilling and 1.094 SG trip fluids, and GO at Newberry with water. Larderello is evaluated and exported at 2,400 m. The Pannonian coating remains unqualified even though its closed windows already decide NO-GO.
 
-The water in the hole, at the temperatures it has while circulating, exerts
-0.94 SG at the target (equivalent static density). To hold the wall as the
-bit exposes the rock, the worst case of stress and strength needs 1.31 SG,
-which a barite-weighted mud of 1.36 SG at surface provides. Circulating that
-mud adds 0.07 SG of annular friction, and the fracture limit while
-circulating, 1.30 SG, then lies below what the wall needs. Through a 44-hour
-trip the column heats and the trip fluid loses 3.1 MPa at the bottom, so a
-fluid that holds the wall at the end of the trip exceeds the fracture limit
-at its start. In both states the window is closed for the case of the
-highest SHmax and the weakest rock, and the site is NO-GO; in the other
-cases it is open. The tool stays below 200 °C while drilling (197 °C) and
-through connections, but running back into the hole it needs circulation for
-about 70% of the run in, and the coated drill pipe exceeds its 204 °C
-rating on the way in.
+## The design study: NO-GO for this programme and these assumptions
 
-Across the five sites, Soultz and United Downs are NO-GO, Pannonian is
-INDETERMINATE (the coating, and no single fluid suits all its stress cases),
-Larderello is CONDITIONAL on a weighted fluid that the shallower open hole
-needs, and Newberry is GO with water.
+No evaluated single lever or permitted pair reopens either deep site. Deeper casing opens Soultz's trip window, but drilling and tools still fail. Low viscosity can open the United Downs drilling window, while zero surge and swab allowance opens its trip window; neither change clears every gate. Stronger insulation cools the tools but leaves pressure and pump failures. Constant-BHP managed-pressure drilling fails the evaluated control and window constraints, with some high-pressure trials numerically unresolved.
 
-## Claims and evidence
+Raising the coating rating to about 274.34 °C at Soultz or 287.45 °C at United Downs clears only that temperature gate. Both thresholds were checked at half the search tolerance. Soultz's bit-only lower-flow boundary is near 39 L/s, with run-in still failing. These subgate thresholds supply no full-site minimum. The continuous searches sampled selected settings and do not establish complete operating envelopes.
 
-| Claim | Support | Status |
-|---|---|---|
-| Model 1 predicts the circulating temperature in an insulated string | FORGE 16B trial; benchmark against Wu et al. (2025) | Validated at 2.5 km and about 200 °C; extrapolated to the targets |
-| The rock behind the wall reheats through a trip as the wall solver gives | FORGE 16B trips, from the surface returns | Checked; the record is too coarse to confirm or reject the reheating |
-| Breakout widths follow from the stresses and a calibrated strength | BGS interpretation of the UD-1 image logs | Calibrated at UD-1 |
-| The model places breakout onset at Soultz without fitting | GPK3 and GPK4 (Valley and Evans, 2007) | Cross-checked |
-| The thermal stress of the cooled wall is of the right size | NWG 55-29 volcanics (Davatzes and Hickman, 2011) | Matched at 25 to 35 K of cooling; the granodiorite is not reproduced |
-| The stresses at the targets | Measurements to 5 km at Soultz, and shallower at the other sites | Extrapolated; the largest single uncertainty |
-| The rheology of the weighted mud | One measured barite-weighted mud (Anawe and Folayan, 2018) | A single pair, with a sensitivity |
-| The coating's behaviour above 204 °C | The manufacturer's rating only | Unknown, so INDETERMINATE |
+The pair of a 10.2 km casing shoe and dual-wall pipe at Soultz cools the tool but leaves the drilling window closed and needs about 121 MPa standpipe pressure. The lower-viscosity fluid and one-hour failure-delay hypothesis at United Downs open drilling but leave trip stability and run-in survival failing. MPD and trip-speed or flow control are operating practice; casing is well design. The modeled insulated replacements and higher cycle-rated coating are hypothetical, and the failure-free delay lacks supporting observations. The [lever tables](levers.md) give every setting, prescription and availability source.
 
-## Two assumptions
+## The open cooling question
 
-**Breakouts form as the bit exposes the rock.** Moore et al. (2011) found
-breakouts already present in images logged at the bit, minutes after
-drilling, in four boreholes in sediment. The model applies this to hot
-granite and judges the drilling state with the rock at formation
-temperature. If breakouts took an hour to form, circulation would
-cool the rock in the meantime and the drilling fluid at Soultz would fall
-from 1.31 to 1.18 SG; the trip would still close the window.
+In the base model the rock that governs breakout width is still at formation temperature when the bit exposes it. Fluid weight holds the wall; cooling protects the tools and slows creep. The width is judged at the wall using the temperature at the depth reached by an uncooled breakout with water in the hole, the existing skin heuristic. Images logged within minutes in sediment support an early check, but do not determine the timing or growth law in hot crystalline rock. Assuming an hour or two of failure-free cooling opens drilling windows in L7 while leaving other failures.
 
-**The breakout's width is judged at the wall, with the temperature of the
-rock at the depth the uncooled breakout reaches.** That depth is taken with
-water in the hole, about 4 cm at Soultz. At the drilling fluid's weight, a
-check with the full stress field over the first minutes of cooling finds the
-failed depth growing from 1.6 cm to 1.7 cm after one minute and falling back
-within five, so the heuristic, which looks deeper into warmer rock, does not
-hide a worse case over that time.
+The [A1 to A9 ledger](robustness.md) keeps both deep sites NO-GO across its optimistic and adverse comparisons for the base programme. Pannonian's historical 0.041 °C tool margin is unresolved because its timestep change exceeds 20% of that margin. Source checks and numerical brackets describe the evidence; they assign no probability to stresses extrapolated many kilometres below measurements.
 
-## The open question about cooling
+## Questions for the next data
 
-The original premise was that cooling the wall would hold it. In the model,
-the rock that decides the breakout is still at formation temperature when
-the bit exposes it, so the fluid's weight has to hold the wall, and cooling
-serves the tools and slows creep. Whether this holds in hot crystalline rock
-depends on how quickly breakouts form there, which has not been measured.
+1. What governs breakout width in hot crystalline rock in the first minutes after exposure? Paired images at the bit and after pauses would test the immediate-exposure rule and the skin heuristic.
+2. Which high-temperature drilling fluids are used at roughly 1.2 to 1.5 SG, and what are their plastic viscosity and yield point through circulation and hot trips? The published 1.3 SG formate system measured after 200 °C ageing supplies context, while the water-viscosity endpoint remains an idealised bound.
+3. How are insulating coatings and managed-pressure equipment qualified for the full temperature cycle? A pressure rating or steady circulating-temperature rating does not establish survival through connections and repeated trips.
 
-## What data would settle it
-
-- Image logs at the bit and repeated hours to days later in hot crystalline
-  rock, to show when breakouts form. The FORGE image logs are being assessed
-  for this.
-- Stress measurements below 5 km at Soultz and near the target depths
-  elsewhere, which would replace the extrapolation.
-- Downhole temperatures at the bit through circulation, connections and
-  trips, to test the tool and coating results directly.
-- The coating's qualification at 250 to 300 °C, and the rheology of weighted
-  water-based muds above 150 °C, where conventional systems begin to break
-  down.
+Stress measurements closer to the targets would reduce the largest input uncertainty. The close margins in Soultz's casing lever and pair also meet the brief's trigger to revisit the common event timeline before an operating-range claim. The remaining deferred models and their triggers are listed in the README.

@@ -9,7 +9,7 @@ import geo_constants as C
 from comparative_sites import classify
 from site_evaluation import SOULTZ, evaluate
 
-o = evaluate(SOULTZ)
+o = evaluate(SOULTZ, circulation='v1.3.3')  # Historical diagnostic dashboard.
 s = SOULTZ
 z = o["z"]
 surv, stab, verdict = classify(o)

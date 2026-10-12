@@ -23,7 +23,7 @@ import comparative_sites as cs        # noqa: E402
 import site_evaluation as se          # noqa: E402
 from site_template import make_site   # noqa: E402
 
-GOLDEN = os.path.join(HERE, "..", "tests", "golden", "v133_site_table.json")
+GOLDEN = os.path.join(HERE, "..", "tests", "golden", "v134_site_table.json")
 
 
 def main():
@@ -48,10 +48,10 @@ def main():
         se.export_result(o, a.json)
         print(f"result written to {a.json}")
     if site == se.SOULTZ and os.path.exists(GOLDEN):
-        pinned = json.load(open(GOLDEN))[se.SOULTZ.name]
-        now = cs.golden_rows_v133([o])[site.name]
-        same = {k: now[k] == pinned[k] for k in ("status", "verdicts", "site_verdict")}
-        print("the Soultz row reproduced:", all(same.values()), same)
+        from release_v134 import reference_row, assert_reviewed
+        pinned = json.load(open(GOLDEN))['sites']['soultz']
+        assert_reviewed(reference_row(se.result_dict(o)), pinned)
+        print("the reviewed v1.3.4 Soultz row reproduced: True")
 
 
 if __name__ == "__main__":

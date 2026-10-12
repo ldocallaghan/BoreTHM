@@ -5,9 +5,10 @@ from dataclasses import replace
 import levers as lv
 
 
-def main():
+def main(root=None):
+    root = root or lv.RESULTS
     for key in ('soultz', 'united-downs'):
-        path = lv.RESULTS / key / 'L8' / 'summary.json'
+        path = root / key / 'L8' / 'summary.json'
         summary = json.loads(path.read_text())
         valid = [r for r in summary['trials'] if r['metrics'] and r['metrics']['solver_ok']]
         passes = [r for r in valid if r['metrics']['tool_peaks_C']['drilling'] <= 200.]
@@ -22,7 +23,7 @@ def main():
                 raise ValueError('a lower failing flow is required')
             failing = max(lower, key=lambda r: r['settings']['flow_L_s'])
             def evaluate(flow):
-                record = lv.trial(key, 'L8', replace(lv.base_settings(key), flow_L_s=flow))
+                record = lv.trial(key, 'L8', replace(lv.base_settings(key), flow_L_s=flow), root=root)
                 summary['trials'].append(record)
                 if not record['metrics'] or not record['metrics']['solver_ok']:
                     raise ValueError('unresolved physical solve at the bit boundary')

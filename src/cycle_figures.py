@@ -18,7 +18,7 @@ FIG = os.path.join(os.path.dirname(__file__), "..", "figures")
 
 def main():
     site = se.SOULTZ
-    o = se.evaluate(site)
+    o = se.evaluate(site, circulation='v1.3.3')  # Historical diagnostic figure.
     c = o["cycle"]
     z, T_rock = o["z"], o["T_rock"]
     gov = next(pc for pc in c["per_case"] if pc["label"] == c["deciding_case"])

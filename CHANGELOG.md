@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.3.4: NO-GO for this programme and these assumptions at the deep sites (12 October 2026)
+
+The confirmed mixture, fluid-feedback and depth-coverage errors are corrected. Each verdict belongs to the stated programme and assumptions. No evaluated design lever or permitted pair reopens either deep site; no full-site minimum or complete operating envelope is established.
+
+| Site | v1.3.3 | v1.3.4 | Required / simulated drilling SG | Required / simulated trip SG | Reason |
+|---|---|---|---|---|---|
+| Soultz | NO-GO | NO-GO | 1.378925 / 1.378840 | 1.443624 / 1.443545 | conserved hot mud lowers column pressure; whole-hole feedback and target coverage retain closed windows; run-in fails |
+| United Downs | NO-GO | NO-GO | 1.331318 / 1.331733 | 1.401337 / 1.401158 | corrected trip pressure and target coverage retain closed windows; the bit remains above 200 °C |
+| Larderello | CONDITIONAL | CONDITIONAL | 1.036244 / 1.036329 | 1.094193 / 1.094057 | shallow prescription now supplies the simulated fluid, hydraulics and tools; target metadata is 2,400 m |
+| Pannonian | INDETERMINATE | NO-GO | 1.458734 / 1.459278 | 1.544787 / 1.545152 | corrected all-depth windows are closed; coating qualification remains unknown |
+| Newberry | GO | GO | 0.998201 / 0.998201 | 0.998201 / 0.998201 | water satisfies the corrected common windows and all evaluated gates |
+
+Weights are surface densities at 20 °C. Closed windows have no valid prescription, even when an attempted lower-bound weight is simulated. The complete before-and-after bounds, controlling cases and isolated C1 pressure changes are in `docs/v134-checkpoint-1.md`.
+
+- **Conserved composition, C1.** Mud density uses component volumes at fixed barite mass fraction, conductivity uses the local volume fraction and heat capacity uses mass fractions. The historical adapter retains the prior mixture law. Independent component-volume tests and the four-state table check the correction.
+- **Prescribed fluid and depth coverage, C2 to C4.** Every fluid pass reruns the whole-hole requirement through circulation, hydraulics, drilling rate and tools. The heavier trip fluid occupies the column from trip start. Every depth has its own exposure check; the target and final stand are included. Binding bounds are refined twice. Public entry points validate inputs and export the effective target, retaining the former input as legacy metadata.
+- **Robustness, C5.** `docs/robustness.md` records A1 to A9. NO-GO holds for this programme across those comparisons at both deep sites. Pannonian's historical 0.041 °C tool margin is numerically unresolved; the corrected closer schedule has more tool margin but closed pressure windows.
+- **Design levers, C6.** `docs/levers.md` records L1 to L8 and one pair per site. Coating-only thresholds and Soultz's bit-only flow boundary are checked at half tolerance. Unknown equipment qualification and numerical failures stay explicit. Near-threshold Soultz casing results trigger a follow-up on the common event timeline.
+- **Release and reproduction, C7.** The README and reader summary lead with the corrected programme, levers and open cooling question. Python API and command-line defaults select v1.3.4; historical regression modes remain explicit. Citation and package metadata advance to 1.3.4. Reviewed reference and lever tables are generated in CI, with their bracketing evidence; earlier golden files remain unchanged.
+
 ## v1.3.3: one consistent operating programme (October 2026)
 
 Every part of an evaluation now works from the same operating programme:

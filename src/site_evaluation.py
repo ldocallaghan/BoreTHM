@@ -820,8 +820,13 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
                          "within the pump limit")
 
 
-def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.3", coupled=None):
+def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None):
     """Run Models 1-5 for one site.
+
+    circulation="v1.3.4" is the corrected release programme: conserved mud
+    composition, whole-hole fluid feedback, uniform trip fluid, and every
+    depth at its own exposure including the final stand. Earlier modes
+    remain explicit adapters for their historical regression tables.
 
     circulation="v1.3.3" is "v1.3" with every pressure on the wall from one
     budget (pressure.py): an open annulus at atmospheric pressure, and the

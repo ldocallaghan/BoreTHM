@@ -62,6 +62,16 @@ def test_public_evaluation_validates_before_solving(monkeypatch):
         se.evaluate(replace(se.SOULTZ, geotherm=lambda z: np.nan))
 
 
+def test_public_default_selects_corrected_release(monkeypatch):
+    calls = []
+    def corrected(site, thermal, budget, corrected):
+        calls.append((budget, corrected, site.coupled))
+        return {}
+    monkeypatch.setattr(se, '_evaluate_v13', corrected)
+    se.evaluate(se.SOULTZ)
+    assert calls == [(True, True, True)]
+
+
 def test_json_exports_the_effective_larderello_target():
     from comparative_sites import LARDERELLO
     data = se.result_dict(dict(site=LARDERELLO, z=LARDERELLO.target(), T_rock=LARDERELLO.target_T))
