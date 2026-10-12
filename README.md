@@ -1,6 +1,6 @@
 # BoreTHM: models of circulating temperature and borehole stability for drilling into superhot rock
 
-BoreTHM is an open-source Python toolkit for assessing drilling programmes in superhot geothermal rock. It couples fluid circulation and heat transfer with borehole stability to help researchers and engineers examine pressure windows and equipment temperatures under different well designs and operating conditions.
+BoreTHM is an open-source Python toolkit for assessing drilling programmes in superhot geothermal rock. It couples fluid circulation and heat transfer with borehole stability to help researchers and engineers examine fluid pressure limits and equipment temperatures under different well designs and operating conditions.
 
 The circulation model is checked against Utah FORGE field data. Worked site assessments show how the models are applied, with assumptions and limitations reported alongside the results.
 
@@ -56,7 +56,7 @@ The template starts with Soultz's inputs. Replace them with the new site's measu
 
 ## Reading a result
 
-Start with `status` and its reasons, then inspect the components that set it. The report includes the operating programme, thermal and hydraulic outputs, stability in each cycle state, common fluid windows and equipment checks. The JSON retains every evaluated case and the source of each input.
+Start with `status` and its reasons, then inspect the components that set it. The report includes the operating programme, thermal and hydraulic outputs, stability in each cycle state, allowable mud densities and equipment checks. The JSON retains every evaluated case and the source of each input.
 
 | Status | Meaning for the evaluated programme and assumptions |
 |---|---|
@@ -67,12 +67,14 @@ Start with `status` and its reasons, then inspect the components that set it. Th
 
 An overall NO-GO can coexist with an INDETERMINATE coating check. Exceeding a manufacturer's stated coating rating identifies a qualification question; it is not a validated prediction of a particular failure mode.
 
+A **mud-weight window** is the allowable range of fluid density: enough pressure to keep the borehole stable while staying below the modeled fracture-pressure limit. BoreTHM calculates the range that satisfies all evaluated depths, operating states and stress/strength cases, separately for drilling and trips.
+
 Two pressure descriptions appear in the outputs:
 
 - **Target SG-equivalent** expresses pressure as an equivalent static column at the target. It is a local stability diagnostic, with the existing friction/backpressure treatment.
-- **Surface SG at 20 °C** is fluid density divided by 1,000 kg/m³. Common-programme windows intersect the evaluated depths, states and stress/strength cases to constrain that surface fluid.
+- **Surface SG at 20 °C** is fluid density divided by 1,000 kg/m³. The combined pressure constraints set the allowable range of that surface density.
 
-A positive target interval does not establish a workable whole-hole fluid. A negative common-window width means no surface weight satisfies both bounds. The attempted weights reported for a closed window are calculation inputs, not admissible prescriptions.
+A positive target interval does not establish a workable whole-hole fluid. If the required minimum density exceeds the permitted maximum, no mud density satisfies both pressure limits. The attempted densities reported in that situation are calculation inputs, not admissible prescriptions.
 
 ## Example results
 
@@ -80,17 +82,17 @@ The worked assessments target rock at 400 °C. Every status below refers to **th
 
 | Site | Target, km | Status | Main finding |
 |---|---:|---|---|
-| Soultz-sous-Forêts | 10.70 | NO-GO | Common drilling and trip windows close; the best attempted run-in exceeds the tool limit. |
-| United Downs | 12.86 | NO-GO | Common windows close; drilling and run-in exceed the tool limit. |
+| Soultz-sous-Forêts | 10.70 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; the best attempted run-in exceeds the tool limit. |
+| United Downs | 12.86 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; drilling and run-in exceed the tool limit. |
 | Larderello | 2.40 | CONDITIONAL | Requires weighted drilling and trip fluids. |
-| Pannonian Basin | 9.71 | NO-GO | Common windows close; coating qualification is unresolved. |
+| Pannonian Basin | 9.71 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; coating qualification is unresolved. |
 | Newberry | 3.63 | GO | The evaluated programme passes with water. |
 
 These sites have different evidence quality. Soultz and United Downs use measured or calibrated stresses and strengths, extrapolated to the targets. Larderello and Pannonian retain unsourced strength assumptions. Newberry's well check does not reproduce the observed pattern in every rock type. The [input-source records](data/sites/stress_sources.md) explain those differences.
 
 ### Local stability and the complete programme
 
-At Soultz, eight of nine selected stress/strength cases have an open target drilling interval; at United Downs, two of four do. Both complete programmes remain **NO-GO for this programme and these assumptions** because common pressure windows close and tool-temperature limits are exceeded.
+At Soultz, eight of nine selected stress/strength cases have an open target drilling interval; at United Downs, two of four do. Both complete programmes remain **NO-GO for this programme and these assumptions** because no mud density satisfies the pressure limits throughout the evaluated hole, and tool-temperature limits are exceeded.
 
 <details>
 <summary>Target-depth case table and its interpretation</summary>
@@ -119,7 +121,7 @@ Soultz target 10.70 km; United Downs target 12.86 km. Sv is vertical stress. Uni
 
 ### Independent programme failures
 
-These common windows intersect the evaluated depths, states and cases. Bounds are surface SG at 20 °C; width is upper minus lower. A negative width is closed. Both sites remain **NO-GO for this programme and these assumptions**.
+The bounds below combine the pressure constraints across the evaluated depths, states and cases. They are expressed as surface SG at 20 °C; width is upper minus lower. A negative width means the required minimum density exceeds the permitted maximum. Both sites remain **NO-GO for this programme and these assumptions**.
 
 | Site and state | Lower / upper, surface SG | Width, SG |
 |---|---|---:|
@@ -132,13 +134,13 @@ These common windows intersect the evaluated depths, states and cases. Bounds ar
 
 Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C at United Downs, against the stated 204 °C rating. Both retain **INDETERMINATE qualification**. The coating histories are not necessarily those of the best attempted tool schedule.
 
-Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. They do not measure how close the entire programme is to passing: the common-window deficits and coating qualification remain independent issues.
+Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. They do not measure how close the entire programme is to passing: incompatible density requirements elsewhere in the hole and coating qualification remain independent issues.
 
 Sources: [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json), [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), and settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). The [reader summary](docs/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf), gives the findings and open questions together.
 
 ### Design comparisons
 
-No evaluated single-lever setting or evaluated pair reopened either deep site. Deeper casing opens Soultz's trip window while drilling and tools still fail. Lower viscosity can open United Downs drilling while other gates still fail. Stronger insulation cools tools but leaves pressure and pump constraints.
+No evaluated single-lever setting or evaluated pair made either deep site's programme pass. Deeper casing gives Soultz an allowable trip-fluid density range while drilling and tools still fail. Lower viscosity can give United Downs an allowable drilling-fluid density range while other gates still fail. Stronger insulation cools tools but leaves pressure and pump constraints.
 
 Only one pair per site was evaluated, and continuous searches sampled settings. The [lever study](docs/levers.md) gives the tested settings, remaining failures and equipment-availability evidence. It establishes no complete operating envelope or general impossibility.
 
