@@ -1,0 +1,711 @@
+{
+  "site": {
+    "name": "Newberry / NWG 55-29 (USA)",
+    "tier": "speculative",
+    "target_depth_m": 3629.54044732043,
+    "legacy_target_depth_m": 3629.54044732043,
+    "target_T_C": 400.0,
+    "k_rock": 2.14,
+    "E_rock_Pa": 50000000000.0,
+    "T_inj_C": 40.0,
+    "mu": 0.55,
+    "data_basis": {
+      "stress": {
+        "basis": "measured range",
+        "source": "Davatzes & Hickman (2011): Sv and pore pressure measured; Shmin at frictional equilibrium (mu 0.55, 0.70); SHmax from breakout widths, to 8,860 ft MD"
+      },
+      "strength": {
+        "basis": "log-derived",
+        "source": "UCS-porosity relation of Davatzes & Hickman on the neutron log, granodiorite 8,807 ft to TD (GDR 271)"
+      },
+      "pore pressure": {
+        "basis": "measured",
+        "source": "static survey, October 2008 (GDR 271); underpressured, Pf/Sv ~0.34"
+      },
+      "temperature": {
+        "basis": "extrapolated",
+        "source": "331 C at 2989 m TVD (static survey 2008); 107 C/km below"
+      },
+      "well check": {
+        "basis": "not reproduced",
+        "source": "NWG 55-29 (crosscheck_newberry.py): the volcanic breakout width is reproduced at 25-35 K of wall cooling, but breakouts are predicted in the granodiorite, where none were logged"
+      }
+    },
+    "missing": [
+      [
+        "well check",
+        "not reproduced"
+      ]
+    ],
+    "stress_cases": [
+      {
+        "label": "Davatzes & Hickman (2011), mu 0.55",
+        "source": "Davatzes and Hickman (2011); static survey Oct 2008 (GDR 271)",
+        "z_data_m": [
+          1961.3880000000001,
+          2656.5097465263157
+        ],
+        "Sv": [
+          24172.021866508036,
+          0.0
+        ],
+        "Shmin": [
+          13446.146031109012,
+          1333517.5654764264
+        ],
+        "SHmax": [
+          17463.09843832021,
+          7671106.638199999
+        ],
+        "Pp": [
+          7680.780847435045,
+          -266.9401749231448
+        ],
+        "mu": 0.55
+      },
+      {
+        "label": "Davatzes & Hickman (2011), mu 0.7",
+        "source": "Davatzes and Hickman (2011); static survey Oct 2008 (GDR 271)",
+        "z_data_m": [
+          1961.3880000000001,
+          2656.5097465263157
+        ],
+        "Sv": [
+          24172.021866508036,
+          0.0
+        ],
+        "Shmin": [
+          12151.262971149888,
+          1494506.684891225
+        ],
+        "SHmax": [
+          17267.656507611548,
+          7543553.633699999
+        ],
+        "Pp": [
+          7680.780847435045,
+          -266.9401749231448
+        ],
+        "mu": 0.7
+      }
+    ],
+    "strength_cases": [
+      {
+        "label": "log-derived granodiorite p10",
+        "UCS_Pa": 64849999.60810307
+      },
+      {
+        "label": "log-derived granodiorite median",
+        "UCS_Pa": 79076351.455963
+      },
+      {
+        "label": "log-derived granodiorite p90",
+        "UCS_Pa": 85855472.73371783
+      }
+    ]
+  },
+  "evaluation": "v1.3.4",
+  "z_m": 3629.54044732043,
+  "T_rock_C": 400.0,
+  "programme": {
+    "pipe": "TK-Drakon coated",
+    "flow": 30,
+    "flow_unit": "kg/s",
+    "mass_flow_kg_s": 30.0,
+    "fluid": null,
+    "fluid_passes": [
+      {
+        "fluid_SG": null,
+        "need_SG": 0.9768013947482579,
+        "rho_surface": 998.2012723757273,
+        "simulated_rho_surface": 998.2012723757273,
+        "prescribed_rho_surface": 998.2012723757273,
+        "density_residual_SG": 0.0,
+        "trip_simulated_rho_surface": 998.2012723757273,
+        "trip_prescribed_rho_surface": 998.2012723757273,
+        "trip_residual_SG": 0.0,
+        "ecd_SG": 0.0167613641732067,
+        "success": true,
+        "rop_m_h": 6.054455965609573,
+        "rop_passes": 2,
+        "tool": "PASS"
+      }
+    ],
+    "fluid_converged": true,
+    "rop_m_h": 6.070360778255386,
+    "rop_passes": [],
+    "bit_C": 88.95606708297177,
+    "return_C": 62.298543749512625,
+    "backpressure_Pa": 0.0,
+    "spp_Pa": 2977168.130329855,
+    "ecd_SG": 0.0167613641732067,
+    "v_ann_min": 1.3469927414882625,
+    "conflict": null,
+    "drilling_simulated_rho_surface": 998.2012723757273,
+    "drilling_prescribed_rho_surface": 998.2012723757273,
+    "trip_simulated_rho_surface": 998.2012723757273,
+    "trip_prescribed_rho_surface": 998.2012723757273,
+    "trip_fluid_treatment": "uniform column from the start of the trip",
+    "barite_mass_fraction": 0.0,
+    "trip_barite_mass_fraction": 0.0
+  },
+  "cycle": {
+    "site_verdict": "GO",
+    "deciding_case": "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10",
+    "verdicts": {
+      "drilling": "GO",
+      "connection": "GO",
+      "connection, fresh rock": "GO",
+      "trip": "GO"
+    },
+    "drill_SG": 0.9768013947482579,
+    "drill_SG_hi": 1.3413479890517495,
+    "trip_SG": 0.9392997862553858,
+    "trip_SG_hi": 1.3381093532249562,
+    "safe_pause_h": 73.58106994628906,
+    "trip_h": 17.458607852696083,
+    "T_ref": {
+      "drilling": 400.0,
+      "connection": 149.83771553109335,
+      "connection, fresh rock": 331.8067525326253,
+      "trip": 314.8047694999737,
+      "end of drilling": 114.34867769786717
+    },
+    "budget": {
+      "water_SG": 0.9768013947482579,
+      "water_SG_trip": 0.9392997862553858,
+      "allowance_SG": 0.02,
+      "backpressure": 0.0,
+      "drill_rho_surface": null,
+      "trip_rho_surface": null,
+      "trip_SG_start": 0.9768013947482579,
+      "trip_dP_heating": 1335274.4637202998,
+      "water_dP_heating": 1335274.4637202998
+    },
+    "cases": [
+      {
+        "label": "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10",
+        "UCS": 64849999.60810307,
+        "verdict": "GO",
+        "states": {
+          "drilling": "GO",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 0.9768013947482579,
+        "drill_SG_hi": 1.3413479890517495,
+        "trip_SG": 0.9392997862553858,
+        "trip_SG_start": 0.9768013947482579,
+        "trip_rho_surface": null,
+        "trip_SG_hi": 1.3381093532249562
+      },
+      {
+        "label": "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite median",
+        "UCS": 79076351.455963,
+        "verdict": "GO",
+        "states": {
+          "drilling": "GO",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 0.9768013947482579,
+        "drill_SG_hi": 1.3413479890517495,
+        "trip_SG": 0.9392997862553858,
+        "trip_SG_start": 0.9768013947482579,
+        "trip_rho_surface": null,
+        "trip_SG_hi": 1.3381093532249562
+      },
+      {
+        "label": "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p90",
+        "UCS": 85855472.73371783,
+        "verdict": "GO",
+        "states": {
+          "drilling": "GO",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 0.9768013947482579,
+        "drill_SG_hi": 1.3413479890517495,
+        "trip_SG": 0.9392997862553858,
+        "trip_SG_start": 0.9768013947482579,
+        "trip_rho_surface": null,
+        "trip_SG_hi": 1.3381093532249562
+      },
+      {
+        "label": "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10",
+        "UCS": 64849999.60810307,
+        "verdict": "GO",
+        "states": {
+          "drilling": "GO",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 0.9768013947482579,
+        "drill_SG_hi": 1.2138731852823421,
+        "trip_SG": 0.9392997862553858,
+        "trip_SG_start": 0.9768013947482579,
+        "trip_rho_surface": null,
+        "trip_SG_hi": 1.2106345494555488
+      },
+      {
+        "label": "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite median",
+        "UCS": 79076351.455963,
+        "verdict": "GO",
+        "states": {
+          "drilling": "GO",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 0.9768013947482579,
+        "drill_SG_hi": 1.2138731852823421,
+        "trip_SG": 0.9392997862553858,
+        "trip_SG_start": 0.9768013947482579,
+        "trip_rho_surface": null,
+        "trip_SG_hi": 1.2106345494555488
+      },
+      {
+        "label": "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p90",
+        "UCS": 85855472.73371783,
+        "verdict": "GO",
+        "states": {
+          "drilling": "GO",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 0.9768013947482579,
+        "drill_SG_hi": 1.2138731852823421,
+        "trip_SG": 0.9392997862553858,
+        "trip_SG_start": 0.9768013947482579,
+        "trip_rho_surface": null,
+        "trip_SG_hi": 1.2106345494555488
+      }
+    ]
+  },
+  "sensitivities": {},
+  "trip_profile": [],
+  "windows": {
+    "depths": [
+      3629.54044732043,
+      3604.54044732043,
+      3601.00507132043,
+      3579.54044732043,
+      3554.54044732043,
+      3529.54044732043,
+      3429.54044732043,
+      3329.54044732043,
+      3229.54044732043,
+      3129.54044732043,
+      3029.54044732043,
+      2929.54044732043,
+      2829.54044732043,
+      2729.54044732043,
+      2629.54044732043,
+      2529.54044732043,
+      2429.54044732043,
+      2329.54044732043,
+      2229.54044732043,
+      2129.54044732043,
+      2029.5404473204298,
+      1929.5404473204298,
+      1829.5404473204298,
+      1814.770223660215
+    ],
+    "states": {
+      "drilling": {
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1364.4443463443713,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite median": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1364.4443463443713,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p90": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1364.4443463443713,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1236.660315944572,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite median": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1236.660315944572,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p90": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1236.660315944572,
+          "hi_md": 3629.54044732043
+        }
+      },
+      "connection": {
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1381.2253031965206,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite median": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1381.2253031965206,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p90": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1381.2253031965206,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1253.4816534178406,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite median": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1253.4816534178406,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p90": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1253.4816534178406,
+          "hi_md": 3629.54044732043
+        }
+      },
+      "fresh rock": {
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1381.2253031965206,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite median": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1381.2253031965206,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p90": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1381.2253031965206,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1253.4816534178406,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite median": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1253.4816534178406,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p90": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1253.4816534178406,
+          "hi_md": 3629.54044732043
+        }
+      },
+      "trip": {
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1361.20192481426,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite median": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1361.20192481426,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p90": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1361.20192481426,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1233.409486218348,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite median": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1233.409486218348,
+          "hi_md": 3629.54044732043
+        },
+        "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p90": {
+          "lo": 998.2012723757273,
+          "lo_md": null,
+          "hi": 1233.409486218348,
+          "hi_md": 3629.54044732043
+        }
+      }
+    },
+    "drilling_fluid": {
+      "lo": 998.2012723757273,
+      "lo_by": {
+        "state": "drilling",
+        "case": "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10",
+        "md": null
+      },
+      "hi": 1236.660315944572,
+      "hi_by": {
+        "state": "drilling",
+        "case": "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10",
+        "md": 3629.54044732043
+      },
+      "open": true,
+      "fluid": 998.2012723757273
+    },
+    "trip_fluid": {
+      "lo": 998.2012723757273,
+      "lo_by": {
+        "state": "trip",
+        "case": "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10",
+        "md": null
+      },
+      "hi": 1233.409486218348,
+      "hi_by": {
+        "state": "trip",
+        "case": "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10",
+        "md": 3629.54044732043
+      },
+      "open": true,
+      "fluid": 998.2012723757273
+    },
+    "refinement": {
+      "levels": [
+        {
+          "spacing_m": 50.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        },
+        {
+          "spacing_m": 25.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        }
+      ],
+      "tolerance_SG": 0.002,
+      "converged": true
+    }
+  },
+  "tools": {
+    "limit": 200.0,
+    "drilling": {
+      "T": 88.95606708297177,
+      "ok": true
+    },
+    "connection": {
+      "practice": {
+        "precirc_min": 0.33,
+        "off_min": 6.33
+      },
+      "schedule": {
+        "precirc_min": 0.33,
+        "off_min": 6.33,
+        "peak": 89.0741583093748
+      },
+      "peak": 89.0741583093748,
+      "node_max": 111.03211162440473,
+      "ok": true
+    },
+    "trip_in": {
+      "unstaged": {
+        "peak": 173.8408626528023,
+        "md": 3629.54044732043
+      },
+      "staged": {
+        "peak": 94.4017309481488,
+        "md": 3553.300655660217,
+        "spacing_m": 144.8775360000002,
+        "minutes": 15.51
+      },
+      "ok": true,
+      "schedule": {
+        "spacing_m": 144.8775360000002,
+        "minutes": 15.51,
+        "peak": 94.4017309481488,
+        "md": 3553.300655660217,
+        "stages": 12,
+        "staging_h": 3.102,
+        "circulating_fraction": 0.32319316561936157
+      }
+    },
+    "tool": "PASS",
+    "coating": {
+      "pipe": "TK-Drakon coated",
+      "rating": 204.0,
+      "circulating_max": 91.85573085499294,
+      "connection": {
+        "max": 92.80919147191943,
+        "minutes_above": 0.0
+      },
+      "trip_in": {
+        "max": 139.36799840422512,
+        "minutes_above": 0.0
+      },
+      "status": "within rating"
+    },
+    "trip_fluid_SG": null,
+    "trip_circulation_success": true
+  },
+  "status": {
+    "label": "GO",
+    "reasons": []
+  },
+  "components": {
+    "solver": {
+      "ok": true,
+      "converged": true,
+      "runs_ok": true,
+      "fluid_passes": 1
+    },
+    "tool": {
+      "ok": true,
+      "detail": "PASS"
+    },
+    "coating": {
+      "status": "within rating",
+      "pipe": "TK-Drakon coated"
+    },
+    "hole_cleaning": {
+      "ok": true,
+      "v_ann_min": 1.3469927414882625,
+      "conflict": null
+    },
+    "pumps": {
+      "ok": true,
+      "spp": 2977168.130329855,
+      "within_rig": true,
+      "gpm": 479.2419821299187
+    },
+    "admissibility": {
+      "inadmissible": []
+    },
+    "stability": {
+      "verdict": "GO",
+      "states": {
+        "drilling": "GO",
+        "connection": "GO",
+        "connection, fresh rock": "GO",
+        "trip": "GO"
+      }
+    },
+    "prescription": {
+      "drilling_fluid": {
+        "open": true,
+        "fluid": 998.2012723757273,
+        "note": null,
+        "heavier_than_water": false
+      },
+      "trip_fluid": {
+        "open": true,
+        "fluid": 998.2012723757273,
+        "note": null,
+        "heavier_than_water": false
+      }
+    },
+    "window_refinement": {
+      "levels": [
+        {
+          "spacing_m": 50.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        },
+        {
+          "spacing_m": 25.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        }
+      ],
+      "tolerance_SG": 0.002,
+      "converged": true
+    }
+  },
+  "versions": {
+    "commit": "3be5452536aab133bd41e7472dfc66e40c377a32",
+    "dirty": false,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "input_warnings": [
+    "temperature falls with depth above the casing shoe, at 100 m",
+    "no source stated for the rock's conductivity",
+    "no source stated for the rock's stiffness"
+  ]
+}

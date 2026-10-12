@@ -1,0 +1,1112 @@
+{
+  "site": "soultz",
+  "lever": "L8",
+  "settings": {
+    "flow_L_s": 31.25,
+    "pipe": "TK-Drakon coated",
+    "shoe_m": 4000.0,
+    "pv_fraction": 1.0,
+    "coating_rating_C": 204.0,
+    "allowance_SG": 0.02,
+    "form_h": 0.0,
+    "bhp_Pa": null
+  },
+  "source_sha256": "c6cca213c2ec48998592fee95f71d59eb8dab958940cf154897d6ac45e5b169b",
+  "versions": {
+    "commit": "3be5452536aab133bd41e7472dfc66e40c377a32",
+    "dirty": false,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "assessment": {
+    "reopened": false,
+    "verdict": "NO-GO",
+    "failures": [
+      "tool",
+      "drilling_fluid",
+      "trip_fluid",
+      "wall stability"
+    ],
+    "qualification_indeterminate": [
+      "coating qualification"
+    ],
+    "evaluated_status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, trip, drilling common window, trip common window",
+        "tool: 226 C at the bit while drilling"
+      ]
+    }
+  },
+  "metrics": {
+    "status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, trip, drilling common window, trip common window",
+        "tool: 226 C at the bit while drilling"
+      ]
+    },
+    "pressure_margin_SG": {
+      "drilling_fluid": -0.12252210876978348,
+      "trip_fluid": -0.08541211650833702
+    },
+    "actual_fluid_slack_SG": {
+      "drilling_fluid": {
+        "lower": -3.3808740381800816e-05,
+        "upper": -0.12248830002940167
+      },
+      "trip_fluid": {
+        "lower": -3.546384286528337e-05,
+        "upper": -0.08537665266547174
+      }
+    },
+    "tool_peaks_C": {
+      "drilling": 226.01192850432955,
+      "connection": 226.28800497638744,
+      "run_in": 240.5505332616213
+    },
+    "tool_margin_C": -40.5505332616213,
+    "run_in_margin_C": -40.5505332616213,
+    "practice_run_in_peak_C": 240.5505332616213,
+    "practice_run_in_margin_C": -40.5505332616213,
+    "run_in_search": {
+      "attempts": [
+        {
+          "peak_C": 240.5505332616213,
+          "stage_seconds": 930.6,
+          "stages": 46,
+          "spacing_m": 144.87753599999996
+        }
+      ],
+      "best": {
+        "peak_C": 240.5505332616213,
+        "stage_seconds": 930.6,
+        "stages": 46,
+        "spacing_m": 144.87753599999996
+      }
+    },
+    "windows": {
+      "drilling_fluid": {
+        "lo": 1399.8958981296746,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1277.3737893598911,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "SHmax upper bound (1.05 Sv), lab UCS 100"
+        ],
+        "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100"
+      },
+      "trip_fluid": {
+        "lo": 1454.5961317094782,
+        "lo_by": {
+          "state": "trip",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1369.1840152011412,
+        "hi_by": {
+          "state": "trip",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "SHmax upper bound (1.05 Sv), lab UCS 100"
+        ],
+        "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100"
+      }
+    },
+    "solver_ok": true,
+    "coating": {
+      "pipe": "TK-Drakon coated",
+      "rating": 204.0,
+      "circulating_max": 228.09132875891083,
+      "connection": {
+        "max": 229.31532479299568,
+        "minutes_above": 6.33
+      },
+      "trip_in": {
+        "max": 290.6807330876433,
+        "minutes_above": 788.154030773259
+      },
+      "status": "INDETERMINATE"
+    },
+    "pumps": {
+      "ok": true,
+      "spp": 21850184.24412659,
+      "within_rig": true,
+      "gpm": 497.99951547639944,
+      "trip_spp": 22162797.92719273,
+      "trip_gpm": 497.9568991194169
+    }
+  },
+  "result": {
+    "site": {
+      "name": "Upper Rhine Graben / Soultz-sous-Forets (France)",
+      "tier": "evidence-based",
+      "target_depth_m": 10700.0,
+      "legacy_target_depth_m": 10700.0,
+      "target_T_C": 400.0,
+      "k_rock": 2.9,
+      "E_rock_Pa": 55000000000.0,
+      "T_inj_C": 40.0,
+      "mu": 0.8,
+      "data_basis": {
+        "stress": {
+          "basis": "measured range",
+          "source": "Valley & Evans (2007), 1.5-5.0 km"
+        },
+        "strength": {
+          "basis": "measured (lab)",
+          "source": "Valley & Evans (2007): 10 samples, 100-130 MPa; not calibrated in situ"
+        },
+        "pore pressure": {
+          "basis": "measured",
+          "source": "near-hydrostatic (Valley & Evans 2007)"
+        },
+        "temperature": {
+          "basis": "extrapolated",
+          "source": "200 C at 5 km measured (GPK wells); 35 C/km assumed below"
+        },
+        "well check": {
+          "basis": "checked",
+          "source": "GPK3/GPK4 breakout onset and occurrence (crosscheck_soultz.py)"
+        }
+      },
+      "missing": [],
+      "stress_cases": [
+        {
+          "label": "SHmax lower bound (0.90 Sv)",
+          "source": "Valley & Evans (2007)",
+          "z_data_m": [
+            1500.0,
+            5000.0
+          ],
+          "Sv": [
+            25500.0,
+            -1300000.0
+          ],
+          "Shmin": [
+            14060.0,
+            -1780000.0
+          ],
+          "SHmax": [
+            22950.0,
+            -1170000.0
+          ],
+          "Pp": [
+            10000.0,
+            0.0
+          ],
+          "mu": null
+        },
+        {
+          "label": "SHmax mid-range",
+          "source": "Valley & Evans (2007)",
+          "z_data_m": [
+            1500.0,
+            5000.0
+          ],
+          "Sv": [
+            25500.0,
+            -1300000.0
+          ],
+          "Shmin": [
+            14060.0,
+            -1780000.0
+          ],
+          "SHmax": [
+            24865.0,
+            -1270000.0
+          ],
+          "Pp": [
+            10000.0,
+            0.0
+          ],
+          "mu": null
+        },
+        {
+          "label": "SHmax upper bound (1.05 Sv)",
+          "source": "Valley & Evans (2007)",
+          "z_data_m": [
+            1500.0,
+            5000.0
+          ],
+          "Sv": [
+            25500.0,
+            -1300000.0
+          ],
+          "Shmin": [
+            14060.0,
+            -1780000.0
+          ],
+          "SHmax": [
+            26780.0,
+            -1370000.0
+          ],
+          "Pp": [
+            10000.0,
+            0.0
+          ],
+          "mu": null
+        }
+      ],
+      "strength_cases": [
+        {
+          "label": "lab UCS 100",
+          "UCS_Pa": 100000000.0
+        },
+        {
+          "label": "lab UCS 115",
+          "UCS_Pa": 115000000.0
+        },
+        {
+          "label": "lab UCS 130",
+          "UCS_Pa": 130000000.0
+        }
+      ]
+    },
+    "evaluation": "v1.3.4",
+    "z_m": 10700.0,
+    "T_rock_C": 399.5,
+    "programme": {
+      "pipe": "TK-Drakon coated",
+      "flow": 31.25,
+      "flow_unit": "L/s",
+      "mass_flow_kg_s": 43.7456902934154,
+      "fluid": {
+        "rho_surface": 1399.8620893892928,
+        "sg": 1.3998620893892928,
+        "yield_point_Pa": 13.406472800000001,
+        "pv_ratio_to_water": 31.513581287688897
+      },
+      "fluid_passes": [
+        {
+          "simulated_rho_surface": 998.2012723757273,
+          "prescribed_rho_surface": 1392.557201742931,
+          "trip_simulated_rho_surface": 998.2012723757273,
+          "trip_prescribed_rho_surface": 1448.40240887639,
+          "density_residual_SG": 0.39435592936720376,
+          "trip_residual_SG": 0.4502011365006626,
+          "fluid_SG": null,
+          "success": true,
+          "rop_m_h": 3.5905742033922015,
+          "tool": "FAIL: 217 C at the bit while drilling"
+        },
+        {
+          "simulated_rho_surface": 1392.557201742931,
+          "prescribed_rho_surface": 1399.8620893892928,
+          "trip_simulated_rho_surface": 1448.40240887639,
+          "trip_prescribed_rho_surface": 1454.560667866613,
+          "density_residual_SG": 0.007304887646361749,
+          "trip_residual_SG": 0.0061582589902229755,
+          "fluid_SG": 1.392557201742931,
+          "success": true,
+          "rop_m_h": 3.5959618458455154,
+          "tool": "FAIL: 226 C at the bit while drilling"
+        },
+        {
+          "simulated_rho_surface": 1399.8620893892928,
+          "prescribed_rho_surface": 1399.8958981296746,
+          "trip_simulated_rho_surface": 1454.560667866613,
+          "trip_prescribed_rho_surface": 1454.5961317094782,
+          "density_residual_SG": 3.3808740381800816e-05,
+          "trip_residual_SG": 3.546384286528337e-05,
+          "fluid_SG": 1.3998620893892928,
+          "success": true,
+          "rop_m_h": 3.530855194899933,
+          "tool": "FAIL: 226 C at the bit while drilling"
+        }
+      ],
+      "fluid_converged": true,
+      "rop_m_h": 3.5301811043537628,
+      "rop_passes": [],
+      "bit_C": 226.01192850432955,
+      "return_C": 74.41688435420672,
+      "backpressure_Pa": 0.0,
+      "spp_Pa": 21850184.24412659,
+      "ecd_SG": 0.10918867538222804,
+      "v_ann_min": 1.4070462978756724,
+      "conflict": null,
+      "drilling_simulated_rho_surface": 1399.8620893892928,
+      "drilling_prescribed_rho_surface": 1399.8958981296746,
+      "trip_simulated_rho_surface": 1454.560667866613,
+      "trip_prescribed_rho_surface": 1454.5961317094782,
+      "trip_fluid_treatment": "uniform column from the start of the trip",
+      "barite_mass_fraction": 0.3763825477977351,
+      "trip_barite_mass_fraction": 0.41155740391403806
+    },
+    "cycle": {
+      "site_verdict": "NO-GO [CONDITIONAL..NO-GO]",
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "verdicts": {
+        "drilling": "NO-GO",
+        "connection": "GO",
+        "connection, fresh rock": "CONDITIONAL",
+        "trip": "NO-GO"
+      },
+      "drill_SG": 1.3167944539189278,
+      "drill_SG_hi": 1.2570850106333769,
+      "trip_SG": 1.3228868317142242,
+      "trip_SG_hi": 1.3462736860156048,
+      "safe_pause_h": 20.872787475585938,
+      "trip_h": 43.805945595885035,
+      "T_ref": {
+        "drilling": 399.5,
+        "connection": 276.8722945101657,
+        "connection, fresh rock": 388.59527656943214,
+        "trip": 378.1029035838799,
+        "end of drilling": 263.86709019350536
+      },
+      "budget": {
+        "water_SG": 0.9207437645359651,
+        "water_SG_trip": 0.8909462775110694,
+        "allowance_SG": 0.02,
+        "backpressure": 0.0,
+        "drill_rho_surface": 1400.322099813699,
+        "trip_rho_surface": 1440.8579279469504,
+        "trip_SG_start": 1.3572742772729502,
+        "trip_dP_heating": 3609546.997962801,
+        "water_dP_heating": 3127752.820542228
+      },
+      "cases": [
+        {
+          "label": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "UCS": 100000000.0,
+          "verdict": "CONDITIONAL",
+          "states": {
+            "drilling": "CONDITIONAL",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.2339589944451503,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.240051372240447,
+          "trip_SG_start": 1.2738500027437922,
+          "trip_rho_surface": 1357.2177225053547,
+          "trip_SG_hi": 1.3462736860156048
+        },
+        {
+          "label": "SHmax lower bound (0.90 Sv), lab UCS 115",
+          "UCS": 115000000.0,
+          "verdict": "CONDITIONAL",
+          "states": {
+            "drilling": "CONDITIONAL",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.213460942954371,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.2192656034976972,
+          "trip_SG_start": 1.2528964182664077,
+          "trip_rho_surface": 1336.1470737876887,
+          "trip_SG_hi": 1.3462736860156048
+        },
+        {
+          "label": "SHmax lower bound (0.90 Sv), lab UCS 130",
+          "UCS": 130000000.0,
+          "verdict": "CONDITIONAL",
+          "states": {
+            "drilling": "CONDITIONAL",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.192962891463591,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.1984798347549477,
+          "trip_SG_start": 1.2319345942418078,
+          "trip_rho_surface": 1315.0417527963689,
+          "trip_SG_hi": 1.3462736860156048
+        },
+        {
+          "label": "SHmax mid-range, lab UCS 100",
+          "UCS": 100000000.0,
+          "verdict": "NO-GO",
+          "states": {
+            "drilling": "NO-GO",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.275376724182039,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.2814691019773357,
+          "trip_SG_start": 1.3155779186910534,
+          "trip_rho_surface": 1399.1024999311433,
+          "trip_SG_hi": 1.3462736860156048
+        },
+        {
+          "label": "SHmax mid-range, lab UCS 115",
+          "UCS": 115000000.0,
+          "verdict": "CONDITIONAL",
+          "states": {
+            "drilling": "CONDITIONAL",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.2548786726912595,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.260683333234586,
+          "trip_SG_start": 1.2946404044613955,
+          "trip_rho_surface": 1378.0987842719114,
+          "trip_SG_hi": 1.3462736860156048
+        },
+        {
+          "label": "SHmax mid-range, lab UCS 130",
+          "UCS": 130000000.0,
+          "verdict": "CONDITIONAL",
+          "states": {
+            "drilling": "CONDITIONAL",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.2343806212004798,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.2398975644918364,
+          "trip_SG_start": 1.2736949821873265,
+          "trip_rho_surface": 1357.0619314772698,
+          "trip_SG_hi": 1.3462736860156048
+        },
+        {
+          "label": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "UCS": 100000000.0,
+          "verdict": "NO-GO",
+          "states": {
+            "drilling": "NO-GO",
+            "connection": "GO",
+            "connection, fresh rock": "CONDITIONAL",
+            "trip": "NO-GO"
+          },
+          "drill_SG": 1.3167944539189278,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.3228868317142242,
+          "trip_SG_start": 1.3572742772729502,
+          "trip_rho_surface": 1440.8579279469504,
+          "trip_SG_hi": 1.3462736860156048
+        },
+        {
+          "label": "SHmax upper bound (1.05 Sv), lab UCS 115",
+          "UCS": 115000000.0,
+          "verdict": "NO-GO",
+          "states": {
+            "drilling": "NO-GO",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.2962964024281485,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.3021010629714747,
+          "trip_SG_start": 1.3363525522243167,
+          "trip_rho_surface": 1419.918492614373,
+          "trip_SG_hi": 1.3462736860156048
+        },
+        {
+          "label": "SHmax upper bound (1.05 Sv), lab UCS 130",
+          "UCS": 130000000.0,
+          "verdict": "NO-GO",
+          "states": {
+            "drilling": "NO-GO",
+            "connection": "GO",
+            "connection, fresh rock": "GO",
+            "trip": "GO"
+          },
+          "drill_SG": 1.2757983509373685,
+          "drill_SG_hi": 1.2570850106333769,
+          "trip_SG": 1.2813152942287251,
+          "trip_SG_start": 1.3154230161087712,
+          "trip_rho_surface": 1398.9471985620032,
+          "trip_SG_hi": 1.3462736860156048
+        }
+      ]
+    },
+    "sensitivities": {},
+    "trip_profile": [],
+    "windows": {
+      "depths": [
+        10700.0,
+        10675.0,
+        10671.464624,
+        10650.0,
+        10625.0,
+        10600.0,
+        10500.0,
+        10400.0,
+        10300.0,
+        10200.0,
+        10100.0,
+        10000.0,
+        9900.0,
+        9800.0,
+        9700.0,
+        9600.0,
+        9500.0,
+        9400.0,
+        9300.0,
+        9200.0,
+        9100.0,
+        9000.0,
+        8900.0,
+        8800.0,
+        8700.0,
+        8600.0,
+        8500.0,
+        8400.0,
+        8300.0,
+        8200.0,
+        8100.0,
+        8000.0,
+        7900.0,
+        7800.0,
+        7700.0,
+        7600.0,
+        7500.0,
+        7400.0,
+        7300.0,
+        7200.0,
+        7100.0,
+        7000.0,
+        6900.0,
+        6800.0,
+        6700.0,
+        6600.0,
+        6500.0,
+        6400.0,
+        6300.0,
+        6200.0,
+        6100.0,
+        6000.0,
+        5900.0,
+        5800.0,
+        5700.0,
+        5600.0,
+        5500.0,
+        5400.0,
+        5300.0,
+        5200.0,
+        5100.0,
+        5000.0,
+        4900.0,
+        4800.0,
+        4700.0,
+        4600.0,
+        4500.0,
+        4400.0,
+        4300.0,
+        4200.0,
+        4100.0,
+        4075.0,
+        4050.0,
+        4025.0,
+        4000.0
+      ],
+      "states": {
+        "drilling": {
+          "SHmax lower bound (0.90 Sv), lab UCS 100": {
+            "lo": 1221.344902809665,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          },
+          "SHmax lower bound (0.90 Sv), lab UCS 115": {
+            "lo": 1200.8786777522178,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          },
+          "SHmax lower bound (0.90 Sv), lab UCS 130": {
+            "lo": 1180.346601245924,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 100": {
+            "lo": 1263.267849532893,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 115": {
+            "lo": 1242.8442922564666,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 130": {
+            "lo": 1222.3780671990194,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 100": {
+            "lo": 1305.0833194735958,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 115": {
+            "lo": 1284.6983212044227,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 130": {
+            "lo": 1264.2977020425599,
+            "lo_md": 10700.0,
+            "hi": 1277.3737893598911,
+            "hi_md": 4000.0
+          }
+        },
+        "connection": {
+          "SHmax lower bound (0.90 Sv), lab UCS 100": {
+            "lo": 1316.6363491974207,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax lower bound (0.90 Sv), lab UCS 115": {
+            "lo": 1295.9759639879198,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax lower bound (0.90 Sv), lab UCS 130": {
+            "lo": 1275.2644557618726,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 100": {
+            "lo": 1358.3149031309135,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 115": {
+            "lo": 1337.6912307669309,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 130": {
+            "lo": 1317.0431734197323,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 100": {
+            "lo": 1399.8958981296746,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 115": {
+            "lo": 1379.308217942368,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 130": {
+            "lo": 1358.7205377550606,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          }
+        },
+        "fresh rock": {
+          "SHmax lower bound (0.90 Sv), lab UCS 100": {
+            "lo": 1316.6363491974207,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax lower bound (0.90 Sv), lab UCS 115": {
+            "lo": 1295.9759639879198,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax lower bound (0.90 Sv), lab UCS 130": {
+            "lo": 1275.2644557618726,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 100": {
+            "lo": 1358.3149031309135,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 115": {
+            "lo": 1337.6912307669309,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 130": {
+            "lo": 1317.0431734197323,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 100": {
+            "lo": 1399.8958981296746,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 115": {
+            "lo": 1379.308217942368,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 130": {
+            "lo": 1358.7205377550606,
+            "lo_md": 10700.0,
+            "hi": 1389.4053356822344,
+            "hi_md": 4000.0
+          }
+        },
+        "trip": {
+          "SHmax lower bound (0.90 Sv), lab UCS 100": {
+            "lo": 1371.024845021532,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          },
+          "SHmax lower bound (0.90 Sv), lab UCS 115": {
+            "lo": 1350.2855087048868,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          },
+          "SHmax lower bound (0.90 Sv), lab UCS 130": {
+            "lo": 1329.4671515030927,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 100": {
+            "lo": 1412.8720491945335,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 115": {
+            "lo": 1392.180360455329,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          },
+          "SHmax mid-range, lab UCS 130": {
+            "lo": 1371.4410241386838,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 100": {
+            "lo": 1454.5961317094782,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 115": {
+            "lo": 1433.949543520117,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          },
+          "SHmax upper bound (1.05 Sv), lab UCS 130": {
+            "lo": 1413.286693451614,
+            "lo_md": 10700.0,
+            "hi": 1369.1840152011412,
+            "hi_md": 4000.0
+          }
+        }
+      },
+      "drilling_fluid": {
+        "lo": 1399.8958981296746,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1277.3737893598911,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "SHmax upper bound (1.05 Sv), lab UCS 100"
+        ],
+        "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100"
+      },
+      "trip_fluid": {
+        "lo": 1454.5961317094782,
+        "lo_by": {
+          "state": "trip",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1369.1840152011412,
+        "hi_by": {
+          "state": "trip",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "SHmax upper bound (1.05 Sv), lab UCS 100"
+        ],
+        "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100"
+      },
+      "refinement": {
+        "levels": [
+          {
+            "spacing_m": 50.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              }
+            }
+          },
+          {
+            "spacing_m": 25.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              }
+            }
+          }
+        ],
+        "tolerance_SG": 0.002,
+        "converged": true
+      }
+    },
+    "tools": {
+      "limit": 200.0,
+      "drilling": {
+        "T": 226.01192850432955,
+        "ok": false
+      },
+      "connection": {
+        "practice": {
+          "precirc_min": 0.33,
+          "off_min": 6.33
+        },
+        "schedule": null,
+        "peak": 226.28800497638744,
+        "node_max": 254.04633705290945,
+        "ok": false
+      },
+      "trip_in": {
+        "unstaged": {
+          "peak": 328.1292552765585,
+          "md": 10700.0
+        },
+        "staged": {
+          "peak": 240.5505332616213,
+          "md": 10664.366655999998,
+          "spacing_m": 144.8775360000002,
+          "minutes": 15.51
+        },
+        "ok": false,
+        "schedule": null
+      },
+      "tool": "FAIL: 226 C at the bit while drilling",
+      "coating": {
+        "pipe": "TK-Drakon coated",
+        "rating": 204.0,
+        "circulating_max": 228.09132875891083,
+        "connection": {
+          "max": 229.31532479299568,
+          "minutes_above": 6.33
+        },
+        "trip_in": {
+          "max": 290.6807330876433,
+          "minutes_above": 788.154030773259
+        },
+        "status": "INDETERMINATE"
+      },
+      "trip_fluid_SG": 1.454560667866613,
+      "trip_circulation_success": true,
+      "robustness_search": {
+        "attempts": [
+          {
+            "peak_C": 240.5505332616213,
+            "stage_seconds": 930.6,
+            "stages": 46,
+            "spacing_m": 144.87753599999996
+          }
+        ],
+        "best": {
+          "peak_C": 240.5505332616213,
+          "stage_seconds": 930.6,
+          "stages": 46,
+          "spacing_m": 144.87753599999996
+        }
+      }
+    },
+    "status": {
+      "label": "NO-GO",
+      "reasons": [
+        "the wall is not held: drilling, trip, drilling common window, trip common window",
+        "tool: 226 C at the bit while drilling"
+      ]
+    },
+    "components": {
+      "solver": {
+        "ok": true,
+        "converged": true,
+        "runs_ok": true,
+        "fluid_passes": 3
+      },
+      "tool": {
+        "ok": false,
+        "detail": "FAIL: 226 C at the bit while drilling"
+      },
+      "coating": {
+        "status": "INDETERMINATE",
+        "pipe": "TK-Drakon coated"
+      },
+      "hole_cleaning": {
+        "ok": true,
+        "v_ann_min": 1.4070462978756724,
+        "conflict": null
+      },
+      "pumps": {
+        "ok": true,
+        "spp": 21850184.24412659,
+        "within_rig": true,
+        "gpm": 497.99951547639944,
+        "trip_spp": 22162797.92719273,
+        "trip_gpm": 497.9568991194169
+      },
+      "admissibility": {
+        "inadmissible": []
+      },
+      "stability": {
+        "verdict": "NO-GO",
+        "states": {
+          "drilling": "NO-GO",
+          "connection": "GO",
+          "connection, fresh rock": "CONDITIONAL",
+          "trip": "NO-GO",
+          "drilling common window": "NO-GO",
+          "trip common window": "NO-GO"
+        }
+      },
+      "prescription": {
+        "drilling_fluid": {
+          "open": false,
+          "fluid": null,
+          "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100",
+          "heavier_than_water": false
+        },
+        "trip_fluid": {
+          "open": false,
+          "fluid": null,
+          "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100",
+          "heavier_than_water": false
+        }
+      },
+      "window_refinement": {
+        "levels": [
+          {
+            "spacing_m": 50.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              }
+            }
+          },
+          {
+            "spacing_m": 25.0,
+            "changes": {
+              "drilling_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              },
+              "trip_fluid": {
+                "lo": 0.0,
+                "hi": 0.0,
+                "binding_depth_change_m": 0.0
+              }
+            }
+          }
+        ],
+        "tolerance_SG": 0.002,
+        "converged": true
+      }
+    },
+    "versions": {
+      "commit": "3be5452536aab133bd41e7472dfc66e40c377a32",
+      "dirty": false,
+      "python": "3.14.4",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.18.1",
+        "iapws": "1.5.5",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "input_warnings": []
+  },
+  "mpd": null,
+  "elapsed_seconds": 39.661158219999834,
+  "evidence": "results/v1.3.4/ci/38186784798-1/levers/soultz/L8/436d2122df95b544.json",
+  "rating_only_physics_reused_from": null
+}

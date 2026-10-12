@@ -1,0 +1,825 @@
+{
+  "site": {
+    "name": "Pannonian Basin (Hungary)",
+    "tier": "speculative",
+    "target_depth_m": 9714.0,
+    "legacy_target_depth_m": 9714.0,
+    "target_T_C": 400.0,
+    "k_rock": 2.7,
+    "E_rock_Pa": 50000000000.0,
+    "T_inj_C": 40.0,
+    "mu": 0.8,
+    "data_basis": {
+      "stress": {
+        "basis": "regime bounds",
+        "source": "Bada et al. (2007); orientation maps only (Bekesi et al. 2023), no magnitudes"
+      },
+      "strength": {
+        "basis": "unsourced",
+        "source": "v1.0 160 MPa; no basement data found"
+      },
+      "pore pressure": {
+        "basis": "assumed",
+        "source": "hydrostatic, but the deep Great Hungarian Plain is reported overpressured by 1-35 MPa (not yet verified)"
+      },
+      "temperature": {
+        "basis": "regional",
+        "source": "45-50 C/km regional gradient, extrapolated to 9.7 km; no deep well cited"
+      },
+      "well check": {
+        "basis": "none",
+        "source": "no well with wellbore-failure data"
+      }
+    },
+    "missing": [
+      [
+        "stress",
+        "regime bounds"
+      ],
+      [
+        "strength",
+        "unsourced"
+      ],
+      [
+        "well check",
+        "none"
+      ]
+    ],
+    "stress_cases": [
+      {
+        "label": "Shmin 0% of floor-to-Sv",
+        "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+        "z_data_m": null,
+        "Sv": [
+          25015.5,
+          0.0
+        ],
+        "Shmin": [
+          13468.584164104657,
+          0.0
+        ],
+        "SHmax": [
+          25015.5,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      },
+      {
+        "label": "Shmin 25% of floor-to-Sv",
+        "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+        "z_data_m": null,
+        "Sv": [
+          25015.5,
+          0.0
+        ],
+        "Shmin": [
+          16355.313123078493,
+          0.0
+        ],
+        "SHmax": [
+          25015.5,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      },
+      {
+        "label": "Shmin 50% of floor-to-Sv",
+        "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+        "z_data_m": null,
+        "Sv": [
+          25015.5,
+          0.0
+        ],
+        "Shmin": [
+          19242.04208205233,
+          0.0
+        ],
+        "SHmax": [
+          25015.5,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      },
+      {
+        "label": "Shmin 75% of floor-to-Sv",
+        "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+        "z_data_m": null,
+        "Sv": [
+          25015.5,
+          0.0
+        ],
+        "Shmin": [
+          22128.771041026164,
+          0.0
+        ],
+        "SHmax": [
+          25015.5,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      },
+      {
+        "label": "Shmin 100% of floor-to-Sv",
+        "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+        "z_data_m": null,
+        "Sv": [
+          25015.5,
+          0.0
+        ],
+        "Shmin": [
+          25015.5,
+          0.0
+        ],
+        "SHmax": [
+          25015.5,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      }
+    ],
+    "strength_cases": [
+      {
+        "label": "site UCS",
+        "UCS_Pa": 160000000.0
+      }
+    ]
+  },
+  "evaluation": "v1.3.4",
+  "z_m": 9714.0,
+  "T_rock_C": 399.99,
+  "programme": {
+    "pipe": "TK-Drakon coated",
+    "flow": 40,
+    "flow_unit": "L/s",
+    "mass_flow_kg_s": 58.371125114444396,
+    "fluid": {
+      "rho_surface": 1459.2781278611099,
+      "sg": 1.4592781278611098,
+      "yield_point_Pa": 13.406472800000001,
+      "pv_ratio_to_water": 31.513581287688897
+    },
+    "fluid_passes": [
+      {
+        "fluid_SG": null,
+        "need_SG": 1.4160723049375843,
+        "rho_surface": 1477.2937951488186,
+        "simulated_rho_surface": 998.2012723757273,
+        "prescribed_rho_surface": 1477.2937951488186,
+        "density_residual_SG": 0.47909252277309133,
+        "trip_simulated_rho_surface": 998.2012723757273,
+        "trip_prescribed_rho_surface": 1541.2871614995704,
+        "trip_residual_SG": 0.5430858891238431,
+        "ecd_SG": 0.018825369757855228,
+        "success": true,
+        "rop_m_h": 3.8761075980825255,
+        "rop_passes": 2,
+        "tool": "PASS"
+      },
+      {
+        "fluid_SG": 1.4772937951488185,
+        "need_SG": 1.3975885031228046,
+        "rho_surface": 1459.2781278611099,
+        "simulated_rho_surface": 1477.2937951488186,
+        "prescribed_rho_surface": 1459.2781278611099,
+        "density_residual_SG": -0.018015667287708766,
+        "trip_simulated_rho_surface": 1541.2871614995704,
+        "trip_prescribed_rho_surface": 1545.1517811955964,
+        "trip_residual_SG": 0.0038646196960260113,
+        "ecd_SG": 0.07462056471888878,
+        "success": true,
+        "rop_m_h": 3.8788094477078316,
+        "rop_passes": 0,
+        "tool": "PASS with the schedule found"
+      },
+      {
+        "fluid_SG": 1.4592781278611098,
+        "need_SG": 1.397514738235903,
+        "rho_surface": 1458.7342812992442,
+        "simulated_rho_surface": 1459.2781278611099,
+        "prescribed_rho_surface": 1458.7342812992442,
+        "density_residual_SG": -0.0005438465618656209,
+        "trip_simulated_rho_surface": 1545.1517811955964,
+        "trip_prescribed_rho_surface": 1544.7872910635567,
+        "trip_residual_SG": -0.00036449013203969117,
+        "ecd_SG": 0.07398251564310662,
+        "success": true,
+        "rop_m_h": 3.8876500523805895,
+        "rop_passes": 0,
+        "tool": "PASS with the schedule found"
+      }
+    ],
+    "fluid_converged": true,
+    "rop_m_h": 3.8943025402577462,
+    "rop_passes": [],
+    "bit_C": 184.71725580197523,
+    "return_C": 74.6084228738977,
+    "backpressure_Pa": 0.0,
+    "spp_Pa": 24611507.05826827,
+    "ecd_SG": 0.07398251564310662,
+    "v_ann_min": 1.8002970860747383,
+    "conflict": null,
+    "drilling_simulated_rho_surface": 1459.2781278611099,
+    "drilling_prescribed_rho_surface": 1458.7342812992442,
+    "trip_simulated_rho_surface": 1545.1517811955964,
+    "trip_prescribed_rho_surface": 1544.7872910635567,
+    "trip_fluid_treatment": "uniform column from the start of the trip",
+    "barite_mass_fraction": 0.41446752925489083,
+    "trip_barite_mass_fraction": 0.46433577618836624
+  },
+  "cycle": {
+    "site_verdict": "CONDITIONAL",
+    "deciding_case": "Shmin 100% of floor-to-Sv",
+    "verdicts": {
+      "drilling": "CONDITIONAL",
+      "connection": "CONDITIONAL",
+      "connection, fresh rock": "CONDITIONAL",
+      "trip": "CONDITIONAL"
+    },
+    "drill_SG": 1.397514738235903,
+    "drill_SG_hi": 2.4260174843568936,
+    "trip_SG": 1.414133009592826,
+    "trip_SG_hi": 2.48,
+    "safe_pause_h": 14.437820434570312,
+    "trip_h": 40.131718366208155,
+    "T_ref": {
+      "drilling": 399.99,
+      "connection": 236.85195397451568,
+      "connection, fresh rock": 374.4943593276007,
+      "trip": 372.1879771516371,
+      "end of drilling": 220.59375290934472
+    },
+    "budget": {
+      "water_SG": 0.9397455947560767,
+      "water_SG_trip": 0.8988908011633862,
+      "allowance_SG": 0.02,
+      "backpressure": 0.0,
+      "drill_rho_surface": 1459.4600663395718,
+      "trip_rho_surface": 1524.4434282248087,
+      "trip_SG_start": 1.4628001826679478,
+      "trip_dP_heating": 4637706.137859503,
+      "water_dP_heating": 3893230.591251671
+    },
+    "cases": [
+      {
+        "label": "Shmin 0% of floor-to-Sv",
+        "UCS": 160000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "CONDITIONAL",
+          "connection, fresh rock": "CONDITIONAL",
+          "trip": "CONDITIONAL"
+        },
+        "drill_SG": 1.146552607762048,
+        "drill_SG_hi": 1.2489618435928422,
+        "trip_SG": 1.163170879118971,
+        "trip_SG_start": 1.2089764091699902,
+        "trip_rho_surface": 1270.783507040992,
+        "trip_SG_hi": 1.3029443592359489
+      },
+      {
+        "label": "Shmin 25% of floor-to-Sv",
+        "UCS": 160000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 1.2092931403805118,
+        "drill_SG_hi": 1.5432257537838547,
+        "trip_SG": 1.2259114117374348,
+        "trip_SG_start": 1.272588949254005,
+        "trip_rho_surface": 1334.6228181201593,
+        "trip_SG_hi": 1.5972082694269614
+      },
+      {
+        "label": "Shmin 50% of floor-to-Sv",
+        "UCS": 160000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 1.2720336729989756,
+        "drill_SG_hi": 1.8374896639748677,
+        "trip_SG": 1.2886519443558986,
+        "trip_SG_start": 1.336094497264329,
+        "trip_rho_surface": 1398.1676680560986,
+        "trip_SG_hi": 1.8914721796179743
+      },
+      {
+        "label": "Shmin 75% of floor-to-Sv",
+        "UCS": 160000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 1.3347742056174394,
+        "drill_SG_hi": 2.1317535741658804,
+        "trip_SG": 1.3513924769743622,
+        "trip_SG_start": 1.3994969951643528,
+        "trip_rho_surface": 1461.4356184863475,
+        "trip_SG_hi": 2.185736089808987
+      },
+      {
+        "label": "Shmin 100% of floor-to-Sv",
+        "UCS": 160000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "CONDITIONAL",
+          "trip": "GO"
+        },
+        "drill_SG": 1.397514738235903,
+        "drill_SG_hi": 2.4260174843568936,
+        "trip_SG": 1.414133009592826,
+        "trip_SG_start": 1.4628001826679478,
+        "trip_rho_surface": 1524.4434282248087,
+        "trip_SG_hi": 2.48
+      }
+    ]
+  },
+  "sensitivities": {},
+  "trip_profile": [],
+  "windows": {
+    "depths": [
+      9714.0,
+      9689.0,
+      9685.464624,
+      9664.0,
+      9639.0,
+      9614.0,
+      9514.0,
+      9414.0,
+      9314.0,
+      9214.0,
+      9114.0,
+      9014.0,
+      8914.0,
+      8814.0,
+      8714.0,
+      8614.0,
+      8514.0,
+      8414.0,
+      8314.0,
+      8214.0,
+      8114.0,
+      8014.0,
+      7914.0,
+      7814.0,
+      7714.0,
+      7614.0,
+      7514.0,
+      7414.0,
+      7314.0,
+      7214.0,
+      7114.0,
+      7014.0,
+      6914.0,
+      6814.0,
+      6714.0,
+      6614.0,
+      6514.0,
+      6414.0,
+      6314.0,
+      6214.0,
+      6114.0,
+      6014.0,
+      5914.0,
+      5814.0,
+      5714.0,
+      5614.0,
+      5514.0,
+      5414.0,
+      5314.0,
+      5214.0,
+      5114.0,
+      5014.0,
+      4914.0,
+      4814.0,
+      4714.0,
+      4614.0,
+      4514.0,
+      4414.0,
+      4314.0,
+      4214.0,
+      4114.0,
+      4100.0,
+      4075.0,
+      4050.0,
+      4025.0,
+      4014.0,
+      4000.0
+    ],
+    "states": {
+      "drilling": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo": 1170.9860868353167,
+          "lo_md": 9714.0,
+          "hi": 1293.1067108804236,
+          "hi_md": 4000.0
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo": 1234.2684754412664,
+          "lo_md": 9714.0,
+          "hi": 1589.466520831474,
+          "hi_md": 4000.0
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo": 1297.3560922850409,
+          "lo_md": 9714.0,
+          "hi": 1883.6853030496736,
+          "hi_md": 4000.0
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo": 1360.2370202948139,
+          "lo_md": 9714.0,
+          "hi": 2176.21984871608,
+          "hi_md": 4000.0
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo": 1422.9425933376533,
+          "lo_md": 9714.0,
+          "hi": 2467.496772775617,
+          "hi_md": 4000.0
+        }
+      },
+      "connection": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo": 1207.207102140016,
+          "lo_md": 9714.0,
+          "hi": 1368.595933116371,
+          "hi_md": 4000.0
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo": 1270.3624135866648,
+          "lo_md": 9714.0,
+          "hi": 1664.3699008743783,
+          "hi_md": 4000.0
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo": 1333.331001905686,
+          "lo_md": 9714.0,
+          "hi": 1958.1218292650601,
+          "hi_md": 4000.0
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo": 1396.1239884033703,
+          "lo_md": 9714.0,
+          "hi": 2250.2995670375944,
+          "hi_md": 4000.0
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo": 1458.7342812992442,
+          "lo_md": 9714.0,
+          "hi": 2541.318457718196,
+          "hi_md": 4000.0
+        }
+      },
+      "fresh rock": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo": 1207.207102140016,
+          "lo_md": 9714.0,
+          "hi": 1368.595933116371,
+          "hi_md": 4000.0
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo": 1270.3624135866648,
+          "lo_md": 9714.0,
+          "hi": 1664.3699008743783,
+          "hi_md": 4000.0
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo": 1333.331001905686,
+          "lo_md": 9714.0,
+          "hi": 1958.1218292650601,
+          "hi_md": 4000.0
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo": 1396.1239884033703,
+          "lo_md": 9714.0,
+          "hi": 2250.2995670375944,
+          "hi_md": 4000.0
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo": 1458.7342812992442,
+          "lo_md": 9714.0,
+          "hi": 2541.318457718196,
+          "hi_md": 4000.0
+        }
+      },
+      "trip": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo": 1291.4768884026062,
+          "lo_md": 9714.0,
+          "hi": 1348.4153725573378,
+          "hi_md": 4000.0
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo": 1355.223955063632,
+          "lo_md": 9714.0,
+          "hi": 1644.3396595730444,
+          "hi_md": 4000.0
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo": 1418.665840356697,
+          "lo_md": 9714.0,
+          "hi": 1938.2104247047166,
+          "hi_md": 4000.0
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo": 1481.8488705775314,
+          "lo_md": 9714.0,
+          "hi": 2230.478670988279,
+          "hi_md": 4000.0
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo": 1544.7872910635567,
+          "lo_md": 9714.0,
+          "hi": 2521.5660743977714,
+          "hi_md": 4000.0
+        }
+      }
+    },
+    "drilling_fluid": {
+      "lo": 1458.7342812992442,
+      "lo_by": {
+        "state": "connection",
+        "case": "Shmin 100% of floor-to-Sv",
+        "md": 9714.0
+      },
+      "hi": 1293.1067108804236,
+      "hi_by": {
+        "state": "drilling",
+        "case": "Shmin 0% of floor-to-Sv",
+        "md": 4000.0
+      },
+      "open": false,
+      "fluid": null,
+      "deciding_pair": [
+        "Shmin 100% of floor-to-Sv",
+        "Shmin 0% of floor-to-Sv"
+      ],
+      "note": "none: the scenarios need different fluids"
+    },
+    "trip_fluid": {
+      "lo": 1544.7872910635567,
+      "lo_by": {
+        "state": "trip",
+        "case": "Shmin 100% of floor-to-Sv",
+        "md": 9714.0
+      },
+      "hi": 1348.4153725573378,
+      "hi_by": {
+        "state": "trip",
+        "case": "Shmin 0% of floor-to-Sv",
+        "md": 4000.0
+      },
+      "open": false,
+      "fluid": null,
+      "deciding_pair": [
+        "Shmin 100% of floor-to-Sv",
+        "Shmin 0% of floor-to-Sv"
+      ],
+      "note": "none: the scenarios need different fluids"
+    },
+    "refinement": {
+      "levels": [
+        {
+          "spacing_m": 50.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        },
+        {
+          "spacing_m": 25.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        }
+      ],
+      "tolerance_SG": 0.002,
+      "converged": true
+    }
+  },
+  "tools": {
+    "limit": 200.0,
+    "drilling": {
+      "T": 184.71725580197523,
+      "ok": true
+    },
+    "connection": {
+      "practice": {
+        "precirc_min": 0.33,
+        "off_min": 6.33
+      },
+      "schedule": {
+        "precirc_min": 0.33,
+        "off_min": 6.33,
+        "peak": 185.06178226809922
+      },
+      "peak": 185.06178226809922,
+      "node_max": 218.78631650901377,
+      "ok": true
+    },
+    "trip_in": {
+      "unstaged": {
+        "peak": 312.69004525629936,
+        "md": 9714.0
+      },
+      "staged": {
+        "peak": 203.1712588152216,
+        "md": 9650.223903999999,
+        "spacing_m": 144.8775360000002,
+        "minutes": 15.51
+      },
+      "ok": false,
+      "schedule": {
+        "spacing_m": 72.4387680000001,
+        "minutes": 15.51,
+        "peak": 192.84483789803483,
+        "md": 9650.223903999999,
+        "stages": 78,
+        "staging_h": 20.163,
+        "circulating_fraction": 0.5369834183614002
+      }
+    },
+    "tool": "PASS with the schedule found",
+    "coating": {
+      "pipe": "TK-Drakon coated",
+      "rating": 204.0,
+      "circulating_max": 187.53187639741995,
+      "connection": {
+        "max": 188.56180337536694,
+        "minutes_above": 0.0
+      },
+      "trip_in": {
+        "max": 243.94088281695701,
+        "minutes_above": 569.725058804628
+      },
+      "status": "INDETERMINATE"
+    },
+    "trip_fluid_SG": 1.5451517811955964,
+    "trip_circulation_success": true
+  },
+  "status": {
+    "label": "NO-GO",
+    "reasons": [
+      "the wall is not held: drilling common window, trip common window"
+    ]
+  },
+  "components": {
+    "solver": {
+      "ok": true,
+      "converged": true,
+      "runs_ok": true,
+      "fluid_passes": 3
+    },
+    "tool": {
+      "ok": true,
+      "detail": "PASS with the schedule found"
+    },
+    "coating": {
+      "status": "INDETERMINATE",
+      "pipe": "TK-Drakon coated"
+    },
+    "hole_cleaning": {
+      "ok": true,
+      "v_ann_min": 1.8002970860747383,
+      "conflict": null
+    },
+    "pumps": {
+      "ok": true,
+      "spp": 24611507.05826827,
+      "within_rig": true,
+      "gpm": 637.3801263186418,
+      "trip_spp": 25645992.449713968,
+      "trip_gpm": 637.2944875940029
+    },
+    "admissibility": {
+      "inadmissible": []
+    },
+    "stability": {
+      "verdict": "NO-GO",
+      "states": {
+        "drilling": "CONDITIONAL",
+        "connection": "CONDITIONAL",
+        "connection, fresh rock": "CONDITIONAL",
+        "trip": "CONDITIONAL",
+        "drilling common window": "NO-GO",
+        "trip common window": "NO-GO"
+      }
+    },
+    "prescription": {
+      "drilling_fluid": {
+        "open": false,
+        "fluid": null,
+        "note": "none: the scenarios need different fluids",
+        "heavier_than_water": false
+      },
+      "trip_fluid": {
+        "open": false,
+        "fluid": null,
+        "note": "none: the scenarios need different fluids",
+        "heavier_than_water": false
+      }
+    },
+    "window_refinement": {
+      "levels": [
+        {
+          "spacing_m": 50.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        },
+        {
+          "spacing_m": 25.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        }
+      ],
+      "tolerance_SG": 0.002,
+      "converged": true
+    }
+  },
+  "versions": {
+    "commit": "3be5452536aab133bd41e7472dfc66e40c377a32",
+    "dirty": false,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "input_warnings": [
+    "no source stated for the rock's conductivity",
+    "no source stated for the rock's stiffness"
+  ]
+}

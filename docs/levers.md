@@ -168,7 +168,7 @@ $env:OMP_NUM_THREADS = '1'
 .venv/Scripts/python.exe src/lever_pairs.py
 ```
 
-Each trial saves its source fingerprint, package versions, elapsed seconds and exact settings. Earlier non-MPD runs have a different source fingerprint because the MPD reference-pressure handling was subsequently corrected; that change does not affect their physical settings. Only the final MPD trials are retained. The summaries link every retained bracket. Golden lever tables await this STOP review and regeneration in the CI environment, as required by the spec. C7 remains pending.
+Each trial saves its source fingerprint, package versions, elapsed seconds and exact settings. Earlier non-MPD runs have a different source fingerprint because the MPD reference-pressure handling was subsequently corrected; that change does not affect their physical settings. Only the final MPD trials are retained. The summaries link every retained bracket. The C6 STOP review was accepted before C7. The release pins and their fresh CI bracketing evidence are recorded in [release verification](v134-release.md).
 
 The [evidence manifest](../results/levers/manifest.json) records the source files and checksums of the retained trial and summary files. The reconstructed base agrees with the reviewed checkpoint within 0.00003 C at the bit and 0.00005 kg/m3 at the common-window bounds.
 

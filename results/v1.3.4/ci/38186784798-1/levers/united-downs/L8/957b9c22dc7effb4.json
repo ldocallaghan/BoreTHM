@@ -1,0 +1,49 @@
+{
+  "site": "united-downs",
+  "lever": "L8",
+  "settings": {
+    "flow_L_s": 5.0,
+    "pipe": "TK-Drakon coated",
+    "shoe_m": 4000.0,
+    "pv_fraction": 1.0,
+    "coating_rating_C": 204.0,
+    "allowance_SG": 0.02,
+    "form_h": 0.0,
+    "bhp_Pa": null
+  },
+  "source_sha256": "c6cca213c2ec48998592fee95f71d59eb8dab958940cf154897d6ac45e5b169b",
+  "versions": {
+    "commit": "3be5452536aab133bd41e7472dfc66e40c377a32",
+    "dirty": false,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "assessment": {
+    "reopened": false,
+    "verdict": "INDETERMINATE",
+    "failures": [
+      "solver"
+    ],
+    "qualification_indeterminate": [],
+    "evaluated_status": {
+      "label": "INDETERMINATE",
+      "reasons": [
+        "selected circulation did not converge"
+      ]
+    }
+  },
+  "metrics": null,
+  "result": {
+    "prerequisite_failure": "selected circulation did not converge",
+    "other_gates": "INDETERMINATE because the selected circulation failed"
+  },
+  "mpd": null,
+  "elapsed_seconds": 28.55644571499988,
+  "evidence": "results/v1.3.4/ci/38186784798-1/levers/united-downs/L8/957b9c22dc7effb4.json",
+  "rating_only_physics_reused_from": null
+}

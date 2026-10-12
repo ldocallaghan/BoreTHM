@@ -6,7 +6,7 @@
 
 The reference case reaches 400 °C at 10.7 km at Soultz-sous-Forêts. Its measured stresses cover 1.5 to 5 km and are extrapolated to the target; laboratory granite strengths span 100 to 130 MPa. The corrected programme uses TK-Drakon coated pipe at 40 L/s and simulates a 1.379 SG drilling fluid and 1.444 SG trip fluid at surface.
 
-The worst cases leave both whole-hole fluid windows closed. Drilling needs at least 1.378925 SG against a 1.312559 SG upper bound; trip needs 1.443624 SG against 1.364611 SG. No surface weight satisfies a closed window. The bit is below its 200 °C limit at 197.0 °C, but the best attempted run-in schedule reaches 201.2 °C. The pipe coating also exceeds its stated cycle rating.
+The worst cases leave both whole-hole fluid windows closed. Drilling needs at least 1.378925 SG against a 1.312559 SG upper bound; trip needs 1.443624 SG against 1.364611 SG. No surface weight satisfies a closed window. The bit is below its 200 °C limit at 197.0 °C, but the best attempted run-in schedule reaches 201.2 °C. The pipe coating also exceeds the manufacturer's stated 204 °C temperature rating during run-in; qualification for that cycle is unknown.
 
 Conserving the barite and water masses makes hot mud lighter than the previous constant-volume mixture. Holding the temperature profile and surface weight fixed, that correction lowers Soultz's trip bottomhole pressure by 3.263 MPa. The full calculation feeds the required drilling and trip fluids back through circulation and every gate. It checks every depth at its own exposure, including the target and final stand. These corrections are documented beside the previous result in [the first checkpoint](v134-checkpoint-1.md).
 
