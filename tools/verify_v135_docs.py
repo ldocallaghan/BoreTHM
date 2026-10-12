@@ -85,6 +85,24 @@ def coating_sentence():
             f"at Soultz and {coatings[1]['trip_in']['max']:.1f} °C at United Downs, against the stated 204 °C rating.")
 
 
+def summary_rows():
+    """Compact briefing rows, independently derived from retained evidence."""
+    rows = []
+    for key, name in SITES.items():
+        data = source(key)
+        cases = data['cycle']['cases']
+        opened = sum(c['drill_SG'] <= c['drill_SG_hi'] + 1e-9 for c in cases)
+        for field in ('drilling_fluid', 'trip_fluid'):
+            bounds = data['windows'][field]
+            assert bounds['lo'] > bounds['hi'] and not bounds['open']
+        peaks = base_trial(key)['metrics']['tool_peaks_C']
+        assert data['tools']['limit'] == 200.0
+        rows.append(f"| {name}, {data['site']['target_depth_m'] / 1000:.2f} km | "
+                    f"{opened} of {len(cases)} cases | No allowable drilling or trip-fluid density | "
+                    f"{peaks['drilling']:.1f} / {peaks['run_in']:.1f} °C |")
+    return rows
+
+
 def verify():
     hashes = read(EVIDENCE / 'manifest.json')['evidence_files_sha256']
     assert len(hashes) == 112
@@ -136,10 +154,13 @@ def verify():
         data = source(key)
         prefix = f"| {name} | {data['site']['target_depth_m'] / 1000:.2f} | {data['status']['label']} |"
         assert prefix in readme, (key, 'headline table')
-    for doc in ['README.md', 'docs/guides/summary.md']:
-        text = (ROOT / doc).read_text(encoding='utf-8')
-        for table in [case_table(), window_table(), tool_sentence(), coating_sentence()]:
-            assert table in text, f'{doc}: missing or mismatched evidence panel'
+    for table in [case_table(), window_table(), tool_sentence(), coating_sentence()]:
+        assert table in readme, 'README.md: missing or mismatched evidence panel'
+    summary = (ROOT / 'docs/guides/summary.md').read_text(encoding='utf-8')
+    for row in summary_rows():
+        assert row in summary, 'Summary: missing or mismatched evidence row'
+    assert coating_sentence() in summary
+    assert "Soultz's reference FORGE-practice tool run-in reaches 214.5 °C" in summary
     docs = ['README.md', 'CHANGELOG.md', *(p.relative_to(ROOT).as_posix()
                                          for p in (ROOT / 'docs').rglob('*.md'))]
     for doc in docs:
@@ -157,7 +178,7 @@ def verify():
     metadata = tomllib.loads((ROOT / 'pyproject.toml').read_text(encoding='utf-8'))
     assert metadata['project']['version'] == '1.3.5'
     assert 'version: "1.3.5"' in (ROOT / 'CITATION.cff').read_text(encoding='utf-8')
-    print('13 case rows, counts 8/9 and 2/4, 4 signed common windows, selected tool schedules,')
+    print('13 README case rows, compact summary rows, counts 8/9 and 2/4, 4 signed density bounds,')
     print('coating status, 5 site statuses, 112 evidence checksums, reader links and version metadata verified.')
 
 

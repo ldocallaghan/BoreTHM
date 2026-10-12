@@ -18,7 +18,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'output/pdf/summary-v135.pdf'
-BASE = 'https://github.com/ldocallaghan/geothermal-thermo-hydraulic-model/blob/release/v1.3.5/'
+BASE = 'https://github.com/ldocallaghan/BoreTHM/blob/main/'
 
 
 def font_files():
@@ -50,13 +50,13 @@ def render():
         pdfmetrics.registerFont(TTFont(name, str(font_dir / file)))
     pdfmetrics.registerFontFamily('Reader', normal='Reader', bold='Reader-Bold',
                                   italic='Reader-Italic', boldItalic='Reader-BoldItalic')
-    body = ParagraphStyle('body', fontName='Reader', fontSize=10.2, leading=13.0,
+    body = ParagraphStyle('body', fontName='Reader', fontSize=11.0, leading=14.4,
                           spaceAfter=6, textColor=colors.HexColor('#202b34'))
     h1 = ParagraphStyle('title', parent=body, fontName='Reader-Bold', fontSize=17,
                         leading=20, spaceAfter=8)
     h2 = ParagraphStyle('heading', parent=body, fontName='Reader-Bold', fontSize=11.5,
                         leading=14, spaceBefore=4, spaceAfter=5, keepWithNext=True)
-    cell = ParagraphStyle('cell', parent=body, fontSize=9.2, leading=11.0, spaceAfter=0)
+    cell = ParagraphStyle('cell', parent=body, fontSize=9.8, leading=12.0, spaceAfter=0)
     story = []
     lines = (ROOT / 'docs/guides/summary.md').read_text(encoding='utf-8').splitlines()
     i = 0
@@ -82,7 +82,7 @@ def render():
                 if not all(re.fullmatch(r'[-:]+', e) for e in entries):
                     rows.append([Paragraph(markup(e), cell) for e in entries])
                 i += 1
-            widths = [width * p for p in ([.43, .095, .245, .23] if len(rows[0]) == 4 else [.40, .39, .21])]
+            widths = [width * p for p in ([.24, .17, .29, .30] if len(rows[0]) == 4 else [.40, .39, .21])]
             table = Table(rows, colWidths=widths, repeatRows=1, hAlign='LEFT')
             table.setStyle(TableStyle([
                 ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#e8f0f3')),
@@ -106,11 +106,11 @@ def render():
     def footer(canvas, doc):
         canvas.setFont('Reader', 8)
         canvas.setFillColor(colors.HexColor('#586a75'))
-        canvas.drawString(38, 24, 'BoreTHM | reader draft | retained v1.3.4 calculation')
+        canvas.drawString(38, 24, 'BoreTHM | scientific briefing | github.com/ldocallaghan/BoreTHM')
         canvas.drawRightString(A4[0] - 38, 24, str(doc.page))
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     doc = SimpleDocTemplate(str(OUTPUT), pagesize=A4, leftMargin=38, rightMargin=38,
-                            topMargin=32, bottomMargin=38, title='BoreTHM v1.3.5: a summary for readers',
+                            topMargin=32, bottomMargin=38, title='BoreTHM: cooling and borehole stability in superhot geothermal drilling',
                             author="Liam O'Callaghan")
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
     pages = len(PdfReader(OUTPUT).pages)
