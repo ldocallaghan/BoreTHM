@@ -2,7 +2,7 @@
 # not installed as a package; the reference results were made with the exact
 # versions in requirements-lock.txt.
 [project]
-name = "quenchwell"
+name = "borethm"
 version = "1.3.5"
 description = "Models of circulating temperature and borehole stability for drilling into superhot rock"
 readme = "README.md"

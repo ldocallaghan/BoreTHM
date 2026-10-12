@@ -1,4 +1,4 @@
-# Quenchwell v1.3.5: a summary for readers
+# BoreTHM v1.3.5: a summary for readers
 
 *Draft for Liam O'Callaghan's final editorial pass. All numerical evidence is retained from v1.3.4.*
 

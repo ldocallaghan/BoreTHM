@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "Quenchwell: models of circulating temperature and borehole stability for drilling into superhot rock"
+title: "BoreTHM: models of circulating temperature and borehole stability for drilling into superhot rock"
 authors:
   - family-names: "O'Callaghan"
     given-names: "Liam"

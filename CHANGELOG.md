@@ -2,6 +2,8 @@
 
 ## v1.3.5: reader framing and a deliberate development pause (release candidate)
 
+The project is now named BoreTHM. Reader documentation, the summary PDF and citation title use the new name; package metadata uses `borethm`.
+
 The README and two-page reader summary now place the favourable target-depth stress/strength cases beside the complete programme's independent failures. The saved reference calculation has open target drilling intervals in eight of nine Soultz cases and two of four United Downs cases. These local diagnostics do not establish successful drilling programmes; both sites remain NO-GO for this programme and these assumptions.
 
 The patch distinguishes target SG-equivalent pressures from surface-SG common windows, the best attempted tool schedule from reference practice, and temperature-rating exceedance from coating qualification. It narrows robustness, lever and validation claims to the comparisons performed. H-01's already-met proximity trigger is explicitly deferred by project priority while coolant-delivery and fluid-displacement triggers remain distinct; the cooling question and historical Pannonian threshold remain unresolved.

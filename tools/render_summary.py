@@ -106,11 +106,11 @@ def render():
     def footer(canvas, doc):
         canvas.setFont('Reader', 8)
         canvas.setFillColor(colors.HexColor('#586a75'))
-        canvas.drawString(38, 24, 'Quenchwell | reader draft | retained v1.3.4 calculation')
+        canvas.drawString(38, 24, 'BoreTHM | reader draft | retained v1.3.4 calculation')
         canvas.drawRightString(A4[0] - 38, 24, str(doc.page))
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     doc = SimpleDocTemplate(str(OUTPUT), pagesize=A4, leftMargin=38, rightMargin=38,
-                            topMargin=32, bottomMargin=38, title='Quenchwell v1.3.5: a summary for readers',
+                            topMargin=32, bottomMargin=38, title='BoreTHM v1.3.5: a summary for readers',
                             author="Liam O'Callaghan")
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
     pages = len(PdfReader(OUTPUT).pages)

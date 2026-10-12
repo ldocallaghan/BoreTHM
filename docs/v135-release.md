@@ -2,6 +2,8 @@
 
 This release candidate updates framing and reader readiness, then deliberately pauses model expansion for specialist feedback. Its baseline is v1.3.4 commit `1d19ac81e1de11e93ad492f876a1f5eca5a50b45`. The package metadata advances to 1.3.5 while the calculation mode, defaults and retained numerical evidence remain v1.3.4.
 
+The project name is BoreTHM. The README, reader summary, PDF title and footer, citation title and package name (`borethm`) reflect the rename. The GitHub repository URL and retained calculation provenance remain the same.
+
 The [README](../README.md) and [reader summary](summary.md) place favourable target-depth cases beside the common-programme failures. Eight of nine Soultz cases and two of four United Downs cases have open target drilling intervals in the saved reference solution. These selected scenarios are not probabilities of successful drilling. Both deep sites remain NO-GO for this programme and these assumptions. The whole-hole pressure windows, tool schedules and INDETERMINATE coating qualification are reported separately.
 
 ## Evidence and calculation identity

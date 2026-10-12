@@ -1,6 +1,6 @@
-# Quenchwell: models of circulating temperature and borehole stability for drilling into superhot rock
+# BoreTHM: models of circulating temperature and borehole stability for drilling into superhot rock
 
-Quenchwell is an open-source Python tool for screening sites for drilling into rock at around 400 °C. This v1.3.5 reader update retains the v1.3.4 calculation and evidence.
+BoreTHM is an open-source Python tool for screening sites for drilling into rock at around 400 °C. This v1.3.5 reader update retains the v1.3.4 calculation and evidence.
 
 At Soultz, eight of nine stress/strength cases have an open target-depth drilling-fluid interval in the saved reference calculation; at United Downs, two of four do. These are local stability checks, not successful drilling programmes. The stated programme remains **NO-GO for this programme and these assumptions** at both sites because its whole-hole pressure windows close and tool-temperature limits are exceeded. Stress, strength, fluid properties and full-cycle equipment qualification remain key uncertainties.
 
@@ -15,8 +15,6 @@ The corrected mud conserves the mass of barite and water as it heats. Every flui
 The wall is held by the weight of the fluid. When the bit exposes the rock, the rock a few centimetres behind the wall, into which a breakout grows, is still at formation temperature, and breakouts have been imaged at the bit within minutes of drilling (Moore et al., 2011). In the base model, immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand. Insulated pipe can cool the tools, and cooling slows modeled creep. Near-bit pre-cooling and breakout growth remain separate unresolved questions; the delay experiments do not establish an hour of failure-free cooling in hot crystalline rock.
 
 The targets at both sites lie 6 to 11 km below the deepest stress measurements, so the results are projections from much shallower data.
-
-The name is taken from Quenchwell, a hamlet in Feock, Cornwall, a few miles from United Downs.
 
 ## 1. Introduction
 
