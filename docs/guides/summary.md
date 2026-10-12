@@ -1,7 +1,5 @@
 # BoreTHM v1.3.5: a summary for readers
 
-*Draft for Liam O'Callaghan's final editorial pass. All numerical evidence is retained from v1.3.4.*
-
 At Soultz, eight of nine stress/strength cases have an open target-depth drilling-fluid interval in the saved reference calculation; at United Downs, two of four do. These are local stability checks, not successful drilling programmes. The stated programme remains **NO-GO for this programme and these assumptions** at both sites because its whole-hole pressure windows close and tool-temperature limits are exceeded. Stress, strength, fluid properties and full-cycle equipment qualification remain key uncertainties.
 
 ## Target-depth stability diagnostic
