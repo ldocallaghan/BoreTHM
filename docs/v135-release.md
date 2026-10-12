@@ -4,6 +4,8 @@ This release candidate updates framing and reader readiness, then deliberately p
 
 The project name is BoreTHM. The README, reader summary, PDF title and footer, citation title and package name (`borethm`) reflect the rename. The GitHub repository URL and retained calculation provenance remain the same.
 
+The README is organised as a project guide, with setup and usage before result interpretation and example findings. Detailed derivations, diagnostic figures and the bibliography are in the [methods guide](methods.md); the full approximation and follow-up record is in [development priorities](development.md). The reader summary links to those priorities, and its PDF has been regenerated to preserve working links. The scientific results and their qualification are unchanged.
+
 The [README](../README.md) and [reader summary](summary.md) place favourable target-depth cases beside the common-programme failures. Eight of nine Soultz cases and two of four United Downs cases have open target drilling intervals in the saved reference solution. These selected scenarios are not probabilities of successful drilling. Both deep sites remain NO-GO for this programme and these assumptions. The whole-hole pressure windows, tool schedules and INDETERMINATE coating qualification are reported separately.
 
 ## Evidence and calculation identity

@@ -115,15 +115,29 @@ def verify():
     expected_status = {'soultz': 'NO-GO', 'united-downs': 'NO-GO', 'pannonian': 'NO-GO',
                        'larderello': 'CONDITIONAL', 'newberry': 'GO'}
     assert {k: source(k)['status']['label'] for k in expected_status} == expected_status
+    readme = (ROOT / 'README.md').read_text(encoding='utf-8')
+    for key, name in [('soultz', 'Soultz-sous-Forêts'), ('united-downs', 'United Downs'),
+                      ('larderello', 'Larderello'), ('pannonian', 'Pannonian Basin'), ('newberry', 'Newberry')]:
+        data = source(key)
+        prefix = f"| {name} | {data['site']['target_depth_m'] / 1000:.2f} | {data['status']['label']} |"
+        assert prefix in readme, (key, 'headline table')
     for doc in ['README.md', 'docs/summary.md']:
         text = (ROOT / doc).read_text(encoding='utf-8')
         for table in [case_table(), window_table(), tool_sentence(), coating_sentence()]:
             assert table in text, f'{doc}: missing or mismatched evidence panel'
-    for doc in ['README.md', 'docs/summary.md', 'docs/v135-release.md', 'CHANGELOG.md']:
+    for doc in ['README.md', 'docs/summary.md', 'docs/v135-release.md', 'CHANGELOG.md',
+                'docs/methods.md', 'docs/development.md', 'docs/new_site.md']:
         text = (ROOT / doc).read_text(encoding='utf-8')
         for link in re.findall(r'\[[^\]]*\]\(([^)]+)\)', text):
-            if '://' not in link and not link.startswith('#'):
-                assert ((ROOT / doc).parent / link.split('#')[0]).exists(), (doc, link)
+            if '://' not in link:
+                path, _, anchor = link.partition('#')
+                target = ((ROOT / doc).parent / path) if path else ROOT / doc
+                assert target.exists(), (doc, link)
+                if anchor and target.suffix == '.md':
+                    headings = [line.lstrip('# ').strip().lower() for line in
+                                target.read_text(encoding='utf-8').splitlines() if line.startswith('#')]
+                    slugs = {re.sub(r'[^\w -]', '', heading).replace(' ', '-') for heading in headings}
+                    assert anchor in slugs, (doc, link, 'missing heading')
     metadata = tomllib.loads((ROOT / 'pyproject.toml').read_text(encoding='utf-8'))
     assert metadata['project']['version'] == '1.3.5'
     assert 'version: "1.3.5"' in (ROOT / 'CITATION.cff').read_text(encoding='utf-8')

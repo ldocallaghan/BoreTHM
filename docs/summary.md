@@ -59,7 +59,7 @@ The base deep-site verdicts remain NO-GO for this programme and these assumption
 
 Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. Images within minutes in sediment do not establish timing or growth in hot crystalline rock. Failure-delay experiments are unsupported hypotheses, not evidence that breakouts wait an hour. Near-bit pre-cooling and breakout growth remain separate unresolved questions.
 
-**H-01 trigger met; implementation deferred by project priority.** Soultz L2's 0.00137 SG trip width and the L2+L4 pair's 0.00949 SG drilling deficit meet the trigger, but other gates still fail. Revisit the timeline before claiming a near-threshold programme is feasible, or when feedback or new data makes timing decision-relevant. Coolant delivery and fluid displacement retain distinct [README triggers](../README.md#6-limitations-and-further-work). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
+**H-01 trigger met; implementation deferred by project priority.** Soultz L2's 0.00137 SG trip width and the L2+L4 pair's 0.00949 SG drilling deficit meet the trigger, but other gates still fail. Revisit the timeline before claiming a near-threshold programme is feasible, or when feedback or new data makes timing decision-relevant. Coolant delivery and fluid displacement retain distinct [development triggers](development.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
 
 Model expansion is paused for specialist feedback; demonstrated defects can still be corrected. Reader interest, usable observations or a discriminating hypothesis can justify a separate near-bit or FORGE image-log study. Neither is initiated here.
 

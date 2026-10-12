@@ -1,7 +1,7 @@
 # Evaluating a new site
 
 This guide takes a site from its inputs to a result in JSON. It assumes the
-environment in the README's section on reproducing the results: Python
+environment in the [getting-started guide](../README.md#get-started): Python
 3.14.4 with the packages in `requirements-lock.txt`.
 
 ## 1. Copy the template

@@ -4,131 +4,98 @@ BoreTHM is an open-source Python toolkit for assessing drilling programmes in su
 
 The circulation model is checked against Utah FORGE field data. Worked site assessments show how the models are applied, with assumptions and limitations reported alongside the results.
 
-- [Get started](#7-reproducing-the-results): set up Python and run a site assessment.
-- [Read the summary](docs/summary.md): the findings and open research questions.
-- [Explore the site results](#5-site-assessment): evaluated programmes and their controlling constraints.
-- [Understand the models](#3-drilling-with-a-single-loop): methods and field comparisons.
+- [Get started](#get-started): set up Python and run an assessment.
+- [Read a result](#reading-a-result): understand the outputs and status labels.
+- [Explore the examples](#example-results): site findings and their controlling constraints.
+- [Understand the models](#models-and-evidence): methods and field comparisons.
 
-## 1. Introduction
+## Get started
 
-Rock at temperatures of around 400 °C, often called superhot rock, could yield considerably more power per well than conventional geothermal systems, because water at those conditions is supercritical and carries much more energy. Reaching it is primarily a drilling problem. Electronics and seals in the bottom-hole assembly fail above roughly 200 °C, hot crystalline rock is slow to cut, and a hot, highly stressed borehole wall may break out or creep shut. The deepest borehole yet drilled, the Kola superdeep well, reached 12.3 km, where the rock proved hotter and more plastic than expected; in most continental crust, 400 °C lies deeper still. Where it is shallower, as at Larderello in Italy, the Venelle-2 well recorded temperatures of 507 to 517 °C at 2.9 km depth (Bertani et al., 2018).
+Use Python 3.14.4 with the locked dependencies to reproduce the reference calculations. The models run directly from `src/`.
 
-The concept examined here relies on a single circulating loop to address all three problems. Cold fluid is pumped down an insulated pipe within the drill string to the bit, where it keeps the tools below their survival limit and quenches the rock face. The quench may crack the rock directly (thermal spallation) or weaken it so that the bit cuts faster, and it cools the borehole wall, which slows the creep of hot rock into the hole. The fluid then returns up the annulus in contact with the hot rock and brings heat back to surface while the well is being drilled. As a production system, a single closed loop is limited by conduction through the rock to a few megawatts of heat, as Model 1 shows below and as the closed-loop field results and studies cited in Section 2 find. The fivefold to tenfold advantage per well claimed for superhot rock assumes open-loop flow through fractured rock (Clean Air Task Force, 2022), which is how Mazama Energy plans to develop Newberry. The models here are therefore concerned with the loop as a means of drilling the well, and the heat it returns is treated as a by-product.
+```bash
+git clone https://github.com/ldocallaghan/geothermal-thermo-hydraulic-model.git
+cd geothermal-thermo-hydraulic-model
+python -m venv .venv
+```
 
-The models were built to test each part of this concept from first principles, using IAPWS-95 water properties and rock and stress parameters taken from the literature. They are one-dimensional or axisymmetric, and steady-state apart from the model of the borehole wall through the drilling cycle. The circulation model (Model 1) has been validated against field measurements to within a few degrees (Section 3.1). The models of spallation, drilling rate and creep (Models 2 to 4) rest on parameters taken from the literature and remain order-of-magnitude estimates. Their purpose is to identify the constraints that govern feasibility and to quantify the trade-offs between them. A full reservoir or geomechanical simulation would still be needed to design a well.
+Use `python3` for the environment-creation command if your system does not provide `python`. Activate the environment with `.\.venv\Scripts\Activate.ps1` in Windows PowerShell, or `source .venv/bin/activate` on Linux and macOS. Then install the dependencies and build the water-property cache:
 
-## 2. Related work
+```bash
+python -m pip install -r requirements-lock.txt
+python src/water_table.py
+```
 
-The use of insulated drill pipe to keep the bit cool in hot rock is well established. Sandia National Laboratories and Drill Cool Systems built insulated drill pipe in the 1990s and tested it in the laboratory and in a geothermal well, comparing circulating temperatures with those in conventional pipe (Finger et al., 2000). A later DOE-funded project to develop it for high-temperature drilling stopped after its first phase, because a pipe strong enough for the hole left too small a bore for the flow (Champness et al., 2008). Eavor ran internally and externally coated pipe at Utah FORGE in 2023 and has published its field experience and coating properties (Vetsak et al., 2024). Circulating temperatures in wells have been calculated analytically since Raymond (1969), Holmes and Swift (1970) and Kabir et al. (1996), and numerically with Sandia's GEOTEMP (Mitchell, 1981) and GEOTEMP2 (Mitchell et al., 1984), which Ujyo et al. (2026) have extended to supercritical water as GEOTEMPSC; they find that circulation cools the rock only a few metres from the wall. Model 1 is a steady-state model of the same kind. The recovery of the temperature around a borehole after circulation stops has been treated with line-source solutions since Bullard (1947) and Lachenbruch and Brewer (1959). Wu et al. (2025) compared conventional, coated and dual-wall pipe in deep vertical and horizontal wells with a transient thermo-hydraulic model, and Pearce and Pink (2024, 2025) concluded that superhot wells can be drilled by combining existing technologies, with insulated pipe the main means of keeping tools below their 175 to 200 °C limits.
+The IAPWS-95 cache is a one-time build. Run a first assessment from the repository root:
 
-The mechanics of borehole stability used here are also established. The stress concentration around a borehole, breakout formation under a Mohr-Coulomb criterion and the use of breakout width to infer stress are standard (Zoback, 2007). Cooling a borehole wall adds a thermal hoop stress that suppresses breakouts and promotes tensile fractures, the combination studied by Hals and Berre (2012). In practice, the Japan Beyond-Brittle Project describes drilling at Kakkonda into rock above 500 °C with continuous circulation, and sets a target of cooling the hole below 160 °C (Muraoka et al., 2014), and Kruszewski and Wittig (2018) reviewed the failures in 20 wells drilled into supercritical conditions, many of them in casing and cement under thermal load. On the production side, Eavor's Geretsried project now reports about 8.5 MW of heat from its first loop, more than 2 MW per lateral pair falling to an expected 1.3 MW after five years (Eavor, 2026), and Beckers and Johnston (2022) estimated about 22 MW of heat and 2.2 MW of electricity from a 7.5 km loop with more than 90 km of laterals at 30 °C/km.
+```bash
+python src/site_evaluation.py --site newberry --json newberry.json
+```
 
-The contribution of this repository is to link these elements for named sites in a single open tool, whose results are fixed by its test suite. The circulating temperature from a validated model is carried through to the thermal stress at the wall, to the range of drilling-fluid weights that keeps the wall stable through the drilling cycle, and to the depth of the target below the site's data. The stability model has been calibrated in one well and checked in two others, and the circulation model has been compared with a published simulator and validated against field measurements.
+The command prints the assessment and saves its inputs, results and calculation provenance as JSON. Evaluations take several minutes; weighted-fluid cases require repeated coupled solves and can take longer.
 
-## 3. Drilling with a single loop
+## Run your own assessment
 
-The thermal balance of the loop (Model 1, `model1_coupled.py`) is solved for the fluid flowing down the drill string and back up the annulus. The well is represented by its casing and cement, a string of drill pipe, heavy-weight pipe and collars, and a pipe wall made up of its steel and insulation layers. The model includes the heat generated by friction in the pipe, annulus and bit nozzles, and the time for which each depth of the wall has been exposed to circulation. For rock at 450 °C at 12.4 km depth, at the 30 kg/s needed to lift the cuttings in an 8.67-inch hole, fluid reaches the bit at 390 °C with conventional pipe, 222 °C with pipe internally coated with NOV's TK-Drakōn, and 56 °C with the dual-wall pipe of Xiao et al. (2022) (Fig. 1). Tool survival depends above all on the insulation of the downgoing pipe. Water in the loop remains dense and supercritical below about 2 km, with no flashing. The heat returned is limited by conduction through the surrounding rock, to a few megawatts per loop once the rock has been circulated against for a year (Fig. 1); the higher figures in the site table are for rock freshly exposed while drilling. Because that conduction depends only logarithmically on the borehole radius, a tenfold increase in diameter yields only about 1.9 times the heat, and output scales instead with the length of hole in contact with hot rock.
+The built-in site keys are `soultz`, `united-downs`, `larderello`, `pannonian` and `newberry`.
 
-![Model 1 coupled counterflow temperature profiles](figures/model1_profiles.png)
+```bash
+python src/site_evaluation.py --site soultz --json soultz.json
+python src/comparative_sites.py
+```
 
-*Fig. 1. Temperature of the downgoing fluid, the returning fluid and the rock along a 12.4 km well to 450 °C rock (Model 1), at 30 kg/s, for conventional pipe, TK-Drakōn coated pipe and dual-wall pipe, with the rock exposed for a year. At this flow the TK-Drakōn case is above the 200 °C tool limit; a higher flow brings it below.*
+The first command evaluates one site; the second reports all five. Use `python src/site_evaluation.py --help` for the CLI options.
 
-### 3.1 Checking the circulation model
+For a new site, follow the [site-input guide](docs/new_site.md) and copy [the documented template](examples/site_template.py). It records units and sources, and checks the inputs before evaluation. The worked example can validate the template without running the full calculation:
 
-Model 1 was first compared with the transient simulator of Wu et al. (2025), with their published well, string, fluid and flow and nothing fitted (`benchmark_utaustin.py`). The comparison identified one omission in Model 1, the heat generated by friction. Their dual-wall pipe loses about 70 MPa to friction, which warms the mud by about 18 °C; with this heat included, Model 1 agrees with their results for conventional and dual-wall pipe to within 7 °C in the vertical well and 2 °C in the horizontal well. The results for coated pipe do not agree. With the 1 mm coatings described in their text, Model 1 is 30 to 60 °C hotter than their results, and with the single conductivity per pipe given in their table applied across the whole wall, it is 10 to 36 °C colder. Their results lie between the two, and the paper does not state which interpretation their model uses. The standpipe pressures from Model 1 are 10 to 25% higher than theirs, of which 1.4 MPa is the loss across a bit whose nozzles they do not specify.
+```bash
+python examples/new_site.py
+python examples/new_site.py --evaluate --json result.json
+```
 
-| Base case, 600 gal/min, 24 °C/km | Wu et al. | Model 1 | Model 1, whole-wall reading |
-|---|---|---|---|
-| Vertical, conventional | 179 °C | 172 °C | 172 °C |
-| Vertical, internally coated | 76 °C | 126 °C | 66 °C |
-| Vertical, externally coated | 121 °C | 153 °C | 91 °C |
-| Vertical, dual-wall | 59 °C | 61 °C | 61 °C |
-| Horizontal, conventional | 206 °C | 207 °C | 207 °C |
-| Horizontal, dual-wall | 65 °C | 67 °C | 66 °C |
+The template starts with Soultz's inputs. Replace them with the new site's measurements or explicitly sourced assumptions.
 
-The field comparison uses the trial of Eavor's insulated drill pipe in Utah FORGE well 16B in May 2023 (`validate_forge16b.py`). Four bits were run in 9.5-inch hole at 60 to 70° inclination: two on regular pipe, one on a full string of insulated pipe and one with about 70% insulated pipe above regular pipe. The well's survey, casing, string, rock properties and drilling record come from the public FORGE dataset, the flow and inlet temperature minute by minute from the rig's records, and the measured MWD temperatures from Eavor's trial report. The model is run at half-hourly intervals while each bit was drilling and compared with the fluid temperature in the pipe at the MWD sensor. Without fitting, the model overestimated the temperature on the runs with regular pipe by 4 to 12 °F. A multiplier of 0.75 on the annulus heat-transfer coefficient, fitted to those runs, brings them within 5 °F. One effective conductivity for Eavor's pipe, fitted on the full insulated run, gives 4.9 W/m·K across the pipe wall, which is within about 15% of the wall resistance of a 1 mm coating at 0.47 W/m·K on steel, the coating Eavor has described (Vetsak et al., 2024). The run with partial insulation was then predicted with no further fitting.
+## Reading a result
 
-| Run | Measured MWD | Fitted model | Model with the film unfitted |
-|---|---|---|---|
-| BHA 10, regular pipe | 180 °F | 184 °F | 192 °F |
-| BHA 11, insulated pipe (fitted) | 149 °F | 149 °F | 149 °F |
-| BHA 12, partial, blind | 164 °F | 157 °F | 160 °F |
-| BHA 12 after levelling, blind | 150 to 160 °F | 159 °F | 161 °F |
-| BHA 13, regular pipe | 220 °F | 218 °F | 228 °F |
+Start with `status` and its reasons, then inspect the components that set it. The report includes the operating programme, thermal and hydraulic outputs, stability in each cycle state, common fluid windows and equipment checks. The JSON retains every evaluated case and the source of each input.
 
-Eavor estimated from the data how each change between the first two runs moved the MWD temperature. Rebuilt one factor at a time, the model attributes −9 °F to the higher flow (Eavor −12 to −14), +17 °F to the warmer inlet (+23), +9 °F to the added depth (+7) and −61 °F to the insulated pipe. Eavor's breakdown gives −47 to −49 °F for the pipe, which they describe as conservative, and their overall estimate of its benefit, against the runs before and after, is 47 to 75 °F. The site evaluations use the unfitted coefficient, since the multiplier absorbs all the effects the model omits at FORGE and there is no evidence that it applies to a 12 km well; it is reported as a sensitivity. With the coefficient unfitted, BHA 12 is predicted to within 4 to 6 °F, and the temperatures on the runs with regular pipe are overestimated, so the model errs towards a warmer wall and therefore towards caution.
+| Status | Meaning for the evaluated programme and assumptions |
+|---|---|
+| GO | The modeled checks pass without the additional conditions listed by the evaluator. |
+| CONDITIONAL | The assessment depends on stated conditions, such as prescribed fluids or a circulation schedule. Read those conditions before using the result. |
+| NO-GO | A modeled gate fails for this programme and these assumptions; the reasons identify the failing components. |
+| INDETERMINATE | A required numerical result did not converge, or an equipment qualification remains unresolved without another decisive failure. |
 
-![Model 1 against the FORGE 16B trial](figures/validate_forge16b.png)
+An overall NO-GO can coexist with an INDETERMINATE coating check. Exceeding a manufacturer's stated coating rating identifies a qualification question; it is not a validated prediction of a particular failure mode.
 
-*Fig. 2. Left: modelled MWD temperature while drilling each run (points), against the measured run averages (bars) and BHA 12's levelled range (shaded). Right: the change between the first two runs, one factor at a time, from the model and from Eavor's estimate.*
+Two pressure descriptions appear in the outputs:
 
-The reheating of the wall when circulation stops is calculated with a transient model of conduction in the rock around the hole, described in Section 4.1. It was compared with the return temperature recorded in FORGE 16B when circulation resumed after each of the five trips in the trial (`validate_forge_pauses.py`). While the pumps are off, the fluid in the hole drifts towards the temperature of the rock around it, warming in the deep part of the hole and cooling near surface, and when they restart the annulus column reaches surface over the first bottoms-up, shallowest fluid first. In the model, the rock at points every 200 ft along the hole is taken through its own history of circulation and pauses from the rig's minute-by-minute record, and the column of fluid temperatures is pushed to surface as plug flow. Plug flow ignores the heat the returning fluid exchanges with the string and the rock on its way up, so one factor scales the modelled anomaly in the return temperature. Fitted on four of the five trips and used to predict the fifth, in turn, the factor is 0.56, and the predicted mean anomalies differ from the observed ones by 12 °F (root mean square), against observed anomalies of −10 to +38 °F (Fig. 3). The largest miss is the 33-hour trip, observed at +25 °F and predicted at 0 °F. With the fluid in the hole taken at the wall's temperature, the sensitivity used for the sites, the factor is 0.39 and the misfit 13 °F. The pauses with the bit on bottom could not be used, as most were for gyroscopic surveys or circulation at reduced flow, and their first bottoms-up runs into the next operation. The modelled curves are dominated by the arrival of the hot fluid from the bottom of the hole, which the observed curves do not show, and the fit barely separates the base case from the case with no fluid in the hole. The comparison is therefore too coarse to confirm or reject the reheating model, which rests on its analytic checks (Section 4.1). It is nonetheless the only field record of reheating found in the public data.
+- **Target SG-equivalent** expresses pressure as an equivalent static column at the target. It is a local stability diagnostic, with the existing friction/backpressure treatment.
+- **Surface SG at 20 °C** is fluid density divided by 1,000 kg/m³. Common-programme windows intersect the evaluated depths, states and stress/strength cases to constrain that surface fluid.
 
-![Return temperature after each FORGE 16B trip, observed and modelled](figures/forge_pauses.png)
+A positive target interval does not establish a workable whole-hole fluid. A negative common-window width means no surface weight satisfies both bounds. The attempted weights reported for a closed window are calculation inputs, not admissible prescriptions.
 
-*Fig. 3. Return temperature anomaly over the first bottoms-up after each trip in FORGE 16B: observed (black), from the plug-flow column (dotted) and scaled by the factor fitted on the other trips (red). Left: the mean anomaly over each bottoms-up, predicted against observed.*
+## Example results
 
-### 3.2 Drilling rate, creep and the brittle-ductile transition
+The worked assessments target rock at 400 °C. Every status below refers to **this programme and these assumptions**.
 
-The quench was expected to make superhot drilling much faster, but this expectation is only partly borne out. Thermal spallation (Model 2, `model2_spallation.py`) requires the thermal tension at the quenched face to exceed both the rock's tensile strength and the confining stress, which grows with depth. It is therefore possible only in crust where the horizontal stress is low relative to the vertical (a ratio K0 below about 0.5, typical of extensional settings) and the rock is still brittle (Fig. 4). Where spallation occurs, the coupled drilling model (Model 3, `model3_optimiser.py`) predicts rates of penetration up to about 7.5 times those without the quench. Elsewhere the quench lowers the energy needed to cut the rock without breaking it outright, and the gain is 1.5 to 2.3 times (Fig. 5). Similar quench-assisted fracture has been reported by Holtzman et al. (2023) and in the literature on cryogenic and thermal-shock stimulation of enhanced geothermal systems.
+| Site | Target, km | Status | Main finding |
+|---|---:|---|---|
+| Soultz-sous-Forêts | 10.70 | NO-GO | Common drilling and trip windows close; the best attempted run-in exceeds the tool limit. |
+| United Downs | 12.86 | NO-GO | Common windows close; drilling and run-in exceed the tool limit. |
+| Larderello | 2.40 | CONDITIONAL | Requires weighted drilling and trip fluids. |
+| Pannonian Basin | 9.71 | NO-GO | Common windows close; coating qualification is unresolved. |
+| Newberry | 3.63 | GO | The evaluated programme passes with water. |
 
-![Model 2 quench spallation feasibility against depth](figures/model2_feasibility.png)
+These sites have different evidence quality. Soultz and United Downs use measured or calibrated stresses and strengths, extrapolated to the targets. Larderello and Pannonian retain unsourced strength assumptions. Newberry's well check does not reproduce the observed pattern in every rock type. The [input-source records](data/sites/stress_sources.md) explain those differences.
 
-*Fig. 4. Thermal tension available from the quench (red) against the tension needed to crack the rock at each stress ratio K0 (dashed). Spallation is possible in the shaded window, at low K0 and below the brittle-ductile transition.*
+### Local stability and the complete programme
 
-![Model 3 coupled optimiser siting map](figures/model3_siting_map.png)
+At Soultz, eight of nine selected stress/strength cases have an open target drilling interval; at United Downs, two of four do. Both complete programmes remain **NO-GO for this programme and these assumptions** because common pressure windows close and tool-temperature limits are exceeded.
 
-*Fig. 5. Gain in rate of penetration from the quench across target temperature and stress ratio K0. The 7.5× band is pure spallation; elsewhere the gain is 1.5 to 2.3×.*
+<details>
+<summary>Target-depth case table and its interpretation</summary>
 
-Cooling also slows the closure of the hole by creep. Hot rock creeps slowly into an open borehole, and the hotter the rock, the faster it creeps. Model 4 (`model4_hole_stability.py`) shows that cooling the wall to 200 °C slows this creep by a factor of 10^5 to 10^6, and that convection carries too little heat back into the cooled rock to undo the effect. Where the wall does break out, Model 5 (`model5_convergence_confinement.py`) shows that the damaged zone is only millimetres deep and is held in place by the fluid pressure, well short of collapse.
-
-The approach meets a further limit at about 400 °C, where granite stops fracturing and begins to flow: the brittle-ductile transition, reached at depths between about 5.5 and 19 km depending on the geothermal gradient. Cooling does not remove this limit for spallation. At the bit, the quench chills only a skin a few millimetres thick before it is cut away, while the rock that would have to crack lies behind it at full temperature and yields by flowing. Above about 400 °C, the quench can therefore only weaken the face, as it does in most rock. Cooling does still slow the closure of the hole by creep, because the cooled shell around the wall, about 1.5 m thick after a week, keeps the hot rock away from the stress concentration at the wall (Model 4). The 400 °C targets used here sit at the transition; whether the approach can be pushed hotter rests on that creep argument, which has not been tested in practice.
-
-## 4. Borehole stability
-
-The site verdicts depend mainly on whether the borehole wall can be kept stable. Drilling a vertical hole concentrates the in-situ stresses around its circumference, and where the resulting hoop stress exceeds the strength of the rock, the wall spalls in two lobes on opposite sides of the hole, in the direction of the minimum horizontal stress (Shmin). These features are known as breakouts. Wells are routinely drilled with breakouts present; problems arise when the breakouts become too wide. Following the empirical criterion of Zoback (2007), a site is rated GO if breakouts stay within 90° of the circumference with drilling fluid at hydrostatic weight. It is rated CONDITIONAL if a heavier fluid brings them within 90° while its pressure stays below Shmin; above Shmin the fluid would fracture the rock and be lost into it. It is rated NO-GO if any fluid heavy enough to hold breakouts within 90° would also exceed Shmin. The equations are given in the Appendix.
-
-### 4.1 The wall and the rock behind it
-
-The temperature of the rock around the hole through the drilling cycle is calculated by implicit finite volumes for radial conduction (`wall_thermal.py`). While the fluid circulates, the wall exchanges heat with the annulus at the temperature and film coefficient that Model 1 gives. When circulation stops, the fluid in the hole is treated as a single well-mixed volume coupled to the wall by the laminar film coefficient (a Nusselt number of 4.36), the conservative floor Model 1 already uses, so that the fluid slows the reheating; the case with no fluid, in which the wall reheats faster, is a sensitivity. Jaeger (1956) gave the corresponding solution for a cylinder containing a perfect conductor. The solver reproduces the heat flow from a cylinder held at constant temperature (Carslaw and Jaeger, 1959) to within 1.2% and the recovery after a period of constant heat flow to within 2%, both evaluated by numerical inversion of the Laplace-transform solutions (Abate and Valkó, 2004). The line-source approximation (Bullard, 1947) differs from the cylinder solution by 6 to 13% over the times of interest and is reported for comparison only.
-
-The thermal stresses in the rock follow from the temperature field for plane strain with a free wall (Timoshenko and Goodier, 1970). They are added to the full Kirsch solution with the wellbore pressure (Jaeger et al., 2007), and the Mohr-Coulomb criterion is applied at each radius and angle with the strength at the local temperature (`model5_convergence_confinement.py`). In an elastic Mohr-Coulomb analysis the failed region reaches wider just behind the wall than at the wall itself, at the edges of the breakout, so the angular extent of failure in the rock is not a measure of breakout width (Fig. 6). The width is therefore judged at the wall, as an image log measures it and as the 90° criterion and the UD-1 calibration assume, but with the temperature of the rock at the depth to which the breakout would reach in uncooled rock with water in the hole, about 4 cm at Soultz. A cooled zone thicker than that keeps its benefit, and a thin or reheated one is judged by the warmer rock behind it. With no cooling the result is the width at the wall.
-
-Breakouts begin as the bit exposes the rock. Moore et al. (2011) compared images logged at the bit, minutes after drilling, with images taken 30 minutes to 3 days later in four boreholes of the NanTroSEIZE transect, in sediment, and found breakouts already present at the bit and widening with time in all four. The width check is therefore applied from the moment of exposure (Section 5). In the first minutes of cooling, the contracting skin pushes hoop stress into the rock just behind it, and the failed depth from the full stress field at Soultz, at the drilling fluid's weight, grows from 1.6 cm in uncooled rock to 1.7 cm after a minute, falling below the uncooled depth within 5 minutes. Over that time the width check uses rock within a few kelvin of formation temperature, so the effect does not conceal a worse case.
-
-![Failure margin around the hole at Soultz at the end of drilling and the end of a trip](figures/failure_zone_soultz.png)
-
-*Fig. 6. Historical v1.3.3 diagnostic, retained to illustrate the skin heuristic; the corrected weights are in Section 5. Mohr-Coulomb margin in the rock out to twice the hole radius at Soultz at 10.7 km and 1.31 SG, at the end of drilling (left) and at the end of a 44-hour trip (right), in the case of stress and strength that decides the site's verdict. Failure is where the margin is positive (red, bounded by the black contour). The dashed circle is the depth the uncooled breakout reaches, whose temperature sets the width at the wall (orange). The failed regions behind intact wall, at about 45° to the stress directions, arise from the elastic criterion; at the wall in the direction of SHmax the margin is positive where the hoop stress is tensile.*
-
-### 4.2 Calibration against UD-1
-
-UD-1 was drilled into the Carnmenellis granite with drilling fluid below 1.05 SG (specific gravity relative to water) in its 12.25-inch section, and stress magnitudes at the site have been published by Reinecker et al. (2021). The British Geological Survey's interpretation of the UD-1 borehole images (BGS, 2024) records 24 breakouts in the near-vertical part of the well between 900 and 4,000 m measured depth, each with its depth and angular width. Given the stresses, the width of a breakout fixes the strength of the rock in which it formed, so the rock strength can be fitted directly (`calibrate_ud1.py`). The intervals that did not break out set a lower bound on the strength of intact rock.
-
-The temperature of the drilling fluid at the wall was not published, and its cooling effect was therefore bracketed between 0 and 40 K. Over that range the median strength of the rock that broke out is 118 to 147 MPa, and intact rock must have a strength of at least 172 to 203 MPa. With these values the model predicts breakouts from about 2.9 km depth, compared with one logged at 2.2 km and the rest from 3.1 km (measured depth, which differs from vertical depth by less than 10 m in this section), and widths of 53 to 57° near the base of the section, compared with 50 to 53° logged (Fig. 7). The 51 breakouts recorded in the deeper, deviated part of the well were not used in the fit; they fall between the predictions for weak and intact rock. The interpretation summarised by Reinecker et al. (2021) contains more breakouts over the same interval (27, totalling 139 m against 46 m), and the calibration is accordingly specific to the BGS reading of the images.
-
-The calibration was repeated with the cooling credited only as deep as the breakout reaches. Each depth was taken as circulated against from the time the bit passed it, at a rate of penetration of 3.6 m/h (2.0 to 5.2 m/h as a sensitivity, from the drilling times in Reinecker et al., 2021). The weak-zone strength becomes 119 to 147 MPa, and the intact bound is unchanged, because the cooled zone at UD-1 extends further into the rock than its breakouts.
-
-![Breakout width with depth in UD-1, logged and predicted, and the strength each breakout implies](figures/ud1_calibration.png)
-
-*Fig. 7. Left: breakout widths logged in UD-1 (filled, 12.25-inch section; hollow, deviated 8.5-inch section) and widths predicted for weak-zone and intact rock. Right: rock strength implied by each breakout over the 0 to 40 K range of wall cooling.*
-
-### 4.3 Cross-check at Soultz-sous-Forêts
-
-The Soultz wells GPK3 and GPK4 reached 5 km with breakouts, and their stress state has been characterised to that depth by Valley and Evans (2007). With nothing fitted to Soultz (`crosscheck_soultz.py`), the model predicts breakouts at 5 km with a drillable range of fluid weights in 46 of 48 combinations of rock strength, wall cooling and stress. Using the weak-zone strengths from UD-1 without adjustment, it places the first breakouts at 2.6 to 3.8 km depth; in GPK4 they appear at about 3.0 km and become dense below 3.7 km. With the laboratory strength of Soultz granite (100 to 130 MPa) and the lower bound on the maximum horizontal stress, the onset falls at 3.64 km, consistent with the analysis of Valley and Evans (2007). That a strength calibrated in one granite reproduces the failure pattern in another is encouraging, although two wells are a small basis for generalisation. Judged with the temperature of the rock behind the wall, after 1 or 24 hours of circulation at 40 K below formation temperature, the widths at 5 km increase by up to 3°, and the window of fluid weights stays open in every case.
-
-### 4.4 Cross-check at Newberry
-
-NWG 55-29 at Newberry, Oregon, was imaged with a borehole televiewer in 2008 during a programme of injecting cold water to cool the well, at up to 277 °C. Davatzes and Hickman (2011) found breakouts throughout the volcanic rocks above about 8,610 ft and none in the granodiorite below, and derived the stresses from them with a strength taken from the neutron porosity log. They set the thermal stress of the cooled wall to zero. With their stresses and porosity-derived strength, the well's logs from the Geothermal Data Repository (Cladouhos, 2012) and nothing fitted (`crosscheck_newberry.py`), the model matches the volcanics' modal breakout width of 36° when the wall is 25 to 35 K below its static temperature. This is the same order as the 20 K of cooling implied by the log's maximum temperature against the static temperature at its base, and it is the first test of the thermal term at about 290 °C. With the cooling credited only as deep as the breakout reaches, the width in the volcanics is matched at 25 to 40 K. The model also predicts breakouts over most of the logged granodiorite, where none were seen, as does the authors' own criterion. The porosity relation gives the granodiorite 60 to 82 MPa against 51 to 74 MPa in the volcanics, too little contrast to separate them, so the pattern by rock type is not reproduced. Their friction coefficient (0.55, with 0.70 as an alternative) is used for this well and for the site, because their stresses were derived with it; it differs from the 0.8 used at United Downs. The Shmin they quote at 8,420 ft corresponds to their formula at 0.70, and both cases are run.
-
-## 5. Site assessment
-
-The five sites were assessed for a target rock temperature of 400 °C (`comparative_sites.py`). They are not equally well characterised, and the results are reported in two groups accordingly. At Soultz and United Downs the stress magnitudes and rock strength have been measured or calibrated at the site, and the stability model has been checked against wells drilled there. At Larderello and in the Pannonian Basin, no stress magnitudes or rock strengths were found in the literature; the stresses are bounded only by the type of faulting observed (Liotta and Brogi, manuscript; Bada et al., 2007), and the strengths have no source. Newberry has stresses from a breakout analysis and strengths derived from logs, but its well check did not reproduce the breakout pattern, so it is grouped with them. Mazama Energy is developing Newberry as an open-loop enhanced geothermal system, and the table assesses drilling there; production is outside its scope. For the Pannonian Basin the table covers the transtensional part of the strike-slip regime described for the basin interior, with the maximum horizontal stress close to the vertical.
-
-### Target-depth stability in the saved reference calculation
-
-At Soultz, eight of nine stress/strength cases have an open target-depth drilling-fluid interval in the saved reference calculation; at United Downs, two of four do. These are local stability checks, not successful drilling programmes. The stated programme remains **NO-GO for this programme and these assumptions** at both sites because its whole-hole pressure windows close and tool-temperature limits are exceeded. Stress, strength, fluid properties and full-cycle equipment qualification remain key uncertainties.
-
-Need and limit are static-column SG-equivalent values at the target, with the existing friction/backpressure treatment. They are not surface mud-density prescriptions. The target stability-cycle verdict also checks connections and the trip; it excludes the separate whole-hole, tool and equipment gates. Each site's saved reference thermal/hydraulic solution is reused across its cases, without a fresh coupled design evaluation for each case. A positive local interval neither proves one fluid works throughout the hole nor proves the saved attempted fluid lies inside that interval.
+Need and limit are static-column SG-equivalent values at the target, not surface mud-density prescriptions. The saved target stability-cycle verdict also checks connections and the trip; it excludes separate whole-hole, tool and equipment gates. Each site's reference thermal/hydraulic solution is reused across cases without a fresh coupled evaluation for each case. An open interval does not prove the saved attempted fluid lies inside it.
 
 | Case | UCS, MPa | Drilling need / limit, SG-equivalent | Target stability-cycle verdict |
 |---|---:|---|---|
@@ -146,11 +113,13 @@ Need and limit are static-column SG-equivalent values at the target, with the ex
 | United Downs: weak zones, 0 K | 147 | 1.234 / 1.220 | NO-GO |
 | United Downs: weak zones, 40 K | 118 | 1.267 / 1.220 | NO-GO |
 
-Soultz target 10.70 km; United Downs target 12.86 km. Sv is vertical stress. United Downs retains the existing 0 K / 40 K strength-calibration cases; these labels do not specify a newly applied cooling intervention. The 13 cases are selected scenarios, not samples from a probability distribution. Eight of nine and two of four describe open target drilling intervals, not probabilities of successful drilling. All verdicts refer to this programme and these assumptions.
+Soultz target 10.70 km; United Downs target 12.86 km. Sv is vertical stress. United Downs retains the existing 0 K / 40 K strength-calibration cases; these labels do not specify a newly applied cooling intervention. These 13 selected scenarios are not samples from a probability distribution. Eight of nine and two of four describe open target drilling intervals, not probabilities of successful drilling. All verdicts refer to this programme and these assumptions.
 
-### Common-programme failures beside the local cases
+</details>
 
-These common-programme windows intersect the evaluated depths, states and stress/strength cases. Surface SG at 20 °C is density divided by 1,000 kg/m³. Width is upper minus lower; negative means closed. Both sites remain **NO-GO for this programme and these assumptions**.
+### Independent programme failures
+
+These common windows intersect the evaluated depths, states and cases. Bounds are surface SG at 20 °C; width is upper minus lower. A negative width is closed. Both sites remain **NO-GO for this programme and these assumptions**.
 
 | Site and state | Lower / upper, surface SG | Width, SG |
 |---|---|---:|
@@ -159,326 +128,87 @@ These common-programme windows intersect the evaluated depths, states and stress
 | United Downs drilling | 1.33132 / 1.28519 | -0.04613 |
 | United Downs trip | 1.40134 / 1.36503 | -0.03631 |
 
-**Tools, drilling / connection / best attempted run-in:** Soultz: 197.0 / 197.3 / 201.2 °C; United Downs: 205.7 / 206.1 / 224.5 °C. The tool limit is 200 °C. Best attempted means the lowest peak in the saved schedule search, not an optimum over all possible schedules. Soultz's reference FORGE-practice run-in reaches 214.5 °C; it is separate from the 201.2 °C search result.
+**Tool peaks, drilling / connection / best attempted run-in:** Soultz: 197.0 / 197.3 / 201.2 °C; United Downs: 205.7 / 206.1 / 224.5 °C. The limit is 200 °C. Best attempted means the lowest peak in the retained schedule search, not an optimum over every possible schedule. Soultz's reference FORGE-practice run-in reaches 214.5 °C, separately from the 201.2 °C search result.
 
-Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C at United Downs, against the stated 204 °C rating. Both retain **INDETERMINATE qualification**. Exceeding the stated rating is not a validated prediction of a particular failure mode. These coating histories are not necessarily those of the best attempted tool schedule.
+Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C at United Downs, against the stated 204 °C rating. Both retain **INDETERMINATE qualification**. The coating histories are not necessarily those of the best attempted tool schedule.
 
-Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are useful local facts. They do not mean the entire programme is that close to passing: whole-hole deficits and coating qualification remain independent issues.
+Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. They do not measure how close the entire programme is to passing: the common-window deficits and coating qualification remain independent issues.
 
-Sources: retained [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json) and [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), `cycle.cases[]`, `windows` and `tools.coating`; tool searches in the settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json).
+Sources: [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json), [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), and settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). The [reader summary](docs/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf), gives the findings and open questions together.
 
-### The corrected programme
+### Design comparisons
 
-The reference design uses Wu et al.'s well geometry, with the intermediate shoe at 4,000 m where the target is deeper, and TK-Drakon coated pipe. The flow search includes the fluid's effects on friction and tool temperature, together with the pump limit and the rig's pressure-dependent capacity. Surface volume flow is reported in L/s for weighted fluids. Newberry's water flow remains 30 kg/s.
+No evaluated single-lever setting or evaluated pair reopened either deep site. Deeper casing opens Soultz's trip window while drilling and tools still fail. Lower viscosity can open United Downs drilling while other gates still fail. Stronger insulation cools tools but leaves pressure and pump constraints.
 
-The drilling fluid is water where it holds the wall. Elsewhere it is a barite-weighted water-based mud whose water properties follow IAPWS-95. Its surface barite mass fraction is conserved; local volume fractions follow the changing component densities. The plastic-viscosity law and yield point retain the existing reference mud (Anawe and Folayan, 2018). Every pass simulates the weights required by the common windows down the hole, and reruns the tool and hydraulic checks until the density change is below 0.002 SG and the drilling rate settles. If the trip needs a heavier fluid, that fluid occupies the whole column from the start of the trip and supplies the run-in tool calculation. This is the uniform-column bound; displacement is not modeled.
+Only one pair per site was evaluated, and continuous searches sampled settings. The [lever study](docs/levers.md) gives the tested settings, remaining failures and equipment-availability evidence. It establishes no complete operating envelope or general impossibility.
 
-At every open-hole depth the drilling state is checked at that depth's own exposure under the immediate-failure rule, together with its connection and trip states. The final stand and target are included. The spacing is halved twice around the binding bounds, which must settle within 0.002 SG. Final-depth circulation supplies the shallow thermal boundaries; its effect is recorded as A7 in the robustness ledger.
+## Models and evidence
 
-All weights below are surface SG at 20 °C, defined here as surface density divided by 1,000 kg/m³. D and T mean drilling and trip. A negative window width is closed, so its attempted fluid weights do not form an admissible programme. Required and simulated weights agree within the iteration tolerance.
+The circulation model solves the downgoing and returning fluid temperatures with frictional heating and heat transfer through the pipe, casing and surrounding rock. Rock conduction carries each depth through its exposure and circulation pauses. Fluid properties and pressure losses feed back into the stability and tool calculations.
 
-| Site | Effective target | Status | Flow | Required D / T, SG | Simulated D / T, SG | D / T window width, SG | Bit, °C |
-|---|---:|---|---|---|---|---|---:|
-| Soultz-sous-Forêts | 10.70 km | NO-GO | 40 L/s | 1.37892/1.44362 | 1.37884/1.44354 | -0.06637/-0.07901 | 196.99 |
-| United Downs | 12.86 km | NO-GO | 50 L/s | 1.33132/1.40134 | 1.33173/1.40116 | -0.04613/-0.03631 | 205.70 |
-| Larderello | 2.40 km | CONDITIONAL | 30 L/s | 1.03624/1.09419 | 1.03633/1.09406 | +0.19350/+0.23700 | 66.45 |
-| Pannonian Basin | 9.71 km | NO-GO | 40 L/s | 1.45873/1.54479 | 1.45928/1.54515 | -0.16563/-0.19637 | 184.72 |
-| Newberry | 3.63 km | GO | 30 kg/s | 0.99820/0.99820 | 0.99820/0.99820 | +0.23846/+0.23521 | 88.96 |
+| Model or check | Role | Evidence and detail |
+|---|---|---|
+| Circulation | Fluid temperatures, heat transfer and hydraulics | [Utah FORGE comparisons and published-model benchmark](docs/methods.md#31-checking-the-circulation-model) |
+| Rock reheating | Temperature recovery when circulation stops | [Analytic checks and the limits of the FORGE pause comparison](docs/methods.md#41-the-wall-and-the-rock-behind-it) |
+| Borehole stability | Breakout width and pressure requirements | [UD-1 strength calibration and other well checks](docs/methods.md#4-borehole-stability) |
+| Spallation, drilling rate and creep | Exploratory estimates of quench effects and closure | [Physical models and their limits](docs/methods.md#32-drilling-rate-creep-and-the-brittle-ductile-transition) |
 
-The [first checkpoint](docs/v134-checkpoint-1.md) gives the binding depth, state and rock case for each bound, beside v1.3.3. With the same surface weight and trip temperature profile, conserving the mud's composition lowers bottomhole pressure by 3.263 MPa at Soultz and 3.530 MPa at United Downs. The combined corrections widen the trip-window deficits; that comparison also includes the changed fluid feedback and final-stand coverage.
+The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Full derivations, diagnostic figures and the bibliography are in the [methods guide](docs/methods.md); [material properties](data/materials.md) and [site inputs](data/sites/stress_sources.md) retain their sources.
 
-At Larderello the drilling lower bound binds at a connection at 1,300 m, and the trip lower bound at the 2,400 m target. Simulating the weighted drilling fluid gives 0.121 SG of annular friction, compared with 0.018 SG in the earlier water calculation, and 66.45 °C at the bit. The effective target is exported as 2,400 m; the former 2,850 m input is retained as legacy metadata.
+## Scope and limitations
 
-The tools are represented by the fluid inside the bottom-hole assembly, lumped with the steel of the collars. Run-in is the limiting tool state at Soultz: its best attempted schedule reaches 201.2 °C, and the nominal FORGE-practice schedule reaches 214.5 °C. United Downs reaches 224.5 °C under its best attempted run-in schedule. Pannonian's corrected closer staging reaches 192.8 °C, while the original v1.3.3 schedule's 0.041 °C margin is numerically unresolved. Tool survival does not clear a failed pressure window. The coating remains a separate qualification check.
+BoreTHM screens a stated drilling programme. A passing result is conditional on the modeled inputs and checks; a failure does not settle whether a different design or existing technology could drill the site. Reservoir production and detailed well-integrity design are outside the assessments.
 
-The depth of extrapolation remains the largest site-input uncertainty. Soultz's stress data extend to 5 km and United Downs' Shmin data to about 2 km, leaving targets 5.7 and 10.9 km deeper. The stresses continue along the measured trends below the data, limited by the frictional strength of the crust. Historical site figures are retained in the repository; the corrected programme and its binding bounds are reported in the checkpoint JSON and the tables above.
+The deep targets lie well below measured stress data. Strength calibration depends on the assumed stress profile, and the reference mud's rheology and constant barite properties are approximations. Full-cycle qualification of insulated pipe and managed-pressure equipment remains unresolved for the hot conditions studied.
 
-### 5.1 What would reopen the deep sites: NO-GO for this programme and these assumptions
+Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. The failure-delay experiments are unsupported hypotheses, not evidence that breakouts wait an hour. Near-bit pre-cooling and breakout growth remain separate open questions.
 
-The [lever study](docs/levers.md) applies L1 to L8 separately to the corrected base, then evaluates one pair per site. No evaluated single-lever setting or evaluated pair reopened either deep site. Continuous searches sampled the base, midpoint and endpoint, with additional MPD target-pressure checks. They establish no full-site minimum and no complete operating envelope. Numerical failures remain unresolved. Coating-only thresholds and Soultz's bit-only flow boundary were confirmed at half the search tolerance.
+The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](docs/robustness.md). These generally change one approximation at a time and do not cover every joint uncertainty. Coolant delivery, trip timing and fluid displacement are among the [deferred approximations](docs/development.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
 
-| Lever | Soultz | United Downs | Availability of the evaluated intervention |
-|---|---|---|---|
-| L1 Constant-BHP MPD | pressure control and windows fail | pressure control, windows and tools fail | Available practice; RCD thermal qualification unknown |
-| L2 Deeper shoe | 10.2 km opens the trip window; drilling and tools fail | 12.36 km leaves pressure and tool failures | Available casing practice; the proposed deep design is unqualified |
-| L3 Lower plastic viscosity | pressure and tools still fail | the water-PV bound opens drilling; trip and tools fail | Hypothetical bound for the evaluated high-temperature fluid |
-| L4 Dual-wall or vacuum-insulated pipe | tools cool; windows and pumps fail | tools cool; windows and pumps fail | Hypothetical as drill pipe for these modeled constructions |
-| L5 Higher coating rating | about 274.34 °C clears coating only | about 287.45 °C clears coating only | Hypothetical qualification for the full thermal cycle |
-| L6 Smaller surge and swab allowance | no evaluated allowance reopens the site | zero allowance opens trip; drilling and tools fail | Available trip-speed control; zero allowance is an idealised limit |
-| L7 Failure-free cooling delay | drilling opens; trip and tools fail | drilling opens; trip and tools fail | Hypothetical scientific assumption unsupported by Moore et al. (2011) |
-| L8 Lower flow | bit boundary near 39 L/s; full tool survival fails | no tested lower flow passes the tools | Available flow control, subject to cleaning and tool limits |
+## Development and feedback
 
-L1, L6 and L8 are operating practice, while L2 is well design. L3 to L5 concern equipment, and L7 changes the scientific assumption about failure timing. Product ratings and the limits of those availability labels are cited in the lever report. No modeled replacement has verified developmental-trial qualification at the properties and cycle used here.
+Model expansion is paused for specialist feedback on the assumptions and practical applicability. Corrections to demonstrated defects remain in scope. Feedback is most useful when it identifies a relevant observation or qualification record, or explains which assumption changes a decision. The [reader summary](docs/summary.md#questions-for-specialist-discussion) sets out the focused research questions.
 
-The pair of deeper casing and dual-wall pipe at Soultz cools the tools but leaves the drilling window closed and requires about 121 MPa standpipe pressure, beyond the modeled pump and rig limits. The lower-PV fluid and one-hour failure-delay hypothesis at United Downs open the drilling window but leave trip stability and run-in tool survival failing. Pair selection follows the change in the narrower common-window width; it is not a joint design optimisation.
+**H-01 trigger met; implementation deferred by project priority.** Soultz's casing and paired interventions meet the proximity trigger for a common event timeline, but other gates still fail and no operating range is claimed. Revisit before a near-threshold feasibility claim, or when feedback or new data makes timing decision-relevant. Coolant delivery and fluid displacement retain distinct triggers in the [development priorities](docs/development.md).
 
-## 6. Limitations and further work
+## Tests and reproducibility
 
-The [robustness ledger](docs/robustness.md) compares A1 to A9 at the deep sites, covering property pressures and face heat, delivery and staging of coolant, the changing trip column and the uniform-fluid bound, shallow circulation, surge and swab, and numerical resolution. The base deep-site verdicts remain NO-GO for this programme and these assumptions across the A1-A9 comparisons performed. None of the optimistic comparisons reopens a site. These comparisons generally change one approximation at a time and do not cover every joint uncertainty. They assign no probability to extrapolated inputs and do not establish robustness of every lever or combination.
-
-Pannonian's historical 199.959 °C tool peak leaves 0.041 °C below its limit. Halving the timestep changes the peak by about 0.099 °C, above 20% of that margin, so the historical threshold is unresolved. The corrected closer-staging result has a larger tool margin; its pressure windows are still closed.
-
-Stress and temperature extrapolation, the skin heuristic and the time taken for failure in hot crystalline rock remain unresolved physical questions. Strength at UD-1 is calibrated with the assumed stress profile, and the two cannot be checked independently there. The circulation validation is at FORGE's depth and temperature, well below the targets. Newberry's well check reproduces the volcanic breakouts but also predicts failure in the granodiorite where none was logged. Larderello and Pannonian retain unsourced strength assumptions.
-
-The rheology is one reference mud, with a fixed yield point and a viscosity law scaled from water. The barite heat capacity and expansion are constant approximations whose source values are checked in the lever report. A published 1.3 SG potassium-formate system retained 30 mPa s PV after 200 °C ageing, measured after cooling to 49 °C; that result does not qualify the modeled fluid through a 400 °C trip. The manufacturer's 204 °C coating rating does not quantify survival through the hotter full cycle. The cited onshore MPD pressure rating supplies a mechanical bound with an explicit thermal-qualification unknown.
-
-The tool is a lumped collar and enclosed-fluid model. Staging supplies steady coolant without advective travel in the string, and its duration is absent from the base trip clock. The trip column is frozen during run-in, with the uniform heavier fluid present immediately. Casing and cement integrity, string loads and fatigue, circulation losses, and coupling of creep to the drilling cycle require separate well-design work. The hole-cleaning reference and cycle timings come from one well; the rig check uses three pumps of one published rating. The 0.02 SG surge and swab allowance is a sensitivity assumption, with no verified field range for these 10 to 13 km wells.
-
-The deferred work has explicit triggers:
-
-| Deferred item | Trigger for bringing it back |
-|---|---|
-| Programme schema and full cache invalidation, P-01/P-02 | Repeated runs cannot be traced with the release JSON, or an external user requests it |
-| Common event timeline, H-01 | A4 or A5 changes the decision, or a lever is within 0.02 SG or 5 °C of a threshold |
-| Coolant advection in the string, H-02 | A3 straddles tool survival at a site whose verdict depends on it |
-| Fluid displacement, W-03 | A6 straddles the site verdict |
-| Full flow and stress envelopes, D-03 | A lever reopens a site and an operating range must be claimed |
-| Near-bit thermal model, growth law and thermo-poroelasticity | Specialist interest, usable observations or a clearly discriminating hypothesis justify a separately scoped study; L7 becoming decision-relevant is another trigger |
-
-**H-01 trigger met; implementation deferred by project priority.** Soultz L2's 0.00137 SG trip width and its L2+L4 pair's 0.00949 SG drilling deficit meet the proximity trigger. The evaluated programmes still fail other gates, and no operating range is claimed. Revisit before claiming a near-threshold programme is feasible, or when specialist feedback or new data makes the timing approximation decision-relevant. Coolant delivery (H-02) and fluid displacement (W-03) retain their distinct triggers above. Model expansion is paused to seek external feedback; a demonstrated defect can still require correction. This pause leaves the cooling question open. The source files and retained trial checksums keep this release's comparisons traceable; the trial cache checks model and schedule sources, benchmark data and runtime versions.
-
-The most useful next evidence is early and repeated image logs in hot crystalline rock, and qualified fluid rheology at the reported weights and temperatures. Full-cycle coating and MPD-equipment qualification is also needed. The focused questions are set out in [the reader summary](docs/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf). The FORGE image-log study and near-bit thermal work remain possible follow-ups under separate specifications. Breakout-timing data is one possible basis for near-bit pre-cooling work, alongside reader interest, usable observations or a discriminating hypothesis. Software interfaces and examples enable external use; practical usefulness remains for readers and users to establish.
-
-## 7. Reproducing the results
-
-The reference results in `tests/golden/` were made with Python 3.14.4 and the package versions in `requirements-lock.txt` (numpy 2.5.3, scipy 1.18.1, matplotlib 3.11.2, iapws 1.5.5, pytest 9.1.1), the locked environment used by the release checks; `requirements.txt` gives the minimum versions. From the repository root:
+Run the fast suite in the activated environment:
 
 ```bash
-pip install -r requirements-lock.txt
-python src/water_table.py         # one-time build of the IAPWS-95 property table (~2.5 min)
-python src/site_evaluation.py --site soultz --json soultz.json   # one site, with its result as JSON
-python src/comparative_sites.py   # all five sites
-python examples/new_site.py --evaluate   # a site from the template (docs/new_site.md)
-python src/calibrate_ud1.py       # UD-1 strength calibration and Fig. 7
-python src/crosscheck_soultz.py   # Soultz cross-check
-python src/crosscheck_newberry.py # Newberry cross-check
-python src/benchmark_utaustin.py  # benchmark against Wu et al. (2025)
-python src/validate_forge16b.py   # FORGE 16B validation and Fig. 2 (about 10 min)
-python src/drilling_cycle.py      # drilling-cycle timings from FORGE 16B
-python src/validate_forge_pauses.py  # check of the reheating against FORGE 16B's trips and Fig. 3 (about 5 min)
+python -m pytest
 ```
 
-Release history and verification are documented in the [changelog](CHANGELOG.md) and [release records](docs/v135-release.md).
+The default excludes physical regressions marked `slow`. To include the complete suite after building the water-property cache:
 
-Each model file also runs on its own and prints its analysis, for example `python src/model1_coupled.py`. Historical figure scripts retain earlier diagnostic programmes; their saved figures are not the corrected release table. The scripts `src/*_figures.py` regenerate those figures in `figures/`. The test suite is run with `pytest`, which takes a few seconds and doesn't need the property table, or `pytest -m slow` to include the full runs, which do (the table is built on first use if it isn't there). A set of reference results is held fixed by the tests, so that any change to the models shows up as a difference. The FORGE and Newberry extracts can be rebuilt from the public datasets with the scripts in their data folders.
-
-```
-data/forge16b/            FORGE 16B survey, temperatures, string, drilling record and trial results
-data/newberry/            NWG 55-29 logs and notes on Davatzes and Hickman (2011)
-data/benchmarks/          inputs and results of Wu et al. (2025)
-data/ud1/                 UD-1 sources: notes on Reinecker et al. (2021), BGS image-log interpretation
-data/sites/               stress, strength and temperature sources for every site
-data/materials.md         pipe, coating and cement properties, and which pipe can be bought
-figures/                  generated figures
-tests/                    test suite; golden/ holds the fixed reference results
-docs/new_site.md          evaluating a new site, from the template to a JSON result
-docs/summary.md           the reference case, levers and questions for readers
-docs/robustness.md        the A1 to A9 approximation ledger
-docs/levers.md            the L1 to L8 study and its availability evidence
-results/v1.3.4/           checkpoint and CI release evidence
-results/levers/           reviewed single-lever and pair trials
-examples/                 the site template and the worked example
-src/
-  geo_constants.py        physical constants, each with its source
-  water_props.py, water_table.py      IAPWS-95 water properties
-  well_geometry.py        well, casing, string and named pipe types
-  model1_coupled.py       thermal balance and hydraulics of the circulating loop
-  model1_steadystate.py, model1_diameter_scaling.py, model1_depth_limits.py
-  model2_spallation.py    quench fracture against the confining stress
-  model3_optimiser.py     coupled drilling and thermal model
-  model4_hole_stability.py            creep closure of the cooled hole
-  model5_convergence_confinement.py   yielding, breakout at the wall and failure behind it
-  wall_thermal.py         temperature of the rock around the hole through the drilling cycle
-  pressure.py             the pressure on the wall in each state of the cycle, from one budget
-  fluids.py               the drilling fluid: water, or a barite-weighted water-based mud
-  tool_thermal.py         the bottom-hole assembly and the coated pipe through the cycle
-  drilling_cycle.py       drilling-cycle timings from FORGE 16B
-  site_evaluation.py      site data and validation, the operating programme, the cycle, the
-                          common windows, the status, and the report and JSON export
-  comparative_sites.py    the five corrected sites; historical adapters remain explicit
-  robustness.py           scoped approximation comparisons
-  levers.py               coupled single-lever evaluations and retained brackets
-  calibrate_ud1.py        rock-strength calibration against UD-1
-  crosscheck_soultz.py    cross-check against the Soultz wells
-  crosscheck_newberry.py  cross-check against NWG 55-29
-  benchmark_utaustin.py   benchmark against Wu et al. (2025)
-  validate_forge16b.py    validation against the FORGE 16B trial
-  validate_forge_pauses.py            check of the reheating against FORGE 16B's trips
-  *_figures.py            figure scripts
+```bash
+python -m pytest -m "slow or not slow"
 ```
 
-## Data credits
+Full physical runs can take an hour or more. Single-threaded BLAS avoids oversubscription during repeated solves; set `OPENBLAS_NUM_THREADS=1` and `OMP_NUM_THREADS=1` before starting Python for those runs.
 
-The FORGE data are from the Geothermal Data Repository, used under CC-BY 4.0: Utah FORGE: Well 16B(78)-32 Drilling Data (McLennan et al., 2023, https://doi.org/10.15121/1998591) and Utah FORGE: Deep Wells Temperature Surveys as of September 2022 (Jones, 2022, https://doi.org/10.15121/1893533). The NWG 55-29 logs are from Newberry EGS Demonstration: Well 55-29 Stimulation Data (Cladouhos, AltaRock Energy, https://doi.org/10.15121/1357916), also CC-BY 4.0. The UD-1 image interpretation contains NERC materials ©NERC 2024. The extracts in `data/` are derived from these datasets, and the README in each folder lists the files and how to rebuild the extracts.
+Saved reference outputs and numerical regression tables support comparison with the published calculations. [Release records](docs/v135-release.md) document the environment and verification; the [changelog](CHANGELOG.md) records changes. Historical diagnostic figures use their stated programmes and should be interpreted with their captions.
+
+## Find your way around the repository
+
+| Location | Contents |
+|---|---|
+| [src/](src/) | Physical models and evaluation scripts |
+| [examples/](examples/) | Site template and worked example |
+| [docs/](docs/) | Methods, reader summary and study reports |
+| [data/](data/) | Extracted observations and input-source records |
+| [results/](results/) | Retained numerical evaluations and trial evidence |
+| [tests/](tests/) | Unit checks and physical regressions, including fixed reference tables |
+| [figures/](figures/) | Diagnostic and field-comparison figures |
+
+## Citation and data credits
+
+Use [CITATION.cff](CITATION.cff) for the software citation. The [methods bibliography](docs/methods.md#references) lists the scientific sources.
+
+The FORGE data come from the Geothermal Data Repository: [well 16B drilling data](https://doi.org/10.15121/1998591) and [deep-well temperature surveys](https://doi.org/10.15121/1893533). The Newberry extracts come from [well 55-29 stimulation data](https://doi.org/10.15121/1357916). These datasets are used under CC-BY 4.0. The UD-1 image interpretation contains NERC materials ©NERC 2024.
+
+The [FORGE](data/forge16b/README.md) and [Newberry](data/newberry/README.md) data guides describe the extracts and how to rebuild them. Other input sources are recorded alongside the corresponding data.
 
 ## Licence
 
-The code is released under the MIT licence (`LICENSE`). The files in `data/` keep the licences of the datasets they come from, given above and in each folder's README.
-
-## Appendix: equations
-
-The equations are given in the notation used in the code.
-
-The loop model (Model 1) solves coupled heat balances for the downgoing and returning fluid along measured depth z, with the rock at the temperature of its true vertical depth, and with the heat dissipated by friction (pressure gradient dp/dz) added to each stream:
-
-$$\dot{m}c_p\frac{dT_d}{dz}=UA_i(T_u-T_d)+\frac{\dot{m}}{\rho}\left|\frac{dp}{dz}\right|_d$$
-
-$$\dot{m}c_p\frac{dT_u}{dz}=UA_i(T_u-T_d)-UA_o\big(T_{\text{rock}}(z)-T_u\big)-\frac{\dot{m}}{\rho}\left|\frac{dp}{dz}\right|_u$$
-
-$$T_d(0)=T_{\text{inj}},\qquad T_u(L)=T_d(L)+\frac{Q_{\text{face}}}{\dot{m}c_p}+\frac{\Delta p_{\text{bit}}}{\rho c_p}$$
-
-The conductances per unit length are resistances in series: the films on each side, each layer of the pipe wall, and on the rock side any casing and cement and the conduction into the rock, which limits the heat per unit length:
-
-$$\frac{1}{UA_i}=\frac{1}{2\pi r_b h_d}+\sum_j\frac{\ln(r_{j+1}/r_j)}{2\pi k_j}+\frac{1}{2\pi r_o h_u},\qquad \frac{1}{UA_o}=\frac{1}{2\pi r_w h_u}+\sum_c\frac{\ln(r_{c+1}/r_c)}{2\pi k_c}+\frac{\ln(r_\infty/r_r)}{2\pi k_{\text{rock}}}$$
-
-$$q'(z)=\frac{2\pi k_{\text{rock}}\Delta T}{\ln(r_\infty/r_r)},\qquad r_\infty=r_r+2\sqrt{\alpha t(z)}$$
-
-where t(z) is the time the wall at z has been exposed to circulation, at least one hour. Where a pipe has bare tool joints over a fraction f of its length, UA_i is the length-weighted mean of the insulated body and bare steel. Friction follows the laminar and Blasius factors, and the bit nozzles lose
-
-$$\Delta p_{\text{bit}}=\frac{\rho Q^2}{2C_d^2A_n^2},\qquad C_d=0.95$$
-
-The standpipe pressure is the sum of the friction losses down the pipe and up the annulus, the bit loss, and the buoyancy of the hotter annulus, the integral of (ρ_u − ρ_d) g over true vertical depth.
-
-Spallation (Model 2) requires the constrained thermal stress of the quenched face to exceed the confining stress and the tensile strength, with the face temperature given by the convective half-space solution:
-
-$$\sigma_T=\frac{E\alpha\Delta T}{1-\nu},\qquad \sigma_T-K_0\rho g z>T_0$$
-
-$$T(x,t)=T_{\text{rock}}+(T_{\text{cold}}-T_{\text{rock}})\big[\mathrm{erfc}(\eta)-e^{-\eta^2}\mathrm{erfcx}(\eta+\beta)\big],\qquad \eta=\frac{x}{2\sqrt{\alpha t}},\quad \beta=\frac{h\sqrt{\alpha t}}{k}$$
-
-The drilling model (Model 3) converts the quench into an effective mechanical specific energy (MSE) and rate of penetration (ROP), and returns the heat generated at the face to Model 1:
-
-$$\text{MSE}_{\text{eff}}=\text{MSE}(1-D),\qquad \text{ROP}=\frac{P_{\text{mech}}}{\text{MSE}_{\text{eff}}\cdot A_{\text{bit}}}$$
-
-$$Q_{\text{face}}=\text{MSE}\cdot A\cdot\text{ROP}+\rho c\cdot A\cdot\text{ROP}\cdot\Delta T+Q_{\text{cond}}$$
-
-Creep closure (Model 4) follows an Arrhenius power law, and convective heat resupply is checked through the Péclet number:
-
-$$\dot\varepsilon=A\sigma^{n}\exp\left(-\frac{Q}{RT}\right),\qquad \mathrm{Pe}=\frac{vL}{\alpha}\ll 1$$
-
-Yielding at the wall (Model 5) follows the ground-reaction curve:
-
-$$k=\frac{1+\sin\phi}{1-\sin\phi},\qquad p_{\text{cr}}=\frac{2p_0-\sigma_{cm}}{1+k}$$
-
-The stability verdict uses the hoop stress at the wall of a vertical hole, at angle θ from the direction of the maximum horizontal stress, including the thermal stress from cooling the wall:
-
-$$\sigma_\theta(\theta)=S_H+S_h-2(S_H-S_h)\cos 2\theta-P_w+\Delta\sigma_T,\qquad \Delta\sigma_T=-\frac{E\alpha}{1-\nu}\,(T_{\text{rock}}-T_{\text{wall}})$$
-
-The wall fails where the Mohr-Coulomb criterion is exceeded in effective stress, with pore pressure P_p and drilling-fluid pressure P_w:
-
-$$\sigma_\theta-P_p>\sigma_{cm}(T_{\text{wall}})+k\,(P_w-P_p)$$
-
-which holds over a breakout of width
-
-$$W=\arccos\!\left(-\frac{a}{d}\right),\qquad a=S_H+S_h-P_w+\Delta\sigma_T-P_p-\sigma_{cm}-k(P_w-P_p),\quad d=2(S_H-S_h)$$
-
-The temperature in the rock around the hole through the drilling cycle follows radial conduction. While circulating, the wall exchanges heat with the annulus fluid at T_f; when circulation stops, the fluid in the hole is one well-mixed volume of heat capacity C per unit length, coupled to the wall by the laminar film, h = 4.36 k_f/D_h:
-
-$$\frac{\partial T}{\partial t}=\frac{\alpha}{r}\frac{\partial}{\partial r}\left(r\frac{\partial T}{\partial r}\right),\qquad -k\frac{\partial T}{\partial r}\Big|_{a}=h\,\big(T_f-T(a)\big),\qquad C\frac{dT_f}{dt}=2\pi a h\,\big(T(a)-T_f\big)$$
-
-The thermal stresses behind the wall are those of plane strain with a free wall, for a temperature change ΔT(r) from the rock temperature, compression positive:
-
-$$\Delta\sigma_r=\frac{E\alpha}{1-\nu}\,\frac{1}{r^2}\int_a^r\Delta T\,s\,ds,\qquad \Delta\sigma_\theta=\frac{E\alpha}{1-\nu}\left[\Delta T(r)-\frac{1}{r^2}\int_a^r\Delta T\,s\,ds\right]$$
-
-and are added to the Kirsch stresses at radius r and angle θ from SHmax, with S = (S_H + S_h)/2 and D = (S_H − S_h)/2:
-
-$$\sigma_r=S\Big(1-\frac{a^2}{r^2}\Big)+D\Big(1-\frac{4a^2}{r^2}+\frac{3a^4}{r^4}\Big)\cos 2\theta+P_w\frac{a^2}{r^2},\qquad \sigma_\theta=S\Big(1+\frac{a^2}{r^2}\Big)-D\Big(1+\frac{3a^4}{r^4}\Big)\cos 2\theta-P_w\frac{a^2}{r^2}$$
-
-$$\tau_{r\theta}=-D\Big(1+\frac{2a^2}{r^2}-\frac{3a^4}{r^4}\Big)\sin 2\theta$$
-
-The Mohr-Coulomb criterion is applied to the principal stresses in the plane of the hole. The breakout width used for the verdict is that of the wall equations above with T_wall replaced by the temperature at a + d, where d is the depth the uncooled breakout reaches in the direction of Shmin.
-
-Each stress state is also required to be within the frictional strength of the crust, with a friction coefficient μ of 0.8 (Reinecker et al., 2021), or at Newberry the 0.55 and 0.70 of Davatzes and Hickman (2011):
-
-$$\frac{S_1-P_p}{S_3-P_p}\le\left(\sqrt{1+\mu^2}+\mu\right)^2$$
-
-## References
-
-Abate, J., Valkó, P.P., 2004. Multi-precision Laplace transform inversion. International Journal for Numerical Methods in Engineering 60 (5–7), 979–993.
-
-Anawe, P.A.L., Folayan, J.A., 2018. Data analyses on temperature-dependent behaviour of water based drilling fluid rheological models. Data in Brief 21, 289–298. https://doi.org/10.1016/j.dib.2018.09.100
-
-Bada, G., Dövényi, P., Horváth, F., Szafián, P., Windhoffer, G., 2007. Present-day stress field in the Pannonian Basin and the surrounding Alpine-Carpathian-Dinaric orogens. Földtani Közlöny 137 (3).
-
-Beckers, K.F., Johnston, H.E., 2022. Techno-economic performance of Eavor-Loop 2.0. Proceedings, 47th Workshop on Geothermal Reservoir Engineering, Stanford University, SGP-TR-223.
-
-Bertani, R., et al., 2018. The first results of the DESCRAMBLE project. Proceedings, 43rd Workshop on Geothermal Reservoir Engineering, Stanford University, SGP-TR-213.
-
-Bourgoyne, A.T., Millheim, K.K., Chenevert, M.E., Young, F.S., 1986. Applied Drilling Engineering. SPE Textbook Series 2. Society of Petroleum Engineers.
-
-British Geological Survey, 2024. United Downs 1 borehole image interpretation. NERC EDS National Geoscience Data Centre. https://doi.org/10.5285/a040a246-8691-428b-b146-13874e743b0a. Contains NERC materials ©NERC 2024.
-
-Bullard, E.C., 1947. The time necessary for a bore hole to attain temperature equilibrium. Geophysical Supplements to the Monthly Notices of the Royal Astronomical Society 5, 127–130.
-
-Carslaw, H.S., Jaeger, J.C., 1959. Conduction of Heat in Solids, 2nd edition. Oxford University Press.
-
-Champness, T., Worthen, T., Finger, J., 2008. Development and application of insulated drill pipe for high temperature, high pressure drilling. Drill Cool Systems Inc., final report to DOE/NETL.
-
-Cladouhos, T.T., 2012. Newberry EGS Demonstration: Well 55-29 Stimulation Data. AltaRock Energy. Geothermal Data Repository, submission 271. https://doi.org/10.15121/1357916. CC-BY 4.0.
-
-Clean Air Task Force, 2022. Superhot Rock Energy: A Vision for Firm, Global Zero-Carbon Energy.
-
-Davatzes, N.C., Hickman, S.H., 2011. Preliminary analysis of stress in the Newberry EGS well NWG 55-29. Geothermal Resources Council Transactions 35.
-
-Eavor, 2026. Technical update from Geretsried: what we built, what we learned and what comes next. 21 May 2026. https://eavor.com/blog/technical-update-from-geretsried-what-we-built-what-we-learned-and-what-comes-next/
-
-Finger, J.T., Jacobson, R.D., Champness, A.T., 2000. Development and testing of insulated drillpipe. IADC/SPE Drilling Conference, New Orleans. SAND2000-0285C.
-
-Ghassemi, A., Tao, Q., Diek, A., 2009. Influence of coupled chemo-poro-thermoelastic processes on pore pressure and stress distributions around a wellbore in swelling shale. Journal of Petroleum Science and Engineering 67, 57–64.
-
-Hals, K.M.D., Berre, I., 2012. Thermal fracturing of geothermal wells and the effects of borehole orientation. arXiv:1212.2763.
-
-Holmes, C.S., Swift, S.C., 1970. Calculation of circulating mud temperatures. Journal of Petroleum Technology 22 (6), 670–674.
-
-Holtzman, B.K., Groebner, N., Mittal, T., 2023. Quench-spallation drilling: a novel drilling head design for routine heat mining above the brittle-ductile transition. Geothermal Resources Council Transactions 47, 2960–2978.
-
-Jaeger, J.C., 1956. Conduction of heat in an infinite region bounded internally by a circular cylinder of a perfect conductor. Australian Journal of Physics 9 (2), 167–179.
-
-Jaeger, J.C., Cook, N.G.W., Zimmerman, R.W., 2007. Fundamentals of Rock Mechanics, 4th edition. Blackwell.
-
-Jones, C., 2022. Utah FORGE: Deep Wells Temperature Surveys as of September 2022. Geothermal Data Repository, submission 1421. https://doi.org/10.15121/1893533. CC-BY 4.0.
-
-Kabir, C.S., Hasan, A.R., Kouba, G.E., Ameen, M.M., 1996. Determining circulating fluid temperature in drilling, workover, and well-control operations. SPE Drilling & Completion 11 (2), 74–79.
-
-Kruszewski, M., Wittig, V., 2018. Review of failure modes in supercritical geothermal drilling projects. Geothermal Energy 6, 28.
-
-Lachenbruch, A.H., Brewer, M.C., 1959. Dissipation of the temperature effect of drilling a well in Arctic Alaska. U.S. Geological Survey Bulletin 1083-C, 73–109.
-
-Liotta, D., Brogi, A. Pliocene-Quaternary fault kinematics in the Larderello geothermal area (Italy): insights for the interpretation of the present stress field. Manuscript submitted to Geothermics.
-
-McLennan, J., Mock, B., Swearingen, L., Baldwin, R., Hodder, M., Vetsak, A., Kuhns, A.T., Breland, J., England, K., 2023. Utah FORGE: Well 16B(78)-32 Drilling Data. Geothermal Data Repository, submission 1516. https://doi.org/10.15121/1998591. CC-BY 4.0.
-
-Mitchell, R.F., 1981. Downhole temperature prediction for drilling geothermal wells. Sandia National Laboratories, SAND-81-0036C.
-
-Mitchell, R.F., Mondy, L.A., Duda, L.E., 1984. GEOTEMP2: advanced wellbore thermal simulator. Sandia National Laboratories.
-
-Moore, J.C., Chang, C., McNeill, L., Thu, M.K., Yamada, Y., Huftile, G., 2011. Growth of borehole breakouts with time after drilling: implications for state of stress, NanTroSEIZE transect, SW Japan. Geochemistry, Geophysics, Geosystems 12 (4), Q04D09. https://doi.org/10.1029/2010GC003417
-
-Muraoka, H., Asanuma, H., Tsuchiya, N., Ito, T., Mogi, T., Ito, H., 2014. The Japan Beyond-Brittle Project. Scientific Drilling 17, 51–59.
-
-NOV, 2014. 14-P-220 triplex mud pump. Technical marketing sheet.
-
-NOV, 2024. TK-Drakōn insulating coating. Tuboscope product flyer D392006697-MKT-001.
-
-Pearce, R., Pink, T., 2024. Drilling for superhot geothermal energy: a technology gap analysis. Cascade Institute, technical paper 2024-6.
-
-Pearce, R., Pink, T., 2025. Drilling for superhot geothermal energy: a technology gap analysis. Proceedings, 50th Workshop on Geothermal Reservoir Engineering, Stanford University, SGP-TR-229.
-
-Raymond, L.R., 1969. Temperature distribution in a circulating drilling fluid. Journal of Petroleum Technology 21 (3), 333–341.
-
-Reinecker, J., Gutmanis, J., Foxford, A., Cotton, L., Dalby, C., Law, R., 2021. Geothermal exploration and reservoir modelling of the United Downs deep geothermal project, Cornwall (UK). Geothermics 97, 102226.
-
-Timoshenko, S.P., Goodier, J.N., 1970. Theory of Elasticity, 3rd edition. McGraw-Hill.
-
-Ujyo, S., Hyodo, M., Okabe, T., Naganawa, S., Burnell, J., 2026. A wellbore hydrothermal simulation technology applicable to supercritical conditions. Proceedings, 51st Workshop on Geothermal Reservoir Engineering, Stanford University, SGP-TR-230.
-
-Valley, B., Evans, K.F., 2007. Stress state at Soultz-sous-Forêts to 5 km depth from wellbore failure and hydraulic observations. Proceedings, 32nd Workshop on Geothermal Reservoir Engineering, Stanford University, SGP-TR-183.
-
-Vetsak, A., Besoiu, C., Zatonski, V., Torre, A., Hodder, M., Toews, M., 2024. The insulated drill pipe: field experience and thermal model validation. SPE/IADC Drilling Conference. https://doi.org/10.2118/217753-MS
-
-Wenning, Q.C., Berthet, T., Ask, M., Zappone, A., Rosberg, J.-E., Almqvist, B.S.G., 2017. Image log analysis of in situ stress orientation, breakout growth, and natural geologic structures to 2.5 km depth in central Scandinavian Caledonides: results from the COSC-1 borehole. Journal of Geophysical Research: Solid Earth 122 (5), 3999–4019. https://doi.org/10.1002/2016JB013776
-
-Wu, Y., Zhang, Y., Bettir, N., Ashok, P., van Oort, E., 2025. A comprehensive evaluation of drill pipe insulation for downhole temperature management using physics-based models. Proceedings, 50th Workshop on Geothermal Reservoir Engineering, Stanford University, SGP-TR-202.
-
-Xiao, D., Hu, Y., Wang, Y., Deng, H., Zhang, J., Tang, B., Xi, J., Tang, S., Li, G., 2022. Wellbore cooling and heat energy utilization method for deep shale gas horizontal well drilling. Applied Thermal Engineering 213, 118684.
-
-Zoback, M.D., 2007. Reservoir Geomechanics. Cambridge University Press.
+The code is released under the [MIT licence](LICENSE). Data retain their source licences, as recorded in their data guides.
