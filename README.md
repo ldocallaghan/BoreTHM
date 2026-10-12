@@ -4,6 +4,7 @@ BoreTHM is an open-source Python toolkit for assessing drilling programmes in su
 
 The circulation model is checked against Utah FORGE field data. Worked site assessments show how the models are applied, with assumptions and limitations reported alongside the results.
 
+- [Documentation guide](docs/README.md): choose a reading path.
 - [Get started](#get-started): set up Python and run an assessment.
 - [Read a result](#reading-a-result): understand the outputs and status labels.
 - [Explore the examples](#example-results): site findings and their controlling constraints.
@@ -45,7 +46,7 @@ python src/comparative_sites.py
 
 The first command evaluates one site; the second reports all five. Use `python src/site_evaluation.py --help` for the CLI options.
 
-For a new site, follow the [site-input guide](docs/new_site.md) and copy [the documented template](examples/site_template.py). It records units and sources, and checks the inputs before evaluation. The worked example can validate the template without running the full calculation:
+For a new site, follow the [site-input guide](docs/guides/new-site.md) and copy [the documented template](examples/site_template.py). It records units and sources, and checks the inputs before evaluation. The worked example can validate the template without running the full calculation:
 
 ```bash
 python examples/new_site.py
@@ -55,6 +56,8 @@ python examples/new_site.py --evaluate --json result.json
 The template starts with Soultz's inputs. Replace them with the new site's measurements or explicitly sourced assumptions.
 
 ## Reading a result
+
+The [output guide](docs/guides/interpreting-results.md) maps the JSON fields and explains schedule identity.
 
 Start with `status` and its reasons, then inspect the components that set it. The report includes the operating programme, thermal and hydraulic outputs, stability in each cycle state, allowable mud densities and equipment checks. The JSON retains every evaluated case and the source of each input.
 
@@ -136,13 +139,13 @@ Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C a
 
 Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. They do not measure how close the entire programme is to passing: incompatible density requirements elsewhere in the hole and coating qualification remain independent issues.
 
-Sources: [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json), [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), and settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). The [reader summary](docs/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf), gives the findings and open questions together.
+Sources: [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json), [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), and settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). The [reader summary](docs/guides/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf), gives the findings and open questions together.
 
 ### Design comparisons
 
 No evaluated single-lever setting or evaluated pair made either deep site's programme pass. Deeper casing gives Soultz an allowable trip-fluid density range while drilling and tools still fail. Lower viscosity can give United Downs an allowable drilling-fluid density range while other gates still fail. Stronger insulation cools tools but leaves pressure and pump constraints.
 
-Only one pair per site was evaluated, and continuous searches sampled settings. The [lever study](docs/levers.md) gives the tested settings, remaining failures and equipment-availability evidence. It establishes no complete operating envelope or general impossibility.
+Only one pair per site was evaluated, and continuous searches sampled settings. The [lever study](docs/science/design-comparisons.md) gives the tested settings, remaining failures and equipment-availability evidence. It establishes no complete operating envelope or general impossibility.
 
 ## Models and evidence
 
@@ -150,12 +153,12 @@ The circulation model solves the downgoing and returning fluid temperatures with
 
 | Model or check | Role | Evidence and detail |
 |---|---|---|
-| Circulation | Fluid temperatures, heat transfer and hydraulics | [Utah FORGE comparisons and published-model benchmark](docs/methods.md#31-checking-the-circulation-model) |
-| Rock reheating | Temperature recovery when circulation stops | [Analytic checks and the limits of the FORGE pause comparison](docs/methods.md#41-the-wall-and-the-rock-behind-it) |
-| Borehole stability | Breakout width and pressure requirements | [UD-1 strength calibration and other well checks](docs/methods.md#4-borehole-stability) |
-| Spallation, drilling rate and creep | Exploratory estimates of quench effects and closure | [Physical models and their limits](docs/methods.md#32-drilling-rate-creep-and-the-brittle-ductile-transition) |
+| Circulation | Fluid temperatures, heat transfer and hydraulics | [Utah FORGE comparisons and published-model benchmark](docs/science/validation.md#circulation) |
+| Rock reheating | Temperature recovery when circulation stops | [Analytic checks and the limits of the FORGE pause comparison](docs/science/validation.md#rock-reheating) |
+| Borehole stability | Breakout width and pressure requirements | [UD-1 strength calibration and other well checks](docs/science/validation.md#stability-checks) |
+| Spallation, drilling rate and creep | Exploratory estimates of quench effects and closure | [Physical models and their limits](docs/science/models.md#drilling-rate-and-creep) |
 
-The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Full derivations, diagnostic figures and the bibliography are in the [methods guide](docs/methods.md); [material properties](data/materials.md) and [site inputs](data/sites/stress_sources.md) retain their sources.
+The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Full derivations and diagnostic figures are in the [physical-model guide](docs/science/models.md); the [bibliography](docs/science/sources.md#references), [material properties](data/materials.md) and [site inputs](data/sites/stress_sources.md) retain their sources.
 
 ## Scope and limitations
 
@@ -165,13 +168,13 @@ The deep targets lie well below measured stress data. Strength calibration depen
 
 Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. The failure-delay experiments are unsupported hypotheses, not evidence that breakouts wait an hour. Near-bit pre-cooling and breakout growth remain separate open questions.
 
-The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](docs/robustness.md). These generally change one approximation at a time and do not cover every joint uncertainty. Coolant delivery, trip timing and fluid displacement are among the [deferred approximations](docs/development.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
+The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](docs/science/approximation-comparisons.md). These generally change one approximation at a time and do not cover every joint uncertainty. Coolant delivery, trip timing and fluid displacement are among the [deferred approximations](docs/science/limitations.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
 
 ## Development and feedback
 
-Model expansion is paused for specialist feedback on the assumptions and practical applicability. Corrections to demonstrated defects remain in scope. Feedback is most useful when it identifies a relevant observation or qualification record, or explains which assumption changes a decision. The [reader summary](docs/summary.md#questions-for-specialist-discussion) sets out the focused research questions.
+Model expansion is paused for specialist feedback on the assumptions and practical applicability. Corrections to demonstrated defects remain in scope. Feedback is most useful when it identifies a relevant observation or qualification record, or explains which assumption changes a decision. The [reader summary](docs/guides/summary.md#questions-for-specialist-discussion) sets out the focused research questions.
 
-**H-01 trigger met; implementation deferred by project priority.** Soultz's casing and paired interventions meet the proximity trigger for a common event timeline, but other gates still fail and no operating range is claimed. Revisit before a near-threshold feasibility claim, or when feedback or new data makes timing decision-relevant. Coolant delivery and fluid displacement retain distinct triggers in the [development priorities](docs/development.md).
+**H-01 trigger met; implementation deferred by project priority.** Soultz's casing and paired interventions meet the proximity trigger for a common event timeline, but other gates still fail and no operating range is claimed. Revisit before a near-threshold feasibility claim, or when feedback or new data makes timing decision-relevant. Coolant delivery and fluid displacement retain distinct triggers in the [development priorities](docs/maintenance/development.md).
 
 ## Tests and reproducibility
 
@@ -189,23 +192,23 @@ python -m pytest -m "slow or not slow"
 
 Full physical runs can take an hour or more. Single-threaded BLAS avoids oversubscription during repeated solves; set `OPENBLAS_NUM_THREADS=1` and `OMP_NUM_THREADS=1` before starting Python for those runs.
 
-Saved reference outputs and numerical regression tables support comparison with the published calculations. [Release records](docs/v135-release.md) document the environment and verification; the [changelog](CHANGELOG.md) records changes. Historical diagnostic figures use their stated programmes and should be interpreted with their captions.
+Saved reference outputs and numerical regression tables support comparison with the published calculations. [Release records](docs/releases/README.md) document the environment and verification; the [changelog](CHANGELOG.md) records changes. Historical diagnostic figures use their stated programmes and should be interpreted with their captions.
 
 ## Find your way around the repository
 
 | Location | Contents |
 |---|---|
-| [src/](src/) | Physical models and evaluation scripts |
-| [examples/](examples/) | Site template and worked example |
-| [docs/](docs/) | Methods, reader summary and study reports |
-| [data/](data/) | Extracted observations and input-source records |
-| [results/](results/) | Retained numerical evaluations and trial evidence |
-| [tests/](tests/) | Unit checks and physical regressions, including fixed reference tables |
-| [figures/](figures/) | Diagnostic and field-comparison figures |
+| [src/](src) | Physical models and evaluation scripts |
+| [examples/](examples) | Site template and worked example |
+| [docs/](docs/README.md) | Reading guide, model use, science and historical records |
+| [data/](data) | Extracted observations and input-source records |
+| [results/](results) | Retained numerical evaluations and trial evidence |
+| [tests/](tests) | Unit checks and physical regressions, including fixed reference tables |
+| [figures/](figures) | Diagnostic and field-comparison figures |
 
 ## Citation and data credits
 
-Use [CITATION.cff](CITATION.cff) for the software citation. The [methods bibliography](docs/methods.md#references) lists the scientific sources.
+Use [CITATION.cff](CITATION.cff) for the software citation. The [scientific bibliography](docs/science/sources.md#references) lists the scientific sources.
 
 The FORGE data come from the Geothermal Data Repository: [well 16B drilling data](https://doi.org/10.15121/1998591) and [deep-well temperature surveys](https://doi.org/10.15121/1893533). The Newberry extracts come from [well 55-29 stimulation data](https://doi.org/10.15121/1357916). These datasets are used under CC-BY 4.0. The UD-1 image interpretation contains NERC materials ©NERC 2024.
 

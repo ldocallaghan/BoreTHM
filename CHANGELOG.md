@@ -8,7 +8,7 @@ The README and two-page reader summary now place the favourable target-depth str
 
 The patch distinguishes target SG-equivalent pressures from surface-SG common windows, the best attempted tool schedule from reference practice, and temperature-rating exceedance from coating qualification. It narrows robustness, lever and validation claims to the comparisons performed. H-01's already-met proximity trigger is explicitly deferred by project priority while coolant-delivery and fluid-displacement triggers remain distinct; the cooling question and historical Pannonian threshold remain unresolved.
 
-Package and citation metadata advance to 1.3.5. Calculation mode v1.3.4, model source, inputs, physical defaults and numerical goldens remain unchanged. The reader tables are checked against retained evidence, all 112 checksums match, and the fast suite passes 357 tests in 14.41 s. The [release record](docs/v135-release.md) preserves the original CI provenance and records the pending author editorial pass. Outreach and new modelling remain separate work.
+Package and citation metadata advance to 1.3.5. Calculation mode v1.3.4, model source, inputs, physical defaults and numerical goldens remain unchanged. Documentation now separates practical guides, scientific studies, release verification and labelled historical reviews, with a reading guide at `docs/README.md`. The output guide describes the fields actually present in the retained assessments. All 112 evidence checksums match, and the fast suite passes 357 tests in 14.24 s after the reorganisation. The [release record](docs/releases/v1.3.5.md) preserves the original CI provenance; publication preparation is tracked separately. Outreach and new modelling remain separate work.
 
 ## v1.3.4: NO-GO for this programme and these assumptions at the deep sites (12 October 2026)
 
@@ -22,12 +22,12 @@ The confirmed mixture, fluid-feedback and depth-coverage errors are corrected. E
 | Pannonian | INDETERMINATE | NO-GO | 1.458734 / 1.459278 | 1.544787 / 1.545152 | corrected all-depth windows are closed; coating qualification remains unknown |
 | Newberry | GO | GO | 0.998201 / 0.998201 | 0.998201 / 0.998201 | water satisfies the corrected common windows and all evaluated gates |
 
-Weights are surface densities at 20 °C. Closed windows have no valid prescription, even when an attempted lower-bound weight is simulated. The complete before-and-after bounds, controlling cases and isolated C1 pressure changes are in `docs/v134-checkpoint-1.md`.
+Weights are surface densities at 20 °C. Closed windows have no valid prescription, even when an attempted lower-bound weight is simulated. The complete before-and-after bounds, controlling cases and isolated C1 pressure changes are in `docs/archive/v1.3.4/checkpoint-1.md`.
 
 - **Conserved composition, C1.** Mud density uses component volumes at fixed barite mass fraction, conductivity uses the local volume fraction and heat capacity uses mass fractions. The historical adapter retains the prior mixture law. Independent component-volume tests and the four-state table check the correction.
 - **Prescribed fluid and depth coverage, C2 to C4.** Every fluid pass reruns the whole-hole requirement through circulation, hydraulics, drilling rate and tools. The heavier trip fluid occupies the column from trip start. Every depth has its own exposure check; the target and final stand are included. Binding bounds are refined twice. Public entry points validate inputs and export the effective target, retaining the former input as legacy metadata.
-- **Robustness, C5.** `docs/robustness.md` records A1 to A9. NO-GO holds for this programme across those comparisons at both deep sites. Pannonian's historical 0.041 °C tool margin is numerically unresolved; the corrected closer schedule has more tool margin but closed pressure windows.
-- **Design levers, C6.** `docs/levers.md` records L1 to L8 and one pair per site. Coating-only thresholds and Soultz's bit-only flow boundary are checked at half tolerance. Unknown equipment qualification and numerical failures stay explicit. Near-threshold Soultz casing results trigger a follow-up on the common event timeline.
+- **Robustness, C5.** `docs/science/approximation-comparisons.md` records A1 to A9. NO-GO holds for this programme across those comparisons at both deep sites. Pannonian's historical 0.041 °C tool margin is numerically unresolved; the corrected closer schedule has more tool margin but closed pressure windows.
+- **Design levers, C6.** `docs/science/design-comparisons.md` records L1 to L8 and one pair per site. Coating-only thresholds and Soultz's bit-only flow boundary are checked at half tolerance. Unknown equipment qualification and numerical failures stay explicit. Near-threshold Soultz casing results trigger a follow-up on the common event timeline.
 - **Release and reproduction, C7.** The README and reader summary lead with the corrected programme, levers and open cooling question. Python API and command-line defaults select v1.3.4; historical regression modes remain explicit. Citation and package metadata advance to 1.3.4. Reviewed reference and lever tables are generated in CI, with their bracketing evidence; earlier golden files remain unchanged.
 
 ## v1.3.3: one consistent operating programme (October 2026)
@@ -108,8 +108,8 @@ now 0.94 to 0.98 SG at the targets, against the 1.02 SG of the constant
   --json <path>` runs one site.
 - **New sites.** `examples/site_template.py` documents every input with its
   units, range and source; `validate_site()` checks them; `examples/new_site.py`
-  rebuilds Soultz from the template and reproduces its row; `docs/new_site.md`
-  is the guide, and `docs/summary.md` a two-page summary for readers.
+  rebuilds Soultz from the template and reproduces its row; `docs/guides/new-site.md`
+  is the guide, and `docs/guides/summary.md` a two-page summary for readers.
 - **Tests and reproducibility.** The v1.3.3 site table is pinned from a
   golden made in the continuous integration, which runs the fast tests on
   every push and the slow suite weekly and on demand, on Python 3.14.4 and the

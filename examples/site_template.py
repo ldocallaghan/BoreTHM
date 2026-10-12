@@ -4,7 +4,7 @@ A site's inputs, as a template.
 Copy this file, replace every value with your site's, and give every value
 its source. The values below are Soultz-sous-Forets, the reference case,
 so that examples/new_site.py can check the template reproduces its row of
-the site table. docs/new_site.md walks through the steps.
+the site table. docs/guides/new-site.md walks through the steps.
 
 Units are SI throughout: metres, pascals, degrees Celsius. Each field's
 allowed range is the one site_evaluation.validate_site checks

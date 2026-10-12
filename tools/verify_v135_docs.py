@@ -115,18 +115,34 @@ def verify():
     expected_status = {'soultz': 'NO-GO', 'united-downs': 'NO-GO', 'pannonian': 'NO-GO',
                        'larderello': 'CONDITIONAL', 'newberry': 'GO'}
     assert {k: source(k)['status']['label'] for k in expected_status} == expected_status
+    assert all('flow_ceiling' not in source(k) and 'shmin_margin' not in source(k)
+               for k in expected_status), 'Update the output guide if retained fields change'
+    for report, archive, boundary in [
+            ('science/approximation-comparisons.md', 'archive/v1.3.4/approximation-review.md',
+             '## Evidence and verification'),
+            ('science/design-comparisons.md', 'archive/v1.3.4/design-review.md',
+             '## Reproduction and review')]:
+        original = (ROOT / 'docs' / archive).read_text(encoding='utf-8').split(boundary)[0]
+        current = (ROOT / 'docs' / report).read_text(encoding='utf-8')
+        # Published study data rows remain identical to the historical review.
+        # Headers can change (e.g. removing an internal requirement identifier).
+        rows = [line for line in original.splitlines() if line.startswith('|')
+                and re.match(r'^\| (?:Soultz|United Downs|Pannonian|A\d|L\d|PAIR|[0-9]|first|half|radial|timesteps|window|all three)', line)]
+        without_links = lambda text: re.sub(r'\[([^\]]*)\]\([^)]+\)', r'\1', text)
+        assert rows and all(without_links(line) in without_links(current) for line in rows), report
     readme = (ROOT / 'README.md').read_text(encoding='utf-8')
     for key, name in [('soultz', 'Soultz-sous-Forêts'), ('united-downs', 'United Downs'),
                       ('larderello', 'Larderello'), ('pannonian', 'Pannonian Basin'), ('newberry', 'Newberry')]:
         data = source(key)
         prefix = f"| {name} | {data['site']['target_depth_m'] / 1000:.2f} | {data['status']['label']} |"
         assert prefix in readme, (key, 'headline table')
-    for doc in ['README.md', 'docs/summary.md']:
+    for doc in ['README.md', 'docs/guides/summary.md']:
         text = (ROOT / doc).read_text(encoding='utf-8')
         for table in [case_table(), window_table(), tool_sentence(), coating_sentence()]:
             assert table in text, f'{doc}: missing or mismatched evidence panel'
-    for doc in ['README.md', 'docs/summary.md', 'docs/v135-release.md', 'CHANGELOG.md',
-                'docs/methods.md', 'docs/development.md', 'docs/new_site.md']:
+    docs = ['README.md', 'CHANGELOG.md', *(p.relative_to(ROOT).as_posix()
+                                         for p in (ROOT / 'docs').rglob('*.md'))]
+    for doc in docs:
         text = (ROOT / doc).read_text(encoding='utf-8')
         for link in re.findall(r'\[[^\]]*\]\(([^)]+)\)', text):
             if '://' not in link:

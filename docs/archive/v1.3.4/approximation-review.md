@@ -1,4 +1,6 @@
-# Robustness of NO-GO for this programme and these assumptions
+# Archived v1.3.4 approximation review
+
+**Historical record from the v1.3.4 development cycle.** Future-tense statements and release-status statements describe the checkpoint when this review was written. The release was published on 12 October 2026; see [its verification](../../releases/v1.3.4.md). For current reading paths, use the [documentation guide](../../README.md).
 
 This is the C5 STOP review. It compares A1 to A9 with the reviewed C1 to C4 programme at Soultz and United Downs, and checks numerical resolution at Pannonian. The original Pannonian tool threshold is checked separately because the spec names its 0.041 C margin.
 
@@ -127,7 +129,7 @@ NO-GO holds for this programme across A1 to A9 at Soultz and United Downs. The h
 
 ## Evidence and verification
 
-The comparison runner is [robustness.py](../src/robustness.py). Every completed comparison is saved under [results/robustness](../results/robustness/) with the programme, signed changes, solver and pump checks, coating temperatures and source hash. The live regression runs every comparison and pins its sign, with separate analytical tests of the warm-stage peak, elapsed clock and resolution controls. Existing reviewed golden files are unchanged.
+The comparison runner is [robustness.py](../../../src/robustness.py). Every completed comparison is saved under [results/robustness](../../../results/robustness) with the programme, signed changes, solver and pump checks, coating temperatures and source hash. The live regression runs every comparison and pins its sign, with separate analytical tests of the warm-stage peak, elapsed clock and resolution controls. Existing reviewed golden files are unchanged.
 
 Reproduce the corrected ledgers with `python src/robustness.py`, then the historical threshold with `python src/robustness.py --sites pannonian --only A9 --legacy-threshold`. Run the direction checks with `python -m pytest tests/test_robustness.py -m slow`. Scope overrides restore the original model functions after every comparison.
 

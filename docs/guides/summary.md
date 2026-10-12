@@ -45,21 +45,21 @@ These common-programme windows intersect the evaluated depths, states and stress
 
 Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C at United Downs, against the stated 204 °C rating. Both retain **INDETERMINATE qualification**. Exceeding the stated rating is not a validated prediction of a particular failure mode. These coating histories are not necessarily those of the best attempted tool schedule.
 
-Sources: retained [Soultz reference](../results/v1.3.4/ci/38186784798-1/reference/soultz.json) and [United Downs reference](../results/v1.3.4/ci/38186784798-1/reference/united-downs.json); settings-matched L4 base trials for [Soultz](../results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](../results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). See [release provenance](v134-release.md).
+Sources: retained [Soultz reference](../../results/v1.3.4/ci/38186784798-1/reference/soultz.json) and [United Downs reference](../../results/v1.3.4/ci/38186784798-1/reference/united-downs.json); settings-matched L4 base trials for [Soultz](../../results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](../../results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). See [release provenance](../releases/v1.3.4.md).
 
 ## Scope of the result and design study
 
 The reference programme uses TK-Drakon coated pipe, a 4,000 m intermediate shoe and 40/50 L/s at Soultz/United Downs. The five-site headline remains NO-GO at Soultz, United Downs and Pannonian, CONDITIONAL at Larderello, and GO at Newberry, for this programme and these assumptions. One defined programme has been screened; drilling these sites with existing technology remains an open question.
 
-Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. Whole-hole deficits and coating qualification are independent barriers. No evaluated single-lever setting or evaluated pair reopened either deep site. Only one pair per site was evaluated, and continuous searches sampled settings. The [lever study](levers.md) establishes no complete operating envelope or general impossibility.
+Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. Whole-hole deficits and coating qualification are independent barriers. No evaluated single-lever setting or evaluated pair reopened either deep site. Only one pair per site was evaluated, and continuous searches sampled settings. The [lever study](../science/design-comparisons.md) establishes no complete operating envelope or general impossibility.
 
-The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](robustness.md). These generally change one approximation at a time and do not cover every joint uncertainty. Circulation is checked against Utah FORGE measurements; strength calibration and other well checks are separate. Those checks do not validate a complete 10-13 km drilling programme.
+The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](../science/approximation-comparisons.md). These generally change one approximation at a time and do not cover every joint uncertainty. Circulation is checked against Utah FORGE measurements; strength calibration and other well checks are separate. Those checks do not validate a complete 10-13 km drilling programme.
 
 ## The open cooling question and development pause
 
 Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. Images within minutes in sediment do not establish timing or growth in hot crystalline rock. Failure-delay experiments are unsupported hypotheses, not evidence that breakouts wait an hour. Near-bit pre-cooling and breakout growth remain separate unresolved questions.
 
-**H-01 trigger met; implementation deferred by project priority.** Soultz L2's 0.00137 SG trip width and the L2+L4 pair's 0.00949 SG drilling deficit meet the trigger, but other gates still fail. Revisit the timeline before claiming a near-threshold programme is feasible, or when feedback or new data makes timing decision-relevant. Coolant delivery and fluid displacement retain distinct [development triggers](development.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
+**H-01 trigger met; implementation deferred by project priority.** Soultz L2's 0.00137 SG trip width and the L2+L4 pair's 0.00949 SG drilling deficit meet the trigger, but other gates still fail. Revisit the timeline before claiming a near-threshold programme is feasible, or when feedback or new data makes timing decision-relevant. Coolant delivery and fluid displacement retain distinct [development triggers](../science/limitations.md#development-pause). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
 
 Model expansion is paused for specialist feedback; demonstrated defects can still be corrected. Reader interest, usable observations or a discriminating hypothesis can justify a separate near-bit or FORGE image-log study. Neither is initiated here.
 
@@ -69,4 +69,4 @@ Model expansion is paused for specialist feedback; demonstrated defects can stil
 2. Which fluids maintain the required density and rheology through circulation and hot trips? Measured properties would test the reference mud and viscosity bounds.
 3. How are insulated pipe and managed-pressure equipment qualified for the complete hot cycle? Steady temperature or pressure ratings alone do not establish that qualification.
 
-The [release record](v135-release.md) distinguishes this reader patch from its retained calculation and evidence. Interfaces and examples enable external use; readers and users will establish practical usefulness.
+The [release record](../releases/v1.3.5.md) distinguishes this reader patch from its retained calculation and evidence. Interfaces and examples enable external use; readers and users will establish practical usefulness.

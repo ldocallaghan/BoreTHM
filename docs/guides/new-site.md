@@ -1,7 +1,7 @@
 # Evaluating a new site
 
 This guide takes a site from its inputs to a result in JSON. It assumes the
-environment in the [getting-started guide](../README.md#get-started): Python
+environment in the [getting-started guide](../../README.md#get-started): Python
 3.14.4 with the packages in `requirements-lock.txt`.
 
 ## 1. Copy the template
@@ -41,9 +41,8 @@ The fields fall into four groups.
 
 ## 2. Validate the inputs
 
-```
-python -c "import sys; sys.path[:0] = ['src', 'examples']; \
-import site_evaluation as se, site_template as t; print(se.validate_site(t.make_site()))"
+```bash
+python examples/new_site.py
 ```
 
 `validate_site` raises an error listing every problem it finds: a value
@@ -57,13 +56,13 @@ input without a source and any temperature fall above the casing shoe.
 `examples/new_site.py` builds the site from the template, validates it and,
 with `--evaluate`, runs it:
 
+The worked script imports `make_site` from `examples/site_template.py`. If you give your template copy another module name, update that import in your copy of `examples/new_site.py` before running it.
+
 ```
 python examples/new_site.py --evaluate --json result.json
 ```
 
-An evaluation takes a few minutes for a site drilled with water and up to
-about fifteen for one that needs a weighted fluid, because the fluid's weight
-is iterated with the circulation it sets. With the template unchanged, the
+Evaluations take several minutes. Weighted-fluid cases take longer because the fluid density is iterated with circulation and hydraulics. With the template unchanged, the
 script reports that the site is the repository's Soultz and compares its
 row of the site table with the pinned one.
 
@@ -75,29 +74,6 @@ python src/site_evaluation.py --site soultz --json soultz.json
 
 ## 4. Read the result
 
-The printed report and the JSON hold the same result. The parts, in order:
+The report and JSON describe the same assessment; the JSON retains additional detail and input provenance. Start with `status` and its reasons, then inspect the pressure bounds and independent equipment checks. The [output guide](interpreting-results.md) maps the current JSON fields, explains the units and distinguishes a target stability case from a complete programme.
 
-1. **Inputs and their sources**, with the site's tier.
-2. **The operating programme**: the drill pipe, the flow, the drilling fluid
-   and how many passes its weight took to converge, the temperature at the
-   bit, the standpipe pressure and the circulating friction as an equivalent
-   density.
-3. **The cycle**: the verdict in each state (drilling, connection, the
-   connection on freshly drilled rock, and the trip) for the case that
-   decides it, with the drilling and trip fluids, their limits and the safe
-   pause.
-4. **The common windows**: the fluid's density at surface that suits every
-   stress and strength case in every state down to the casing shoe, with the
-   bound, state, case and depth that set each limit. Where no one fluid
-   suits every case, the deciding pair of cases is named.
-5. **The tool and the coating**: the tool's temperature in each state, the
-   circulation schedule it needs where FORGE's practice does not keep it
-   below 200 °C, and the coating against its rating.
-6. **The margins**: the range of flow over which the verdict holds, and the
-   fall in Shmin that would close the window.
-7. **The status**: GO, CONDITIONAL with its conditions, NO-GO with the parts
-   that fail, or INDETERMINATE where a solver did not converge or the coating
-   is above a rating whose qualification is unknown.
-
-The JSON also records the git commit and the package versions that produced
-it.
+The retained reference evaluations do not include a complete flow operating range or stress-uncertainty envelope. Those must not be inferred from a single assessment. Optional margin fields in other evaluation modes are described in the output guide.

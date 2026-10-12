@@ -1,4 +1,4 @@
-"""Export docs/summary.md to a two-page PDF, with clickable repository links.
+"""Export docs/guides/summary.md to a two-page PDF, with clickable repository links.
 
 Requires reportlab and pypdf (available in the bundled document runtime).
 Run: python tools/render_summary.py
@@ -35,7 +35,7 @@ def markup(text):
         label, href = match.groups()
         if '://' not in href:
             path, sep, anchor = href.partition('#')
-            target = (ROOT / 'docs' / path).resolve().relative_to(ROOT).as_posix()
+            target = (ROOT / 'docs/guides' / path).resolve().relative_to(ROOT).as_posix()
             href = BASE + target + (sep + anchor if sep else '')
         return f'<a href="{href}" color="#155b7a"><u>{label}</u></a>'
     text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', link, text)
@@ -58,7 +58,7 @@ def render():
                         leading=14, spaceBefore=4, spaceAfter=5, keepWithNext=True)
     cell = ParagraphStyle('cell', parent=body, fontSize=9.2, leading=11.0, spaceAfter=0)
     story = []
-    lines = (ROOT / 'docs/summary.md').read_text(encoding='utf-8').splitlines()
+    lines = (ROOT / 'docs/guides/summary.md').read_text(encoding='utf-8').splitlines()
     i = 0
     width = A4[0] - 76
     while i < len(lines):
