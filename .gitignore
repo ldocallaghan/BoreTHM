@@ -8,7 +8,6 @@ __pycache__/
 # Editors and local tooling
 .idea/
 .vscode/
-.claude/
 
 # Local working notes, not part of the project
 docs/spec-*.md
