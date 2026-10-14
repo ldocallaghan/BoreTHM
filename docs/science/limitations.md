@@ -20,10 +20,8 @@ Immediate exposure and the skin heuristic prevent cooling from reducing the init
 
 The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](approximation-comparisons.md). These generally change one approximation at a time and do not cover every joint uncertainty. The [design comparisons](design-comparisons.md) sample selected settings and one pair per site; they establish no complete operating envelope.
 
-## Development pause
+## Deferred approximations
 
-Model expansion is paused for specialist feedback. Demonstrated defects can still require correction. Reader interest, usable observations or a discriminating hypothesis can justify a separately scoped near-bit or FORGE image-log study.
+The H-01 common-timeline trigger is met by Soultz L2's 0.00137 SG trip width and its L2+L4 pair's 0.00949 SG drilling deficit. The common timeline has not yet been implemented; the evaluated programmes still fail other gates, and no operating range is claimed. It is needed before a near-threshold feasibility claim, or when new data make timing decision-relevant.
 
-The H-01 common-timeline trigger is already met by Soultz L2's 0.00137 SG trip width and its L2+L4 pair's 0.00949 SG drilling deficit. Implementation is deferred by project priority because other gates still fail and no operating range is claimed. Revisit before a near-threshold feasibility claim, or when feedback or new data makes timing decision-relevant.
-
-Coolant delivery and fluid displacement retain distinct decision triggers: a delivery approximation straddling tool survival at a site that depends on it, and a displacement approximation straddling the site verdict, respectively. Full implementation criteria are in the [maintenance priorities](../maintenance/development.md). The [reader summary](../guides/summary.md#questions-for-specialist-discussion) gives questions for specialist discussion.
+Coolant delivery and fluid displacement retain distinct decision triggers: a delivery approximation straddling tool survival at a site that depends on it, and a displacement approximation straddling the site verdict, respectively. Full implementation criteria are in the [maintenance priorities](../maintenance/development.md). The [summary](../guides/summary.md#questions-for-specialist-discussion) gives questions for specialist discussion.

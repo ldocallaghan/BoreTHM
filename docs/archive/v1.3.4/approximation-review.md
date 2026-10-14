@@ -1,6 +1,6 @@
 # Archived v1.3.4 approximation review
 
-**Historical record from the v1.3.4 development cycle.** Future-tense statements and release-status statements describe the checkpoint when this review was written. The release was published on 12 October 2026; see [its verification](../../releases/v1.3.4.md). For current reading paths, use the [documentation guide](../../README.md).
+**Historical record from the v1.3.4 development cycle.** Future-tense statements and release-status statements describe the checkpoint when this review was written. The release was published on 12 October 2026. For current reading paths, use the [documentation guide](../../README.md).
 
 This is the C5 STOP review. It compares A1 to A9 with the reviewed C1 to C4 programme at Soultz and United Downs, and checks numerical resolution at Pannonian. The original Pannonian tool threshold is checked separately because the spec names its 0.041 C margin.
 

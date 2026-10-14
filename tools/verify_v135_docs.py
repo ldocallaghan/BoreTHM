@@ -1,4 +1,4 @@
-"""Offline checks of reader tables against retained v1.3.4 evidence.
+"""Offline checks of the README and summary tables against retained v1.3.4 evidence.
 
 No model imports or coupled solves. Run: python tools/verify_v135_docs.py
 """
@@ -196,7 +196,7 @@ def verify():
             continue
         assert old_name.encode() not in (ROOT / name).read_bytes(), (name, 'old repository name')
     print('13 README case rows, compact summary rows, counts 8/9 and 2/4, 4 signed density bounds,')
-    print('coating status, 5 site statuses, 112 evidence checksums, reader links, version and')
+    print('coating status, 5 site statuses, 112 evidence checksums, document links, version and')
     print('licence metadata verified.')
 
 

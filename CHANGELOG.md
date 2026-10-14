@@ -1,16 +1,12 @@
 # Changelog
 
-## v1.3.5: reader framing and a deliberate development pause (14 October 2026)
+## v1.3.5 (14 October 2026)
 
-The project is now named BoreTHM. Reader documentation, the summary PDF and citation title use the new name; package metadata uses `borethm`.
+The project is renamed BoreTHM, and the package `borethm`. The README is rewritten as a guide to the project, and the documentation is reorganised under `docs/` into guides, scientific pages, maintenance notes and an archive of the v1.3.4 reviews. The two-page summary (`docs/guides/summary.md`, with a PDF in `output/pdf/`) is rewritten. It sets the open target drilling intervals in eight of nine Soultz cases and two of four United Downs cases beside the failures of the complete programme; both sites remain NO-GO.
 
-The README and two-page reader summary now place the favourable target-depth stress/strength cases beside the complete programme's independent failures. The saved reference calculation has open target drilling intervals in eight of nine Soultz cases and two of four United Downs cases. These local diagnostics do not establish successful drilling programmes; both sites remain NO-GO for this programme and these assumptions.
+The code licence changes from MIT to Apache 2.0, which adds an explicit patent grant. Documentation, figures, results and the summary PDF are licensed under CC BY 4.0. Data keep their source licences, listed in `NOTICE`. Releases up to v1.3.4 remain under MIT.
 
-The patch distinguishes target SG-equivalent pressures from surface-SG common windows, the best attempted tool schedule from reference practice, and temperature-rating exceedance from coating qualification. It narrows robustness, lever and validation claims to the comparisons performed. H-01's already-met proximity trigger is explicitly deferred by project priority while coolant-delivery and fluid-displacement triggers remain distinct; the cooling question and historical Pannonian threshold remain unresolved.
-
-Package and citation metadata advance to 1.3.5. Calculation mode v1.3.4, model source, inputs, physical defaults and numerical goldens remain unchanged. Documentation now separates practical guides, scientific studies, release verification and labelled historical reviews, with a reading guide at `docs/README.md`. The output guide describes the fields actually present in the retained assessments. All 112 evidence checksums match, and the fast suite passes 357 tests in 14.24 s after the reorganisation. The [release record](docs/releases/v1.3.5.md) preserves the original CI provenance; publication preparation is tracked separately. Outreach and new modelling remain separate work.
-
-The code licence changes from MIT to Apache 2.0, which adds an explicit patent grant. Documentation, figures, results and the summary PDF are licensed under CC BY 4.0. Data keep their source licences, now listed in `NOTICE`. Releases up to v1.3.4 remain under MIT. Package and citation metadata name the repository as BoreTHM.
+The calculation, its inputs and the reference results are those of v1.3.4.
 
 ## v1.3.4: NO-GO for this programme and these assumptions at the deep sites (12 October 2026)
 
@@ -30,7 +26,7 @@ Weights are surface densities at 20 °C. Closed windows have no valid prescripti
 - **Prescribed fluid and depth coverage, C2 to C4.** Every fluid pass reruns the whole-hole requirement through circulation, hydraulics, drilling rate and tools. The heavier trip fluid occupies the column from trip start. Every depth has its own exposure check; the target and final stand are included. Binding bounds are refined twice. Public entry points validate inputs and export the effective target, retaining the former input as legacy metadata.
 - **Robustness, C5.** `docs/science/approximation-comparisons.md` records A1 to A9. NO-GO holds for this programme across those comparisons at both deep sites. Pannonian's historical 0.041 °C tool margin is numerically unresolved; the corrected closer schedule has more tool margin but closed pressure windows.
 - **Design levers, C6.** `docs/science/design-comparisons.md` records L1 to L8 and one pair per site. Coating-only thresholds and Soultz's bit-only flow boundary are checked at half tolerance. Unknown equipment qualification and numerical failures stay explicit. Near-threshold Soultz casing results trigger a follow-up on the common event timeline.
-- **Release and reproduction, C7.** The README and reader summary lead with the corrected programme, levers and open cooling question. Python API and command-line defaults select v1.3.4; historical regression modes remain explicit. Citation and package metadata advance to 1.3.4. Reviewed reference and lever tables are generated in CI, with their bracketing evidence; earlier golden files remain unchanged.
+- **Release and reproduction, C7.** The README and summary lead with the corrected programme, levers and open cooling question. Python API and command-line defaults select v1.3.4; historical regression modes remain explicit. Citation and package metadata advance to 1.3.4. Reviewed reference and lever tables are generated in CI, with their bracketing evidence; earlier golden files remain unchanged.
 
 ## v1.3.3: one consistent operating programme (October 2026)
 

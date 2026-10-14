@@ -12,7 +12,7 @@ Choose a path based on what you want to do. Installation and the first command a
 
 - [Physical models](science/models.md): component calculations, programme evaluation and equations.
 - [Validation and calibration](science/validation.md): what the observations and analytic checks establish.
-- [Limitations and open questions](science/limitations.md): input uncertainties, approximations and the development pause.
+- [Limitations and open questions](science/limitations.md): input uncertainties, approximations and the deferred work.
 - [Sources and related work](science/sources.md): bibliography and links to data provenance.
 
 ## Examine the studies
@@ -20,10 +20,9 @@ Choose a path based on what you want to do. Installation and the first command a
 - [Approximation comparisons](science/approximation-comparisons.md): the individual physical and numerical sensitivity checks.
 - [Design comparisons](science/design-comparisons.md): the evaluated interventions, remaining failures and qualification evidence.
 
-## Trace a release or maintain the project
+## Maintain the project
 
-- [Release verification](releases/README.md): environments, retained evidence and checks for each release or candidate.
 - [Historical reviews](archive/README.md): dated checkpoints preserved for traceability.
-- [Maintenance notes](maintenance/README.md): implementation priorities and release preparation.
+- [Maintenance notes](maintenance/README.md): implementation priorities and triggers.
 
 Dataset descriptions and input sources stay beside their files under [data/](../data/). They are linked from the scientific pages where needed.

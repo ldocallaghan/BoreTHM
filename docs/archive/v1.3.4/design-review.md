@@ -1,6 +1,6 @@
 # Archived v1.3.4 design review
 
-**Historical record from the v1.3.4 development cycle.** Future-tense statements and release-status statements describe the checkpoint when this review was written. The release was published on 12 October 2026; see [its verification](../../releases/v1.3.4.md). For current reading paths, use the [documentation guide](../../README.md).
+**Historical record from the v1.3.4 development cycle.** Future-tense statements and release-status statements describe the checkpoint when this review was written. The release was published on 12 October 2026. For current reading paths, use the [documentation guide](../../README.md).
 
 This is the C6 STOP review for Soultz and United Downs. No single lever reopened either site at the evaluated settings. The one permitted pair at each site is reported below. These are programme comparisons; the sampled continuous searches do not establish a complete feasible operating envelope.
 
@@ -170,7 +170,7 @@ $env:OMP_NUM_THREADS = '1'
 .venv/Scripts/python.exe src/lever_pairs.py
 ```
 
-Each trial saves its source fingerprint, package versions, elapsed seconds and exact settings. Earlier non-MPD runs have a different source fingerprint because the MPD reference-pressure handling was subsequently corrected; that change does not affect their physical settings. Only the final MPD trials are retained. The summaries link every retained bracket. The C6 STOP review was accepted before C7. The release pins and their fresh CI bracketing evidence are recorded in [release verification](../../releases/v1.3.4.md).
+Each trial saves its source fingerprint, package versions, elapsed seconds and exact settings. Earlier non-MPD runs have a different source fingerprint because the MPD reference-pressure handling was subsequently corrected; that change does not affect their physical settings. Only the final MPD trials are retained. The summaries link every retained bracket. The C6 STOP review was accepted before C7.
 
 The [evidence manifest](../../../results/levers/manifest.json) records the source files and checksums of the retained trial and summary files. The reconstructed base agrees with the reviewed checkpoint within 0.00003 C at the bit and 0.00005 kg/m3 at the common-window bounds.
 

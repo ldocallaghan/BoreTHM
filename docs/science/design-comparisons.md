@@ -160,6 +160,6 @@ Sources checked on 11 October 2026. Availability describes the product or practi
 
 ## Evidence and reproduction
 
-The [reviewed trial outputs](../../results/levers/) and their [manifest](../../results/levers/manifest.json) retain all settings and brackets. Fresh release evidence is documented in the [v1.3.4 release verification](../releases/v1.3.4.md). The [historical review](../archive/v1.3.4/design-review.md) records implementation and testing history.
+The [reviewed trial outputs](../../results/levers/) and their [manifest](../../results/levers/manifest.json) retain all settings and brackets. The [historical review](../archive/v1.3.4/design-review.md) records implementation and testing history.
 
 From the repository root, use `python src/levers.py --sites soultz united-downs --levers L1 L2 L3 L4 L5 L6 L7 L8`, followed by `python src/lever_flow_limit.py` and `python src/lever_pairs.py`, to reproduce the study. These are lengthy physical calculations. The [maintenance priorities](../maintenance/development.md) record the already-met timeline trigger and the reason for deferral.

@@ -1,6 +1,6 @@
 # Archived v1.3.4 implementation checkpoint
 
-**Historical record from the v1.3.4 development cycle.** Future-tense statements and release-status statements describe the checkpoint when this review was written. The release was published on 12 October 2026; see [its verification](../../releases/v1.3.4.md). For current reading paths, use the [documentation guide](../../README.md).
+**Historical record from the v1.3.4 development cycle.** Future-tense statements and release-status statements describe the checkpoint when this review was written. The release was published on 12 October 2026. For current reading paths, use the [documentation guide](../../README.md).
 
 This is the first STOP review in the supplied v1.3.4 specification. These are verdicts for the stated programme and assumptions. C5 and C6 have not begun, and the v1.3.3 goldens are unchanged.
 

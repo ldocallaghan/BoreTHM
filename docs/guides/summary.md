@@ -57,6 +57,6 @@ The base deep-site verdicts persist across the [A1-A9 comparisons performed](../
 2. Which fluids maintain the required density and rheology through circulation and hot trips? Measurements under the relevant temperature and pressure conditions would constrain the fluid assumptions.
 3. How are insulated pipe and managed-pressure equipment qualified for the complete hot cycle? Public qualification procedures or test records would clarify the scope of their ratings.
 
-Model development is paused for specialist feedback on these assumptions and their practical applicability. A relevant measurement, qualification record or clearly discriminating hypothesis can guide the next focused study.
+A relevant measurement, qualification record or clearly discriminating hypothesis can guide the next focused study.
 
 [Repository and setup](https://github.com/ldocallaghan/BoreTHM) · [Documentation guide](../README.md) · [Saved reference evidence](../../results/v1.3.4/ci/38186784798-1/reference/)

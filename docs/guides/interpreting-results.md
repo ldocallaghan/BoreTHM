@@ -24,7 +24,7 @@ Start with `status.label` and `status.reasons`. A verdict belongs to the evaluat
 | `sensitivities` | The named comparisons actually supplied; these are not a complete uncertainty analysis |
 | `versions`, `evaluation` | Code/runtime provenance and calculation mode |
 
-The CLI prints a subset of the JSON detail. Its label “Common windows” corresponds to the density bounds described below. The reader terminology does not rename the stored fields.
+The CLI prints a subset of the JSON detail. Its label “Common windows” corresponds to the density bounds described below. These names do not rename the stored fields.
 
 ## Pressure units and density bounds
 

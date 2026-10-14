@@ -139,7 +139,7 @@ Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C a
 
 Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. They do not measure how close the entire programme is to passing: incompatible density requirements elsewhere in the hole and coating qualification remain independent issues.
 
-Sources: [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json), [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), and settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). The [reader summary](docs/guides/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf), gives the findings and open questions together.
+Sources: [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json), [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), and settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). The [summary](docs/guides/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf), gives the findings and open questions together.
 
 ### Design comparisons
 
@@ -170,12 +170,6 @@ Immediate exposure and the skin heuristic prevent cooling from reducing the init
 
 The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](docs/science/approximation-comparisons.md). These generally change one approximation at a time and do not cover every joint uncertainty. Coolant delivery, trip timing and fluid displacement are among the [deferred approximations](docs/science/limitations.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
 
-## Development and feedback
-
-Model expansion is paused for specialist feedback on the assumptions and practical applicability. Corrections to demonstrated defects remain in scope. Feedback is most useful when it identifies a relevant observation or qualification record, or explains which assumption changes a decision. The [reader summary](docs/guides/summary.md#questions-for-specialist-discussion) sets out the focused research questions.
-
-**H-01 trigger met; implementation deferred by project priority.** Soultz's casing and paired interventions meet the proximity trigger for a common event timeline, but other gates still fail and no operating range is claimed. Revisit before a near-threshold feasibility claim, or when feedback or new data makes timing decision-relevant. Coolant delivery and fluid displacement retain distinct triggers in the [development priorities](docs/maintenance/development.md).
-
 ## Tests and reproducibility
 
 Run the fast suite in the activated environment:
@@ -192,7 +186,7 @@ python -m pytest -m "slow or not slow"
 
 Full physical runs can take an hour or more. Single-threaded BLAS avoids oversubscription during repeated solves; set `OPENBLAS_NUM_THREADS=1` and `OMP_NUM_THREADS=1` before starting Python for those runs.
 
-Saved reference outputs and numerical regression tables support comparison with the published calculations. [Release records](docs/releases/README.md) document the environment and verification; the [changelog](CHANGELOG.md) records changes. Historical diagnostic figures use their stated programmes and should be interpreted with their captions.
+Saved reference outputs and numerical regression tables support comparison with the published calculations. The [changelog](CHANGELOG.md) records changes. Historical diagnostic figures use their stated programmes and should be interpreted with their captions.
 
 ## Find your way around the repository
 
