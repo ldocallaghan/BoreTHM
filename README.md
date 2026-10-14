@@ -216,4 +216,4 @@ The [FORGE](data/forge16b/README.md) and [Newberry](data/newberry/README.md) dat
 
 ## Licence
 
-The code is released under the [MIT licence](LICENSE). Data retain their source licences, as recorded in their data guides.
+The code in `src/`, `tools/`, `tests/` and `examples/` is released under the [Apache License 2.0](LICENSE). The documentation, figures, results and summary PDF are released under [CC BY 4.0](LICENSE-docs). Data in `data/` keep their source licences, as recorded in their data guides and in [NOTICE](NOTICE). Releases up to v1.3.4 were published under the MIT licence.

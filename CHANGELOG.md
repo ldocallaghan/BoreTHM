@@ -10,6 +10,8 @@ The patch distinguishes target SG-equivalent pressures from surface-SG common wi
 
 Package and citation metadata advance to 1.3.5. Calculation mode v1.3.4, model source, inputs, physical defaults and numerical goldens remain unchanged. Documentation now separates practical guides, scientific studies, release verification and labelled historical reviews, with a reading guide at `docs/README.md`. The output guide describes the fields actually present in the retained assessments. All 112 evidence checksums match, and the fast suite passes 357 tests in 14.24 s after the reorganisation. The [release record](docs/releases/v1.3.5.md) preserves the original CI provenance; publication preparation is tracked separately. Outreach and new modelling remain separate work.
 
+The code licence changes from MIT to Apache 2.0, which adds an explicit patent grant. Documentation, figures, results and the summary PDF are licensed under CC BY 4.0. Data keep their source licences, now listed in `NOTICE`. Releases up to v1.3.4 remain under MIT. Package and citation metadata name the repository as BoreTHM.
+
 ## v1.3.4: NO-GO for this programme and these assumptions at the deep sites (12 October 2026)
 
 The confirmed mixture, fluid-feedback and depth-coverage errors are corrected. Each verdict belongs to the stated programme and assumptions. No evaluated design lever or permitted pair reopens either deep site; no full-site minimum or complete operating envelope is established.
