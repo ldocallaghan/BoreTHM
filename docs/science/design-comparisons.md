@@ -20,6 +20,8 @@ Empty MPD density families retain finite diagnostic gaps in the JSON. Their nega
 
 ## Soultz: NO-GO for this programme and these assumptions
 
+Where an upper bound is the same in every stress and strength case, the tables name the first case. In the rows listed here the case named for the upper bound does not set it alone: at Soultz, L2 to L8 and the L2 + L4 pair; at United Downs, L2 to L8 and the L3 + L7 pair. The L1 trials keep no bounds for each case, so their rows are not included.
+
 | Lever | Reopens / minimum | Selected evaluated setting | Binding constraints | Verdict and fluid evaluation | Availability |
 |---|---|---|---|---|---|
 | L1 constant-BHP MPD | No; none found | BHP 141.575 MPa; [trials](../../results/levers/soultz/L1/summary.json) | trip: lower trip 10700 m (SHmax lower bound (0.90 Sv), lab UCS 100); upper trip 10700 m (SHmax lower bound (0.90 Sv), lab UCS 100). Other failures: drilling_fluid, trip_fluid, wall stability, MPD pressure control / working-pressure rating | NO-GO; D/T widths -0.00051/-0.00249; simulated 1.35947/1.35947 SG; demands 1.35892/1.35892 SG; tool D/connection/run-in 196.15/196.47/197.52 C | Available practice; thermal qualification unknown [1,2] |
