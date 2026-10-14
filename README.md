@@ -68,7 +68,7 @@ Start with `status` and its reasons, then inspect the components that set it. Th
 | NO-GO | A modeled gate fails for this programme and these assumptions; the reasons identify the failing components. |
 | INDETERMINATE | A required numerical result did not converge, or an equipment qualification remains unresolved without another decisive failure. |
 
-An overall NO-GO can coexist with an INDETERMINATE coating check. Exceeding a manufacturer's stated coating rating identifies a qualification question; it is not a validated prediction of a particular failure mode.
+An overall NO-GO can coexist with an INDETERMINATE coating check. Exceeding a manufacturer's stated coating rating identifies a qualification question. It does not predict a particular failure mode.
 
 A **mud-weight window** is the allowable range of fluid density: enough pressure to keep the borehole stable while staying below the modeled fracture-pressure limit. BoreTHM calculates the range that satisfies all evaluated depths, operating states and stress/strength cases, separately for drilling and trips.
 
@@ -77,7 +77,7 @@ Two pressure descriptions appear in the outputs:
 - **Target SG-equivalent** expresses pressure as an equivalent static column at the target. It is a local stability diagnostic, with the existing friction/backpressure treatment.
 - **Surface SG at 20 °C** is fluid density divided by 1,000 kg/m³. The combined pressure constraints set the allowable range of that surface density.
 
-A positive target interval does not establish a workable whole-hole fluid. If the required minimum density exceeds the permitted maximum, no mud density satisfies both pressure limits. The attempted densities reported in that situation are calculation inputs, not admissible prescriptions.
+A positive target interval does not establish a workable whole-hole fluid. If the required minimum density exceeds the permitted maximum, no mud density satisfies both pressure limits. The densities reported in that situation are calculation inputs and cannot be prescribed.
 
 ## Example results
 
@@ -100,7 +100,7 @@ At Soultz, eight of nine selected stress/strength cases have an open target dril
 <details>
 <summary>Target-depth case table and its interpretation</summary>
 
-Need and limit are static-column SG-equivalent values at the target, not surface mud-density prescriptions. The saved target stability-cycle verdict also checks connections and the trip; it excludes separate whole-hole, tool and equipment gates. Each site's reference thermal/hydraulic solution is reused across cases without a fresh coupled evaluation for each case. An open interval does not prove the saved attempted fluid lies inside it.
+Need and limit are static-column SG-equivalent values at the target. They differ from the surface mud densities a programme would prescribe. The saved target stability-cycle verdict also checks connections and the trip; it excludes separate whole-hole, tool and equipment gates. Each site's reference thermal/hydraulic solution is reused across cases without a fresh coupled evaluation for each case. An open interval does not prove the saved attempted fluid lies inside it.
 
 | Case | UCS, MPa | Drilling need / limit, SG-equivalent | Target stability-cycle verdict |
 |---|---:|---|---|
@@ -118,7 +118,7 @@ Need and limit are static-column SG-equivalent values at the target, not surface
 | United Downs: weak zones, 0 K | 147 | 1.234 / 1.220 | NO-GO |
 | United Downs: weak zones, 40 K | 118 | 1.267 / 1.220 | NO-GO |
 
-Soultz target 10.70 km; United Downs target 12.86 km. Sv is vertical stress. United Downs retains the existing 0 K / 40 K strength-calibration cases; these labels do not specify a newly applied cooling intervention. These 13 selected scenarios are not samples from a probability distribution. Eight of nine and two of four describe open target drilling intervals, not probabilities of successful drilling. All verdicts refer to this programme and these assumptions.
+Soultz target 10.70 km; United Downs target 12.86 km. Sv is vertical stress. United Downs retains the existing 0 K / 40 K strength-calibration cases; these labels do not specify a newly applied cooling intervention. These 13 selected scenarios are not samples from a probability distribution. Eight of nine and two of four count the cases with an open target drilling interval. They do not estimate a probability of successful drilling. All verdicts refer to this programme and these assumptions.
 
 </details>
 
@@ -133,7 +133,7 @@ The bounds below combine the pressure constraints across the evaluated depths, s
 | United Downs drilling | 1.33132 / 1.28519 | -0.04613 |
 | United Downs trip | 1.40134 / 1.36503 | -0.03631 |
 
-**Tool peaks, drilling / connection / best attempted run-in:** Soultz: 197.0 / 197.3 / 201.2 °C; United Downs: 205.7 / 206.1 / 224.5 °C. The limit is 200 °C. Best attempted means the lowest peak in the retained schedule search, not an optimum over every possible schedule. Soultz's reference FORGE-practice run-in reaches 214.5 °C, separately from the 201.2 °C search result.
+**Tool peaks, drilling / connection / best attempted run-in:** Soultz: 197.0 / 197.3 / 201.2 °C; United Downs: 205.7 / 206.1 / 224.5 °C. The limit is 200 °C. Best attempted means the lowest peak among the schedules searched. A wider search could find a lower one. Soultz's reference FORGE-practice run-in reaches 214.5 °C, separately from the 201.2 °C search result.
 
 Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C at United Downs, against the stated 204 °C rating. Both retain **INDETERMINATE qualification**. The coating histories are not necessarily those of the best attempted tool schedule.
 
@@ -166,7 +166,7 @@ BoreTHM screens a stated drilling programme. A passing result is conditional on 
 
 The deep targets lie well below measured stress data. Strength calibration depends on the assumed stress profile, and the reference mud's rheology and constant barite properties are approximations. Full-cycle qualification of insulated pipe and managed-pressure equipment remains unresolved for the hot conditions studied.
 
-Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. The failure-delay experiments are unsupported hypotheses, not evidence that breakouts wait an hour. Near-bit pre-cooling and breakout growth remain separate open questions.
+Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. The failure-delay experiments test hypotheses that no data yet support. They give no evidence that breakouts wait an hour to form. Near-bit pre-cooling and breakout growth remain separate open questions.
 
 The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](docs/science/approximation-comparisons.md). These generally change one approximation at a time and do not cover every joint uncertainty. Coolant delivery, trip timing and fluid displacement are among the [deferred approximations](docs/science/limitations.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
 

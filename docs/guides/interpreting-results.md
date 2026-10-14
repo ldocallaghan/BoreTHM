@@ -30,17 +30,17 @@ The CLI prints a subset of the JSON detail. Its label “Common windows” corre
 
 A mud-weight window is the allowable range of fluid density: enough pressure for borehole stability while staying below the modeled fracture-pressure limit. The programme combines the constraints across evaluated depths, operating states and stress/strength cases, separately for drilling and trips.
 
-Target `drill_SG` and `drill_SG_hi` in `cycle.cases[]` are static-column SG-equivalent pressures with the existing friction/backpressure treatment. They are local diagnostics, not surface mud-density prescriptions. A favourable drilling interval does not by itself determine the stability-cycle verdict, which also checks connections and the trip.
+Target `drill_SG` and `drill_SG_hi` in `cycle.cases[]` are static-column SG-equivalent pressures with the existing friction/backpressure treatment. They are local diagnostics and differ from surface mud-density prescriptions. A favourable drilling interval does not by itself determine the stability-cycle verdict, which also checks connections and the trip.
 
-The `lo` and `hi` values under `windows` are surface densities in kg/m³. Divide by 1,000 to express surface SG at 20 °C. Width is upper minus lower. If the minimum exceeds the maximum, no surface density satisfies both limits. Attempted densities for that case are calculation inputs, not feasible prescriptions. The `lo_by` and `hi_by` records identify the controlling constraint.
+The `lo` and `hi` values under `windows` are surface densities in kg/m³. Divide by 1,000 to express surface SG at 20 °C. Width is upper minus lower. If the minimum exceeds the maximum, no surface density satisfies both limits. Attempted densities for that case are calculation inputs and cannot be prescribed. The `lo_by` and `hi_by` records identify the controlling constraint.
 
 The target-case table reuses a site's reference thermal/hydraulic solution across stress/strength cases. It is not a coupled redesign for every scenario. Open target intervals neither prove one fluid works throughout the hole nor prove the attempted fluid lies inside the local interval.
 
 ## Tool schedules and coating qualification
 
-The reference-practice run-in history and the best attempted schedule search are distinct. The retained reference JSON reports the practice history under `tools.trip_in.staged`; the settings-matched base trials in the [design-study evidence](../../results/v1.3.4/ci/38186784798-1/levers/) record `metrics.tool_peaks_C`, `practice_run_in_peak_C` and `run_in_search`. Best attempted means the lowest peak among those saved attempts, not an optimum over all schedules.
+The reference-practice run-in history and the best attempted schedule search are distinct. The retained reference JSON reports the practice history under `tools.trip_in.staged`; the settings-matched base trials in the [design-study evidence](../../results/v1.3.4/ci/38186784798-1/levers/) record `metrics.tool_peaks_C`, `practice_run_in_peak_C` and `run_in_search`. Best attempted means the lowest peak among those saved attempts. A wider search could find a lower one.
 
-Coating histories are separate from the best attempted tool schedule. Exceeding a stated rating leaves qualification INDETERMINATE; it is not a validated prediction of a particular failure mode.
+Coating histories are separate from the best attempted tool schedule. Exceeding a stated rating leaves qualification INDETERMINATE. It does not predict a particular failure mode.
 
 ## What a single assessment does not provide
 
