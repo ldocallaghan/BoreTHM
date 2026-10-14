@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -178,8 +179,25 @@ def verify():
     metadata = tomllib.loads((ROOT / 'pyproject.toml').read_text(encoding='utf-8'))
     assert metadata['project']['version'] == '1.3.5'
     assert 'version: "1.3.5"' in (ROOT / 'CITATION.cff').read_text(encoding='utf-8')
+    licence = (ROOT / 'LICENSE').read_text(encoding='utf-8')
+    assert licence.lstrip().startswith('Apache License') and 'Version 2.0, January 2004' in licence
+    assert 'Attribution 4.0 International' in (ROOT / 'LICENSE-docs').read_text(encoding='utf-8')
+    assert "Copyright 2026 Liam O'Callaghan" in (ROOT / 'NOTICE').read_text(encoding='utf-8')
+    assert metadata['project']['license'] == 'Apache-2.0'
+    assert metadata['project']['urls']['Repository'].endswith('/BoreTHM')
+    citation = (ROOT / 'CITATION.cff').read_text(encoding='utf-8')
+    assert 'license: Apache-2.0' in citation
+    assert 'repository-code: "https://github.com/ldocallaghan/BoreTHM"' in citation
+    old_name = 'geothermal-thermo-' + 'hydraulic-model'
+    files = subprocess.run(['git', 'ls-files', '--cached', '--others', '--exclude-standard'],
+                           cwd=ROOT, capture_output=True, text=True, check=True).stdout.splitlines()
+    for name in files:
+        if name.startswith('docs/archive/') or not (ROOT / name).is_file():
+            continue
+        assert old_name.encode() not in (ROOT / name).read_bytes(), (name, 'old repository name')
     print('13 README case rows, compact summary rows, counts 8/9 and 2/4, 4 signed density bounds,')
-    print('coating status, 5 site statuses, 112 evidence checksums, reader links and version metadata verified.')
+    print('coating status, 5 site statuses, 112 evidence checksums, reader links, version and')
+    print('licence metadata verified.')
 
 
 if __name__ == '__main__':
