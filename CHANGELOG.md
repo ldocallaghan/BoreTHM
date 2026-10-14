@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.3.5: reader framing and a deliberate development pause (release candidate)
+## v1.3.5: reader framing and a deliberate development pause (14 October 2026)
 
 The project is now named BoreTHM. Reader documentation, the summary PDF and citation title use the new name; package metadata uses `borethm`.
 
