@@ -15,8 +15,8 @@ The circulation model is checked against Utah FORGE field data. Worked site asse
 Use Python 3.14.4 with the locked dependencies to reproduce the reference calculations. The models run directly from `src/`.
 
 ```bash
-git clone https://github.com/ldocallaghan/geothermal-thermo-hydraulic-model.git
-cd geothermal-thermo-hydraulic-model
+git clone https://github.com/ldocallaghan/BoreTHM.git
+cd BoreTHM
 python -m venv .venv
 ```
 
