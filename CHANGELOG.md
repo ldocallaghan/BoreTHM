@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.3.6 (unreleased)
+## v1.3.6 (19 October 2026)
 
 Adds the breakout-timing results from lever L7 at zero and one hour, a fixed delay scan, and a documentation page explaining them. The first sampled delay with an open whole-hole drilling window is 20 minutes at Soultz, bracketed by 15 and 20 minutes, and 15 minutes at United Downs, bracketed by 10 and 15 minutes. The complete programmes remain NO-GO.
 
