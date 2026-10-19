@@ -1,0 +1,333 @@
+{
+  "site": "soultz",
+  "scan_minutes": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    30,
+    45,
+    60,
+    90,
+    120
+  ],
+  "trials": [
+    {
+      "delay_min": 0,
+      "form_h": 0.0,
+      "drilling_fluid": {
+        "lo": 1378.9248396137127,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1312.5588573314958,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "SHmax upper bound (1.05 Sv), lab UCS 100"
+        ],
+        "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100"
+      },
+      "drill_SG": 1.3128721463055864,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-0min.json",
+      "evidence_sha256": "959e8a0fc6055280601936c5b7d6d12eb58edca5a9c70b1eac97186c0d48170d",
+      "reused": true,
+      "elapsed_seconds": 57.688438799988944
+    },
+    {
+      "delay_min": 5,
+      "form_h": 0.08333333333333333,
+      "drilling_fluid": {
+        "lo": 1378.9248396137127,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1312.5588573314958,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "SHmax upper bound (1.05 Sv), lab UCS 100"
+        ],
+        "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100"
+      },
+      "drill_SG": 1.3128721463055864,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-5min.json",
+      "evidence_sha256": "b997fe5091d4a88064deddf03c059ced67bbb5c3225667882c27010f0a074018",
+      "reused": false,
+      "elapsed_seconds": 60.204967400000896
+    },
+    {
+      "delay_min": 10,
+      "form_h": 0.16666666666666666,
+      "drilling_fluid": {
+        "lo": 1361.320159242839,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1313.0391866950854,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "SHmax upper bound (1.05 Sv), lab UCS 100"
+        ],
+        "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100"
+      },
+      "drill_SG": 1.2959164369803875,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-10min.json",
+      "evidence_sha256": "e677d8430d48c0db5ff99cf78d148118f3ad70d2f235abfeafb3e5e98fb8d50b",
+      "reused": false,
+      "elapsed_seconds": 53.19776199996704
+    },
+    {
+      "delay_min": 15,
+      "form_h": 0.25,
+      "drilling_fluid": {
+        "lo": 1326.5280051322338,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1313.9981201632459,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "SHmax upper bound (1.05 Sv), lab UCS 100"
+        ],
+        "note": "none: no fluid suits the scenario SHmax upper bound (1.05 Sv), lab UCS 100"
+      },
+      "drill_SG": 1.2618147959221335,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-15min.json",
+      "evidence_sha256": "805de5b8daaafc3d95f50dba156e319a3aa776cae2c4d0de0d7a5d1dde32d3dd",
+      "reused": false,
+      "elapsed_seconds": 53.45135050005047
+    },
+    {
+      "delay_min": 20,
+      "form_h": 0.3333333333333333,
+      "drilling_fluid": {
+        "lo": 1303.4160135681268,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10700.0
+        },
+        "hi": 1314.6224281487187,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": true,
+        "fluid": 1303.4160135681268
+      },
+      "drill_SG": 1.2391694896439165,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-20min.json",
+      "evidence_sha256": "4ede581379687641f56103cfe8cd606773aab05cc64a1725c36945a83101374f",
+      "reused": false,
+      "elapsed_seconds": 53.581197099993005
+    },
+    {
+      "delay_min": 30,
+      "form_h": 0.5,
+      "drilling_fluid": {
+        "lo": 1275.9693197328038,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10550.0
+        },
+        "hi": 1314.2571485157298,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": true,
+        "fluid": 1275.9693197328038
+      },
+      "drill_SG": 1.2117349479679025,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-30min.json",
+      "evidence_sha256": "402f1c3da9d19da671eccb422d605c773de89adc9716f51c502415e02d6d3d63",
+      "reused": false,
+      "elapsed_seconds": 73.3368169000023
+    },
+    {
+      "delay_min": 45,
+      "form_h": 0.75,
+      "drilling_fluid": {
+        "lo": 1252.765072466533,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10550.0
+        },
+        "hi": 1304.3815546817016,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": true,
+        "fluid": 1252.765072466533
+      },
+      "drill_SG": 1.1890405867090301,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-45min.json",
+      "evidence_sha256": "043376bad3d2550d6d63dc0fc068b61087d968e04239569e2d9ea4ada274be24",
+      "reused": false,
+      "elapsed_seconds": 73.6601516000228
+    },
+    {
+      "delay_min": 60,
+      "form_h": 1.0,
+      "drilling_fluid": {
+        "lo": 1238.7628082134052,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10550.0
+        },
+        "hi": 1304.6331961017872,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": true,
+        "fluid": 1238.7628082134052
+      },
+      "drill_SG": 1.1753490605347825,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-60min.json",
+      "evidence_sha256": "8746d16990a185887ce7c99dec3dd298a5b76f75cf56505b7e5cca0ab794c6ac",
+      "reused": true,
+      "elapsed_seconds": 80.77729030000046
+    },
+    {
+      "delay_min": 90,
+      "form_h": 1.5,
+      "drilling_fluid": {
+        "lo": 1221.9373324021624,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10550.0
+        },
+        "hi": 1304.9373013433496,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": true,
+        "fluid": 1221.9373324021624
+      },
+      "drill_SG": 1.1588808147623217,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-90min.json",
+      "evidence_sha256": "60117022b41f59da4967f3118f86a10cd0ad6b3609dd69136809b582b5a77fb9",
+      "reused": false,
+      "elapsed_seconds": 73.92849149997346
+    },
+    {
+      "delay_min": 120,
+      "form_h": 2.0,
+      "drilling_fluid": {
+        "lo": 1211.7548858276816,
+        "lo_by": {
+          "state": "connection",
+          "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+          "md": 10550.0
+        },
+        "hi": 1305.123157843429,
+        "hi_by": {
+          "state": "drilling",
+          "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+          "md": 4000.0
+        },
+        "open": true,
+        "fluid": 1211.7548858276816
+      },
+      "drill_SG": 1.1489040263842185,
+      "deciding_case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+      "programme_verdict": "NO-GO",
+      "evidence": "soultz-120min.json",
+      "evidence_sha256": "2949d2e39731d8faa22ad6230b67503048fe81c998e6701841a675b50726bda9",
+      "reused": false,
+      "elapsed_seconds": 73.92600899998797
+    }
+  ],
+  "critical_delay": {
+    "minutes": 20,
+    "bracket": {
+      "closed_min": 15,
+      "open_min": 20
+    },
+    "status": "first open sampled window"
+  },
+  "elapsed_seconds": 517.3537122000125,
+  "fresh_runs": 8,
+  "reused_runs": 2,
+  "fresh_solve_seconds": 515.286745999998,
+  "versions": {
+    "commit": "5389d128bb56d18930cb9c09817e728304eb9db5",
+    "dirty": true,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "source_sha256": "c6cca213c2ec48998592fee95f71d59eb8dab958940cf154897d6ac45e5b169b",
+  "reporting_tool_sha256": "25e82c13329149e1e622e69cafe4cd41220c1c5527fe93d58eff73003c037ae3",
+  "criterion": "first sampled delay with drilling_fluid.open true; no interpolation or refinement"
+}

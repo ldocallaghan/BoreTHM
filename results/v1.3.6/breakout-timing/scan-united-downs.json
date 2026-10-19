@@ -1,0 +1,328 @@
+{
+  "site": "united-downs",
+  "scan_minutes": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    30,
+    45,
+    60,
+    90,
+    120
+  ],
+  "trials": [
+    {
+      "delay_min": 0,
+      "form_h": 0.0,
+      "drilling_fluid": {
+        "lo": 1331.3175191615755,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12857.142857142857
+        },
+        "hi": 1285.185600209884,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "Reinecker et al. (2021), weak zones, 40 K",
+          "Reinecker et al. (2021), weak zones, 40 K"
+        ],
+        "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K"
+      },
+      "drill_SG": 1.266726058676413,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-0min.json",
+      "evidence_sha256": "9e9c9030a2677efd65318910e8a518b65ddb397b667991f9bbac324445f7c3e1",
+      "reused": true,
+      "elapsed_seconds": 52.72136920003686
+    },
+    {
+      "delay_min": 5,
+      "form_h": 0.08333333333333333,
+      "drilling_fluid": {
+        "lo": 1331.3175191615755,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12857.142857142857
+        },
+        "hi": 1285.185600209884,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "Reinecker et al. (2021), weak zones, 40 K",
+          "Reinecker et al. (2021), weak zones, 40 K"
+        ],
+        "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K"
+      },
+      "drill_SG": 1.266726058676413,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-5min.json",
+      "evidence_sha256": "b0c5981af54c056905b1ac477838aae11e47e63e05dea1e0cdba748ecddbdf00",
+      "reused": false,
+      "elapsed_seconds": 54.23075069999322
+    },
+    {
+      "delay_min": 10,
+      "form_h": 0.16666666666666666,
+      "drilling_fluid": {
+        "lo": 1311.612653490994,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1285.6936035221725,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": false,
+        "fluid": null,
+        "deciding_pair": [
+          "Reinecker et al. (2021), weak zones, 40 K",
+          "Reinecker et al. (2021), weak zones, 40 K"
+        ],
+        "note": "none: no fluid suits the scenario Reinecker et al. (2021), weak zones, 40 K"
+      },
+      "drill_SG": 1.2460058832846943,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-10min.json",
+      "evidence_sha256": "0c965da7613bce8f85e916369fbdff9be80da71bcab68aa6ff0eb562cfb455b3",
+      "reused": false,
+      "elapsed_seconds": 56.49697829998331
+    },
+    {
+      "delay_min": 15,
+      "form_h": 0.25,
+      "drilling_fluid": {
+        "lo": 1277.1127062219268,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1286.5342677366978,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": true,
+        "fluid": 1277.1127062219268
+      },
+      "drill_SG": 1.2125210396669146,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-15min.json",
+      "evidence_sha256": "50f3ca939fc0955672303e88d75c6f039ae8d236eec38ba0a5d59c95d258b26d",
+      "reused": false,
+      "elapsed_seconds": 94.52209559996845
+    },
+    {
+      "delay_min": 20,
+      "form_h": 0.3333333333333333,
+      "drilling_fluid": {
+        "lo": 1256.42482705441,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1287.0634732945614,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": true,
+        "fluid": 1256.42482705441
+      },
+      "drill_SG": 1.1925157019044155,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-20min.json",
+      "evidence_sha256": "9c82b048f5ff2348dda800b4f95304c59a890750e0d7919307faf4e36f8f7910",
+      "reused": false,
+      "elapsed_seconds": 94.67005939997034
+    },
+    {
+      "delay_min": 30,
+      "form_h": 0.5,
+      "drilling_fluid": {
+        "lo": 1232.5119702407042,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1287.6854174535126,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": true,
+        "fluid": 1232.5119702407042
+      },
+      "drill_SG": 1.1693576612412118,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-30min.json",
+      "evidence_sha256": "8f370d27eaccde4a2db3bc31d09231f0f768817c745222497f9188e41e1d1625",
+      "reused": false,
+      "elapsed_seconds": 95.72913630004041
+    },
+    {
+      "delay_min": 45,
+      "form_h": 0.75,
+      "drilling_fluid": {
+        "lo": 1213.3534555446272,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1288.1930633678744,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": true,
+        "fluid": 1213.3534555446272
+      },
+      "drill_SG": 1.1507406065798442,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-45min.json",
+      "evidence_sha256": "7a3b8dc8cbe32fa89d7d71c901dfba2858fa605b90c01d495889687a815176f5",
+      "reused": false,
+      "elapsed_seconds": 78.76726150000468
+    },
+    {
+      "delay_min": 60,
+      "form_h": 1.0,
+      "drilling_fluid": {
+        "lo": 1201.9899951883754,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1288.4979005547207,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": true,
+        "fluid": 1201.9899951883754
+      },
+      "drill_SG": 1.1396674975026793,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-60min.json",
+      "evidence_sha256": "1e7f429db1efc69a7bc818dd87f9a15b295c78ad958d21382a4496530b23a72d",
+      "reused": true,
+      "elapsed_seconds": 78.48691460001282
+    },
+    {
+      "delay_min": 90,
+      "form_h": 1.5,
+      "drilling_fluid": {
+        "lo": 1188.4359115445095,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1288.861946938309,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": true,
+        "fluid": 1188.4359115445095
+      },
+      "drill_SG": 1.1264635249525354,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-90min.json",
+      "evidence_sha256": "d2263c9725ef32063b79d7cc3b14c5aec5c60a0d017b11ab9f66a5504432318f",
+      "reused": false,
+      "elapsed_seconds": 99.08662099996582
+    },
+    {
+      "delay_min": 120,
+      "form_h": 2.0,
+      "drilling_fluid": {
+        "lo": 1180.277254180925,
+        "lo_by": {
+          "state": "connection",
+          "case": "Reinecker et al. (2021), weak zones, 40 K",
+          "md": 12707.142857142857
+        },
+        "hi": 1289.085740960437,
+        "hi_by": {
+          "state": "drilling",
+          "case": "Reinecker et al. (2021), intact, 0 K",
+          "md": 12857.142857142857
+        },
+        "open": true,
+        "fluid": 1180.277254180925
+      },
+      "drill_SG": 1.1185079794248074,
+      "deciding_case": "Reinecker et al. (2021), weak zones, 40 K",
+      "programme_verdict": "NO-GO",
+      "evidence": "united-downs-120min.json",
+      "evidence_sha256": "41fcc7eb24f98c32125b5dd3645d1ca48746419423491b7340d382f4c06042f5",
+      "reused": false,
+      "elapsed_seconds": 78.91336189996218
+    }
+  ],
+  "critical_delay": {
+    "minutes": 15,
+    "bracket": {
+      "closed_min": 10,
+      "open_min": 15
+    },
+    "status": "first open sampled window"
+  },
+  "elapsed_seconds": 654.2061144000036,
+  "fresh_runs": 8,
+  "reused_runs": 2,
+  "fresh_solve_seconds": 652.4162646998884,
+  "versions": {
+    "commit": "5389d128bb56d18930cb9c09817e728304eb9db5",
+    "dirty": true,
+    "python": "3.14.4",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "source_sha256": "c6cca213c2ec48998592fee95f71d59eb8dab958940cf154897d6ac45e5b169b",
+  "reporting_tool_sha256": "25e82c13329149e1e622e69cafe4cd41220c1c5527fe93d58eff73003c037ae3",
+  "criterion": "first sampled delay with drilling_fluid.open true; no interpolation or refinement"
+}

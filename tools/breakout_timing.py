@@ -2,6 +2,7 @@
 
 Run from the repository root:
     python tools/breakout_timing.py
+    python tools/breakout_timing.py --scan --reuse
 
 The coupled programme evaluates every built-in stress and strength case.
 """
@@ -24,6 +25,7 @@ import site_evaluation as se
 RESULTS = ROOT / 'results/v1.3.6/breakout-timing'
 SITES = ('soultz', 'united-downs')
 SCHEMA = 1
+SCAN_MINUTES = (0, 5, 10, 15, 20, 30, 45, 60, 90, 120)
 
 
 def plain(value):
@@ -193,13 +195,88 @@ def render_result(record):
     return '\n'.join(rows)
 
 
+def critical_delay(trials):
+    """Return the first open sampled window and its preceding closed sample."""
+    first = next((i for i, row in enumerate(trials) if row['drilling_fluid']['open']), None)
+    if first is None:
+        return dict(minutes=None, bracket=None, status='no open window in the scan')
+    passing = trials[first]['delay_min']
+    bracket = (dict(closed_min=trials[first - 1]['delay_min'], open_min=passing)
+               if first else None)
+    return dict(minutes=passing, bracket=bracket, status='first open sampled window')
+
+
+def run_scan(key, output, reuse=False):
+    """Evaluate the fixed grid with the same coupled L7 entry point as the pair."""
+    started = time.perf_counter()
+    trials = []
+    for minutes in SCAN_MINUTES:
+        record, reused = run_case(key, minutes, output, reuse)
+        path = output / f'{key}-{minutes:g}min.json'
+        trials.append(dict(delay_min=minutes, form_h=record['settings']['form_h'],
+            drilling_fluid=record['windows']['drilling_fluid'],
+            drill_SG=record['cycle']['drill_SG'], deciding_case=record['cycle']['deciding_case'],
+            programme_verdict=record['status']['label'],
+            evidence=path.name, evidence_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+            reused=reused, elapsed_seconds=record['elapsed_seconds']))
+    scan = dict(site=key, scan_minutes=list(SCAN_MINUTES), trials=trials,
+                critical_delay=critical_delay(trials),
+                elapsed_seconds=time.perf_counter() - started,
+                fresh_runs=sum(not row['reused'] for row in trials),
+                reused_runs=sum(row['reused'] for row in trials),
+                fresh_solve_seconds=sum(row['elapsed_seconds'] for row in trials if not row['reused']),
+                versions=se.versions(), source_sha256=levers.fingerprint(),
+                reporting_tool_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                criterion='first sampled delay with drilling_fluid.open true; no interpolation or refinement')
+    write_json(output / f'scan-{key}.json', scan)
+    print(f"Critical delay {key}: {scan['critical_delay']}; scan {scan['elapsed_seconds']:.1f} s", flush=True)
+    return scan
+
+
+def render_scans(scans):
+    rows = ['# Breakout formation delay scan', '',
+            'The window bounds are surface SG at 20 C. drill_SG is the deciding case\'s SG-equivalent requirement at the target and includes its connection checks.', '',
+            '| Site | Delay, min | lo / 1000, surface SG | hi / 1000, surface SG | Drilling window open | drill_SG, SG-equivalent at target | Deciding case | Complete programme |',
+            '|---|---:|---:|---:|---|---:|---|---|']
+    for scan in scans:
+        for trial in scan['trials']:
+            w = trial['drilling_fluid']
+            rows.append(f"| {scan['site']} | {trial['delay_min']} | {w['lo'] / 1000:.6f} | "
+                        f"{w['hi'] / 1000:.6f} | {w['open']} | {trial['drill_SG']:.6f} | "
+                        f"{trial['deciding_case']} | {trial['programme_verdict']} |")
+    rows += ['', '## Critical delay brackets', '',
+             'These brackets describe the first passing sampled drilling-fluid window. The fixed grid has no interpolation or refinement. They do not establish a measured breakout formation time.', '']
+    for scan in scans:
+        critical = scan['critical_delay']
+        bracket = critical['bracket']
+        if bracket:
+            rows.append(f"- {scan['site']}: closed at {bracket['closed_min']} min; open at "
+                        f"{bracket['open_min']} min. First passing sampled delay: {critical['minutes']} min.")
+        else:
+            rows.append(f"- {scan['site']}: {critical['status']}; first passing delay {critical['minutes']}.")
+        rows.append(f"  Scan wall time: {scan['elapsed_seconds']:.1f} s; {scan['fresh_runs']} fresh runs "
+                    f"({scan['fresh_solve_seconds']:.1f} s of solves), {scan['reused_runs']} reused runs. "
+                    'Each JSON trial retains its own original calculation time and provenance.')
+    rows += ['', 'Reproduce from the repository root:', '', '```sh',
+             'python tools/breakout_timing.py',
+             'python tools/breakout_timing.py --scan --reuse', '```', '']
+    return '\n'.join(rows)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sites', nargs='+', choices=SITES, default=list(SITES))
     parser.add_argument('--output', type=Path, default=RESULTS)
     parser.add_argument('--reuse', action='store_true', help='reuse matching completed results')
+    parser.add_argument('--scan', action='store_true', help='scan the fixed 0 to 120 minute grid')
     args = parser.parse_args(argv)
     args.output.mkdir(parents=True, exist_ok=True)
+    if args.scan:
+        scans = []
+        for key in args.sites:
+            scans.append(run_scan(key, args.output, args.reuse))
+            (args.output / 'scan.md').write_text(render_scans(scans), encoding='utf-8', newline='\n')
+        return
     for key in args.sites:
         for minutes in (0, 60):
             record, _ = run_case(key, minutes, args.output, args.reuse)
