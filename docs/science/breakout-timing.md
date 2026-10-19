@@ -147,8 +147,8 @@ From the repository root, install the locked dependencies and run the reporting 
 
 ```sh
 python -m pip install -r requirements-lock.txt
-python tools/breakout_timing.py
-python tools/breakout_timing.py --scan --reuse
+python tools/breakout_timing.py --output ../borethm-timing-reproduction
+python tools/breakout_timing.py --scan --reuse --output ../borethm-timing-reproduction
 ```
 
-The default output is `results/v1.3.6/breakout-timing/`. To retain a separate reproduction, add `--output <directory>` to both reporting commands. `--reuse` accepts completed results only when their settings and model/data/runtime fingerprint match. Each new physical run repeats the coupled programme evaluation. The model, inputs and defaults are unchanged from v1.3.5.
+The commands write a separate reproduction beside the checkout. The recorded release evidence remains in `results/v1.3.6/breakout-timing/`, the tool's default output directory. `--reuse` accepts completed results only when their settings and model/data/runtime fingerprint match. Each new physical run repeats the coupled programme evaluation. The model, inputs and defaults are unchanged from v1.3.5.
