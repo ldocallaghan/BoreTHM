@@ -141,6 +141,10 @@ Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are
 
 Sources: [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json), [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), and settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). The [summary](docs/guides/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf), gives the findings and open questions together.
 
+### Breakout timing
+
+Whether breakouts form as soon as the rock is exposed, or take time to form, decides whether a drilling mud weight window exists at Soultz and United Downs. See [Breakout timing](docs/science/breakout-timing.md) for the criterion, the results and how to reproduce them.
+
 ### Design comparisons
 
 No evaluated single-lever setting or evaluated pair made either deep site's programme pass. Deeper casing gives Soultz an allowable trip-fluid density range while drilling and tools still fail. Lower viscosity can give United Downs an allowable drilling-fluid density range while other gates still fail. Stronger insulation cools tools but leaves pressure and pump constraints.
@@ -166,7 +170,7 @@ BoreTHM screens a stated drilling programme. A passing result is conditional on 
 
 The deep targets lie well below measured stress data. Strength calibration depends on the assumed stress profile, and the reference mud's rheology and constant barite properties are approximations. Full-cycle qualification of insulated pipe and managed-pressure equipment remains unresolved for the hot conditions studied.
 
-Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. The failure-delay experiments test hypotheses that no data yet support. They give no evidence that breakouts wait an hour to form. Near-bit pre-cooling and breakout growth remain separate open questions.
+Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. The [failure-delay experiments](docs/science/breakout-timing.md) test hypotheses that no data yet support. They give no evidence that breakouts wait an hour to form. Near-bit pre-cooling and breakout growth remain separate open questions.
 
 The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](docs/science/approximation-comparisons.md). These generally change one approximation at a time and do not cover every joint uncertainty. Coolant delivery, trip timing and fluid displacement are among the [deferred approximations](docs/science/limitations.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
 
