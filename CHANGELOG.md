@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.6 (unreleased)
+
+Adds the breakout-timing results from lever L7 at zero and one hour, a fixed delay scan, and a documentation page explaining them. The first sampled delay with an open whole-hole drilling window is 20 minutes at Soultz, bracketed by 15 and 20 minutes, and 15 minutes at United Downs, bracketed by 10 and 15 minutes. The complete programmes remain NO-GO.
+
+The reporting tool records per-case target requirements separately from surface-density bounds and identifies the remaining failures. New regressions check the paired results, opening brackets and published values. No model, input or default changes.
+
 ## v1.3.5 (14 October 2026)
 
 The project is renamed BoreTHM, and the package `borethm`. The README is rewritten as a guide to the project, and the documentation is reorganised under `docs/` into guides, scientific pages, maintenance notes and an archive of the v1.3.4 reviews. The two-page summary (`docs/guides/summary.md`, with a PDF in `output/pdf/`) is rewritten. It sets the open target drilling intervals in eight of nine Soultz cases and two of four United Downs cases beside the failures of the complete programme; both sites remain NO-GO.

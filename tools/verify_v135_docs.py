@@ -177,8 +177,8 @@ def verify():
                     slugs = {re.sub(r'[^\w -]', '', heading).replace(' ', '-') for heading in headings}
                     assert anchor in slugs, (doc, link, 'missing heading')
     metadata = tomllib.loads((ROOT / 'pyproject.toml').read_text(encoding='utf-8'))
-    assert metadata['project']['version'] == '1.3.5'
-    assert 'version: "1.3.5"' in (ROOT / 'CITATION.cff').read_text(encoding='utf-8')
+    assert metadata['project']['version'] == '1.3.6'
+    assert 'version: "1.3.6"' in (ROOT / 'CITATION.cff').read_text(encoding='utf-8')
     licence = (ROOT / 'LICENSE').read_text(encoding='utf-8')
     assert licence.lstrip().startswith('Apache License') and 'Version 2.0, January 2004' in licence
     assert 'Attribution 4.0 International' in (ROOT / 'LICENSE-docs').read_text(encoding='utf-8')
