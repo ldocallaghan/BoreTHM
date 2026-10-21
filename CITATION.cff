@@ -4,11 +4,12 @@ title: "BoreTHM: models of circulating temperature and borehole stability for dr
 authors:
   - family-names: "O'Callaghan"
     given-names: "Liam"
+    orcid: "https://orcid.org/0009-0003-3943-7330"
 version: "1.4.0"
 license: Apache-2.0
 date-released: "2026-10-22"
 repository-code: "https://github.com/ldocallaghan/BoreTHM"
-# doi: "10.5281/zenodo.XXXXXXX"   # to be added once the repository is archived on Zenodo
+doi: "10.5281/zenodo.23549104"
 keywords:
   - geothermal
   - superhot rock

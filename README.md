@@ -230,7 +230,7 @@ Saved reference outputs and numerical regression tables support comparison with 
 
 ## How to cite and data credits
 
-Use [CITATION.cff](CITATION.cff) for the software citation. The [scientific bibliography](docs/science/sources.md#references) lists the scientific sources.
+Cite BoreTHM using the [software DOI](https://doi.org/10.5281/zenodo.23549104). [CITATION.cff](CITATION.cff) provides the citation metadata. The [scientific bibliography](docs/science/sources.md#references) lists the scientific sources.
 
 The [benchmark dataset](benchmarks/README.md#how-to-cite) has a separate citation. Its DOI will be added after deposit on Zenodo.
 
