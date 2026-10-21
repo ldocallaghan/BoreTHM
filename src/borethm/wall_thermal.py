@@ -43,7 +43,13 @@ class State:
     """One state of the well. kind: "circulating" (T_fluid, h), "static"
     (h, C; the fluid node starts at T_node0, or at the last circulating fluid
     temperature if None), "fixed" (T_wall) or "flux" (q, W/m into the wall,
-    negative when heat is drawn out)."""
+    negative when heat is drawn out).
+
+    Construct one history item for wall_temperatures. duration is seconds;
+    temperatures are degrees C; h is W/(m2 K); C is fluid heat capacity per
+    unit length [J/(m K)]; q is W/m into the rock. kind selects the required
+    boundary inputs. The label is descriptive text.
+    """
     kind: str
     duration: float                 # s
     T_fluid: float = None
@@ -106,7 +112,15 @@ class Result:
 def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growth=1.08,
         probe_r=None):
     """Conduct heat through the history of states. T_rock: far-field and
-    initial temperature (or T0, an initial field on the grid)."""
+    initial temperature (or T0, an initial field on the grid).
+
+    history contains WallState objects with durations [s]. T_rock and T0
+    are degrees C; a and r_max are radii [m], k is W/(m K), and rhocp is
+    J/(m3 K). T0, if supplied, is an initial temperature array on the grid.
+    n sets grid size; dt0 is seconds; growth is dimensionless; probe_r is m.
+    Returns a Result with t [s], r [m], T_wall, T_node and fields [degrees C],
+    q_wall [W/m into rock], energy_in, energy_far and stored [J/m].
+    """
     alpha = k / rhocp
     total = sum(s.duration for s in history)
     r, faces, vol = Grid(a, r_max or r_max_for(a, alpha, total), n).build()

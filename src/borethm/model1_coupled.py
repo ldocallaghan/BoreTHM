@@ -373,6 +373,14 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     one, properties are at T_avg and mid-depth pressure throughout.
 
       SPP = dP_string + dP_bit + dP_annulus + integral (rho_ann - rho_bore) g dTVD
+
+    The first two arguments, m_dot [kg/s] and geometry [WellGeometry],
+    are required. result is a circulating_temperatures result; T_avg is
+    degrees C, tfa is m2 and P_surface is Pa. bit enables nozzle loss;
+    friction selects the friction law. fluid=None uses water; otherwise
+    use a constant property dictionary or an object providing props.
+    Return a dictionary with pressure losses and spp [Pa], annular velocities
+    [m/s], hydraulic pump power [W], and flow diagnostics.
     """
     top, bot = _pieces(geometry)
     mid = 0.5 * (top + bot)

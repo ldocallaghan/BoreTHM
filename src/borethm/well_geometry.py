@@ -31,6 +31,10 @@ INCH = 0.0254
 
 @dataclass(frozen=True)
 class Layer:
+    """A concentric wall layer, with inner and outer radii [m] and k [W/(m K)].
+
+    Construct from r_in, r_out, k. resistance() returns K m/W.
+    """
     r_in: float
     r_out: float
     k: float
@@ -48,7 +52,12 @@ def _check_concentric(layers):
 @dataclass(frozen=True)
 class PipeType:
     """A drill pipe's wall, inside out. A tool joint is modelled as bare steel
-    across the same bore and outside radius."""
+    across the same bore and outside radius.
+
+    layers is a tuple of Layer objects, with radii [m] and conductivity
+    [W/(m K)]. joint_fraction is dimensionless. Returns a pipe with r_bore
+    and r_out [m]; resistance methods return K m/W. source records provenance.
+    """
     name: str
     layers: tuple
     joint_fraction: float = 0.0
@@ -79,7 +88,10 @@ class PipeType:
 
 def uniform_wall(k, r_in=C.R_INNER_PIPE_IN, r_out=C.R_INNER_PIPE_OUT, name=None):
     """One wall layer of conductivity k, on the model's original 100 mm bore
-    and 120 mm outside diameter unless given."""
+    and 120 mm outside diameter unless given.
+
+    k is W/(m K); r_in and r_out are radii [m]. Returns a PipeType.
+    """
     return PipeType(name or f"uniform wall, {k} W/m/K", (Layer(r_in, r_out, k),))
 
 
@@ -132,6 +144,10 @@ LEGACY_VACUUM = uniform_wall(0.02, name="legacy vacuum tubing, 0.02 W/m/K")
 
 @dataclass(frozen=True)
 class StringSegment:
+    """A drill-string segment of length [m], using the supplied PipeType.
+
+    Construct in surface-to-bit order as an input to WellGeometry.
+    """
     length: float
     pipe: PipeType
 
@@ -139,7 +155,11 @@ class StringSegment:
 @dataclass(frozen=True)
 class HoleInterval:
     """From md_top to md_bottom: the annulus's outer radius r_wall and the
-    layers outside it, up to the rock. layers=() is open hole."""
+    layers outside it, up to the rock. layers=() is open hole.
+
+    All measured depths and radii are m. layers is a tuple of Layer
+    objects with conductivity [W/(m K)]. resistance() returns K m/W.
+    """
     md_top: float
     md_bottom: float
     r_wall: float
@@ -160,11 +180,19 @@ class HoleInterval:
 
 
 def open_hole(md_top, md_bottom, d_hole):
+    """Construct an open HoleInterval from measured depths [m] and hole diameter [m].
+
+    Arguments are md_top, md_bottom, d_hole; returned r_wall is a radius [m].
+    """
     return HoleInterval(md_top, md_bottom, d_hole / 2)
 
 
 def cased(md_top, md_bottom, casing_id, casing_od, d_hole, k_cement=K_CEMENT):
-    """A single casing string cemented into a hole of diameter d_hole."""
+    """A single casing string cemented into a hole of diameter d_hole.
+
+    Measured depths and all diameters are m; k_cement is W/(m K).
+    Returns a HoleInterval containing casing steel and cement layers.
+    """
     return HoleInterval(md_top, md_bottom, casing_id / 2,
                         (Layer(casing_id / 2, casing_od / 2, K_STEEL),
                          Layer(casing_od / 2, d_hole / 2, k_cement)))
@@ -173,7 +201,13 @@ def cased(md_top, md_bottom, casing_id, casing_od, d_hole, k_cement=K_CEMENT):
 class Survey:
     """Measured depth to true vertical depth. Built from survey stations
     (minimum curvature) or from a table of TVD against MD; interpolated
-    linearly between stations."""
+    linearly between stations.
+
+    Construct with matching measured-depth md and true-vertical-depth tvd
+    arrays [m]. tvd(s) returns true vertical depth [m]. vertical() gives a
+    vertical survey; from_stations takes depths [m], inclination and azimuth
+    [degrees] and initial true vertical depth tvd0 [m].
+    """
 
     def __init__(self, md, tvd):
         self.md = np.asarray(md, float)
@@ -209,7 +243,16 @@ class Survey:
 
 
 class WellGeometry:
-    """The string and hole, with per-node lookups vectorised over s."""
+    """The string and hole, with per-node lookups vectorised over s.
+
+    string is a sequence of StringSegment objects from surface to bit;
+    hole is a contiguous sequence of HoleInterval objects covering the string;
+    survey is a Survey, defaulting to vertical. Depths and radii are m.
+    WellGeometry.single(length, pipe, r_hole=0.108, survey=None) constructs
+    a single segment in open hole, with length and hole radius in m.
+    Returns geometry with md_bit [m], survey, and vectorised at(s) properties
+    for measured depths s [m], including radii [m] and resistances [K m/W].
+    """
 
     def __init__(self, string, hole, survey=None):
         self.string = tuple(string)

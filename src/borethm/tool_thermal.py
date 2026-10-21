@@ -43,7 +43,12 @@ STEEL_CP = 434.0        # J/kg/K
 @dataclass
 class Lump:
     """A length of string per metre: steel heat capacity C_s and internal
-    fluid heat capacity C_f [J/m/K], and the inner and outer perimeters [m]."""
+    fluid heat capacity C_f [J/m/K], and the inner and outer perimeters [m].
+
+    D_in is the internal diameter [m]. Construct directly, or call
+    ToolLump.of_pipe(r_bore, r_out, rhocp_fluid), with radii [m] and fluid
+    volumetric heat capacity [J/(m3 K)]. The result is input to tool_trip_in.
+    """
     C_s: float
     C_f: float
     P_in: float
@@ -126,7 +131,15 @@ def trip_in(lump, column, md_bottom, speed, T0, h_static_out, h_static_in, stage
     column whose temperature is column(md), from T0 at surface, holding for
     stage_s of circulation at each of the measured depths in stages;
     circulating(md) gives (T_flow, h_in, h_out) there. Returns the History
-    and the depth [m] at each of its times."""
+    and the depth [m] at each of its times.
+
+    lump is a ToolLump; column maps measured depth [m] to degrees C.
+    T0 and circulating temperatures are degrees C; h_static_out and
+    h_static_in are W/(m2 K). md_bottom and stages are measured depths [m];
+    stage_s and dt are seconds. Returns (History, depths), with History.t [s],
+    History.T_s and History.T_f [degrees C], and depths [m]. History.peak()
+    returns (peak internal-fluid temperature [degrees C], time [s]).
+    """
     T_s, T_f = T0, T0
     depth, t_all, Ts_all, Tf_all, labels = [0.0], [0.0], [T0], [T0], [""]
     stops = sorted(d for d in stages if 0.0 < d < md_bottom)

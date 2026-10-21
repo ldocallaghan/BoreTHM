@@ -80,7 +80,14 @@ def _clip(T_C, P_Pa):
 
 
 def props(T_C, P_Pa):
-    """Vectorized: returns (rho, cp, mu, k) arrays for T[degC], P[Pa]."""
+    """Return water properties for temperature T_C [degrees C] and P_Pa [Pa].
+
+    Inputs may be scalars or matching arrays. Returns (rho [kg/m3],
+    cp [J/(kg K)], mu [Pa s], k [W/(m K)]) as arrays. Values are
+    interpolated from the cached IAPWS-95 table; inputs outside its
+    temperature and pressure range are clipped to the table boundaries.
+    The table is built on first use when no cache is present.
+    """
     pts = _clip(T_C, P_Pa)
     f = _interpolators()
     return f["RHO"](pts), f["CP"](pts), f["MU"](pts), f["K"](pts)
@@ -90,10 +97,19 @@ def cp(T_C, P_Pa):
     return _interpolators()["CP"](_clip(T_C, P_Pa))
 
 
-if __name__ == "__main__":
-    import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+def main(argv=None):
+    import argparse
+    import sys
+    parser = argparse.ArgumentParser(description="Build or report the cached water-property table.")
+    parser.parse_args(argv)
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     print("table shape:", _interpolators()["CP"].values.shape, "cached at", _CACHE)
     for T in (15, 200, 450):
         for P in (5e6, 120e6):
             r, c, m, kk = props(np.array([T]), np.array([P]))
             print(f"T={T:4} P={P/1e6:5.0f}MPa rho={r[0]:7.1f} cp={c[0]:7.0f} mu={m[0]*1e6:6.1f} k={kk[0]:.3f}")
+
+
+if __name__ == "__main__":
+    main()

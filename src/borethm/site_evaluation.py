@@ -68,6 +68,11 @@ class StressProfile:
     Pore pressure is Pp_grad * (z - Pp_datum) below a static fluid level at
     Pp_datum [m], zero above it. z_data is the depth range [m] the magnitude data
     actually cover, or None when the profile rests on regime bounds alone.
+
+    Inputs ending in _grad are Pa/m; stress intercepts are Pa.
+    The constructor orders Sv, Shmin, then SHmax gradients. Methods Sv(z),
+    Shmin(z), SHmax(z) and Pp(z) return Pa for depth z [m]. mu is dimensionless;
+    regime is normal, strike-slip or reverse when specified.
     """
     label: str
     Sv_grad: float
@@ -151,6 +156,20 @@ def transitional_bounds(Sv_grad, source, Sv_int=0.0, Pp_grad=C.HYDROSTATIC_GRAD,
 
 @dataclass
 class SiteProfile:
+    """Site inputs for evaluate, with temperature and stress profiles.
+
+    geotherm maps depth [m] to rock temperature [degrees C]; target_depth is
+    m and target_T is degrees C. Stress and fluid pressure gradients are
+    Pa/m; K0_min and SHmax_over_Sv are dimensionless stress ratios.
+    k_rock is W/(m K); E_rock and UCS are Pa; T_inj is degrees C.
+    stress_cases contains StressProfile objects; strength_cases contains
+    (label, UCS [Pa]) pairs. data_basis maps input names to (basis, source).
+    temperature_data_to and optional replacement target depths are m.
+    mu is a dimensionless friction coefficient; coupled enables coupling to
+    the site's circulation. Construct a profile, then call validate_site.
+    Methods target() and temperature() give the effective depth [m] and
+    temperature [degrees C], including a replacement geotherm when supplied.
+    """
     name: str
     geotherm: callable          # z[m] -> T_rock[degC]
     target_depth: float         # m
@@ -257,7 +276,11 @@ def validate_site(site):
         the casing shoe (the open hole, where the stresses are used): the
         stresses positive, SHmax at least Shmin, Shmin above the pore
         pressure, and the order of the stated regime;
-      * every data-basis entry with a basis from BASES and a source."""
+      * every data-basis entry with a basis from BASES and a source.
+
+    Input is a SiteProfile in the units documented on that class. Returns a
+    list of warning strings; invalid inputs raise ValueError.
+    """
     errs, warns = [], []
     for k, (lo, hi, unit) in INPUT_RANGES.items():
         v = site.target() if k == 'target_depth' else getattr(site, k)
@@ -376,6 +399,9 @@ def thermal_hoop_stress(T_rock, T_wall, site=None):
     from Model 2 at the rock temperature, as Model 2 evaluates them. Negative
     (less compressive) when the wall is cooled. For a coupled site, E is the
     site's own E_rock scaled by Model 2's temperature factor.
+
+    Both temperature arguments are degrees C, in the order rock then wall.
+    Returns the hoop-stress change in Pa; site optionally supplies rock stiffness.
     """
     E, al = m2.E_of_T(T_rock), m2.alpha_of_T(T_rock)
     if site is not None and site.coupled:
@@ -515,6 +541,12 @@ def breakout_eff(Shmin, SHmax, Pw, Pp, T_rock, T_wall=None, UCS=None, dsigma_T=0
     dsigma_T = 0 it is breakout_v10 exactly. Same keys as breakout_v10, with
     sigma_theta the total hoop stress and mc_cold / mc_hot the total-stress
     limits (Pp plus the effective strength), so the two stay comparable.
+
+    Arguments start with Shmin then SHmax. All stresses, pressures, UCS
+    and dsigma_T are Pa; T_rock and T_wall are degrees C. Returns a dictionary:
+    sigma_theta, mc_hot, mc_cold and P_need [Pa], overbalance_MPa [MPa],
+    dimensionless over_hydro, and breaks and frac_limited flags. UCS=None
+    uses the model's intact strength; T_wall=None uses the existing wall cap.
     """
     if T_wall is None:
         T_wall = min(T_rock, T_WALL_CAP)
@@ -567,6 +599,15 @@ def mud_window(Shmin, SHmax, Pp, z, Pw_hydro, T_rock, T_wall=None, UCS=None,
 
     The SG figures are equivalent static densities, (P - P_surface) / (1000 g z),
     with P_surface the wellhead pressure.
+
+    Arguments start with Shmin then SHmax. Stresses and pressures, UCS,
+    dsigma_T and tensile strength T0 are Pa; z is true vertical depth [m];
+    T_rock and T_wall are degrees C. W_max is degrees; margin_SG and ecd_SG
+    are SG equivalents. Returns a dictionary with SG_lo, SG_hi, SG_hydro,
+    Pw_lo, Pw_hi and Pw_mud [pressures in Pa], widths [degrees],
+    verdict and tensile diagnostics. An infeasible Pw_mud is None.
+    These bounds describe the supplied local state. Whole-programme surface
+    density bounds from evaluate account for the fluid's temperature profile.
     """
     if T_wall is None:
         T_wall = min(T_rock, T_WALL_CAP)
@@ -821,36 +862,20 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
 
 
 def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None):
-    """Run Models 1-5 for one site.
+    """Evaluate a SiteProfile through circulation, connections and trips.
 
-    circulation="v1.3.4" is the corrected release programme: conserved mud
-    composition, whole-hole fluid feedback, uniform trip fluid, and every
-    depth at its own exposure including the final stand. Earlier modes
-    remain explicit adapters for their historical regression tables.
+    Site inputs use m, Pa, degrees C and SI thermal properties. Validate the
+    profile first with validate_site. The default circulation='v1.3.4' uses
+    the corrected programme calculation. v10 selects the original model;
+    thermal enables wall cooling and coupled overrides the site's coupling.
+    Earlier circulation modes remain available for reproducing old releases.
 
-    circulation="v1.3.3" is "v1.3" with every pressure on the wall from one
-    budget (pressure.py): an open annulus at atmospheric pressure, and the
-    fluid column at its temperature in each state of the cycle, with a surge
-    and swab allowance through trips; a barite mud iterated with the
-    circulation it sets; the tool and coating gates; the common windows and
-    the status. It is also coupled (coupled=None takes it from circulation):
-    Model 3 runs on the site's circulation, the rate of penetration and the
-    exposure are iterated to a fixed point, and the thermal stress takes the
-    site's E_rock. circulation="v1.3" adds the verdict through the drilling
-    cycle (site_cycle) to circulation="v1.2", the circulation model as validated: the site well and
-    string, a named pipe type, friction heating, the wall's exposure from Model
-    3's rate of penetration, and the flow rule above. circulation="v1.1" keeps
-    the earlier single-pipe model (a 0.02 W/m K wall, a year's exposure, the
-    lowest survivable flow) for the comparison with v1.1.1; the v1.0 adapter
-    always uses it.
-
-    v10=True is the v1.0 adapter: it reproduces v1.0 exactly (the global C.UCS
-    instead of the site's own), for the regression tests. Each v1.1 change that
-    alters the stability numbers is switched off by it. thermal=False switches
-    off the wall's thermal hoop stress alone. Either way the result carries
-    three sensitivities: an uncooled wall (at rock temperature, so neither
-    thermal stress nor cold-strength gain), the site-calibrated breakout
-    limit, and the two together.
+    Return a dictionary containing the site and target depth z [m], rock
+    temperature T_rock [degrees C], the circulation and operating programme,
+    cycle cases, mud windows, tool gates and status. Whole-programme windows
+    use surface fluid density [kg/m3 at 20 degrees C]; cycle SG values are
+    equivalent static densities. Use result_dict for a serialisable record.
+    This evaluation can require substantial computation.
     """
     input_warnings = validate_site(site)
     # coupled: on by default with the pressure budget; on with "v1.3" alone
@@ -2569,9 +2594,13 @@ def versions():
 
 
 def result_dict(o):
-    """The evaluation as plain data: inputs and their sources, the operating
-    programme, the cycle with every case, the windows, the tools, the
-    status, the margins, the sensitivities, and the versions."""
+    """Convert an evaluate result into a JSON-compatible dictionary.
+
+    Inputs and outputs retain the evaluation's units: depth [m], temperature
+    [degrees C], pressure [Pa], flow [kg/s or L/s as labelled], and surface
+    density [kg/m3 at 20 degrees C]. SG-equivalent values remain labelled SG.
+    Includes input sources and runtime versions; does not run calculations.
+    """
     s = o["site"]
     d = dict(
         site=dict(name=s.name, tier=s.tier, target_depth_m=s.target(),
@@ -2630,20 +2659,34 @@ def result_dict(o):
 
 
 def export_result(o, path):
-    """Write result_dict(o) as JSON to path."""
+    """Write result_dict(o) as JSON to an explicit path.
+
+    o is an evaluate result. Values retain their labelled SI units and
+    temperatures in degrees C. Returns None; creates or overwrites the file.
+    """
     import json
     with open(path, "w") as fh:
         json.dump(result_dict(o), fh, indent=1)
 
 
 def named_sites():
-    """The sites the repository defines, by a short key."""
+    """Return a dictionary mapping short site keys to SiteProfile objects.
+
+    The keys are soultz, larderello, united-downs, pannonian and newberry.
+    Profile depths are m, temperatures degrees C and stresses Pa.
+    """
     from borethm import comparative_sites as cs
     keys = ("soultz", "larderello", "united-downs", "pannonian", "newberry")
     return dict(zip(keys, cs.SITES))
 
 
 def find_site(name):
+    """Find one built-in SiteProfile by key or unambiguous name substring.
+
+    name is case-insensitive; spaces match hyphens. Returns a SiteProfile
+    with depth [m], temperature [degrees C] and stress [Pa] inputs.
+    Raises ValueError for an unknown or ambiguous name.
+    """
     sites = named_sites()
     key = name.lower().replace(" ", "-")
     hits = [k for k in sites if key in k or key in sites[k].name.lower()]
@@ -2652,15 +2695,16 @@ def find_site(name):
     return sites[hits[0]]
 
 
-if __name__ == "__main__":
+def main(argv=None):
     import argparse
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description="Evaluate one site through the drilling cycle.")
     ap.add_argument("--site", default="soultz", help="one of: " + ", ".join(
         ("soultz", "larderello", "united-downs", "pannonian", "newberry")))
     ap.add_argument("--json", help="also write the result to this JSON file")
     ap.add_argument('--circulation', choices=('v1.3.3', 'v1.3.4'), default='v1.3.4')
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
     try:
         site = find_site(a.site)
     except ValueError as error:
@@ -2675,3 +2719,7 @@ if __name__ == "__main__":
     if a.json:
         export_result(o, a.json)
         print(f"result written to {a.json}")
+
+
+if __name__ == "__main__":
+    main()

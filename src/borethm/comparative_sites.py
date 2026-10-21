@@ -679,12 +679,22 @@ def print_basis(site):
         print(f"    {k + ':':<15}{basis:<16}{src}")
 
 
-if __name__ == "__main__":
-    import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    mode = 'v1.3.3' if '--write-golden' in sys.argv else 'v1.3.4'
+def main(argv=None):
+    import argparse
+    import sys
+    parser = argparse.ArgumentParser(description="Evaluate and compare the built-in sites.")
+    parser.add_argument('--write-golden', action='store_true',
+                        help='write the historical v1.3.3 golden table (source checkout only)')
+    args = parser.parse_args(argv)
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if args.write_golden:
+        from borethm._paths import repository_path, require_path
+        require_path(repository_path('tests/golden'), 'Writing regression goldens')
+    mode = 'v1.3.3' if args.write_golden else 'v1.3.4'
     results = [evaluate(s, circulation=mode) for s in SITES]
     olds = [evaluate(s, circulation="v1.1") for s in SITES]
-    if "--write-golden" in sys.argv:
+    if args.write_golden:
         # the v1.3.3 table; the v1.2 and v1.3 tables stay pinned as their
         # releases left them, the regression against which v1.3.3 is checked
         import json, os
@@ -733,3 +743,7 @@ if __name__ == "__main__":
                   f"breakout sig_th {b['sigma_theta']/1e6:.0f} vs MC {b['mc_cold']/1e6:.0f} MPa, "
                   f"P_need {b['P_need']/1e6:.0f} vs Shmin {o['Shmin']/1e6:.0f} MPa")
             print_stress_cases(o)
+
+
+if __name__ == "__main__":
+    main()

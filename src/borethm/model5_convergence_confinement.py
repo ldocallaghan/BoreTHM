@@ -81,6 +81,10 @@ def breakout_width(SHmax, Shmin, Pw, Pp, T_wall, UCS=None, dsigma_T=0.0):
     _width_threshold) around the circumference: the lobe spans
     |phi| < arccos(-a/d) / 2, so its full width is arccos(-a/d). 0 when the
     wall holds everywhere, 180 when it fails all round (two lobes meeting).
+
+    Argument order is SHmax then Shmin, opposite to breakout_check and
+    mud_window. Stresses, Pw, Pp, UCS and dsigma_T are Pa; T_wall is degrees C.
+    Returns the width in degrees; UCS=None uses the model's intact strength.
     """
     a, d = _width_threshold(SHmax, Shmin, Pw, Pp, T_wall, UCS, dsigma_T)
     if d < 0.0:

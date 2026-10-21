@@ -28,5 +28,10 @@ dependencies = [
 plot = ["matplotlib>=3.7"]
 test = ["pytest>=7.4"]
 
+[project.scripts]
+borethm-evaluate = "borethm.site_evaluation:main"
+borethm-sites = "borethm.comparative_sites:main"
+borethm-water-table = "borethm.water_table:main"
+
 [project.urls]
 Repository = "https://github.com/ldocallaghan/BoreTHM"
