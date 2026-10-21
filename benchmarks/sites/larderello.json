@@ -1,0 +1,143 @@
+{
+  "name": "Larderello (Italy)",
+  "geotherm": {
+    "callable": {
+      "module": "borethm.comparative_sites",
+      "name": "make_geotherm.<locals>.gt",
+      "path": "src/borethm/comparative_sites.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
+    },
+    "samples": "larderello-geotherms.csv",
+    "column": "geotherm_C"
+  },
+  "target_depth": 2850.0,
+  "target_T": 400.0,
+  "Sv_grad": 25506.0,
+  "K0_min": 0.55,
+  "SHmax_over_Sv": 0.75,
+  "rho_fluid_grad": 10000.0,
+  "k_rock": 2.6,
+  "E_rock": 45000000000.0,
+  "UCS": 140000000.0,
+  "T_inj": 40.0,
+  "stress_cases": [
+    {
+      "label": "Shmin 0% of floor-to-Sv",
+      "Sv_grad": 25506.0,
+      "Shmin_grad": 13581.889783797198,
+      "SHmax_grad": 25506.0,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "Shmin 25% of floor-to-Sv",
+      "Sv_grad": 25506.0,
+      "Shmin_grad": 16562.9173378479,
+      "SHmax_grad": 25506.0,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "Shmin 50% of floor-to-Sv",
+      "Sv_grad": 25506.0,
+      "Shmin_grad": 19543.944891898598,
+      "SHmax_grad": 25506.0,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "Shmin 75% of floor-to-Sv",
+      "Sv_grad": 25506.0,
+      "Shmin_grad": 22524.9724459493,
+      "SHmax_grad": 25506.0,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "Shmin 100% of floor-to-Sv",
+      "Sv_grad": 25506.0,
+      "Shmin_grad": 25506.0,
+      "SHmax_grad": 25506.0,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    }
+  ],
+  "stress_basis": "regime bounds",
+  "strength_cases": [
+    [
+      "site UCS",
+      140000000.0
+    ]
+  ],
+  "data_basis": {
+    "stress": [
+      "regime bounds",
+      "Liotta & Brogi (manuscript, Geothermics); no magnitudes published"
+    ],
+    "strength": [
+      "unsourced",
+      "v1.0 140 MPa; only an Elba micaschist analogue found"
+    ],
+    "pore pressure": [
+      "assumed",
+      "hydrostatic; vapour-dominated field, with over-pressured fluids reported along active faults"
+    ],
+    "temperature": [
+      "measured",
+      "Venelle-2 to 2.9 km (Bertani et al. 2018)"
+    ],
+    "well check": [
+      "none",
+      "Venelle-2 drilled to 2.9 km (losses, stuck pipe), but no breakout data published"
+    ]
+  },
+  "geotherm_v11": {
+    "callable": {
+      "module": "borethm.comparative_sites",
+      "name": "make_geotherm.<locals>.gt",
+      "path": "src/borethm/comparative_sites.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
+    },
+    "samples": "larderello-geotherms.csv",
+    "column": "geotherm_v11_C"
+  },
+  "target_depth_v11": 2400.0,
+  "temperature_data_to": 2900.0,
+  "mu": 0.8,
+  "coupled": false
+}

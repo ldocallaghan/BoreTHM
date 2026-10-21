@@ -1,0 +1,98 @@
+{
+  "name": "United Downs / Carnmenellis (UK)",
+  "geotherm": {
+    "callable": {
+      "module": "borethm.comparative_sites",
+      "name": "make_geotherm.<locals>.gt",
+      "path": "src/borethm/comparative_sites.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
+    },
+    "samples": "united-downs-geotherms.csv",
+    "column": "geotherm_C"
+  },
+  "target_depth": 12500.0,
+  "target_T": 400.0,
+  "Sv_grad": 25800.300000000003,
+  "K0_min": 0.55,
+  "SHmax_over_Sv": 1.4,
+  "rho_fluid_grad": 10000.0,
+  "k_rock": 3.3,
+  "E_rock": 60000000000.0,
+  "UCS": 180000000.0,
+  "T_inj": 40.0,
+  "stress_cases": [
+    {
+      "label": "Reinecker et al. (2021)",
+      "Sv_grad": 25275.0,
+      "Shmin_grad": 13210.0,
+      "SHmax_grad": 25990.0,
+      "Sv_int": 0.0,
+      "Shmin_int": 3000000.0,
+      "SHmax_int": 5900000.0,
+      "Pp_grad": 9494.0,
+      "Pp_datum": 61.0,
+      "source": "Reinecker et al. (2021), Geothermics 97, 102226",
+      "z_data": [
+        0.0,
+        2000.0
+      ],
+      "mu": null,
+      "regime": null
+    }
+  ],
+  "stress_basis": "measured",
+  "strength_cases": [
+    [
+      "intact, 0 K",
+      203000000.0
+    ],
+    [
+      "intact, 40 K",
+      172000000.0
+    ],
+    [
+      "weak zones, 0 K",
+      147000000.0
+    ],
+    [
+      "weak zones, 40 K",
+      118000000.0
+    ]
+  ],
+  "data_basis": {
+    "stress": [
+      "measured",
+      "Reinecker et al. (2021); Shmin data to 2.0 km, SHmax derived at mu 0.8"
+    ],
+    "strength": [
+      "calibrated",
+      "UD-1 breakouts, BGS image log (calibrate_ud1.py)"
+    ],
+    "pore pressure": [
+      "measured",
+      "Reinecker et al. (2021)"
+    ],
+    "temperature": [
+      "extrapolated",
+      "~180 C at 5 km (Reinecker et al. 2021); 28 C/km assumed below"
+    ],
+    "well check": [
+      "calibrated",
+      "UD-1 to 5,058 m TVD (calibrate_ud1.py)"
+    ]
+  },
+  "geotherm_v11": {
+    "callable": {
+      "module": "borethm.comparative_sites",
+      "name": "make_geotherm.<locals>.gt",
+      "path": "src/borethm/comparative_sites.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
+    },
+    "samples": "united-downs-geotherms.csv",
+    "column": "geotherm_v11_C"
+  },
+  "target_depth_v11": 12857.142857142857,
+  "temperature_data_to": 5058.0,
+  "mu": 0.8,
+  "coupled": false
+}

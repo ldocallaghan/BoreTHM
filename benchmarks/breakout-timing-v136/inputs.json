@@ -1,0 +1,94 @@
+{
+  "site_profiles": "../sites/",
+  "data": "../data/",
+  "code": {
+    "module": "borethm.studies.levers",
+    "name": null,
+    "path": "src/borethm/studies/levers.py",
+    "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/levers.py"
+  },
+  "units": {
+    "flow_L_s": "L/s",
+    "shoe_m": "m",
+    "pv_fraction": "dimensionless",
+    "bhp_Pa": "Pa",
+    "coating_rating_C": "degrees C",
+    "allowance_SG": "SG equivalent",
+    "pipe": "PipeType name",
+    "form_h": "h",
+    "scan_minutes": "min"
+  },
+  "attributes": {},
+  "paired_settings": {
+    "soultz": {
+      "0": {
+        "flow_L_s": 40,
+        "pipe": "TK-Drakon coated",
+        "shoe_m": 4000.0,
+        "pv_fraction": 1.0,
+        "coating_rating_C": 204.0,
+        "allowance_SG": 0.02,
+        "form_h": 0.0,
+        "bhp_Pa": null
+      },
+      "60": {
+        "flow_L_s": 40,
+        "pipe": "TK-Drakon coated",
+        "shoe_m": 4000.0,
+        "pv_fraction": 1.0,
+        "coating_rating_C": 204.0,
+        "allowance_SG": 0.02,
+        "form_h": 1.0,
+        "bhp_Pa": null
+      }
+    },
+    "united-downs": {
+      "0": {
+        "flow_L_s": 50,
+        "pipe": "TK-Drakon coated",
+        "shoe_m": 4000.0,
+        "pv_fraction": 1.0,
+        "coating_rating_C": 204.0,
+        "allowance_SG": 0.02,
+        "form_h": 0.0,
+        "bhp_Pa": null
+      },
+      "60": {
+        "flow_L_s": 50,
+        "pipe": "TK-Drakon coated",
+        "shoe_m": 4000.0,
+        "pv_fraction": 1.0,
+        "coating_rating_C": 204.0,
+        "allowance_SG": 0.02,
+        "form_h": 1.0,
+        "bhp_Pa": null
+      }
+    }
+  },
+  "scan_minutes": {
+    "soultz": [
+      0,
+      5,
+      10,
+      15,
+      20,
+      30,
+      45,
+      60,
+      90,
+      120
+    ],
+    "united-downs": [
+      0,
+      5,
+      10,
+      15,
+      20,
+      30,
+      45,
+      60,
+      90,
+      120
+    ]
+  }
+}

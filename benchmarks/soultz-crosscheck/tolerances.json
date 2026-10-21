@@ -1,0 +1,20 @@
+{
+  "source": "tests/test_soultz_crosscheck.py::test_results_are_unchanged_from_v122",
+  "units": {
+    "ucs": "MPa",
+    "cooling": "K",
+    "width": "degrees",
+    "onset": "m TVD"
+  },
+  "rules": [
+    {
+      "fields": "width",
+      "absolute": 0.001
+    },
+    {
+      "fields": "source, ucs, cooling, onset and verdicts",
+      "exact": true
+    }
+  ],
+  "note": "Onsets use the retained 10 m search grid. Null means no onset in the searched interval."
+}

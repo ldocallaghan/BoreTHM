@@ -1,0 +1,57 @@
+{
+  "site_profiles": "../sites/",
+  "data": "../data/",
+  "code": {
+    "module": "borethm.studies.release_v134",
+    "name": null,
+    "path": "src/borethm/studies/release_v134.py",
+    "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/release_v134.py"
+  },
+  "units": {
+    "site_profiles": "../sites/units.json",
+    "programme": "fields retain the explicit unit names and flow_unit in each evidence record"
+  },
+  "attributes": {},
+  "programmes": {
+    "soultz": {
+      "path": "evidence/soultz.json",
+      "pointers": [
+        "/site",
+        "/programme",
+        "/windows/depths"
+      ]
+    },
+    "larderello": {
+      "path": "evidence/larderello.json",
+      "pointers": [
+        "/site",
+        "/programme",
+        "/windows/depths"
+      ]
+    },
+    "united-downs": {
+      "path": "evidence/united-downs.json",
+      "pointers": [
+        "/site",
+        "/programme",
+        "/windows/depths"
+      ]
+    },
+    "pannonian": {
+      "path": "evidence/pannonian.json",
+      "pointers": [
+        "/site",
+        "/programme",
+        "/windows/depths"
+      ]
+    },
+    "newberry": {
+      "path": "evidence/newberry.json",
+      "pointers": [
+        "/site",
+        "/programme",
+        "/windows/depths"
+      ]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "site_profiles": "../sites/",
+  "data": "../data/",
+  "code": {
+    "module": "borethm.studies.crosscheck_soultz",
+    "name": null,
+    "path": "src/borethm/studies/crosscheck_soultz.py",
+    "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/crosscheck_soultz.py"
+  },
+  "units": {
+    "Z_CHECK": "m TVD",
+    "COOLING_K": "K",
+    "OBS_ONSET_FIRST": "m TVD",
+    "OBS_ONSET_DENSE": "m TVD",
+    "OBS_DITF_CONTINUOUS_TO": "m TVD",
+    "STRENGTHS": "(label, UCS values in Pa)"
+  },
+  "attributes": {
+    "borethm.studies.crosscheck_soultz": {
+      "Z_CHECK": 5000.0,
+      "COOLING_K": [
+        0.0,
+        40.0
+      ],
+      "OBS_ONSET_FIRST": 3000.0,
+      "OBS_ONSET_DENSE": 3670.0,
+      "OBS_DITF_CONTINUOUS_TO": 2180.0,
+      "STRENGTHS": [
+        [
+          "v1.0 UCS (unsourced)",
+          [
+            170000000.0
+          ]
+        ],
+        [
+          "Soultz lab UCS 100-130",
+          [
+            100000000.0,
+            115000000.0,
+            130000000.0
+          ]
+        ],
+        [
+          "UD-1 weak zones",
+          [
+            147000000.0,
+            118000000.0
+          ]
+        ],
+        [
+          "UD-1 intact bound",
+          [
+            203000000.0,
+            172000000.0
+          ]
+        ]
+      ]
+    }
+  }
+}

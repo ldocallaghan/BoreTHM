@@ -1,0 +1,2 @@
+# Dataset manifests describe exact bytes, including source line endings.
+/benchmarks/** -text

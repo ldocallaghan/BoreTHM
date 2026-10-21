@@ -1,0 +1,20 @@
+{
+  "depths": "m",
+  "temperatures": "degrees C",
+  "Sv_grad": "Pa/m",
+  "rho_fluid_grad": "Pa/m",
+  "K0_min": "dimensionless",
+  "SHmax_over_Sv": "dimensionless",
+  "k_rock": "W/(m K)",
+  "E_rock": "Pa",
+  "UCS": "Pa",
+  "strength_cases": "(label, UCS in Pa)",
+  "mu": "dimensionless",
+  "stress_cases": {
+    "gradients": "Pa/m",
+    "stress_intercepts": "Pa",
+    "Pp_datum": "m",
+    "z_data": "m",
+    "mu": "dimensionless"
+  }
+}

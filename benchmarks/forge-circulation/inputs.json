@@ -1,0 +1,125 @@
+{
+  "site_profiles": "../sites/",
+  "data": "../data/",
+  "code": {
+    "module": "borethm.studies.validate_forge16b",
+    "name": null,
+    "path": "src/borethm/studies/validate_forge16b.py",
+    "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+  },
+  "units": {
+    "FT": "m/ft",
+    "INCH": "m/in",
+    "GPM": "m3/s per US gal/min",
+    "PSI": "Pa/psi",
+    "K_ROCK": "W/(m K)",
+    "RHOCP_ROCK": "J/(m3 K)",
+    "K_ROCK_RANGE": "W/(m K)",
+    "MWD_ABOVE_BIT_FT": "ft",
+    "HWDP_JOINT_FT": "ft",
+    "BHA12_REGULAR_FT": "ft",
+    "NOZZLES": "diameters in 1/32 in",
+    "DEPTHS": "ft measured depth"
+  },
+  "attributes": {
+    "borethm.studies.validate_forge16b": {
+      "FT": 0.3048,
+      "INCH": 0.0254,
+      "GPM": 6.30902e-05,
+      "PSI": 6894.757,
+      "K_ROCK": 2.497333333333333,
+      "RHOCP_ROCK": 2483147.3333333335,
+      "K_ROCK_RANGE": [
+        2.041,
+        3.087
+      ],
+      "MWD_ABOVE_BIT_FT": 84.0,
+      "HWDP_JOINT_FT": 30.447333333333333,
+      "BHA12_REGULAR_FT": 2378.5,
+      "NOZZLES": {
+        "BHA10": [
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14
+        ],
+        "BHA11": [
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14
+        ],
+        "BHA12": [
+          14,
+          14,
+          14,
+          16,
+          16,
+          16
+        ],
+        "BHA13": [
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      "DEPTHS": {
+        "BHA10": [
+          7584.0,
+          8085.0
+        ],
+        "BHA11": [
+          8085.0,
+          8585.0
+        ],
+        "BHA12": [
+          8585.0,
+          9255.0
+        ],
+        "BHA13": [
+          9255.0,
+          9800.0
+        ]
+      }
+    }
+  },
+  "geometry_recipes": [
+    {
+      "module": "borethm.studies.validate_forge16b",
+      "name": "hole",
+      "path": "src/borethm/studies/validate_forge16b.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+    },
+    {
+      "module": "borethm.studies.validate_forge16b",
+      "name": "string",
+      "path": "src/borethm/studies/validate_forge16b.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+    },
+    {
+      "module": "borethm.studies.validate_forge16b",
+      "name": "survey",
+      "path": "src/borethm/studies/validate_forge16b.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+    },
+    {
+      "module": "borethm.studies.validate_forge16b",
+      "name": "formation_temperature",
+      "path": "src/borethm/studies/validate_forge16b.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+    }
+  ]
+}

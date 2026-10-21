@@ -1,0 +1,30 @@
+{
+  "source": "tests/test_breakout_timing.py",
+  "units": {
+    "drill_SG": "SG-equivalent at target, including connection checks",
+    "drill_rho_surface": "kg/m3 at 20 degrees C",
+    "window_lo_hi": "kg/m3 at 20 degrees C",
+    "md": "m measured depth",
+    "delay_min": "min",
+    "form_h": "h"
+  },
+  "rules": [
+    {
+      "fields": "z_m and window bound md",
+      "absolute": 0.01
+    },
+    {
+      "fields": "drill_SG",
+      "absolute": 0.002
+    },
+    {
+      "fields": "drill_rho_surface and window lo/hi divided by 1000",
+      "absolute": 0.002
+    },
+    {
+      "fields": "settings, case labels, UCS, states, verdicts, open flags and scan brackets",
+      "exact": true
+    }
+  ],
+  "note": "The fixed scan grid is not a measured breakout formation time."
+}

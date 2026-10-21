@@ -1,0 +1,103 @@
+{
+  "name": "Newberry / NWG 55-29 (USA)",
+  "geotherm": {
+    "callable": {
+      "module": "borethm.crosscheck_newberry",
+      "name": "geotherm",
+      "path": "src/borethm/crosscheck_newberry.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/crosscheck_newberry.py"
+    },
+    "samples": "newberry-geotherms.csv",
+    "column": "geotherm_C"
+  },
+  "target_depth": 3629.54044732043,
+  "target_T": 400.0,
+  "Sv_grad": 24172.021866508036,
+  "K0_min": 0.53,
+  "SHmax_over_Sv": 0.85,
+  "rho_fluid_grad": 10000.0,
+  "k_rock": 2.14,
+  "E_rock": 50000000000.0,
+  "UCS": 79000000.0,
+  "T_inj": 40.0,
+  "stress_cases": [
+    {
+      "label": "Davatzes & Hickman (2011), mu 0.55",
+      "Sv_grad": 24172.021866508036,
+      "Shmin_grad": 13446.146031109016,
+      "SHmax_grad": 17463.09843832021,
+      "Sv_int": 0.0,
+      "Shmin_int": 1333517.5654764164,
+      "SHmax_int": 7671106.638199999,
+      "Pp_grad": 7680.7808474350495,
+      "Pp_datum": -266.94017492314265,
+      "source": "Davatzes and Hickman (2011); static survey Oct 2008 (GDR 271)",
+      "z_data": [
+        1961.3880000000001,
+        2656.5097465263157
+      ],
+      "mu": 0.55,
+      "regime": null
+    },
+    {
+      "label": "Davatzes & Hickman (2011), mu 0.7",
+      "Sv_grad": 24172.021866508036,
+      "Shmin_grad": 12151.262971149892,
+      "SHmax_grad": 17267.656507611548,
+      "Sv_int": 0.0,
+      "Shmin_int": 1494506.684891214,
+      "SHmax_int": 7543553.633699999,
+      "Pp_grad": 7680.7808474350495,
+      "Pp_datum": -266.94017492314265,
+      "source": "Davatzes and Hickman (2011); static survey Oct 2008 (GDR 271)",
+      "z_data": [
+        1961.3880000000001,
+        2656.5097465263157
+      ],
+      "mu": 0.7,
+      "regime": null
+    }
+  ],
+  "stress_basis": "measured range",
+  "strength_cases": [
+    [
+      "log-derived granodiorite p10",
+      64849999.60810307
+    ],
+    [
+      "log-derived granodiorite median",
+      79076351.455963
+    ],
+    [
+      "log-derived granodiorite p90",
+      85855472.73371783
+    ]
+  ],
+  "data_basis": {
+    "stress": [
+      "measured range",
+      "Davatzes & Hickman (2011): Sv and pore pressure measured; Shmin at frictional equilibrium (mu 0.55, 0.70); SHmax from breakout widths, to 8,860 ft MD"
+    ],
+    "strength": [
+      "log-derived",
+      "UCS-porosity relation of Davatzes & Hickman on the neutron log, granodiorite 8,807 ft to TD (GDR 271)"
+    ],
+    "pore pressure": [
+      "measured",
+      "static survey, October 2008 (GDR 271); underpressured, Pf/Sv ~0.34"
+    ],
+    "temperature": [
+      "extrapolated",
+      "331 C at 2989 m TVD (static survey 2008); 107 C/km below"
+    ],
+    "well check": [
+      "not reproduced",
+      "NWG 55-29 (crosscheck_newberry.py): the volcanic breakout width is reproduced at 25-35 K of wall cooling, but breakouts are predicted in the granodiorite, where none were logged"
+    ]
+  },
+  "geotherm_v11": null,
+  "target_depth_v11": null,
+  "temperature_data_to": 2989.0821600000004,
+  "mu": 0.55,
+  "coupled": false
+}

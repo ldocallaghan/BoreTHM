@@ -1,0 +1,28 @@
+{
+  "source": "tests/test_validate_forge16b.py",
+  "units": {
+    "temperature": "degrees F",
+    "decomposition": "degrees F difference",
+    "k_idp": "W/(m K)",
+    "film_mult": "dimensionless"
+  },
+  "rules": [
+    {
+      "fields": "film_mult",
+      "absolute": 0.02
+    },
+    {
+      "fields": "k_idp and unfitted/k_idp",
+      "relative": 0.03
+    },
+    {
+      "fields": "run_means, bha12_late and their unfitted counterparts",
+      "absolute": 1.0
+    },
+    {
+      "fields": "decomposition (fitted chain)",
+      "absolute": 1.0
+    }
+  ],
+  "note": "Unfitted decomposition is retained without a separate numerical acceptance assertion."
+}
