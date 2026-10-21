@@ -99,7 +99,12 @@ jobs:
       - run: pip install -r requirements-lock.txt
       - run: pip install --no-deps -e .
       - run: python -m borethm.water_table
-      - run: pytest -m "slow or not slow"
+      - run: pytest -m "slow or not slow" --durations=20 --junitxml=full-tests.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-physical-regressions
+          path: full-tests.xml
 
   goldens:
     # the v1.3.3 site table pinned in the CI environment, on the lock file's

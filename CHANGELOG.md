@@ -1,8 +1,14 @@
 # Changelog
 
+## v1.4.0 (release candidate)
+
+Makes BoreTHM an installable package, `borethm`, with a documented public Python interface and command-line tools. The data move into the package, and the water-property cache uses a user cache directory. Adds a benchmark dataset of the reference cases, contribution and support guides, and a publishing workflow.
+
+No physics, input, default or result changes. Existing numerical regressions retain their reference values and tolerances. Release validation is recorded in [the v1.4.0 release notes](docs/releases/v1.4.0.md#validation).
+
 ## v1.3.6 (19 October 2026)
 
-Adds the breakout-timing results from lever L7 at zero and one hour, a fixed delay scan, and a documentation page explaining them. The first sampled delay with an open whole-hole drilling window is 20 minutes at Soultz, bracketed by 15 and 20 minutes, and 15 minutes at United Downs, bracketed by 10 and 15 minutes. The complete programmes remain NO-GO.
+Adds results for breakout formation delays of zero and one hour, a fixed delay scan, and a documentation page explaining them. The first sampled delay with an open whole-hole drilling window is 20 minutes at Soultz, bracketed by 15 and 20 minutes, and 15 minutes at United Downs, bracketed by 10 and 15 minutes. The complete programmes remain NO-GO.
 
 The reporting tool records per-case target requirements separately from surface-density bounds and identifies the remaining failures. New regressions check the paired results, opening brackets and published values. No model, input or default changes.
 

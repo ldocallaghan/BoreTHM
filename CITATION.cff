@@ -6,7 +6,7 @@ authors:
     given-names: "Liam"
 version: "1.4.0"
 license: Apache-2.0
-date-released: "2026-10-19"
+date-released: "2026-10-21"
 repository-code: "https://github.com/ldocallaghan/BoreTHM"
 # doi: "10.5281/zenodo.XXXXXXX"   # to be added once the repository is archived on Zenodo
 keywords:
