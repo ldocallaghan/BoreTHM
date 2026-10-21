@@ -34,8 +34,8 @@ jobs:
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install ".[test]"
@@ -44,7 +44,7 @@ jobs:
       # Regression tests read the evidence retained in the checkout.
       - run: python -m pip install --no-deps -e .
       - run: python -m pytest --junitxml=fast-matrix.xml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: fast-python-${{ matrix.python-version }}
@@ -53,8 +53,8 @@ jobs:
   wheel-install:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14"
       - run: python -m pip install build twine
@@ -75,8 +75,8 @@ jobs:
   fast:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
@@ -92,15 +92,15 @@ jobs:
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ inputs.python-version || '3.14.4' }}
       - run: pip install -r requirements-lock.txt
       - run: pip install --no-deps -e .
       - run: python -m borethm.water_table
       - run: pytest -m "slow or not slow" --durations=20 --junitxml=full-tests.xml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: full-physical-regressions
@@ -117,15 +117,15 @@ jobs:
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
       - run: pip install --no-deps -e .
       - run: python -m borethm.water_table
       - run: python -m borethm.comparative_sites --write-golden > site_table.txt
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: v133-goldens
           path: |
@@ -141,8 +141,8 @@ jobs:
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
@@ -152,7 +152,7 @@ jobs:
         run: python -m borethm.studies.release_v134 --output results/v1.3.4/ci/${{ github.run_id }}-${{ github.run_attempt }}
       - name: Verify every fast and slow regression against the generated pins
         run: pytest -m "slow or not slow" --durations=12 --junitxml=v134-tests.xml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: v134-release
