@@ -1,8 +1,8 @@
 """C2 reference integration; uses the documented uniform trip-fluid bound."""
 import pytest
 
-import site_evaluation as se
-from comparative_sites import LARDERELLO
+from borethm import site_evaluation as se
+from borethm.comparative_sites import LARDERELLO
 
 
 @pytest.mark.slow

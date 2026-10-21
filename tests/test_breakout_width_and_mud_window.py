@@ -9,10 +9,10 @@ the window, and every site and case gets a window.
 import numpy as np
 import pytest
 
-import geo_constants as C
-import model5_convergence_confinement as m5
-import site_evaluation as se
-from comparative_sites import CORNWALL, SITES
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL, SITES
 
 MPa = 1.0e6
 
@@ -184,19 +184,19 @@ def _o(verdicts, ref_index=0, admissible=True, T_rock=400.0):
 
 
 def test_classify_single_case():
-    from comparative_sites import classify
+    from borethm.comparative_sites import classify
     assert classify(_o(["GO"]))[2] == "GO"
     assert classify(_o(["CONDITIONAL"]))[1] == "+5.0MPa (1.10 SG)"
     assert classify(_o(["NO-GO"]))[2] == "NO-GO"
 
 
 def test_classify_reports_the_range_across_cases():
-    from comparative_sites import classify
+    from borethm.comparative_sites import classify
     assert classify(_o(["GO", "CONDITIONAL", "NO-GO"], ref_index=2))[2] == "NO-GO [GO..NO-GO]"
 
 
 def test_classify_inadmissible_stress_is_never_go():
-    from comparative_sites import classify
+    from borethm.comparative_sites import classify
     v = classify(_o(["GO"], admissible=False))[2]
     assert v == "CONDITIONAL (stress inadmissible)"
     assert classify(_o(["NO-GO"], admissible=False))[2] == "NO-GO (stress inadmissible)"
@@ -210,7 +210,7 @@ def test_all_round_failure_is_labelled_as_yielding():
 def test_circulating_friction_narrows_only_the_fracture_bound():
     """The breakout bound is set at static mud; the annular friction (ECD) is
     added to the mud only on the fracture bound."""
-    import site_evaluation as se
+    from borethm import site_evaluation as se
     MPa, z = 1e6, 4000.0
     args = (60 * MPa, 100 * MPa, 40 * MPa, z, 40 * MPa, 150.0)
     a = se.mud_window(*args, UCS=100 * MPa)

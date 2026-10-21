@@ -10,9 +10,9 @@ versions, so temperatures are held to 0.5 C and heat to 1%.
 """
 import pytest
 
-import model1_coupled as m1
-import site_evaluation as se
-import well_geometry as wg
+from borethm import model1_coupled as m1
+from borethm import site_evaluation as se
+from borethm import well_geometry as wg
 
 pytestmark = pytest.mark.slow
 

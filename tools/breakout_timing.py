@@ -15,12 +15,11 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'src'))
 
-import fluids
-import levers
-import pressure
-import site_evaluation as se
+from borethm import fluids
+from borethm.studies import levers
+from borethm import pressure
+from borethm import site_evaluation as se
 
 RESULTS = ROOT / 'results/v1.3.6/breakout-timing'
 SITES = ('soultz', 'united-downs')

@@ -1,7 +1,7 @@
 """Drilling-cycle timings measured from the FORGE 16B record, pinned."""
 import pytest
 
-import drilling_cycle as dc
+from borethm import drilling_cycle as dc
 
 
 @pytest.fixture(scope="module")

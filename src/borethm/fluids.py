@@ -53,7 +53,7 @@ Sources:
 """
 import numpy as np
 
-import water_table as wt
+from borethm import water_table as wt
 
 T_REF = 20.0                  # C, the surface conditions a mud weight is quoted at
 P_ATM = 1.0e5                 # Pa

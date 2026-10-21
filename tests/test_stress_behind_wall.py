@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-import model5_convergence_confinement as m5
+from borethm import model5_convergence_confinement as m5
 
 MPa = 1e6
 
@@ -64,7 +64,7 @@ def test_thermal_stress_for_a_cooled_annulus():
 def test_uniform_temperature_reproduces_the_wall_width(cooling):
     """With the temperature uniform behind the wall, the width judged over the
     rock equals the closed-form width at the wall, within 0.5 deg."""
-    import site_evaluation as se
+    from borethm import site_evaluation as se
     SH, Sh, Pw, Pp, a, Tr, ucs = 150 * MPa, 90 * MPa, 50 * MPa, 48 * MPa, 0.11, 250.0, 120 * MPa
     Tw = Tr - cooling
     thermo = -se.thermal_hoop_stress(Tr, Tr - 1.0)
@@ -80,8 +80,8 @@ def test_uniform_temperature_reproduces_the_wall_width(cooling):
 def test_with_no_cooling_failure_starts_at_the_wall_at_every_site():
     """Failure starts at the wall. (The failed region reaches wider just behind
     the wall than at it, so its angular extent is not the breakout width.)"""
-    import site_evaluation as se
-    from comparative_sites import SITES
+    from borethm import site_evaluation as se
+    from borethm.comparative_sites import SITES
     for site in SITES:
         z = site.target()
         T = float(site.temperature()(z))
@@ -97,7 +97,7 @@ def test_with_no_cooling_failure_starts_at_the_wall_at_every_site():
 
 def _skin_case(cooling, b):
     """A skin cooled by `cooling` K out to radius b, rock temperature beyond."""
-    import site_evaluation as se
+    from borethm import site_evaluation as se
     SH, Sh, Pw, Pp, a, Tr, ucs = 285 * MPa, 149 * MPa, 105 * MPa, 105 * MPa, 0.11, 400.0, 100 * MPa
     thermo = -se.thermal_hoop_stress(Tr, Tr - 1.0)
     r = np.array([a, b, b * 1.0001, 1e3])

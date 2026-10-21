@@ -2,11 +2,11 @@
 import json
 from dataclasses import replace
 
-import levers as lv
+from borethm.studies import levers as lv
 
 
 def main(root=None):
-    root = root or lv.RESULTS
+    root = lv.require_path(root or lv.RESULTS, 'Flow-limit study evidence')
     for key in ('soultz', 'united-downs'):
         path = root / key / 'L8' / 'summary.json'
         summary = json.loads(path.read_text())
@@ -42,4 +42,7 @@ def main(root=None):
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except ValueError as error:
+        raise SystemExit(str(error)) from None

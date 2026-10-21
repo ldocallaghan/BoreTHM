@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-import wall_thermal as wt
+from borethm import wall_thermal as wt
 
 A, K, RC, T_ROCK = 0.11, 2.5, 2.5e6, 200.0
 ALPHA = K / RC

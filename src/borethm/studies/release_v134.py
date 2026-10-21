@@ -6,13 +6,15 @@ import os
 from pathlib import Path
 import time
 
-import lever_flow_limit
-import lever_pairs
-import levers as lv
-import site_evaluation as se
+from borethm.studies import lever_flow_limit
+from borethm.studies import lever_pairs
+from borethm.studies import levers as lv
+from borethm import site_evaluation as se
 
-ROOT = Path(__file__).resolve().parent.parent
-GOLDEN = ROOT / 'tests/golden'
+from borethm._paths import repository_root, repository_path, require_path
+
+ROOT = repository_root()
+GOLDEN = repository_path('tests/golden')
 SITES = ('soultz', 'united-downs', 'larderello', 'pannonian', 'newberry')
 
 
@@ -130,6 +132,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    require_path(ROOT, 'Release evidence and regression goldens')
     output = args.output.resolve()
     if not output.is_relative_to((ROOT / 'results/v1.3.4/ci').resolve()):
         parser.error('release evidence must be beneath results/v1.3.4/ci')
@@ -159,4 +162,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except ValueError as error:
+        raise SystemExit(str(error)) from None

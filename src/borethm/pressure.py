@@ -26,9 +26,9 @@ import numpy as np
 from scipy.optimize import brentq
 from iapws.iapws97 import _PSat_T, _TSat_P
 
-import fluids
-import geo_constants as C
-import model1_coupled as m1
+from borethm import fluids
+from borethm import geo_constants as C
+from borethm import model1_coupled as m1
 
 P_ATM = m1.P_SURF        # Pa absolute, at the wellhead
 G = m1.G_GRAV

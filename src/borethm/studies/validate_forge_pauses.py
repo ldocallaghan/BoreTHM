@@ -58,11 +58,11 @@ from datetime import datetime, timezone
 
 import numpy as np
 
-import model1_coupled as m1
-import validate_forge16b as v
-import wall_thermal as wt
+from borethm import model1_coupled as m1
+from borethm.studies import validate_forge16b as v
+from borethm import wall_thermal as wt
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+from borethm._paths import repository_path, require_path
 PUMPS_ON_GPM = 100.0
 ON_BOTTOM_FT = 100.0
 K_IDP_UNFITTED = 4.703      # validate_forge16b, the chain with the film unfitted
@@ -96,7 +96,7 @@ def _ts(s):
     return datetime.strptime(s, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc).timestamp()
 
 
-CYCLE = list(csv.DictReader(open(os.path.join(v.DATA, "cycle_timings.csv"))))
+CYCLE = list(csv.DictReader((v.DATA / "cycle_timings.csv").open()))
 _runs = [r for r in CYCLE if r["kind"] == "bit run"]
 RUN_ENDS = {"BHA10": _ts(_runs[1]["start"]), "BHA11": _ts(_runs[2]["start"]),
             "BHA12": _ts(_runs[3]["start"])}
@@ -367,20 +367,20 @@ def figure(c, path):
     fig.savefig(path, dpi=130)
 
 
-GOLDEN = os.path.join(HERE, "..", "tests", "golden", "forge_pauses.json")
+GOLDEN = repository_path("tests/golden/forge_pauses.json")
 
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     c = check(True)
     c0 = check(False)
     report(c, c0)
-    figure(c, os.path.join(HERE, "..", "figures", "forge_pauses.png"))
+    figure(c, require_path(repository_path("figures/forge_pauses.png"), "The FORGE pauses figure"))
     print("saved forge_pauses.png")
     if "--write-golden" in sys.argv:
         import json
         keep = lambda cc: [{k: r[k] for k in ("start", "kind", "hours", "obs", "mod", "pred")}
                            for r in cc["rows"]]
-        with open(GOLDEN, "w") as fh:
+        with open(require_path(GOLDEN, "Writing regression goldens"), "w") as fh:
             json.dump(dict(f=c["f"], f_no_node=c0["f"], rows=keep(c), rows_no_node=keep(c0)),
                       fh, indent=1)
         print("wrote", os.path.basename(GOLDEN))

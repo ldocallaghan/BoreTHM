@@ -36,7 +36,7 @@ not the absolute rate.
 """
 import numpy as np
 from scipy.integrate import quad
-import geo_constants as C
+from borethm import geo_constants as C
 
 R_GAS = 8.314
 YEAR = 3.156e7

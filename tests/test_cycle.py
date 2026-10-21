@@ -5,8 +5,8 @@ import os
 import numpy as np
 import pytest
 
-import site_evaluation as se
-from comparative_sites import SITES, golden_rows_v13
+from borethm import site_evaluation as se
+from borethm.comparative_sites import SITES, golden_rows_v13
 from conftest import GOLDEN
 
 pytestmark = pytest.mark.slow
@@ -121,7 +121,7 @@ def test_a_scaled_site_scales_only_the_horizontal_stresses():
 
 
 def test_friction_needed_inverts_the_frictional_cap():
-    import model5_convergence_confinement as m5
+    from borethm import model5_convergence_confinement as m5
     R = m5.frictional_cap(0.8)
     Pp, S3 = 100e6, 150e6
     assert se.friction_needed(250e6, S3, Pp + R * (S3 - Pp), Pp) == pytest.approx(0.8)

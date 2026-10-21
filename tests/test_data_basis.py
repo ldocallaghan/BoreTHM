@@ -3,8 +3,8 @@ measured or calibrated stress and strength, checked against a well, are
 classed speculative."""
 import pytest
 
-import site_evaluation as se
-from comparative_sites import CORNWALL, LARDERELLO, PANNONIAN, SITES
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL, LARDERELLO, PANNONIAN, SITES
 
 INPUTS = ("stress", "strength", "pore pressure", "temperature", "well check")
 
@@ -25,7 +25,7 @@ def test_tiers():
 def test_newberry_is_held_back_only_by_its_well_check():
     """Its log-derived strength counts; the cross-check not reproducing the
     breakout pattern is what keeps it speculative."""
-    from comparative_sites import NEWBERRY
+    from borethm.comparative_sites import NEWBERRY
     assert dict(NEWBERRY.missing()) == {"well check": "not reproduced"}
     assert NEWBERRY.mu == 0.55
     assert {p.mu for p in NEWBERRY.stress_cases} == {0.55, 0.70}

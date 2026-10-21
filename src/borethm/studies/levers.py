@@ -16,15 +16,18 @@ from unittest.mock import patch
 import numpy as np
 from scipy.optimize import brentq
 
-import fluids
-import model1_coupled as m1
-import pressure as pr
-import robustness as rb
-import site_evaluation as se
-import well_geometry as wg
+from borethm import fluids
+from borethm import model1_coupled as m1
+from borethm import pressure as pr
+from borethm.studies import robustness as rb
+from borethm import site_evaluation as se
+from borethm import well_geometry as wg
+
+from borethm._paths import repository_path, require_path
 
 ROOT = rb.ROOT
-RESULTS = ROOT / 'results/levers'
+PACKAGE = Path(__file__).resolve().parent.parent
+RESULTS = repository_path('results/levers')
 PSI = 6894.757
 MPD_LIMIT_PA = 2500. * PSI  # Nabors Integra onshore dynamic working-pressure class.
 NATIVE_CYCLE, NATIVE_WINDOWS = se.site_cycle, se.common_windows
@@ -447,20 +450,21 @@ def evaluate_settings(key, settings):
 def fingerprint():
     # Schedule helpers and benchmark data affect the gates too. Include the
     # runtime so CI cannot silently reuse a trial from a different environment.
-    files = {Path(__file__), *(ROOT / 'src').glob('*.py'),
-             *(p for p in (ROOT / 'data').rglob('*')
-               if p.is_file() and p.suffix in ('.csv', '.json', '.npy', '.npz'))}
+    files = {p for p in PACKAGE.rglob('*.py') if 'data' not in p.relative_to(PACKAGE).parts}
+    files.update(p for p in (PACKAGE / 'data').rglob('*')
+                 if p.is_file() and p.suffix in ('.csv', '.json', '.npy', '.npz'))
     versions = se.versions()
     environment = dict(python=versions['python'], packages=versions['packages'])
     digest = hashlib.sha256(json.dumps(environment, sort_keys=True).encode())
     for path in sorted(files):
-        label = path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.name
+        label = path.relative_to(PACKAGE).as_posix()
         digest.update(label.encode())
         digest.update(path.read_bytes())
     return digest.hexdigest()
 
 
 def trial(key, lever, settings, root=RESULTS):
+    root = require_path(root, 'Lever study output')
     parameters = asdict(settings)
     signature = fingerprint()
     identifier = hashlib.sha256(json.dumps([parameters, signature], sort_keys=True).encode()).hexdigest()[:16]
@@ -491,7 +495,7 @@ def trial(key, lever, settings, root=RESULTS):
                 metrics=None, result=dict(prerequisite_failure=str(error),
                     other_gates='INDETERMINATE because the selected circulation failed'), mpd=None,
                 elapsed_seconds=time.perf_counter() - started,
-                evidence=str(path.relative_to(ROOT)).replace('\\', '/'), rating_only_physics_reused_from=None)
+                evidence=path.relative_to(ROOT).as_posix() if ROOT is not None and path.is_relative_to(ROOT) else path.as_posix(), rating_only_physics_reused_from=None)
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(record, indent=2) + '\n', encoding='utf-8', newline='\n')
             print('Unresolved trial', key, lever, str(error), flush=True)
@@ -499,7 +503,7 @@ def trial(key, lever, settings, root=RESULTS):
     record = dict(site=key, lever=lever, settings=parameters, source_sha256=signature,
                   versions=se.versions(), assessment=gates(out), metrics=rb.metrics(out),
                   result=se.result_dict(out), mpd=out.get('mpd_gate'),
-                  elapsed_seconds=time.perf_counter() - started, evidence=str(path.relative_to(ROOT)).replace('\\', '/'))
+                  elapsed_seconds=time.perf_counter() - started, evidence=path.relative_to(ROOT).as_posix() if ROOT is not None and path.is_relative_to(ROOT) else path.as_posix())
     record['rating_only_physics_reused_from'] = reused
     if lever == 'L5' and reused is None:
         RATING_PHYSICS[rating_key] = (out, record['evidence'])
@@ -530,11 +534,13 @@ def bisect_minimum(evaluate, failing, passing, tolerance, predicate=None):
 
 
 def base_settings(key):
-    data = json.loads((rb.CHECKPOINT / (key + '.json')).read_text())
+    checkpoint = require_path(rb.CHECKPOINT, 'Reviewed programme evidence')
+    data = json.loads((checkpoint / (key + '.json')).read_text())
     return Settings(flow_L_s=data['programme']['flow'])
 
 
 def run_lever(key, lever, root=RESULTS):
+    root = require_path(root, 'Lever study output')
     base = base_settings(key)
     target = se.find_site(key).target()
     summary = dict(site=key, lever=lever, trials=[], bracket=None)
@@ -631,10 +637,14 @@ def main():
     parser.add_argument('--levers', nargs='+', choices=['L' + str(i) for i in range(1, 9)], default=['L' + str(i) for i in range(1, 9)])
     parser.add_argument('--output', type=Path, default=RESULTS)
     args = parser.parse_args()
+    args.output = require_path(args.output, 'Lever study output')
     for key in args.sites:
         for lever in args.levers:
             run_lever(key, lever, args.output)
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except ValueError as error:
+        raise SystemExit(str(error)) from None

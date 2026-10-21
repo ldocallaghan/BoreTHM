@@ -51,7 +51,7 @@ Failure checks (the honest part)
 import numpy as np
 from scipy.special import erfc, erfcx
 from scipy.optimize import brentq
-import geo_constants as C
+from borethm import geo_constants as C
 
 # ---- optional temperature dependence (granite softens & expands more when hot)
 def E_of_T(T_C):

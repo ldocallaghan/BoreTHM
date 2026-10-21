@@ -11,7 +11,7 @@ is converged (0.04 K)."""
 import numpy as np
 import pytest
 
-import wall_thermal as wt
+from borethm import wall_thermal as wt
 
 A, K, RHOCP = 0.1207, 2.9, 2.7e6          # Soultz: hole radius, conductivity, rho c
 T_ROCK, T_FLUID, H = 400.0, 190.0, 2000.0  # rock, annulus fluid [C], film [W/m2/K]

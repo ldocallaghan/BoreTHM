@@ -31,6 +31,7 @@ jobs:
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
+      - run: pip install --no-deps -e .
       - run: pytest
 
   slow:
@@ -47,7 +48,8 @@ jobs:
         with:
           python-version: ${{ inputs.python-version || '3.14.4' }}
       - run: pip install -r requirements-lock.txt
-      - run: python src/water_table.py
+      - run: pip install --no-deps -e .
+      - run: python -m borethm.water_table
       - run: pytest -m "slow or not slow"
 
   goldens:
@@ -66,8 +68,9 @@ jobs:
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
-      - run: python src/water_table.py
-      - run: python src/comparative_sites.py --write-golden > site_table.txt
+      - run: pip install --no-deps -e .
+      - run: python -m borethm.water_table
+      - run: python -m borethm.comparative_sites --write-golden > site_table.txt
       - uses: actions/upload-artifact@v4
         with:
           name: v133-goldens
@@ -89,9 +92,10 @@ jobs:
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
-      - run: python src/water_table.py
+      - run: pip install --no-deps -e .
+      - run: python -m borethm.water_table
       - name: Generate fresh reviewed reference and lever tables
-        run: python src/release_v134.py --output results/v1.3.4/ci/${{ github.run_id }}-${{ github.run_attempt }}
+        run: python -m borethm.studies.release_v134 --output results/v1.3.4/ci/${{ github.run_id }}-${{ github.run_attempt }}
       - name: Verify every fast and slow regression against the generated pins
         run: pytest -m "slow or not slow" --durations=12 --junitxml=v134-tests.xml
       - uses: actions/upload-artifact@v4

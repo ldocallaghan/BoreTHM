@@ -7,8 +7,8 @@ observations in Valley & Evans (2007).
 """
 import pytest
 
-import crosscheck_soultz as cs
-from comparative_sites import CORNWALL
+from borethm.studies import crosscheck_soultz as cs
+from borethm.comparative_sites import CORNWALL
 
 MPa = 1.0e6
 

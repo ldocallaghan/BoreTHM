@@ -2,18 +2,19 @@
 trip that ends it (Fig. A), and the failure zone around the hole at the end of
 drilling and the end of the trip (Fig. B)."""
 import os
+from borethm._paths import repository_path, require_path
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-import geo_constants as C
-import model5_convergence_confinement as m5
-import site_evaluation as se
-import wall_thermal
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm import wall_thermal
 
-FIG = os.path.join(os.path.dirname(__file__), "..", "figures")
+FIG = require_path(repository_path("figures"), "Figure output")
 
 
 def main():

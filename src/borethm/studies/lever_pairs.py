@@ -5,7 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 
-import levers as lv
+from borethm.studies import levers as lv
 
 
 def pressure_width(record):
@@ -38,6 +38,7 @@ def main(argv=None):
     parser.add_argument('--sites', nargs='+', choices=['soultz', 'united-downs'], default=['soultz', 'united-downs'])
     parser.add_argument('--output', type=Path, default=lv.RESULTS)
     args = parser.parse_args(argv)
+    args.output = lv.require_path(args.output, 'Paired lever study output')
     for key in args.sites:
         summaries = [json.loads((args.output / key / ('L' + str(i)) / 'summary.json').read_text())
                      for i in range(1, 9)]
@@ -66,4 +67,7 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except ValueError as error:
+        raise SystemExit(str(error)) from None

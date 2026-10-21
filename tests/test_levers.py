@@ -2,8 +2,8 @@
 import numpy as np
 import pytest
 
-import levers as lv
-import pressure as pr
+from borethm.studies import levers as lv
+from borethm import pressure as pr
 
 
 def constant_fluid(rho):
@@ -78,7 +78,7 @@ def test_coating_unknown_is_explicit_and_a_failed_rig_gate_cannot_reopen():
         admissibility={'inadmissible': []}, coating={'status': 'INDETERMINATE'})
     out = dict(components=components, windows={n: {'open': True} for n in ('drilling_fluid', 'trip_fluid')},
                status={'label': 'INDETERMINATE', 'reasons': ['coating qualification']}, fluid=None, trip_fluid=None)
-    import fluids
+    from borethm import fluids
     for window in out['windows'].values():
         window.update(lo=fluids.water().rho_surface, hi=1500.)
     result = lv.gates(out)
@@ -89,7 +89,7 @@ def test_coating_unknown_is_explicit_and_a_failed_rig_gate_cannot_reopen():
 
 
 def test_water_viscosity_endpoint_keeps_the_yield_point_separate():
-    import fluids
+    from borethm import fluids
     mud = fluids.Mud(1300., fluids.PV_REF * lv.water_pv_fraction(), fluids.YP_REF)
     T, P = np.array([80.]), np.array([10.e6])
     assert mud.props(T, P)[2] == pytest.approx(fluids._water(T, P)[2])
@@ -109,7 +109,7 @@ def test_mpd_skin_reference_uses_connection_backpressure(monkeypatch):
 
 def test_pair_selection_ranks_applied_margins_and_stops_after_single_success():
     from dataclasses import asdict, replace
-    import lever_pairs as lp
+    from borethm.studies import lever_pairs as lp
     base = lv.base_settings('soultz')
     def record(settings, width, mpd=None):
         return dict(settings=asdict(settings), metrics=dict(solver_ok=True,
@@ -126,16 +126,19 @@ def test_pair_selection_ranks_applied_margins_and_stops_after_single_success():
 
 
 def test_trial_cache_invalidates_for_schedule_data_and_runtime(tmp_path, monkeypatch):
-    monkeypatch.setattr(lv, 'ROOT', tmp_path)
-    source = tmp_path / 'src' / 'drill_cycle.py'
-    source.parent.mkdir()
+    package = tmp_path / 'borethm'
+    monkeypatch.setattr(lv, 'PACKAGE', package)
+    source = package / 'studies' / 'drill_cycle.py'
+    source.parent.mkdir(parents=True)
     source.write_text('stage_minutes = 15\n')
-    data = tmp_path / 'data' / 'forge.csv'
+    data = package / 'data' / 'forge.csv'
     data.parent.mkdir()
     data.write_text('flow_gpm\n600\n')
     versions = dict(python='3.14.4', packages=dict(scipy='1.18.1'))
     monkeypatch.setattr(lv.se, 'versions', lambda: versions)
     original = lv.fingerprint()
+    (data.parent / 'build_extracts.py').write_text('excluded from the wheel\n')
+    assert lv.fingerprint() == original
     source.write_text('stage_minutes = 20\n')
     assert lv.fingerprint() != original
     source.write_text('stage_minutes = 15\n')

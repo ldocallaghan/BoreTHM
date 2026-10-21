@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-import site_evaluation as se
+from borethm import site_evaluation as se
 
 pytestmark = pytest.mark.slow
 

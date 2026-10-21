@@ -7,14 +7,15 @@ and UD-1's site-calibrated 63 deg. Right: how deep each site's stress and
 temperature data reach against its target. Filled = evidence-based, hollow =
 speculative."""
 import os
+from borethm._paths import repository_path, require_path
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-import geo_constants as C
-from comparative_sites import SITES, classify
-from site_evaluation import evaluate
+from borethm import geo_constants as C
+from borethm.comparative_sites import SITES, classify
+from borethm.site_evaluation import evaluate
 
 BLUE = "#2a78d6"                                    # reference palette slot 1
 INK, INK2, GRID, SURF = "#0b0b0b", "#52514e", "#e4e3df", "#fcfcfb"
@@ -85,6 +86,6 @@ a2.set_title("How deep the data reach", color=INK, fontsize=10, loc="left")
 
 a1.set_ylim(14.5, 0)
 fig.tight_layout()
-_figdir = os.path.join(os.path.dirname(__file__), "..", "figures")
+_figdir = require_path(repository_path("figures"), "Figure output")
 fig.savefig(os.path.join(_figdir, "comparative_sites.png"), dpi=130, facecolor=SURF)
 print("saved comparative_sites.png")

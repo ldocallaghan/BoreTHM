@@ -30,10 +30,10 @@ import sys
 
 import numpy as np
 
-import geo_constants as C
-import model5_convergence_confinement as m5
-import site_evaluation as se
-from comparative_sites import CORNWALL
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL
 
 SOULTZ = se.SOULTZ
 Z_CHECK = 5000.0
@@ -108,8 +108,8 @@ _shapes = {}
 
 
 def _shape(hours):
-    import calibrate_ud1 as cal
-    import wall_thermal as wt
+    from borethm import calibrate_ud1 as cal
+    from borethm import wall_thermal as wt
     if hours not in _shapes:
         _shapes[hours] = wt.cooling_shape(hours * 3600.0, A_HOLE, SOULTZ.k_rock,
                                           C.RHO_ROCK * C.CP_ROCK, cal.H_ANN_UD1)

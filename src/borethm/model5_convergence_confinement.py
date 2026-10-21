@@ -30,7 +30,7 @@ RADIAL stress (the fluid pressure), through the (1+k) factor -- so the simple
 of the work; cooling EXTENDS the stable envelope and cuts convergence.
 """
 import numpy as np
-import geo_constants as C
+from borethm import geo_constants as C
 
 ALPHA = C.K_ROCK / (C.RHO_ROCK * C.CP_ROCK)
 PHI = np.radians(35.0)

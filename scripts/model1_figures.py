@@ -7,14 +7,15 @@ NOV's TK-Drakon coated pipe and the dual-wall pipe of Xiao et al. (2022), at
 the 30 kg/s that cleans an 8.67-inch hole.
 """
 import os
+from borethm._paths import repository_path, require_path
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-import geo_constants as C
-import model1_coupled as m1
-import well_geometry as wg
+from borethm import geo_constants as C
+from borethm import model1_coupled as m1
+from borethm import well_geometry as wg
 
 L = (C.TARGET_ROCK_TEMP - C.SURFACE_TEMP) / C.GEOTHERM_GRADIENT
 M_DOT = 30.0
@@ -52,5 +53,5 @@ if __name__ == "__main__":
     axes[0].legend(fontsize=8, loc="lower left")
     fig.suptitle("Model 1: temperatures along a 12.4 km well to 450 C rock (35 C/km)", fontsize=11)
     fig.tight_layout()
-    fig.savefig(os.path.join(os.path.dirname(__file__), "..", "figures", "model1_profiles.png"), dpi=130)
+    fig.savefig(require_path(repository_path("figures/model1_profiles.png"), "Figure output"), dpi=130)
     print("saved model1_profiles.png")

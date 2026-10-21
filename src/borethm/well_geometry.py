@@ -22,7 +22,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-import geo_constants as C
+from borethm import geo_constants as C
 
 K_STEEL = 45.0   # W/m/K, drill pipe and casing (Wu et al. 2025, Tables 3 to 5)
 K_CEMENT = 1.0   # W/m/K, cement sheath (Dufrene et al. 2025)

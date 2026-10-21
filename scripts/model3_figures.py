@@ -8,9 +8,9 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import geo_constants as C
-from model3_optimiser import evaluate
-import well_geometry as wg
+from borethm import geo_constants as C
+from borethm.model3_optimiser import evaluate
+from borethm import well_geometry as wg
 
 G = 0.040                      # 40 K/km province
 m_dot, pipe = 4.0, wg.LEGACY_VACUUM
@@ -60,6 +60,7 @@ ax.set_title(f"Coupled optimiser siting map (G={G*1000:.0f} K/km, m={m_dot} kg/s
              f"red hatch = tool does not survive", fontsize=9)
 fig.tight_layout()
 import os
-_figdir = os.path.join(os.path.dirname(__file__), "..", "figures")
+from borethm._paths import repository_path, require_path
+_figdir = require_path(repository_path("figures"), "Figure output")
 fig.savefig(os.path.join(_figdir, "model3_siting_map.png"), dpi=130)
 print("saved model3_siting_map.png")

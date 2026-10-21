@@ -4,9 +4,8 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import geo_constants as C
-from model2_spallation import (sigma_thermal_surface, confining_horizontal,
-                               feasible_window, T_BDT)
+from borethm import geo_constants as C
+from borethm.model2_spallation import sigma_thermal_surface, confining_horizontal, feasible_window, T_BDT
 
 G = C.GEOTHERM_GRADIENT
 T_cold, t, h = 60.0, 1.0, 5e4
@@ -44,6 +43,7 @@ ax.legend(fontsize=8, loc="lower right")
 ax.grid(alpha=0.3)
 fig.tight_layout()
 import os
-_figdir = os.path.join(os.path.dirname(__file__), "..", "figures")
+from borethm._paths import repository_path, require_path
+_figdir = require_path(repository_path("figures"), "Figure output")
 fig.savefig(os.path.join(_figdir, "model2_feasibility.png"), dpi=130)
 print(f"saved model2_feasibility.png  (BDT at {zbdt:.1f} km)")

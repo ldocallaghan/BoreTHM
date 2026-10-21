@@ -3,7 +3,7 @@ water limit, and its Bingham-plastic pressure loss."""
 import numpy as np
 import pytest
 
-import fluids
+from borethm import fluids
 
 PSI_PER_FT = 6894.757 / 0.3048     # Pa/m
 CP = 1e-3                           # Pa s
@@ -52,7 +52,7 @@ def test_a_yield_point_keeps_slow_flow_laminar():
 # ---------------------------------------------------------- with water properties
 @pytest.mark.slow
 def test_the_mud_without_barite_or_yield_point_is_water():
-    import water_table as wt
+    from borethm import water_table as wt
     T = np.array([20.0, 150.0, 300.0])
     P = np.array([1e5, 50e6, 100e6])
     w = fluids.water()
@@ -90,8 +90,8 @@ def test_the_plastic_viscosity_follows_water():
 def test_water_limit_reproduces_the_water_hydraulics():
     """With water's density and no yield point, the fluid gives v1.3.2's
     hydraulics to within 1%."""
-    import model1_coupled as m1
-    import site_evaluation as se
+    from borethm import model1_coupled as m1
+    from borethm import site_evaluation as se
     g = se.site_well(10700.0, se.SITE_PIPES[0])
     a = m1.hydraulics(40.0, g, T_avg=80.0)
     b = m1.hydraulics(40.0, g, T_avg=80.0, fluid=fluids.water())

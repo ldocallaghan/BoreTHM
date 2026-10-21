@@ -30,9 +30,9 @@ an uncooled hole the practical ceiling can arrive BELOW the 400 C textbook BDT.
 We treat T_BDT as optimistic and flag it.
 """
 import numpy as np
-import geo_constants as C
-import model1_coupled as m1
-import well_geometry as wg
+from borethm import geo_constants as C
+from borethm import model1_coupled as m1
+from borethm import well_geometry as wg
 
 T_BDT = 400.0       # degC, brittle-ductile transition: optimistic ceiling for
                     # spallation and for an uncooled hole (see Models 2 and 4)

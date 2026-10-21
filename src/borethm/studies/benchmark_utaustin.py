@@ -42,8 +42,8 @@ import sys
 
 import numpy as np
 
-import model1_coupled as m1
-import well_geometry as wg
+from borethm import model1_coupled as m1
+from borethm import well_geometry as wg
 
 MUD = dict(rho=1078.0, cp=3750.0, mu=0.014, k=0.75)
 RHO_WATER_INLET = 992.2   # kg/m^3, water at 40 C, 1 atm (IAPWS-95)
@@ -214,8 +214,9 @@ def figure(out, path):
     fig.savefig(path, dpi=130)
 
 
-GOLDEN = os.path.join(os.path.dirname(__file__), "..", "tests", "golden",
-                      "benchmark_utaustin.json")
+from borethm._paths import repository_path, require_path
+
+GOLDEN = repository_path("tests/golden/benchmark_utaustin.json")
 
 
 def golden_rows():
@@ -236,11 +237,11 @@ if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if "--write-golden" in sys.argv:
         import json
-        with open(GOLDEN, "w") as fh:
+        with open(require_path(GOLDEN, "Writing regression goldens"), "w") as fh:
             json.dump(golden_rows(), fh, indent=1)
         print("wrote", os.path.basename(GOLDEN))
         sys.exit()
     out = tables()
-    path = os.path.join(os.path.dirname(__file__), "..", "figures", "benchmark_utaustin.png")
+    path = require_path(repository_path("figures/benchmark_utaustin.png"), "The UT Austin figure")
     figure(out, path)
     print(f"\nsaved {os.path.basename(path)}")

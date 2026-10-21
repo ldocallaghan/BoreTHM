@@ -17,10 +17,9 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.join(HERE, "..", "src"))
 
-import comparative_sites as cs        # noqa: E402
-import site_evaluation as se          # noqa: E402
+from borethm import comparative_sites as cs        # noqa: E402
+from borethm import site_evaluation as se          # noqa: E402
 from site_template import make_site   # noqa: E402
 
 GOLDEN = os.path.join(HERE, "..", "tests", "golden", "v134_site_table.json")
@@ -48,7 +47,7 @@ def main():
         se.export_result(o, a.json)
         print(f"result written to {a.json}")
     if site == se.SOULTZ and os.path.exists(GOLDEN):
-        from release_v134 import reference_row, assert_reviewed
+        from borethm.studies.release_v134 import reference_row, assert_reviewed
         pinned = json.load(open(GOLDEN))['sites']['soultz']
         assert_reviewed(reference_row(se.result_dict(o)), pinned)
         print("the reviewed v1.3.4 Soultz row reproduced: True")

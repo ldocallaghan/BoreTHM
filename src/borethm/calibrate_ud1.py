@@ -40,14 +40,17 @@ import sys
 
 import numpy as np
 
-import geo_constants as C
-import model5_convergence_confinement as m5
-import site_evaluation as se
-from comparative_sites import CORNWALL
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOG = os.path.join(ROOT, "data", "ud1", "UD1_Borehole_Imaging_Interpretation.csv")
-FIG = os.path.join(ROOT, "figures", "ud1_calibration.png")
+from importlib.resources import files
+from borethm._paths import repository_root, repository_path, require_path
+
+ROOT = repository_root()
+LOG = files("borethm") / "data/ud1/UD1_Borehole_Imaging_Interpretation.csv"
+FIG = repository_path("figures/ud1_calibration.png")
 
 PROFILE = CORNWALL.stress_cases[0]          # Reinecker et al. (2021)
 MUD_SG = 1.05                               # 12.25" section, upper bound
@@ -167,7 +170,7 @@ def cooled_field(z, md, cooling, rop=ROP_UD1):
     since the bit passed, with the fluid `cooling` below the formation."""
     key = (round(z, 1), round(md, 1), cooling, rop)
     if key not in _fields:
-        import wall_thermal as wt
+        from borethm import wall_thermal as wt
         T_rock = T_formation(z)
         T_fluid = max(T_rock - cooling, min(T_rock, T_SURF))
         t = max((SECTION_MD[1] - md) / rop, 1.0) * 3600.0
@@ -373,6 +376,7 @@ INK, INK2, GRID, SURF = "#0b0b0b", "#52514e", "#e4e3df", "#fcfcfb"
 
 
 def figure(cal, features, path=FIG):
+    path = require_path(path, "The UD-1 calibration figure")
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt

@@ -15,18 +15,20 @@ from unittest.mock import patch
 
 import numpy as np
 
-import drilling_cycle as dc
-import fluids
-import geo_constants as C
-import model1_coupled as m1
-import pressure as pr
-import site_evaluation as se
-import tool_thermal as tt
-import wall_thermal as wt
-import well_geometry as wg
+from borethm import drilling_cycle as dc
+from borethm import fluids
+from borethm import geo_constants as C
+from borethm import model1_coupled as m1
+from borethm import pressure as pr
+from borethm import site_evaluation as se
+from borethm import tool_thermal as tt
+from borethm import wall_thermal as wt
+from borethm import well_geometry as wg
 
-ROOT = Path(__file__).resolve().parent.parent
-CHECKPOINT = ROOT / 'results/v1.3.4/checkpoint-1'
+from borethm._paths import repository_root, repository_path, require_path
+
+ROOT = repository_root()
+CHECKPOINT = repository_path('results/v1.3.4/checkpoint-1')
 IDS = tuple('A' + str(i) for i in range(1, 10))
 
 
@@ -73,7 +75,8 @@ def recorded_tool_gates(site, out, **kwargs):
 
 
 def reviewed_base(key):
-    saved = json.loads((CHECKPOINT / (key + '.json')).read_text())
+    checkpoint = require_path(CHECKPOINT, 'Reviewed programme evidence')
+    saved = json.loads((checkpoint / (key + '.json')).read_text())
     site = replace(se.find_site(key), coupled=True)
     p = saved['programme']
     pipe = next(pipe for pipe in se.SITE_PIPES if pipe.name == p['pipe'])
@@ -432,10 +435,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sites', nargs='+', default=['soultz', 'united-downs', 'pannonian'])
     parser.add_argument('--only', nargs='+', choices=IDS)
-    parser.add_argument('--output', type=Path, default=ROOT / 'results/robustness')
+    parser.add_argument('--output', type=Path, default=repository_path('results/robustness'))
     parser.add_argument('--legacy-threshold', action='store_true',
                         help='also check the original v1.3.3 Pannonian 0.041 C tool threshold')
     args = parser.parse_args()
+    args.output = require_path(args.output, 'Robustness output')
+    require_path(CHECKPOINT, 'Reviewed programme evidence')
     args.output.mkdir(parents=True, exist_ok=True)
     for key in args.sites:
         destination = args.output / (key + '.json')
@@ -469,7 +474,7 @@ def legacy_pannonian_threshold(destination):
     base = se.evaluate(site, circulation='v1.3.3')
     peak = base['tools']['trip_in']['staged']['peak']
     margin = C.BHA_SURVIVAL_TEMP - peak
-    pinned = json.loads((ROOT / 'tests/golden/v133_site_table.json').read_text())[site.name]['tools']['running_in']
+    pinned = json.loads((require_path(ROOT, 'Historical regression goldens') / 'tests/golden/v133_site_table.json').read_text())[site.name]['tools']['running_in']
     if abs(peak - pinned) > 0.001:
         raise ValueError('original threshold did not reproduce to 0.001 C')
     record = dict(site='pannonian', evaluation='v1.3.3 historical threshold',
@@ -490,4 +495,7 @@ def legacy_pannonian_threshold(destination):
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except ValueError as error:
+        raise SystemExit(str(error)) from None

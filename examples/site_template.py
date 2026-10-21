@@ -21,10 +21,9 @@ speculative. The labels allowed are site_evaluation.BASES.
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 
-import geo_constants as C                            # noqa: E402
-from site_evaluation import SiteProfile, StressProfile, urg_geotherm   # noqa: E402
+from borethm import geo_constants as C                            # noqa: E402
+from borethm.site_evaluation import SiteProfile, StressProfile, urg_geotherm   # noqa: E402
 
 # Valley & Evans (2007), Stanford Geothermal Workshop SGP-TR-183, valid 1.5 to
 # 5.0 km: Sv = -1.30 + 25.50 z, Shmin = -1.78 + 14.06 z and

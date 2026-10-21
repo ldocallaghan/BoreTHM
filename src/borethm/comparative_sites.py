@@ -21,12 +21,11 @@ are written up in data/sites/stress_sources.md.
 import sys
 
 import numpy as np
-import fluids
-import geo_constants as C
-import model1_coupled as m1
-import site_evaluation as se
-from site_evaluation import (SiteProfile, SOULTZ, StressProfile, evaluate,
-                             transitional_bounds)
+from borethm import fluids
+from borethm import geo_constants as C
+from borethm import model1_coupled as m1
+from borethm import site_evaluation as se
+from borethm.site_evaluation import SiteProfile, SOULTZ, StressProfile, evaluate, transitional_bounds
 
 
 def make_geotherm(segments):
@@ -141,7 +140,7 @@ PANNONIAN = SiteProfile(
         "well check": ("none", "no well with wellbore-failure data"),
     })
 
-import crosscheck_newberry as nb                           # noqa: E402
+from borethm import crosscheck_newberry as nb                           # noqa: E402
 
 NEWBERRY = SiteProfile(
     name="Newberry / NWG 55-29 (USA)",
@@ -689,7 +688,8 @@ if __name__ == "__main__":
         # the v1.3.3 table; the v1.2 and v1.3 tables stay pinned as their
         # releases left them, the regression against which v1.3.3 is checked
         import json, os
-        gold = os.path.join(os.path.dirname(__file__), "..", "tests", "golden")
+        from borethm._paths import repository_path, require_path
+        gold = require_path(repository_path("tests/golden"), "Writing regression goldens")
         with open(os.path.join(gold, "v133_site_table.json"), "w") as fh:
             json.dump(golden_rows_v133(results), fh, indent=1, default=float)
     tiers = {t: [(s, o) for s, o in zip(SITES, results) if s.tier == t]

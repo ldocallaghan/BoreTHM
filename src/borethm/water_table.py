@@ -19,7 +19,9 @@ from scipy.interpolate import RegularGridInterpolator
 from iapws import IAPWS95
 
 KELVIN = 273.15
-_CACHE = os.path.join(os.path.dirname(__file__), "water_table.npz")
+from borethm._paths import cache_directory
+
+_CACHE = cache_directory() / "water_table.npz"
 
 # Grid spans the whole borehole envelope with margin.
 T_GRID = np.arange(1.0, 481.0, 2.0)            # degC
@@ -39,6 +41,7 @@ def _build():
             cp[i, j] = w.cp * 1000.0
             mu[i, j] = w.mu
             k[i, j] = w.k
+    _CACHE.parent.mkdir(parents=True, exist_ok=True)
     np.savez(_CACHE, T=T_GRID, P=P_GRID, rho=rho, cp=cp, mu=mu, k=k)
     return rho, cp, mu, k
 

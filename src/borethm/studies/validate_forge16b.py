@@ -42,11 +42,13 @@ from datetime import datetime, timezone
 import numpy as np
 from scipy.optimize import brentq, minimize_scalar
 
-import model1_coupled as m1
-import well_geometry as wg
+from borethm import model1_coupled as m1
+from borethm import well_geometry as wg
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(HERE, "..", "data", "forge16b")
+from importlib.resources import files
+from borethm._paths import repository_path, require_path
+
+DATA = files("borethm") / "data" / "forge16b"
 FT, INCH, GPM, PSI = 0.3048, 0.0254, 6.30902e-5, 6894.757
 
 
@@ -59,7 +61,7 @@ def C_to_F(c):
 
 
 def _read(name):
-    with open(os.path.join(DATA, name), newline="") as fh:
+    with (DATA / name).open(newline="") as fh:
         return list(csv.DictReader(fh))
 
 
@@ -448,7 +450,7 @@ def figure(o, path):
     fig.savefig(path, dpi=130)
 
 
-GOLDEN = os.path.join(HERE, "..", "tests", "golden", "validate_forge16b.json")
+GOLDEN = repository_path("tests/golden/validate_forge16b.json")
 
 
 def golden(o):
@@ -469,10 +471,10 @@ if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     o = run_all()
     report(o)
-    figure(o, os.path.join(HERE, "..", "figures", "validate_forge16b.png"))
+    figure(o, require_path(repository_path("figures/validate_forge16b.png"), "The FORGE figure"))
     print("\nsaved validate_forge16b.png")
     if "--write-golden" in sys.argv:
         import json
-        with open(GOLDEN, "w") as fh:
+        with open(require_path(GOLDEN, "Writing regression goldens"), "w") as fh:
             json.dump(golden(o), fh, indent=1)
         print("wrote", os.path.basename(GOLDEN))

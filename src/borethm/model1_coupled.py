@@ -35,10 +35,10 @@ fully vectorized. P(z) hydrostatic (+1 atm surface).
 """
 import numpy as np
 from scipy.integrate import solve_bvp
-import geo_constants as C
-import water_table as wt
-import well_geometry as wg
-from well_geometry import WellGeometry
+from borethm import geo_constants as C
+from borethm import water_table as wt
+from borethm import well_geometry as wg
+from borethm.well_geometry import WellGeometry
 
 P_SURF = 1.0e5  # Pa, atmospheric at wellhead
 P_OP = 5.0e6    # Pa, loop operating pressure for the surface heat-product calc
@@ -398,7 +398,7 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     def loss(rho, mu, area, Dh, annulus):
         v = m_dot / (rho * area)
         if tau_y > 0.0:     # a Bingham plastic (fluids.Mud)
-            import fluids
+            from borethm import fluids
             return fluids.bingham_gradient(rho, mu, tau_y, v, Dh, annulus)[0] * (bot - top), v
         f = friction_factor(rho * v * Dh / mu, friction)
         return f * ((bot - top) / Dh) * 0.5 * rho * v ** 2, v

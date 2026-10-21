@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-import tool_thermal as tt
+from borethm import tool_thermal as tt
 
 BHA = tt.Lump.of_pipe(0.073 / 2, 0.17 / 2, 1300.0 * 3000.0)
 
@@ -56,7 +56,7 @@ def test_staging_on_the_way_in_lowers_the_peak():
 # ---------------------------------------------------------------- at a site
 @pytest.fixture(scope="module")
 def soultz(evaluated):
-    import site_evaluation as se
+    from borethm import site_evaluation as se
     return evaluated(se.SOULTZ)
 
 
@@ -65,8 +65,8 @@ def test_a_forced_exceedance_finds_a_schedule(soultz, monkeypatch):
     """With the tool's limit set just below the connection's peak, FORGE's
     practice fails and the search adds circulation before the connection or
     shortens it until the tool holds."""
-    import geo_constants as C
-    import site_evaluation as se
+    from borethm import geo_constants as C
+    from borethm import site_evaluation as se
     base = soultz["tools"]["connection"]["peak"]
     monkeypatch.setattr(C, "BHA_SURVIVAL_TEMP", base - 0.05)
     if soultz["tools"]["drilling"]["T"] >= base - 0.05:

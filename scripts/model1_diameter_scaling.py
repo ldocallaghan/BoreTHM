@@ -16,9 +16,9 @@ We show this analytically and confirm it by re-running the full Model 1 BVP at
 several borehole diameters.
 """
 import numpy as np
-import geo_constants as C
-import model1_coupled as m1
-import well_geometry as wg
+from borethm import geo_constants as C
+from borethm import model1_coupled as m1
+from borethm import well_geometry as wg
 
 ALPHA = C.K_ROCK / (C.RHO_ROCK * C.CP_ROCK)
 

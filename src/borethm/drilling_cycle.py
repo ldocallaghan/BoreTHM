@@ -35,13 +35,15 @@ from dataclasses import dataclass
 
 import numpy as np
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(HERE, "..", "data", "forge16b")
+from importlib.resources import files
+from borethm._paths import repository_path, require_path
+
+DATA = files("borethm") / "data" / "forge16b"
 FT = 0.3048
 
 
 def _read(name):
-    with open(os.path.join(DATA, name), newline="") as fh:
+    with (DATA / name).open(newline="") as fh:
         return list(csv.DictReader(fh))
 
 

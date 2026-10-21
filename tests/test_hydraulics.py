@@ -2,8 +2,8 @@
 import numpy as np
 import pytest
 
-import model1_coupled as m1
-import well_geometry as wg
+from borethm import model1_coupled as m1
+from borethm import well_geometry as wg
 
 PSI = 6894.757
 GPM = 6.30902e-5   # m^3/s
@@ -43,7 +43,7 @@ def _pipe_in_hole(L=3000.0):
 
 @pytest.mark.slow
 def test_string_loss_laminar_and_turbulent():
-    import water_table as wt
+    from borethm import water_table as wt
     g = _pipe_in_hole()
     T, P = 60.0, m1.P_of_z(1500.0)
     rho, _, mu, _ = (float(x[0]) for x in wt.props(np.array([T]), np.array([P])))
@@ -93,7 +93,7 @@ def test_hot_annulus_lowers_standpipe_pressure():
 def test_friction_heat_in_an_insulated_string():
     """With a near-adiabatic string, the bore warms by its friction loss over
     rho cp, give or take what crosses the wall."""
-    import benchmark_utaustin as b
+    from borethm.studies import benchmark_utaustin as b
     on, off = b.run(wg.DUAL_WALL), b.run(wg.DUAL_WALL, friction_heat=False)
     expect = on["hyd"]["dp_string"] / (b.MUD["rho"] * b.MUD["cp"])
     assert b.bhct(on) - b.bhct(off) == pytest.approx(expect, rel=0.15)

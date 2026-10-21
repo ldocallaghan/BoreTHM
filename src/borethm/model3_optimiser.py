@@ -25,10 +25,10 @@ here; the exported MW is an EARLY-LIFE value and would carry a separate economic
 decline derate in the production phase.
 """
 import numpy as np
-import geo_constants as C
-import model1_coupled as m1
-import well_geometry as wg
-import model2_spallation as m2
+from borethm import geo_constants as C
+from borethm import model1_coupled as m1
+from borethm import well_geometry as wg
+from borethm import model2_spallation as m2
 
 A_BIT = np.pi * (C.BIT_DIAMETER / 2) ** 2
 CEILING = C.BHA_SURVIVAL_TEMP            # 200 C tool survival

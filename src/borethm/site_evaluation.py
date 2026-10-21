@@ -22,16 +22,16 @@ import os
 import sys
 from dataclasses import dataclass, field, replace
 import numpy as np
-import geo_constants as C
-import model1_coupled as m1
-import model2_spallation as m2
-import model3_optimiser as m3
-import model4_hole_stability as m4
-import model5_convergence_confinement as m5
-import pressure as pr
-import fluids
-import wall_thermal
-import well_geometry as wg
+from borethm import geo_constants as C
+from borethm import model1_coupled as m1
+from borethm import model2_spallation as m2
+from borethm import model3_optimiser as m3
+from borethm import model4_hole_stability as m4
+from borethm import model5_convergence_confinement as m5
+from borethm import pressure as pr
+from borethm import fluids
+from borethm import wall_thermal
+from borethm import well_geometry as wg
 
 YEAR = 3.156e7
 
@@ -1136,7 +1136,7 @@ def trip_temperatures(site, out, run, trip_h, node=True):
     cache = run.setdefault("trip_columns", {})
     if key in cache:
         return cache[key]
-    import drilling_cycle as dc
+    from borethm import drilling_cycle as dc
     t = dc.forge_timings()
     z_bit = out["z"]
     geotherm = site.temperature()
@@ -1250,7 +1250,7 @@ def site_cycle(site, out, connection="p90", trip_scale=1.0, run=None, label="bas
     verdict_only: return the site verdict and the deciding case's drilling
     fluid without the safe pause and the full-field check (for searches).
     thermal: the thermal hoop stress on or off, the evaluation's by default."""
-    import drilling_cycle as dc
+    from borethm import drilling_cycle as dc
     thermal = out.get("thermal", True) if thermal is None else thermal
     t = dc.forge_timings()
     z = out["z"]
@@ -1538,7 +1538,7 @@ def common_windows(site, out, cycle=None, run=None, node=True, extra_depths=(), 
     connection and fresh rock) and the trip fluid. If it is empty, the
     deciding pair of scenarios is named. The site verdict is unchanged; this
     is a separate output."""
-    import drilling_cycle as dc
+    from borethm import drilling_cycle as dc
     t = dc.forge_timings()
     cycle = cycle or out["cycle"]
     run = run or out["m1"]
@@ -1804,8 +1804,8 @@ def tool_gates(site, out, run=None, node=True, trip_h=None):
     annulus above the bit, where the coated pipe is, so the coating's time
     above its rating on the way in is overstated. The BHA always runs into
     fluid not yet circulated, so its peak is not affected."""
-    import drilling_cycle as dc
-    import tool_thermal as tt
+    from borethm import drilling_cycle as dc
+    from borethm import tool_thermal as tt
     t = dc.forge_timings()
     run = run or out["m1"]
     z, T_rock = out["z"], out["T_rock"]
@@ -2088,7 +2088,7 @@ def trip_profile(site, out, heights=(0.0, 100.0, 250.0, 500.0, 1000.0, 2000.0, 3
     passed at the rate of penetration (connections ignored) and through the
     bottoms-up, then the trip. With the budget, the pressure at each is the
     water column at the end of the trip, less the swab allowance."""
-    import drilling_cycle as dc
+    from borethm import drilling_cycle as dc
     t = dc.forge_timings()
     run = out["m1"]
     z_bit = out["z"]
@@ -2547,10 +2547,19 @@ def versions():
     import importlib.metadata as md
     import platform
     import subprocess
-    here = os.path.dirname(os.path.abspath(__file__))
-    git = lambda *a: subprocess.run(["git", *a], cwd=here, capture_output=True, text=True).stdout.strip()
+    from borethm._paths import repository_root
+    root = repository_root()
+
+    def git(*args):
+        if root is None:
+            return ''
+        try:
+            result = subprocess.run(["git", *args], cwd=root, capture_output=True, text=True)
+        except OSError:
+            return ''
+        return result.stdout.strip() if result.returncode == 0 else ''
     pkgs = {}
-    for p in ("numpy", "scipy", "iapws", "matplotlib"):
+    for p in ("borethm", "numpy", "scipy", "iapws", "matplotlib"):
         try:
             pkgs[p] = md.version(p)
         except md.PackageNotFoundError:
@@ -2629,7 +2638,7 @@ def export_result(o, path):
 
 def named_sites():
     """The sites the repository defines, by a short key."""
-    import comparative_sites as cs
+    from borethm import comparative_sites as cs
     keys = ("soultz", "larderello", "united-downs", "pannonian", "newberry")
     return dict(zip(keys, cs.SITES))
 
@@ -2639,7 +2648,7 @@ def find_site(name):
     key = name.lower().replace(" ", "-")
     hits = [k for k in sites if key in k or key in sites[k].name.lower()]
     if len(hits) != 1:
-        raise SystemExit(f"--site {name!r}: choose one of " + ", ".join(sites))
+        raise ValueError(f"--site {name!r}: choose one of " + ", ".join(sites))
     return sites[hits[0]]
 
 
@@ -2652,7 +2661,10 @@ if __name__ == "__main__":
     ap.add_argument("--json", help="also write the result to this JSON file")
     ap.add_argument('--circulation', choices=('v1.3.3', 'v1.3.4'), default='v1.3.4')
     a = ap.parse_args()
-    site = find_site(a.site)
+    try:
+        site = find_site(a.site)
+    except ValueError as error:
+        raise SystemExit(str(error)) from None
     try:
         for warning in validate_site(site):
             print('warning:', warning)

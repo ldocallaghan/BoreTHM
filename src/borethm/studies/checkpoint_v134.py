@@ -8,9 +8,9 @@ import json
 from pathlib import Path
 import time
 
-import fluids
-import pressure as pr
-import site_evaluation as se
+from borethm import fluids
+from borethm import pressure as pr
+from borethm import site_evaluation as se
 
 
 def main():
@@ -19,7 +19,8 @@ def main():
     parser.add_argument('--sites', nargs='+', default=list(se.named_sites()))
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
-    root = Path(__file__).resolve().parent.parent
+    from borethm._paths import repository_root, require_path
+    root = require_path(repository_root(), 'Historical regression goldens')
     baseline = json.loads((root / 'tests/golden/v133_site_table.json').read_text())
     comparison_path = args.output / 'comparison.json'
     rows = json.loads(comparison_path.read_text()) if comparison_path.exists() else []
@@ -59,4 +60,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except ValueError as error:
+        raise SystemExit(str(error)) from None

@@ -2,9 +2,9 @@
 import numpy as np
 import pytest
 
-import model1_coupled as m1
-import pressure as pr
-import site_evaluation as se
+from borethm import model1_coupled as m1
+from borethm import pressure as pr
+from borethm import site_evaluation as se
 
 
 @pytest.mark.parametrize('temperature', [1000., np.nan, np.inf])

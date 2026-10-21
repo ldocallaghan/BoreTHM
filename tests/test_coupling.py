@@ -5,9 +5,9 @@ from dataclasses import replace
 
 import pytest
 
-import geo_constants as C
-import model3_optimiser as m3
-import site_evaluation as se
+from borethm import geo_constants as C
+from borethm import model3_optimiser as m3
+from borethm import site_evaluation as se
 
 
 def test_a_coupled_site_takes_its_own_stiffness():

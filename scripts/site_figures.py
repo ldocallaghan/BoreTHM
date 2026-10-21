@@ -5,9 +5,9 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import geo_constants as C
-from comparative_sites import classify
-from site_evaluation import SOULTZ, evaluate
+from borethm import geo_constants as C
+from borethm.comparative_sites import classify
+from borethm.site_evaluation import SOULTZ, evaluate
 
 o = evaluate(SOULTZ, circulation='v1.3.3')  # Historical diagnostic dashboard.
 s = SOULTZ
@@ -85,6 +85,7 @@ ax[2].set_title("Scorecard", fontsize=10)
 fig.suptitle("Site evaluation dashboard: Upper Rhine Graben / Soultz-sous-Forets", fontsize=12)
 fig.tight_layout()
 import os
-_figdir = os.path.join(os.path.dirname(__file__), "..", "figures")
+from borethm._paths import repository_path, require_path
+_figdir = require_path(repository_path("figures"), "Figure output")
 fig.savefig(os.path.join(_figdir, "site_dashboard.png"), dpi=130)
 print("saved site_dashboard.png")

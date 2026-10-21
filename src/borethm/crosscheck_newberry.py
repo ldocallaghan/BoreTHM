@@ -41,11 +41,13 @@ import sys
 
 import numpy as np
 
-import model5_convergence_confinement as m5
-import site_evaluation as se
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(HERE, "..", "data", "newberry")
+from importlib.resources import files
+from borethm._paths import repository_path, require_path
+
+DATA = files("borethm") / "data" / "newberry"
 FT, PSI = 0.3048, 6894.757
 
 SV_8420_PSI, MD_8420 = 8852.9, 8420.0
@@ -58,7 +60,7 @@ COOLING_K = np.arange(0.0, 101.0, 5.0)
 
 
 def _read(name):
-    with open(os.path.join(DATA, name), newline="") as fh:
+    with (DATA / name).open(newline="") as fh:
         return list(csv.DictReader(fh))
 
 
@@ -131,8 +133,8 @@ _depths = {}
 
 
 def _shape(hours):
-    import calibrate_ud1 as cal
-    import wall_thermal as wt
+    from borethm import calibrate_ud1 as cal
+    from borethm import wall_thermal as wt
     if hours not in _shapes:
         _shapes[hours] = wt.cooling_shape(hours * 3600.0, A_HOLE, 2.14, 2.7e6, cal.H_ANN_UD1)
     return _shapes[hours]

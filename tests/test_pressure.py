@@ -4,10 +4,10 @@ import numpy as np
 import pytest
 from iapws.iapws97 import _PSat_T
 
-import geo_constants as C
-import pressure as pr
-import site_evaluation as se
-from comparative_sites import CORNWALL
+from borethm import geo_constants as C
+from borethm import pressure as pr
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL
 
 Z = 10700.0
 TVD = np.linspace(0.0, Z, 501)

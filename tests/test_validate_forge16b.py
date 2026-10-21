@@ -5,7 +5,7 @@ import json
 
 import pytest
 
-import validate_forge16b as v
+from borethm.studies import validate_forge16b as v
 
 pytestmark = pytest.mark.slow
 

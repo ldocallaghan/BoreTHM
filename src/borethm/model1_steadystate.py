@@ -35,8 +35,8 @@ We also estimate the metal-to-fluid film drop to check the BHA truly tracks the
 coolant temperature, not the rock.
 """
 import numpy as np
-import geo_constants as C
-from water_props import water
+from borethm import geo_constants as C
+from borethm.water_props import water
 
 KELVIN = 273.15
 
