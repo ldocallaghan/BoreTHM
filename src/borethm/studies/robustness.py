@@ -75,9 +75,9 @@ def recorded_tool_gates(site, out, **kwargs):
 
 
 def reviewed_base(key):
+    site = replace(se.find_site(key), coupled=True)
     checkpoint = require_path(CHECKPOINT, 'Reviewed programme evidence')
     saved = json.loads((checkpoint / (key + '.json')).read_text())
-    site = replace(se.find_site(key), coupled=True)
     p = saved['programme']
     pipe = next(pipe for pipe in se.SITE_PIPES if pipe.name == p['pipe'])
     water_rho = fluids.water().rho_surface

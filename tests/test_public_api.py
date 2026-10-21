@@ -68,11 +68,18 @@ def test_circulation_wrapper_preserves_arguments_and_only_changes_verbosity(monk
     assert bt.circulating_temperatures(*args)['verbose'] is True
 
 
-def test_unknown_site_is_a_library_error_and_a_one_line_command_error():
+@pytest.mark.parametrize('module, option', [
+    ('site_evaluation', '--site'),
+    ('studies.robustness', '--sites'),
+    ('studies.checkpoint_v134', '--sites'),
+])
+def test_unknown_site_is_a_library_error_and_a_one_line_command_error(module, option, tmp_path):
     with pytest.raises(ValueError, match='choose one of'):
         bt.find_site('unknown-test-site')
-    command = subprocess.run([sys.executable, '-m', 'borethm.site_evaluation',
-                              '--site', 'unknown-test-site'], capture_output=True, text=True)
+    arguments = [sys.executable, '-m', 'borethm.' + module, option, 'unknown-test-site']
+    if module.startswith('studies.'):
+        arguments += ['--output', str(tmp_path)]
+    command = subprocess.run(arguments, capture_output=True, text=True)
     assert command.returncode == 1
     assert command.stderr.startswith("--site 'unknown-test-site': choose one of ")
     assert 'Traceback' not in command.stderr
