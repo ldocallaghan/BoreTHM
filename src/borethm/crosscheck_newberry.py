@@ -4,7 +4,7 @@ crosscheck_newberry.py
 A check of the stability model against the Newberry EGS well NWG 55-29,
 where the wall was imaged at up to 277 C. Nothing is fitted to Newberry.
 
-Run from the repo root:   python src/crosscheck_newberry.py
+Run from the repo root:   python -m borethm.crosscheck_newberry
 
 Source: Davatzes, N.C., Hickman, S.H. (2011), "Preliminary Analysis of Stress
 in the Newberry EGS Well NWG 55-29", GRC Transactions 35 (data/newberry/).

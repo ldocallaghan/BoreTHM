@@ -1,8 +1,8 @@
 """Rebuild the FORGE 16B extracts in this folder from the raw GDR downloads.
 
-    python data/forge16b/build_extracts.py
+    python src/borethm/data/forge16b/build_extracts.py
 
-Expects the raw files in data/forge16b/raw/ (not committed; see README.md):
+Expects the raw files in src/borethm/data/forge16b/raw/ (not committed; see README.md):
 
   - "16B(78)-32 Well Survey.zip"  (GDR 1516)        -> survey_16b.csv
   - "Utah FORGE Deep Well Temperature Profiles_Sept 2022.xlsx"
@@ -15,7 +15,7 @@ Expects the raw files in data/forge16b/raw/ (not committed; see README.md):
 run_observations.csv is transcribed by hand from the Eavor trial report, so it
 is not rebuilt here. cycle_timings.csv is built from pason_trial_1min.csv.
 
-    python data/forge16b/build_extracts.py --image-logs
+    python src/borethm/data/forge16b/build_extracts.py --image-logs
 
 reads the file listing of the GDR 1531 image-log zips from their central
 directories by HTTP range requests, without downloading them, into

@@ -16,8 +16,8 @@ drill pipe (IDP) trial Eavor ran in Utah FORGE well 16B(78)-32 in May 2023.
 Both are used under CC-BY 4.0. The extracts here are derived from them.
 
 The raw files are not committed. To rebuild the extracts, download these into
-`data/forge16b/raw/` (unzipping `16B_Pason.zip` to `raw/16B_Pason/`) and run
-`python data/forge16b/build_extracts.py`:
+`src/borethm/data/forge16b/raw/` (unzipping `16B_Pason.zip` to `raw/16B_Pason/`) and run
+`python src/borethm/data/forge16b/build_extracts.py`:
 
 | File (GDR) | SHA-256 (first 16) |
 |---|---|

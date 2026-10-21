@@ -59,7 +59,7 @@ FRICTION_MU_SENSITIVITY = (0.6, 0.85)
 # drilling margin against losses, not a site value -- adjust if one exists.
 BREAKOUT_W_MAX_DEG = 90.0
 # The widest breakout UD-1 logged in a section drilled without trouble (the
-# 12.25", BGS image log; src/calibrate_ud1.py). Verdicts are also reported at
+# 12.25", BGS image log; src/borethm/calibrate_ud1.py). Verdicts are also reported at
 # this site-calibrated W_max, as a sensitivity on the 90 deg default.
 BREAKOUT_W_MAX_SITE_DEG = 63.0
 WALL_T0 = 0.0

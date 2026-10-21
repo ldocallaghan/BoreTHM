@@ -1,6 +1,6 @@
 # Newberry well NWG 55-29
 
-Data for the stability cross-check against NWG 55-29 (`src/crosscheck_newberry.py`)
+Data for the stability cross-check against NWG 55-29 (`src/borethm/crosscheck_newberry.py`)
 and the Newberry site in the site table.
 
 ## Sources and licence
@@ -13,7 +13,7 @@ and the Newberry site in the site table.
   CC-BY 4.0. The extracts here are derived from it.
 
 The raw files are not committed. To rebuild the extracts, download these into
-`data/newberry/raw/gdr271/` and run `python data/newberry/build_extracts.py`:
+`src/borethm/data/newberry/raw/gdr271/` and run `python src/borethm/data/newberry/build_extracts.py`:
 
 | File (GDR 271) | SHA-256 (first 16) |
 |---|---|

@@ -59,7 +59,7 @@ fractures, at the two ends of the paper's tensile-fracture interval. Most
 likely the operator's interpretation (behind the paper) and the BGS one used
 different picking criteria; tensile fractures are often axial traces that a
 plane-picking workflow would not record. This dataset is the one with depths
-and widths, so it is what the strength calibration (src/calibrate_ud1.py)
+and widths, so it is what the strength calibration (src/borethm/calibrate_ud1.py)
 fits, and the paper's counts are a second opinion.
 
 The deviated 8.5" section is not used in the calibration, because the

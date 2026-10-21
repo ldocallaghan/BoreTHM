@@ -1,8 +1,8 @@
 # BoreTHM: models of circulating temperature and borehole stability for drilling into superhot rock
 
-BoreTHM is an open-source Python toolkit for assessing drilling programmes in superhot geothermal rock. It couples fluid circulation and heat transfer with borehole stability to help researchers and engineers examine fluid pressure limits and equipment temperatures under different well designs and operating conditions.
+BoreTHM is an open-source Python model for assessing drilling programmes in superhot geothermal rock. It couples circulating-fluid and downhole-tool temperatures with thermal stress at the borehole wall to calculate the mud-weight window: the range of fluid densities that meets the pressure constraints through drilling, connections and trips.
 
-The circulation model is checked against Utah FORGE field data. Worked site assessments show how the models are applied, with assumptions and limitations reported alongside the results.
+At the deep granite targets studied at Soultz and United Downs, whether a drilling window exists depends on how quickly breakouts form after rock exposure. The Soultz window first opens between the sampled delays of 15 and 20 minutes; the formation time has not been measured. Both complete programmes remain NO-GO for the stated designs. BoreTHM is for drilling engineers and researchers assessing a well design or reusing the thermal and stability calculations. Its reference cases support checks against field observations and published models.
 
 - [Documentation guide](docs/README.md): choose a reading path.
 - [Get started](#get-started): set up Python and run an assessment.
@@ -12,7 +12,34 @@ The circulation model is checked against Utah FORGE field data. Worked site asse
 
 ## Get started
 
-Use Python 3.14.4 with the locked dependencies to reproduce the reference calculations. The models run directly from `src/`.
+Install BoreTHM with Python 3.11 or later:
+
+```bash
+python -m pip install borethm
+```
+
+For figures, install `"borethm[plot]"`. Build the water-property cache and run a first assessment:
+
+```bash
+borethm-water-table
+borethm-evaluate --site newberry --json newberry.json
+```
+
+The IAPWS-95 cache is built once, outside the installed package, in the platform's user cache directory. Set `BORETHM_CACHE_DIR` to choose another location. The evaluator also builds a missing cache on first use. The assessment command prints its result and saves the inputs and calculation provenance as JSON. Evaluations take several minutes; weighted-fluid cases require repeated coupled solves and can take longer.
+
+The same assessment through the [public Python interface](docs/api.md):
+
+```python
+from borethm import evaluate, export_result, find_site
+site = find_site("newberry")
+result = evaluate(site)
+export_result(result, "newberry.json")
+print(result["status"]["label"])
+```
+
+### Reproduce the reference calculations
+
+Use Python 3.14.4 and the locked dependencies in a source checkout:
 
 ```bash
 git clone https://github.com/ldocallaghan/BoreTHM.git
@@ -20,31 +47,26 @@ cd BoreTHM
 python -m venv .venv
 ```
 
-Use `python3` for the environment-creation command if your system does not provide `python`. Activate the environment with `.\.venv\Scripts\Activate.ps1` in Windows PowerShell, or `source .venv/bin/activate` on Linux and macOS. Then install the dependencies and build the water-property cache:
+Use `python3` if your system does not provide `python`. Activate the environment with `.\.venv\Scripts\Activate.ps1` in PowerShell, or `source .venv/bin/activate` on Linux and macOS, then install:
 
 ```bash
 python -m pip install -r requirements-lock.txt
-python src/water_table.py
+python -m pip install --no-deps -e .
+borethm-water-table
 ```
 
-The IAPWS-95 cache is a one-time build. Run a first assessment from the repository root:
-
-```bash
-python src/site_evaluation.py --site newberry --json newberry.json
-```
-
-The command prints the assessment and saves its inputs, results and calculation provenance as JSON. Evaluations take several minutes; weighted-fluid cases require repeated coupled solves and can take longer.
+Commands for releases before v1.4.0 are in their [release records](docs/releases/) and run from that release's tag.
 
 ## Run your own assessment
 
 The built-in site keys are `soultz`, `united-downs`, `larderello`, `pannonian` and `newberry`.
 
 ```bash
-python src/site_evaluation.py --site soultz --json soultz.json
-python src/comparative_sites.py
+borethm-evaluate --site soultz --json soultz.json
+borethm-sites
 ```
 
-The first command evaluates one site; the second reports all five. Use `python src/site_evaluation.py --help` for the CLI options.
+The first command evaluates one site; the second reports all five. Use `borethm-evaluate --help` for the command-line options.
 
 For a new site, follow the [site-input guide](docs/guides/new-site.md) and copy [the documented template](examples/site_template.py). It records units and sources, and checks the inputs before evaluation. The worked example can validate the template without running the full calculation:
 
@@ -91,7 +113,7 @@ The worked assessments target rock at 400 °C. Every status below refers to **th
 | Pannonian Basin | 9.71 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; coating qualification is unresolved. |
 | Newberry | 3.63 | GO | The evaluated programme passes with water. |
 
-These sites have different evidence quality. Soultz and United Downs use measured or calibrated stresses and strengths, extrapolated to the targets. Larderello and Pannonian retain unsourced strength assumptions. Newberry's well check does not reproduce the observed pattern in every rock type. The [input-source records](data/sites/stress_sources.md) explain those differences.
+These sites have different evidence quality. Soultz and United Downs use measured or calibrated stresses and strengths, extrapolated to the targets. Larderello and Pannonian retain unsourced strength assumptions. Newberry's well check does not reproduce the observed pattern in every rock type. The [input-source records](src/borethm/data/sites/stress_sources.md) explain those differences.
 
 ### Local stability and the complete programme
 
@@ -147,9 +169,9 @@ Whether breakouts form as soon as the rock is exposed, or take time to form, dec
 
 ### Design comparisons
 
-No evaluated single-lever setting or evaluated pair made either deep site's programme pass. Deeper casing gives Soultz an allowable trip-fluid density range while drilling and tools still fail. Lower viscosity can give United Downs an allowable drilling-fluid density range while other gates still fail. Stronger insulation cools tools but leaves pressure and pump constraints.
+No evaluated individual design setting or evaluated pair made either deep site's programme pass. Deeper casing gives Soultz an allowable trip-fluid density range while drilling and tools still fail. Lower viscosity can give United Downs an allowable drilling-fluid density range while other gates still fail. Stronger insulation cools tools but leaves pressure and pump constraints.
 
-Only one pair per site was evaluated, and continuous searches sampled settings. The [lever study](docs/science/design-comparisons.md) gives the tested settings, remaining failures and equipment-availability evidence. It establishes no complete operating envelope or general impossibility.
+Only one pair per site was evaluated, and continuous searches sampled settings. The [design study](docs/science/design-comparisons.md) gives the tested settings, remaining failures and equipment-availability evidence. It establishes no complete operating envelope or general impossibility.
 
 ## Models and evidence
 
@@ -162,7 +184,7 @@ The circulation model solves the downgoing and returning fluid temperatures with
 | Borehole stability | Breakout width and pressure requirements | [UD-1 strength calibration and other well checks](docs/science/validation.md#stability-checks) |
 | Spallation, drilling rate and creep | Exploratory estimates of quench effects and closure | [Physical models and their limits](docs/science/models.md#drilling-rate-and-creep) |
 
-The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Full derivations and diagnostic figures are in the [physical-model guide](docs/science/models.md); the [bibliography](docs/science/sources.md#references), [material properties](data/materials.md) and [site inputs](data/sites/stress_sources.md) retain their sources.
+The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Full derivations and diagnostic figures are in the [physical-model guide](docs/science/models.md); the [bibliography](docs/science/sources.md#references), [material properties](src/borethm/data/materials.md) and [site inputs](src/borethm/data/sites/stress_sources.md) retain their sources.
 
 ## Scope and limitations
 
@@ -188,7 +210,7 @@ The default excludes physical regressions marked `slow`. To include the complete
 python -m pytest -m "slow or not slow"
 ```
 
-Full physical runs can take an hour or more. Single-threaded BLAS avoids oversubscription during repeated solves; set `OPENBLAS_NUM_THREADS=1` and `OMP_NUM_THREADS=1` before starting Python for those runs.
+Full physical runs can take an hour or more. Single-threaded BLAS avoids oversubscription during repeated solves; set `OPENBLAS_NUM_THREADS=1`, `OMP_NUM_THREADS=1` and `MKL_NUM_THREADS=1` before starting Python for those runs.
 
 Saved reference outputs and numerical regression tables support comparison with the published calculations. The [changelog](CHANGELOG.md) records changes. Historical diagnostic figures use their stated programmes and should be interpreted with their captions.
 
@@ -196,22 +218,30 @@ Saved reference outputs and numerical regression tables support comparison with 
 
 | Location | Contents |
 |---|---|
-| [src/](src) | Physical models and evaluation scripts |
+| [src/borethm/](src/borethm) | Installed package, physical models and study modules |
+| [scripts/](scripts/README.md) | Standalone diagnostic and figure scripts |
+| [benchmarks/](benchmarks/README.md) | Reference dataset with inputs, expected outputs and tolerances |
 | [examples/](examples) | Site template and worked example |
 | [docs/](docs/README.md) | Reading guide, model use, science and historical records |
-| [data/](data) | Extracted observations and input-source records |
+| [src/borethm/data/](src/borethm/data) | Packaged observations and input-source records |
 | [results/](results) | Retained numerical evaluations and trial evidence |
 | [tests/](tests) | Unit checks and physical regressions, including fixed reference tables |
 | [figures/](figures) | Diagnostic and field-comparison figures |
 
-## Citation and data credits
+## How to cite and data credits
 
 Use [CITATION.cff](CITATION.cff) for the software citation. The [scientific bibliography](docs/science/sources.md#references) lists the scientific sources.
 
+The [benchmark dataset](benchmarks/README.md#how-to-cite) has a separate citation. Its DOI will be added after deposit on Zenodo.
+
 The FORGE data come from the Geothermal Data Repository: [well 16B drilling data](https://doi.org/10.15121/1998591) and [deep-well temperature surveys](https://doi.org/10.15121/1893533). The Newberry extracts come from [well 55-29 stimulation data](https://doi.org/10.15121/1357916). These datasets are used under CC-BY 4.0. The UD-1 image interpretation contains NERC materials ©NERC 2024.
 
-The [FORGE](data/forge16b/README.md) and [Newberry](data/newberry/README.md) data guides describe the extracts and how to rebuild them. Other input sources are recorded alongside the corresponding data.
+The [FORGE](src/borethm/data/forge16b/README.md) and [Newberry](src/borethm/data/newberry/README.md) data guides describe the extracts and how to rebuild them. Other input sources are recorded alongside the corresponding data.
+
+## Questions and contributions
+
+Use [GitHub issues](https://github.com/ldocallaghan/BoreTHM/issues) for questions and problem reports. See [SUPPORT.md](SUPPORT.md) for what to include and [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and proposing changes.
 
 ## Licence
 
-The code in `src/`, `tools/`, `tests/` and `examples/` is released under the [Apache License 2.0](LICENSE). The documentation, figures, results and summary PDF are released under [CC BY 4.0](LICENSE-docs). Data in `data/` keep their source licences, as recorded in their data guides and in [NOTICE](NOTICE). Releases up to v1.3.4 were published under the MIT licence.
+The code in `src/`, `scripts/`, `tools/`, `tests/` and `examples/` is released under the [Apache License 2.0](LICENSE). The documentation, figures, results and summary PDF are released under [CC BY 4.0](LICENSE-docs). Data in `src/borethm/data/` and `benchmarks/data/` keep their source licences, as recorded in their data guides and in [NOTICE](NOTICE). Releases up to v1.3.4 were published under the MIT licence.

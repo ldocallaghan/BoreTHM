@@ -127,4 +127,4 @@ The base deep-site verdicts remain NO-GO for this programme and these assumption
 
 ## Evidence and reproduction
 
-The [comparison runner](../../src/robustness.py) and [saved outputs](../../results/robustness/) retain the settings, signed changes and numerical checks. Reproduce the comparisons with `python src/robustness.py` from the repository root. The [historical review](../archive/v1.3.4/approximation-review.md) records the original runtime and test evidence.
+The [comparison runner](../../src/borethm/studies/robustness.py) and [saved outputs](../../results/robustness/) retain the settings, signed changes and numerical checks. Reproduce the comparisons with `python -m borethm.studies.robustness` from the repository root. The [historical review](../archive/v1.3.4/approximation-review.md) records the original runtime and test evidence.

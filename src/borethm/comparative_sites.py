@@ -90,7 +90,7 @@ CORNWALL = SiteProfile(
         source="Reinecker et al. (2021), Geothermics 97, 102226",
         z_data=(0.0, 2000.0)),),
     stress_basis="measured",
-    # Calibrated by src/calibrate_ud1.py against the BGS UD-1 image log:
+    # Calibrated by src/borethm/calibrate_ud1.py against the BGS UD-1 image log:
     # intact rock (no breakout to 4 km) and the breakout zones' median, each at
     # both ends of the 0-40 K bracket on wall cooling while UD-1 was drilled
     # (no mud temperatures are published). UCS=180e6 above stays as v1.0's

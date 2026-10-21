@@ -1,6 +1,6 @@
 """C5 comparisons for the reviewed C1-C4 programme, without a design search.
 
-python src/robustness.py --sites soultz united-downs pannonian
+python -m borethm.studies.robustness --sites soultz united-downs pannonian
 Scoped overrides exist only during each comparison and are restored on exit.
 The fluid weights, pipe, flow and exposure rate stay at the reviewed values.
 """

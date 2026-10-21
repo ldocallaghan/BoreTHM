@@ -40,7 +40,7 @@ estimate of a pipe that could be built, and the README says so.
 What can be bought or has been run in a well:
 
 - Eavor's internally and externally coated IDP, run at FORGE 16B in 2023
-  (`data/forge16b/`); the fitted effective conductivity matches a 1 mm
+  (`src/borethm/data/forge16b/`); the fitted effective conductivity matches a 1 mm
   coating at 0.47 W/m·K.
 - NOV Tuboscope's TK-Drakōn internal coating, launched November 2024: applied
   20–30 mils (0.51–0.76 mm) thick at 0.162 W/m·K, rated to 204 °C "or all
@@ -70,7 +70,7 @@ annular velocity at which a comparable hole was actually drilled and cleaned.
 FORGE 16B was drilled through the trial interval, at 60 to 70° inclination in
 9-1/2-inch open hole, at 600 to 700 gal/min. The rig's daily reports give the
 annular velocity around the 5-1/2-inch drill pipe as 245.1 ft/min at 600 gal/min
-(1.245 m/s) and 286.0 ft/min at 700 gal/min (`data/forge16b/rig_hydraulics.csv`).
+(1.245 m/s) and 286.0 ft/min at 700 gal/min (`src/borethm/data/forge16b/rig_hydraulics.csv`).
 The reference is the lower, 1.245 m/s. It is a deviated-hole value, so it is
 also used for vertical hole, where cuttings settle less readily and it is
 conservative. No vertical value from practice is available: Wu et al. (2025)

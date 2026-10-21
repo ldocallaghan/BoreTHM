@@ -4,7 +4,7 @@ calibrate_ud1.py
 Calibrate rock-mass strength against the breakouts logged in UD-1, the
 5,275 m MD well at United Downs.
 
-Run from the repo root:   python src/calibrate_ud1.py
+Run from the repo root:   python -m borethm.calibrate_ud1
 
 Inputs (all in data/ud1/):
   - stresses and pore pressure: Reinecker et al. (2021), via the United Downs

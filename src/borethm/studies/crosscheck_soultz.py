@@ -5,7 +5,7 @@ A sanity check of the stability model against the 5 km Soultz wells, GPK3
 and GPK4. Nothing is fitted to Soultz: if a model calibrated at United Downs
 also reproduces where Soultz broke out, that is independent support for it.
 
-Run from the repo root:   python src/crosscheck_soultz.py
+Run from the repo root:   python -m borethm.studies.crosscheck_soultz
 
 Stresses: Valley & Evans (2007), the SOULTZ stress cases, valid 1.5-5 km.
 Mud at hydrostatic ("the annulus pressure was maintained at near-hydrostatic

@@ -6,6 +6,7 @@ Choose a path based on what you want to do. Installation and the first command a
 
 - [Evaluate a new site](guides/new-site.md): inputs, sources and the worked template.
 - [Interpret an assessment](guides/interpreting-results.md): status, density bounds and schedule identity.
+- [Python interface](api.md): public functions and classes, with units and the interface stability policy.
 - [Read the study summary](guides/summary.md): findings and questions for specialist discussion, also available as a [two-page PDF](../output/pdf/summary-v135.pdf).
 
 ## Understand the science
@@ -19,10 +20,13 @@ Choose a path based on what you want to do. Installation and the first command a
 
 - [Approximation comparisons](science/approximation-comparisons.md): the individual physical and numerical sensitivity checks.
 - [Design comparisons](science/design-comparisons.md): the evaluated interventions, remaining failures and qualification evidence.
+- [Breakout timing](science/breakout-timing.md): assumed formation delays and the drilling-window opening brackets.
+- [Benchmark dataset](../benchmarks/README.md): reference inputs and outputs for checking another model, with tolerances and source records.
 
 ## Maintain the project
 
 - [Historical reviews](archive/README.md): dated checkpoints preserved for traceability.
 - [Maintenance notes](maintenance/README.md): implementation priorities and triggers.
+- [Contributing](../CONTRIBUTING.md) and [support](../SUPPORT.md): changes, problem reports and questions.
 
-Dataset descriptions and input sources stay beside their files under [data/](../data/). They are linked from the scientific pages where needed.
+Field-data descriptions and input sources stay beside their files under [src/borethm/data/](../src/borethm/data/). They are linked from the scientific pages where needed.

@@ -1,6 +1,6 @@
 """C1-C4 checkpoint evidence. Run from the repository root.
 
-python src/checkpoint_v134.py --output results/v1.3.4/checkpoint-1
+python -m borethm.studies.checkpoint_v134 --output results/v1.3.4/checkpoint-1
 This writes run evidence. Reviewed regression goldens remain unchanged.
 """
 import argparse

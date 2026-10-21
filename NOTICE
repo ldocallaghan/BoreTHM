@@ -1,7 +1,7 @@
 BoreTHM
 Copyright 2026 Liam O'Callaghan
 
-The code in src/, tools/, tests/ and examples/ is licensed under the
+The code in src/, scripts/, tools/, tests/ and examples/ is licensed under the
 Apache License, Version 2.0 (see LICENSE).
 
 The documentation, figures, results and summary PDF in docs/, figures/,
@@ -9,7 +9,11 @@ results/ and output/, with README.md and CHANGELOG.md, are licensed under
 the Creative Commons Attribution 4.0 International licence (see
 LICENSE-docs).
 
-Data in data/ keep their source licences:
+The reference inputs, expected results and documentation in benchmarks/
+are CC BY 4.0. Its third-party data keep their source licences, recorded
+in benchmarks/NOTICE and the accompanying data guides.
+
+Data in src/borethm/data/ keep their source licences:
 
 Utah FORGE: Well 16B(78)-32 Drilling Data. McLennan, J., Mock, B.,
 Swearingen, L., Baldwin, R., Hodder, M., Vetsak, A., Kuhns, A.T.,
@@ -23,7 +27,7 @@ https://doi.org/10.15121/1893533. CC BY 4.0.
 Utah FORGE: Well 16B(78)-32 Logs from Schlumberger Technologies. May, D.,
 Jones, D. (2023). Geothermal Data Repository, submission 1531.
 https://doi.org/10.15121/2001059. CC BY 4.0. The file listing and log
-headers in data/forge16b/ are read from it.
+headers in src/borethm/data/forge16b/ are read from it.
 
 Newberry EGS Demonstration: Well 55-29 Stimulation Data. Cladouhos, T.T.
 (AltaRock Energy). Geothermal Data Repository, submission 271.
@@ -34,5 +38,6 @@ United Downs 1 borehole image interpretation. British Geological Survey,
 Open Government Licence. Contains NERC materials ©NERC 2024. Contains
 data supplied by UKRI.
 
-The extracts in data/ are derived from these sources. Each data guide
+The extracts in src/borethm/data/ and benchmarks/data/ are derived from
+these sources. Each data guide
 records the source, the download and how the extract was made.

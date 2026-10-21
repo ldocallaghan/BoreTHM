@@ -36,7 +36,7 @@ Newberry's fitted stress coefficients are copied exactly from the retained progr
 
 BoreTHM's reference results, exported inputs and dataset documentation are CC BY 4.0; the licence text is in [LICENSE](LICENSE). Third-party data keep their source licences and credits, as detailed in [NOTICE](NOTICE) and the guides under `data/`.
 
-The FORGE and Newberry extracts are CC BY 4.0. The BGS UD-1 image interpretation is supplied under the Open Government Licence: Contains NERC materials ©NERC 2024. Contains data supplied by UKRI. Paper references and source guides provide attribution for published parameters; the papers themselves are not included. Data guides are retained as source records, including their original extraction commands.
+The FORGE and Newberry extracts are CC BY 4.0. The BGS UD-1 image interpretation is supplied under the Open Government Licence: Contains NERC materials ©NERC 2024. Contains data supplied by UKRI. Paper references and source guides provide attribution for published parameters; the papers themselves are not included. Data guides retain the source descriptions and credits; extraction commands use the v1.4.0 source-checkout paths.
 
 ## Build and check
 

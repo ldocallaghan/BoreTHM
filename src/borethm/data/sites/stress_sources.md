@@ -3,7 +3,7 @@
 Where each site's stress cases, rock strength, pore pressure and temperature in
 the code come from, and what each rests on (the `data_basis` of each
 `SiteProfile`). United Downs' main source has its own file,
-`data/ud1/reinecker2021.md`.
+`src/borethm/data/ud1/reinecker2021.md`.
 
 | Site | Basis | Profile | Data cover |
 |---|---|---|---|
@@ -30,7 +30,7 @@ Read from the paper directly. Conclusions, verbatim, "valid between depths of
 - The upper bound from frictional strength alone, at μ = 1.0, is 1.21 Sv
   (Evans 2005), so the wellbore-failure bound is the tighter one.
 
-Wellbore observations used by the Soultz cross-check (`src/crosscheck_soultz.py`),
+Wellbore observations used by the Soultz cross-check (`src/borethm/studies/crosscheck_soultz.py`),
 same paper, GPK3 and GPK4 ultrasonic (UBI) logs run 12-15 hours after drilling:
 
 - About 10% of the logged length broken out in each well; breakouts at 5 km.
@@ -149,7 +149,7 @@ the case with the worst verdict, then the narrowest mud window.
 
 Davatzes, N.C. & Hickman, S.H. (2011), "Preliminary Analysis of Stress in the
 Newberry EGS Well NWG 55-29", *GRC Transactions* 35; logs from GDR submission
-271 (AltaRock). Details, files and checksums in `data/newberry/README.md`.
+271 (AltaRock). Details, files and checksums in `src/borethm/data/newberry/README.md`.
 
 - Sv: their 8,852.9 psi at 8,420 ft MD (8,285 ft TVD), carried linearly in TVD.
 - Pore pressure: the static survey of October 2008, fitted over the open hole;

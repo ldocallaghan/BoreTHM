@@ -154,7 +154,9 @@ def build_files(root=ROOT):
         content = (root / source).read_bytes()
         old_path = source.replace('src/borethm/data/', 'data/')
         put(target, content, dict(kind='copy', path=source,
-            source_release='v1.3.6', original_path=old_path, licence=licence,
+            source_release=('v1.4.0' if source.startswith('src/borethm/data/')
+                            and source.endswith('.md') else 'v1.3.6'),
+            original_path=old_path, licence=licence,
             sha256=hashlib.sha256(content).hexdigest()))
 
     for path in sorted((root / 'benchmarks').rglob('*.md')):

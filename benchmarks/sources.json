@@ -225,7 +225,7 @@
     "data/benchmarks/utaustin2025.md": {
       "kind": "copy",
       "path": "src/borethm/data/benchmarks/utaustin2025.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/benchmarks/utaustin2025.md",
       "licence": "CC-BY-4.0",
       "sha256": "1911a860d564de0e19445a231f750fa16d75790dc24621cf2a562d1e4d53c981"
@@ -233,10 +233,10 @@
     "data/forge16b/README.md": {
       "kind": "copy",
       "path": "src/borethm/data/forge16b/README.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/forge16b/README.md",
       "licence": "CC-BY-4.0",
-      "sha256": "0d55464c4fa645f8f7f281b717c10a9bb711ff179a3a949cf52621ff8a2063da"
+      "sha256": "38183dc485700f405735d411a7afc7777c6215abd329cee5c4ad4ef0811c63c3"
     },
     "data/forge16b/connections_10s.csv": {
       "kind": "copy",
@@ -281,10 +281,10 @@
     "data/forge16b/image_logs_inventory.md": {
       "kind": "copy",
       "path": "src/borethm/data/forge16b/image_logs_inventory.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/forge16b/image_logs_inventory.md",
       "licence": "CC-BY-4.0",
-      "sha256": "7ed9ed15effb362f7613a7942e7ac83989f045b80df35e2cb7e36bf6f3b8b548"
+      "sha256": "3d350dd5cfe27567520dcf8d377aba224a8df19ef7fcdd0a147e3424b171c7c8"
     },
     "data/forge16b/pason_trial_1min.csv": {
       "kind": "copy",
@@ -337,23 +337,23 @@
     "data/materials.md": {
       "kind": "copy",
       "path": "src/borethm/data/materials.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/materials.md",
       "licence": "CC-BY-4.0",
-      "sha256": "318301d55785121531116401f6f7c7019bb42a16fe7305420130d7d2e928627f"
+      "sha256": "624129c6d2bed1ff57b58bf5ba426df53f39a3163f898f656ed1ff8c2c143b29"
     },
     "data/newberry/README.md": {
       "kind": "copy",
       "path": "src/borethm/data/newberry/README.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/newberry/README.md",
       "licence": "CC-BY-4.0",
-      "sha256": "2349cae653507b702542f4ba4d7b009b4aa15b432c12469a2db323c9c253df25"
+      "sha256": "1c12938a961b20a6aa52ae74345396e7bbfde597491ae6cf4a83f7ffb1742229"
     },
     "data/newberry/davatzes_hickman_2011.md": {
       "kind": "copy",
       "path": "src/borethm/data/newberry/davatzes_hickman_2011.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/newberry/davatzes_hickman_2011.md",
       "licence": "CC-BY-4.0",
       "sha256": "085cbf7964a4d73625b63192a46d02fcd65dfdd3354866302c864cacbf608d40"
@@ -385,10 +385,10 @@
     "data/sites/stress_sources.md": {
       "kind": "copy",
       "path": "src/borethm/data/sites/stress_sources.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/sites/stress_sources.md",
       "licence": "CC-BY-4.0",
-      "sha256": "407595d0c2287f5a154844ca96579385a0d308e164ce2ccf6361ce233aa0a8a3"
+      "sha256": "9c20b112cc0e9ffe84d6db84ef845609698fbaca821273a8067f0cb3d75fc05f"
     },
     "data/ud1/UD1_Borehole_Imaging_Interpretation.csv": {
       "kind": "copy",
@@ -401,15 +401,15 @@
     "data/ud1/bgs_image_log.md": {
       "kind": "copy",
       "path": "src/borethm/data/ud1/bgs_image_log.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/ud1/bgs_image_log.md",
       "licence": "CC-BY-4.0",
-      "sha256": "6986369b49ef5a37666b22aa8cc09852d0518099ab142843b06dfbcbcb6d1864"
+      "sha256": "356f4afc0fe8f555111f28bd89cb07169eea8722c3b35b47ccc25b2facfae76a"
     },
     "data/ud1/reinecker2021.md": {
       "kind": "copy",
       "path": "src/borethm/data/ud1/reinecker2021.md",
-      "source_release": "v1.3.6",
+      "source_release": "v1.4.0",
       "original_path": "data/ud1/reinecker2021.md",
       "licence": "CC-BY-4.0",
       "sha256": "9b9782c45b48fe3fd4a3113d5dd1565b14a31b4121a91db209f65fc4e821a505"

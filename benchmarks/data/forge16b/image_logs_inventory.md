@@ -8,7 +8,7 @@ submission 1531. https://doi.org/10.15121/2001059. CC-BY 4.0. Seven zip files,
 Nothing was downloaded in full. The file listing (`gdr1531_listing.csv`, 168
 files) was read from the zips' central directories, and the LAS headers below
 from the first part of each member, by HTTP range requests
-(`python data/forge16b/build_extracts.py --image-logs`, and `las_header()` in
+(`python src/borethm/data/forge16b/build_extracts.py --image-logs`, and `las_header()` in
 the same script). Times since drilling come from the Pason record of GDR 1516
 (`drilling_history_10min.csv`, the deepest hole against time) and the
 inclination from the survey (`survey_16b.csv`).

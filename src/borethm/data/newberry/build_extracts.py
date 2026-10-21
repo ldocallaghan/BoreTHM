@@ -1,8 +1,8 @@
 """Rebuild the NWG 55-29 extracts in this folder from the raw GDR downloads.
 
-    python data/newberry/build_extracts.py
+    python src/borethm/data/newberry/build_extracts.py
 
-Expects the raw files of GDR submission 271 in data/newberry/raw/gdr271/ (not
+Expects the raw files of GDR submission 271 in src/borethm/data/newberry/raw/gdr271/ (not
 committed; see README.md):
 
   - Static_Profile_Oct2008_PT.csv   -> nwg5529_static_2008.csv

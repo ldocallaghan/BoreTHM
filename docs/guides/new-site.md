@@ -1,12 +1,14 @@
 # Evaluating a new site
 
-This guide takes a site from its inputs to a result in JSON. It assumes the
-environment in the [getting-started guide](../../README.md#get-started): Python
-3.14.4 with the packages in `requirements-lock.txt`.
+This guide takes a site from its inputs to a result in JSON. Install BoreTHM
+as described in the [getting-started guide](../../README.md#get-started).
+The [public Python interface](../api.md) provides `SiteProfile`,
+`StressProfile` and the evaluation functions. To use the worked scripts below,
+clone the repository and follow the README's reference-calculation setup.
 
 ## 1. Copy the template
 
-`examples/site_template.py` defines one site, as a `SiteProfile`, with every
+[examples/site_template.py](../../examples/site_template.py) defines one site, as a `SiteProfile`, with every
 field documented: its units, the range `validate_site` accepts, and where its
 value comes from. The values in the template are those of Soultz-sous-Forets,
 the reference case. Copy the file and replace each value with the site's own.
@@ -15,9 +17,8 @@ The fields fall into four groups.
 
 - **Temperature.** A geotherm, any function from depth in metres to rock
   temperature in °C, and the target depth and temperature. For measured
-  points, `site_evaluation.layered_geotherm([(z, T), ...], gradient_below)`
-  interpolates between them and extends below the deepest at a stated
-  gradient. The geotherm must rise with depth through the open hole and give
+  points, supply an interpolation function and state how it extrapolates
+  below the deepest measurement. The geotherm must rise with depth through the open hole and give
   the target temperature at the target depth within 5 °C.
 - **Stress.** One or more stress cases, each a linear profile of Sv, Shmin and
   SHmax with depth, with the pore pressure, the depths the magnitude data
@@ -32,12 +33,14 @@ The fields fall into four groups.
   case.
 - **Sources.** `data_basis` records, for the stress, strength, pore pressure,
   temperature and the check against a real well, the basis of the value
-  (measured, calibrated, extrapolated and so on, from `site_evaluation.BASES`)
+  (for example, `measured`, `calibrated` or `extrapolated`)
   and its source. The site is evidence-based only if its stresses and
   strength are measured or calibrated there and the stability model has been
   checked against a well at the site; otherwise it is reported as
   speculative, in a separate table. Sources for the conductivity and the
-  modulus go under `conductivity` and `stiffness`.
+  modulus go under `conductivity` and `stiffness`. `validate_site` rejects
+  unrecognised basis labels. The template uses internal helpers for its
+  Soultz reference inputs; those helpers are outside the public interface.
 
 ## 2. Validate the inputs
 
@@ -66,10 +69,10 @@ Evaluations take several minutes. Weighted-fluid cases take longer because the f
 script reports that the site is the repository's Soultz and compares its
 row of the site table with the pinned one.
 
-To run one of the repository's sites from the command line:
+To run one of the built-in sites from any directory after installing the package:
 
 ```
-python src/site_evaluation.py --site soultz --json soultz.json
+borethm-evaluate --site soultz --json soultz.json
 ```
 
 ## 4. Read the result

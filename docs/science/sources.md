@@ -1,6 +1,6 @@
 # Sources and related work
 
-This page provides the scientific context and bibliography. Input-specific provenance remains beside the data: [site parameters](../../data/sites/stress_sources.md), [material properties](../../data/materials.md), [FORGE extracts](../../data/forge16b/README.md) and [Newberry extracts](../../data/newberry/README.md).
+This page provides the scientific context and bibliography. Input-specific provenance remains beside the data: [site parameters](../../src/borethm/data/sites/stress_sources.md), [material properties](../../src/borethm/data/materials.md), [FORGE extracts](../../src/borethm/data/forge16b/README.md) and [Newberry extracts](../../src/borethm/data/newberry/README.md).
 
 ## Related work
 

@@ -1,6 +1,6 @@
 """C6: one lever at a time from the reviewed v1.3.4 programme.
 
-python src/levers.py --sites soultz united-downs --levers L1 L2 L3 L4 L5 L6 L7 L8
+python -m borethm.studies.levers --sites soultz united-downs --levers L1 L2 L3 L4 L5 L6 L7 L8
 Identical completed trials can be resumed. Every new trial reruns the coupled
 fluid iteration, whole-hole windows, thermal gates and pump/rig checks.
 """
