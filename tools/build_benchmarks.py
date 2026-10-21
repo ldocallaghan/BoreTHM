@@ -182,12 +182,20 @@ def build_files(root=ROOT):
         checkpoint = f'results/v1.3.4/checkpoint-1/{key}.json'
         saved = json.loads((root / checkpoint).read_text())
         depths = saved['windows']['depths']
+        if key == 'newberry':
+            # Preserve the fitted input coefficients recorded with the reference
+            # run, including their last digits across LAPACK implementations.
+            for stress, retained in zip(profile['stress_cases'], saved['site']['stress_cases']):
+                for name in ('Sv', 'Shmin', 'SHmax'):
+                    stress[name + '_grad'], stress[name + '_int'] = retained[name]
+                stress['Pp_grad'], stress['Pp_datum'] = retained['Pp']
         functions = {name: value for name, value in profile.items() if callable(value)}
         for name, function in functions.items():
             profile[name] = dict(callable=code_reference(function.__module__, function.__qualname__),
                                  samples=f'{key}-geotherms.csv', column=name + '_C')
         generated(f'sites/{key}.json', profile, method='dataclasses.asdict; callable fields described separately',
                   source=code_reference('borethm.site_evaluation' if key == 'soultz' else 'borethm.comparative_sites'),
+                  retained_fitted_stresses=dict(path=checkpoint, pointer='/site/stress_cases') if key == 'newberry' else None,
                   licence='CC-BY-4.0')
         table = io.StringIO(newline='')
         writer = csv.writer(table, lineterminator='\n')

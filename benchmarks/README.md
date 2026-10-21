@@ -30,6 +30,8 @@ Lengths are m, pressures Pa and temperatures degrees C unless the case says othe
 
 `sources.json` records file origins and copied-file hashes. Its input-code links identify the packaged definitions used for export. Existing provenance inside the goldens and evidence remains unchanged. `manifest.json` gives the SHA-256 of every dataset file except itself.
 
+Newberry's fitted stress coefficients are copied exactly from the retained programme input record. This preserves the reference inputs across the last-digit round-off differences of least-squares libraries on different platforms. Other profile fields are exported from their dataclass definitions.
+
 ## Sources and licences
 
 BoreTHM's reference results, exported inputs and dataset documentation are CC BY 4.0; the licence text is in [LICENSE](LICENSE). Third-party data keep their source licences and credits, as detailed in [NOTICE](NOTICE) and the guides under `data/`.

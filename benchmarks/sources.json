@@ -566,6 +566,7 @@
         "path": "src/borethm/comparative_sites.py",
         "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
       },
+      "retained_fitted_stresses": null,
       "licence": "CC-BY-4.0"
     },
     "sites/newberry-geotherms.csv": {
@@ -592,6 +593,10 @@
         "name": null,
         "path": "src/borethm/comparative_sites.py",
         "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
+      },
+      "retained_fitted_stresses": {
+        "path": "results/v1.3.4/checkpoint-1/newberry.json",
+        "pointer": "/site/stress_cases"
       },
       "licence": "CC-BY-4.0"
     },
@@ -620,6 +625,7 @@
         "path": "src/borethm/comparative_sites.py",
         "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
       },
+      "retained_fitted_stresses": null,
       "licence": "CC-BY-4.0"
     },
     "sites/soultz-geotherms.csv": {
@@ -647,6 +653,7 @@
         "path": "src/borethm/site_evaluation.py",
         "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/site_evaluation.py"
       },
+      "retained_fitted_stresses": null,
       "licence": "CC-BY-4.0"
     },
     "sites/united-downs-geotherms.csv": {
@@ -680,6 +687,7 @@
         "path": "src/borethm/comparative_sites.py",
         "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
       },
+      "retained_fitted_stresses": null,
       "licence": "CC-BY-4.0"
     },
     "sites/units.json": {

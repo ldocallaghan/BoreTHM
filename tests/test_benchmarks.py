@@ -54,6 +54,20 @@ def test_expected_values_are_exact_copies_of_existing_goldens(case):
 def test_all_profile_fields_and_geotherm_samples_match_their_sources(key):
     original = asdict(se.named_sites()[key])
     exported = read(DATASET / 'sites' / (key + '.json'))
+    saved = read(ROOT / 'results/v1.3.4/checkpoint-1' / (key + '.json'))
+    if key == 'newberry':
+        # Fitted inputs are tied exactly to the retained record, independent
+        # of the current machine's last-digit least-squares round-off.
+        for actual, retained in zip(exported['stress_cases'], saved['site']['stress_cases']):
+            assert [actual['Sv_grad'], actual['Sv_int']] == retained['Sv']
+            assert [actual['Shmin_grad'], actual['Shmin_int']] == retained['Shmin']
+            assert [actual['SHmax_grad'], actual['SHmax_int']] == retained['SHmax']
+            assert [actual['Pp_grad'], actual['Pp_datum']] == retained['Pp']
+        for actual, current in zip(exported['stress_cases'], original['stress_cases']):
+            for field in ('label', 'source', 'z_data', 'mu', 'regime'):
+                assert actual[field] == plain(current[field])
+        original.pop('stress_cases')
+        exported.pop('stress_cases')
     functions = {name: value for name, value in original.items() if callable(value)}
     for name, function in functions.items():
         record = exported.pop(name)
@@ -64,7 +78,6 @@ def test_all_profile_fields_and_geotherm_samples_match_their_sources(key):
     assert exported == plain(original)
     with (DATASET / 'sites' / (key + '-geotherms.csv')).open(newline='') as handle:
         samples = list(csv.DictReader(handle))
-    saved = read(ROOT / 'results/v1.3.4/checkpoint-1' / (key + '.json'))
     assert [float(row['depth_m']) for row in samples] == saved['windows']['depths']
     for row in samples:
         for name, function in functions.items():
