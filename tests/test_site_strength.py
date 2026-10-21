@@ -7,10 +7,10 @@ United Downs runs on the strengths calibrated against UD-1; the v1.0 adapter
 """
 import pytest
 
-import geo_constants as C
-import model5_convergence_confinement as m5
-import site_evaluation as se
-from comparative_sites import CORNWALL, SITES
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL, SITES
 
 MPa = 1.0e6
 

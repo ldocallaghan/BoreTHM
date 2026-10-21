@@ -2,8 +2,8 @@
 import numpy as np
 import pytest
 
-import model1_coupled as m1
-import well_geometry as wg
+from borethm import model1_coupled as m1
+from borethm import well_geometry as wg
 
 
 def test_constant_rate_of_penetration():

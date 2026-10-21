@@ -164,18 +164,9 @@ def verify():
     assert "Soultz's reference FORGE-practice tool run-in reaches 214.5 °C" in summary
     docs = ['README.md', 'CHANGELOG.md', *(p.relative_to(ROOT).as_posix()
                                          for p in (ROOT / 'docs').rglob('*.md'))]
-    for doc in docs:
-        text = (ROOT / doc).read_text(encoding='utf-8')
-        for link in re.findall(r'\[[^\]]*\]\(([^)]+)\)', text):
-            if '://' not in link:
-                path, _, anchor = link.partition('#')
-                target = ((ROOT / doc).parent / path) if path else ROOT / doc
-                assert target.exists(), (doc, link)
-                if anchor and target.suffix == '.md':
-                    headings = [line.lstrip('# ').strip().lower() for line in
-                                target.read_text(encoding='utf-8').splitlines() if line.startswith('#')]
-                    slugs = {re.sub(r'[^\w -]', '', heading).replace(' ', '-') for heading in headings}
-                    assert anchor in slugs, (doc, link, 'missing heading')
+    from check_links import check_documents
+    errors = check_documents(ROOT / doc for doc in docs)
+    assert not errors, '\n'.join(errors)
     metadata = tomllib.loads((ROOT / 'pyproject.toml').read_text(encoding='utf-8'))
     assert metadata['project']['version'] == '1.3.6'
     assert 'version: "1.3.6"' in (ROOT / 'CITATION.cff').read_text(encoding='utf-8')

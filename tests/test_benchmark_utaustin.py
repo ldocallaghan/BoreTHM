@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-import benchmark_utaustin as b
+from borethm.studies import benchmark_utaustin as b
 
 pytestmark = pytest.mark.slow
 

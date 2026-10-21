@@ -1,0 +1,121 @@
+{
+  "name": "Upper Rhine Graben / Soultz-sous-Forets (France)",
+  "geotherm": {
+    "callable": {
+      "module": "borethm.site_evaluation",
+      "name": "urg_geotherm",
+      "path": "src/borethm/site_evaluation.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/site_evaluation.py"
+    },
+    "samples": "soultz-geotherms.csv",
+    "column": "geotherm_C"
+  },
+  "target_depth": 10700.0,
+  "target_T": 400.0,
+  "Sv_grad": 25996.5,
+  "K0_min": 0.54,
+  "SHmax_over_Sv": 1.0,
+  "rho_fluid_grad": 10000.0,
+  "k_rock": 2.9,
+  "E_rock": 55000000000.0,
+  "UCS": 170000000.0,
+  "T_inj": 40.0,
+  "stress_cases": [
+    {
+      "label": "SHmax lower bound (0.90 Sv)",
+      "Sv_grad": 25500.0,
+      "Shmin_grad": 14060.0,
+      "SHmax_grad": 22950.0,
+      "Sv_int": -1300000.0,
+      "Shmin_int": -1780000.0,
+      "SHmax_int": -1170000.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "Valley & Evans (2007)",
+      "z_data": [
+        1500.0,
+        5000.0
+      ],
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "SHmax mid-range",
+      "Sv_grad": 25500.0,
+      "Shmin_grad": 14060.0,
+      "SHmax_grad": 24865.0,
+      "Sv_int": -1300000.0,
+      "Shmin_int": -1780000.0,
+      "SHmax_int": -1270000.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "Valley & Evans (2007)",
+      "z_data": [
+        1500.0,
+        5000.0
+      ],
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "SHmax upper bound (1.05 Sv)",
+      "Sv_grad": 25500.0,
+      "Shmin_grad": 14060.0,
+      "SHmax_grad": 26780.0,
+      "Sv_int": -1300000.0,
+      "Shmin_int": -1780000.0,
+      "SHmax_int": -1370000.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "Valley & Evans (2007)",
+      "z_data": [
+        1500.0,
+        5000.0
+      ],
+      "mu": null,
+      "regime": null
+    }
+  ],
+  "stress_basis": "measured range",
+  "strength_cases": [
+    [
+      "lab UCS 100",
+      100000000.0
+    ],
+    [
+      "lab UCS 115",
+      115000000.0
+    ],
+    [
+      "lab UCS 130",
+      130000000.0
+    ]
+  ],
+  "data_basis": {
+    "stress": [
+      "measured range",
+      "Valley & Evans (2007), 1.5-5.0 km"
+    ],
+    "strength": [
+      "measured (lab)",
+      "Valley & Evans (2007): 10 samples, 100-130 MPa; not calibrated in situ"
+    ],
+    "pore pressure": [
+      "measured",
+      "near-hydrostatic (Valley & Evans 2007)"
+    ],
+    "temperature": [
+      "extrapolated",
+      "200 C at 5 km measured (GPK wells); 35 C/km assumed below"
+    ],
+    "well check": [
+      "checked",
+      "GPK3/GPK4 breakout onset and occurrence (crosscheck_soultz.py)"
+    ]
+  },
+  "geotherm_v11": null,
+  "target_depth_v11": null,
+  "temperature_data_to": 5000.0,
+  "mu": 0.8,
+  "coupled": false
+}

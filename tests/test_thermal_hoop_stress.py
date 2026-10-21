@@ -8,11 +8,11 @@ and every site run also carries the verdict without it as a sensitivity.
 import numpy as np
 import pytest
 
-import geo_constants as C
-import model2_spallation as m2
-import model5_convergence_confinement as m5
-import site_evaluation as se
-from comparative_sites import CORNWALL, SITES
+from borethm import geo_constants as C
+from borethm import model2_spallation as m2
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL, SITES
 
 MPa = 1.0e6
 
@@ -83,7 +83,7 @@ def test_v10_adapter_ignores_the_thermal_term(site):
 @pytest.mark.slow
 @pytest.mark.parametrize("site", SITES, ids=lambda s: s.name.split()[0])
 def test_evaluate_uses_model1_wall_and_reports_the_sensitivity(site, evaluated):
-    from comparative_sites import classify, classify_no_thermal
+    from borethm.comparative_sites import classify, classify_no_thermal
     o = evaluated(site, circulation="v1.2")
     assert o["thermal"] is True
     assert o["T_wall"] == pytest.approx(o["m1"]["T_bottom_delivered"])
@@ -102,7 +102,7 @@ def test_evaluate_uses_model1_wall_and_reports_the_sensitivity(site, evaluated):
 
 @pytest.mark.slow
 def test_v10_evaluate_has_no_sensitivity_line(evaluated):
-    from comparative_sites import classify_no_thermal
+    from borethm.comparative_sites import classify_no_thermal
     o = evaluated(CORNWALL, v10=True)
     assert o["thermal"] is False and o["no_thermal"] is None
     assert classify_no_thermal(o) is None
@@ -113,7 +113,7 @@ def test_v10_evaluate_has_no_sensitivity_line(evaluated):
 def test_creep_closure_uses_the_same_wall_temperature(v10, evaluated):
     """Model 4's cooled creep rate takes the wall temperature the stability
     checks use: Model 1's in v1.1, v1.0's 200 C under the adapter."""
-    import model4_hole_stability as m4
+    from borethm import model4_hole_stability as m4
     o = evaluated(CORNWALL, v10=True) if v10 else evaluated(CORNWALL, circulation="v1.2")
     T_wall = 200.0 if v10 else o["m1"]["T_bottom_delivered"]
     assert o["T_wall"] == pytest.approx(T_wall)
@@ -125,7 +125,7 @@ def test_creep_closure_uses_the_same_wall_temperature(v10, evaluated):
 def test_sensitivities_cover_uncooled_and_the_calibrated_breakout_limit(evaluated):
     """The uncooled wall alone, UD-1's 63 deg limit alone, and the two
     together; at United Downs the combination closes the window (NO-GO)."""
-    from comparative_sites import classify_sensitivity
+    from borethm.comparative_sites import classify_sensitivity
     o = evaluated(CORNWALL, circulation="v1.2")
     w63 = f"W_max {C.BREAKOUT_W_MAX_SITE_DEG:.0f}"
     assert set(o["sensitivity"]) == {"no wall cooling", w63, f"no wall cooling, {w63}"}

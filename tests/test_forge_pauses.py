@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-import validate_forge_pauses as vp
+from borethm.studies import validate_forge_pauses as vp
 
 pytestmark = pytest.mark.slow
 

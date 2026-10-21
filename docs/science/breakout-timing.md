@@ -6,7 +6,7 @@ Heat diffusion sets a timescale for cooling. With a thermal diffusivity of 0.7 t
 
 <!-- timing-overview:start -->
 
-The failure-delay experiment, lever L7, assumes breakouts form a set time after exposure. With a one-hour delay at Soultz, the target drilling requirement in the most demanding case falls from 1.31 to 1.18 SG-equivalent, and the whole-hole drilling window opens: without the delay, the fluid needed at the bottom would fracture the rock below the casing shoe. At United Downs the target requirement falls from 1.27 to 1.14 SG-equivalent. The fixed scan places the opening bracket at 15–20 minutes at Soultz and 10–15 minutes at United Downs.
+The breakout formation-delay experiment assumes breakouts form a set time after exposure. With a one-hour delay at Soultz, the target drilling requirement in the most demanding case falls from 1.31 to 1.18 SG-equivalent, and the whole-hole drilling window opens: without the delay, the fluid needed at the bottom would fracture the rock below the casing shoe. At United Downs the target requirement falls from 1.27 to 1.14 SG-equivalent. The fixed scan places the opening bracket at 15–20 minutes at Soultz and 10–15 minutes at United Downs.
 
 <!-- timing-overview:end -->
 
@@ -147,6 +147,7 @@ From the repository root, install the locked dependencies and run the reporting 
 
 ```sh
 python -m pip install -r requirements-lock.txt
+python -m pip install --no-deps -e .
 python tools/breakout_timing.py --output ../borethm-timing-reproduction
 python tools/breakout_timing.py --scan --reuse --output ../borethm-timing-reproduction
 ```

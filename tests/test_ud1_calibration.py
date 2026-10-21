@@ -8,10 +8,10 @@ and the hole stays drillable at 5,058 m TVD.
 import numpy as np
 import pytest
 
-import calibrate_ud1 as cu
-import geo_constants as C
-import model5_convergence_confinement as m5
-from comparative_sites import CORNWALL
+from borethm import calibrate_ud1 as cu
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm.comparative_sites import CORNWALL
 
 MPa = 1.0e6
 
@@ -155,7 +155,7 @@ def test_deviated_section_not_made_undrillable(cal, z):
     the window stays open (vertical-hole approximation)."""
     ucs = cal["levels"][40.0]["weak_p50"]
     s = cu.state(z, 40.0)
-    from site_evaluation import mud_window
+    from borethm.site_evaluation import mud_window
     w = mud_window(s["Sh"], s["SH"], s["Pp"], z, s["Pw"], s["T_rock"],
                    T_wall=s["T_wall"], UCS=ucs, dsigma_T=s["dT"])
     assert w["open"]
@@ -171,7 +171,7 @@ def test_crediting_cooling_as_deep_as_it_reaches_barely_moves_the_calibration():
     """The uncooled breakouts reach centimetres into the rock; after hours of
     circulation the cooled zone is thicker, so the weak-zone strengths move by
     1 MPa at most and the intact bound not at all."""
-    import calibrate_ud1 as cal
+    from borethm import calibrate_ud1 as cal
     feats = cal.load_log()
     base, skin = cal.calibrate(feats), cal.calibrate_skin(feats)
     for dK in cal.COOLING_K:

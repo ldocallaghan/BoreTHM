@@ -3,7 +3,7 @@ import copy
 
 import pytest
 
-import site_evaluation as se
+from borethm import site_evaluation as se
 
 
 def components(**changes):

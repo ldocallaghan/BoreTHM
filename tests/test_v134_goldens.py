@@ -6,9 +6,9 @@ import tempfile
 
 import pytest
 
-import release_v134 as release
-import levers as lv
-import site_evaluation as se
+from borethm.studies import release_v134 as release
+from borethm.studies import levers as lv
+from borethm import site_evaluation as se
 
 
 def read_pin(name):

@@ -6,7 +6,7 @@ from dataclasses import replace
 import numpy as np
 import pytest
 
-import site_evaluation as se
+from borethm import site_evaluation as se
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "examples"))
 from site_template import make_site   # noqa: E402
@@ -73,7 +73,7 @@ def test_public_default_selects_corrected_release(monkeypatch):
 
 
 def test_json_exports_the_effective_larderello_target():
-    from comparative_sites import LARDERELLO
+    from borethm.comparative_sites import LARDERELLO
     data = se.result_dict(dict(site=LARDERELLO, z=LARDERELLO.target(), T_rock=LARDERELLO.target_T))
     assert data['site']['target_depth_m'] == 2400.
     assert data['site']['legacy_target_depth_m'] == 2850.

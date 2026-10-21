@@ -6,9 +6,9 @@ import time
 import numpy as np
 import pytest
 
-import robustness as rb
-import tool_thermal as tt
-import wall_thermal as wt
+from borethm.studies import robustness as rb
+from borethm import tool_thermal as tt
+from borethm import wall_thermal as wt
 
 
 def test_warm_stage_peak_is_retained_after_cold_coolant_arrives():
@@ -85,10 +85,10 @@ SIGNS = {
 
 @pytest.mark.slow
 @pytest.mark.parametrize('key', ['soultz', 'united-downs', 'pannonian'])
-def test_live_comparisons_run_and_their_signs_are_pinned(key):
+def test_live_comparisons_run_and_their_signs_are_pinned(key, tmp_path):
     """Run every ledger definition; retain its evidence before asserting signs."""
     site, base = rb.reviewed_base(key)
-    destination = rb.ROOT / 'results/robustness' / (key + '.json')
+    destination = tmp_path / (key + '.json')
     ledger = dict(site=key, base=rb.metrics(base), versions=rb.se.versions(),
                   source_sha256=hashlib.sha256(rb.Path(rb.__file__).read_bytes()).hexdigest(),
                   programme=json.loads((rb.CHECKPOINT / (key + '.json')).read_text())['programme'],

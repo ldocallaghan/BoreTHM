@@ -23,14 +23,64 @@ on:
     - cron: "0 3 * * 1"
 
 jobs:
+  fast-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m pip install ".[test]"
+      # The fast suite includes a figure-output check.
+      - run: python -m pip install ".[plot]"
+      # Regression tests read the evidence retained in the checkout.
+      - run: python -m pip install --no-deps -e .
+      - run: python -m pytest --junitxml=fast-matrix.xml
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: fast-python-${{ matrix.python-version }}
+          path: fast-matrix.xml
+
+  wheel-install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - run: python -m pip install build twine
+      - run: python -m build
+      - run: python -m twine check dist/*
+      - name: Install without the plotting extra and check outside the checkout
+        shell: bash
+        run: |
+          python -m venv "$RUNNER_TEMP/borethm-wheel"
+          "$RUNNER_TEMP/borethm-wheel/bin/python" -m pip install dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/borethm-wheel/bin/python" -c "import borethm; print(borethm.__version__)"
+          "$RUNNER_TEMP/borethm-wheel/bin/borethm-evaluate" --help
+          "$RUNNER_TEMP/borethm-wheel/bin/borethm-sites" --help
+          "$RUNNER_TEMP/borethm-wheel/bin/borethm-water-table" --help
+          "$RUNNER_TEMP/borethm-wheel/bin/python" "$GITHUB_WORKSPACE/tools/check_install.py"
+
   fast:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
+      - run: pip install --no-deps -e .
       - run: pytest
 
   slow:
@@ -42,13 +92,19 @@ jobs:
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ inputs.python-version || '3.14.4' }}
       - run: pip install -r requirements-lock.txt
-      - run: python src/water_table.py
-      - run: pytest -m "slow or not slow"
+      - run: pip install --no-deps -e .
+      - run: python -m borethm.water_table
+      - run: pytest -m "slow or not slow" --durations=20 --junitxml=full-tests.xml
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: full-physical-regressions
+          path: full-tests.xml
 
   goldens:
     # the v1.3.3 site table pinned in the CI environment, on the lock file's
@@ -61,14 +117,15 @@ jobs:
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
-      - run: python src/water_table.py
-      - run: python src/comparative_sites.py --write-golden > site_table.txt
-      - uses: actions/upload-artifact@v4
+      - run: pip install --no-deps -e .
+      - run: python -m borethm.water_table
+      - run: python -m borethm.comparative_sites --write-golden > site_table.txt
+      - uses: actions/upload-artifact@v7
         with:
           name: v133-goldens
           path: |
@@ -84,17 +141,18 @@ jobs:
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14.4"
       - run: pip install -r requirements-lock.txt
-      - run: python src/water_table.py
+      - run: pip install --no-deps -e .
+      - run: python -m borethm.water_table
       - name: Generate fresh reviewed reference and lever tables
-        run: python src/release_v134.py --output results/v1.3.4/ci/${{ github.run_id }}-${{ github.run_attempt }}
+        run: python -m borethm.studies.release_v134 --output results/v1.3.4/ci/${{ github.run_id }}-${{ github.run_attempt }}
       - name: Verify every fast and slow regression against the generated pins
         run: pytest -m "slow or not slow" --durations=12 --junitxml=v134-tests.xml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: v134-release

@@ -12,8 +12,8 @@ matter below. See data/ud1/reinecker2021.md.
 import numpy as np
 import pytest
 
-import geo_constants as C
-import site_evaluation as se
+from borethm import geo_constants as C
+from borethm import site_evaluation as se
 
 MPa = 1.0e6
 

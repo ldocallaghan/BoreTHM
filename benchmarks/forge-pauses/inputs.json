@@ -1,0 +1,62 @@
+{
+  "site_profiles": "../sites/",
+  "data": "../data/",
+  "code": {
+    "module": "borethm.studies.validate_forge_pauses",
+    "name": null,
+    "path": "src/borethm/studies/validate_forge_pauses.py",
+    "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge_pauses.py"
+  },
+  "units": {
+    "PUMPS_ON_GPM": "US gal/min",
+    "ON_BOTTOM_FT": "ft",
+    "K_IDP_UNFITTED": "W/(m K)",
+    "DZ_FT": "ft",
+    "SHOE_FT": "ft",
+    "R_OPEN": "m",
+    "R_CASED": "m",
+    "RUN_ENDS": "Unix seconds; source clock interpreted as UTC"
+  },
+  "attributes": {
+    "borethm.studies.validate_forge_pauses": {
+      "PUMPS_ON_GPM": 100.0,
+      "ON_BOTTOM_FT": 100.0,
+      "K_IDP_UNFITTED": 4.703,
+      "DZ_FT": 200.0,
+      "SHOE_FT": 4837.0,
+      "R_OPEN": 0.12065,
+      "R_CASED": 0.1356614,
+      "RUN_ENDS": {
+        "BHA10": 1684797420.0,
+        "BHA11": 1684980540.0,
+        "BHA12": 1685149020.0
+      }
+    }
+  },
+  "geometry_recipes": [
+    {
+      "module": "borethm.studies.validate_forge16b",
+      "name": "hole",
+      "path": "src/borethm/studies/validate_forge16b.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+    },
+    {
+      "module": "borethm.studies.validate_forge16b",
+      "name": "string",
+      "path": "src/borethm/studies/validate_forge16b.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+    },
+    {
+      "module": "borethm.studies.validate_forge16b",
+      "name": "survey",
+      "path": "src/borethm/studies/validate_forge16b.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+    },
+    {
+      "module": "borethm.studies.validate_forge16b",
+      "name": "formation_temperature",
+      "path": "src/borethm/studies/validate_forge16b.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/validate_forge16b.py"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import os
 
 import pytest
 
-from comparative_sites import SITES, golden_rows_v133
+from borethm.comparative_sites import SITES, golden_rows_v133
 from conftest import GOLDEN
 
 pytestmark = pytest.mark.slow

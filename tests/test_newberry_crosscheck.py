@@ -3,7 +3,7 @@ Hickman (2011) and the breakout pattern predicted by rock type, pinned."""
 import numpy as np
 import pytest
 
-import crosscheck_newberry as nb
+from borethm import crosscheck_newberry as nb
 
 PSI = nb.PSI
 

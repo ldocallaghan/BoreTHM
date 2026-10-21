@@ -4,6 +4,9 @@ __pycache__/
 .venv/
 .pytest_cache/
 .ci-v134/
+*.egg-info/
+build/
+dist/
 
 # Editors and local tooling
 .idea/
@@ -17,6 +20,6 @@ docs/review-*.md
 water_table.npz
 
 # Raw downloads; only extracted data are committed
-data/forge16b/raw/
-data/benchmarks/raw/
-data/newberry/raw/
+src/borethm/data/forge16b/raw/
+src/borethm/data/benchmarks/raw/
+src/borethm/data/newberry/raw/

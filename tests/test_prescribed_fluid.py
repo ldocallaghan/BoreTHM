@@ -2,8 +2,8 @@
 import numpy as np
 import pytest
 
-import fluids
-import site_evaluation as se
+from borethm import fluids
+from borethm import site_evaluation as se
 
 
 @pytest.fixture

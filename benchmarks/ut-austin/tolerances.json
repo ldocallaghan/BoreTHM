@@ -1,0 +1,14 @@
+{
+  "source": "tests/test_benchmark_utaustin.py::test_benchmark_table_is_unchanged",
+  "units": {
+    "temperature": "degrees C",
+    "spp_MPa": "MPa"
+  },
+  "rules": [
+    {
+      "fields": "all numeric fields",
+      "absolute": 0.5
+    }
+  ],
+  "note": "Regression tolerance only; it does not assert agreement with Wu et al."
+}

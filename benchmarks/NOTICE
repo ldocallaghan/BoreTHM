@@ -1,0 +1,30 @@
+BoreTHM benchmark dataset 1.0
+Copyright 2026 Liam O'Callaghan
+
+Reference results, exported inputs and dataset documentation are licensed
+under Creative Commons Attribution 4.0 International (see LICENSE).
+Third-party data retain their source licences.
+
+Utah FORGE: Well 16B(78)-32 Drilling Data. McLennan et al. (2023).
+Geothermal Data Repository submission 1516.
+https://doi.org/10.15121/1998591. CC BY 4.0.
+
+Utah FORGE: Deep Wells Temperature Surveys as of September 2022.
+Jones (2022). Geothermal Data Repository submission 1421.
+https://doi.org/10.15121/1893533. CC BY 4.0.
+
+Utah FORGE: Well 16B(78)-32 Logs from Schlumberger Technologies.
+May and Jones (2023). Geothermal Data Repository submission 1531.
+https://doi.org/10.15121/2001059. CC BY 4.0.
+
+Newberry EGS Demonstration: Well 55-29 Stimulation Data.
+Cladouhos (AltaRock Energy). Geothermal Data Repository submission 271.
+https://doi.org/10.15121/1357916. CC BY 4.0.
+
+United Downs 1 borehole image interpretation. British Geological Survey (2024).
+https://doi.org/10.5285/a040a246-8691-428b-b146-13874e743b0a.
+Open Government Licence. Contains NERC materials ©NERC 2024.
+Contains data supplied by UKRI.
+
+Published parameter and observation sources are credited in the case guides
+and the retained data guides. No source paper is included in this archive.

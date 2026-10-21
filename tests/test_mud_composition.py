@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-import fluids
+from borethm import fluids
 
 
 def unit_parcel(rho_surface, rho_water_surface, temperatures, water_densities):
@@ -41,7 +41,7 @@ def test_component_masses_are_conserved_using_independent_parcel_volumes(monkeyp
 
 @pytest.mark.slow
 def test_four_reference_states_and_exact_water_limit():
-    import water_table as wt
+    from borethm import water_table as wt
     T, P = np.array([20., 200., 300., 400.]), np.array([1e5, 100e6, 100e6, 100e6])
     mud = fluids.Mud(1360.)
     assert mud.props(T, P)[0] == pytest.approx([1360., 1268.0, 1142.7, 976.4], abs=0.5)

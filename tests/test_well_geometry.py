@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-import well_geometry as wg
+from borethm import well_geometry as wg
 
 
 def test_vertical_survey_gives_tvd_equal_to_md():
@@ -85,7 +85,7 @@ def test_string_must_fit_and_hole_must_cover_it():
 
 @pytest.mark.slow
 def test_n_identical_segments_equal_one():
-    import model1_coupled as m1
+    from borethm import model1_coupled as m1
     one = m1.solve(m_dot=4.0, pipe=wg.LEGACY_VACUUM, verbose=False)
     L = one["L"]
     g = wg.WellGeometry([wg.StringSegment(L / 4, wg.LEGACY_VACUUM)] * 4,
@@ -99,7 +99,7 @@ def test_n_identical_segments_equal_one():
 @pytest.mark.parametrize("pipe", [wg.INTERNALLY_COATED, wg.DUAL_WALL])
 def test_joint_fraction_limits(pipe):
     """Fraction 0 is the uniform pipe body; fraction 1 is bare steel throughout."""
-    import model1_coupled as m1
+    from borethm import model1_coupled as m1
     z = np.linspace(0.0, 10000.0, 7)
     T_d, T_u = np.full_like(z, 60.0), np.full_like(z, 150.0)
     bare = wg.PipeType("bare", (wg.Layer(pipe.r_bore, pipe.r_out, wg.K_STEEL),))

@@ -11,12 +11,11 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 
-import geo_constants as C                                   # noqa: E402
-import model5_convergence_confinement as m5                 # noqa: E402
-import site_evaluation as se                                # noqa: E402
-from comparative_sites import CORNWALL                      # noqa: E402
+from borethm import geo_constants as C                                   # noqa: E402
+from borethm import model5_convergence_confinement as m5                 # noqa: E402
+from borethm import site_evaluation as se                                # noqa: E402
+from borethm.comparative_sites import CORNWALL                      # noqa: E402
 
 MPa = 1.0e6
 SV, SHMIN, SHMAX = 25.275, (13.21, 3.0), (25.99, 5.9)       # published, MPa/km + MPa

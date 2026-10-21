@@ -12,10 +12,10 @@ deterministic; they are stated in MPa so a failure reads in physical units.
 import numpy as np
 import pytest
 
-import geo_constants as C
-import model5_convergence_confinement as m5
-import site_evaluation as se
-from comparative_sites import CORNWALL, SITES
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL, SITES
 
 MPa = 1.0e6
 

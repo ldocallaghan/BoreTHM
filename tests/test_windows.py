@@ -1,8 +1,8 @@
 """Common windows across scenarios and down the hole."""
 import pytest
 
-import comparative_sites as cs
-import site_evaluation as se
+from borethm import comparative_sites as cs
+from borethm import site_evaluation as se
 
 pytestmark = pytest.mark.slow
 

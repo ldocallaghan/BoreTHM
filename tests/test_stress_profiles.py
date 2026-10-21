@@ -9,11 +9,11 @@ stability_inputs() needs no Model 1-4 calls.
 import numpy as np
 import pytest
 
-import geo_constants as C
-import model5_convergence_confinement as m5
-import site_evaluation as se
-from comparative_sites import CORNWALL, LARDERELLO, PANNONIAN, SITES
-from site_evaluation import SOULTZ, StressProfile
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL, LARDERELLO, PANNONIAN, SITES
+from borethm.site_evaluation import SOULTZ, StressProfile
 
 MPa = 1.0e6
 UD = CORNWALL.stress_cases[0]

@@ -1,0 +1,46 @@
+{
+  "source": "src/borethm/studies/release_v134.py::assert_reviewed",
+  "units": {
+    "target_m": "m",
+    "bit_C": "degrees C",
+    "weights_SG": "surface SG at 20 degrees C",
+    "window_bounds": "surface SG at 20 degrees C",
+    "md": "m measured depth"
+  },
+  "rules": [
+    {
+      "match": "boolean, string or null",
+      "exact": true
+    },
+    {
+      "match": "numeric path contains /settings/",
+      "absolute": 1e-08,
+      "exception": "/bhp_Pa uses 1 Pa"
+    },
+    {
+      "match": "numeric path contains _SG",
+      "absolute": 0.002
+    },
+    {
+      "match": "numeric path contains _C",
+      "absolute": 0.1
+    },
+    {
+      "match": "numeric path contains _Pa",
+      "absolute": 10000.0
+    },
+    {
+      "match": "numeric path ends /md",
+      "absolute": 100.0
+    },
+    {
+      "match": "numeric path ends /target_m",
+      "absolute": 0.1
+    },
+    {
+      "match": "other numeric values",
+      "absolute": 1e-08
+    }
+  ],
+  "note": "Rules are evaluated in the listed order. Provenance is outside physical comparisons."
+}

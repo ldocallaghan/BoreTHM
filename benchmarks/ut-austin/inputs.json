@@ -1,0 +1,243 @@
+{
+  "site_profiles": "../sites/",
+  "data": "../data/",
+  "code": {
+    "module": "borethm.studies.benchmark_utaustin",
+    "name": null,
+    "path": "src/borethm/studies/benchmark_utaustin.py",
+    "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/benchmark_utaustin.py"
+  },
+  "units": {
+    "MUD": {
+      "rho": "kg/m3",
+      "cp": "J/(kg K)",
+      "mu": "Pa s",
+      "k": "W/(m K)"
+    },
+    "RHO_WATER_INLET": "kg/m3",
+    "GPM": "m3/s per US gal/min",
+    "T_SURF": "degrees C",
+    "K_ROCK": "W/(m K)",
+    "RHOCP_ROCK": "J/(m3 K)",
+    "TVD": "m",
+    "T_INLET": "degrees C",
+    "EXPOSURE": "s",
+    "FIG2": "degrees C",
+    "SPP_600": "MPa",
+    "WU_L_HWDP": "m",
+    "WU_L_COLLAR": "m",
+    "WU_L_BIT": "m",
+    "WU_SHOES": "m",
+    "K_STEEL": "W/(m K)",
+    "K_CEMENT": "W/(m K)",
+    "pipe_layers": {
+      "r_in": "m",
+      "r_out": "m",
+      "k": "W/(m K)",
+      "joint_fraction": "dimensionless"
+    },
+    "run_defaults": {
+      "G_per_km": "degrees C/km",
+      "gpm": "US gal/min",
+      "friction_heat": "boolean"
+    }
+  },
+  "attributes": {
+    "borethm.studies.benchmark_utaustin": {
+      "MUD": {
+        "rho": 1078.0,
+        "cp": 3750.0,
+        "mu": 0.014,
+        "k": 0.75
+      },
+      "RHO_WATER_INLET": 992.2,
+      "GPM": 6.30902e-05,
+      "T_SURF": 17.0,
+      "K_ROCK": 2.31,
+      "RHOCP_ROCK": 2604000.0,
+      "TVD": 8600.0,
+      "T_INLET": 40.0,
+      "EXPOSURE": 90000.0,
+      "FIG2": {
+        "vertical": {
+          "conventional": 179,
+          "internal": 76,
+          "external": 121,
+          "dual-wall": 59
+        },
+        "horizontal": {
+          "conventional": 206,
+          "internal": 100,
+          "external": 153,
+          "dual-wall": 65
+        }
+      },
+      "SPP_600": {
+        "internal": [
+          16,
+          18
+        ],
+        "external": [
+          16,
+          18
+        ],
+        "dual-wall": [
+          67,
+          67
+        ]
+      }
+    },
+    "borethm.well_geometry": {
+      "WU_L_HWDP": 223.0,
+      "WU_L_COLLAR": 143.0,
+      "WU_L_BIT": 0.8,
+      "WU_SHOES": [
+        100.0,
+        1000.0,
+        4000.0
+      ],
+      "K_STEEL": 45.0,
+      "K_CEMENT": 1.0
+    }
+  },
+  "pipes": {
+    "conventional": {
+      "name": "conventional",
+      "layers": [
+        {
+          "r_in": 0.0607,
+          "r_out": 0.06985,
+          "k": 45.0
+        }
+      ],
+      "joint_fraction": 0.0,
+      "source": "Wu et al. (2025), Table 5"
+    },
+    "internal": {
+      "name": "internally coated",
+      "layers": [
+        {
+          "r_in": 0.0597,
+          "r_out": 0.0607,
+          "k": 0.47
+        },
+        {
+          "r_in": 0.0607,
+          "r_out": 0.06985,
+          "k": 45.0
+        }
+      ],
+      "joint_fraction": 0.0,
+      "source": "1 mm composite at 0.47 W/m/K, Vetsak et al. (2024) via Wu et al. (2025)"
+    },
+    "external": {
+      "name": "externally coated",
+      "layers": [
+        {
+          "r_in": 0.0607,
+          "r_out": 0.06985,
+          "k": 45.0
+        },
+        {
+          "r_in": 0.06985,
+          "r_out": 0.07085,
+          "k": 1.31
+        }
+      ],
+      "joint_fraction": 0.0,
+      "source": "1 mm composite at 1.31 W/m/K, Vetsak et al. (2024) via Wu et al. (2025)"
+    },
+    "dual-wall": {
+      "name": "dual-wall",
+      "layers": [
+        {
+          "r_in": 0.04,
+          "r_out": 0.0607,
+          "k": 0.092
+        },
+        {
+          "r_in": 0.0607,
+          "r_out": 0.06985,
+          "k": 45.0
+        }
+      ],
+      "joint_fraction": 0.0,
+      "source": "phenolic fill at 0.092 W/m/K, Xiao et al. (2022) via Wu et al. (2025)"
+    }
+  },
+  "whole_wall_pipes": {
+    "conventional": {
+      "name": "conventional",
+      "layers": [
+        {
+          "r_in": 0.0607,
+          "r_out": 0.06985,
+          "k": 45.0
+        }
+      ],
+      "joint_fraction": 0.0,
+      "source": "Wu et al. (2025), Table 5"
+    },
+    "internal": {
+      "name": "internal, whole wall",
+      "layers": [
+        {
+          "r_in": 0.0597,
+          "r_out": 0.06985,
+          "k": 0.47
+        }
+      ],
+      "joint_fraction": 0.0,
+      "source": ""
+    },
+    "external": {
+      "name": "external, whole wall",
+      "layers": [
+        {
+          "r_in": 0.0607,
+          "r_out": 0.07085,
+          "k": 1.31
+        }
+      ],
+      "joint_fraction": 0.0,
+      "source": ""
+    },
+    "dual-wall": {
+      "name": "dual-wall, whole wall",
+      "layers": [
+        {
+          "r_in": 0.04,
+          "r_out": 0.06985,
+          "k": 0.092
+        }
+      ],
+      "joint_fraction": 0.0,
+      "source": ""
+    }
+  },
+  "geometry_recipes": [
+    {
+      "module": "borethm.studies.benchmark_utaustin",
+      "name": "well",
+      "path": "src/borethm/studies/benchmark_utaustin.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/benchmark_utaustin.py"
+    },
+    {
+      "module": "borethm.well_geometry",
+      "name": "wu2025_well",
+      "path": "src/borethm/well_geometry.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/well_geometry.py"
+    }
+  ],
+  "run_defaults": {
+    "source": {
+      "module": "borethm.studies.benchmark_utaustin",
+      "name": "run",
+      "path": "src/borethm/studies/benchmark_utaustin.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/studies/benchmark_utaustin.py"
+    },
+    "G_per_km": 24.0,
+    "gpm": 600.0,
+    "friction_heat": true
+  }
+}

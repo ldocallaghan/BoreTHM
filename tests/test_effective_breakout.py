@@ -7,10 +7,10 @@ With no thermal stress and Pp = 0 it must reduce to v1.0's total-stress check.
 import numpy as np
 import pytest
 
-import geo_constants as C
-import model5_convergence_confinement as m5
-import site_evaluation as se
-from comparative_sites import CORNWALL, SITES
+from borethm import geo_constants as C
+from borethm import model5_convergence_confinement as m5
+from borethm import site_evaluation as se
+from borethm.comparative_sites import CORNWALL, SITES
 
 MPa = 1.0e6
 UD = CORNWALL.stress_cases[0]

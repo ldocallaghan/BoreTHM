@@ -5,9 +5,9 @@ import os
 
 import pytest
 
-import model1_coupled as m1
-import site_evaluation as se
-from comparative_sites import SITES, golden_rows
+from borethm import model1_coupled as m1
+from borethm import site_evaluation as se
+from borethm.comparative_sites import SITES, golden_rows
 from conftest import GOLDEN
 
 pytestmark = pytest.mark.slow

@@ -1,0 +1,134 @@
+{
+  "name": "Pannonian Basin (Hungary)",
+  "geotherm": {
+    "callable": {
+      "module": "borethm.comparative_sites",
+      "name": "make_geotherm.<locals>.gt",
+      "path": "src/borethm/comparative_sites.py",
+      "url": "https://github.com/ldocallaghan/BoreTHM/blob/7ae63cf59e198b7af573282f2aad57d4b40e5a05/src/borethm/comparative_sites.py"
+    },
+    "samples": "pannonian-geotherms.csv",
+    "column": "geotherm_C"
+  },
+  "target_depth": 9714.0,
+  "target_T": 400.0,
+  "Sv_grad": 25015.5,
+  "K0_min": 0.6,
+  "SHmax_over_Sv": 0.9,
+  "rho_fluid_grad": 10000.0,
+  "k_rock": 2.7,
+  "E_rock": 50000000000.0,
+  "UCS": 160000000.0,
+  "T_inj": 40.0,
+  "stress_cases": [
+    {
+      "label": "Shmin 0% of floor-to-Sv",
+      "Sv_grad": 25015.5,
+      "Shmin_grad": 13468.584164104657,
+      "SHmax_grad": 25015.5,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "Shmin 25% of floor-to-Sv",
+      "Sv_grad": 25015.5,
+      "Shmin_grad": 16355.313123078493,
+      "SHmax_grad": 25015.5,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "Shmin 50% of floor-to-Sv",
+      "Sv_grad": 25015.5,
+      "Shmin_grad": 19242.04208205233,
+      "SHmax_grad": 25015.5,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "Shmin 75% of floor-to-Sv",
+      "Sv_grad": 25015.5,
+      "Shmin_grad": 22128.771041026164,
+      "SHmax_grad": 25015.5,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    },
+    {
+      "label": "Shmin 100% of floor-to-Sv",
+      "Sv_grad": 25015.5,
+      "Shmin_grad": 25015.5,
+      "SHmax_grad": 25015.5,
+      "Sv_int": 0.0,
+      "Shmin_int": 0.0,
+      "SHmax_int": 0.0,
+      "Pp_grad": 10000.0,
+      "Pp_datum": 0.0,
+      "source": "regime: strike-slip, locally transtensional (Bada et al. 2007)",
+      "z_data": null,
+      "mu": null,
+      "regime": null
+    }
+  ],
+  "stress_basis": "regime bounds",
+  "strength_cases": [
+    [
+      "site UCS",
+      160000000.0
+    ]
+  ],
+  "data_basis": {
+    "stress": [
+      "regime bounds",
+      "Bada et al. (2007); orientation maps only (Bekesi et al. 2023), no magnitudes"
+    ],
+    "strength": [
+      "unsourced",
+      "v1.0 160 MPa; no basement data found"
+    ],
+    "pore pressure": [
+      "assumed",
+      "hydrostatic, but the deep Great Hungarian Plain is reported overpressured by 1-35 MPa (not yet verified)"
+    ],
+    "temperature": [
+      "regional",
+      "45-50 C/km regional gradient, extrapolated to 9.7 km; no deep well cited"
+    ],
+    "well check": [
+      "none",
+      "no well with wellbore-failure data"
+    ]
+  },
+  "geotherm_v11": null,
+  "target_depth_v11": null,
+  "temperature_data_to": null,
+  "mu": 0.8,
+  "coupled": false
+}

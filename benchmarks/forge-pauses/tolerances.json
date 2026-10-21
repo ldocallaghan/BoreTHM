@@ -1,0 +1,27 @@
+{
+  "source": "tests/test_forge_pauses.py::test_pause_check_is_unchanged",
+  "units": {
+    "f": "dimensionless",
+    "f_no_node": "dimensionless",
+    "start": "Unix seconds, UTC convention",
+    "hours": "h",
+    "obs": "degrees F anomaly",
+    "mod": "degrees F anomaly",
+    "pred": "degrees F anomaly"
+  },
+  "rules": [
+    {
+      "fields": "f and f_no_node",
+      "absolute": 0.02
+    },
+    {
+      "fields": "rows and rows_no_node: obs",
+      "absolute": 0.5
+    },
+    {
+      "fields": "rows and rows_no_node: mod",
+      "absolute": 1.0
+    }
+  ],
+  "note": "pred values are retained; the existing numerical regression does not set their tolerance."
+}

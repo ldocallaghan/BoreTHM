@@ -4,10 +4,10 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-import fluids
-import pressure as pr
-import site_evaluation as se
-import well_geometry as wg
+from borethm import fluids
+from borethm import pressure as pr
+from borethm import site_evaluation as se
+from borethm import well_geometry as wg
 
 
 @pytest.fixture
