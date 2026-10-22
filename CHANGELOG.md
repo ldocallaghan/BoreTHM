@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.2 (22 October 2026)
+
+Corrects the model documentation: the circulation model's exposure-time floor, the drilling-rate and face-heat equations as implemented, the water-property table's range, pressure conventions in the API, and what each validation comparison establishes. Calculations, inputs, public signatures and saved results are unchanged. See the [release record](docs/releases/v1.4.2.md) for verification.
+
 ## v1.4.1 (22 October 2026)
 
 Clarifies the difference between target-depth stability and whole-hole fluid windows, and identifies breakout formation timing as a model assumption. Rewrites the user guides and summary, corrects scientific explanations and data notes, and makes the API reference self-contained. README links work from PyPI, and documentation checks cover the packaged data guides and absolute repository links.

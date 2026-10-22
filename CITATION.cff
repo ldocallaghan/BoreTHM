@@ -5,7 +5,7 @@ authors:
   - family-names: "O'Callaghan"
     given-names: "Liam"
     orcid: "https://orcid.org/0009-0003-3943-7330"
-version: "1.4.1"
+version: "1.4.2"
 license: Apache-2.0
 date-released: "2026-10-22"
 repository-code: "https://github.com/ldocallaghan/BoreTHM"

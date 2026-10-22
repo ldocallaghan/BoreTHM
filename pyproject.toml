@@ -18,7 +18,7 @@ borethm = ["data/**/*.py", "data/**/raw/**"]
 
 [project]
 name = "borethm"
-version = "1.4.1"
+version = "1.4.2"
 description = "Models of circulating temperature and borehole stability for drilling into superhot rock"
 readme = "README.md"
 license = "Apache-2.0"
