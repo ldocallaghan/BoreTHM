@@ -10,6 +10,8 @@ The circulation comparisons use FORGE observations at depths and temperatures be
 
 ## Breakout formation and cooling
 
+The circulation rock term uses a minimum exposure of one hour for a depth-dependent history, or 0.001 years (about 8.8 hours) for a uniform `t_years`. This is a restriction of its quasi-steady line-source approximation. The separate radial wall-temperature calculation resolves early cooling with its supplied state durations, using fluid-temperature and film-coefficient boundaries from circulation. It does not apply the circulation exposure floors. Those floors set no breakout formation delay. The [circulation equations](models.md#circulation-heat-balance) describe their scope.
+
 The base case assumes breakouts form as soon as the bit exposes the rock. A skin-depth heuristic approximates where failure begins behind the wall; immediate formation prevents cooling from reducing the initial drilling pressure requirement. The [physical-model guide](models.md#borehole-stability) explains that approximation.
 
 The [breakout-timing study](breakout-timing.md) tests assumed delays between exposure and failure. Its results show when the whole-hole drilling-fluid window opens under those assumptions. They do not measure breakout formation time. Images showing breakouts within minutes in sediment do not establish timing or growth in hot crystalline rock. Near-bit pre-cooling and the growth of breakouts remain open questions.

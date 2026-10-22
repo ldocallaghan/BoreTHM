@@ -18,6 +18,12 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     Rock conductivity k_rock is W/(m K), rhocp_rock is J/(m3 K), and
     t_years is years. A geotherm maps true vertical depth in m to degrees C;
     exposure maps measured depth in m to seconds and overrides t_years.
+    The circulation rock term floors exposure at 3,600 s, or t_years at
+    0.001 years (about 8.8 hours) when exposure=None. This restriction of
+    the quasi-steady line-source approximation applies only to circulation.
+    The separate radial wall-temperature solver uses its supplied state
+    durations, with fluid-temperature and film-coefficient boundaries from
+    circulation. The exposure floors set no breakout formation delay.
     With a geotherm and a pipe, target_depth must give the measured depth
     in m. Geometry supplies the depth when given. P_surface is Pa; tfa is
     the bit nozzle flow area in m2. Friction heating is optional; film_mult

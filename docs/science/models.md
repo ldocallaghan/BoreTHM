@@ -10,7 +10,7 @@ The thermal models are one-dimensional or axisymmetric. Spallation, drilling-rat
 
 ## Circulation and heat transfer
 
-The circulation model (Model 1, `model1_coupled.py`) calculates fluid temperature down the drill string and back up the annulus, the space between the string and the borehole wall. It represents the casing and cement, the string geometry and the steel and insulation layers in the pipe. Friction in the pipe, annulus and bit nozzles generates heat. Heat transfer to the rock depends on how long each depth has been exposed to circulation. The programme evaluations use the exposure of rock encountered while drilling.
+The circulation model (Model 1, `model1_coupled.py`) calculates fluid temperature down the drill string and back up the annulus, the space between the string and the borehole wall. It represents the casing and cement, the string geometry and the steel and insulation layers in the pipe. Friction in the pipe, annulus and bit nozzles generates heat. Heat transfer to the rock depends on how long each depth has been exposed to circulation. The programme evaluations supply the exposure of rock encountered while drilling; the circulation rock term applies a one-hour minimum to that exposure, as described in the [equations](#circulation-heat-balance).
 
 Figure 1 is a separate illustrative comparison with rock exposed to circulation for a year. It uses a 12.4 km well reaching 450 °C rock at a mass flow of 30 kg/s. The calculated bit temperatures are 390 °C with conventional pipe, 222 °C with NOV TK-Drakon coated pipe and 56 °C with the dual-wall pipe of Xiao et al. (2022). These are the conditions of that figure; the [site programmes](#programme-evaluation) have their own targets, flows and exposure histories. Heat returned to surface in the figure is limited by conduction from the surrounding rock and does not constitute a reservoir-production assessment.
 
@@ -70,6 +70,8 @@ In the base case, every open-hole depth is checked at its own exposure under the
 
 The equations are given in the notation used in the code.
 
+### Circulation heat balance
+
 The loop model (Model 1) solves coupled heat balances for the downgoing and returning fluid along measured depth z, with the rock at the temperature of its true vertical depth, and with the heat dissipated by friction (pressure gradient dp/dz) added to each stream:
 
 $$\dot{m}c_p\frac{dT_d}{dz}=UA_i(T_u-T_d)+\frac{\dot{m}}{\rho}\left|\frac{dp}{dz}\right|_d$$
@@ -82,13 +84,23 @@ The conductances per unit length are resistances in series: the films on each si
 
 $$\frac{1}{UA_i}=\frac{1}{2\pi r_b h_d}+\sum_j\frac{\ln(r_{j+1}/r_j)}{2\pi k_j}+\frac{1}{2\pi r_o h_u},\qquad \frac{1}{UA_o}=\frac{1}{2\pi r_w h_u}+\sum_c\frac{\ln(r_{c+1}/r_c)}{2\pi k_c}+\frac{\ln(r_\infty/r_r)}{2\pi k_{\text{rock}}}$$
 
-$$q'(z)=\frac{2\pi k_{\text{rock}}\Delta T}{\ln(r_\infty/r_r)},\qquad r_\infty=r_r+2\sqrt{\alpha t(z)}$$
+$$q'(z)=\frac{2\pi k_{\text{rock}}\Delta T}{\ln(r_\infty/r_r)},\qquad r_\infty=r_r+2\sqrt{\alpha t_{\text{eff}}(z)}$$
 
-where t(z) is the time the wall at z has been exposed to circulation. Programme evaluations supply each depth's own exposure, including the youngest rock at the target. Where a pipe has bare tool joints over a fraction f of its length, UA_i is the length-weighted mean of the insulated body and bare steel. Friction follows the laminar and Blasius factors, and the bit nozzles lose
+Here t(z) is the time the wall at z has been exposed to circulation, and t_eff is the effective time used by `model1_coupled.exposure_seconds` in the rock term. For a depth-dependent exposure history,
+
+$$t_{\text{eff}}(z)=\max\big(t(z),\;3600\ \mathrm{s}\big).$$
+
+With a uniform `t_years` and no exposure history, the minimum is 0.001 years, about 8.8 hours. Programme evaluations supply each depth's own exposure, including the youngest rock at the target, and the circulation calculation applies the one-hour floor to that history.
+
+The rock term approximates quasi-steady line-source conduction, which requires the conduction radius to be well beyond the hole radius. A transient cylindrical-source solution would be needed to represent shorter exposures in this term. The separate radial wall-temperature solver used by the stability checks and the [breakout-timing study](breakout-timing.md) resolves early cooling with its supplied state durations and does not apply these circulation floors. Its fluid-temperature and film-coefficient boundaries come from the circulation calculation. The exposure floor sets no breakout formation time; the timing study's assumed delay is a separate input.
+
+Where a pipe has bare tool joints over a fraction f of its length, UA_i is the length-weighted mean of the insulated body and bare steel. Friction follows the laminar and Blasius factors, and the bit nozzles lose
 
 $$\Delta p_{\text{bit}}=\frac{\rho Q^2}{2C_d^2A_n^2},\qquad C_d=0.95$$
 
 The standpipe pressure is the sum of the friction losses down the pipe and up the annulus, the bit loss, and the buoyancy of the hotter annulus, the integral of (ρ_u − ρ_d) g over true vertical depth.
+
+### Quenched-face stress
 
 Spallation (Model 2) requires the constrained thermal stress of the quenched face to exceed the confining stress and the tensile strength, with the face temperature given by the convective half-space solution:
 
@@ -96,11 +108,50 @@ $$\sigma_T=\frac{E\alpha\Delta T}{1-\nu},\qquad \sigma_T-K_0\rho g z>T_0$$
 
 $$T(x,t)=T_{\text{rock}}+(T_{\text{cold}}-T_{\text{rock}})\big[\mathrm{erfc}(\eta)-e^{-\eta^2}\mathrm{erfcx}(\eta+\beta)\big],\qquad \eta=\frac{x}{2\sqrt{\alpha t}},\quad \beta=\frac{h\sqrt{\alpha t}}{k}$$
 
-The drilling model (Model 3) converts the quench into an effective mechanical specific energy (MSE) and rate of penetration (ROP), and returns the heat generated at the face to Model 1:
+### Drilling rate and face heat
 
-$$\text{MSE}_{\text{eff}}=\text{MSE}(1-D),\qquad \text{ROP}=\frac{P_{\text{mech}}}{\text{MSE}_{\text{eff}}\cdot A_{\text{bit}}}$$
+The drilling model (Model 3, `model3_optimiser.py`) converts cooling at the cutting face into an effective mechanical specific energy (MSE), the energy needed to remove a unit volume of rock. It uses that energy to calculate the rate of penetration (ROP).
 
-$$Q_{\text{face}}=\text{MSE}\cdot A\cdot\text{ROP}+\rho c\cdot A\cdot\text{ROP}\cdot\Delta T+Q_{\text{cond}}$$
+`effective_mse` selects the spallation branch when the formation temperature is below the assumed brittle-to-ductile transition, `model2_spallation.T_BDT = 400 °C`, and the thermal tension exceeds confinement plus tensile strength, as defined in the Model 2 equations above. Other thermally assisted cases use a damage fraction D. Disabling thermal assistance with `quench=False` in `evaluate` or `evaluate_at` selects the mechanical branch:
+
+$$\text{MSE}_{\text{eff}}=\begin{cases}
+40\ \mathrm{MPa}, & \text{spallation},\\
+\text{MSE}(1-D), & \text{assisted},\\
+\text{MSE}, & \text{mechanical}.
+\end{cases}$$
+
+The intact-rock MSE defaults to 300 MPa. The spallation branch uses `MSE_SPALL`, fixed at 40 MPa, and returns D = 1 as a regime label. The damage formula applies only to the assisted branch; the mechanical branch returns D = 0.
+
+The assisted branch combines a damage fraction from the change in differential stress, D_macro, with a fraction representing thermal microcracking, D_micro:
+
+$$D=\min(D_{\text{macro}}+D_{\text{micro}},\;0.6),\qquad D_{\text{macro}}=\chi_{\text{macro}}\operatorname{clip}\!\left(\frac{\Delta\sigma_{\text{dev}}}{\sigma_{\text{dev,fail}}},0,1\right),\qquad D_{\text{micro}}=\chi_{\text{micro}}\operatorname{clip}\!\left(\frac{\Delta T}{\Delta T_{\text{ref}}},0,1\right).$$
+
+Here `clip(x, 0, 1)` limits x to the interval from 0 to 1, and ΔT = T_rock − T_cold. The default coefficients are χ_macro = 0.5, χ_micro = 0.4 and ΔT_ref = 400 K. They are assumed damage parameters that need calibration by experiment.
+
+`model2_spallation.deviatoric_increase` supplies the differential stresses before and after cooling. It uses the face thermal tension σ_T returned by `model2_spallation.sigma_thermal_surface` at the specified exposure time and film coefficient. In its tension-positive convention, σ_v = −ρgz and σ_h = −K0ρgz, with rock density ρ and gravitational acceleration g:
+
+$$\Delta\sigma_{\text{dev}}=\left|\sigma_v-(\sigma_h+\sigma_T)\right|-\left|\sigma_v-\sigma_h\right|,\qquad \sigma_{\text{dev,fail}}=\mathrm{UCS}+(q-1)K_0\rho gz,\qquad q=\tan^2\!\left(45^\circ+\frac{\phi}{2}\right).$$
+
+UCS is the reference unconfined compressive strength, and the friction angle φ defaults to 30° in `effective_mse`. `rop_from_power` divides mechanical power P_mech by the effective energy per unit volume and the bit area A_bit, then applies `ROP_CAP`:
+
+$$\mathrm{ROP}=\min\!\left(\frac{P_{\text{mech}}}{\mathrm{MSE}_{\text{eff}}\,A_{\text{bit}}},\;\frac{20}{3600}\ \mathrm{m/s}\right).$$
+
+The cap is 20 m/h.
+
+`face_load` sums conduction from the face with the mechanical cutting heat and the sensible heat of the removed rock:
+
+$$Q_{\text{face}}=Q_{\text{cond}}+Q_{\text{cut}}+Q_{\text{spall}},\qquad Q_{\text{cut}}=\begin{cases}
+0, & \text{spallation},\\
+P_{\text{mech}}, & \text{assisted or mechanical},
+\end{cases}$$
+
+$$Q_{\text{spall}}=\rho c\,A_{\text{bit}}\,\mathrm{ROP}\,\Delta T,\qquad Q_{\text{cond}}=2\pi ka\,\Delta T.$$
+
+Here ρ, c and k are rock density, specific heat capacity and thermal conductivity; a is the face-cavity radius, `CAVITY_RADIUS = 0.108 m`. These heat terms use ROP in m/s and return watts. The term named Q_spall represents the sensible heat of removed rock in every regime.
+
+The standalone `model3_optimiser.evaluate` iterates Model 1 with the face load returned by `face_load`. The reference site evaluation supplies the fixed `Q_FACE_SITE = 30 kW` to circulation and calls `evaluate_at` with the resulting coolant temperature. `evaluate_at` returns ROP and a face load without feeding that load back into the circulation calculation. The [face-load approximation comparison, A2](approximation-comparisons.md#what-each-comparison-changes), replaces the fixed load in a separate test.
+
+### Creep and borehole mechanics
 
 Creep closure (Model 4) follows an Arrhenius power law, and convective heat resupply is checked through the Péclet number:
 
