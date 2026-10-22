@@ -2,7 +2,7 @@
 
 BoreTHM is an open-source Python model for assessing drilling programmes in superhot geothermal rock. It couples circulating-fluid and downhole-tool temperatures with thermal stress at the borehole wall to calculate the mud-weight window: the range of fluid densities that meets the pressure constraints through drilling, connections and trips.
 
-BoreTHM is intended for drilling engineers and researchers assessing a well design or reusing the thermal and stability calculations. Its reference cases support comparisons with field observations and published models. The assessment covers the specified drilling programme; reservoir production and detailed well-integrity design require separate work.
+BoreTHM is intended for drilling engineers and researchers assessing a well design or reusing the thermal and stability calculations. Its reference cases support comparisons with field observations and published models.
 
 - [Documentation guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/README.md): choose a reading path.
 - [Get started](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#get-started): set up Python and run an assessment.
