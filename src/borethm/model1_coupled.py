@@ -31,7 +31,10 @@ BCs:
   T_u(L) = T_d(L) + Q_face/(m_dot*cp_L)          (face heat load at turnaround)
 
 Water properties: IAPWS-95 via a precomputed table (water_table.py),
-fully vectorized. P(z) hydrostatic (+1 atm surface).
+fully vectorized. The approximate property pressure is absolute:
+P_of_z = P_surface + 10 MPa/km times true vertical depth, with a default
+P_surface of 0.1 MPa absolute. The programme's gauge wall-pressure budget
+is calculated separately by pressure.py.
 """
 import numpy as np
 from scipy.integrate import solve_bvp
@@ -367,8 +370,9 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     """Pressure losses along the string and annulus, bit nozzle loss,
     standpipe pressure and annular velocity.
 
-    With a circulating_temperatures result, water properties use each piece's local
-    bore or annulus temperature and pressure, and the standpipe pressure
+    With a circulating_temperatures result, water properties use each piece's
+    bore or annulus temperature and the approximate absolute pressure
+    P_surface + 10,000 Pa/m times true vertical depth. The standpipe pressure
     includes the buoyancy of the hot annulus against the cold bore. Without
     one, properties are at T_avg and mid-depth pressure throughout.
 
@@ -376,11 +380,14 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
 
     The first two arguments, m_dot [kg/s] and geometry [WellGeometry],
     are required. result is a circulating_temperatures result; T_avg is
-    degrees C, tfa is m2 and P_surface is Pa. bit enables nozzle loss;
+    degrees C, tfa is m2 and P_surface is Pa absolute, default 100,000 Pa.
+    bit enables nozzle loss;
     friction selects the friction law. fluid=None uses water; otherwise
     use a constant property dictionary or an object providing props.
-    Return a dictionary with pressure losses and spp [Pa], annular velocities
-    [m/s], hydraulic pump power [W], and flow diagnostics.
+    Return a dictionary with dp_string, dp_annulus, dp_bit, dp_buoyancy and
+    spp [Pa as pressure differences]. The per-piece dp_bore and dp_ann
+    entries are also pressure differences [Pa]. Other outputs include
+    annular velocities [m/s], hydraulic pump power [W], and flow diagnostics.
     """
     top, bot = _pieces(geometry)
     mid = 0.5 * (top + bot)

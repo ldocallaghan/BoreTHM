@@ -69,9 +69,10 @@ class StressProfile:
     Pp_datum [m], zero above it. z_data is the depth range [m] the magnitude data
     actually cover, or None when the profile rests on regime bounds alone.
 
-    Inputs ending in _grad are Pa/m; stress intercepts are Pa.
+    Inputs ending in _grad are Pa/m; stress intercepts are Pa gauge.
     The constructor orders Sv, Shmin, then SHmax gradients. Methods Sv(z),
-    Shmin(z), SHmax(z) and Pp(z) return Pa for depth z [m]. mu is dimensionless;
+    Shmin(z), SHmax(z) and Pp(z) return Pa gauge for depth z [m]. The gauge
+    reference is the model's atmosphere, 0.1 MPa absolute. mu is dimensionless;
     regime is normal, strike-slip or reverse when specified.
     """
     label: str
@@ -161,7 +162,8 @@ class SiteProfile:
     geotherm maps depth [m] to rock temperature [degrees C]; target_depth is
     m and target_T is degrees C. Sv is vertical stress; Shmin and SHmax are
     minimum and maximum horizontal stress. Stress and fluid pressure
-    gradients are Pa/m; K0_min and SHmax_over_Sv are dimensionless ratios.
+    gradients are Pa/m and use the gauge convention of StressProfile;
+    K0_min and SHmax_over_Sv are dimensionless ratios.
     k_rock is W/(m K); E_rock and UCS are Pa; T_inj is degrees C. UCS is the
     uniaxial compressive strength supplied at 25 degrees C.
     stress_cases contains StressProfile objects; strength_cases contains
@@ -305,6 +307,10 @@ def validate_site(site):
     unsourced, none. Unrecognised labels raise ValueError. Missing sources
     or missing required provenance entries produce warnings; these checks
     do not verify the cited measurement or publication.
+
+    These checks catch unit slips and implausible inputs. Acceptance does
+    not establish that every fluid state remains inside the water-property
+    table's temperature and absolute-pressure limits.
     """
     errs, warns = [], []
     for k, (lo, hi, unit) in INPUT_RANGES.items():
@@ -567,13 +573,17 @@ def breakout_eff(Shmin, SHmax, Pw, Pp, T_rock, T_wall=None, UCS=None, dsigma_T=0
     K = (1 + sin(phi))/(1 - sin(phi)) with phi = 35 degrees.
     No additional filter-cake support is assumed.
 
-    Arguments start with Shmin then SHmax. All stresses, pressures, UCS
-    and dsigma_T are Pa; T_rock and T_wall are degrees C. Returns a dictionary:
+    Arguments start with Shmin then SHmax. Shmin, SHmax, Pw and Pp are Pa
+    gauge, relative to the model's 0.1 MPa absolute atmosphere. UCS and
+    dsigma_T are Pa, with no atmospheric offset; T_rock and T_wall are
+    degrees C. Returns a dictionary:
     sigma_theta, mc_hot, mc_cold and P_need [Pa], overbalance_MPa [MPa],
     dimensionless over_hydro, and breaks and frac_limited flags. sigma_theta
     is total hoop stress; mc_hot and mc_cold are total-stress limits at the
-    rock and wall temperatures, each including pore pressure. P_need is
-    the pressure required to prevent failure at this azimuth; frac_limited
+    rock and wall temperatures, each including pore pressure. These total
+    stresses retain the inputs' gauge reference. P_need is the gauge
+    pressure required to prevent failure at this azimuth. overbalance_MPa
+    is the pressure difference P_need - Pw in MPa; frac_limited
     compares it with Shmin. UCS=None uses the reference strength of 200e6 Pa at 25 degrees C;
     T_wall=None uses min(T_rock, 200 degrees C).
     """
@@ -625,15 +635,18 @@ def mud_window(Shmin, SHmax, Pp, z, Pw_hydro, T_rock, T_wall=None, UCS=None,
     3 Shmin - SHmax - Pw - Pp + dsigma_T < -T0. Initiation alone is not a
     prediction that the complete well cannot be drilled.
 
-    Arguments start with Shmin then SHmax. All stresses, pressures, UCS,
-    dsigma_T and T0 are Pa; z is true vertical depth [m]. T_rock and T_wall
+    Arguments start with Shmin then SHmax. Shmin, SHmax, Pp and Pw_hydro
+    are Pa gauge, relative to the model's 0.1 MPa absolute atmosphere.
+    P_surface is wellhead pressure [Pa gauge], default zero. UCS, dsigma_T
+    and T0 are Pa, with no atmospheric offset; z is true vertical depth [m].
+    T_rock and T_wall
     are degrees C. W_max is degrees; margin_SG and ecd_SG are SG
     equivalents. T_wall=None uses min(T_rock, 200 degrees C). UCS=None uses the reference
     strength of 200e6 Pa at 25 degrees C.
 
     Returns SG_lo, SG_hi and SG_hydro as (P - P_surface)/(1000 g z), where
-    P_surface is wellhead pressure. Pw_lo, Pw_hi and Pw_mud are Pa; widths
-    are degrees. Includes verdict and tensile diagnostics. An infeasible
+    P_surface is gauge wellhead pressure. Pw_lo, Pw_hi and Pw_mud are Pa gauge;
+    widths are degrees. Includes verdict and tensile diagnostics. An infeasible
     Pw_mud is None. These local SG-equivalent bounds differ from the
     whole-programme surface-density bounds returned by evaluate.
     """
@@ -893,7 +906,10 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
     """Evaluate a SiteProfile through circulation, connections and trips.
 
     Site inputs use m, Pa, degrees C and SI thermal properties. Validate the
-    profile first with validate_site. The default circulation='v1.3.4' uses
+    profile first with validate_site. Stresses and the wall-pressure budget
+    use Pa gauge, relative to a 0.1 MPa absolute atmosphere. Circulation
+    property pressures are absolute, and hydraulic losses are pressure
+    differences. The default circulation='v1.3.4' uses
     the whole-hole programme calculation. This calculation-mode identifier
     is independent of the package version. v10 selects the original model;
     thermal enables wall cooling and coupled overrides the site's coupling.
@@ -2628,6 +2644,9 @@ def result_dict(o):
     Inputs and outputs retain the evaluation's units: depth [m], temperature
     [degrees C], pressure [Pa], flow [kg/s or L/s as labelled], and surface
     density [kg/m3 at 20 degrees C]. SG-equivalent values remain labelled SG.
+    Stresses, pore pressures and wall-pressure quantities are gauge.
+    programme.backpressure_Pa is gauge; programme.spp_Pa is a pressure
+    difference. The gauge reference is 0.1 MPa absolute.
     Includes input sources and runtime versions; does not run calculations.
     """
     s = o["site"]

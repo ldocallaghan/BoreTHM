@@ -3,6 +3,7 @@ import inspect
 from pathlib import Path
 
 import borethm
+from borethm import pressure
 
 
 def render():
@@ -25,6 +26,8 @@ def render():
         'well = WellGeometry.single(3000.0, pipe, r_hole=0.11)',
         'stress_Pa = thermal_hoop_stress(300.0, 150.0)',
         '```', '',
+        '## Pressure conventions', '',
+        inspect.getdoc(pressure).split('## Pressure conventions\n\n', 1)[1], '',
     ]
     for name in borethm.__all__:
         rows += ['## ' + name, '']

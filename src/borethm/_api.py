@@ -25,15 +25,19 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     durations, with fluid-temperature and film-coefficient boundaries from
     circulation. The exposure floors set no breakout formation delay.
     With a geotherm and a pipe, target_depth must give the measured depth
-    in m. Geometry supplies the depth when given. P_surface is Pa; tfa is
-    the bit nozzle flow area in m2. Friction heating is optional; film_mult
+    in m. Geometry supplies the depth when given. P_surface is absolute
+    pressure [Pa], default 100,000 Pa. Property pressures follow the
+    approximate hydrostatic profile P_surface + 10,000 Pa/m times true
+    vertical depth. tfa is the bit nozzle flow area in m2. Friction heating
+    is optional; film_mult
     scales the annulus film coefficient. breaks are measured depths in m;
     init is a previous circulation result used to seed the solver.
 
     fluid=None uses water. A constant fluid dictionary supplies rho [kg/m3],
     cp [J/(kg K)], mu [Pa s] and k [W/(m K)]; a fluid object may provide props.
     Return a dictionary with z [measured depth, m], Td, Tu and Trock [degrees C],
-    Q_product [W], m_dot [kg/s], P_bottom [Pa], geometry and success, plus
+    Q_product [W], m_dot [kg/s], P_bottom [Pa absolute from that approximate
+    hydrostatic profile], geometry and success, plus
     the underlying solution. Check success before using a profile.
     verbose=False suppresses the solver's printed report by default.
     """

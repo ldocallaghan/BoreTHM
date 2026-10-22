@@ -11,7 +11,9 @@ is smooth enough for these models. The table is loaded, or built, on first use,
 so importing the models costs nothing until water properties are needed.
 
 Properties: rho [kg/m^3], cp [J/kg/K], mu [Pa.s], k [W/m/K].
-Inputs to the lookups: T [degC], P [Pa] (arrays ok).
+Inputs to props: T [degC], P [Pa absolute] (arrays accepted). The cached
+grid spans 1 to 479 degC and 0.1 to 218.1 MPa absolute, at 2 degC and
+2 MPa spacing. props clips its inputs to these boundaries before interpolation.
 """
 import os
 import numpy as np
@@ -80,12 +82,14 @@ def _clip(T_C, P_Pa):
 
 
 def props(T_C, P_Pa):
-    """Return water properties for temperature T_C [degrees C] and P_Pa [Pa].
+    """Return water properties for T_C [degrees C] and P_Pa [Pa absolute].
 
     Inputs may be scalars or matching arrays. Returns (rho [kg/m3],
     cp [J/(kg K)], mu [Pa s], k [W/(m K)]) as arrays. Values are
-    interpolated from the cached IAPWS-95 table; inputs outside its
-    temperature and pressure range are clipped to the table boundaries.
+    interpolated from the cached IAPWS-95 table, whose grid spans
+    1 to 479 degrees C and 100,000 to 218,100,000 Pa absolute, with
+    2-degree C and 2 MPa spacing. Inputs outside these ranges are
+    clipped to the nearest grid edge before interpolation.
     The table is built on first use when no cache is present.
     """
     pts = _clip(T_C, P_Pa)

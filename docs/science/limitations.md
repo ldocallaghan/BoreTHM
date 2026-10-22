@@ -8,6 +8,38 @@ The deep targets extend beyond the measured stress and temperature records. Stre
 
 The circulation comparisons use FORGE observations at depths and temperatures below the deep targets. Newberry's well check reproduces the volcanic breakouts but also predicts failure in granodiorite where none was logged. These checks do not establish the accuracy of a complete deep drilling programme.
 
+## Applicability and numerical guards
+
+Input acceptance, property-table coverage and field evidence impose different limits:
+
+| Item | Range or treatment |
+|---|---|
+| Accepted site inputs | `validate_site` applies the [scalar ranges below](#accepted-scalar-ranges) to catch unit slips and implausible inputs. It checks a finite geotherm sampled every 100 m, including the target; the sampled open hole must warm with depth, and the target temperature must agree within 5 °C. It samples stress profiles every 500 m from the target to the casing shoe, including the shoe, checking finite positive stresses, maximum horizontal stress at least equal to minimum horizontal stress, the ordering of any declared faulting regime, and pore pressure below the minimum horizontal stress. It also checks provenance labels and reports missing sources. These checks do not establish that every fluid state remains inside the property table. |
+| Water-property table | `water_properties`, implemented by `water_table.props`, interpolates over 1 to 479 °C and 0.1 to 218.1 MPa absolute. Each grid has a spacing of 2 in its stated units. Inputs outside those limits are clipped to the nearest edge before interpolation. These are the cached grid's limits. |
+| Other numerical guards | The water-only heat-capacity path, `model1_coupled._cp`, clips its inputs to 1 to 480 °C and 0.1 to 220 MPa absolute, then calls the heat-capacity interpolator directly. That interpolator extrapolates over the small intervals beyond the final grid nodes at 479 °C and 218.1 MPa. `model1_coupled.solve` marks a circulation solution unsuccessful if either sampled fluid profile reaches 480 °C. The friction-heating lookup in `model1_coupled._friction_gradient` uses a minimum property pressure of 5 MPa absolute and clips temperature to 1 to 480 °C. The separate `hydraulics` function uses the approximate hydrostatic property pressure directly. |
+| Fluid model | Circulation represents one single-phase fluid. The weighted-fluid model treats barite as a dispersed solid in water. There is no two-phase liquid-vapour flow calculation or vapour-fraction balance. |
+| Circulation property pressure | `model1_coupled.P_of_z` supplies the approximate absolute pressure `P_surface + 10 MPa/km × TVD`, with true vertical depth (TVD) measured from surface and a default surface pressure of 0.1 MPa absolute. This property pressure is separate from the wall-pressure budget. The [property-pressure comparison, A1](approximation-comparisons.md#what-each-comparison-changes), tests a different treatment at fixed programme inputs. |
+| Field comparison range | The FORGE 16B circulation trial spans about 2.31 to 2.99 km measured depth, or 2.12 to 2.41 km true vertical depth. Its adopted formation-temperature profile, from neighbouring well 16A, gives about 182 to 205 °C over that interval. These conditions are below the deep reference targets; the [validation guide](validation.md#circulation) describes the measured fluid temperatures and fitted parameters. |
+| Site conditions | Deep stress and temperature profiles extend beyond the measured intervals. Strength assumptions and the transfer of calibrated parameters remain site-specific uncertainties, as described in [input evidence](#input-evidence). |
+
+### Accepted scalar ranges
+
+The inclusive limits below are those in `site_evaluation.INPUT_RANGES`. Unconfined compressive strength (UCS) is supplied at 25 °C. Invalid values raise `ValueError`; missing provenance produces warnings.
+
+| Input | Accepted range | Unit |
+|---|---|---|
+| Effective target depth | 500 to 20,000 | m |
+| Target rock temperature | 50 to 600 | °C |
+| Rock conductivity | 0.5 to 7 | W/(m K) |
+| Rock Young's modulus | 5 to 150 | GPa |
+| UCS and every strength-case UCS | 10 to 500 | MPa |
+| Injection temperature | 0 to 100 | °C |
+| Friction coefficient | 0.2 to 1.5 | dimensionless |
+| Reference fluid-pressure gradient | 8,000 to 20,000 | Pa/m |
+| Reference vertical-stress gradient | 15,000 to 35,000 | Pa/m |
+
+These scalar limits are distinct from the temperature and pressure domain of the property table.
+
 ## Breakout formation and cooling
 
 The circulation rock term uses a minimum exposure of one hour for a depth-dependent history, or 0.001 years (about 8.8 hours) for a uniform `t_years`. This is a restriction of its quasi-steady line-source approximation. The separate radial wall-temperature calculation resolves early cooling with its supplied state durations, using fluid-temperature and film-coefficient boundaries from circulation. It does not apply the circulation exposure floors. Those floors set no breakout formation delay. The [circulation equations](models.md#circulation-heat-balance) describe their scope.

@@ -86,7 +86,9 @@ def breakout_width(SHmax, Shmin, Pw, Pp, T_wall, UCS=None, dsigma_T=0.0):
     all round. Equal horizontal stresses give 0 or 180 degrees directly.
 
     Argument order is SHmax then Shmin, opposite to breakout_check and
-    mud_window. Stresses, Pw, Pp, UCS and dsigma_T are Pa; T_wall is degrees C.
+    mud_window. SHmax, Shmin, Pw and Pp are Pa gauge, relative to the model's
+    0.1 MPa absolute atmosphere. UCS and dsigma_T are Pa with no atmospheric
+    offset; T_wall is degrees C.
     Returns the width in degrees; UCS=None uses the reference strength
     of 200e6 Pa at 25 degrees C.
     """

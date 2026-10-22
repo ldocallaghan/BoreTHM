@@ -17,10 +17,31 @@ The pressure on the wall through the drilling cycle, from one budget:
   * dP_allowance: surge and swab during a trip, taken off the lower bound and
     added to the upper.
 
-Pressures here are gauge, relative to the atmosphere, as the stresses and
-pore pressures they are compared with are; the fluid's properties are taken at
-the absolute pressure. An SG is the equivalent static density at the depth,
+An SG is the equivalent static density at the depth,
 (P_static - P_surface) / (1000 g z).
+
+## Pressure conventions
+
+Absolute pressure is measured from vacuum; gauge pressure is measured from
+the model's atmosphere, P_SURF = 0.1 MPa absolute. Thus P_absolute equals
+P_gauge + 0.1 MPa. Pressure arguments and outputs use Pa unless labelled otherwise.
+
+water_properties uses absolute pressure. circulating_temperatures and
+hydraulics take an absolute P_surface, defaulting to 0.1 MPa, for their
+approximate hydrostatic property-pressure profile. The circulation result's
+P_bottom is also absolute.
+
+The wall-pressure budget uses gauge pressure, as do the in-situ stresses,
+pore pressures and fluid-support pressures used in the stability comparisons.
+mud_window takes a gauge P_surface, defaulting to zero. These conventions
+also apply to StressProfile and the pressure arguments of breakout_check
+and breakout_width. Rock strengths and thermal-stress changes use Pa and
+receive no atmospheric offset.
+
+Standpipe pressure and friction losses are pressure differences. In a
+hydraulics result, spp, dp_string, dp_annulus, dp_bit and dp_buoyancy are
+differences, as are the per-piece dp_bore and dp_ann entries. Their values
+receive no atmospheric offset.
 """
 import numpy as np
 from scipy.optimize import brentq

@@ -16,6 +16,8 @@ Figure 1 is a separate illustrative comparison with rock exposed to circulation 
 
 Water properties depend on both temperature and pressure. Water is supercritical only above both critical values, 373.946 °C and 22.064 MPa ([IAPWS critical-point release](https://iapws.org/public/documents/CU3rZ/crits.pdf)). Colder water can remain a compressed liquid at high pressure. Depth alone does not establish its phase. Whether water flashes into vapour depends on the local pressure and temperature along the flow path.
 
+Circulation evaluates fluid properties at the approximate absolute pressure `P_surface + 10 MPa/km × TVD`, where TVD is true vertical depth and the default `P_surface` is 0.1 MPa absolute. The programme's wall-pressure budget is calculated separately. Circulation represents a single-phase fluid and has no liquid-vapour flow calculation. The [applicability table](limitations.md#applicability-and-numerical-guards) gives the cached property limits and numerical guards; the [property-pressure comparison, A1](approximation-comparisons.md#what-each-comparison-changes), tests a different property-pressure treatment.
+
 ![Model 1 coupled counterflow temperature profiles](../../figures/model1_profiles.png)
 
 *Fig. 1. Illustrative year-long circulation case, separate from the drilling programmes: temperature of the downgoing fluid, returning fluid and rock along a 12.4 km well reaching 450 °C rock, at 30 kg/s. The coated-pipe bit temperature exceeds the 200 °C reference tool limit in this example. Passing the bit-temperature check alone would not establish programme feasibility.*

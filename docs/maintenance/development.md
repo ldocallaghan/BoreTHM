@@ -13,6 +13,7 @@ The deferred work has explicit triggers:
 | Full flow and stress envelopes, D-03 | A lever reopens a site and an operating range must be claimed |
 | Tied bound labels: report every tied case in `lo_by` and `hi_by`, keeping `case` as the first, and have `describe_bound()` print "all cases" when every case ties | The next release that regenerates the evidence |
 | Near-bit thermal model, growth law and thermo-poroelasticity | Specialist interest, usable observations or a clearly discriminating hypothesis justify a separately scoped study; the breakout formation-delay experiment becoming decision-relevant is another trigger |
+| Report the frequency and extent of water-property lookups outside the cached grid | An evaluation approaches the grid limits, or a user needs evidence of property-domain coverage; requires separate instrumentation work |
 
 **H-01 trigger met; not yet implemented.** Soultz L2's 0.00137 SG trip width and its L2+L4 pair's 0.00949 SG drilling deficit meet the proximity trigger. The evaluated programmes still fail other gates, and no operating range is claimed. Revisit before claiming a near-threshold programme is feasible, or when new data make the timing approximation decision-relevant. Coolant delivery (H-02) and fluid displacement (W-03) retain their distinct triggers above.
 

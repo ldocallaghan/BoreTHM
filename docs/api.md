@@ -13,6 +13,29 @@ well = WellGeometry.single(3000.0, pipe, r_hole=0.11)
 stress_Pa = thermal_hoop_stress(300.0, 150.0)
 ```
 
+## Pressure conventions
+
+Absolute pressure is measured from vacuum; gauge pressure is measured from
+the model's atmosphere, P_SURF = 0.1 MPa absolute. Thus P_absolute equals
+P_gauge + 0.1 MPa. Pressure arguments and outputs use Pa unless labelled otherwise.
+
+water_properties uses absolute pressure. circulating_temperatures and
+hydraulics take an absolute P_surface, defaulting to 0.1 MPa, for their
+approximate hydrostatic property-pressure profile. The circulation result's
+P_bottom is also absolute.
+
+The wall-pressure budget uses gauge pressure, as do the in-situ stresses,
+pore pressures and fluid-support pressures used in the stability comparisons.
+mud_window takes a gauge P_surface, defaulting to zero. These conventions
+also apply to StressProfile and the pressure arguments of breakout_check
+and breakout_width. Rock strengths and thermal-stress changes use Pa and
+receive no atmospheric offset.
+
+Standpipe pressure and friction losses are pressure differences. In a
+hydraulics result, spp, dp_string, dp_annulus, dp_bit and dp_buoyancy are
+differences, as are the per-piece dp_bore and dp_ann entries. Their values
+receive no atmospheric offset.
+
 ## evaluate
 
 ```python
@@ -22,7 +45,10 @@ evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupl
 Evaluate a SiteProfile through circulation, connections and trips.
 
 Site inputs use m, Pa, degrees C and SI thermal properties. Validate the
-profile first with validate_site. The default circulation='v1.3.4' uses
+profile first with validate_site. Stresses and the wall-pressure budget
+use Pa gauge, relative to a 0.1 MPa absolute atmosphere. Circulation
+property pressures are absolute, and hydraulic losses are pressure
+differences. The default circulation='v1.3.4' uses
 the whole-hole programme calculation. This calculation-mode identifier
 is independent of the package version. v10 selects the original model;
 thermal enables wall cooling and coupled overrides the site's coupling.
@@ -46,6 +72,9 @@ Convert an evaluate result into a JSON-compatible dictionary.
 Inputs and outputs retain the evaluation's units: depth [m], temperature
 [degrees C], pressure [Pa], flow [kg/s or L/s as labelled], and surface
 density [kg/m3 at 20 degrees C]. SG-equivalent values remain labelled SG.
+Stresses, pore pressures and wall-pressure quantities are gauge.
+programme.backpressure_Pa is gauge; programme.spp_Pa is a pressure
+difference. The gauge reference is 0.1 MPa absolute.
 Includes input sources and runtime versions; does not run calculations.
 
 ## export_result
@@ -70,7 +99,8 @@ Site inputs for evaluate, with temperature and stress profiles.
 geotherm maps depth [m] to rock temperature [degrees C]; target_depth is
 m and target_T is degrees C. Sv is vertical stress; Shmin and SHmax are
 minimum and maximum horizontal stress. Stress and fluid pressure
-gradients are Pa/m; K0_min and SHmax_over_Sv are dimensionless ratios.
+gradients are Pa/m and use the gauge convention of StressProfile;
+K0_min and SHmax_over_Sv are dimensionless ratios.
 k_rock is W/(m K); E_rock and UCS are Pa; T_inj is degrees C. UCS is the
 uniaxial compressive strength supplied at 25 degrees C.
 stress_cases contains StressProfile objects; strength_cases contains
@@ -100,9 +130,10 @@ Pore pressure is Pp_grad * (z - Pp_datum) below a static fluid level at
 Pp_datum [m], zero above it. z_data is the depth range [m] the magnitude data
 actually cover, or None when the profile rests on regime bounds alone.
 
-Inputs ending in _grad are Pa/m; stress intercepts are Pa.
+Inputs ending in _grad are Pa/m; stress intercepts are Pa gauge.
 The constructor orders Sv, Shmin, then SHmax gradients. Methods Sv(z),
-Shmin(z), SHmax(z) and Pp(z) return Pa for depth z [m]. mu is dimensionless;
+Shmin(z), SHmax(z) and Pp(z) return Pa gauge for depth z [m]. The gauge
+reference is the model's atmosphere, 0.1 MPa absolute. mu is dimensionless;
 regime is normal, strike-slip or reverse when specified.
 
 ## validate_site
@@ -142,6 +173,10 @@ checked, regime bounds, extrapolated, regional, assumed, not reproduced,
 unsourced, none. Unrecognised labels raise ValueError. Missing sources
 or missing required provenance entries produce warnings; these checks
 do not verify the cited measurement or publication.
+
+These checks catch unit slips and implausible inputs. Acceptance does
+not establish that every fluid state remains inside the water-property
+table's temperature and absolute-pressure limits.
 
 ## named_sites
 
@@ -186,15 +221,19 @@ The separate radial wall-temperature solver uses its supplied state
 durations, with fluid-temperature and film-coefficient boundaries from
 circulation. The exposure floors set no breakout formation delay.
 With a geotherm and a pipe, target_depth must give the measured depth
-in m. Geometry supplies the depth when given. P_surface is Pa; tfa is
-the bit nozzle flow area in m2. Friction heating is optional; film_mult
+in m. Geometry supplies the depth when given. P_surface is absolute
+pressure [Pa], default 100,000 Pa. Property pressures follow the
+approximate hydrostatic profile P_surface + 10,000 Pa/m times true
+vertical depth. tfa is the bit nozzle flow area in m2. Friction heating
+is optional; film_mult
 scales the annulus film coefficient. breaks are measured depths in m;
 init is a previous circulation result used to seed the solver.
 
 fluid=None uses water. A constant fluid dictionary supplies rho [kg/m3],
 cp [J/(kg K)], mu [Pa s] and k [W/(m K)]; a fluid object may provide props.
 Return a dictionary with z [measured depth, m], Td, Tu and Trock [degrees C],
-Q_product [W], m_dot [kg/s], P_bottom [Pa], geometry and success, plus
+Q_product [W], m_dot [kg/s], P_bottom [Pa absolute from that approximate
+hydrostatic profile], geometry and success, plus
 the underlying solution. Check success before using a profile.
 verbose=False suppresses the solver's printed report by default.
 
@@ -207,8 +246,9 @@ hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='bl
 Pressure losses along the string and annulus, bit nozzle loss,
 standpipe pressure and annular velocity.
 
-With a circulating_temperatures result, water properties use each piece's local
-bore or annulus temperature and pressure, and the standpipe pressure
+With a circulating_temperatures result, water properties use each piece's
+bore or annulus temperature and the approximate absolute pressure
+P_surface + 10,000 Pa/m times true vertical depth. The standpipe pressure
 includes the buoyancy of the hot annulus against the cold bore. Without
 one, properties are at T_avg and mid-depth pressure throughout.
 
@@ -216,11 +256,14 @@ one, properties are at T_avg and mid-depth pressure throughout.
 
 The first two arguments, m_dot [kg/s] and geometry [WellGeometry],
 are required. result is a circulating_temperatures result; T_avg is
-degrees C, tfa is m2 and P_surface is Pa. bit enables nozzle loss;
+degrees C, tfa is m2 and P_surface is Pa absolute, default 100,000 Pa.
+bit enables nozzle loss;
 friction selects the friction law. fluid=None uses water; otherwise
 use a constant property dictionary or an object providing props.
-Return a dictionary with pressure losses and spp [Pa], annular velocities
-[m/s], hydraulic pump power [W], and flow diagnostics.
+Return a dictionary with dp_string, dp_annulus, dp_bit, dp_buoyancy and
+spp [Pa as pressure differences]. The per-piece dp_bore and dp_ann
+entries are also pressure differences [Pa]. Other outputs include
+annular velocities [m/s], hydraulic pump power [W], and flow diagnostics.
 
 ## mud_window
 
@@ -248,15 +291,18 @@ these window bounds. The diagnostic uses effective
 3 Shmin - SHmax - Pw - Pp + dsigma_T < -T0. Initiation alone is not a
 prediction that the complete well cannot be drilled.
 
-Arguments start with Shmin then SHmax. All stresses, pressures, UCS,
-dsigma_T and T0 are Pa; z is true vertical depth [m]. T_rock and T_wall
+Arguments start with Shmin then SHmax. Shmin, SHmax, Pp and Pw_hydro
+are Pa gauge, relative to the model's 0.1 MPa absolute atmosphere.
+P_surface is wellhead pressure [Pa gauge], default zero. UCS, dsigma_T
+and T0 are Pa, with no atmospheric offset; z is true vertical depth [m].
+T_rock and T_wall
 are degrees C. W_max is degrees; margin_SG and ecd_SG are SG
 equivalents. T_wall=None uses min(T_rock, 200 degrees C). UCS=None uses the reference
 strength of 200e6 Pa at 25 degrees C.
 
 Returns SG_lo, SG_hi and SG_hydro as (P - P_surface)/(1000 g z), where
-P_surface is wellhead pressure. Pw_lo, Pw_hi and Pw_mud are Pa; widths
-are degrees. Includes verdict and tensile diagnostics. An infeasible
+P_surface is gauge wellhead pressure. Pw_lo, Pw_hi and Pw_mud are Pa gauge;
+widths are degrees. Includes verdict and tensile diagnostics. An infeasible
 Pw_mud is None. These local SG-equivalent bounds differ from the
 whole-programme surface-density bounds returned by evaluate.
 
@@ -292,13 +338,17 @@ strength is the temperature-adjusted UCS and
 K = (1 + sin(phi))/(1 - sin(phi)) with phi = 35 degrees.
 No additional filter-cake support is assumed.
 
-Arguments start with Shmin then SHmax. All stresses, pressures, UCS
-and dsigma_T are Pa; T_rock and T_wall are degrees C. Returns a dictionary:
+Arguments start with Shmin then SHmax. Shmin, SHmax, Pw and Pp are Pa
+gauge, relative to the model's 0.1 MPa absolute atmosphere. UCS and
+dsigma_T are Pa, with no atmospheric offset; T_rock and T_wall are
+degrees C. Returns a dictionary:
 sigma_theta, mc_hot, mc_cold and P_need [Pa], overbalance_MPa [MPa],
 dimensionless over_hydro, and breaks and frac_limited flags. sigma_theta
 is total hoop stress; mc_hot and mc_cold are total-stress limits at the
-rock and wall temperatures, each including pore pressure. P_need is
-the pressure required to prevent failure at this azimuth; frac_limited
+rock and wall temperatures, each including pore pressure. These total
+stresses retain the inputs' gauge reference. P_need is the gauge
+pressure required to prevent failure at this azimuth. overbalance_MPa
+is the pressure difference P_need - Pw in MPa; frac_limited
 compares it with Shmin. UCS=None uses the reference strength of 200e6 Pa at 25 degrees C;
 T_wall=None uses min(T_rock, 200 degrees C).
 
@@ -319,7 +369,9 @@ clipped to 0 when no wall failure occurs and 180 when failure extends
 all round. Equal horizontal stresses give 0 or 180 degrees directly.
 
 Argument order is SHmax then Shmin, opposite to breakout_check and
-mud_window. Stresses, Pw, Pp, UCS and dsigma_T are Pa; T_wall is degrees C.
+mud_window. SHmax, Shmin, Pw and Pp are Pa gauge, relative to the model's
+0.1 MPa absolute atmosphere. UCS and dsigma_T are Pa with no atmospheric
+offset; T_wall is degrees C.
 Returns the width in degrees; UCS=None uses the reference strength
 of 200e6 Pa at 25 degrees C.
 
@@ -364,12 +416,14 @@ returns (peak internal-fluid temperature [degrees C], time [s]).
 water_properties(T_C, P_Pa)
 ```
 
-Return water properties for temperature T_C [degrees C] and P_Pa [Pa].
+Return water properties for T_C [degrees C] and P_Pa [Pa absolute].
 
 Inputs may be scalars or matching arrays. Returns (rho [kg/m3],
 cp [J/(kg K)], mu [Pa s], k [W/(m K)]) as arrays. Values are
-interpolated from the cached IAPWS-95 table; inputs outside its
-temperature and pressure range are clipped to the table boundaries.
+interpolated from the cached IAPWS-95 table, whose grid spans
+1 to 479 degrees C and 100,000 to 218,100,000 Pa absolute, with
+2-degree C and 2 MPa spacing. Inputs outside these ranges are
+clipped to the nearest grid edge before interpolation.
 The table is built on first use when no cache is present.
 
 ## WellGeometry
