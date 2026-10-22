@@ -51,4 +51,4 @@ The ZIP must be outside the repository. It contains one `borethm-benchmarks-1.0/
 
 ## How to cite
 
-Cite Liam O'Callaghan, *BoreTHM benchmark dataset*, version 1.0. A separate dataset DOI will be added here after its Zenodo deposit. Cite the software separately using its `CITATION.cff`, and acknowledge the field-data sources used by the selected case. The dataset has not yet been deposited on Zenodo.
+Cite Liam O'Callaghan, *BoreTHM benchmark dataset*, version 1.0, Zenodo, [doi:10.5281/zenodo.23565448](https://doi.org/10.5281/zenodo.23565448). Cite the software separately using its `CITATION.cff`, and acknowledge the field-data sources used by the selected case.

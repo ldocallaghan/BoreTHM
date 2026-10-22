@@ -17,7 +17,7 @@
 - [x] Tag v1.4.0 and publish the GitHub release; verify the PyPI publishing job.
 - [x] Check `pip install borethm` in a fresh environment from PyPI.
 - [x] Check the software's Zenodo archive, then add its all-versions DOI to the citation, README and NOTICE. Add an ORCID iD if supplied.
-- [ ] Upload the benchmark ZIP as a separate Zenodo dataset record and add its DOI to the dataset guide and README.
+- [x] Upload the benchmark ZIP as a separate Zenodo dataset record and add its DOI to the dataset guide and README.
 
 See the [release record](../releases/v1.4.0.md) for the commands and validation requirements. Keep publication checks open until their results have been confirmed.
 

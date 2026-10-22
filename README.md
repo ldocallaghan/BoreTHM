@@ -188,7 +188,7 @@ Saved reference outputs and numerical regression tables support comparison with 
 
 Cite BoreTHM using the [software DOI](https://doi.org/10.5281/zenodo.23549104). [CITATION.cff](https://github.com/ldocallaghan/BoreTHM/blob/main/CITATION.cff) provides the citation metadata. The [scientific bibliography](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/sources.md#references) lists the scientific sources.
 
-The [benchmark dataset](https://github.com/ldocallaghan/BoreTHM/blob/main/benchmarks/README.md#how-to-cite) has a separate citation. Its DOI will be added after deposit on Zenodo.
+The [benchmark dataset](https://github.com/ldocallaghan/BoreTHM/blob/main/benchmarks/README.md#how-to-cite) is published separately as [version 1.0 on Zenodo](https://doi.org/10.5281/zenodo.23565448).
 
 The FORGE data come from the Geothermal Data Repository: [well 16B drilling data](https://doi.org/10.15121/1998591) and [deep-well temperature surveys](https://doi.org/10.15121/1893533). The Newberry extracts come from [well 55-29 stimulation data](https://doi.org/10.15121/1357916). These datasets are used under CC-BY 4.0. The UD-1 image interpretation contains NERC materials ©NERC 2024.
 
