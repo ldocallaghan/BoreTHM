@@ -367,7 +367,7 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     """Pressure losses along the string and annulus, bit nozzle loss,
     standpipe pressure and annular velocity.
 
-    With a solve() result, water properties are taken at each piece's local
+    With a circulating_temperatures result, water properties use each piece's local
     bore or annulus temperature and pressure, and the standpipe pressure
     includes the buoyancy of the hot annulus against the cold bore. Without
     one, properties are at T_avg and mid-depth pressure throughout.

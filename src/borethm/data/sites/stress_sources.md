@@ -67,7 +67,7 @@ field." Read from the manuscript as submitted to *Geothermics* (GEOT_2019_13);
 
 No stress magnitudes and no pore pressures. Regime, from fault-slip inversion
 of Pliocene-Quaternary faults compared with focal mechanisms of local
-earthquakes (M < 2, 2–6 km deep, bracketing the 2.85 km target):
+earthquakes (M < 2, 2–6 km deep, bracketing the 2.40 km target):
 
 - NW-trending faults are dominantly normal (σ1 near vertical, σ3 NE-SW).
   NE-trending faults are left-lateral oblique to strike-slip, and can also be
@@ -131,11 +131,15 @@ Rock strength and temperature: no basement strength data found; the
 45–50 °C/km gradient is regional and is extrapolated to 9.7 km with no deep
 well cited.
 
-Bounded as transtensional, matching the description of the interior: SHmax =
-Sv, with Shmin from the frictional floor to Sv. The wider strike-slip range,
-with SHmax up to the friction cap, gives verdicts at 9.7 km from GO to
-CONDITIONAL with the wall cooled, and from CONDITIONAL to NO-GO without
-cooling.
+The adopted transtensional bounds match the description of the interior:
+SHmax = Sv, with Shmin from the frictional floor to Sv. Separate target-depth
+stability checks using a wider strike-slip range, with SHmax up to the
+friction cap, give GO to CONDITIONAL with the wall cooled and CONDITIONAL to
+NO-GO without cooling. Those are local stress and cooling sensitivities.
+The current full programme remains NO-GO because the drilling and trip
+fluid-density bounds over the hole are incompatible; equipment qualification
+also remains unresolved. The [reference findings](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#example-results)
+describe that programme.
 
 ## Regime-bound construction
 

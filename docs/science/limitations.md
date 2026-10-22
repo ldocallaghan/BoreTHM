@@ -1,27 +1,37 @@
 # Assumptions, limitations and open questions
 
-BoreTHM screens a stated programme and its inputs. A failed assessment does not establish that no other well design or existing technology can drill the site. The [validation guide](validation.md) describes the scope of each check.
+BoreTHM screens a stated drilling programme using the supplied inputs. A failed assessment does not establish that no other well design or existing technology can drill the site. The [validation guide](validation.md) describes what each comparison and check establishes.
 
-## Inputs and physical approximations
+## Input evidence
 
-Pannonian's historical 199.959 °C tool peak leaves 0.041 °C below its limit. Halving the timestep changes the peak by about 0.099 °C, above 20% of that margin, so the historical threshold is unresolved. The corrected closer-staging result has a larger tool margin; its pressure windows are still closed.
+The deep targets extend beyond the measured stress and temperature records. Stress extrapolation and the strength assumptions affect the pressure requirements. At United Downs, strength is calibrated using an assumed stress profile, so that comparison cannot independently verify both quantities. Larderello and Pannonian retain unsourced strength assumptions. The [site-input records](../../src/borethm/data/sites/stress_sources.md) identify the sources and uncertainties.
 
-Stress and temperature extrapolation, the skin heuristic and the time taken for failure in hot crystalline rock remain unresolved physical questions. Strength at UD-1 is calibrated with the assumed stress profile, and the two cannot be checked independently there. The circulation validation is at FORGE's depth and temperature, well below the targets. Newberry's well check reproduces the volcanic breakouts but also predicts failure in the granodiorite where none was logged. Larderello and Pannonian retain unsourced strength assumptions.
+The circulation comparisons use FORGE observations at depths and temperatures below the deep targets. Newberry's well check reproduces the volcanic breakouts but also predicts failure in granodiorite where none was logged. These checks do not establish the accuracy of a complete deep drilling programme.
 
-The rheology is one reference mud, with a fixed yield point and a viscosity law scaled from water. The barite heat capacity and expansion are constant approximations whose source values are checked in the lever report. A published 1.3 SG potassium-formate system retained 30 mPa s PV after 200 °C ageing, measured after cooling to 49 °C; that result does not qualify the modeled fluid through a 400 °C trip. The manufacturer's 204 °C coating rating does not quantify survival through the hotter full cycle. The cited onshore MPD pressure rating supplies a mechanical bound with an explicit thermal-qualification unknown.
+## Breakout formation and cooling
 
-The tool is a lumped collar and enclosed-fluid model. Staging supplies steady coolant without advective travel in the string, and its duration is absent from the base trip clock. The trip column is frozen during run-in, with the uniform heavier fluid present immediately. Casing and cement integrity, string loads and fatigue, circulation losses, and coupling of creep to the drilling cycle require separate well-design work. The hole-cleaning reference and cycle timings come from one well; the rig check uses three pumps of one published rating. The 0.02 SG surge and swab allowance is a sensitivity assumption, with no verified field range for these 10 to 13 km wells.
+The base case assumes breakouts form as soon as the bit exposes the rock. A skin-depth heuristic approximates where failure begins behind the wall; immediate formation prevents cooling from reducing the initial drilling pressure requirement. The [physical-model guide](models.md#borehole-stability) explains that approximation.
 
-## Initial exposure and cooling
+The [breakout-timing study](breakout-timing.md) tests assumed delays between exposure and failure. Its results show when the whole-hole drilling-fluid window opens under those assumptions. They do not measure breakout formation time. Images showing breakouts within minutes in sediment do not establish timing or growth in hot crystalline rock. Near-bit pre-cooling and the growth of breakouts remain open questions.
 
-Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. Images of breakouts within minutes in sediment do not establish timing or growth in hot crystalline rock. Failure-delay experiments are unsupported hypotheses. Near-bit pre-cooling and breakout growth remain separate open questions.
+## Fluid properties and equipment qualification
 
-## Scope of the approximation study
+The fluid model represents one reference mud. Its yield point is fixed and its plastic viscosity is scaled from water. Barite heat capacity and thermal expansion are treated as constants. The [design study's barite source check](design-comparisons.md#barite-source-check) gives the supporting values and their limits.
 
-The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](approximation-comparisons.md). These generally change one approximation at a time and do not cover every joint uncertainty. The [design comparisons](design-comparisons.md) sample selected settings and one pair per site; they establish no complete operating envelope.
+A published potassium-formate fluid retained a plastic viscosity of 30 mPa s after ageing at 200 °C, measured after cooling to 49 °C. That result does not qualify the modelled mud during a 400 °C trip. The [fluid and equipment sources](design-comparisons.md#sources-and-qualification-limits) describe the conditions behind the comparisons.
 
-## Deferred approximations
+The manufacturer's 204 °C coating rating does not establish survival through a hotter drilling cycle. The cited managed-pressure drilling equipment has a stated mechanical pressure rating; qualification for the modelled thermal cycle remains unknown.
 
-The H-01 common-timeline trigger is met by Soultz L2's 0.00137 SG trip width and its L2+L4 pair's 0.00949 SG drilling deficit. The common timeline has not yet been implemented; the evaluated programmes still fail other gates, and no operating range is claimed. It is needed before a near-threshold feasibility claim, or when new data make timing decision-relevant.
+## Tool temperature and programme timing
 
-Coolant delivery and fluid displacement retain distinct decision triggers: a delivery approximation straddling tool survival at a site that depends on it, and a displacement approximation straddling the site verdict, respectively. Full implementation criteria are in the [maintenance priorities](../maintenance/development.md). The [summary](../guides/summary.md#questions-for-specialist-discussion) gives questions for specialist discussion.
+The tool is represented by a lumped thermal model of the collar and enclosed fluid. During a staging pause, coolant is supplied at its steady temperature without accounting for its travel time through the string. Staging duration is absent from the base trip clock. During run-in, the trip-fluid temperature column is frozen and a uniform heavier fluid is assumed present from the start.
+
+These approximations matter when interpreting a small tool-temperature margin or a narrow allowable density range. The [approximation comparisons](approximation-comparisons.md) test selected alternatives. Their results do not replace a calculation with a common timeline and explicit fluid displacement.
+
+## Other design limits and study scope
+
+The assessments do not include detailed casing and cement integrity, string loads and fatigue, circulation losses, or creep coupled to the drilling cycle. The hole-cleaning reference and cycle timings come from one well. Rig capacity is checked against three pumps of one published rating. The 0.02 SG allowance for pressure changes during pipe movement is a sensitivity assumption, with no verified field range for these 10 to 13 km wells.
+
+The [approximation study](approximation-comparisons.md) generally changes one assumption at a time and does not cover every joint uncertainty. The [design study](design-comparisons.md) samples selected settings and one pair per site. Neither study makes either deep-site programme pass or establishes a complete operating envelope.
+
+The conditions for further implementation work are recorded in the [maintenance priorities](../maintenance/development.md). The [study summary](../guides/summary.md#questions-for-specialist-discussion) lists questions for specialist discussion.

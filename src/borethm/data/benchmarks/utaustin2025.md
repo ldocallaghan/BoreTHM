@@ -98,9 +98,9 @@ Dual-wall pipe exceeds the 51.7 MPa limit above 500 gal/min (text); the coated
 pipes stay below it from 400 to 800 gal/min (text). No conventional-pipe value
 is given.
 
-## Corrections to what was expected
+## Reading uncertainty
 
-The vertical-well BHCTs had been summarised as about 115, 100, 135 and 85 °C
-(conventional, internal, external, dual-wall). The figure gives about 179, 76,
-121 and 59 °C. The horizontal conventional-pipe value is about 206 °C, not
-170 °C.
+The temperatures read from figures have an estimated uncertainty of about
+±3 °C; standpipe pressures read from figures have about ±2 MPa uncertainty.
+Use the text and table values where available, and retain the figure-reading
+uncertainty when comparing model outputs with the values above.

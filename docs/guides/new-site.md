@@ -20,8 +20,9 @@ The fields fall into four groups.
   points, supply an interpolation function and state how it extrapolates
   below the deepest measurement. The geotherm must rise with depth through the open hole and give
   the target temperature at the target depth within 5 °C.
-- **Stress.** One or more stress cases, each a linear profile of Sv, Shmin and
-  SHmax with depth, with the pore pressure, the depths the magnitude data
+- **Stress.** One or more cases, each giving vertical stress Sv, minimum
+  horizontal stress Shmin and maximum horizontal stress SHmax as linear
+  profiles with depth, with the pore pressure, the depths the magnitude data
   cover and the source. A measured range is given as several cases (Soultz
   has three, across its range of SHmax). Below the data, SHmax is capped at
   the frictional limit at the site's friction coefficient. A case may state
@@ -39,8 +40,32 @@ The fields fall into four groups.
   checked against a well at the site; otherwise it is reported as
   speculative, in a separate table. Sources for the conductivity and the
   modulus go under `conductivity` and `stiffness`. `validate_site` rejects
-  unrecognised basis labels. The template uses internal helpers for its
+  unrecognised basis labels; the accepted labels are listed below. The template uses internal helpers for its
   Soultz reference inputs; those helpers are outside the public interface.
+
+## Provenance basis labels
+
+Use these exact strings as the first item of each `(basis, source)` pair:
+
+| Label | Description of the input basis |
+|---|---|
+| `calibrated` | Fitted to observations |
+| `measured` | Reported measurement |
+| `measured range` | Range supported by measurements |
+| `measured (lab)` | Laboratory measurement |
+| `log-derived` | Inferred from a well log |
+| `checked` | Compared against observations |
+| `regime bounds` | Constructed from a stress regime |
+| `extrapolated` | Extended beyond the measured range |
+| `regional` | Regional estimate |
+| `assumed` | Stated modelling assumption |
+| `not reproduced` | The stated observation is not reproduced |
+| `unsourced` | No supporting source identified |
+| `none` | No basis supplied |
+
+The label records how an input was obtained. Validation does not establish
+that its source is accurate. The [API reference](../api.md#validate_site)
+lists the numerical ranges and validation checks.
 
 ## 2. Validate the inputs
 
@@ -66,8 +91,9 @@ python examples/new_site.py --evaluate --json result.json
 ```
 
 Evaluations take several minutes. Weighted-fluid cases take longer because the fluid density is iterated with circulation and hydraulics. With the template unchanged, the
-script reports that the site is the repository's Soultz and compares its
-row of the site table with the pinned one.
+script identifies the built-in Soultz inputs and checks the evaluated
+result against the saved reference. That comparison runs only when the
+template still matches Soultz. Your new site is evaluated using its own inputs.
 
 To run one of the built-in sites from any directory after installing the package:
 
@@ -79,4 +105,4 @@ borethm-evaluate --site soultz --json soultz.json
 
 The report and JSON describe the same assessment; the JSON retains additional detail and input provenance. Start with `status` and its reasons, then inspect the pressure bounds and independent equipment checks. The [output guide](interpreting-results.md) maps the current JSON fields, explains the units and distinguishes a target stability case from a complete programme.
 
-The retained reference evaluations do not include a complete flow operating range or stress-uncertainty envelope. Those must not be inferred from a single assessment. Optional margin fields in other evaluation modes are described in the output guide.
+The reference assessments do not include a complete flow operating range or stress-uncertainty envelope. Those must not be inferred from a single assessment. Optional margin fields in other evaluation modes are described in the output guide.

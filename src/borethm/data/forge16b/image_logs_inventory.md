@@ -74,16 +74,16 @@ each run:
   ratio of 7 to 26, on the tangent at 61 to 67°. Here both runs carried the
   UBI, which allows a comparison between the same tool.
 
-## Decision
+## Suitability for paired observations
 
-**Proceed to Stage B.** Two or more runs image the same open-hole interval
-with times since drilling that differ by more than a factor of three over
-about 3,750 ft, the criterion for paired breakout widths. The
+Two or more runs image the same open-hole interval with times since drilling
+that differ by more than a factor of three over about 3,750 ft. This provides
+intervals for a possible paired-width comparison. The
 best-matched pair is runs 2 and 3 over 6,935 to 8,590 ft, both with the UBI,
 on a tangent of nearly constant inclination; runs 1 and 2 add a short
 overlap at the shortest times, under two days.
 
-Points for Stage B:
+The following limits apply to a paired comparison:
 
 - Most of the overlap is in a hole inclined at 47 to 67°. Breakout widths
   there depend on the hole's orientation in the stress field, so a pair is
@@ -104,3 +104,5 @@ Points for Stage B:
   Schlumberger or Utah FORGE picked the breakouts in each run (a
   `UBI-Breakout-Customer` DLIS exists for runs 1 and 2). Utah FORGE could
   confirm both, and any breakout interpretation made for 16B.
+
+The [maintenance notes](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/maintenance/development.md#forge-image-log-follow-up) record the proposed follow-up. This inventory does not contain a completed paired breakout-width analysis.

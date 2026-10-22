@@ -8,7 +8,7 @@ The use of insulated drill pipe to keep the bit cool in hot rock is well establi
 
 The mechanics of borehole stability used here are also established. The stress concentration around a borehole, breakout formation under a Mohr-Coulomb criterion and the use of breakout width to infer stress are standard (Zoback, 2007). Cooling a borehole wall adds a thermal hoop stress that suppresses breakouts and promotes tensile fractures, the combination studied by Hals and Berre (2012). In practice, the Japan Beyond-Brittle Project describes drilling at Kakkonda into rock above 500 °C with continuous circulation, and sets a target of cooling the hole below 160 °C (Muraoka et al., 2014), and Kruszewski and Wittig (2018) reviewed the failures in 20 wells drilled into supercritical conditions, many of them in casing and cement under thermal load. On the production side, Eavor's Geretsried project now reports about 8.5 MW of heat from its first loop, more than 2 MW per lateral pair falling to an expected 1.3 MW after five years (Eavor, 2026), and Beckers and Johnston (2022) estimated about 22 MW of heat and 2.2 MW of electricity from a 7.5 km loop with more than 90 km of laterals at 30 °C/km.
 
-The contribution of this repository is to link these elements for named sites in a single open tool, whose results are fixed by its test suite. The circulating temperature from a validated model is carried through to the thermal stress at the wall, to the range of drilling-fluid weights that keeps the wall stable through the drilling cycle, and to the depth of the target below the site's data. The stability model has been calibrated in one well and checked in two others, and the circulation model has been compared with a published simulator and validated against field measurements.
+BoreTHM combines circulating temperatures with wall thermal stress and fluid-pressure constraints for named site programmes. The circulation component has been compared with a published simulator and temperatures measured at FORGE. Some FORGE runs were used to fit parameters; the partial-insulation run was predicted without further fitting. Rock strength is calibrated at UD-1, with separate checks at Soultz and Newberry. The [validation guide](validation.md) describes the scope and limitations of each comparison. Analytical checks test specified equations, while regression tests check numerical repeatability against saved outputs. None of these checks validates a complete deep drilling programme.
 
 ## References
 
@@ -49,6 +49,8 @@ Hals, K.M.D., Berre, I., 2012. Thermal fracturing of geothermal wells and the ef
 Holmes, C.S., Swift, S.C., 1970. Calculation of circulating mud temperatures. Journal of Petroleum Technology 22 (6), 670–674.
 
 Holtzman, B.K., Groebner, N., Mittal, T., 2023. Quench-spallation drilling: a novel drilling head design for routine heat mining above the brittle-ductile transition. Geothermal Resources Council Transactions 47, 2960–2978.
+
+IAPWS, 1992. Revised Release on the Values of Temperature, Pressure and Density of Ordinary and Heavy Water Substances at their Respective Critical Points. R2-83(1992). https://iapws.org/public/documents/CU3rZ/crits.pdf
 
 Jaeger, J.C., 1956. Conduction of heat in an infinite region bounded internally by a circular cylinder of a perfect conductor. Australian Journal of Physics 9 (2), 167–179.
 

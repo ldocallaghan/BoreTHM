@@ -45,7 +45,8 @@ The raw files are not committed. To rebuild the extracts, download these into
 - `run_observations.csv`: the four trial runs, transcribed from the Eavor trial
   report (text and its Table 1): depths, string make-up, flow, inlet temperature
   and MWD temperatures. Blank cells are not given in the report; flow and inlet
-  temperature for BHA 12 and 13 will come from the Pason data.
+  temperature for BHA 12 and 13 are supplied by `pason_trial_1min.csv` in the
+  circulation comparison. The transcription remains unchanged.
 
 - `rig_hydraulics.csv`: the rig's hydraulics for each trial run, transcribed
   from the daily drilling reports reproduced in the End of Well Report (reports

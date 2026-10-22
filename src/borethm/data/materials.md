@@ -18,26 +18,23 @@ Workshop on Geothermal Reservoir Engineering*, Stanford, SGP-TR-229. They find
 
 Vacuum-insulated tubing is a production tubular. None of the sources here
 describes a drill pipe built that way, so for drilling it is a sensitivity.
-The model's previous 0.02 W/m·K matches the best-case end of the vacuum-tubing
-range, with connections; 0.10 W/m·K matches none of the named products.
 
-## Which pipe types can be bought
+## Reference pipe and equipment evidence
 
-The site runs use the best-insulated pipe that can be bought, which is pipe
-coated internally with NOV's TK-Drakōn (since v1.2.1); the dual-wall pipe,
-which insulates far better, is reported as a sensitivity. Its figures (80 mm
-bore, phenolic fill at 0.092 W/m·K) come from Xiao, D. et al. (2022),
-"Wellbore cooling and heat energy utilization method for deep shale gas
-horizontal well drilling", *Applied Thermal Engineering* 213, 118684, as used
-by Wu et al. (2025), a modelling study that describes no product. A search on 8 October 2026, in English
-and Chinese, found no dual-wall insulated drill pipe on sale or reported in a
-field trial, in China or elsewhere; the Chinese work found models insulating
-coatings. Sandia and Drill Cool Systems field-tested a prototype insulated
-drill pipe around 2000 (Champness and Finger, OSTI 751131), not taken further
-as far as the search shows. The dual-wall figures are kept, as an engineering
-estimate of a pipe that could be built, and the README says so.
+The site programmes use internally coated NOV TK-Drakon pipe with the
+properties listed below. The published coating properties define this reference configuration.
 
-What can be bought or has been run in a well:
+The dual-wall sensitivity uses the 80 mm bore and phenolic fill at
+0.092 W/m·K from Xiao, D. et al. (2022), "Wellbore cooling and heat energy
+utilization method for deep shale gas horizontal well drilling", *Applied
+Thermal Engineering* 213, 118684, as used by Wu et al. (2025). That modelling
+study does not identify a commercial drill-pipe product with those properties.
+The source search recorded on 8 October 2026 identified no matching product
+or field trial. Sandia and Drill Cool Systems field-tested a prototype
+insulated drill pipe around 2000 (Champness and Finger, OSTI 751131).
+These records do not qualify the modelled dual-wall geometry for drilling.
+
+The equipment sources describe:
 
 - Eavor's internally and externally coated IDP, run at FORGE 16B in 2023
   (`src/borethm/data/forge16b/`); the fitted effective conductivity matches a 1 mm
@@ -50,7 +47,7 @@ What can be bought or has been run in a well:
   The model's TK-Drakon pipe type is 0.635 mm, the middle of that range, on
   5-1/2-inch pipe. Its coating resistance is about 1.8 times that of Eavor's 1 mm
   coating at 0.47 W/m·K, and about 1/70 of the dual-wall pipe's.
-- Vacuum-insulated tubing (production tubing, not drill pipe).
+- Vacuum-insulated production tubing. Its use as drill pipe is a model sensitivity.
 
 Pro-Pipe Service and Sales (Alberta) is developing an insulated drill pipe,
 with field trials at 300 °C and a 5,000 m string planned for 2027 (Emissions
@@ -59,13 +56,12 @@ published, so it is not modelled.
 
 ## Hole cleaning
 
-No citable minimum annular velocity could be checked. PetroWiki's "Hole
-cleaning" page now redirects to OnePetro, the open review and thesis found
-were not reachable, and Finger and Blankenship (2010), *Handbook of Best
-Practices for Geothermal Drilling* (SAND2010-6048), calls for "high annular
-velocity to lift the cuttings" without a number.
+The sources used here do not establish a universal minimum annular velocity.
+Finger and Blankenship (2010), *Handbook of Best Practices for Geothermal
+Drilling* (SAND2010-6048), calls for "high annular velocity to lift the cuttings"
+without a numerical requirement.
 
-The model therefore takes its hole-cleaning reference from practice: the
+The model takes its hole-cleaning reference from practice: the
 annular velocity at which a comparable hole was actually drilled and cleaned.
 FORGE 16B was drilled through the trial interval, at 60 to 70° inclination in
 9-1/2-inch open hole, at 600 to 700 gal/min. The rig's daily reports give the
@@ -87,9 +83,8 @@ hp, which is 1,215 gal/min at 2,795 psi on 9-inch liners, 960 gal/min at
 pump's flow at a pressure is therefore about 1,980 x 1,714 / psi gal/min, up
 to 1,215. FORGE 16B's rig had at least three mud pumps (its daily reports
 mention "No. 3 mud pump"; the Pason record has a third pump channel) and ran
-5.5-inch liners; the model takes three pumps of the 14-P-220's rating, which a
-rig for 10 to 13 km would at least match. The pump models on FORGE's rig
-aren't given.
+5.5-inch liners; the model takes three pumps of the 14-P-220's rating as a reference rig assumption. The pump models on FORGE's rig
+are not given, and these records do not qualify a rig for the deep programmes.
 
 ## Bit nozzles
 

@@ -2,13 +2,13 @@
 
 BoreTHM is an open-source Python model for assessing drilling programmes in superhot geothermal rock. It couples circulating-fluid and downhole-tool temperatures with thermal stress at the borehole wall to calculate the mud-weight window: the range of fluid densities that meets the pressure constraints through drilling, connections and trips.
 
-At the deep granite targets studied at Soultz and United Downs, whether a drilling window exists depends on how quickly breakouts form after rock exposure. The Soultz window first opens between the sampled delays of 15 and 20 minutes; the formation time has not been measured. Both complete programmes remain NO-GO for the stated designs. BoreTHM is for drilling engineers and researchers assessing a well design or reusing the thermal and stability calculations. Its reference cases support checks against field observations and published models.
+BoreTHM is intended for drilling engineers and researchers assessing a well design or reusing the thermal and stability calculations. Its reference cases support comparisons with field observations and published models. The assessment covers the specified drilling programme; reservoir production and detailed well-integrity design require separate work.
 
-- [Documentation guide](docs/README.md): choose a reading path.
-- [Get started](#get-started): set up Python and run an assessment.
-- [Read a result](#reading-a-result): understand the outputs and status labels.
-- [Explore the examples](#example-results): site findings and their controlling constraints.
-- [Understand the models](#models-and-evidence): methods and field comparisons.
+- [Documentation guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/README.md): choose a reading path.
+- [Get started](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#get-started): set up Python and run an assessment.
+- [Read a result](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#reading-a-result): understand the outputs and status labels.
+- [Explore the examples](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#example-results): site findings and their controlling constraints.
+- [Understand the models](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#models-and-evidence): methods and field comparisons.
 
 ## Get started
 
@@ -27,7 +27,7 @@ borethm-evaluate --site newberry --json newberry.json
 
 The IAPWS-95 cache is built once, outside the installed package, in the platform's user cache directory. Set `BORETHM_CACHE_DIR` to choose another location. The evaluator also builds a missing cache on first use. The assessment command prints its result and saves the inputs and calculation provenance as JSON. Evaluations take several minutes; weighted-fluid cases require repeated coupled solves and can take longer.
 
-The same assessment through the [public Python interface](docs/api.md):
+The same assessment through the [public Python interface](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/api.md):
 
 ```python
 from borethm import evaluate, export_result, find_site
@@ -55,7 +55,7 @@ python -m pip install --no-deps -e .
 borethm-water-table
 ```
 
-Commands for releases before v1.4.0 are in their [release records](docs/releases/) and run from that release's tag.
+Commands for releases before v1.4.0 are in their [release records](https://github.com/ldocallaghan/BoreTHM/tree/main/docs/releases) and run from that release's tag.
 
 ## Run your own assessment
 
@@ -68,7 +68,7 @@ borethm-sites
 
 The first command evaluates one site; the second reports all five. Use `borethm-evaluate --help` for the command-line options.
 
-For a new site, follow the [site-input guide](docs/guides/new-site.md) and copy [the documented template](examples/site_template.py). It records units and sources, and checks the inputs before evaluation. The worked example can validate the template without running the full calculation:
+For a new site, follow the [site-input guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md) and, from a source checkout, copy [the documented template](https://github.com/ldocallaghan/BoreTHM/blob/main/examples/site_template.py). It records units and sources, and checks the inputs before evaluation. From the checkout root, the worked example can validate the template without running the full calculation:
 
 ```bash
 python examples/new_site.py
@@ -79,20 +79,20 @@ The template starts with Soultz's inputs. Replace them with the new site's measu
 
 ## Reading a result
 
-The [output guide](docs/guides/interpreting-results.md) maps the JSON fields and explains schedule identity.
+The [output guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/interpreting-results.md) maps the JSON fields and explains schedule identity.
 
 Start with `status` and its reasons, then inspect the components that set it. The report includes the operating programme, thermal and hydraulic outputs, stability in each cycle state, allowable mud densities and equipment checks. The JSON retains every evaluated case and the source of each input.
 
 | Status | Meaning for the evaluated programme and assumptions |
 |---|---|
-| GO | The modeled checks pass without the additional conditions listed by the evaluator. |
+| GO | The modelled checks pass without the additional conditions listed by the evaluator. |
 | CONDITIONAL | The assessment depends on stated conditions, such as prescribed fluids or a circulation schedule. Read those conditions before using the result. |
-| NO-GO | A modeled gate fails for this programme and these assumptions; the reasons identify the failing components. |
+| NO-GO | A modelled gate fails for this programme and these assumptions; the reasons identify the failing components. |
 | INDETERMINATE | A required numerical result did not converge, or an equipment qualification remains unresolved without another decisive failure. |
 
 An overall NO-GO can coexist with an INDETERMINATE coating check. Exceeding a manufacturer's stated coating rating identifies a qualification question. It does not predict a particular failure mode.
 
-A **mud-weight window** is the allowable range of fluid density: enough pressure to keep the borehole stable while staying below the modeled fracture-pressure limit. BoreTHM calculates the range that satisfies all evaluated depths, operating states and stress/strength cases, separately for drilling and trips.
+A **mud-weight window** is the allowable range of fluid density: enough pressure to keep the borehole stable while staying below the modelled fracture-pressure limit. BoreTHM calculates the range that satisfies all evaluated depths, operating states and stress/strength cases, separately for drilling and trips.
 
 Two pressure descriptions appear in the outputs:
 
@@ -103,7 +103,7 @@ A positive target interval does not establish a workable whole-hole fluid. If th
 
 ## Example results
 
-The worked assessments target rock at 400 °C. Every status below refers to **this programme and these assumptions**.
+The reference assessments target rock at 400 °C. The table reports the base case with immediate breakout formation. Each status applies to the specified design and inputs.
 
 | Site | Target, km | Status | Main finding |
 |---|---:|---|---|
@@ -113,65 +113,21 @@ The worked assessments target rock at 400 °C. Every status below refers to **th
 | Pannonian Basin | 9.71 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; coating qualification is unresolved. |
 | Newberry | 3.63 | GO | The evaluated programme passes with water. |
 
-These sites have different evidence quality. Soultz and United Downs use measured or calibrated stresses and strengths, extrapolated to the targets. Larderello and Pannonian retain unsourced strength assumptions. Newberry's well check does not reproduce the observed pattern in every rock type. The [input-source records](src/borethm/data/sites/stress_sources.md) explain those differences.
+These sites have different evidence quality. Soultz and United Downs use measured or calibrated stresses and strengths, extrapolated to the targets. Larderello and Pannonian retain unsourced strength assumptions. Newberry's well check does not reproduce the observed pattern in every rock type. The [input-source records](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/sites/stress_sources.md) explain those differences.
 
 ### Local stability and the complete programme
 
-At Soultz, eight of nine selected stress/strength cases have an open target drilling interval; at United Downs, two of four do. Both complete programmes remain **NO-GO for this programme and these assumptions** because no mud density satisfies the pressure limits throughout the evaluated hole, and tool-temperature limits are exceeded.
-
-<details>
-<summary>Target-depth case table and its interpretation</summary>
-
-Need and limit are static-column SG-equivalent values at the target. They differ from the surface mud densities a programme would prescribe. The saved target stability-cycle verdict also checks connections and the trip; it excludes separate whole-hole, tool and equipment gates. Each site's reference thermal/hydraulic solution is reused across cases without a fresh coupled evaluation for each case. An open interval does not prove the saved attempted fluid lies inside it.
-
-| Case | UCS, MPa | Drilling need / limit, SG-equivalent | Target stability-cycle verdict |
-|---|---:|---|---|
-| Soultz: SHmax lower bound (0.90 Sv) | 100 | 1.230 / 1.296 | CONDITIONAL |
-| Soultz: SHmax lower bound (0.90 Sv) | 115 | 1.209 / 1.296 | CONDITIONAL |
-| Soultz: SHmax lower bound (0.90 Sv) | 130 | 1.189 / 1.296 | CONDITIONAL |
-| Soultz: SHmax mid-range | 100 | 1.271 / 1.296 | CONDITIONAL |
-| Soultz: SHmax mid-range | 115 | 1.251 / 1.296 | CONDITIONAL |
-| Soultz: SHmax mid-range | 130 | 1.230 / 1.296 | CONDITIONAL |
-| Soultz: SHmax upper bound (1.05 Sv) | 100 | 1.313 / 1.296 | NO-GO |
-| Soultz: SHmax upper bound (1.05 Sv) | 115 | 1.292 / 1.296 | CONDITIONAL |
-| Soultz: SHmax upper bound (1.05 Sv) | 130 | 1.272 / 1.296 | CONDITIONAL |
-| United Downs: intact, 0 K | 203 | 1.169 / 1.220 | CONDITIONAL |
-| United Downs: intact, 40 K | 172 | 1.205 / 1.220 | CONDITIONAL |
-| United Downs: weak zones, 0 K | 147 | 1.234 / 1.220 | NO-GO |
-| United Downs: weak zones, 40 K | 118 | 1.267 / 1.220 | NO-GO |
-
-Soultz target 10.70 km; United Downs target 12.86 km. Sv is vertical stress. United Downs retains the existing 0 K / 40 K strength-calibration cases; these labels do not specify a newly applied cooling intervention. These 13 selected scenarios are not samples from a probability distribution. Eight of nine and two of four count the cases with an open target drilling interval. They do not estimate a probability of successful drilling. All verdicts refer to this programme and these assumptions.
-
-</details>
-
-### Independent programme failures
-
-The bounds below combine the pressure constraints across the evaluated depths, states and cases. They are expressed as surface SG at 20 °C; width is upper minus lower. A negative width means the required minimum density exceeds the permitted maximum. Both sites remain **NO-GO for this programme and these assumptions**.
-
-| Site and state | Lower / upper, surface SG | Width, SG |
-|---|---|---:|
-| Soultz drilling | 1.37892 / 1.31256 | -0.06637 |
-| Soultz trip | 1.44362 / 1.36461 | -0.07901 |
-| United Downs drilling | 1.33132 / 1.28519 | -0.04613 |
-| United Downs trip | 1.40134 / 1.36503 | -0.03631 |
-
-**Tool peaks, drilling / connection / best attempted run-in:** Soultz: 197.0 / 197.3 / 201.2 °C; United Downs: 205.7 / 206.1 / 224.5 °C. The limit is 200 °C. Best attempted means the lowest peak among the schedules searched. A wider search could find a lower one. Soultz's reference FORGE-practice run-in reaches 214.5 °C, separately from the 201.2 °C search result.
-
-Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C at United Downs, against the stated 204 °C rating. Both retain **INDETERMINATE qualification**. The coating histories are not necessarily those of the best attempted tool schedule.
-
-Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. They do not measure how close the entire programme is to passing: incompatible density requirements elsewhere in the hole and coating qualification remain independent issues.
-
-Sources: [Soultz reference](results/v1.3.4/ci/38186784798-1/reference/soultz.json), [United Downs reference](results/v1.3.4/ci/38186784798-1/reference/united-downs.json), and settings-matched L4 base trials for [Soultz](results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json). The [summary](docs/guides/summary.md), also available as a [two-page PDF](output/pdf/summary-v135.pdf), gives the findings and open questions together.
+At Soultz and United Downs, some stress and strength cases have an open drilling window at the target depth. Neither reference programme has a fluid density that satisfies the pressure limits throughout the hole. The [reference-programme comparison](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/design-comparisons.md#reference-programmes) gives the case tables, whole-hole pressure bounds and equipment temperatures.
 
 ### Breakout timing
 
-Whether breakouts form as soon as the rock is exposed, or take time to form, decides whether a drilling mud weight window exists at Soultz and United Downs. See [Breakout timing](docs/science/breakout-timing.md) for the criterion, the results and how to reproduce them.
+The assumed time between rock exposure and breakout formation can change the **whole-hole drilling-fluid window**. In the saved scan, that window first opens between delays of 15 and 20 minutes at Soultz, and between 10 and 15 minutes at United Downs. These are brackets from calculations with assumed delays. Breakout formation time in hot granite has not been measured in the studies reviewed here. Both complete programmes remain NO-GO because other checks still fail. The [breakout-timing study](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/breakout-timing.md) explains the assumptions and results.
 
 ### Design comparisons
 
-No evaluated individual design setting or evaluated pair made either deep site's programme pass. Deeper casing gives Soultz an allowable trip-fluid density range while drilling and tools still fail. Lower viscosity can give United Downs an allowable drilling-fluid density range while other gates still fail. Stronger insulation cools tools but leaves pressure and pump constraints.
+No evaluated design change or evaluated pair made either deep-site programme pass. The [design comparisons](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/design-comparisons.md) describe the tested settings and remaining failures. They do not establish a complete operating envelope or show that every possible design would fail.
 
-Only one pair per site was evaluated, and continuous searches sampled settings. The [design study](docs/science/design-comparisons.md) gives the tested settings, remaining failures and equipment-availability evidence. It establishes no complete operating envelope or general impossibility.
+The [study summary](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/summary.md), also available as a [two-page PDF](https://github.com/ldocallaghan/BoreTHM/blob/main/output/pdf/summary.pdf), brings the findings and open questions together.
 
 ## Models and evidence
 
@@ -179,22 +135,22 @@ The circulation model solves the downgoing and returning fluid temperatures with
 
 | Model or check | Role | Evidence and detail |
 |---|---|---|
-| Circulation | Fluid temperatures, heat transfer and hydraulics | [Utah FORGE comparisons and published-model benchmark](docs/science/validation.md#circulation) |
-| Rock reheating | Temperature recovery when circulation stops | [Analytic checks and the limits of the FORGE pause comparison](docs/science/validation.md#rock-reheating) |
-| Borehole stability | Breakout width and pressure requirements | [UD-1 strength calibration and other well checks](docs/science/validation.md#stability-checks) |
-| Spallation, drilling rate and creep | Exploratory estimates of quench effects and closure | [Physical models and their limits](docs/science/models.md#drilling-rate-and-creep) |
+| Circulation | Fluid temperatures, heat transfer and hydraulics | [Utah FORGE comparisons and published-model benchmark](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/validation.md#circulation) |
+| Rock reheating | Temperature recovery when circulation stops | [Analytic checks and the limits of the FORGE pause comparison](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/validation.md#rock-reheating) |
+| Borehole stability | Breakout width and pressure requirements | [UD-1 strength calibration and other well checks](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/validation.md#stability-checks) |
+| Spallation, drilling rate and creep | Exploratory estimates of quench effects and closure | [Physical models and their limits](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/models.md#drilling-rate-and-creep) |
 
-The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Full derivations and diagnostic figures are in the [physical-model guide](docs/science/models.md); the [bibliography](docs/science/sources.md#references), [material properties](src/borethm/data/materials.md) and [site inputs](src/borethm/data/sites/stress_sources.md) retain their sources.
+The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Full derivations and diagnostic figures are in the [physical-model guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/models.md); the [bibliography](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/sources.md#references), [material properties](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/materials.md) and [site inputs](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/sites/stress_sources.md) retain their sources.
 
 ## Scope and limitations
 
-BoreTHM screens a stated drilling programme. A passing result is conditional on the modeled inputs and checks; a failure does not settle whether a different design or existing technology could drill the site. Reservoir production and detailed well-integrity design are outside the assessments.
+A passing result depends on the modelled inputs and checks. A failed assessment does not establish that a different design or existing technology could not drill the site.
 
-The deep targets lie well below measured stress data. Strength calibration depends on the assumed stress profile, and the reference mud's rheology and constant barite properties are approximations. Full-cycle qualification of insulated pipe and managed-pressure equipment remains unresolved for the hot conditions studied.
+The deep targets lie below measured stress data. Strength calibration depends on the assumed stress profile, and the reference mud's viscosity and constant barite properties are approximations. Qualification of insulated pipe and managed-pressure equipment over the full hot drilling cycle remains unresolved.
 
-Immediate exposure and the skin heuristic prevent cooling from reducing the initial drilling demand in the base model. The [failure-delay experiments](docs/science/breakout-timing.md) test hypotheses that no data yet support. They give no evidence that breakouts wait an hour to form. Near-bit pre-cooling and breakout growth remain separate open questions.
+The base case assumes that breakouts form immediately after rock exposure, before cooling can reduce the initial pressure requirement. Experiments with an assumed delay show how that requirement changes; they do not demonstrate that breakouts wait an hour to form.
 
-The base deep-site verdicts remain NO-GO for this programme and these assumptions across the [A1-A9 comparisons performed](docs/science/approximation-comparisons.md). These generally change one approximation at a time and do not cover every joint uncertainty. Coolant delivery, trip timing and fluid displacement are among the [deferred approximations](docs/science/limitations.md). Pannonian's historical 0.041 °C tool threshold remains numerically unresolved.
+The [approximation comparisons](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/approximation-comparisons.md) test individual assumptions and numerical resolution. None changes either deep-site programme to a pass, but the study does not cover every combination of uncertainty. The [limitations guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/limitations.md) explains the input uncertainties and the approximations in coolant delivery, trip timing and fluid displacement.
 
 ## Tests and reproducibility
 
@@ -212,36 +168,36 @@ python -m pytest -m "slow or not slow"
 
 Full physical runs can take an hour or more. Single-threaded BLAS avoids oversubscription during repeated solves; set `OPENBLAS_NUM_THREADS=1`, `OMP_NUM_THREADS=1` and `MKL_NUM_THREADS=1` before starting Python for those runs.
 
-Saved reference outputs and numerical regression tables support comparison with the published calculations. The [changelog](CHANGELOG.md) records changes. Historical diagnostic figures use their stated programmes and should be interpreted with their captions.
+Saved reference outputs and numerical regression tables support comparison with the published calculations. The [changelog](https://github.com/ldocallaghan/BoreTHM/blob/main/CHANGELOG.md) records changes. Historical diagnostic figures use their stated programmes and should be interpreted with their captions.
 
 ## Find your way around the repository
 
 | Location | Contents |
 |---|---|
-| [src/borethm/](src/borethm) | Installed package, physical models and study modules |
-| [scripts/](scripts/README.md) | Standalone diagnostic and figure scripts |
-| [benchmarks/](benchmarks/README.md) | Reference dataset with inputs, expected outputs and tolerances |
-| [examples/](examples) | Site template and worked example |
-| [docs/](docs/README.md) | Reading guide, model use, science and historical records |
-| [src/borethm/data/](src/borethm/data) | Packaged observations and input-source records |
-| [results/](results) | Retained numerical evaluations and trial evidence |
-| [tests/](tests) | Unit checks and physical regressions, including fixed reference tables |
-| [figures/](figures) | Diagnostic and field-comparison figures |
+| [src/borethm/](https://github.com/ldocallaghan/BoreTHM/tree/main/src/borethm) | Installed package, physical models and study modules |
+| [scripts/](https://github.com/ldocallaghan/BoreTHM/blob/main/scripts/README.md) | Standalone diagnostic and figure scripts |
+| [benchmarks/](https://github.com/ldocallaghan/BoreTHM/blob/main/benchmarks/README.md) | Reference dataset with inputs, expected outputs and tolerances |
+| [examples/](https://github.com/ldocallaghan/BoreTHM/tree/main/examples) | Site template and worked example |
+| [docs/](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/README.md) | Reading guide, model use, science and historical records |
+| [src/borethm/data/](https://github.com/ldocallaghan/BoreTHM/tree/main/src/borethm/data) | Packaged observations and input-source records |
+| [results/](https://github.com/ldocallaghan/BoreTHM/tree/main/results) | Retained numerical evaluations and trial evidence |
+| [tests/](https://github.com/ldocallaghan/BoreTHM/tree/main/tests) | Unit checks and physical regressions, including fixed reference tables |
+| [figures/](https://github.com/ldocallaghan/BoreTHM/tree/main/figures) | Diagnostic and field-comparison figures |
 
 ## How to cite and data credits
 
-Cite BoreTHM using the [software DOI](https://doi.org/10.5281/zenodo.23549104). [CITATION.cff](CITATION.cff) provides the citation metadata. The [scientific bibliography](docs/science/sources.md#references) lists the scientific sources.
+Cite BoreTHM using the [software DOI](https://doi.org/10.5281/zenodo.23549104). [CITATION.cff](https://github.com/ldocallaghan/BoreTHM/blob/main/CITATION.cff) provides the citation metadata. The [scientific bibliography](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/sources.md#references) lists the scientific sources.
 
-The [benchmark dataset](benchmarks/README.md#how-to-cite) has a separate citation. Its DOI will be added after deposit on Zenodo.
+The [benchmark dataset](https://github.com/ldocallaghan/BoreTHM/blob/main/benchmarks/README.md#how-to-cite) has a separate citation. Its DOI will be added after deposit on Zenodo.
 
 The FORGE data come from the Geothermal Data Repository: [well 16B drilling data](https://doi.org/10.15121/1998591) and [deep-well temperature surveys](https://doi.org/10.15121/1893533). The Newberry extracts come from [well 55-29 stimulation data](https://doi.org/10.15121/1357916). These datasets are used under CC-BY 4.0. The UD-1 image interpretation contains NERC materials ©NERC 2024.
 
-The [FORGE](src/borethm/data/forge16b/README.md) and [Newberry](src/borethm/data/newberry/README.md) data guides describe the extracts and how to rebuild them. Other input sources are recorded alongside the corresponding data.
+The [FORGE](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/forge16b/README.md) and [Newberry](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/newberry/README.md) data guides describe the extracts and how to rebuild them. Other input sources are recorded alongside the corresponding data.
 
 ## Questions and contributions
 
-Use [GitHub issues](https://github.com/ldocallaghan/BoreTHM/issues) for questions and problem reports. See [SUPPORT.md](SUPPORT.md) for what to include and [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and proposing changes.
+Use [GitHub issues](https://github.com/ldocallaghan/BoreTHM/issues) for questions and problem reports. See [SUPPORT.md](https://github.com/ldocallaghan/BoreTHM/blob/main/SUPPORT.md) for what to include and [CONTRIBUTING.md](https://github.com/ldocallaghan/BoreTHM/blob/main/CONTRIBUTING.md) for development setup and proposing changes.
 
 ## Licence
 
-The code in `src/`, `scripts/`, `tools/`, `tests/` and `examples/` is released under the [Apache License 2.0](LICENSE). The documentation, figures, results and summary PDF are released under [CC BY 4.0](LICENSE-docs). Data in `src/borethm/data/` and `benchmarks/data/` keep their source licences, as recorded in their data guides and in [NOTICE](NOTICE). Releases up to v1.3.4 were published under the MIT licence.
+The code in `src/`, `scripts/`, `tools/`, `tests/` and `examples/` is released under the [Apache License 2.0](https://github.com/ldocallaghan/BoreTHM/blob/main/LICENSE). The documentation, figures, results and summary PDF are released under [CC BY 4.0](https://github.com/ldocallaghan/BoreTHM/blob/main/LICENSE-docs). Data in `src/borethm/data/` and `benchmarks/data/` keep their source licences, as recorded in their data guides and in [NOTICE](https://github.com/ldocallaghan/BoreTHM/blob/main/NOTICE). Releases up to v1.3.4 were published under the MIT licence.

@@ -1,7 +1,8 @@
 """Check local Markdown links without requiring a particular release version.
 
-The path and heading checks are extracted from verify_v135_docs.py. Historical
-release records and archived reviews retain the paths used at their tags.
+Checks relative links and absolute GitHub links to this repository's main
+branch against the working tree. Archived reviews and historical release
+records retain the paths used at their tags.
 """
 from collections import Counter
 from pathlib import Path
@@ -9,13 +10,15 @@ import re
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-HISTORICAL_RELEASES = frozenset(('v1.3.6.md',))
+HISTORICAL_RELEASES = frozenset(('v1.3.6.md', 'v1.4.0.md'))
 
 
 def reader_documents(root=ROOT):
     root = Path(root)
-    documents = [root / name for name in ('README.md', 'CONTRIBUTING.md', 'SUPPORT.md')]
+    documents = [root / name for name in ('README.md', 'CONTRIBUTING.md', 'SUPPORT.md', 'CHANGELOG.md', 'scripts/README.md')]
     documents.extend(sorted((root / 'benchmarks').rglob('*.md')))
+    documents.extend(sorted((root / 'src/borethm/data').rglob('*.md')))
+    documents.extend(sorted((root / '.github').rglob('*.md')))
     for path in sorted((root / 'docs').rglob('*.md')):
         relative = path.relative_to(root / 'docs')
         if relative.parts[0] == 'archive':
@@ -44,8 +47,9 @@ def headings(path):
     return anchors
 
 
-def check_documents(documents):
-    """Return missing local paths or heading anchors as readable messages."""
+def check_documents(documents, root=ROOT):
+    """Return missing local or default-branch repository paths and anchors."""
+    root = Path(root).resolve()
     errors = []
     for doc in map(Path, documents):
         text = doc.read_text(encoding='utf-8')
@@ -57,8 +61,22 @@ def check_documents(documents):
                     else destination.split(' "', 1)[0])
             parsed = urlsplit(link)
             if parsed.scheme or parsed.netloc:
-                continue
-            target = doc.parent / unquote(parsed.path) if parsed.path else doc
+                parts = unquote(parsed.path).strip('/').split('/')
+                repository = [part.casefold() for part in parts[:2]]
+                if (parsed.scheme not in ('http', 'https') or parsed.hostname != 'github.com'
+                        or repository != ['ldocallaghan', 'borethm']):
+                    continue
+                if len(parts) == 2:
+                    target = root / 'README.md'
+                elif len(parts) >= 4 and parts[2] in ('blob', 'tree') and parts[3] == 'main':
+                    target = root.joinpath(*parts[4:])
+                    if not target.resolve().is_relative_to(root):
+                        errors.append(f'{doc}: {link}: path outside repository')
+                        continue
+                else:
+                    continue
+            else:
+                target = doc.parent / unquote(parsed.path) if parsed.path else doc
             if not target.exists():
                 errors.append(f'{doc}: {link}: missing path')
             elif parsed.fragment and target.suffix.lower() == '.md':
@@ -72,7 +90,7 @@ def main():
     errors = check_documents(documents)
     if errors:
         raise SystemExit('\n'.join(errors))
-    print(f'Checked relative links in {len(documents)} Markdown files.')
+    print(f'Checked local and main-branch repository links in {len(documents)} Markdown files.')
 
 
 if __name__ == '__main__':

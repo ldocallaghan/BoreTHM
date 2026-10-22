@@ -17,6 +17,7 @@ from borethm import site_evaluation as se
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = '1.0'
+GUIDE_RELEASE = 'v1.4.1'
 INPUT_COMMIT = '7ae63cf59e198b7af573282f2aad57d4b40e5a05'
 CASES = {
     'ut-austin': ('benchmark_utaustin.json', 'benchmark_utaustin'),
@@ -154,7 +155,7 @@ def build_files(root=ROOT):
         content = (root / source).read_bytes()
         old_path = source.replace('src/borethm/data/', 'data/')
         put(target, content, dict(kind='copy', path=source,
-            source_release=('v1.4.0' if source.startswith('src/borethm/data/')
+            source_release=(GUIDE_RELEASE if source.startswith('src/borethm/data/')
                             and source.endswith('.md') else 'v1.3.6'),
             original_path=old_path, licence=licence,
             sha256=hashlib.sha256(content).hexdigest()))

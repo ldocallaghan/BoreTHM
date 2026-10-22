@@ -1,6 +1,51 @@
 # Design comparisons at Soultz and United Downs
 
-No evaluated single-lever setting or evaluated pair made either deep-site programme pass. These are NO-GO results for this programme and these assumptions. Only one pair per site was evaluated; sampled continuous searches do not establish a complete operating envelope. The IDs L1-L8 identify the saved design interventions. L7 identifies the breakout formation-delay experiment, which varies the assumed time between rock exposure and breakout formation.
+No evaluated individual design change or evaluated pair made either deep-site programme pass. The comparisons apply to the specified programmes and inputs. Only one pair per site was evaluated; sampled continuous searches do not establish a complete operating envelope. Each table names the intervention alongside the identifier used in the saved results, L1 to L8. The breakout formation-delay experiment, L7, varies the assumed time between rock exposure and breakout formation.
+
+## Reference programmes
+
+At Soultz, eight of nine selected stress/strength cases have an open target drilling interval; at United Downs, two of four do. Both complete programmes remain **NO-GO** because no mud density satisfies the pressure limits throughout the evaluated hole, and tool-temperature limits are exceeded.
+
+### Target-depth cases
+
+UCS is unconfined compressive strength; SHmax is maximum horizontal stress. Need and limit are static-column SG-equivalent values at the target. They differ from the surface mud densities a programme would prescribe. The saved target stability-cycle verdict also checks connections and the trip; it excludes separate whole-hole, tool and equipment gates. Each site's reference thermal/hydraulic solution is reused across cases without a fresh coupled evaluation for each case. An open interval does not prove the saved attempted fluid lies inside it.
+
+| Case | UCS, MPa | Drilling need / limit, SG-equivalent | Target stability-cycle verdict |
+|---|---:|---|---|
+| Soultz: SHmax lower bound (0.90 Sv) | 100 | 1.230 / 1.296 | CONDITIONAL |
+| Soultz: SHmax lower bound (0.90 Sv) | 115 | 1.209 / 1.296 | CONDITIONAL |
+| Soultz: SHmax lower bound (0.90 Sv) | 130 | 1.189 / 1.296 | CONDITIONAL |
+| Soultz: SHmax mid-range | 100 | 1.271 / 1.296 | CONDITIONAL |
+| Soultz: SHmax mid-range | 115 | 1.251 / 1.296 | CONDITIONAL |
+| Soultz: SHmax mid-range | 130 | 1.230 / 1.296 | CONDITIONAL |
+| Soultz: SHmax upper bound (1.05 Sv) | 100 | 1.313 / 1.296 | NO-GO |
+| Soultz: SHmax upper bound (1.05 Sv) | 115 | 1.292 / 1.296 | CONDITIONAL |
+| Soultz: SHmax upper bound (1.05 Sv) | 130 | 1.272 / 1.296 | CONDITIONAL |
+| United Downs: intact, 0 K | 203 | 1.169 / 1.220 | CONDITIONAL |
+| United Downs: intact, 40 K | 172 | 1.205 / 1.220 | CONDITIONAL |
+| United Downs: weak zones, 0 K | 147 | 1.234 / 1.220 | NO-GO |
+| United Downs: weak zones, 40 K | 118 | 1.267 / 1.220 | NO-GO |
+
+Soultz target 10.70 km; United Downs target 12.86 km. Sv is vertical stress. United Downs retains the existing 0 K / 40 K strength-calibration cases; these labels do not specify a newly applied cooling intervention. These 13 selected scenarios are not samples from a probability distribution. Eight of nine and two of four count the cases with an open target drilling interval. They do not estimate a probability of successful drilling. These are the zero-delay reference programmes.
+
+### Independent programme failures
+
+The bounds below combine the pressure constraints across the evaluated depths, states and cases. They are expressed as surface SG at 20 °C; width is upper minus lower. A negative width means the required minimum density exceeds the permitted maximum. Both sites remain **NO-GO**.
+
+| Site and state | Lower / upper, surface SG | Width, SG |
+|---|---|---:|
+| Soultz drilling | 1.37892 / 1.31256 | -0.06637 |
+| Soultz trip | 1.44362 / 1.36461 | -0.07901 |
+| United Downs drilling | 1.33132 / 1.28519 | -0.04613 |
+| United Downs trip | 1.40134 / 1.36503 | -0.03631 |
+
+**Tool peaks, drilling / connection / best attempted run-in:** Soultz: 197.0 / 197.3 / 201.2 °C; United Downs: 205.7 / 206.1 / 224.5 °C. The limit is 200 °C. Best attempted means the lowest peak among the schedules searched. A wider search could find a lower one. Soultz's reference FORGE-practice run-in reaches 214.5 °C, separately from the 201.2 °C search result.
+
+Reference-practice coating run-in maxima are 274.3 °C at Soultz and 287.4 °C at United Downs, against the stated 204 °C rating. Both retain **INDETERMINATE qualification**. The coating histories are not necessarily those of the best attempted tool schedule.
+
+Soultz's 0.017 SG-equivalent target drilling deficit and 1.2 °C tool excess are local facts. They do not measure how close the entire programme is to passing: incompatible density requirements elsewhere in the hole and coating qualification remain independent issues.
+
+The [Soultz reference](../../results/v1.3.4/ci/38186784798-1/reference/soultz.json) and [United Downs reference](../../results/v1.3.4/ci/38186784798-1/reference/united-downs.json) contain the target cases. The pressure-window and equipment checks are recorded in the matching reference-pipe trials for [Soultz](../../results/v1.3.4/ci/38186784798-1/levers/soultz/L4/summary.json) and [United Downs](../../results/v1.3.4/ci/38186784798-1/levers/united-downs/L4/summary.json), identified by `pipe="TK-Drakon coated"`.
 
 ## Evaluation and search
 
@@ -14,7 +59,7 @@ L1, L6 and L8 are operating practice. L2 is well design. L3 to L5 concern equipm
 
 In the tables, D and T mean drilling and trip. Window widths are upper minus lower in surface SG; a negative width is closed. The fluid columns show the actual simulated weights and the lower-bound demands. A closed window has no valid prescription even when a numerical lower-bound weight is listed. The selected row is the changed setting with the largest narrower-window width among converged, refined trials. L5 uses its refined coating threshold, and Soultz L8 uses its refined bit-only flow threshold. Full trial histories and every setting are linked in each row.
 
-Tool run-in peaks report the best stage schedule attempted. When no schedule passes, the native coating check uses its FORGE-practice fallback. The JSON retains both the best attempted tool peak and the practice peak, together with the coating history's maxima and time above rating.
+Tool run-in peaks report the best stage schedule attempted. When no schedule passes, the coating check uses the reference FORGE-practice schedule. The JSON retains both the best attempted tool peak and the practice peak, together with the coating history's maxima and time above rating.
 
 Empty MPD density families retain finite diagnostic gaps in the JSON. Their negative widths identify a failed intersection; their magnitudes do not give a feasible operating margin. Pair ranking excludes MPD runs with unachievable control. Higher-pressure MPD settings with unsettled depth refinement remain INDETERMINATE.
 
@@ -22,7 +67,7 @@ Empty MPD density families retain finite diagnostic gaps in the JSON. Their nega
 
 Where an upper bound is the same in every stress and strength case, the tables name the first case. In the rows listed here the case named for the upper bound does not set it alone: at Soultz, L2 to L8 and the L2 + L4 pair; at United Downs, L2 to L8 and the L3 + L7 pair. The L1 trials keep no bounds for each case, so their rows are not included.
 
-| Lever | Reopens / minimum | Selected evaluated setting | Binding constraints | Verdict and fluid evaluation | Availability |
+| Intervention | Reopens / minimum | Selected evaluated setting | Binding constraints | Verdict and fluid evaluation | Availability |
 |---|---|---|---|---|---|
 | L1 constant-BHP MPD | No; none found | BHP 141.575 MPa; [trials](../../results/levers/soultz/L1/summary.json) | trip: lower trip 10700 m (SHmax lower bound (0.90 Sv), lab UCS 100); upper trip 10700 m (SHmax lower bound (0.90 Sv), lab UCS 100). Other failures: drilling_fluid, trip_fluid, wall stability, MPD pressure control / working-pressure rating | NO-GO; D/T widths -0.00051/-0.00249; simulated 1.35947/1.35947 SG; demands 1.35892/1.35892 SG; tool D/connection/run-in 196.15/196.47/197.52 C | Available practice; thermal qualification unknown [1,2] |
 | L2 deeper shoe | No; none found | shoe 10200 m; [trials](../../results/levers/soultz/L2/summary.json) | drilling: lower connection 10700 m (SHmax upper bound (1.05 Sv), lab UCS 100); upper drilling 10700 m (SHmax lower bound (0.90 Sv), lab UCS 100). Other failures: tool, drilling_fluid, wall stability | NO-GO; D/T widths -0.01603/+0.00137; simulated 1.37987/1.41110 SG; demands 1.37987/1.41107 SG; tool D/connection/run-in 198.06/198.39/202.84 C | Available casing practice; this geometry unqualified [8] |
@@ -35,11 +80,11 @@ Where an upper bound is the same in every stress and strength case, the tables n
 
 The selected pair is L2 + L4. Its settings are pipe=dual-wall, shoe_m=10200.0. NO-GO; D/T widths -0.00949/+0.00839; simulated 1.35149/1.38580 SG; demands 1.35141/1.38568 SG; tool D/connection/run-in 79.86/80.27/124.45 C. drilling: lower connection 10550 m (SHmax upper bound (1.05 Sv), lab UCS 100); upper drilling 10700 m (SHmax lower bound (0.90 Sv), lab UCS 100). Other failures: pump limit, rig capacity, drilling_fluid, wall stability.
 
-[Pair and ranking evidence](../../results/levers/soultz/PAIR-L2-L4/summary.json). Pair selection ranks the increase in the narrower common pressure-window width in SG. It excludes unconverged or unrefined runs and MPD runs with unachievable control. It keeps other physical gate failures visible. There is one pair evaluation per site; its settings are taken from the single-lever trials and are not jointly optimised.
+[Pair and ranking evidence](../../results/levers/soultz/PAIR-L2-L4/summary.json). Pair selection ranks the increase in the narrower common pressure-window width in SG. It excludes unconverged or unrefined runs and MPD runs with unachievable control. It keeps other physical gate failures visible. There is one pair evaluation per site; its settings are taken from the individual-intervention trials and are not jointly optimised.
 
 ### Settings evaluated
 
-| Lever | Settings |
+| Intervention | Settings |
 |---|---|
 | L1 | BHP 139.747 MPa; BHP 141.575 MPa; BHP 143.404 MPa; BHP 140.683 MPa; BHP 140.739 MPa; BHP 140.741 MPa |
 | L2 | shoe 4000 m; shoe 7100 m; shoe 10200 m |
@@ -83,7 +128,7 @@ The 5 L/s trial failed the selected circulation solve. Its downstream gates are 
 
 ## United Downs: NO-GO for this programme and these assumptions
 
-| Lever | Reopens / minimum | Selected evaluated setting | Binding constraints | Verdict and fluid evaluation | Availability |
+| Intervention | Reopens / minimum | Selected evaluated setting | Binding constraints | Verdict and fluid evaluation | Availability |
 |---|---|---|---|---|---|
 | L1 constant-BHP MPD | No; none found | BHP 164.453 MPa; [trials](../../results/levers/united-downs/L1/summary.json) | trip: lower trip 12857 m (Reinecker et al. (2021), intact, 0 K); upper trip 12857 m (Reinecker et al. (2021), intact, 0 K). Other failures: tool, drilling_fluid, trip_fluid, wall stability, MPD pressure control / working-pressure rating | NO-GO; D/T widths -0.00025/-0.00348; simulated 1.27747/1.27747 SG; demands 1.27773/1.27773 SG; tool D/connection/run-in 203.00/203.34/217.95 C | Available practice; thermal qualification unknown [1,2] |
 | L2 deeper shoe | No; none found | shoe 12357 m; [trials](../../results/levers/united-downs/L2/summary.json) | drilling: lower connection 12857 m (Reinecker et al. (2021), weak zones, 40 K); upper drilling 12857 m (Reinecker et al. (2021), intact, 0 K). Other failures: tool, drilling_fluid, trip_fluid, wall stability | NO-GO; D/T widths -0.04534/-0.00282; simulated 1.33197/1.36840 SG; demands 1.33222/1.36865 SG; tool D/connection/run-in 206.72/207.08/224.25 C | Available casing practice; this geometry unqualified [8] |
@@ -96,11 +141,11 @@ The 5 L/s trial failed the selected circulation solve. Its downstream gates are 
 
 The selected pair is L3 + L7. Its settings are pv_fraction=0.5158661751400286, form_h=1.0. NO-GO; D/T widths +0.10196/-0.03788; simulated 1.19960/1.39792 SG; demands 1.19955/1.39793 SG; tool D/connection/run-in 198.33/198.65/208.79 C. trip: lower trip 12857 m (Reinecker et al. (2021), weak zones, 40 K); upper trip 12857 m (Reinecker et al. (2021), intact, 0 K). Other failures: tool, trip_fluid, wall stability.
 
-[Pair and ranking evidence](../../results/levers/united-downs/PAIR-L3-L7/summary.json). Pair selection ranks the increase in the narrower common pressure-window width in SG. It excludes unconverged or unrefined runs and MPD runs with unachievable control. It keeps other physical gate failures visible. There is one pair evaluation per site; its settings are taken from the single-lever trials and are not jointly optimised.
+[Pair and ranking evidence](../../results/levers/united-downs/PAIR-L3-L7/summary.json). Pair selection ranks the increase in the narrower common pressure-window width in SG. It excludes unconverged or unrefined runs and MPD runs with unachievable control. It keeps other physical gate failures visible. There is one pair evaluation per site; its settings are taken from the individual-intervention trials and are not jointly optimised.
 
 ### Settings evaluated
 
-| Lever | Settings |
+| Intervention | Settings |
 |---|---|
 | L1 | BHP 162.380 MPa; BHP 164.453 MPa; BHP 166.526 MPa; BHP 163.761 MPa; BHP 163.769 MPa; BHP 163.770 MPa |
 | L2 | shoe 4000 m; shoe 8179 m; shoe 12357 m |

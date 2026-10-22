@@ -75,16 +75,20 @@ def _width_threshold(SHmax, Shmin, Pw, Pp, T_wall, UCS, dsigma_T):
 
 
 def breakout_width(SHmax, Shmin, Pw, Pp, T_wall, UCS=None, dsigma_T=0.0):
-    """Width [deg] of one breakout lobe, centred on the Shmin azimuth.
+    """Width [degrees] of one breakout lobe, centred on the Shmin azimuth.
 
-    Closed form of the effective-stress Mohr-Coulomb criterion (see
-    _width_threshold) around the circumference: the lobe spans
-    |phi| < arccos(-a/d) / 2, so its full width is arccos(-a/d). 0 when the
-    wall holds everywhere, 180 when it fails all round (two lobes meeting).
+    Uses the effective-stress Mohr-Coulomb criterion around the wall.
+    Let strength be the temperature-adjusted UCS,
+    K = (1 + sin(phi))/(1 - sin(phi)) with phi = 35 degrees,
+    a = SHmax + Shmin - Pw + dsigma_T - Pp - strength - K (Pw - Pp),
+    and d = 2 (SHmax - Shmin). The full lobe width is arccos(-a/d),
+    clipped to 0 when no wall failure occurs and 180 when failure extends
+    all round. Equal horizontal stresses give 0 or 180 degrees directly.
 
     Argument order is SHmax then Shmin, opposite to breakout_check and
     mud_window. Stresses, Pw, Pp, UCS and dsigma_T are Pa; T_wall is degrees C.
-    Returns the width in degrees; UCS=None uses the model's intact strength.
+    Returns the width in degrees; UCS=None uses the reference strength
+    of 200e6 Pa at 25 degrees C.
     """
     a, d = _width_threshold(SHmax, Shmin, Pw, Pp, T_wall, UCS, dsigma_T)
     if d < 0.0:

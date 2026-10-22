@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.1 (22 October 2026)
+
+Clarifies the difference between target-depth stability and whole-hole fluid windows, and identifies breakout formation timing as a model assumption. Rewrites the user guides and summary, corrects scientific explanations and data notes, and makes the API reference self-contained. README links work from PyPI, and documentation checks cover the packaged data guides and absolute repository links.
+
+Calculations, numerical inputs, public signatures and saved reference results are unchanged. Benchmark dataset 1.0 has updated guide text and provenance; its numerical content and tolerances are unchanged. See the [release record](docs/releases/v1.4.1.md) for verification.
+
 ## v1.4.0 (22 October 2026)
 
 Makes BoreTHM an installable package, `borethm`, with a documented public Python interface and command-line tools. The data move into the package, and the water-property cache uses a user cache directory. Adds a benchmark dataset of the reference cases, contribution and support guides, and a publishing workflow.

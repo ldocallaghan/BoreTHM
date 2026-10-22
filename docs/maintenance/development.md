@@ -17,3 +17,7 @@ The deferred work has explicit triggers:
 **H-01 trigger met; not yet implemented.** Soultz L2's 0.00137 SG trip width and its L2+L4 pair's 0.00949 SG drilling deficit meet the proximity trigger. The evaluated programmes still fail other gates, and no operating range is claimed. Revisit before claiming a near-threshold programme is feasible, or when new data make the timing approximation decision-relevant. Coolant delivery (H-02) and fluid displacement (W-03) retain their distinct triggers above.
 
 Near-bit pre-cooling and the FORGE image-log follow-up can be justified by specialist interest, usable observations or a discriminating hypothesis.
+
+## FORGE image-log follow-up
+
+The [16B image-log inventory](../../src/borethm/data/forge16b/image_logs_inventory.md) identifies repeated coverage suitable for investigating breakout-width changes. The proposed follow-up is to obtain matched image intervals, establish logging direction and interpretation provenance, and compare widths at the same depths while accounting for the different circulation histories. Much of the overlap is in deviated hole, so predicting widths would require the corresponding stress calculation. The inventory is complete; the paired-width analysis has not been performed. This work requires a separate specification.

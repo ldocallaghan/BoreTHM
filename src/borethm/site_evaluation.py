@@ -159,16 +159,25 @@ class SiteProfile:
     """Site inputs for evaluate, with temperature and stress profiles.
 
     geotherm maps depth [m] to rock temperature [degrees C]; target_depth is
-    m and target_T is degrees C. Stress and fluid pressure gradients are
-    Pa/m; K0_min and SHmax_over_Sv are dimensionless stress ratios.
-    k_rock is W/(m K); E_rock and UCS are Pa; T_inj is degrees C.
+    m and target_T is degrees C. Sv is vertical stress; Shmin and SHmax are
+    minimum and maximum horizontal stress. Stress and fluid pressure
+    gradients are Pa/m; K0_min and SHmax_over_Sv are dimensionless ratios.
+    k_rock is W/(m K); E_rock and UCS are Pa; T_inj is degrees C. UCS is the
+    uniaxial compressive strength supplied at 25 degrees C.
     stress_cases contains StressProfile objects; strength_cases contains
     (label, UCS [Pa]) pairs. data_basis maps input names to (basis, source).
-    temperature_data_to and optional replacement target depths are m.
-    mu is a dimensionless friction coefficient; coupled enables coupling to
-    the site's circulation. Construct a profile, then call validate_site.
-    Methods target() and temperature() give the effective depth [m] and
-    temperature [degrees C], including a replacement geotherm when supplied.
+    validate_site documents accepted ranges and provenance labels.
+
+    geotherm_v11 and target_depth_v11 optionally replace geotherm and
+    target_depth in current evaluations; their names are compatibility
+    fields. temperature_data_to is the deepest measured temperature depth
+    [m], or None. mu is a dimensionless friction coefficient. coupled
+    enables the site's stiffness in the coupled thermal-stress calculation.
+    Construct a profile, then call validate_site.
+
+    The target() method returns the effective depth [m]; temperature()
+    returns the effective geotherm callable. Passing v10=True selects the
+    original profile for historical evaluation modes.
     """
     name: str
     geotherm: callable          # z[m] -> T_rock[degC]
@@ -265,21 +274,37 @@ REGIME_ORDER = {"normal": ("Sv", "SHmax", "Shmin"), "strike-slip": ("SHmax", "Sv
 
 
 def validate_site(site):
-    """Check a site's inputs before an evaluation. Raises ValueError listing
-    every problem found; returns warnings (inputs without a stated source).
+    """Check a SiteProfile before evaluation; return a list of warning strings.
 
-      * every scalar input within INPUT_RANGES, and every strength case's UCS;
-      * temperature rising with depth down the open hole, from the casing
-        shoe to the target, and reaching target_T there within 5 C (a fall
-        above the shoe, such as a cold aquifer, is a warning);
-      * in every stress case, at the target and at each 500 m above it to
-        the casing shoe (the open hole, where the stresses are used): the
-        stresses positive, SHmax at least Shmin, Shmin above the pore
-        pressure, and the order of the stated regime;
-      * every data-basis entry with a basis from BASES and a source.
+    Invalid values raise ValueError. Scalar ranges are inclusive:
 
-    Input is a SiteProfile in the units documented on that class. Returns a
-    list of warning strings; invalid inputs raise ValueError.
+    | Field | Accepted range | Unit |
+    |---|---|---|
+    | effective target depth | 500 to 20,000 | m |
+    | target_T | 50 to 600 | degrees C |
+    | k_rock | 0.5 to 7 | W/(m K) |
+    | E_rock | 5e9 to 150e9 | Pa |
+    | UCS and every strength-case UCS | 10e6 to 500e6 | Pa |
+    | T_inj | 0 to 100 | degrees C |
+    | mu | 0.2 to 1.5 | dimensionless |
+    | rho_fluid_grad | 8,000 to 20,000 | Pa/m |
+    | Sv_grad | 15,000 to 35,000 | Pa/m |
+
+    The geotherm must be finite, rise through the sampled open hole and
+    reach target_T within 5 degrees C at the effective target depth. A
+    non-rising interval above the casing shoe produces a warning. Stress
+    profiles are sampled from the target to the shoe at 500 m intervals,
+    including the shoe: stresses must be finite and positive, SHmax must
+    be at least Shmin, and pore pressure must be below Shmin. If a regime
+    is supplied, its order must be normal (Sv >= SHmax >= Shmin),
+    strike-slip (SHmax >= Sv >= Shmin), or reverse (SHmax >= Shmin >= Sv).
+
+    Each data_basis value is a (basis, source) pair. Accepted basis labels
+    are: calibrated, measured, measured range, measured (lab), log-derived,
+    checked, regime bounds, extrapolated, regional, assumed, not reproduced,
+    unsourced, none. Unrecognised labels raise ValueError. Missing sources
+    or missing required provenance entries produce warnings; these checks
+    do not verify the cited measurement or publication.
     """
     errs, warns = [], []
     for k, (lo, hi, unit) in INPUT_RANGES.items():
@@ -535,18 +560,22 @@ def breakout_v10(Shmin, SHmax, P_fluid, T_rock, T_wall=None, UCS=None):
 def breakout_eff(Shmin, SHmax, Pw, Pp, T_rock, T_wall=None, UCS=None, dsigma_T=0.0):
     """Effective-stress breakout check at the Shmin azimuth.
 
-    Fails when sigma_theta - Pp > sigma_cm(T_wall, UCS) + KMC (Pw - Pp): the
-    Kirsch hoop stress from model5.hoop_stress, Mohr-Coulomb in effective
-    stress, with no filter-cake credit beyond Pw - Pp. With Pp = 0 and
-    dsigma_T = 0 it is breakout_v10 exactly. Same keys as breakout_v10, with
-    sigma_theta the total hoop stress and mc_cold / mc_hot the total-stress
-    limits (Pp plus the effective strength), so the two stay comparable.
+    Checks whether total hoop stress minus pore pressure exceeds the
+    Mohr-Coulomb strength at T_wall, including fluid support Pw - Pp.
+    The criterion is sigma_theta - Pp > strength + K (Pw - Pp), where
+    strength is the temperature-adjusted UCS and
+    K = (1 + sin(phi))/(1 - sin(phi)) with phi = 35 degrees.
+    No additional filter-cake support is assumed.
 
     Arguments start with Shmin then SHmax. All stresses, pressures, UCS
     and dsigma_T are Pa; T_rock and T_wall are degrees C. Returns a dictionary:
     sigma_theta, mc_hot, mc_cold and P_need [Pa], overbalance_MPa [MPa],
-    dimensionless over_hydro, and breaks and frac_limited flags. UCS=None
-    uses the model's intact strength; T_wall=None uses the existing wall cap.
+    dimensionless over_hydro, and breaks and frac_limited flags. sigma_theta
+    is total hoop stress; mc_hot and mc_cold are total-stress limits at the
+    rock and wall temperatures, each including pore pressure. P_need is
+    the pressure required to prevent failure at this azimuth; frac_limited
+    compares it with Shmin. UCS=None uses the reference strength of 200e6 Pa at 25 degrees C;
+    T_wall=None uses min(T_rock, 200 degrees C).
     """
     if T_wall is None:
         T_wall = min(T_rock, T_WALL_CAP)
@@ -576,38 +605,37 @@ def describe_width(width_deg):
 def mud_window(Shmin, SHmax, Pp, z, Pw_hydro, T_rock, T_wall=None, UCS=None,
                dsigma_T=0.0, W_max=C.BREAKOUT_W_MAX_DEG, margin_SG=C.MUD_MARGIN_SG,
                T0=C.WALL_T0, ecd_SG=0.0, P_surface=0.0):
-    """Mud window and drillability verdict, judged on breakout width.
+    """Local mud window and verdict for the supplied wall state.
 
-    The two bounds are checked under the conditions that set them. Breakout,
-    the lower bound, at static mud weight: with the pumps off at a connection,
-    for minutes while the wall is still cool, it sees only the static column.
-    A trip takes the hole out of circulation for a day or more at these
-    depths, and the wall reheats towards rock temperature; that is closer to
-    the uncooled sensitivity, and reheating is not modelled. Fracture, the
-    upper bound, at circulating pressure: the static mud plus ecd_SG, the
-    annular friction loss as an equivalent density, must stay below Shmin less
-    the margin. ecd_SG = 0 is the static check on both.
+    This helper is stateless. Supply T_wall and dsigma_T for the state being
+    checked; it does not advance time or calculate wall reheating. The
+    programme evaluator evaluate includes separate wall histories and
+    checks connections and trips as well as drilling.
 
-    Lower bound: the lightest mud keeping the breakout lobe at or below W_max,
-    and never below pore pressure (no underbalanced drilling). Upper bound:
-    Shmin less margin_SG of mud (lost returns). Verdict: GO if the lobe is
-    within W_max at hydrostatic mud, CONDITIONAL if a mud weight inside the
-    window gets it there, NO-GO if none does. Tensile-fracture initiation at
-    the wall (effective 3 Shmin - SHmax - Pw - Pp + dsigma_T < -T0) is
-    reported and does not bound the window: UD-1 logged tensile fractures and
-    still reached TD, so initiation alone doesn't stop a well.
+    The lower bound is the static pressure needed to keep a breakout lobe
+    at or below W_max, and cannot be below pore pressure. The upper bound
+    is Shmin - (margin_SG + ecd_SG) * 1000 * g * z, in Pa.
+    ecd_SG represents annular friction as an SG equivalent; set it to zero
+    for a static upper-bound check. GO means the hydrostatic pressure
+    passes the width and upper-bound checks; CONDITIONAL means another
+    pressure in the local window passes; NO-GO means the bounds cross.
 
-    The SG figures are equivalent static densities, (P - P_surface) / (1000 g z),
-    with P_surface the wellhead pressure.
+    Tensile-fracture initiation is reported separately and does not set
+    these window bounds. The diagnostic uses effective
+    3 Shmin - SHmax - Pw - Pp + dsigma_T < -T0. Initiation alone is not a
+    prediction that the complete well cannot be drilled.
 
-    Arguments start with Shmin then SHmax. Stresses and pressures, UCS,
-    dsigma_T and tensile strength T0 are Pa; z is true vertical depth [m];
-    T_rock and T_wall are degrees C. W_max is degrees; margin_SG and ecd_SG
-    are SG equivalents. Returns a dictionary with SG_lo, SG_hi, SG_hydro,
-    Pw_lo, Pw_hi and Pw_mud [pressures in Pa], widths [degrees],
-    verdict and tensile diagnostics. An infeasible Pw_mud is None.
-    These bounds describe the supplied local state. Whole-programme surface
-    density bounds from evaluate account for the fluid's temperature profile.
+    Arguments start with Shmin then SHmax. All stresses, pressures, UCS,
+    dsigma_T and T0 are Pa; z is true vertical depth [m]. T_rock and T_wall
+    are degrees C. W_max is degrees; margin_SG and ecd_SG are SG
+    equivalents. T_wall=None uses min(T_rock, 200 degrees C). UCS=None uses the reference
+    strength of 200e6 Pa at 25 degrees C.
+
+    Returns SG_lo, SG_hi and SG_hydro as (P - P_surface)/(1000 g z), where
+    P_surface is wellhead pressure. Pw_lo, Pw_hi and Pw_mud are Pa; widths
+    are degrees. Includes verdict and tensile diagnostics. An infeasible
+    Pw_mud is None. These local SG-equivalent bounds differ from the
+    whole-programme surface-density bounds returned by evaluate.
     """
     if T_wall is None:
         T_wall = min(T_rock, T_WALL_CAP)
@@ -866,7 +894,8 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
 
     Site inputs use m, Pa, degrees C and SI thermal properties. Validate the
     profile first with validate_site. The default circulation='v1.3.4' uses
-    the corrected programme calculation. v10 selects the original model;
+    the whole-hole programme calculation. This calculation-mode identifier
+    is independent of the package version. v10 selects the original model;
     thermal enables wall cooling and coupled overrides the site's coupling.
     Earlier circulation modes remain available for reproducing old releases.
 

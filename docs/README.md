@@ -7,7 +7,7 @@ Choose a path based on what you want to do. Installation and the first command a
 - [Evaluate a new site](guides/new-site.md): inputs, sources and the worked template.
 - [Interpret an assessment](guides/interpreting-results.md): status, density bounds and schedule identity.
 - [Python interface](api.md): public functions and classes, with units and the interface stability policy.
-- [Read the study summary](guides/summary.md): findings and questions for specialist discussion, also available as a [two-page PDF](../output/pdf/summary-v135.pdf).
+- [Read the study summary](guides/summary.md): findings and questions for specialist discussion, also available as a [two-page PDF](../output/pdf/summary.pdf).
 
 ## Understand the science
 

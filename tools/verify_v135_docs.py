@@ -1,6 +1,8 @@
-"""Offline checks of the README and summary tables against retained v1.3.4 evidence.
+"""Historical reader-document verification from before the v1.4.0 packaging.
 
-No model imports or coupled solves. Run: python tools/verify_v135_docs.py
+Retained as a development record. Its version and table assertions describe
+an earlier documentation layout and are not expected to pass on later releases.
+It is not run by current CI. Use tools/check_links.py for current link checks.
 """
 import hashlib
 import json

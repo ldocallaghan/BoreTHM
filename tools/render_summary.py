@@ -17,8 +17,8 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle, 
 from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / 'output/pdf/summary-v135.pdf'
-BASE = 'https://github.com/ldocallaghan/BoreTHM/blob/main/'
+OUTPUT = ROOT / 'output/pdf/summary.pdf'
+BASE = 'https://github.com/ldocallaghan/BoreTHM/'
 
 
 def font_files():
@@ -36,7 +36,8 @@ def markup(text):
         if '://' not in href:
             path, sep, anchor = href.partition('#')
             target = (ROOT / 'docs/guides' / path).resolve().relative_to(ROOT).as_posix()
-            href = BASE + target + (sep + anchor if sep else '')
+            kind = 'tree' if (ROOT / target).is_dir() else 'blob'
+            href = BASE + kind + '/main/' + target + (sep + anchor if sep else '')
         return f'<a href="{href}" color="#155b7a"><u>{label}</u></a>'
     text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', link, text)
     text = re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', text)
