@@ -1,5 +1,27 @@
 # Release checklist
 
+## v1.5.0
+
+- [x] Review the packaged TOML starter, generated site files and input checks.
+- [x] Review the five result readings and the updated user documentation.
+- [x] Add a strict documentation build and a release-triggered Pages workflow.
+- [x] Move the two saved-file breakout-timing tests into the fast suite.
+- [x] Check published values against retained evidence in the fast suite.
+- [x] Build and check the wheel and source distribution.
+- [x] Check a fresh wheel installation outside the checkout.
+- [x] Compare public names and signatures with v1.4.3, allowing the documented additions.
+- [x] Compare the five reference exports and preserve all saved numerical evidence.
+- [x] Pass the local fast suite, link checker and strict documentation build.
+- [ ] Pass the full physical suite on CI at the release candidate.
+- [ ] Review the complete diff and verified release checks before tagging.
+- [ ] Confirm the citation date against the actual tag date.
+- [ ] Tag v1.5.0 and publish the GitHub release.
+- [ ] Verify the PyPI installation, documentation website and Zenodo archive.
+
+See the [v1.5.0 release record](../releases/v1.5.0.md) for the checks and
+publication status. The citation date is prepared as 23 October 2026 and
+must match the actual tag date before publication.
+
 ## v1.4.0
 
 - [x] Move the models and data into the package without changing the calculation.

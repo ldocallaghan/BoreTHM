@@ -1,8 +1,33 @@
 # Changelog
 
-## Unreleased
+## v1.5.0 (23 October 2026)
 
-### Behaviour correction
+An installed package can now assess a new site from a TOML file.
+`borethm-new-site` creates a starter or copies a built-in site with `--from`;
+`borethm-evaluate --site-file` checks or evaluates it. The format describes
+temperature profiles and linear stress cases, including a stress rule for a
+known faulting regime. `load_site` and `layered_geotherm` join the public
+Python interface. Exported results can record the input file's path and
+SHA-256.
+
+Reports and JSON include an opening reading of the checks that determine
+the status. Documentation gains a searchable website and fast checks
+against retained evidence. Study reproduction commands write to a separate
+output folder. Calculations, numerical inputs and saved results for the
+built-in sites are unchanged.
+
+### Required site selection
+
+`borethm-evaluate` requires `--site` or `--site-file`. Calls without either
+option no longer select Soultz automatically.
+
+### TOML site template
+
+The packaged `templates/site_template.toml` replaces
+`examples/site_template.py`. Python users can still construct a
+`SiteProfile` and call `evaluate`.
+
+### Explicit coupling override
 
 `evaluate(..., coupled=False)` now switches coupling off even when the site's
 own flag is set. The default behaviour and built-in reference results are unchanged.
