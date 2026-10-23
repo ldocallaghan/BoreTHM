@@ -1,2 +1,7 @@
-# Dataset manifests describe exact bytes, including source line endings.
+# Use LF for source and generated text on every operating system.
+* text=auto eol=lf
+# Retained evidence keeps its original bytes, including source line endings.
 /benchmarks/** -text
+/results/** -text
+/tests/golden/** -text
+/src/borethm/data/** -text

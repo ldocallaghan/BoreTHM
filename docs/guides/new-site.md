@@ -29,7 +29,9 @@ borethm-new-site --from newberry mysite.toml
 | `pannonian` | A regional segment geotherm and a stress rule for a known faulting regime |
 | `newberry` | Temperature survey points, a fitted deep gradient and inputs derived from logs |
 
-The generated files reproduce the built-in sites exactly. They retain each
+The packaged files preserve snapshots of the built-in site inputs. Numerical
+fits recomputed on another platform can differ in their last floating-point
+digits. Loading a file preserves its supplied values. The files retain each
 site's provenance, including missing sources. The Soultz starter additionally
 identifies its conductivity and stiffness as assumed values.
 
