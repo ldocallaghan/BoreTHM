@@ -2,21 +2,25 @@
 import os
 import sys
 from dataclasses import replace
+from importlib.resources import as_file, files
 
 import numpy as np
 import pytest
 
 from borethm import site_evaluation as se
 
+from borethm import load_site
+from site_helpers import assert_sites_equal
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "examples"))
-from site_template import make_site   # noqa: E402
 
 
 def test_the_template_rebuilds_soultz():
-    s = make_site()
-    assert s == se.SOULTZ
+    with as_file(files('borethm').joinpath('templates/site_template.toml')) as path:
+        s = load_site(path)
+    assert_sites_equal(s, se.SOULTZ, allow_extra_basis=True)
     assert s.tier == "evidence-based"
-    se.validate_site(s)
+    assert se.validate_site(s) == []
 
 
 def test_a_unit_slip_is_caught():
@@ -81,7 +85,7 @@ def test_json_exports_the_effective_larderello_target():
 
 def test_malformed_template_has_a_clear_cli_error(monkeypatch, capsys):
     import new_site
-    monkeypatch.setattr(new_site, 'make_site', lambda: replace(se.SOULTZ, target_depth=10.7))
+    monkeypatch.setattr(new_site, 'load_site', lambda path: replace(se.SOULTZ, target_depth=10.7))
     monkeypatch.setattr(sys, 'argv', ['new_site.py', '--evaluate'])
     with pytest.raises(SystemExit) as error:
         new_site.main()

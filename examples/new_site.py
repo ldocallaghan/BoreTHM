@@ -6,21 +6,22 @@ validate it, evaluate it, and write the result as JSON.
     python examples/new_site.py --evaluate   # also evaluate (several minutes)
     python examples/new_site.py --evaluate --json soultz.json
 
-The template holds Soultz's inputs, so the site it builds is Soultz's, and
-with --evaluate its row of the site table is compared with the pinned one
-(tests/golden/v133_site_table.json).
+The packaged TOML template contains Soultz's inputs. With --evaluate,
+its row of the site table is compared with the reviewed reference
+(tests/golden/v134_site_table.json).
 """
 import argparse
 import json
 import os
 import sys
+from importlib.resources import as_file, files
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(HERE, '..', 'tests'))
 
-from borethm import comparative_sites as cs        # noqa: E402
 from borethm import site_evaluation as se          # noqa: E402
-from site_template import make_site   # noqa: E402
+from borethm import load_site                    # noqa: E402
+from site_helpers import assert_sites_equal      # noqa: E402
 
 GOLDEN = os.path.join(HERE, "..", "tests", "golden", "v134_site_table.json")
 
@@ -31,14 +32,17 @@ def main():
     ap.add_argument("--json", help="write the result to this JSON file")
     a = ap.parse_args()
 
-    site = make_site()
+    template = files('borethm').joinpath('templates/site_template.toml')
+    with as_file(template) as path:
+        site = load_site(path)
     try:
         for w in se.validate_site(site):
             print("warning:", w)
     except ValueError as error:
         ap.error(str(error))
     print(f"{site.name}: inputs valid; {site.tier}")
-    print("same inputs as the repository's Soultz:", site == se.SOULTZ)
+    assert_sites_equal(site, se.SOULTZ, allow_extra_basis=True)
+    print("same inputs as the repository's Soultz: True")
     if not (a.evaluate or a.json):
         return
     o = se.evaluate(site)
@@ -46,9 +50,10 @@ def main():
     if a.json:
         se.export_result(o, a.json)
         print(f"result written to {a.json}")
-    if site == se.SOULTZ and os.path.exists(GOLDEN):
+    if os.path.exists(GOLDEN):
         from borethm.studies.release_v134 import reference_row, assert_reviewed
-        pinned = json.load(open(GOLDEN))['sites']['soultz']
+        with open(GOLDEN, encoding='utf-8') as stream:
+            pinned = json.load(stream)['sites']['soultz']
         assert_reviewed(reference_row(se.result_dict(o)), pinned)
         print("the reviewed v1.3.4 Soultz row reproduced: True")
 

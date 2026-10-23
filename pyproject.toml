@@ -11,7 +11,7 @@ include = ["borethm", "borethm.studies"]
 namespaces = false
 
 [tool.setuptools.package-data]
-borethm = ["data/**/*.csv", "data/**/*.json", "data/**/*.md"]
+borethm = ["data/**/*.csv", "data/**/*.json", "data/**/*.md", "templates/*.toml"]
 
 [tool.setuptools.exclude-package-data]
 borethm = ["data/**/*.py", "data/**/raw/**"]

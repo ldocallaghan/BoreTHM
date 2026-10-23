@@ -2,6 +2,7 @@ global-exclude *
 include pyproject.toml MANIFEST.in README.md CITATION.cff CHANGELOG.md
 include LICENSE LICENSE-docs NOTICE
 recursive-include src/borethm *.py *.csv *.json *.md
+include src/borethm/templates/*.toml
 recursive-exclude src/borethm/data *.py
 prune src/borethm/data/forge16b/raw
 prune src/borethm/data/newberry/raw

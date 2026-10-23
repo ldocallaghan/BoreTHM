@@ -15,6 +15,8 @@ _EXPORTS = {
     'SiteProfile': ('site_evaluation', 'SiteProfile'),
     'StressProfile': ('site_evaluation', 'StressProfile'),
     'validate_site': ('site_evaluation', 'validate_site'),
+    'load_site': ('site_files', 'load_site'),
+    'layered_geotherm': ('site_evaluation', 'layered_geotherm'),
     'named_sites': ('site_evaluation', 'named_sites'),
     'find_site': ('site_evaluation', 'find_site'),
     'circulating_temperatures': ('_api', 'circulating_temperatures'),

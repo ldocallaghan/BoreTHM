@@ -3,22 +3,22 @@
 This guide takes a site from its inputs to a result in JSON. Install BoreTHM
 as described in the [getting-started guide](../../README.md#get-started).
 The [public Python interface](../api.md) provides `SiteProfile`,
-`StressProfile` and the evaluation functions. To use the worked scripts below,
+`StressProfile`, `load_site` and the evaluation functions. To use the worked example,
 clone the repository and follow the README's reference-calculation setup.
 
 ## 1. Copy the template
 
-[examples/site_template.py](../../examples/site_template.py) defines one site, as a `SiteProfile`, with every
+[site_template.toml](../../src/borethm/templates/site_template.toml) describes one site, with every
 field documented: its units, the range `validate_site` accepts, and where its
 value comes from. The values in the template are those of Soultz-sous-Forets,
-the reference case. Copy the file and replace each value with the site's own.
+the reference case. Copy the file as `mysite.toml` and replace each value with the site's own.
 
 The fields fall into four groups.
 
 - **Temperature.** A geotherm, any function from depth in metres to rock
   temperature in °C, and the target depth and temperature. For measured
-  points, supply an interpolation function and state how it extrapolates
-  below the deepest measurement. The geotherm must rise with depth through the open hole and give
+  points in a TOML file, use `form = "points"` with a `gradient_below` in °C/m;
+  `form = "segments"` gives piecewise linear gradients. The geotherm must rise with depth through the open hole and give
   the target temperature at the target depth within 5 °C.
 - **Stress.** One or more cases, each giving vertical stress Sv, minimum
   horizontal stress Shmin and maximum horizontal stress SHmax as linear
@@ -40,8 +40,7 @@ The fields fall into four groups.
   checked against a well at the site; otherwise it is reported as
   speculative, in a separate table. Sources for the conductivity and the
   modulus go under `conductivity` and `stiffness`. `validate_site` rejects
-  unrecognised basis labels; the accepted labels are listed below. The template uses internal helpers for its
-  Soultz reference inputs; those helpers are outside the public interface.
+  unrecognised basis labels; the accepted labels are listed below.
 
 ## Provenance basis labels
 
@@ -69,8 +68,13 @@ lists the numerical ranges and validation checks.
 
 ## 2. Validate the inputs
 
-```bash
-python examples/new_site.py
+```python
+from borethm import load_site, validate_site
+
+site = load_site("mysite.toml")
+for warning in validate_site(site):
+    print(warning)
+print(site.tier)
 ```
 
 `validate_site` raises an error listing every problem it finds: a value
@@ -81,19 +85,20 @@ input without a source and any temperature fall above the casing shoe.
 
 ## 3. Evaluate the site
 
-`examples/new_site.py` builds the site from the template, validates it and,
-with `--evaluate`, runs it:
+```python
+from borethm import evaluate, export_result, load_site
 
-The worked script imports `make_site` from `examples/site_template.py`. If you give your template copy another module name, update that import in your copy of `examples/new_site.py` before running it.
-
-```
-python examples/new_site.py --evaluate --json result.json
+result = evaluate(load_site("mysite.toml"))
+export_result(result, "result.json")
 ```
 
-Evaluations take several minutes. Weighted-fluid cases take longer because the fluid density is iterated with circulation and hydraulics. With the template unchanged, the
-script identifies the built-in Soultz inputs and checks the evaluated
-result against the saved reference. That comparison runs only when the
-template still matches Soultz. Your new site is evaluated using its own inputs.
+Evaluations take several minutes. Weighted-fluid cases take longer because the fluid density is iterated with circulation and hydraulics.
+
+From a source checkout, `python examples/new_site.py` validates the packaged
+Soultz template and compares its inputs with the built-in site. Add
+`--evaluate --json result.json` to evaluate that reference case and check it
+against the saved Soultz result. To assess your own edited file, use the
+Python calls above.
 
 To run one of the built-in sites from any directory after installing the package:
 

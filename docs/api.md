@@ -178,6 +178,48 @@ These checks catch unit slips and implausible inputs. Acceptance does
 not establish that every fluid state remains inside the water-property
 table's temperature and absolute-pressure limits.
 
+## load_site
+
+```python
+load_site(path)
+```
+
+Read a TOML site file and return its SiteProfile.
+
+path is a string or path-like object. Top-level keys use SiteProfile
+field names: depths are m, temperatures degrees C, stress and pressure
+gradients Pa/m, stress intercepts Pa gauge, strengths and Young's
+modulus Pa, and conductivity W/(m K). Ratios and friction coefficients are
+dimensionless. Optional keys retain SiteProfile's defaults.
+
+geotherm and optional geotherm_v11 are tables. A segments form gives
+[depth, temperature, gradient] rows in m, degrees C and degrees C/m;
+boundary='below' assigns a boundary depth to the segment starting there,
+and boundary='above' to the preceding segment. A points form gives
+[depth, temperature] rows and gradient_below in degrees C/m.
+
+stress_cases is an array of StressProfile tables, with z_data as two
+depths in m. Alternatively, a transitional stress_rule gives Sv_grad
+[Pa/m] and source, with optional Sv_int [Pa gauge], Pp_grad [Pa/m], mu
+and fractions [dimensionless]. Its defaults are transitional_bounds'
+defaults, including mu=0.8, independently of the site's own mu.
+strength_cases contains [label, UCS in Pa] pairs; data_basis maps input
+names to [basis, source] pairs. Arrays become the corresponding tuples.
+
+File, TOML and schema errors raise a one-line ValueError naming the
+file and key. This function parses data and executes no file content.
+Call validate_site on the returned profile to check physical ranges,
+temperature and stress consistency, and provenance labels and sources.
+
+## layered_geotherm
+
+```python
+layered_geotherm(points, gradient_below)
+```
+
+A geotherm from measured (depth [m], temperature [C]) points, linear
+between them, and extended below the deepest at gradient_below [C/m].
+
 ## named_sites
 
 ```python

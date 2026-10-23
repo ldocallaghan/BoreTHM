@@ -68,7 +68,7 @@ borethm-sites
 
 The first command evaluates one site; the second reports all five. Use `borethm-evaluate --help` for the command-line options.
 
-For a new site, follow the [site-input guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md) and, from a source checkout, copy [the documented template](https://github.com/ldocallaghan/BoreTHM/blob/main/examples/site_template.py). It records units and sources, and checks the inputs before evaluation. From the checkout root, the worked example can validate the template without running the full calculation:
+For a new site, follow the [site-input guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md) and copy [the TOML template](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/templates/site_template.toml). It records units and sources; `load_site` reads it and `validate_site` checks the inputs before evaluation. From the checkout root, the worked example checks the packaged Soultz template:
 
 ```bash
 python examples/new_site.py
