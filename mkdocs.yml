@@ -1,0 +1,58 @@
+site_name: BoreTHM
+site_description: Thermal and borehole-stability models for geothermal drilling
+site_url: https://ldocallaghan.github.io/BoreTHM/
+repo_url: https://github.com/ldocallaghan/BoreTHM
+edit_uri: ''
+docs_dir: docs
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+plugins:
+  - search
+markdown_extensions:
+  - tables
+  - fenced_code
+  - toc:
+      permalink: true
+exclude_docs: |
+  /archive/**
+hooks:
+  - tools/docs_links.py
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+  links:
+    not_found: warn
+    unrecognized_links: warn
+    anchors: warn
+nav:
+  - Overview: README.md
+  - Use the model:
+      - Evaluate a new site: guides/new-site.md
+      - Interpret an assessment: guides/interpreting-results.md
+      - Study summary: guides/summary.md
+  - Understand the science:
+      - Physical models: science/models.md
+      - Validation and calibration: science/validation.md
+      - Limitations: science/limitations.md
+      - Sources: science/sources.md
+  - Examine the studies:
+      - Approximation comparisons: science/approximation-comparisons.md
+      - Design comparisons: science/design-comparisons.md
+      - Breakout timing: science/breakout-timing.md
+  - Maintain the project:
+      - Maintenance notes: maintenance/README.md
+      - Development priorities: maintenance/development.md
+      - Release checklist: maintenance/release-checklist.md
+  - Python API: api.md
+  - Release records:
+      - v1.4.3: releases/v1.4.3.md
+      - v1.4.2: releases/v1.4.2.md
+      - v1.4.1: releases/v1.4.1.md
+      - v1.4.0: releases/v1.4.0.md
+      - v1.3.6: releases/v1.3.6.md

@@ -52,6 +52,6 @@ borethm-water-table = "borethm.water_table:main"
 
 [project.urls]
 Repository = "https://github.com/ldocallaghan/BoreTHM"
-Documentation = "https://github.com/ldocallaghan/BoreTHM/blob/main/docs/README.md"
+Documentation = "https://ldocallaghan.github.io/BoreTHM/"
 Changelog = "https://github.com/ldocallaghan/BoreTHM/blob/main/CHANGELOG.md"
 Issues = "https://github.com/ldocallaghan/BoreTHM/issues"

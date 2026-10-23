@@ -7,6 +7,7 @@ __pycache__/
 *.egg-info/
 build/
 dist/
+site/
 
 # Editors and local tooling
 .idea/
