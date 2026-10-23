@@ -2498,12 +2498,112 @@ def _sg(rho):
     return "water" if rho is None else ("none" if rho == float("inf") else f"{rho / 1000:.3f}")
 
 
+_READING_LABELS = (
+    ('calculation', 'Calculation'), ('scenarios_at_target', 'Scenarios at the target'),
+    ('whole_programme', 'Whole programme'), ('equipment', 'Equipment'),
+    ('controlling_constraint', 'Controlling constraint'))
+
+
+def _reading_reason(reason):
+    replacements = {
+        'the wall is not held: ': 'Pressure checks fail for: ',
+        'the binding window did not settle': 'The whole-hole pressure bounds did not settle',
+        'tool: ': 'The tool check fails: ',
+        'excluding the frictionally inadmissible cases': 'Stress cases outside the frictional limit are excluded',
+        'the circulation schedule the tool needs': 'The tool requires the stated circulation schedule',
+    }
+    for prefix, text in replacements.items():
+        if reason.startswith(prefix):
+            reason = text + reason[len(prefix):]
+            break
+    return reason[:1].upper() + reason[1:].rstrip('.') + '.'
+
+
+def reading(o):
+    """Describe existing checks and constraints without running any model."""
+    c, status = o['components'], o['status']
+    reasons = status['reasons']
+    constraint = _reading_reason(reasons[0]) if reasons else 'The status lists no additional constraint.'
+    numerical_ok = c['solver']['ok'] and c.get('window_refinement', {'converged': True})['converged']
+    if not numerical_ok:
+        return dict(calculation='Not valid: ' + constraint,
+                    scenarios_at_target='Not assessed because the calculation is not valid.',
+                    whole_programme='Not assessed because the calculation is not valid.',
+                    equipment='Not assessed because the calculation is not valid.',
+                    controlling_constraint=constraint)
+
+    cycle = o.get('cycle', {})
+    cases = cycle.get('per_case', cycle.get('cases', []))
+    if cases:
+        counts = []
+        for state in cases[0]['states']:
+            passed = sum(case['states'].get(state) in ('GO', 'CONDITIONAL') for case in cases)
+            counts.append(f'{state} {passed}/{len(cases)}')
+        scenarios = 'Cases passing target stability, including stated fluid conditions: ' + '; '.join(counts) + '.'
+    else:
+        scenarios = 'Not assessed: per-case target stability is absent.'
+
+    windows = o.get('windows', {})
+    names = (('drilling_fluid', 'drilling fluid'), ('trip_fluid', 'trip fluid'))
+    if all(key in windows for key, _ in names):
+        both_open = all(windows[key]['open'] for key, _ in names)
+        programme = ('One drilling fluid and one trip fluid satisfy the pressure limits at every evaluated depth, state and case.'
+                     if both_open else 'No pair of drilling and trip fluids satisfies the pressure limits at every evaluated depth, state and case.')
+        programme += ' Surface densities at 20 C: '
+        details = []
+        for key, name in names:
+            w = windows[key]
+            lower, upper = float(w['lo']) / 1000., float(w['hi']) / 1000.
+            if w['open']:
+                details.append(f'{name} {lower:.3f} to {upper:.3f} SG')
+            else:
+                details.append(f'{name} window closed, lower {lower:.3f} SG '
+                               f'({describe_bound(w["lo_by"])}), upper {upper:.3f} SG '
+                               f'({describe_bound(w["hi_by"])})')
+        programme += '; '.join(details) + '.'
+    else:
+        programme = 'Not assessed: whole-hole fluid windows are absent.'
+    if not c['pumps']['ok']:
+        programme += ' The standpipe pressure exceeds the pump limit.'
+    if not c['pumps']['within_rig']:
+        programme += ' The pumping duty exceeds the reference rig capacity.'
+    if status['label'] == 'CONDITIONAL':
+        programme += ' Conditions: ' + ' '.join(_reading_reason(reason) for reason in reasons)
+
+    tools = o.get('tools', {})
+    limit = tools.get('limit')
+    check = 'temperature check' if limit is None else f'{limit:g} C temperature check'
+    detail = c['tool']['detail'].removeprefix('FAIL: ')
+    if c['tool']['ok']:
+        equipment = f'The tool passes its {check}'
+        equipment += ' with the stated circulation schedule.' if detail != 'PASS' else '.'
+    else:
+        equipment = f'The tool fails its {check}: {detail}.'
+    coating = tools.get('coating', {})
+    rating = coating.get('rating')
+    if rating is None:
+        equipment += ' No coating rating is stated; coating qualification is not assessed.'
+    else:
+        peak = max(coating['circulating_max'], coating['connection']['max'], coating['trip_in']['max'])
+        pipe = c['coating']['pipe'].removesuffix(' coated')
+        equipment += f' The {pipe} coating reaches {peak:.1f} C against its stated {rating:g} C rating'
+        equipment += ('; qualification is unresolved.' if c['coating']['status'] == 'INDETERMINATE'
+                      else ' (within rating).')
+    return dict(calculation='Valid: the reported numerical checks converged.',
+                scenarios_at_target=scenarios, whole_programme=programme,
+                equipment=equipment, controlling_constraint=constraint)
+
+
 def report(o):
     """The evaluation, printed from the result."""
     s = o["site"]
     print("=" * 80)
     print(f"SITE EVALUATION:  {s.name}   [{s.tier}]")
     print("=" * 80)
+    if 'components' in o and 'status' in o:
+        summary = reading(o)
+        for key, label in _READING_LABELS:
+            print(f'  {label}: {summary[key]}')
     print(f"  Target: {o['T_rock']:.0f} C rock at {o['z'] / 1000:.1f} km; "
           f"evaluation {o.get('circulation', 'v1.1')}")
     for k, (basis, src) in s.data_basis.items():
@@ -2671,6 +2771,8 @@ def result_dict(o, *, site_file=None):
     programme.backpressure_Pa is gauge; programme.spp_Pa is a pressure
     difference. The gauge reference is 0.1 MPa absolute.
     Includes input sources and runtime versions; does not run calculations.
+    Results with components and status also include a reading of the
+    existing checks and controlling constraint.
     site_file optionally gives the TOML path, recorded as supplied with its
     current SHA-256. A previously captured {path, sha256} record may be
     supplied to preserve the identity of the file loaded before evaluation.
@@ -2727,6 +2829,8 @@ def result_dict(o, *, site_file=None):
     for k in ("windows", "tools", "status", "components", "flow_ceiling", "shmin_margin"):
         if k in o:
             d[k] = o[k]
+    if 'components' in o and 'status' in o:
+        d['reading'] = reading(o)
     d["versions"] = versions()
     d['input_warnings'] = o.get('input_warnings', [])
     if site_file is not None:

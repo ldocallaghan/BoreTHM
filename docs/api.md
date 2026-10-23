@@ -90,6 +90,8 @@ Stresses, pore pressures and wall-pressure quantities are gauge.
 programme.backpressure_Pa is gauge; programme.spp_Pa is a pressure
 difference. The gauge reference is 0.1 MPa absolute.
 Includes input sources and runtime versions; does not run calculations.
+Results with components and status also include a reading of the
+existing checks and controlling constraint.
 site_file optionally gives the TOML path, recorded as supplied with its
 current SHA-256. A previously captured {path, sha256} record may be
 supplied to preserve the identity of the file loaded before evaluation.
