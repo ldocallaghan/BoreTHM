@@ -14,14 +14,14 @@
 - [x] Pass the local fast suite, link checker and strict documentation build.
 - [x] Pass the fast suite across Python 3.11 to 3.14 on Linux, Windows and macOS, and check wheel installation on all three platforms.
 - [x] Pass the full physical suite on CI at the release candidate.
-- [ ] Review the complete diff and verified release checks before tagging.
-- [ ] Confirm the citation date against the actual tag date.
-- [ ] Tag v1.5.0 and publish the GitHub release.
-- [ ] Verify the PyPI installation, documentation website and Zenodo archive.
+- [x] Review the complete diff and verified release checks before tagging.
+- [x] Confirm the citation date against the actual tag date.
+- [x] Tag v1.5.0 and publish the GitHub release.
+- [x] Allow the release tag in the `github-pages` environment and verify deployment.
+- [x] Verify the PyPI installation, documentation website and Zenodo archive.
 
 See the [v1.5.0 release record](../releases/v1.5.0.md) for the checks and
-publication status. The citation date is prepared as 23 October 2026 and
-must match the actual tag date before publication.
+publication status. The citation date and tag date are both 23 October 2026.
 
 ## v1.4.0
 
