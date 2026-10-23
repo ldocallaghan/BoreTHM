@@ -29,6 +29,16 @@ def test_package_and_citation_versions_match():
     citation = (ROOT / 'CITATION.cff').read_text(encoding='utf-8')
     assert bt.__version__ == metadata['project']['version']
     assert re.search(r'^version: "' + re.escape(bt.__version__) + '"$', citation, re.M)
+    notice = (ROOT / 'NOTICE').read_text(encoding='utf-8').split('If you use BoreTHM in research', 1)[1]
+    doi = re.search(r'^doi: "([^"]+)"$', citation, re.M)[1]
+    assert doi in notice
+    assert not re.search(r'\bversion\s+\d', notice, re.I)
+
+
+def test_api_page_matches_its_generator():
+    sys.path.insert(0, str(ROOT / 'tools'))
+    from build_api_docs import render
+    assert render() == (ROOT / 'docs/api.md').read_text(encoding='utf-8')
 
 
 def test_geometry_and_thermal_inputs_can_be_built_from_public_names():
