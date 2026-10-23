@@ -45,6 +45,7 @@ plot = ["matplotlib>=3.7"]
 test = ["pytest>=7.4"]
 
 [project.scripts]
+borethm-new-site = "borethm.site_files:main"
 borethm-evaluate = "borethm.site_evaluation:main"
 borethm-sites = "borethm.comparative_sites:main"
 borethm-water-table = "borethm.water_table:main"

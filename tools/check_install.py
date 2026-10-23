@@ -2,6 +2,11 @@
 import importlib
 from importlib.metadata import version
 import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
 
 import borethm as bt
 from borethm._paths import repository_root
@@ -16,6 +21,18 @@ def main():
     assert bt.thermal_hoop_stress(300., 150.) < 0.
     pipe = bt.uniform_wall(45.0)
     assert bt.WellGeometry.single(100., pipe).md_bit == 100.
+    assert callable(bt.load_site) and callable(bt.layered_geotherm)
+    scripts = Path(sys.executable).parent
+    suffix = '.exe' if os.name == 'nt' else ''
+    with tempfile.TemporaryDirectory() as directory:
+        for key in ('soultz', 'newberry'):
+            name = key + '.toml'
+            create = [str(scripts / ('borethm-new-site' + suffix))]
+            if key != 'soultz':
+                create += ['--from', key]
+            subprocess.run([*create, name], cwd=directory, check=True)
+            subprocess.run([str(scripts / ('borethm-evaluate' + suffix)),
+                            '--site-file', name, '--check'], cwd=directory, check=True)
     from borethm import drilling_cycle
     assert drilling_cycle.forge_timings()
     # Every study must import outside a checkout, even if running it needs evidence.

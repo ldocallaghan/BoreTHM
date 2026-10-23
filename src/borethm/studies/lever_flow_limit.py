@@ -1,6 +1,8 @@
 """Refine L8's bit-temperature boundary without claiming full tool survival."""
 import json
+import argparse
 from dataclasses import replace
+from pathlib import Path
 
 from borethm.studies import levers as lv
 
@@ -41,8 +43,16 @@ def main(root=None):
         path.write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8', newline='\n')
 
 
+def cli(argv=None):
+    """Select the shared study output directory without changing its calculations."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=lv.RESULTS)
+    args = parser.parse_args(argv)
+    main(root=args.output)
+
+
 if __name__ == '__main__':
     try:
-        main()
+        cli()
     except ValueError as error:
         raise SystemExit(str(error)) from None

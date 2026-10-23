@@ -54,6 +54,20 @@ is independent of the package version. v10 selects the original model;
 thermal enables wall cooling and coupled overrides the site's coupling.
 Earlier circulation modes remain available for reproducing old releases.
 
+Coupling uses the site's stiffness in thermal stress, evaluates the
+drilling-rate model with the site's circulation, and iterates rate of
+penetration and exposure together. For modes other than v10:
+
+| Site flag | coupled argument | Effective flag |
+|---|---|---|
+| False | None | On for v1.3.3 and v1.3.4; off for earlier modes |
+| True | None | On |
+| Either | True | On |
+| Either | False | Off |
+
+v10 retains the site's flag for None or True; explicit False switches
+it off. The input profile itself is unchanged.
+
 Return a dictionary containing the site and target depth z [m], rock
 temperature T_rock [degrees C], the circulation and operating programme,
 cycle cases, mud windows, tool gates and status. Whole-programme windows
@@ -64,7 +78,7 @@ This evaluation can require substantial computation.
 ## result_dict
 
 ```python
-result_dict(o)
+result_dict(o, *, site_file=None)
 ```
 
 Convert an evaluate result into a JSON-compatible dictionary.
@@ -76,17 +90,22 @@ Stresses, pore pressures and wall-pressure quantities are gauge.
 programme.backpressure_Pa is gauge; programme.spp_Pa is a pressure
 difference. The gauge reference is 0.1 MPa absolute.
 Includes input sources and runtime versions; does not run calculations.
+site_file optionally gives the TOML path, recorded as supplied with its
+current SHA-256. A previously captured {path, sha256} record may be
+supplied to preserve the identity of the file loaded before evaluation.
 
 ## export_result
 
 ```python
-export_result(o, path)
+export_result(o, path, *, site_file=None)
 ```
 
 Write result_dict(o) as JSON to an explicit path.
 
 o is an evaluate result. Values retain their labelled SI units and
 temperatures in degrees C. Returns None; creates or overwrites the file.
+site_file accepts the optional TOML path or captured provenance record
+described in result_dict.
 
 ## SiteProfile
 

@@ -14,6 +14,16 @@ def template_text():
     return files('borethm').joinpath('templates/site_template.toml').read_text(encoding='utf-8')
 
 
+def site_text(key):
+    """Return a packaged starting site, selected by its exact built-in key."""
+    keys = ('soultz', 'larderello', 'united-downs', 'pannonian', 'newberry')
+    if key not in keys:
+        raise ValueError(f'--from {key!r}: choose one of ' + ', '.join(keys))
+    if key == 'soultz':
+        return template_text()
+    return files('borethm').joinpath(f'templates/sites/{key}.toml').read_text(encoding='utf-8')
+
+
 def _segment_geotherm(segments, boundary='below'):
     """Build a piecewise linear geotherm, with depth in m and temperature in C."""
     def geotherm(z):
@@ -216,3 +226,32 @@ def load_site(path):
         else:
             arguments[name] = _number(item, path, name)
     return SiteProfile(**arguments)
+
+
+def main(argv=None):
+    """Write a starter TOML site file without overwriting an existing file."""
+    import argparse
+    import shlex
+
+    parser = argparse.ArgumentParser(description='Write a starter site file to edit and evaluate.')
+    parser.add_argument('path', help='path for the TOML site file')
+    parser.add_argument('--from', dest='site', default='soultz', metavar='KEY',
+                        help='start from soultz, larderello, united-downs, pannonian or newberry')
+    parser.add_argument('--force', action='store_true', help='overwrite an existing file')
+    arguments = parser.parse_args(argv)
+    try:
+        text = site_text(arguments.site)
+        with Path(arguments.path).open('w' if arguments.force else 'x', encoding='utf-8', newline='\n') as stream:
+            stream.write(text)
+    except FileExistsError:
+        raise SystemExit(f'{arguments.path}: file exists; use --force to overwrite') from None
+    except (ValueError, OSError) as error:
+        raise SystemExit(' '.join(str(error).splitlines())) from None
+    path = shlex.quote(arguments.path)
+    print(f'Wrote {arguments.path}. Edit the site inputs, then run:')
+    print(f'borethm-evaluate --site-file {path} --check')
+    print(f'borethm-evaluate --site-file {path} --json {shlex.quote(str(Path(arguments.path).with_suffix(".json")))}')
+
+
+if __name__ == '__main__':
+    main()

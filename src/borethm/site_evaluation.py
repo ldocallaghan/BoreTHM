@@ -915,6 +915,20 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
     thermal enables wall cooling and coupled overrides the site's coupling.
     Earlier circulation modes remain available for reproducing old releases.
 
+    Coupling uses the site's stiffness in thermal stress, evaluates the
+    drilling-rate model with the site's circulation, and iterates rate of
+    penetration and exposure together. For modes other than v10:
+
+    | Site flag | coupled argument | Effective flag |
+    |---|---|---|
+    | False | None | On for v1.3.3 and v1.3.4; off for earlier modes |
+    | True | None | On |
+    | Either | True | On |
+    | Either | False | Off |
+
+    v10 retains the site's flag for None or True; explicit False switches
+    it off. The input profile itself is unchanged.
+
     Return a dictionary containing the site and target depth z [m], rock
     temperature T_rock [degrees C], the circulation and operating programme,
     cycle cases, mud windows, tool gates and status. Whole-programme windows
@@ -925,10 +939,10 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
     input_warnings = validate_site(site)
     # coupled: on by default with the pressure budget; on with "v1.3" alone
     # shows what the coupling moves in the v1.3.2 table
-    if coupled is None:
-        coupled = circulation in ('v1.3.3', 'v1.3.4')
-    if coupled and not v10:
+    if not v10 and (coupled is True or coupled is None and circulation in ('v1.3.3', 'v1.3.4')):
         site = replace(site, coupled=True)
+    elif coupled is False:
+        site = replace(site, coupled=False)
     z = site.target(v10)
     geotherm = site.temperature(v10)
     T_rock = float(geotherm(z))
@@ -2638,7 +2652,16 @@ def versions():
                 python=platform.python_version(), packages=pkgs)
 
 
-def result_dict(o):
+def _site_file_record(site_file):
+    """Capture the input path and bytes before a potentially long evaluation."""
+    import hashlib
+    from pathlib import Path
+    if isinstance(site_file, dict):
+        return dict(path=os.fspath(site_file['path']), sha256=site_file['sha256'])
+    return dict(path=os.fspath(site_file), sha256=hashlib.sha256(Path(site_file).read_bytes()).hexdigest())
+
+
+def result_dict(o, *, site_file=None):
     """Convert an evaluate result into a JSON-compatible dictionary.
 
     Inputs and outputs retain the evaluation's units: depth [m], temperature
@@ -2648,6 +2671,9 @@ def result_dict(o):
     programme.backpressure_Pa is gauge; programme.spp_Pa is a pressure
     difference. The gauge reference is 0.1 MPa absolute.
     Includes input sources and runtime versions; does not run calculations.
+    site_file optionally gives the TOML path, recorded as supplied with its
+    current SHA-256. A previously captured {path, sha256} record may be
+    supplied to preserve the identity of the file loaded before evaluation.
     """
     s = o["site"]
     d = dict(
@@ -2703,18 +2729,22 @@ def result_dict(o):
             d[k] = o[k]
     d["versions"] = versions()
     d['input_warnings'] = o.get('input_warnings', [])
+    if site_file is not None:
+        d['site_file'] = _site_file_record(site_file)
     return _jsonable(d)
 
 
-def export_result(o, path):
+def export_result(o, path, *, site_file=None):
     """Write result_dict(o) as JSON to an explicit path.
 
     o is an evaluate result. Values retain their labelled SI units and
     temperatures in degrees C. Returns None; creates or overwrites the file.
+    site_file accepts the optional TOML path or captured provenance record
+    described in result_dict.
     """
     import json
     with open(path, "w") as fh:
-        json.dump(result_dict(o), fh, indent=1)
+        json.dump(result_dict(o, site_file=site_file), fh, indent=1)
 
 
 def named_sites():
@@ -2748,24 +2778,40 @@ def main(argv=None):
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description="Evaluate one site through the drilling cycle.")
-    ap.add_argument("--site", default="soultz", help="one of: " + ", ".join(
+    source = ap.add_mutually_exclusive_group(required=True)
+    source.add_argument("--site", help="one of: " + ", ".join(
         ("soultz", "larderello", "united-downs", "pannonian", "newberry")))
+    source.add_argument('--site-file', help='read site inputs from a TOML file')
+    ap.add_argument('--check', action='store_true', help='validate inputs without evaluating')
     ap.add_argument("--json", help="also write the result to this JSON file")
     ap.add_argument('--circulation', choices=('v1.3.3', 'v1.3.4'), default='v1.3.4')
     a = ap.parse_args(argv)
+    site_file = None
     try:
-        site = find_site(a.site)
-    except ValueError as error:
-        raise SystemExit(str(error)) from None
+        if a.site_file is None:
+            site = find_site(a.site)
+        else:
+            from pathlib import Path
+            from borethm.site_files import load_site
+            if Path(a.site_file).suffix.lower() == '.py':
+                raise ValueError(f'{a.site_file}: site files are TOML; for Python use '
+                                 'https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md')
+            site = load_site(a.site_file)
+            site_file = _site_file_record(a.site_file)
+    except (ValueError, OSError) as error:
+        raise SystemExit(' '.join(str(error).splitlines())) from None
     try:
         for warning in validate_site(site):
             print('warning:', warning)
+        if a.check:
+            print(f'{site.name}: inputs valid; {site.tier}')
+            return
         o = evaluate(site, circulation=a.circulation)
     except ValueError as error:
         ap.error(str(error))
     report(o)
     if a.json:
-        export_result(o, a.json)
+        export_result(o, a.json, site_file=site_file)
         print(f"result written to {a.json}")
 
 

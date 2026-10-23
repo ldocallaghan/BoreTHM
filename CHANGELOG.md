@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Behaviour correction
+
+`evaluate(..., coupled=False)` now switches coupling off even when the site's
+own flag is set. The default behaviour and built-in reference results are unchanged.
+
 ## v1.4.3 (22 October 2026)
 
 Adds the published [benchmark dataset 1.0 DOI](https://doi.org/10.5281/zenodo.23565448) to the dataset guide and main README, updates the dataset manifest and records publication as complete. The repository's 91 dataset files match the published Zenodo archive byte for byte. Calculations and numerical data are unchanged.
