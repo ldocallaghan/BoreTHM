@@ -1,22 +1,20 @@
-"""Assemble the benchmark dataset from retained files and input definitions.
+"""Verify and package the published benchmark dataset without recomputing it.
 
-No evaluation, calibration or numerical solver is called. The only function
-sampling tabulates the built-in geotherms on retained programme depth grids.
+The pinned manifest identifies the published snapshot. Its input records and
+geotherm tabulations retain their exact bytes across platforms. Comparisons
+with current numerical definitions are separate from archive construction.
 """
 import argparse
-import csv
-from dataclasses import asdict
 import hashlib
-import importlib
-import io
 import json
 from pathlib import Path
 import zipfile
 
-from borethm import site_evaluation as se
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = '1.0'
+# SHA-256 of the manifest verified against the published dataset 1.0.
+PUBLISHED_MANIFEST_SHA256 = '1ec15e149dcc48b90eac70c1a96870c38fa869e8eab8dbf294e56446cfe052f0'
 GUIDE_RELEASE = 'v1.4.1'
 INPUT_COMMIT = '7ae63cf59e198b7af573282f2aad57d4b40e5a05'
 CASES = {
@@ -140,123 +138,32 @@ def tolerance_record(case):
 
 
 def build_files(root=ROOT):
-    """Return all dataset bytes, including provenance and manifest."""
-    root = Path(root)
-    files, origins = {}, {}
+    """Verify the published snapshot and return its exact file bytes.
 
-    def put(name, content, origin):
+    A published dataset keeps its input capture and numerical tabulations.
+    It is packaged without rerunning derivations in the caller's environment.
+    Current definitions are compared with that capture separately in tests.
+    """
+    dataset = Path(root).resolve() / 'benchmarks'
+    manifest_bytes = (dataset / 'manifest.json').read_bytes()
+    if hashlib.sha256(manifest_bytes).hexdigest() != PUBLISHED_MANIFEST_SHA256:
+        raise ValueError('benchmark dataset ' + VERSION + ': published manifest checksum differs')
+    manifest = json.loads(manifest_bytes)
+    if manifest['dataset_version'] != VERSION:
+        raise ValueError('benchmark dataset version differs from the published snapshot')
+    expected = set(manifest['files']) | {'manifest.json'}
+    actual = {p.relative_to(dataset).as_posix() for p in dataset.rglob('*') if p.is_file()}
+    if actual != expected:
+        raise ValueError('benchmark dataset file list differs from the published snapshot')
+    files = {'manifest.json': manifest_bytes}
+    for name, digest in manifest['files'].items():
+        path = (dataset / name).resolve()
+        if not path.is_relative_to(dataset):
+            raise ValueError('benchmark file outside dataset: ' + name)
+        content = path.read_bytes()
+        if hashlib.sha256(content).hexdigest() != digest:
+            raise ValueError('benchmark file checksum differs: ' + name)
         files[name] = content
-        origins[name] = origin
-
-    def generated(name, value, **origin):
-        put(name, encoded(value), dict(kind='generated', **origin))
-
-    def copy(source, target, licence='CC-BY-4.0'):
-        content = (root / source).read_bytes()
-        old_path = source.replace('src/borethm/data/', 'data/')
-        put(target, content, dict(kind='copy', path=source,
-            source_release=(GUIDE_RELEASE if source.startswith('src/borethm/data/')
-                            and source.endswith('.md') else 'v1.3.6'),
-            original_path=old_path, licence=licence,
-            sha256=hashlib.sha256(content).hexdigest()))
-
-    for path in sorted((root / 'benchmarks').rglob('*.md')):
-        name = path.relative_to(root / 'benchmarks').as_posix()
-        put(name, path.read_bytes(), dict(kind='documentation', licence='CC-BY-4.0'))
-    copy('LICENSE-docs', 'LICENSE')
-    put('NOTICE', (root / 'benchmarks/NOTICE').read_bytes(), dict(kind='documentation', licence='CC-BY-4.0'))
-
-    for path in sorted((root / 'src/borethm/data').rglob('*')):
-        if not path.is_file() or 'raw' in path.parts or path.suffix not in ('.csv', '.json', '.md'):
-            continue
-        relative = path.relative_to(root / 'src/borethm/data').as_posix()
-        licence = 'Open Government Licence' if relative.startswith('ud1/') and path.suffix == '.csv' else 'CC-BY-4.0'
-        copy(path.relative_to(root).as_posix(), 'data/' + relative, licence)
-
-    sites = se.named_sites()
-    generated('sites/units.json', dict(depths='m', temperatures='degrees C',
-        Sv_grad='Pa/m', rho_fluid_grad='Pa/m', K0_min='dimensionless', SHmax_over_Sv='dimensionless',
-        k_rock='W/(m K)', E_rock='Pa', UCS='Pa', strength_cases='(label, UCS in Pa)',
-        mu='dimensionless', stress_cases=dict(gradients='Pa/m', stress_intercepts='Pa',
-                                            Pp_datum='m', z_data='m', mu='dimensionless')),
-        source=code_reference('borethm.site_evaluation', 'SiteProfile and StressProfile'), licence='CC-BY-4.0')
-    for key, site in sites.items():
-        profile = asdict(site)
-        checkpoint = f'results/v1.3.4/checkpoint-1/{key}.json'
-        saved = json.loads((root / checkpoint).read_text())
-        depths = saved['windows']['depths']
-        if key == 'newberry':
-            # Preserve the fitted input coefficients recorded with the reference
-            # run, including their last digits across LAPACK implementations.
-            for stress, retained in zip(profile['stress_cases'], saved['site']['stress_cases']):
-                for name in ('Sv', 'Shmin', 'SHmax'):
-                    stress[name + '_grad'], stress[name + '_int'] = retained[name]
-                stress['Pp_grad'], stress['Pp_datum'] = retained['Pp']
-        functions = {name: value for name, value in profile.items() if callable(value)}
-        for name, function in functions.items():
-            profile[name] = dict(callable=code_reference(function.__module__, function.__qualname__),
-                                 samples=f'{key}-geotherms.csv', column=name + '_C')
-        generated(f'sites/{key}.json', profile, method='dataclasses.asdict; callable fields described separately',
-                  source=code_reference('borethm.site_evaluation' if key == 'soultz' else 'borethm.comparative_sites'),
-                  retained_fitted_stresses=dict(path=checkpoint, pointer='/site/stress_cases') if key == 'newberry' else None,
-                  licence='CC-BY-4.0')
-        table = io.StringIO(newline='')
-        writer = csv.writer(table, lineterminator='\n')
-        writer.writerow(['depth_m', *(name + '_C' for name in functions)])
-        for depth in depths:
-            writer.writerow([depth, *(float(function(depth)) for function in functions.values())])
-        put(f'sites/{key}-geotherms.csv', table.getvalue().encode('utf-8'),
-            dict(kind='tabulation', grid_source=checkpoint, grid_pointer='/windows/depths',
-                 functions={name: code_reference(f.__module__, f.__qualname__) for name, f in functions.items()},
-                 depth_unit='m; MD equals TVD in these vertical site designs', temperature_unit='degrees C',
-                 licence='CC-BY-4.0'))
-
-    for case, (golden, module) in CASES.items():
-        copy('tests/golden/' + golden, case + '/expected.json')
-        source = code_reference('borethm.studies.' + module)
-        inputs = dict(site_profiles='../sites/', data='../data/', code=source,
-                      units=INPUT_UNITS[case], attributes={})
-        for module_name, names in ATTRIBUTES.get(case, {}).items():
-            current = importlib.import_module(module_name)
-            inputs['attributes'][module_name] = {name: getattr(current, name) for name in names}
-        if case == 'ut-austin':
-            benchmark = importlib.import_module('borethm.studies.benchmark_utaustin')
-            inputs['pipes'] = {name: asdict(pipe) for name, pipe in benchmark.PIPES.items()}
-            inputs['whole_wall_pipes'] = {name: asdict(pipe) for name, pipe in benchmark.WHOLE_WALL.items()}
-            inputs['geometry_recipes'] = [code_reference('borethm.studies.benchmark_utaustin', 'well'),
-                                           code_reference('borethm.well_geometry', 'wu2025_well')]
-            inputs['run_defaults'] = dict(source=code_reference('borethm.studies.benchmark_utaustin', 'run'),
-                                           G_per_km=24.0, gpm=600.0, friction_heat=True)
-        if case in ('forge-circulation', 'forge-pauses'):
-            inputs['geometry_recipes'] = [code_reference('borethm.studies.validate_forge16b', name)
-                                           for name in ('hole', 'string', 'survey', 'formation_temperature')]
-        if case == 'site-reference-v134':
-            inputs['programmes'] = {}
-            for key in sites:
-                source_path = f'results/v1.3.4/checkpoint-1/{key}.json'
-                copy(source_path, f'{case}/evidence/{key}.json')
-                inputs['programmes'][key] = dict(path=f'evidence/{key}.json',
-                                                 pointers=['/site', '/programme', '/windows/depths'])
-        if case == 'breakout-timing-v136':
-            retained = json.loads((root / 'tests/golden/v136_breakout_timing.json').read_text())
-            inputs['paired_settings'] = {key: {delay: row['settings'] for delay, row in pairs.items()}
-                                         for key, pairs in retained['pairs'].items()}
-            inputs['scan_minutes'] = {key: row['scan_minutes'] for key, row in retained['scans'].items()}
-            for name, digest in retained['provenance']['evidence_sha256'].items():
-                path = 'results/v1.3.6/breakout-timing/' + name
-                assert hashlib.sha256((root / path).read_bytes()).hexdigest() == digest, path
-                copy(path, f'{case}/evidence/{name}')
-        generated(case + '/inputs.json', inputs, source=source, licence='CC-BY-4.0')
-        generated(case + '/tolerances.json', tolerance_record(case),
-                  source='existing regression assertions named in the record', licence='CC-BY-4.0')
-
-    files['sources.json'] = encoded(dict(dataset_version=VERSION,
-        input_definition_commit=INPUT_COMMIT, retained_release='v1.3.6', files=dict(sorted(origins.items())),
-        note='Copied files retain their original provenance; no model outputs were regenerated.'))
-    files['manifest.json'] = encoded(dict(dataset_version=VERSION, cases=list(CASES),
-        hash_algorithm='SHA-256',
-        note='Hashes cover every dataset file except this manifest itself.',
-        files={name: hashlib.sha256(content).hexdigest() for name, content in sorted(files.items())}))
     return files
 
 

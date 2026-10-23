@@ -7,6 +7,7 @@ import importlib
 import inspect
 import json
 from pathlib import Path
+import shutil
 import sys
 import zipfile
 
@@ -18,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / 'benchmarks'
 sys.path.insert(0, str(ROOT / 'tools'))
 import build_benchmarks as builder
+from site_record_helpers import INPUT_ROUNDOFF_RTOL, assert_record_values
 
 
 def read(path):
@@ -55,19 +57,11 @@ def test_all_profile_fields_and_geotherm_samples_match_their_sources(key):
     original = asdict(se.named_sites()[key])
     exported = read(DATASET / 'sites' / (key + '.json'))
     saved = read(ROOT / 'results/v1.3.4/checkpoint-1' / (key + '.json'))
-    if key == 'newberry':
-        # Fitted inputs are tied exactly to the retained record, independent
-        # of the current machine's last-digit least-squares round-off.
-        for actual, retained in zip(exported['stress_cases'], saved['site']['stress_cases']):
-            assert [actual['Sv_grad'], actual['Sv_int']] == retained['Sv']
-            assert [actual['Shmin_grad'], actual['Shmin_int']] == retained['Shmin']
-            assert [actual['SHmax_grad'], actual['SHmax_int']] == retained['SHmax']
-            assert [actual['Pp_grad'], actual['Pp_datum']] == retained['Pp']
-        for actual, current in zip(exported['stress_cases'], original['stress_cases']):
-            for field in ('label', 'source', 'z_data', 'mu', 'regime'):
-                assert actual[field] == plain(current[field])
-        original.pop('stress_cases')
-        exported.pop('stress_cases')
+    assert len(exported['stress_cases']) == len(saved['site']['stress_cases'])
+    for actual, retained in zip(exported['stress_cases'], saved['site']['stress_cases']):
+        for name in ('Sv', 'Shmin', 'SHmax'):
+            assert_record_values([actual[name + '_grad'], actual[name + '_int']], retained[name])
+        assert_record_values([actual['Pp_grad'], actual['Pp_datum']], retained['Pp'])
     functions = {name: value for name, value in original.items() if callable(value)}
     for name, function in functions.items():
         record = exported.pop(name)
@@ -75,13 +69,14 @@ def test_all_profile_fields_and_geotherm_samples_match_their_sources(key):
         assert record['callable']['name'] == function.__qualname__
         assert (ROOT / record['callable']['path']).is_file()
         original.pop(name)
-    assert exported == plain(original)
+    assert_record_values(exported, plain(original), rtol=INPUT_ROUNDOFF_RTOL)
     with (DATASET / 'sites' / (key + '-geotherms.csv')).open(newline='') as handle:
         samples = list(csv.DictReader(handle))
     assert [float(row['depth_m']) for row in samples] == saved['windows']['depths']
     for row in samples:
         for name, function in functions.items():
-            assert float(row[name + '_C']) == float(function(float(row['depth_m'])))
+            assert_record_values(float(row[name + '_C']), float(function(float(row['depth_m']))),
+                                 rtol=INPUT_ROUNDOFF_RTOL, path=key + '.' + name)
 
 
 @pytest.mark.parametrize('case', builder.ATTRIBUTES)
@@ -161,3 +156,19 @@ def test_rebuild_is_exact_and_calls_no_model_or_calibration(tmp_path, monkeypatc
 def test_zip_must_stay_outside_the_repository(tmp_path):
     with pytest.raises(ValueError, match='outside the repository'):
         builder.assemble(tmp_path / 'dataset', ROOT / 'upload.zip')
+
+
+@pytest.mark.parametrize('change', ['file', 'manifest', 'extra'])
+def test_published_snapshot_packaging_rejects_modified_archive_inputs(tmp_path, change):
+    dataset = tmp_path / 'benchmarks'
+    shutil.copytree(DATASET, dataset)
+    if change == 'file':
+        path = dataset / 'sites/soultz.json'
+        path.write_bytes(path.read_bytes() + b'\n')
+    elif change == 'manifest':
+        path = dataset / 'manifest.json'
+        path.write_bytes(path.read_bytes() + b'\n')
+    else:
+        (dataset / 'extra.txt').write_text('unexpected')
+    with pytest.raises(ValueError, match='checksum|file list'):
+        builder.build_files(tmp_path)
