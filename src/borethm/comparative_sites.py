@@ -40,9 +40,22 @@ def make_geotherm(segments):
     return gt
 
 
+LARDERELLO_GEOTHERM_SEGMENTS = [(0, 15, 0.152), (2200, 350, 0.077)]
+LARDERELLO_GEOTHERM_V11_SEGMENTS = [(0, 15, 0.152), (2200, 350, 0.2504), (2815, 504, 0.1)]
+LARDERELLO_STRESS_RULE = dict(
+    Sv_grad=2600 * 9.81, source="regime: normal/strike-slip transition (Liotta & Brogi)")
+
+CORNWALL_GEOTHERM_SEGMENTS = [(0, 15, 0.035), (5000, 190, 0.028)]
+CORNWALL_GEOTHERM_V11_SEGMENTS = [(0, 15, 0.033), (5000, 180, 0.028)]
+
+PANNONIAN_GEOTHERM_SEGMENTS = [(0, 15, 0.04625), (4000, 200, 0.035)]
+PANNONIAN_STRESS_RULE = dict(
+    Sv_grad=2550 * 9.81, source="regime: strike-slip, locally transtensional (Bada et al. 2007)")
+
+
 LARDERELLO = SiteProfile(
     name="Larderello (Italy)",
-    geotherm=make_geotherm([(0, 15, 0.152), (2200, 350, 0.077)]),   # v1.0; see geotherm_v11
+    geotherm=make_geotherm(LARDERELLO_GEOTHERM_SEGMENTS),   # v1.0; see geotherm_v11
     target_depth=2850.0, target_T=400.0,
     Sv_grad=2600 * 9.81, K0_min=0.55, SHmax_over_Sv=0.75,   # normal-fault, low aniso
     rho_fluid_grad=C.HYDROSTATIC_GRAD, k_rock=2.6, E_rock=45e9, UCS=140e6,
@@ -52,13 +65,12 @@ LARDERELLO = SiteProfile(
     # the Lago Basin), i.e. SHmax ~ Sv. Pore pressure is assumed hydrostatic;
     # the evidence points both ways (a vapour-dominated reservoir, but
     # over-pressured fluids along active faults).
-    stress_cases=transitional_bounds(
-        2600 * 9.81, source="regime: normal/strike-slip transition (Liotta & Brogi)"),
+    stress_cases=transitional_bounds(**LARDERELLO_STRESS_RULE),
     stress_basis="regime bounds",
     # Venelle-2 (Bertani et al. 2018, SGP-TR-213): 350 C at 2.2 km, >= 504 C
     # at 2,815 m, 507-517 C at ~2.9 km. v1.0's profile read 400 C at 2.85 km,
     # more than 100 K too cold there; 400 C is at ~2.4 km.
-    geotherm_v11=make_geotherm([(0, 15, 0.152), (2200, 350, 0.2504), (2815, 504, 0.1)]),
+    geotherm_v11=make_geotherm(LARDERELLO_GEOTHERM_V11_SEGMENTS),
     target_depth_v11=2400.0,
     temperature_data_to=2900.0,
     data_basis={
@@ -74,7 +86,7 @@ LARDERELLO = SiteProfile(
 
 CORNWALL = SiteProfile(
     name="United Downs / Carnmenellis (UK)",
-    geotherm=make_geotherm([(0, 15, 0.035), (5000, 190, 0.028)]),   # v1.0; see geotherm_v11
+    geotherm=make_geotherm(CORNWALL_GEOTHERM_SEGMENTS),   # v1.0; see geotherm_v11
     target_depth=12500.0, target_T=400.0,
     Sv_grad=2630 * 9.81, K0_min=0.55, SHmax_over_Sv=1.40,   # strike-slip, HIGH aniso
     rho_fluid_grad=C.HYDROSTATIC_GRAD, k_rock=3.3, E_rock=60e9, UCS=180e6,
@@ -100,7 +112,7 @@ CORNWALL = SiteProfile(
     # Reinecker et al. (2021) give ~180 C at 5 km; v1.0's 190 C was 10 K
     # hot. v1.0's 28 C/km below 5 km is kept (unsourced), which puts 400 C at
     # ~12.86 km instead of 12.5 km.
-    geotherm_v11=make_geotherm([(0, 15, 0.033), (5000, 180, 0.028)]),
+    geotherm_v11=make_geotherm(CORNWALL_GEOTHERM_V11_SEGMENTS),
     target_depth_v11=5000.0 + (400.0 - 180.0) / 0.028,
     temperature_data_to=5058.0,
     data_basis={
@@ -115,7 +127,7 @@ CORNWALL = SiteProfile(
 
 PANNONIAN = SiteProfile(
     name="Pannonian Basin (Hungary)",
-    geotherm=make_geotherm([(0, 15, 0.04625), (4000, 200, 0.035)]),
+    geotherm=make_geotherm(PANNONIAN_GEOTHERM_SEGMENTS),
     target_depth=9714.0, target_T=400.0,
     Sv_grad=2550 * 9.81, K0_min=0.60, SHmax_over_Sv=0.90,   # back-arc, moderate
     rho_fluid_grad=C.HYDROSTATIC_GRAD, k_rock=2.7, E_rock=50e9, UCS=160e6,
@@ -126,8 +138,7 @@ PANNONIAN = SiteProfile(
     # full strike-slip range (SHmax up to the friction cap) is wider: at 9.7 km
     # it spans GO to CONDITIONAL with the wall cooled, and CONDITIONAL to NO-GO
     # without cooling.
-    stress_cases=transitional_bounds(
-        2550 * 9.81, source="regime: strike-slip, locally transtensional (Bada et al. 2007)"),
+    stress_cases=transitional_bounds(**PANNONIAN_STRESS_RULE),
     stress_basis="regime bounds",
     data_basis={
         "stress": ("regime bounds", "Bada et al. (2007); orientation maps only "
