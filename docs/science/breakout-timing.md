@@ -146,6 +146,7 @@ The deciding target case is Soultz's SHmax upper bound with lab UCS 100 MPa, and
 From the repository root, install the locked dependencies and run the reporting tool. For the recorded execution settings, set `OPENBLAS_NUM_THREADS`, `OMP_NUM_THREADS` and `MKL_NUM_THREADS` to one. The JSON files record the Python and library versions.
 
 ```sh
+git checkout v1.5.0
 python -m pip install -r requirements-lock.txt
 python -m pip install --no-deps -e .
 python tools/breakout_timing.py --output ../borethm-timing-reproduction

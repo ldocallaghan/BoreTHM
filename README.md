@@ -4,7 +4,7 @@ BoreTHM is an open-source Python model for assessing drilling programmes in supe
 
 BoreTHM is intended for drilling engineers and researchers assessing a well design or reusing the thermal and stability calculations. Its reference cases support comparisons with field observations and published models.
 
-- [Documentation guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/README.md): choose a reading path.
+- [Documentation](https://ldocallaghan.github.io/BoreTHM/): guides, scientific explanations and the Python interface.
 - [Get started](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#get-started): set up Python and run an assessment.
 - [Read a result](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#reading-a-result): understand the outputs and status labels.
 - [Explore the examples](https://github.com/ldocallaghan/BoreTHM/blob/main/README.md#example-results): site findings and their controlling constraints.
@@ -25,7 +25,7 @@ borethm-water-table
 borethm-evaluate --site newberry --json newberry.json
 ```
 
-The IAPWS-95 cache is built once, outside the installed package, in the platform's user cache directory. Set `BORETHM_CACHE_DIR` to choose another location. The evaluator also builds a missing cache on first use. The assessment command prints its result and saves the inputs and calculation provenance as JSON. Evaluations take several minutes; weighted-fluid cases require repeated coupled solves and can take longer.
+The IAPWS-95 cache is built once, outside the installed package, in the platform's user cache directory. Set `BORETHM_CACHE_DIR` to choose another location. The evaluator also builds a missing cache on first use. The assessment command prints its result and writes JSON with the reported site inputs, evaluated checks and runtime provenance. Evaluations take several minutes; weighted-fluid cases require repeated coupled solves and can take longer.
 
 The same assessment through the [public Python interface](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/api.md):
 
@@ -44,6 +44,7 @@ Use Python 3.14.4 and the locked dependencies in a source checkout:
 ```bash
 git clone https://github.com/ldocallaghan/BoreTHM.git
 cd BoreTHM
+git checkout v1.5.0
 python -m venv .venv
 ```
 
@@ -59,29 +60,64 @@ Commands for releases before v1.4.0 are in their [release records](https://githu
 
 ## Run your own assessment
 
-The built-in site keys are `soultz`, `united-downs`, `larderello`, `pannonian` and `newberry`.
+Create a site file, edit its inputs and check them before running the assessment. These commands work from any directory after installation:
 
 ```bash
-borethm-evaluate --site soultz --json soultz.json
-borethm-sites
+python -m pip install borethm
+borethm-new-site mysite.toml
+# edit mysite.toml
+borethm-evaluate --site-file mysite.toml --check
+borethm-evaluate --site-file mysite.toml --json mysite.json
 ```
 
-The first command evaluates one site; the second reports all five. Use `borethm-evaluate --help` for the command-line options.
+The starter contains Soultz's inputs. Replace the temperature profile, target, stresses, rock properties and sources with the site's measurements or stated assumptions. The comments explain units and accepted ranges; the [site-input guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md) describes the file format and provenance labels. `--check` reports input warnings and the evidence tier without running the model or building the water-property cache.
 
-For a new site, follow the [site-input guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md) and copy [the TOML template](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/templates/site_template.toml). It records units and sources; `load_site` reads it and `validate_site` checks the inputs before evaluation. From the checkout root, the worked example checks the packaged Soultz template:
+Use `borethm-new-site --from newberry mysite.toml` to start from another built-in site. The available keys are `soultz`, `united-downs`, `larderello`, `pannonian` and `newberry`. Existing files require `--force` to overwrite.
 
-```bash
-python examples/new_site.py
-python examples/new_site.py --evaluate --json result.json
+The same steps through the public Python interface:
+
+```python
+from borethm import load_site, validate_site, evaluate, export_result
+
+site = load_site("mysite.toml")
+for warning in validate_site(site):
+    print(warning)
+result = evaluate(site)
+export_result(result, "mysite.json", site_file="mysite.toml")
 ```
 
-The template starts with Soultz's inputs. Replace them with the new site's measurements or explicitly sourced assumptions.
+Keep the file unchanged between loading and exporting through this Python example. The CLI captures the input checksum before evaluation. Keep the site file and measured data with the result: JSON retains supplied provenance and input warnings, with the file path and SHA-256 when supplied, but does not contain the complete site file or programme definition.
+
+To evaluate a built-in site directly, run `borethm-evaluate --site soultz --json soultz.json`. `borethm-sites` reports all five. Use `borethm-evaluate --help` for the options.
+
+### What you can change
+
+A site file supplies geology and site inputs. The evaluator selects the well geometry, pipe, flow and drilling cycle through its reference rules.
+
+| Task | Interface |
+|---|---|
+| Evaluate a built-in site | `borethm-evaluate --site KEY` |
+| Assess a new site under the evaluator's programme rules | A TOML file with `--site-file`, or `SiteProfile` in Python for a custom geotherm |
+| Specify a circulation, stability, wall-temperature or tool calculation | Public component functions in the [Python API](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/api.md) |
+| Reproduce the documented design interventions | Internal study modules described in the [design comparisons](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/design-comparisons.md); these provide no stable programme-configuration interface |
 
 ## Reading a result
 
-The [output guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/interpreting-results.md) maps the JSON fields and explains schedule identity.
+Start with the reading at the top of the report. It describes numerical validity, the stress and strength cases at the target, the whole-hole pressure limits and the equipment checks. Its controlling constraint identifies the first status reason; follow that into `components`, the density bounds in `windows`, and the detailed report. The same text is exported under `reading` in JSON.
 
-Start with `status` and its reasons, then inspect the components that set it. The report includes the operating programme, thermal and hydraulic outputs, stability in each cycle state, allowable mud densities and equipment checks. The JSON retains every evaluated case and the source of each input.
+For example, the [Newberry reference assessment](https://github.com/ldocallaghan/BoreTHM/blob/main/results/v1.3.4/checkpoint-1/newberry.json) gives:
+
+> **Calculation:** Valid: the reported numerical checks converged.
+>
+> **Scenarios at the target:** Cases passing target stability, including stated fluid conditions: drilling 6/6; connection 6/6; connection, fresh rock 6/6; trip 6/6.
+>
+> **Whole programme:** One drilling fluid and one trip fluid satisfy the pressure limits at every evaluated depth, state and case. Surface densities at 20 C: drilling fluid 0.998 to 1.237 SG; trip fluid 0.998 to 1.233 SG.
+>
+> **Equipment:** The tool passes its 200 C temperature check. The TK-Drakon coating reaches 139.4 C against its stated 204 C rating (within rating).
+>
+> **Controlling constraint:** The status lists no additional constraint.
+
+The [output guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/interpreting-results.md) explains the four entries, status precedence, pressure units and schedule identity. The full report and JSON retain the individual evaluated cases and supplied input provenance.
 
 | Status | Meaning for the evaluated programme and assumptions |
 |---|---|
@@ -140,7 +176,7 @@ The circulation model solves the downgoing and returning fluid temperatures with
 | Borehole stability | Breakout width and pressure requirements | [UD-1 strength calibration and other well checks](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/validation.md#stability-checks) |
 | Spallation, drilling rate and creep | Exploratory estimates of quench effects and closure | [Physical models and their limits](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/models.md#drilling-rate-and-creep) |
 
-The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Full derivations and diagnostic figures are in the [physical-model guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/models.md); the [bibliography](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/sources.md#references), [material properties](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/materials.md) and [site inputs](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/sites/stress_sources.md) retain their sources.
+The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Governing equations, implementation assumptions and diagnostic figures are in the [physical-model guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/models.md); the [bibliography](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/sources.md#references), [material properties](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/materials.md) and [site inputs](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/sites/stress_sources.md) retain their sources.
 
 ## Scope and limitations
 
@@ -177,7 +213,7 @@ Saved reference outputs and numerical regression tables support comparison with 
 | [src/borethm/](https://github.com/ldocallaghan/BoreTHM/tree/main/src/borethm) | Installed package, physical models and study modules |
 | [scripts/](https://github.com/ldocallaghan/BoreTHM/blob/main/scripts/README.md) | Standalone diagnostic and figure scripts |
 | [benchmarks/](https://github.com/ldocallaghan/BoreTHM/blob/main/benchmarks/README.md) | Reference dataset with inputs, expected outputs and tolerances |
-| [examples/](https://github.com/ldocallaghan/BoreTHM/tree/main/examples) | Site template and worked example |
+| [examples/](https://github.com/ldocallaghan/BoreTHM/tree/main/examples) | Worked reference example |
 | [docs/](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/README.md) | Reading guide, model use, science and historical records |
 | [src/borethm/data/](https://github.com/ldocallaghan/BoreTHM/tree/main/src/borethm/data) | Packaged observations and input-source records |
 | [results/](https://github.com/ldocallaghan/BoreTHM/tree/main/results) | Retained numerical evaluations and trial evidence |

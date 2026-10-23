@@ -4,7 +4,7 @@ Choose a path based on what you want to do. Installation and the first command a
 
 ## Use the model
 
-- [Evaluate a new site](guides/new-site.md): inputs, sources and the worked template.
+- [Evaluate a new site](guides/new-site.md): create, check and evaluate a TOML site file from the installed package.
 - [Interpret an assessment](guides/interpreting-results.md): status, density bounds and schedule identity.
 - [Python interface](api.md): public functions and classes, with units and the interface stability policy.
 - [Read the study summary](guides/summary.md): findings and questions for specialist discussion, also available as a [two-page PDF](../output/pdf/summary.pdf).
@@ -30,3 +30,5 @@ Choose a path based on what you want to do. Installation and the first command a
 - [Contributing](../CONTRIBUTING.md) and [support](../SUPPORT.md): changes, problem reports and questions.
 
 Field-data descriptions and input sources stay beside their files under [src/borethm/data/](../src/borethm/data/). They are linked from the scientific pages where needed.
+
+[Documentation website](https://ldocallaghan.github.io/BoreTHM/)

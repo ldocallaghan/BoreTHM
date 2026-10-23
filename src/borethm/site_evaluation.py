@@ -2899,7 +2899,7 @@ def main(argv=None):
             from borethm.site_files import load_site
             if Path(a.site_file).suffix.lower() == '.py':
                 raise ValueError(f'{a.site_file}: site files are TOML; for Python use '
-                                 'https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md')
+                                 'https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md#python-route')
             site = load_site(a.site_file)
             site_file = _site_file_record(a.site_file)
     except (ValueError, OSError) as error:

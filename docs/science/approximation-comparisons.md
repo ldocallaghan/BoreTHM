@@ -129,4 +129,18 @@ The base deep-site verdicts remain NO-GO for this programme and these assumption
 
 ## Evidence and reproduction
 
-The [comparison runner](../../src/borethm/studies/robustness.py) and [saved outputs](../../results/robustness/) retain the settings, signed changes and numerical checks. Reproduce the comparisons with `python -m borethm.studies.robustness` from the repository root. The [historical review](../archive/v1.3.4/approximation-review.md) records the original runtime and test evidence.
+The [comparison runner](../../src/borethm/studies/robustness.py) and [saved outputs](../../results/robustness/) retain the settings, signed changes and numerical checks.
+
+From a checkout of the release tag, install the locked environment and write a separate reproduction beside the checkout:
+
+```bash
+git checkout v1.5.0
+python -m pip install -r requirements-lock.txt
+python -m pip install --no-deps -e .
+python -m borethm.studies.robustness --output ../borethm-approximation-reproduction
+python -m borethm.studies.robustness --sites pannonian --only A9 --legacy-threshold --output ../borethm-approximation-reproduction
+```
+
+These commands preserve the saved outputs under `results/robustness/`. The `--legacy-threshold` run also reproduces the historical Pannonian threshold check.
+
+The [historical review](../archive/v1.3.4/approximation-review.md) records the original runtime and test evidence.

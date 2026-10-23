@@ -207,4 +207,15 @@ Sources checked on 11 October 2026. Availability describes the product or practi
 
 The [reviewed trial outputs](../../results/levers/) and their [manifest](../../results/levers/manifest.json) retain all settings and brackets. The [historical review](../archive/v1.3.4/design-review.md) records implementation and testing history.
 
-From the repository root, use `python -m borethm.studies.levers --sites soultz united-downs --levers L1 L2 L3 L4 L5 L6 L7 L8`, followed by `python -m borethm.studies.lever_flow_limit` and `python -m borethm.studies.lever_pairs`, to reproduce the study. These are lengthy physical calculations. The [maintenance priorities](../maintenance/development.md) record the already-met timeline trigger and the reason for deferral.
+From a checkout of the release tag, install the locked environment and write a separate reproduction beside the checkout:
+
+```bash
+git checkout v1.5.0
+python -m pip install -r requirements-lock.txt
+python -m pip install --no-deps -e .
+python -m borethm.studies.levers --sites soultz united-downs --levers L1 L2 L3 L4 L5 L6 L7 L8 --output ../borethm-design-reproduction
+python -m borethm.studies.lever_flow_limit --output ../borethm-design-reproduction
+python -m borethm.studies.lever_pairs --output ../borethm-design-reproduction
+```
+
+All three commands use the same output folder because the flow-boundary and pair calculations read the preceding trials. Saved evidence under `results/levers/` is preserved. These are lengthy physical calculations. The [maintenance priorities](../maintenance/development.md) record the already-met timeline trigger and the reason for deferral.
