@@ -12,7 +12,8 @@
 - [x] Compare public names and signatures with v1.4.3, allowing the documented additions.
 - [x] Compare the five reference exports and preserve all saved numerical evidence.
 - [x] Pass the local fast suite, link checker and strict documentation build.
-- [ ] Pass the full physical suite on CI at the release candidate.
+- [x] Pass the fast suite across Python 3.11 to 3.14 on Linux, Windows and macOS, and check wheel installation on all three platforms.
+- [x] Pass the full physical suite on CI at the release candidate.
 - [ ] Review the complete diff and verified release checks before tagging.
 - [ ] Confirm the citation date against the actual tag date.
 - [ ] Tag v1.5.0 and publish the GitHub release.
