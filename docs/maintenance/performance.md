@@ -541,3 +541,131 @@ numbers identify each function.
 | `model1_coupled.py:329 friction_factor` | 762,756 | 8.3389 | 8.5794 |
 | `comparative_sites.py:33 gt` | 503,998 | 7.8402 | 20.5017 |
 | `<built-in method numpy.zeros>` | 20,190,085 | 7.2564 | 7.2564 |
+
+## v1.5.1 measurements
+
+The candidate reuses fluid and geometry lookups within a circulation step and
+identical circulation solves within one assessment. Every timed export remains byte-identical to its reference.
+The shared table-cell-search prototype was
+removed after exact interpolation tests failed on macOS; its native timings
+below are retained for information only.
+
+The variants are C1 (property and geometry reuse), C2 (the rejected shared
+table-cell search) and C3 (reuse of identical circulation solves). The release
+candidate includes C1 and C3.
+
+These measurements use the same Ryzen 7 5700G, Python 3.14.4 and locked numerical
+libraries as the original baseline, with a warm property-table cache and one BLAS
+thread. Each variant has three fresh CLI runs per site. All runs were serial.
+C1 and C2 timings are retained from the original interleaved batch. The final
+C1+C3 candidate was measured again after correcting result-copy compatibility.
+The second round in each batch reverses site order. Mean whole-host CPU utilisation
+during the measured commands ranges from 7.53% to 18.98%.
+The baseline column retains the original three-run medians. These are desktop
+measurements, and the profiled stage shares are diagnostic.
+
+| Site | Baseline (s) | C1 only (s) | C1+C2, rejected (s) | C1+C3 (s) | C1+C3 range (s) | Time reduction |
+|---|---:|---:|---:|---:|---:|---:|
+| Soultz | 202.44 | 167.76 | 153.07 | 131.77 | 131.65–135.91 | 34.9% |
+| Larderello | 78.23 | 63.17 | 56.25 | 39.57 | 39.46–41.72 | 49.4% |
+| United Downs | 610.22 | 469.91 | 416.06 | 345.54 | 339.65–349.29 | 43.4% |
+| Pannonian | 255.85 | 205.64 | 188.31 | 163.93 | 157.53–164.49 | 35.9% |
+| Newberry | 30.30 | 30.02 | 27.24 | 19.68 | 19.32–19.97 | 35.1% |
+
+The retained candidate takes 19.68 to 345.54 seconds on this machine.
+The incremental columns below are differences between measured medians.
+Background load varied between sessions, so these estimate each change's
+contribution to the saving.
+
+| Site | C1 saving (s) | Additional C3 saving (s) | Total release saving (s) | Rejected C2 saving beyond C1 (s) |
+|---|---:|---:|---:|---:|
+| Soultz | 34.67 | 36.00 | 70.67 | 14.69 |
+| Larderello | 15.05 | 23.60 | 38.65 | 6.93 |
+| United Downs | 140.31 | 124.36 | 264.68 | 53.85 |
+| Pannonian | 50.21 | 41.71 | 91.93 | 17.33 |
+| Newberry | 0.28 | 10.35 | 10.63 | 2.78 |
+
+The cache compares complete solve inputs exactly. Geotherms and general
+exposure functions use identity; the existing rate-of-penetration exposure formula also recognises
+identical immutable numeric captures. It stores an independent result before
+caller mutation and returns a fresh copy on every hit. Entries are cleared at
+the end of the assessment or trial, including exceptional exits.
+
+| Site | Solve requests | Cached results | Computed solves |
+|---|---:|---:|---:|
+| Soultz | 76 | 24 | 52 |
+| Larderello | 46 | 20 | 26 |
+| United Downs | 302 | 100 | 202 |
+| Pannonian | 88 | 31 | 57 |
+| Newberry | 42 | 24 | 18 |
+
+### Stage shares after reuse
+
+These shares come from separate profiled runs, excluding imports and setup.
+Lookup timings overlap the model stages and must not be added to these shares.
+The lookup union is the time spent inside any table-property lookup, counting
+nested lookup calls once. IAPWS own time excludes calls to other functions.
+
+| Stage | Soultz | Larderello | United Downs | Pannonian | Newberry |
+|---|---:|---:|---:|---:|---:|
+| Circulation solves and reuse | 52.01% | 74.35% | 81.25% | 70.05% | 51.69% |
+| Wall temperatures | 26.97% | 16.23% | 13.81% | 20.68% | 31.33% |
+| Stability | 2.30% | 0.84% | 0.55% | 1.03% | 1.74% |
+| Programme pressure windows | 15.38% | 7.08% | 3.82% | 7.11% | 13.26% |
+| Connections and trips | 0.63% | 1.00% | 0.21% | 0.45% | 1.02% |
+| Equipment checks | 2.65% | 0.31% | 0.29% | 0.61% | 0.60% |
+| Fluid iteration | 0.01% | 0.02% | 0.00% | 0.01% | 0.03% |
+| Pipe and flow selection | 0.03% | 0.06% | 0.05% | 0.03% | 0.12% |
+| Report and JSON | 0.01% | 0.04% | 0.01% | 0.01% | 0.09% |
+| Other | 0.02% | 0.07% | 0.01% | 0.02% | 0.12% |
+
+| Site | Table interpolator calls | Lookup union (s) | Lookup share | IAPWS own (s) |
+|---|---:|---:|---:|---:|
+| Soultz | 1,133,339 | 63.39 | 36.7% | 0.000147 |
+| Larderello | 481,143 | 25.59 | 51.4% | 0.000101 |
+| United Downs | 4,266,526 | 238.75 | 54.3% | 0.000517 |
+| Pannonian | 1,523,863 | 91.92 | 47.0% | 0.000167 |
+| Newberry | 193,976 | 9.90 | 40.6% | 0.000079 |
+
+### Memory and the coating trial
+
+A separate unprofiled United Downs run reached 187.83 MiB peak resident
+memory, compared with 122.82 MiB in the baseline. The cache keeps
+independent solution copies until the assessment ends. These are OS-maintained
+process peaks, including imports, as in the original measurement.
+
+The same Soultz coating-qualification trial at 300 °C and 40 L/s took
+51.469 seconds inside the trial call, compared with
+51.400 seconds before the changes. Both are single unprofiled runs.
+Its full exported scientific record and NO-GO verdict match the baseline; only
+the source fingerprint, elapsed time and output path are excluded. Version
+metadata is compared. No saved trial or rating-only physics record was reused.
+These single runs show no measured speed-up for this trial.
+
+### Pyodide under Node.js
+
+Newberry took 29.691 seconds inside
+the evaluation entry point, compared with
+51.338 seconds in the original
+run. These are single unprofiled measurements after setup, using the same local
+Node.js 24.17.0 and Pyodide 314.0.7 runtime (Python 3.14.2, NumPy 2.4.6,
+SciPy 1.18.0 and IAPWS 1.5.5). The complete export matches the original Pyodide
+export exactly, including version metadata. The evaluation cache is cleared
+after the call.
+
+### Evidence
+
+The three variants use source commits `35ce917`,
+`e658c0b` (rejected), and
+`b647c8b`. The comparison wheels retain 1.5.0
+metadata until release preparation. Installed files were verified against each
+wheel manifest. All 45 timed site exports, the separate profiles and the memory
+run were checked exactly against the unchanged reference exports. Saved results,
+goldens and benchmark inputs are unchanged. Full commands, times, wheel hashes,
+environment records and raw profiles are retained in the external measurement
+record. The original measurements above are preserved.
+
+The [compatibility workflow](https://github.com/ldocallaghan/BoreTHM/actions/runs/40098550516)
+passed 642 fast tests on each of Linux, Windows and macOS with Python 3.11–3.14.
+The separate [exact-export workflow](https://github.com/ldocallaghan/BoreTHM/actions/runs/40098550448)
+passed all five before/after comparisons in each of those 12 environments.
