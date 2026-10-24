@@ -1,5 +1,25 @@
 # Release checklist
 
+## v1.5.1
+
+- [x] Review the property and geometry reuse and the assessment-scoped solve cache.
+- [x] Remove the shared-search prototype after its macOS exact comparisons fail.
+- [x] Compare all five exports exactly in each of the 12 CI environments.
+- [x] Record three timings per site, stage shares and the coating trial.
+- [x] Check Pyodide result copying and reproduce the full Newberry export exactly.
+- [x] Preserve every saved result, golden and benchmark file.
+- [ ] Build the 1.5.1 distributions and check a fresh wheel installation.
+- [ ] Compare all five exports from the 1.5.1 wheel against the baseline.
+- [ ] Pass the release fast compatibility matrix and full physical suite on CI.
+- [ ] Check links, API page equality and the strict documentation build.
+- [ ] Review the final diff and verified checks before tagging.
+- [ ] Confirm the citation date against the actual tag date.
+- [ ] Tag v1.5.1 and publish the GitHub release.
+- [ ] Verify PyPI installation, Pages deployment and the Zenodo archive.
+
+See the [v1.5.1 release record](../releases/v1.5.1.md) for verification and
+publication status.
+
 ## v1.5.0
 
 - [x] Review the packaged TOML starter, generated site files and input checks.

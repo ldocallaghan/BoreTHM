@@ -25,7 +25,7 @@ borethm-water-table
 borethm-evaluate --site newberry --json newberry.json
 ```
 
-The IAPWS-95 cache is built once, outside the installed package, in the platform's user cache directory. Set `BORETHM_CACHE_DIR` to choose another location. The evaluator also builds a missing cache on first use. The assessment command prints its result and writes JSON with the reported site inputs, evaluated checks and runtime provenance. Evaluations take several minutes; weighted-fluid cases require repeated coupled solves and can take longer.
+The IAPWS-95 cache is built once, outside the installed package, in the platform's user cache directory. Set `BORETHM_CACHE_DIR` to choose another location. The evaluator also builds a missing cache on first use. The assessment command prints its result and writes JSON with the reported site inputs, evaluated checks and runtime provenance. With an existing cache, the five built-in assessments took about 20 seconds to 6 minutes on a Ryzen 7 5700G. Cases that need weighted drilling fluid take longer than the water-only Newberry case.
 
 The same assessment through the [public Python interface](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/api.md):
 
