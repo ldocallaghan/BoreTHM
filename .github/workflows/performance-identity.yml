@@ -1,0 +1,127 @@
+name: evaluation identity
+
+on:
+  push:
+    branches: [v1.5.1-performance]
+    paths:
+      - src/borethm/**
+      - tests/test_circulation_reuse.py
+      - tests/test_water_lookup_identity.py
+      - tools/compare_exports.py
+      - .github/workflows/performance-identity.yml
+  workflow_dispatch:
+    inputs:
+      baseline:
+        description: Baseline commit or tag for exact export comparisons
+        default: b9a8a93f49f1b53b7bd71a713b8ca4988e7c21c6
+        required: true
+
+jobs:
+  paired-exports:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ['3.11', '3.12', '3.13', '3.14']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: bash
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+      IDENTITY_PYTHON: ${{ matrix.python }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: candidate
+      - uses: actions/checkout@v7
+        with:
+          path: baseline-source
+          ref: ${{ inputs.baseline || 'b9a8a93f49f1b53b7bd71a713b8ca4988e7c21c6' }}
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Check that inputs and saved evidence are unchanged
+        run: |
+          python - <<'PY'
+          import pathlib, subprocess
+          for folder in ('results','tests/golden','benchmarks','src/borethm/data','src/borethm/templates'):
+              def tree(checkout):
+                  return subprocess.check_output(['git','-C',checkout,'rev-parse','HEAD:'+folder], text=True).strip()
+              assert tree('baseline-source') == tree('candidate'), folder
+          PY
+      - name: Install the build frontend
+        run: python -m pip install build==1.6.1
+      - name: Build the baseline wheel
+        run: |
+          python -m build --wheel --outdir "$RUNNER_TEMP/baseline-wheel" baseline-source
+      - name: Install baseline dependencies and wheel
+        run: |
+          python - <<'PY'
+          import os, pathlib, subprocess, sys
+          workspace = pathlib.Path(os.environ['GITHUB_WORKSPACE'])
+          wheel = next((pathlib.Path(os.environ['RUNNER_TEMP']) / 'baseline-wheel').glob('*.whl'))
+          if os.environ['IDENTITY_PYTHON'] == '3.14':
+              subprocess.run([sys.executable, '-m', 'pip', 'install', '-r',
+                              str(workspace / 'candidate/requirements-lock.txt')], check=True)
+          else:
+              subprocess.run([sys.executable, '-m', 'pip', 'install', str(wheel)+'[plot,test]'], check=True)
+          subprocess.run([sys.executable, '-m', 'pip', 'install', '--force-reinstall',
+                          '--no-deps', str(wheel)], check=True)
+          PY
+      - name: Export every baseline site with a warm property table
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, subprocess, sys, sysconfig
+          output = pathlib.Path(os.environ['RUNNER_TEMP']) / 'evaluation-identity'
+          output.mkdir()
+          os.environ['BORETHM_CACHE_DIR'] = str(output / 'cache')
+          subprocess.run([sys.executable, '-m', 'borethm.water_table'], cwd=output, check=True)
+          cli = pathlib.Path(sysconfig.get_path('scripts')) / ('borethm-evaluate.exe' if os.name == 'nt' else 'borethm-evaluate')
+          for site in ('soultz','larderello','united-downs','pannonian','newberry'):
+              subprocess.run([str(cli), '--site', site,
+                              '--json', str(output / (site+'-before.json'))], cwd=output, check=True)
+          PY
+      - name: Build and install the candidate wheel
+        run: |
+          python -m build --wheel --outdir "$RUNNER_TEMP/candidate-wheel" candidate
+          python -m pip install --force-reinstall --no-deps "$RUNNER_TEMP"/candidate-wheel/*.whl
+          python -m pip check
+      - name: Check interpolation with the physical table
+        env:
+          BORETHM_TEST_CACHED_TABLE: '1'
+        run: |
+          python - <<'PY'
+          import os, pathlib, subprocess, sys
+          workspace = pathlib.Path(os.environ['GITHUB_WORKSPACE'])
+          output = pathlib.Path(os.environ['RUNNER_TEMP']) / 'evaluation-identity'
+          os.environ['BORETHM_CACHE_DIR'] = str(output / 'cache')
+          subprocess.run([sys.executable, '-m', 'pytest',
+                          str(workspace / 'candidate/tests/test_water_lookup_identity.py'),
+                          '--junitxml', str(output / 'physical-interpolation.xml')], cwd=output, check=True)
+          PY
+      - name: Export every candidate site and compare exact numerical bits
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, subprocess, sys, sysconfig
+          workspace = pathlib.Path(os.environ['GITHUB_WORKSPACE'])
+          output = pathlib.Path(os.environ['RUNNER_TEMP']) / 'evaluation-identity'
+          os.environ['BORETHM_CACHE_DIR'] = str(output / 'cache')
+          cli = pathlib.Path(sysconfig.get_path('scripts')) / ('borethm-evaluate.exe' if os.name == 'nt' else 'borethm-evaluate')
+          for site in ('soultz','larderello','united-downs','pannonian','newberry'):
+              before, after = output / (site+'-before.json'), output / (site+'-after.json')
+              subprocess.run([str(cli), '--site', site,
+                              '--json', str(after)], cwd=output, check=True)
+              subprocess.run([sys.executable, str(workspace / 'candidate/tools/compare_exports.py'),
+                              str(before), str(after), '--output', str(output / (site+'-comparison.json'))],
+                             cwd=output, check=True)
+          PY
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: evaluation-identity-${{ matrix.os }}-python-${{ matrix.python }}
+          path: ${{ runner.temp }}/evaluation-identity/
