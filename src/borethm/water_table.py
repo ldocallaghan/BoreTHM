@@ -81,33 +81,6 @@ def _clip(T_C, P_Pa):
     return np.column_stack([np.atleast_1d(T_C), np.atleast_1d(P_Pa)])
 
 
-def _lookup(pts, names):
-    interpolators = _interpolators()
-    selected = [interpolators[name] for name in names]
-    values = [interpolator.values for interpolator in selected]
-    if not all(interpolator.method == "linear" and value.ndim == 2 and value.dtype == np.dtype(float)
-               and value.flags.writeable and value.dtype.byteorder == '='
-               for interpolator, value in zip(selected, values)):
-        return tuple(interpolator(pts) for interpolator in selected)
-
-    T, P = np.asarray(pts, dtype=float).T
-    i = np.clip(np.searchsorted(T_GRID, T, side='right') - 1, 0, len(T_GRID) - 2)
-    j = np.clip(np.searchsorted(P_GRID, P, side='right') - 1, 0, len(P_GRID) - 2)
-    y0 = (T - T_GRID[i]) / (T_GRID[i + 1] - T_GRID[i])
-    y1 = (P - P_GRID[j]) / (P_GRID[j + 1] - P_GRID[j])
-    nans = np.isnan(T) | np.isnan(P)
-    results = []
-    for value in values:
-        # Preserve the two-dimensional linear interpolator's operation order.
-        result = 0 + value[i, j] * (1 - y0) * (1 - y1)
-        result = result + value[i, j + 1] * (1 - y0) * y1
-        result = result + value[i + 1, j] * y0 * (1 - y1)
-        result = result + value[i + 1, j + 1] * y0 * y1
-        result[nans] = np.nan
-        results.append(result)
-    return tuple(results)
-
-
 def props(T_C, P_Pa):
     """Return water properties for T_C [degrees C] and P_Pa [Pa absolute].
 
@@ -120,7 +93,8 @@ def props(T_C, P_Pa):
     The table is built on first use when no cache is present.
     """
     pts = _clip(T_C, P_Pa)
-    return _lookup(pts, ("RHO", "CP", "MU", "K"))
+    f = _interpolators()
+    return f["RHO"](pts), f["CP"](pts), f["MU"](pts), f["K"](pts)
 
 
 def cp(T_C, P_Pa):

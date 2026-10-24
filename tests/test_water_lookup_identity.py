@@ -88,18 +88,6 @@ def test_direct_property_objects_keep_their_scipy_interface():
         assert getattr(wt,name) is wt._interpolators()[name]
 
 
-def test_all_properties_share_the_two_cell_searches(monkeypatch):
-    original=np.searchsorted
-    calls=[]
-    def search(grid,*args,**kwargs):
-        calls.append(grid)
-        return original(grid,*args,**kwargs)
-    monkeypatch.setattr(np,'searchsorted',search)
-    wt.props([20.,200.],[1e6,50e6])
-    assert len(calls)==2
-    assert calls[0] is wt.T_GRID and calls[1] is wt.P_GRID
-
-
 @pytest.mark.parametrize('variant',['float32','readonly','nearest'])
 def test_other_interpolator_paths_keep_their_original_results(monkeypatch,variant):
     tables={}
