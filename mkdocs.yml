@@ -48,6 +48,7 @@ nav:
   - Maintain the project:
       - Maintenance notes: maintenance/README.md
       - Development priorities: maintenance/development.md
+      - Evaluation performance: maintenance/performance.md
       - Release checklist: maintenance/release-checklist.md
   - Python API: api.md
   - Release records:
