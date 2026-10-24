@@ -65,15 +65,15 @@ def fluid_props(T_C, P_Pa, fluid=None):
     return tuple(np.full(shape, float(fluid[q])) for q in ("rho", "cp", "mu", "k"))
 
 
-def _cp(T_C, P_Pa, fluid=None):
+def _cp(T_C, P_Pa, fluid=None, *, properties=None):
     if fluid is None:
         return wt.CP(np.column_stack([np.clip(T_C, 1, 480), np.clip(P_Pa, 1e5, 220e6)]))
-    return fluid_props(T_C, P_Pa, fluid)[1]
+    return (fluid_props(T_C, P_Pa, fluid) if properties is None else properties)[1]
 
 
-def h_dittus(m_dot, area, Dh, T_C, P_Pa, n=0.4, fluid=None):
+def h_dittus(m_dot, area, Dh, T_C, P_Pa, n=0.4, fluid=None, *, properties=None):
     """Vectorized convective coefficient [W/m^2/K]. Laminar floor Nu=4.36."""
-    rho, cp, mu, k = fluid_props(T_C, P_Pa, fluid)
+    rho, cp, mu, k = fluid_props(T_C, P_Pa, fluid) if properties is None else properties
     Gflux = m_dot / area
     Re = Gflux * Dh / mu
     Pr = cp * mu / k
@@ -180,15 +180,16 @@ def exposure_seconds(z, t_years, exposure):
 
 def conductances(z, T_d, T_u, m_dot, t_years, k_rock, geometry, exposure=None,
                  fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, geom_z=None,
-                 film_mult=1.0, P_surface=P_SURF):
+                 film_mult=1.0, P_surface=P_SURF, *, geometry_values=None,
+                 tvd_values=None, pressure=None, properties_d=None, properties_u=None):
     """Vectorized per-length UAi (centre<->annulus), UAo (rock<->annulus).
     geom_z, if given, is where the string and hole are looked up (a point inside
     the same piece), so that nodes on a piece boundary take that piece's geometry."""
-    g = geometry.at(z if geom_z is None else geom_z)
-    g["tvd"] = geometry.survey.tvd(z)
-    P = P_of_z(g["tvd"], P_surface)
-    h_d = h_dittus(m_dot, g["A_bore"], g["Dh_bore"], T_d, P, fluid=fluid)
-    h_a = film_mult * h_dittus(m_dot, g["A_ann"], g["Dh_ann"], T_u, P, fluid=fluid)
+    g = geometry.at(z if geom_z is None else geom_z) if geometry_values is None else geometry_values
+    g["tvd"] = geometry.survey.tvd(z) if tvd_values is None else tvd_values
+    P = P_of_z(g["tvd"], P_surface) if pressure is None else pressure
+    h_d = h_dittus(m_dot, g["A_bore"], g["Dh_bore"], T_d, P, fluid=fluid, properties=properties_d)
+    h_a = film_mult * h_dittus(m_dot, g["A_ann"], g["Dh_ann"], T_u, P, fluid=fluid, properties=properties_u)
 
     R_in = 1.0 / (h_d * 2 * np.pi * g["r_bore"])
     R_ao = 1.0 / (h_a * 2 * np.pi * g["r_out"])
@@ -241,14 +242,22 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     P_L = float(P_of_z(geometry.survey.tvd(L), P_surface))
 
     def derivs(zz, Td, Tu, geom_z=None):
+        g = geometry.at(zz) if geom_z is None else None
+        tvd = g["tvd"] if g is not None else geometry.survey.tvd(zz)
+        P = P_of_z(tvd, P_surface)
+        properties_d = None if fluid is None else fluid_props(Td, P, fluid)
+        properties_u = None if fluid is None else fluid_props(Tu, P, fluid)
         UAi, UAo, P = conductances(zz, Td, Tu, m_dot, t_years, k_rock, geometry, exposure,
-                                   fluid, rhocp_rock, geom_z, film_mult, P_surface)
-        cpd = _cp(Td, P, fluid)
-        cpu = _cp(Tu, P, fluid)
+                                   fluid, rhocp_rock, geom_z, film_mult, P_surface,
+                                   geometry_values=g, tvd_values=tvd, pressure=P,
+                                   properties_d=properties_d, properties_u=properties_u)
+        cpd = _cp(Td, P, fluid, properties=properties_d)
+        cpu = _cp(Tu, P, fluid, properties=properties_u)
         dTd = UAi * (Tu - Td) / (m_dot * cpd)
-        dTu = (-UAo * (Trock(zz) - Tu) + UAi * (Tu - Td)) / (m_dot * cpu)
+        dTu = (-UAo * (T_tvd(tvd) - Tu) + UAi * (Tu - Td)) / (m_dot * cpu)
         if friction_heat:
-            g = geometry.at(zz if geom_z is None else geom_z)
+            if g is None:
+                g = geometry.at(geom_z)
             dTd = dTd + _friction_gradient(m_dot, Td, P, g["A_bore"], g["Dh_bore"], fluid) / cpd
             dTu = dTu - _friction_gradient(m_dot, Tu, P, g["A_ann"], g["Dh_ann"], fluid) / cpu
         return dTd, dTu
