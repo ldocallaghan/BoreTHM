@@ -1,19 +1,5 @@
 # Changelog
 
-## v1.5.1 (24 October 2026)
-
-Evaluations run faster by reusing fluid and geometry lookups within each
-circulation step and identical circulation solves within one assessment.
-On the reference machine, the built-in sites take about 20 to 346 seconds,
-down from 30 to 610 seconds. Every computed number, saved result and golden
-is unchanged. Water-property interpolation retains its existing SciPy implementation.
-
-The solve cache is cleared at the end of each assessment or study trial.
-Independent result copies preserve caller isolation, including SciPy
-interpolators under Pyodide. The source fingerprint changes, so rerunning
-a study recomputes saved trials. See the [release record](docs/releases/v1.5.1.md)
-and [performance measurements](docs/maintenance/performance.md#v151-measurements).
-
 ## v1.5.0 (23 October 2026)
 
 An installed package can now assess a new site from a TOML file.

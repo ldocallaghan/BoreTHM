@@ -52,7 +52,6 @@ nav:
       - Release checklist: maintenance/release-checklist.md
   - Python API: api.md
   - Release records:
-      - v1.5.1: releases/v1.5.1.md
       - v1.5.0: releases/v1.5.0.md
       - v1.4.3: releases/v1.4.3.md
       - v1.4.2: releases/v1.4.2.md
