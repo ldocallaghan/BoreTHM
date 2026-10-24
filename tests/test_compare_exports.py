@@ -40,10 +40,10 @@ def test_scientific_fields_cannot_be_excluded():
 
 
 def test_study_exclusions_are_explicit_and_missing_values_are_reported():
-    before={'elapsed_seconds':1.0,'evidence':'old.json','value':2.0}
-    after={'elapsed_seconds':2.0,'evidence':'new.json','value':2.0}
+    before={'elapsed_seconds':1.0,'evidence':'old.json','source_sha256':'a','value':2.0}
+    after={'elapsed_seconds':2.0,'evidence':'new.json','source_sha256':'b','value':2.0}
     assert not compare(before,after)['equal']
-    result=compare(before,after,excluded=['/elapsed_seconds','/evidence'])
-    assert result['equal'] and len(result['excluded_fields'])==2
+    result=compare(before,after,excluded=['/elapsed_seconds','/evidence','/source_sha256'])
+    assert result['equal'] and len(result['excluded_fields'])==3
     assert compare({'versions':{}},{})['equal']
     assert not compare({'result':1},{})['equal']

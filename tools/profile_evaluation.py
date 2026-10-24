@@ -128,6 +128,7 @@ class Observer:
 
     def register(self, stage, *functions):
         for function in functions:
+            function = inspect.unwrap(function)
             self.codes[function.__code__] = dict(stage=stage, label=self.label(function))
 
     def current_stage(self):
@@ -174,6 +175,9 @@ class Observer:
             record = self.solve_calls[item['solve_index']]
             record.update(profiled_seconds=inclusive / 1e9,
                           success=bool(value['success']) if isinstance(value, dict) and 'success' in value else None)
+            frame = sys._getframe(1)
+            if frame.f_code is code:
+                record['cache_hit'] = bool(frame.f_locals.get('_cache_hit', False))
         end = time.perf_counter_ns()
         self.observer_ns += end - now
         self.last = end
@@ -221,6 +225,8 @@ class Observer:
             stages={key: dict(seconds=value / 1e9, percent=100 * value / 1e9 / total) for key, value in self.exclusive.items()},
             functions={key: dict(calls=value['calls'], inclusive_seconds=value['nanoseconds'] / 1e9) for key, value in self.inclusive.items()},
             solve_calls=len(self.solve_calls), repeated_calls=len(duplicates), unique_calls=len(seen),
+            cache_hits=sum(record.get('cache_hit', False) for record in self.solve_calls),
+            computed_solves=sum(not record.get('cache_hit', False) for record in self.solve_calls),
             repeated_profiled_solve_seconds=sum(r['profiled_seconds'] for r in duplicates),
             duplicate_definition='All bound parameters, exact float/array bytes, callable code/defaults/closure values, and object state at entry. No callable is invoked by the observer. Module globals are not included; matching arguments alone do not establish safe result reuse.',
             calls=self.solve_calls)
@@ -378,15 +384,16 @@ def summary_document(state):
         'Wall times use fresh unprofiled CLI processes with a warm disk cache.',
         'Profiles exclude imports/setup and supply diagnostic shares and counts.',
         'Memory is measured separately for the selected site with the largest median.', '',
-        '| Site | Runs | Median wall (s) | Range (s) | Solves | Repeated | Peak RSS (MiB) |',
-        '|---|---:|---:|---:|---:|---:|---:|']
+        '| Site | Runs | Median wall (s) | Range (s) | Requests | Cached | Computed | Repeated inputs | Peak RSS (MiB) |',
+        '|---|---:|---:|---:|---:|---:|---:|---:|---:|']
     memory = state.get('memory', {})
     for site, item in state['sites'].items():
         observation = item.get('profile', {}).get('observation', {})
         peak = memory.get('peak_resident_bytes') if memory.get('site') == site else None
         lines.append(f"| {site} | {len(item['wall_seconds'])} | {item['median_seconds']:.3f} | "
             f"{min(item['wall_seconds']):.3f}–{max(item['wall_seconds']):.3f} | "
-            f"{observation.get('solve_calls','')} | {observation.get('repeated_calls','')} | "
+            f"{observation.get('solve_calls','')} | {observation.get('cache_hits','')} | "
+            f"{observation.get('computed_solves','')} | {observation.get('repeated_calls','')} | "
             f"{peak/1048576 if peak is not None else ''} |")
     lines += ['', '| Stage | '+' | '.join(state['sites'])+' |',
               '|---|'+'---:|'*len(state['sites'])]

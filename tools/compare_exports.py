@@ -12,6 +12,7 @@ import struct
 
 EXCLUSIONS = {
     '/versions': 'code/environment provenance',
+    '/source_sha256': 'trial source/environment fingerprint',
     '/elapsed_seconds': 'trial elapsed time',
     '/evidence': 'trial output-file path',
 }

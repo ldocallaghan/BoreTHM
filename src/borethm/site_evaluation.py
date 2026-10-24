@@ -902,6 +902,7 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
                          "within the pump limit")
 
 
+@m1._cache_solves
 def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None):
     """Evaluate a SiteProfile through circulation, connections and trips.
 

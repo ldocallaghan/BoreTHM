@@ -36,9 +36,19 @@ P_of_z = P_surface + 10 MPa/km times true vertical depth, with a default
 P_surface of 0.1 MPa absolute. The programme's gauge wall-pressure budget
 is calculated separately by pressure.py.
 """
+from contextlib import contextmanager
+from contextvars import ContextVar
+from copy import deepcopy
+from functools import wraps
+import struct
+from threading import get_ident
+from types import FunctionType
+
 import numpy as np
 from scipy.integrate import solve_bvp
+from scipy.interpolate import PPoly, PchipInterpolator
 from borethm import geo_constants as C
+from borethm import fluids
 from borethm import water_table as wt
 from borethm import well_geometry as wg
 from borethm.well_geometry import WellGeometry
@@ -49,6 +59,125 @@ P_OP = 5.0e6    # Pa, loop operating pressure for the surface heat-product calc
                 # Used only for that calculation; the drilling loop is open.
 P_LIQUID = 5.0e6  # Pa, floor on the pressure at which the friction heating's
                   # liquid properties are taken (_friction_gradient)
+
+
+class _Identity:
+    """Keep a callable alive and compare it by identity."""
+
+    def __init__(self, value):
+        self.value = value
+
+    def __hash__(self):
+        return id(self.value)
+
+    def __eq__(self, other):
+        return type(other) is _Identity and self.value is other.value
+
+
+class _SolveCache:
+    def __init__(self):
+        self.entries = {}
+        self.owner = get_ident()
+        self.active = True
+        self.hits = self.misses = self.bypassed = 0
+
+
+_SOLVE_CACHE = ContextVar('circulation_solve_cache', default=None)
+
+
+def _current_solve_cache():
+    cache = _SOLVE_CACHE.get()
+    return cache if cache is not None and cache.active and cache.owner == get_ident() else None
+
+
+@contextmanager
+def _solve_cache_scope():
+    current = _current_solve_cache()
+    if current is not None:
+        yield current
+        return
+    cache = _SolveCache()
+    token = _SOLVE_CACHE.set(cache)
+    try:
+        yield cache
+    finally:
+        cache.entries.clear()
+        cache.active = False
+        _SOLVE_CACHE.reset(token)
+
+
+def _cache_solves(function):
+    @wraps(function)
+    def scoped(*args, **kwargs):
+        with _solve_cache_scope():
+            return function(*args, **kwargs)
+    return scoped
+
+
+def _cache_value(value, active=None):
+    """Exact supported input state; unknown state leaves a solve uncached."""
+    active = set() if active is None else active
+    kind = type(value)
+    if value is None or kind in (bool, int, str, bytes):
+        return kind, value
+    if kind is float:
+        return kind, struct.pack('>d', value)
+    if isinstance(value, np.generic):
+        if value.dtype.hasobject:
+            raise TypeError('object scalar')
+        return kind, value.dtype, value.tobytes()
+    if kind is np.ndarray:
+        if value.dtype.hasobject or value.dtype.fields:
+            raise TypeError('object or structured array')
+        return kind, value.dtype, value.shape, value.tobytes(order='C')
+    identifier = id(value)
+    if identifier in active:
+        raise TypeError('cyclic argument')
+    active.add(identifier)
+    try:
+        child = lambda item: _cache_value(item, active)
+        if isinstance(value, dict):
+            if kind is not dict and (kind.__getitem__ is not dict.__getitem__
+                    or kind.items is not dict.items
+                    or any('__slots__' in base.__dict__ for base in kind.__mro__)):
+                raise TypeError('custom mapping')
+            state = child(vars(value)) if kind is not dict and vars(value) else None
+            return kind, frozenset((child(k), child(v)) for k, v in value.items()), state
+        if kind in (tuple, list):
+            return kind, tuple(child(v) for v in value)
+        if kind in (wg.Layer, wg.PipeType, wg.StringSegment, wg.HoleInterval,
+                    wg.Survey, wg.WellGeometry, fluids.Mud):
+            return kind, child(vars(value))
+        if kind in (PPoly, PchipInterpolator):
+            return (kind, child(value.c), child(value.x), child(value.axis),
+                    child(value.extrapolate))
+        raise TypeError('unsupported argument ' + str(kind))
+    finally:
+        active.remove(identifier)
+
+
+def _solve_key(arguments):
+    if arguments['geometry'] is not None and type(arguments['geometry']) is not WellGeometry:
+        raise TypeError('custom geometry')
+    if arguments['fluid'] is not None and type(arguments['fluid']) not in (fluids.Mud, dict):
+        raise TypeError('custom fluid')
+    return tuple((name, _cache_exposure(value) if name == 'exposure' and value is not None
+                  else (type(value), _Identity(value)) if name == 'geotherm' and value is not None
+                  else _cache_value(value)) for name, value in arguments.items())
+
+
+def _cache_exposure(value):
+    # Only this formula's immutable captures can replace callable identity.
+    if (type(value) is FunctionType and value.__globals__ is globals()
+            and any(value.__code__ is code for code in exposure_from_rop.__code__.co_consts)
+            and value.__defaults__ is None and value.__kwdefaults__ is None):
+        captured = tuple(cell.cell_contents for cell in (value.__closure__ or ()))
+        if all(type(item) in (int, float) or isinstance(item, (np.integer, np.floating))
+               for item in captured):
+            return (FunctionType, value.__code__, tuple(_cache_value(item) for item in captured),
+                    _Identity(np), _Identity(np.asarray))
+    return type(value), _Identity(value)
+
 
 def P_of_z(z, P_surface=P_SURF):
     return P_surface + C.HYDROSTATIC_GRAD * z
@@ -211,6 +340,23 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
           geotherm=None, target_depth=None, geometry=None, exposure=None,
           fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
           tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF):
+    _arguments = locals().copy()
+    _cache = _current_solve_cache()
+    _cache_key, _cache_hit = None, False
+    if _cache is not None:
+        try:
+            _cache_key = _solve_key(_arguments)
+        except (TypeError, ValueError, RecursionError):
+            _cache.bypassed += 1
+        if _cache_key is not None:
+            if _cache_key in _cache.entries:
+                _cache.hits += 1
+                _cache_hit = True
+                _result = deepcopy(_cache.entries[_cache_key])
+                if verbose:
+                    _print(_result, T_inj, Q_face, t_years if exposure is None else 'by depth')
+                return _result
+            _cache.misses += 1
     # P_surface: pressure at the wellhead. Atmospheric by default; a closed,
     # pressurized loop (P_OP) keeps a return above 100 C liquid.
     # init: a previous solve() result whose profiles seed this one (continuation).
@@ -323,6 +469,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                P_bottom=P_L)
     if verbose:
         _print(res, T_inj, Q_face, t_years if exposure is None else "by depth")
+    if _cache_key is not None:
+        _cache.entries[_cache_key] = deepcopy(res)
     return res
 
 

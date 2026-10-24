@@ -463,6 +463,7 @@ def fingerprint():
     return digest.hexdigest()
 
 
+@m1._cache_solves
 def trial(key, lever, settings, root=RESULTS):
     root = require_path(root, 'Lever study output')
     parameters = asdict(settings)
