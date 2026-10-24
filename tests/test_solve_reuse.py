@@ -73,6 +73,28 @@ def test_every_bound_parameter_is_part_of_the_key():
         assert m1._solve_key(dict(base, **{name: value})) != original, name
 
 
+def test_cache_copies_interpolators_with_module_backends(monkeypatch, small_solve):
+    kwargs, calls = small_solve
+    original = m1.solve_bvp
+    def with_backend(*args, **kw):
+        result = original(*args, **kw)
+        result.sol.backend = np
+        return result
+    monkeypatch.setattr(m1, 'solve_bvp', with_backend)
+    with m1._solve_cache_scope() as cache:
+        first = m1.solve(**kwargs)
+        expected = m1._cache_value(first)
+        first['sol'].sol.c[:] = -1.
+        second = m1.solve(**kwargs)
+        assert m1._cache_value(second) == expected
+        assert second['sol'].sol.backend is first['sol'].sol.backend is np
+        assert not np.shares_memory(first['sol'].sol.c, second['sol'].sol.c)
+        second['Td'][:] = -2.
+        third = m1.solve(**kwargs)
+        assert m1._cache_value(third) == expected
+        assert cache.hits == 2 and cache.misses == 1 and len(calls) == 1
+
+
 @pytest.mark.parametrize('a,b', [(1, 1.), (True, 1), (0., -0.),
     (1., np.nextafter(1., 2.)), (np.float64(1.), 1.),
     (np.array([1.]), np.array([1.], dtype=np.float32)),

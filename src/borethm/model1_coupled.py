@@ -41,8 +41,9 @@ from contextvars import ContextVar
 from copy import deepcopy
 from functools import wraps
 import struct
+import sys
 from threading import get_ident
-from types import FunctionType
+from types import FunctionType, ModuleType
 
 import numpy as np
 from scipy.integrate import solve_bvp
@@ -83,6 +84,16 @@ class _SolveCache:
 
 
 _SOLVE_CACHE = ContextVar('circulation_solve_cache', default=None)
+
+
+def _copy_solve_result(result):
+    """Copy solution state, preserving references to imported modules."""
+    try:
+        return deepcopy(result)
+    except TypeError:
+        modules = {id(module): module for module in tuple(sys.modules.values())
+                   if isinstance(module, ModuleType)}
+        return deepcopy(result, modules)
 
 
 def _current_solve_cache():
@@ -352,7 +363,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
             if _cache_key in _cache.entries:
                 _cache.hits += 1
                 _cache_hit = True
-                _result = deepcopy(_cache.entries[_cache_key])
+                _result = _copy_solve_result(_cache.entries[_cache_key])
                 if verbose:
                     _print(_result, T_inj, Q_face, t_years if exposure is None else 'by depth')
                 return _result
@@ -470,7 +481,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     if verbose:
         _print(res, T_inj, Q_face, t_years if exposure is None else "by depth")
     if _cache_key is not None:
-        _cache.entries[_cache_key] = deepcopy(res)
+        _cache.entries[_cache_key] = _copy_solve_result(res)
     return res
 
 
