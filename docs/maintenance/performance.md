@@ -149,7 +149,7 @@ profiled scope. The cache has a maximum size of 200,000. It started empty
 in each fresh process.
 
 | Site | Scalar wrapper calls | LRU hits / misses / size | `water_table.props` calls | Interpolator calls | Lookup union (s) | IAPWS own time (ms) |
-|---|---:|---:|---:|---:|---:|---:|---:|
+|---|---:|---:|---:|---:|---:|---:|
 | soultz | 0 | 0 / 0 / 0 | 600,342 | 2,423,097 | 132.4143 | 0.1435 |
 | larderello | 0 | 0 / 0 / 0 | 298,546 | 1,217,090 | 64.2438 | 0.0929 |
 | united-downs | 0 | 0 / 0 / 0 | 2,342,778 | 9,397,707 | 506.6154 | 0.5497 |
