@@ -1,0 +1,125 @@
+{
+  "model_version": "1.5.0",
+  "baseline_commit": "b9a8a93f49f1b53b7bd71a713b8ca4988e7c21c6",
+  "git_describe": "v1.5.0-1-gb9a8a93",
+  "role": "Archived evidence: original S1 numerical predictions are unchanged. Tests recompute summary arithmetic only, without rerunning the experiment.",
+  "versions": {
+    "Python": "3.14.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "iapws": "1.5.5",
+    "matplotlib": "3.11.2"
+  },
+  "S1_plan_sha256": "8eab5bdcb241976fb4f9b6808b276481accfab487b099940d32d5dfcf31ed974",
+  "original_primary_output_sha256": "f19c3c1fb8151ab4b1fb7876ac64c960753d5035ced0fd8240e109bba52b0d96",
+  "source_inputs_sha256": {
+    "bha_components.csv": "561c9613a125e445857b767f03fca5d0479dd36841b2d408af413c3896a7380e",
+    "bit_records.csv": "b985fcd8a99a3bc2974154c72949b610756d960aba699d3ed2d44b2d9a93c169",
+    "casing_records.csv": "46f746dd31a9198ae55349879412de60257cf27451398e4a59e186f6868a564f",
+    "clock_alignment.csv": "927d2ac771430d761748a325bd759dfffefbb6a0c944b26c6b4d9d310a2a457d",
+    "daily_well_inputs.csv": "47a81681ad18d5280dae09503b92205c640126c6f52b89c2d9a63d36720c0ef3",
+    "formation_temperature_216day.csv": "5af4cf699f4133ebdfb11b91df12551b9ace041a2306c2ecbfdb2b9f60715ae4",
+    "formation_temperature_57day.csv": "2fc1625846d015a1029a7e786973339c3b93c3da7351d8739e7383dae887b8ac",
+    "mud_log_by_depth.csv": "c14728c67cce1ec993591df91e90428d715d16249cedbd77351943a148930d9a",
+    "operating_notes.csv": "6e3ee327c6851a39f941f6ba37fc8245a9026fb1398a6c8ef22332cffee4ea57",
+    "rig_history_1min.csv": "c00252ddf112afae9be8cfa158f5acc2e51320d6aaeca0ddfb85f7f4d654a71f",
+    "rig_mud_channel_matches.csv": "16f5a2214d8a3c335b87a031e642f8160c9347dc95c481f1a2b30abf34db9252",
+    "run_inputs.csv": "b122e66f2f6a9f0a401e305c58d87309d86a7fecf8d8a1617ae9f97c5ab69e9f",
+    "run_inventory.csv": "d1f4218e33963484e83277073f071d8881e1b446e47f8d7fabb4497da6c99729",
+    "sanvean_BHA10_10s.csv": "15dfcb505fedae7638f5b812c6270305c7e71a47c15c8a5b1c899d47e12917b9",
+    "sanvean_BHA14_10s.csv": "c29d1e5955dbd8c3704d3cd4dbfaf989ab6b1e8227c928b9745b8f79ad175d5e",
+    "sanvean_BHA18_10s.csv": "3e50b17081b95045856e1774971bae08d3a45155d6549521baaf5b5fc26fe93e",
+    "sanvean_BHA21_10s.csv": "43074003fcd0ee27c0f5f3ac5918c0b13faa6a5dfebe108467de632ae556632b",
+    "sanvean_BHA22_10s.csv": "96cfc62c9e50176f91ee366cf3fa326dc8363e0d732eec23850800fe322fdbbd",
+    "sanvean_BHA23_10s.csv": "873558f2d3c1eff4b121b2f67ec97d42213fcb6abd927590b3927a682935b363",
+    "sanvean_BHA30_10s.csv": "a887ce22e0f2f94c82a04e2a2bd054a8eb823b63182ee4b05196daa0bb3b5c21",
+    "sanvean_BHA34_10s.csv": "65dbcaf181a96d590b5786944665a481929eca8cdb0423d407a144a5c572589a",
+    "sanvean_BHA35r1_10s.csv": "e2cc297d8b7c3163e1f46e36a2cc379589ca70afb5c96d18b3353caaf7efe763",
+    "sanvean_BHA35r2_10s.csv": "29002d36eaee4ac63fa53765f34607db2e92fb06a28d40bdb6dd6ce1bbaa3475",
+    "sanvean_BHA38_10s.csv": "ccda8e2bdfce53b385b5e537be71e18a6057a37a4d70a0c41159a5ac2822970b",
+    "sanvean_BHA39_10s.csv": "c2e4257cfac99473152caa806a4d466093052723c24f016728c2cb175775c01b",
+    "sanvean_BHA42_10s.csv": "b02263357c4fc985d6544f831d45ec9ce743c50219497e40423ab9fb6c593d44",
+    "sanvean_BHA9_10s.csv": "98e0d1bf2e51c1e066cadd930ca40294d8c0588bb8b6ab184eaab282ebc940f9",
+    "survey_16a.csv": "13c9a4dae6659283012cbaddf2f7a6627466c6a07fec1a818588aa4f0a819ffd"
+  },
+  "calculation_sources_sha256": {
+    "__init__.py": "576d0e11111f58e13038f73ccada6dd8d59dcf6c6ae7abab52a38f06c8956dda",
+    "_api.py": "d725920a420591a0e7b1e714b8db12b8770074e0d384b45741dcf92384ff7bb5",
+    "_paths.py": "779d3cf2b28a6c3e9415e27429164d7965d91ff4ee3c52b349657b4068116815",
+    "calibrate_ud1.py": "37e1f7731ad313c32105955067061203c7de3b764f07079856ee4157f09f3975",
+    "comparative_sites.py": "27a1bbee57c7839ac7eac48fdc81476d3c612435f974a120afa2e0001a7d1885",
+    "crosscheck_newberry.py": "280f49f5d64de66c7c095eee32ca36991bab2cc44edbbc4c9baa066ac921bcfc",
+    "drilling_cycle.py": "87f4341cf4fb868b4b230e961102e0f3601855e78e1e87755aae9c723a7444a1",
+    "fluids.py": "b3557a12c92fb492996861085fd74077e0029a38d248f124bb01b44b85b099aa",
+    "geo_constants.py": "56f33b9073a2ea208b9292d621daf5c25bdfa6d5b3735b467563da48f3d1eb71",
+    "model1_coupled.py": "193cc3b63aecec75d0a99990ab397adb9316fbc1eff6b8d809331c612854e9ae",
+    "model1_steadystate.py": "e07beb5b74ec481fc24005e5a2c868c2dfb94848616bf0ab2b317e5a5c6aaf4b",
+    "model2_spallation.py": "80338968cee3f2e605201295d53833d2b090dd7b1b0d4dd138ccb1ee2b19c839",
+    "model3_optimiser.py": "aca2c35162fc9838e504b01fc39cfe8a73b9f4ceef83ecf8a0ce5b7be9b7cc50",
+    "model4_hole_stability.py": "6a150f197694dd65f91a70169d4656e3ce22483fe136318d8f9e38dcdd15c703",
+    "model5_convergence_confinement.py": "ad0da11948512aa97b29f5f155feb9757a39f94f7c377eecbc96bfa6438f7859",
+    "pressure.py": "a77b6d40d30b746f30e691b6ec379630fc88af07db2ad7e429b4b965b0533ca0",
+    "site_evaluation.py": "a874f4dba796b6e3b82c549fd0888ed6816ac4d3cf573536b45d643ba99cd774",
+    "site_files.py": "92e6313a9aee998dd9c1934c17eda8e66060db56bd4bc8478dc7b42e7c0d35d9",
+    "tool_thermal.py": "75752e7c6a2cd28734af065b7d4cf2e146019cb76dfbc04fc59edf2bb8110bca",
+    "wall_thermal.py": "f3e9aa4573d406db4fe9ded011552c1c3f2b4e90b3f7308404e2e3c0d2688091",
+    "water_props.py": "4fd268fa43c2f55667e019458752359ca4f5cebe347bc7113bb54da92670a3a3",
+    "water_table.py": "c7d85935491a753bcebad3586fccf3dd222e0733451f84579a319317e54a498d",
+    "well_geometry.py": "752166a1f86b68c4bfb6305df4d880be2107e08fccc5d626cc32f39c051aa6ee"
+  },
+  "archived_output_sha256": {
+    "circulation-primary.csv": "dc3dc56c1c5f315cdeea25777942570dbaead2f7c85df52f467128b5b9efe3d0",
+    "recovery-summary.csv": "0de943fdf393bf418e1edd8889a79bc036870bd0c2385e84e9060c51402b646c",
+    "inlet-counterfactual.csv": "2c7b1a59f3cc429a4a4ba206d1e0d8cf6f835d792970a3c1c85496bda07099ea",
+    "return-recovery-bracket.csv": "a4d4581aaee88505fb0f3c19b7cbbfbf0c5b84e9998be61dab132a677211aace",
+    "transient-events.csv": "59e71edf4f21e44954f6a2008b5acf13d2d8a1676c0e10da4514a51e21cdfa3d",
+    "transient-comparisons.csv": "ce03d317bd76ed3125ca4f062c402f8b9e4988ccbcd98dbe2964020b3e92e4bf",
+    "circulation-metrics.csv": "e6ad414069969983c0d91b244b6530afa2178b6488e86d5f49813116e148691f",
+    "return-metrics.csv": "c88fb083915080d75d27e7b9b6d9e17d62fc32250c6cf942aa38967bcc6bf787",
+    "pause-outliers.md": "f3782277ce37e8759a607fc9512387aeba2d27201064f729fa207155e2e2a651",
+    "pause-boundary-audit.csv": "a129ccbfbdee3bd5d7df2697685ebe54a0ef2b817b10190b1844e7277b02e5f7"
+  },
+  "figures_sha256": {
+    "validate_forge16a.png": "e5b1e7246f8623266edc4a63e7be060f90abc6fe8336c92eea3bed6674ceda0a",
+    "forge16a_diagnostics.png": "dd73d2c857e813ff5443783cb32a3d60618c6cc2ac1a66663a7dd88aa45baa39",
+    "forge16a_transients.png": "053674dfad7e2d11364e308e7ec2002af1d14cca2c464201064a1d938d0d8774",
+    "forge16a_cooler_on.png": "cebe1f47b635e64a7c5f613177666d6c1a3c6817bf96e128cff26f4a88560d1c"
+  },
+  "source_datasets": [
+    {
+      "gdr": 1283,
+      "doi": "10.15121/1776602"
+    },
+    {
+      "gdr": 1292,
+      "doi": "10.15121/1777912"
+    },
+    {
+      "gdr": 1421,
+      "doi": "10.15121/1893533"
+    }
+  ],
+  "source_licence": "CC BY 4.0; attribution in README.md",
+  "diagnostics": {
+    "recovery": "Optimistic full recovery at each known pumps-off interval >2 h; existing one-hour exposure floor retained. Bound only; not an established cause.",
+    "inlet": "One offset to each run inlet series; independently inverted for four fixed comparisons. Counterfactual only; inlet alone does not reproduce BHA 42 downhole and return together.",
+    "returns": "All 135 saved warm cases, no new solves. None of the nine logged run means is bracketed."
+  },
+  "transients": {
+    "selected": 74,
+    "modelled": 69,
+    "unmodelled": 5,
+    "circulation_boundary_failures": 3,
+    "other_failures": [
+      "fixed wall depth lacks initial history",
+      "missing final run-in depth"
+    ],
+    "scope": "Conditional partial run-in legs and pauses; initial-state/medium uncertainties. All nine modelled legs use at least one later operating-input boundary in their earlier wall conditioning."
+  },
+  "archive_location": "validation/forge16a; excluded from wheel and sdist",
+  "pause_audit": {
+    "new_model_solves": 0,
+    "events_changed": 0,
+    "interpretation": "High pause predictions start from the steady boundary at the recorded reduced pre-stop flow; the same starting-state approximation can introduce artificial jumps. No run/profile/unit/initial-state selection error found in the named outliers."
+  }
+}
