@@ -8,4 +8,5 @@ recursive-exclude src/borethm/data *.py
 prune src/borethm/data/forge16b/raw
 prune src/borethm/data/newberry/raw
 prune src/borethm/data/benchmarks/raw
+prune validation/forge16a
 global-exclude __pycache__ *.pyc

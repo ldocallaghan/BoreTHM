@@ -17,6 +17,7 @@ def reader_documents(root=ROOT):
     root = Path(root)
     documents = [root / name for name in ('README.md', 'CONTRIBUTING.md', 'SUPPORT.md', 'CHANGELOG.md', 'scripts/README.md')]
     documents.extend(sorted((root / 'benchmarks').rglob('*.md')))
+    documents.extend(sorted((root / 'validation').rglob('*.md')))
     documents.extend(sorted((root / 'src/borethm/data').rglob('*.md')))
     documents.extend(sorted((root / '.github').rglob('*.md')))
     for path in sorted((root / 'docs').rglob('*.md')):

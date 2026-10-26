@@ -38,8 +38,18 @@ def main():
     # Every study must import outside a checkout, even if running it needs evidence.
     for name in ('benchmark_utaustin', 'checkpoint_v134', 'crosscheck_soultz',
                  'lever_flow_limit', 'lever_pairs', 'levers', 'release_v134',
-                 'robustness', 'validate_forge16b', 'validate_forge_pauses'):
+                 'robustness', 'validate_forge16b', 'validate_forge_pauses',
+                 'validate_forge16a', 'validate_forge16a_transients',
+                 'forge16a_inventory', 'forge16a_evidence'):
         importlib.import_module('borethm.studies.' + name)
+    from borethm.studies import forge16a_evidence
+    assert forge16a_evidence.DATA is None
+    try:
+        forge16a_evidence.primary_summary()
+    except RuntimeError as error:
+        assert 'explicit path' in str(error)
+    else:
+        raise AssertionError('installed study unexpectedly read the external 16A archive')
     from borethm import site_evaluation
     from borethm.studies import levers
     provenance = site_evaluation.versions()
