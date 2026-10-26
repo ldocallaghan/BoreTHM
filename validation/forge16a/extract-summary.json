@@ -1,0 +1,50 @@
+{
+  "survey_stations": 422,
+  "survey_last": {
+    "md_ft": 10955.0,
+    "inc_deg": 68.6,
+    "azi_deg": 101.44,
+    "tvd_ft": 8558.83,
+    "source_row": 498
+  },
+  "formation": {
+    "57": {
+      "rows": 871,
+      "maximum_MD_ft": 8728.0,
+      "maximum_TVD_ft": 7646.064210526316,
+      "last_temperature_C": 193.19105555555555
+    },
+    "216": {
+      "rows": 1067,
+      "maximum_MD_ft": 10740.0,
+      "maximum_TVD_ft": 8479.946458333334,
+      "last_temperature_C": 219.35683333333333
+    }
+  },
+  "mud_log_rows": 10858,
+  "runs": 14,
+  "rig": {
+    "source_rows": 608676,
+    "minute_bins": 102900,
+    "matched_drilling_minutes": 14558,
+    "source_timestamp_resolution": "minute; repeated entries per minute retained as means",
+    "mudlog_in_F": {
+      "mean_difference_F": 16.67525522409213,
+      "MAE_F": 16.81745619515043,
+      "RMSE_F": 19.131961322621976
+    },
+    "mudlog_out_F": {
+      "mean_difference_F": 0.8167771534551512,
+      "MAE_F": 1.696619304986955,
+      "RMSE_F": 3.482857356790861
+    }
+  },
+  "elapsed_s": 12.008868900127709,
+  "flow_valid_range_gpm": [
+    0,
+    2000.0
+  ],
+  "drilling_flow_threshold_gpm": 300.0,
+  "pumps_off_threshold_gpm": 100.0,
+  "method": "Source extraction only; no thermal predictions or comparison errors computed."
+}

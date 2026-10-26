@@ -147,6 +147,8 @@ fracture and a fluid-pressure limit for the evaluated programme.
 
 Inspect `tools.drilling` and `tools.connection` for those states, and `tools.trip_in` for run-in. The `staged` record describes a run-in with circulation pauses and reports its peak, location and staging settings. Establish which schedule a peak belongs to before comparing temperatures.
 
+The run-in tool check [can be non-conservative](../science/limitations.md#tool-temperature-and-programme-timing), as the FORGE 16A comparison shows.
+
 Some study exports also include a schedule search under `tools.robustness_search`, with its attempts and best peak. The best attempted peak is the lowest among the schedules searched; a wider search could find a lower one. It can differ from the reference-practice history under `tools.trip_in.staged`. Study wrappers may record these quantities under `metrics`. Inspect the fields present in your export and the study's definitions.
 
 Coating temperatures and time above rating are separate from tool temperature. A coating history can use a different schedule from the best tool attempt. The [reference-programme comparison](../science/design-comparisons.md#independent-programme-failures) illustrates that distinction.
