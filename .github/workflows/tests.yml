@@ -107,7 +107,7 @@ jobs:
       - run: pip install -r requirements-lock.txt
       - run: pip install --no-deps -e .
       - run: python -m borethm.water_table
-      - run: pytest -m "slow or not slow" --durations=20 --junitxml=full-tests.xml
+      - run: pytest --runslow --durations=20 --junitxml=full-tests.xml
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -159,7 +159,7 @@ jobs:
       - name: Generate fresh reviewed reference and lever tables
         run: python -m borethm.studies.release_v134 --output results/v1.3.4/ci/${{ github.run_id }}-${{ github.run_attempt }}
       - name: Verify every fast and slow regression against the generated pins
-        run: pytest -m "slow or not slow" --durations=12 --junitxml=v134-tests.xml
+        run: pytest --runslow --durations=12 --junitxml=v134-tests.xml
       - uses: actions/upload-artifact@v7
         if: always()
         with:

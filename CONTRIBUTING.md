@@ -14,12 +14,14 @@ python -m pip install --no-deps -e .
 python -m pytest
 ```
 
-The default test run excludes the physical regressions marked `slow`. Build the water-property cache before running those:
+The default test run skips the physical regressions marked `slow`. Build the water-property cache before running the complete suite:
 
 ```sh
 borethm-water-table
-python -m pytest -m slow
+python -m pytest --runslow
 ```
+
+Select only the slow regressions with `python -m pytest -m slow`.
 
 Set `OPENBLAS_NUM_THREADS=1`, `OMP_NUM_THREADS=1` and `MKL_NUM_THREADS=1` before starting Python. Run tests in one process. Slow regressions can take several hours. The [release checklist](docs/maintenance/release-checklist.md) records release validation.
 

@@ -196,10 +196,10 @@ Run the fast suite in the activated environment:
 python -m pytest
 ```
 
-The default excludes physical regressions marked `slow`. To include the complete suite after building the water-property cache:
+The default skips physical regressions marked `slow`. To run the complete suite after building the water-property cache:
 
 ```bash
-python -m pytest -m "slow or not slow"
+python -m pytest --runslow
 ```
 
 Full physical runs can take an hour or more. Single-threaded BLAS avoids oversubscription during repeated solves; set `OPENBLAS_NUM_THREADS=1`, `OMP_NUM_THREADS=1` and `MKL_NUM_THREADS=1` before starting Python for those runs.
