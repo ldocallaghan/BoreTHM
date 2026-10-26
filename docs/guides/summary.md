@@ -35,7 +35,9 @@ No evaluated individual design change or pair made Soultz or United Downs pass. 
 
 ## Evidence and its limits
 
-Circulation temperatures have been compared with Utah FORGE measurements. Parameters were fitted using regular-pipe runs and the fully insulated run; the partial-insulation run was predicted without further fitting. A published-model comparison supplies another benchmark, with the coated-pipe interpretation unresolved.
+Circulation temperatures have been compared with Utah FORGE measurements. In well 16B, parameters were fitted using regular-pipe runs and the fully insulated run; the partial-insulation run was predicted without further fitting. A published-model comparison supplies another benchmark, with the coated-pipe interpretation unresolved.
+
+The [unfitted FORGE 16A comparison](../science/validation.md#forge-16a-blind-circulation-comparison) underpredicted the deeper downhole temperatures and the surface return. Run-in peaks there were underpredicted by about 20–50 °C on partial legs with approximate initial states, so the [run-in tool check can be non-conservative](../science/limitations.md#tool-temperature-and-programme-timing).
 
 Rock reheating is checked against analytical conduction solutions. The FORGE return-temperature comparison after trips is too coarse to confirm or reject the reheating model. Rock strength is calibrated against United Downs breakouts, with separate checks at Soultz and Newberry. Newberry's observed pattern is not reproduced in every rock type. These checks do not validate a complete 10–13 km drilling programme. The [validation guide](../science/validation.md) explains the fitting and comparisons.
 

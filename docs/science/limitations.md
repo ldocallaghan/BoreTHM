@@ -8,6 +8,8 @@ The deep targets extend beyond the measured stress and temperature records. Stre
 
 The circulation comparisons use FORGE observations at depths and temperatures below the deep targets. Newberry's well check reproduces the volcanic breakouts but also predicts failure in granodiorite where none was logged. These checks do not establish the accuracy of a complete deep drilling programme.
 
+The unfitted [FORGE 16A comparison](validation.md#forge-16a-blind-circulation-comparison) underpredicts the deeper downhole temperatures and surface return. Its circulation exposure clock omits recovery during trips. An optimistic reset-clock diagnostic can span several downhole means but leaves every logged mean return above the warm result. Recovery is not established as the cause. The partial run-in checks also depend on approximate initial wall histories and do not independently validate complete-trip tool temperatures.
+
 ## Applicability and numerical guards
 
 Input acceptance, property-table coverage and field evidence impose different limits:
@@ -57,6 +59,8 @@ A published potassium-formate fluid retained a plastic viscosity of 30 mPa s aft
 The manufacturer's 204 °C coating rating does not establish survival through a hotter drilling cycle. The cited managed-pressure drilling equipment has a stated mechanical pressure rating; qualification for the modelled thermal cycle remains unknown.
 
 ## Tool temperature and programme timing
+
+At FORGE 16A, the run-in tool calculation underpredicted measured peaks by about 20–50 °C on partial legs with approximate initial states. The run-in tool check can therefore be non-conservative: it can predict a lower peak than the tool experiences. The [validation section](validation.md#forge-16a-conditional-transient-checks) gives the comparison and its initial-state limitations.
 
 The tool is represented by a lumped thermal model of the collar and enclosed fluid. During a staging pause, coolant is supplied at its steady temperature without accounting for its travel time through the string. Staging duration is absent from the base trip clock. During run-in, the trip-fluid temperature column is frozen and a uniform heavier fluid is assumed present from the start.
 

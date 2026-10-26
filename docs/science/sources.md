@@ -1,6 +1,6 @@
 # Sources and related work
 
-This page provides the scientific context and bibliography. Input-specific provenance remains beside the data: [site parameters](../../src/borethm/data/sites/stress_sources.md), [material properties](../../src/borethm/data/materials.md), [FORGE extracts](../../src/borethm/data/forge16b/README.md) and [Newberry extracts](../../src/borethm/data/newberry/README.md).
+This page provides the scientific context and bibliography. Input-specific provenance remains beside the data: [site parameters](../../src/borethm/data/sites/stress_sources.md), [material properties](../../src/borethm/data/materials.md), [FORGE 16B extracts](../../src/borethm/data/forge16b/README.md), [FORGE 16A extracts](../../validation/forge16a/README.md) and [Newberry extracts](../../src/borethm/data/newberry/README.md).
 
 ## Related work
 
@@ -8,7 +8,7 @@ The use of insulated drill pipe to keep the bit cool in hot rock is well establi
 
 The mechanics of borehole stability used here are also established. The stress concentration around a borehole, breakout formation under a Mohr-Coulomb criterion and the use of breakout width to infer stress are standard (Zoback, 2007). Cooling a borehole wall adds a thermal hoop stress that suppresses breakouts and promotes tensile fractures, the combination studied by Hals and Berre (2012). In practice, the Japan Beyond-Brittle Project describes drilling at Kakkonda into rock above 500 °C with continuous circulation, and sets a target of cooling the hole below 160 °C (Muraoka et al., 2014), and Kruszewski and Wittig (2018) reviewed the failures in 20 wells drilled into supercritical conditions, many of them in casing and cement under thermal load. On the production side, Eavor's Geretsried project now reports about 8.5 MW of heat from its first loop, more than 2 MW per lateral pair falling to an expected 1.3 MW after five years (Eavor, 2026), and Beckers and Johnston (2022) estimated about 22 MW of heat and 2.2 MW of electricity from a 7.5 km loop with more than 90 km of laterals at 30 °C/km.
 
-BoreTHM combines circulating temperatures with wall thermal stress and fluid-pressure constraints for named site programmes. The circulation component has been compared with a published simulator and temperatures measured at FORGE. Some FORGE runs were used to fit parameters; the partial-insulation run was predicted without further fitting. Rock strength is calibrated at UD-1, with separate checks at Soultz and Newberry. The [validation guide](validation.md) describes the scope and limitations of each comparison. Analytical checks test specified equations, while regression tests check numerical repeatability against saved outputs. None of these checks validates a complete deep drilling programme.
+BoreTHM combines circulating temperatures with wall thermal stress and fluid-pressure constraints for named site programmes. The circulation component has been compared with a published simulator and temperatures measured at FORGE. Some 16B runs were used to fit parameters; its partial-insulation run was predicted without further fitting. The 16A comparison fits nothing and reports the observed disagreements and conditional diagnostics. Rock strength is calibrated at UD-1, with separate checks at Soultz and Newberry. The [validation guide](validation.md) describes the scope and limitations of each comparison. Analytical checks test specified equations, while regression tests check numerical repeatability against saved outputs. None of these checks validates a complete deep drilling programme.
 
 ## References
 
@@ -56,6 +56,8 @@ Jaeger, J.C., 1956. Conduction of heat in an infinite region bounded internally 
 
 Jaeger, J.C., Cook, N.G.W., Zimmerman, R.W., 2007. Fundamentals of Rock Mechanics, 4th edition. Blackwell.
 
+Gilmour, B., Wooden, J., Pulka, F., Rose, B., Barker, C. and Borchardt, E., 2021. Utah FORGE: Well 16A(78)-32 Logs. Geothermal Data Repository, submission 1292. https://doi.org/10.15121/1777912. CC-BY 4.0.
+
 Jones, C., 2022. Utah FORGE: Deep Wells Temperature Surveys as of September 2022. Geothermal Data Repository, submission 1421. https://doi.org/10.15121/1893533. CC-BY 4.0.
 
 Kabir, C.S., Hasan, A.R., Kouba, G.E., Ameen, M.M., 1996. Determining circulating fluid temperature in drilling, workover, and well-control operations. SPE Drilling & Completion 11 (2), 74–79.
@@ -65,6 +67,8 @@ Kruszewski, M., Wittig, V., 2018. Review of failure modes in supercritical geoth
 Lachenbruch, A.H., Brewer, M.C., 1959. Dissipation of the temperature effect of drilling a well in Arctic Alaska. U.S. Geological Survey Bulletin 1083-C, 73–109.
 
 Liotta, D., Brogi, A. Pliocene-Quaternary fault kinematics in the Larderello geothermal area (Italy): insights for the interpretation of the present stress field. Manuscript submitted to Geothermics.
+
+McLennan, J., Nash, G., Moore, J., Skowron, G. and Woolsey, S., 2021. Utah FORGE: Well 16A(78)-32 Drilling Data. Geothermal Data Repository, submission 1283. https://doi.org/10.15121/1776602. CC-BY 4.0.
 
 McLennan, J., Mock, B., Swearingen, L., Baldwin, R., Hodder, M., Vetsak, A., Kuhns, A.T., Breland, J., England, K., 2023. Utah FORGE: Well 16B(78)-32 Drilling Data. Geothermal Data Repository, submission 1516. https://doi.org/10.15121/1998591. CC-BY 4.0.
 

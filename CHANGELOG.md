@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+Adds an unfitted field comparison with Utah FORGE well 16A(78)-32, with
+source extracts, frozen circulation evidence and conditional transient
+checks. Documentation presents the blind result before the recovery and
+inlet diagnostics, with their limitations and the cooler annotations.
+Regression checks recompute archived S1 summary arithmetic without
+rerunning that experiment. Existing model calculations, constants and
+reference results are unchanged.
+The 16A archive remains outside the installed package and source distribution.
+Pause outliers are traced to the quasi-steady starting states; run-in
+underprediction is stated explicitly as potentially non-conservative.
+
 ## v1.5.0 (23 October 2026)
 
 An installed package can now assess a new site from a TOML file.

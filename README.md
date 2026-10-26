@@ -176,6 +176,8 @@ The circulation model solves the downgoing and returning fluid temperatures with
 | Borehole stability | Breakout width and pressure requirements | [UD-1 strength calibration and other well checks](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/validation.md#stability-checks) |
 | Spallation, drilling rate and creep | Exploratory estimates of quench effects and closure | [Physical models and their limits](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/models.md#drilling-rate-and-creep) |
 
+The [run-in tool check can be non-conservative](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/limitations.md#tool-temperature-and-programme-timing): at FORGE 16A it underpredicted measured peaks by about 20–50 °C on partial legs with approximate initial states.
+
 The circulation/FORGE comparisons, strength calibration and other checks have distinct scopes. They do not validate a complete 10-13 km drilling programme. Governing equations, implementation assumptions and diagnostic figures are in the [physical-model guide](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/models.md); the [bibliography](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/sources.md#references), [material properties](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/materials.md) and [site inputs](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/sites/stress_sources.md) retain their sources.
 
 ## Scope and limitations
@@ -226,9 +228,9 @@ Cite BoreTHM using the [software DOI](https://doi.org/10.5281/zenodo.23549104). 
 
 The [benchmark dataset](https://github.com/ldocallaghan/BoreTHM/blob/main/benchmarks/README.md#how-to-cite) is published separately as [version 1.0 on Zenodo](https://doi.org/10.5281/zenodo.23565448).
 
-The FORGE data come from the Geothermal Data Repository: [well 16B drilling data](https://doi.org/10.15121/1998591) and [deep-well temperature surveys](https://doi.org/10.15121/1893533). The Newberry extracts come from [well 55-29 stimulation data](https://doi.org/10.15121/1357916). These datasets are used under CC-BY 4.0. The UD-1 image interpretation contains NERC materials ©NERC 2024.
+The FORGE data come from the Geothermal Data Repository: [well 16A drilling data (GDR 1283)](https://doi.org/10.15121/1776602), [well 16A logs (GDR 1292)](https://doi.org/10.15121/1777912), [well 16B drilling data](https://doi.org/10.15121/1998591) and [deep-well temperature surveys](https://doi.org/10.15121/1893533). The Newberry extracts come from [well 55-29 stimulation data](https://doi.org/10.15121/1357916). These datasets are used under CC BY 4.0. The UD-1 image interpretation contains NERC materials ©NERC 2024.
 
-The [FORGE](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/forge16b/README.md) and [Newberry](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/newberry/README.md) data guides describe the extracts and how to rebuild them. Other input sources are recorded alongside the corresponding data.
+The [FORGE 16A](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge16a/README.md), [FORGE 16B](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/forge16b/README.md) and [Newberry](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/newberry/README.md) data guides describe the extracts and how to rebuild them. Other input sources are recorded alongside the corresponding data.
 
 ## Questions and contributions
 
