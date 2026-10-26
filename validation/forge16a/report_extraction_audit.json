@@ -1,0 +1,1232 @@
+[
+  {
+    "report_date": "11/24/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf",
+    "page": 1,
+    "sha256": "f7d97e320f574d1d0c3656b3d526b9c171fe9e9bfc7ece2addd39beea22b6b0d",
+    "BHA": "18",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/29/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf",
+    "page": 1,
+    "sha256": "e36e224fbd6bd39218658b6bc94a55216de7d415532a2146260fb61f6cbfb5e0",
+    "BHA": "23",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/17/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/11_17_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1117202011172020_24_reporttmp.pdf",
+    "page": 1,
+    "sha256": "71b1aa40bfe2e74718857f9b3c5f2eac08392ca59416146d5f1253f2ae4fb1de",
+    "BHA": "10",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/02/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12022020_12022020_12_reporttmp.pdf",
+    "page": 1,
+    "sha256": "c75e0eb74c8891a26c808d22897fb7d7e79653619184d5d037d1e15aae2cdb7f",
+    "BHA": "26",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/11/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11112020_11112020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "058bbae9a1509df9cb6706aaf82d77f5472b36a5adaf8b0ba45ae2e61102b28a",
+    "BHA": "7",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/01/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12120201212020_18_reporttmp.pdf",
+    "page": 1,
+    "sha256": "3dfaa87315df9c4a4b57257a588eebe684bb5955819ddea4349cda60bf4ec1b2",
+    "BHA": "24",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/23/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10232020_10232020_26_reporttmp.pdf",
+    "page": 1,
+    "sha256": "ced8b188c2b6bd4dbd3108299efbfbedf0bf911b132c1d00d9ac518f1e895b6e",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "11/12/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1112202011122020_18_reporttmp.pdf",
+    "page": 1,
+    "sha256": "565bc1bc72a9a4ab1b3a753bdf202336ec9ea81322a37f1cd4b257b49b7b1a8f",
+    "BHA": "7",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/20/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11202020_11202020_8_reporttmp.pdf",
+    "page": 1,
+    "sha256": "413d7ff12f3f74a721527d8749c46134c27a6f12a83859a2a8ab73184397d933",
+    "BHA": "14",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/21/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/12_21_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1221202012212020_14_reporttmp.pdf",
+    "page": 1,
+    "sha256": "c4e06340738598a9abb4c0a8204385790c47ec264b42b531ca4ab93a8736ccc4",
+    "BHA": "44",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "12/25/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1225202012252020_13_reporttmp.pdf",
+    "page": 1,
+    "sha256": "4596dbc094556b30df8fbe87caca5e1b1bd23ebe218d0e60bb10c200fc1325f5",
+    "BHA": "50",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/04/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12420201242020_21_reporttmp.pdf",
+    "page": 1,
+    "sha256": "c4e7fb85b37579efd1d9804553b90cf96e714ebcd1828a7374c5a90af1a5aa79",
+    "BHA": "30",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/10/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11102020_11102020_8_reporttmp.pdf",
+    "page": 1,
+    "sha256": "a626caa2a790307992a40a5ea93fda92435549a45725db71c52a1905af4fd795",
+    "BHA": "6",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/03/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11320201132020_17_reporttmp.pdf",
+    "page": 1,
+    "sha256": "59a1b758ca1243c643046c9dc537bed104611ed57ef30e7a4fb3172adfd77508",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/13/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1213202012132020_11_reporttmp.pdf",
+    "page": 1,
+    "sha256": "ce1b17d4feb8114afcbbce2ebf9878ceb7fa27a01426d58ee6b407b3fe15813f",
+    "BHA": "38",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/31/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1231202012312020_14_reporttmp.pdf",
+    "page": 1,
+    "sha256": "ea0aa5ed43b40d91e093a5ef1a30c1bb4d38e7426c4f4f56b16f3aca1d51112d",
+    "BHA": "53",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/27/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1227202012272020_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "bcf108c30b431e7514ad5c21d4a1df33585ca8799b6d318b35b009c20658e028",
+    "BHA": "52",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/18/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11182020_11182020_16_reporttmp.pdf",
+    "page": 1,
+    "sha256": "5d728239764f17492fe4c03014b97da96592a5e8fe30c4d88052890891518a04",
+    "BHA": "11",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/07/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12720201272020_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "1fd513e5c8f02c0d50854ff09bc01f911d4e23b656729384a34becc1a63fe68a",
+    "BHA": "33",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/29/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1229202012292020_7_reporttmp.pdf",
+    "page": 1,
+    "sha256": "2866ca3e7f807dafeba34a1f35aff0733afdee250b617029a2b1c899dc1c6bb1",
+    "BHA": "53",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/02/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11022020_11022020_21_reporttmp.pdf",
+    "page": 1,
+    "sha256": "88f7f0daa65e6fd7872cbccccc0fafbedd4ff361c0eb10f7e31c1fcc287e5b7e",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/19/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/11_19_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1119202011192020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "ee41b95fd87d665df36db7c9d692db5397155fceae1375ccad14e5e4e7f6cdd9",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/11/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1111202011112020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "fc75aea70f2af3a64b5901034f52f6cbe657e38215244fd7179a69e1c06b0e0a",
+    "BHA": "7",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/23/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12232020_12232020_20_reporttmp.pdf",
+    "page": 1,
+    "sha256": "d5e9bda451b72408ae494ef61967bed5ce5976368330b0e4158124e6edd33315",
+    "BHA": "48",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/19/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11192020_11192020_9_reporttmp.pdf",
+    "page": 1,
+    "sha256": "0d1777da0e5ee2243e274086b87c2e00daf715cf870c88a1b0e5273e2ce22a10",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/24/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10242020_10242020_17_reporttmp.pdf",
+    "page": 1,
+    "sha256": "38180708100a30e76067340894ae5791aea1ca83d2d625a41972b7abb0054c2a",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "10/29/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1029202010292020_11_reporttmp.pdf",
+    "page": 1,
+    "sha256": "70e8414ae1279984316475ba1fea3d49b05c518de90107a639c52b08bb26495b",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/13/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/11_13_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1113202011132020_18_reporttmp.pdf",
+    "page": 1,
+    "sha256": "2912a9ef4632ee9c22b40eea135db7fc32e44f6c89ffc02e108d772a212f8875",
+    "BHA": "7",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "01/02/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_01022021_01022021_14_reporttmp.pdf",
+    "page": 1,
+    "sha256": "060d498868db0ba44a3f39fccb5a5636ab2120122676fe3f359a93ca161ef66a",
+    "BHA": "53",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/25/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1125202011252020_15_reporttmp.pdf",
+    "page": 1,
+    "sha256": "6706f1065c29f91be53c63f57c2eed618c5a11215685ace7a3ee0d73c93ba4ba",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/27/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1127202011272020_9_reporttmp.pdf",
+    "page": 1,
+    "sha256": "8dda96e1879921986833642fb09d0f6cf88076e2fdb01b9b70b9c9076c31e9a9",
+    "BHA": "22",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "01/01/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_112021112021_15_reporttmp.pdf",
+    "page": 1,
+    "sha256": "e45694ad4d139fa666c2f5da0f95d55bd51d18ff006ac7ae1762e14ad9d72f5b",
+    "BHA": "53",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/31/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10312020_10312020_19_1_reporttmp.pdf",
+    "page": 1,
+    "sha256": "06ad19f3a37583bb9008c86866e9a6fe1d31a72e72c15e5973c61afd6535d002",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/12/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12122020_12122020_13_reporttmp.pdf",
+    "page": 1,
+    "sha256": "630a69c4c7bf9e031ae0e0f04fe6f8df84698467a09fcf7bdb35b4e75194f5cb",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/14/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_15_reporttmp.pdf",
+    "page": 1,
+    "sha256": "91a77109f38f505dfed6d55475427985fdbe983e09a0d7a9f892d4a7c8db46b1",
+    "BHA": "39",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/29/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1029202010292020_15_reporttmp.pdf",
+    "page": 1,
+    "sha256": "06c0740b3ecb8eace8b330a37dc3c17a966c35f797f54cb3b2d806d26094f6e6",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/14/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1114202011142020_14_reporttmp.pdf",
+    "page": 1,
+    "sha256": "64b91c507fe266200acc84eff5618cb9eb40e0deeb889c5e3473211836fd571f",
+    "BHA": "7",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/01/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11012020_11012020_21_reporttmp.pdf",
+    "page": 1,
+    "sha256": "55a7115e6d89d3142fc7581e80cea9114f9c075927b5fd1810fc3530410dd729",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/02/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/12_2_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12220201222020_12_reporttmp.pdf",
+    "page": 1,
+    "sha256": "cf06c714bedefb80bdbeb26c64a5172ec731b9a795bf7829f585fe3970f388ab",
+    "BHA": "26",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/19/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12192020_12192020_12_reporttmp.pdf",
+    "page": 1,
+    "sha256": "9a1048a6ef0893507143931c9deb39dfd5166982ff3a6095d33d976e85465746",
+    "BHA": "42",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/26/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1226202012262020_7_reporttmp.pdf",
+    "page": 1,
+    "sha256": "21bf39324e504e175ab603479118ddc2b18b1e1cc49bb386ff17767eee434337",
+    "BHA": "51",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/08/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12082020_12082020_10_reporttmp.pdf",
+    "page": 1,
+    "sha256": "407de3250b26edf223ec68bccfac0b90250c2e8e889b9a715c13a8f81939f913",
+    "BHA": "34",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/28/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11282020_11282020_20_1_reporttmp.pdf",
+    "page": 1,
+    "sha256": "0f3fb797d51974f82aa3294972000048b8db4105d9979ce98a048fe0600a591c",
+    "BHA": "22",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/16/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12162020_12162020_12_reporttmp.pdf",
+    "page": 1,
+    "sha256": "b6eb457f50e85776c744238573b2e89efe1314148b51b176b9c8845fd85bc671",
+    "BHA": "40",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "01/03/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_01032021_01032021_15_1_reporttmp.pdf",
+    "page": 1,
+    "sha256": "845b3e7ce439b7c96680ac50284eef9b920a382b8afe660514e170cc5164cea1",
+    "BHA": "53",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/09/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf",
+    "page": 1,
+    "sha256": "d9c3250c957df489488ba4edb2d2e8f520d1fe1b0d6b9eed5834761565700f33",
+    "BHA": "35",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/26/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11262020_11262020_11_reporttmp.pdf",
+    "page": 1,
+    "sha256": "fb09fc86ae801aecc8c45de0da83d9fbe052ed6e835a36ca3ed2a4d7d7c3b16f",
+    "BHA": "21",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/04/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/11_04_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11420201142020_25_reporttmp.pdf",
+    "page": 1,
+    "sha256": "739acd0e055bf419dcf48a04d739c794ab016180d16a883d0bb18661a1e31e56",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/30/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10302020_10302020_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "c32e82b0b0475df1c06c9f98820b66938486be098258e11074d6b0f45ec86bc4",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/07/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11072020_11072020_24_reporttmp.pdf",
+    "page": 1,
+    "sha256": "8528f9e576ae9e1b1e19cc642c32ccc942774917793645d436d5994697602cee",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/05/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12052020_12052020_10_reporttmp.pdf",
+    "page": 1,
+    "sha256": "f68a8f395474f760d7ae8b76f1dbe4e9d68565c99b960dbd309acebdfe73e6a2",
+    "BHA": "30",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/06/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11062020_11062020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "b4cf115cc55e050cc5de6605a3b2a28418db2b7dcd6473984ba8f9e7d4b5ecb8",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/17/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1217202012172020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "d6846267e129b5cb93f78e5e2cd8dc74e6c7121e2801d6c6b511183a9d113d73",
+    "BHA": "41",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/25/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10252020_10252020_24_reporttmp.pdf",
+    "page": 1,
+    "sha256": "af20b80c3afda6185a9e968a7ec02c8426fc38f07b94bdab81dc433705e07400",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "12/07/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12072020_12072020_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "2acf62b43eee61bf371d0e6272884bde2ffe6a5b407a8d8ad163cddb6da96e47",
+    "BHA": "33",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/24/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12242020_12242020_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "00b6ac178520e0ff7674d7cb782c2e3365da931c55d7e399abde01ebfe0d416b",
+    "BHA": "49",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/16/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11162020_11162020_21_reporttmp.pdf",
+    "page": 1,
+    "sha256": "28392fa7141bffdffb0132325729ad46b30b2b070f9bc50bcc1b2120c9286277",
+    "BHA": "10",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/15/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1215202012152020_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "812e638aa27df2a1f54c72bf7748df351805842e5659ede7a743aad56bac3fb8",
+    "BHA": "40",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/27/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1027202010272020_15_reporttmp.pdf",
+    "page": 1,
+    "sha256": "1f1163d1e0b0239dbaefa9e84166e9e396fbfbf5c0c71c73f6bf0e7eac6788c6",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "12/06/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12062020_12062020_17_reporttmp.pdf",
+    "page": 1,
+    "sha256": "ecceb51f55125e443db870d3c6d382a1f568fccecc92cbf3faf93754d1ef405d",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/28/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10282020_10282020_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "548dd3bb1618dc68728e6ea1c67da2b80bc1c0151ca1dac901de08eef0e390ce",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "12/12/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1212202012122020_13_reporttmp.pdf",
+    "page": 1,
+    "sha256": "d831be8813c29afce10d97deed32d3a23525af95d573c2d74b88d6fc83788ee5",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/07/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11720201172020_24_reporttmp.pdf",
+    "page": 1,
+    "sha256": "87e369be8e2961fadcca05043eebe9d500c33f7da6b67deed98602283ff48ca6",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/22/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11222020_11222020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "a281586851f055b1f1f5af239c6068314db85f0ad22936a106ee74ca750eff85",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/21/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12212020_12212020_14_reporttmp.pdf",
+    "page": 1,
+    "sha256": "13083b6f7a24e4b5c37ed353be2732105fc5efe11cffae2877886aebb12b3a5b",
+    "BHA": "44",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "11/06/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11620201162020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "566010501a680e5744cebaba3d88088c62dfb7156da044541b9e5fb9c5fd701b",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/30/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/11_30_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1130202011302020_16_reporttmp.pdf",
+    "page": 1,
+    "sha256": "db2c9e203448680b7db01a70dc2f95b5b9ab64ca02f14ee51d033be1ca499681",
+    "BHA": "24",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/06/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12620201262020_17_reporttmp.pdf",
+    "page": 1,
+    "sha256": "a8261b81feb215157f955eccc76df8f26e7c6ed7b2b98d27986b0ff78502284e",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/08/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11082020_11082020_26_reporttmp.pdf",
+    "page": 1,
+    "sha256": "0ca79b5cee12985c648cf09bb17a5a5b877b90db51b52bc99cc89a0ceff0a40c",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/21/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1021202010212020_78_reporttmp.pdf",
+    "page": 1,
+    "sha256": "60fd34bb6ac025d75e886d257d0afe80f5b572bf437db67c873bff6d63e9ae52",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "12/20/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1220202012202020_15_reporttmp.pdf",
+    "page": 1,
+    "sha256": "771d37cacfffa7c9742428029181b05fb731199ceb53d823f563dd09ffbe8f43",
+    "BHA": "44",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/28/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1228202012282020_13_reporttmp.pdf",
+    "page": 1,
+    "sha256": "e1c65a5336e5760aa0b24bf96d57a5043e04b8a89d72ff3ec4a12a22a54829a0",
+    "BHA": "53",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/22/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1022202010222020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "0cc09f0961f5b73250d826e5df84a28d00293742d1daf466f6e1520c6cefa75d",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "11/08/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11820201182020_26_reporttmp.pdf",
+    "page": 1,
+    "sha256": "6c95ee541de0f805ec2902423ba3e8c985dbeb9e39f73356cb45f3c2f4b5822d",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/10/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12102020_12102020_22_reporttmp.pdf",
+    "page": 1,
+    "sha256": "b68aed9f4d06e9427e3c471aa6165c4faabdb4008a656f7203817c63e4ced257",
+    "BHA": "3",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "01/02/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_122021122021_14_reporttmp.pdf",
+    "page": 1,
+    "sha256": "b8641fbece0b99117c2d5a283e4f8301686d886aac3576927a7768cf9324526d",
+    "BHA": "53",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/10/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1110202011102020_8_reporttmp.pdf",
+    "page": 1,
+    "sha256": "e3c298cda2a6be20e59be46a6674989614ecfbb96d30a87a70d5ee7ee4939fd5",
+    "BHA": "6",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/11/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1211202012112020_8_reporttmp.pdf",
+    "page": 1,
+    "sha256": "75ec660dc80206a61abb96336cdecd4016dd1a58ca429ddff5ce9acde066cc6f",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/11/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12112020_12112020_8_reporttmp.pdf",
+    "page": 1,
+    "sha256": "53fcf830460e4d0703b3181c6597cb83895c1c55db019549b9691bdcc298eb8b",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/09/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12092020_12092020_16_reporttmp.pdf",
+    "page": 1,
+    "sha256": "c8559729c09a3a3120204de2bf488d4ab56c26d08d4b3bc2bc6b52c03e761d8c",
+    "BHA": "35",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/30/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12302020_12302020_17_reporttmp.pdf",
+    "page": 1,
+    "sha256": "7af69214ede1f8bdfca0d23d6d89d124d3b25f5ca29817f6131f01eaab2ee408",
+    "BHA": "53",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/08/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12820201282020_10_reporttmp.pdf",
+    "page": 1,
+    "sha256": "ca543ee29a03754b0a24efa1879656e966147e812f920c85b2f4f1547e40735f",
+    "BHA": "34",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/14/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/12_14_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "0d7f548db0f0ed80d0e6d7584c5fc3a17771473d4c5b9768f2fb97352595fd09",
+    "BHA": "39",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/04/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11420201142020_18_reporttmp.pdf",
+    "page": 1,
+    "sha256": "f7714edfd4cb9cb93e4cb954b6fdb9ca109df07f028a0eed7e329baabe2f78b7",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/18/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf",
+    "page": 1,
+    "sha256": "1c9d1349bceb8d55d1a43d4a7ebfc66878ad3d169d1b026e428e8d88fe82e298",
+    "BHA": "42",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/23/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1123202011232020_16_reporttmp.pdf",
+    "page": 1,
+    "sha256": "36cc7d48253ce66f350ff62dfa64bbec2fc663a5225a1eca3bec1289b4e8a605",
+    "BHA": "17",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/03/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12320201232020_7_reporttmp.pdf",
+    "page": 1,
+    "sha256": "d7f820ed72b404010b5368ddda4b087a3cc34939b3cd2ee7751daeb4291874a3",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/22/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12222020_12222020_8_reporttmp.pdf",
+    "page": 1,
+    "sha256": "63587d86a3ebbffb53632f3d95f2a259300172ab414b5b36bd869315d8120810",
+    "BHA": "47",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/10/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1210202012102020_22_reporttmp.pdf",
+    "page": 1,
+    "sha256": "313ccb596fabb458eecebadb71fbe91d686f2fefa6039e33ed4fba59dcd20a30",
+    "BHA": "3",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/22/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/11_22_2020_Utah_Forge_FORGE_16A_78-32_Drilling-C_1122202011222020_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "087fe1b8621cc3a5273fb01ddb0148f595529546a63a80b44b231eed5b0ee3c8",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/30/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11302020_11302020_16_1_reporttmp.pdf",
+    "page": 1,
+    "sha256": "cf37df1dc84cf4d3994f3e38baa69e57805a2d7dd70cb5dd191df6d6ae097f2f",
+    "BHA": "24",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/05/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12520201252020_10_reporttmp.pdf",
+    "page": 1,
+    "sha256": "80c1d986fbaf6308ff57b9a589afcef9b543cb8c9cf04f622ffd4e2b1002491a",
+    "BHA": "30",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/13/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1113202011132020_18_reporttmp.pdf",
+    "page": 1,
+    "sha256": "0a37b017c0feebb904fd35496c73df11de03f27a62ee393aa97fda64342fb32f",
+    "BHA": "7",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/15/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1115202011152020_13_reporttmp.pdf",
+    "page": 1,
+    "sha256": "8b8650f1a366f7671871954cc6b8e50cae24a7ba9f113ca6be0da55593b7ad00",
+    "BHA": "9",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/21/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11212020_11212020_15_reporttmp.pdf",
+    "page": 1,
+    "sha256": "9caa4accd638580ed8727ae777bbfb8c1454a5d12d65462be37f0c3d5485947c",
+    "BHA": "14",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/26/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1026202010262020_15_reporttmp.pdf",
+    "page": 1,
+    "sha256": "9a952b70e7b89d0425af16efede41425b33b4ce13686b3a1ee3836e7c0456ad1",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "12/03/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12032020_12032020_7_reporttmp.pdf",
+    "page": 1,
+    "sha256": "be15c6d8d89c92bfca0c70c72a05d07828a1de30ffa0ca15c1051e106d51edff",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "10/21/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1021202010212020_92_reporttmp.pdf",
+    "page": 1,
+    "sha256": "7427d6a5a92df1665e0730e4c3f4a4e9588280e34d99bf3a9345c4e1aaa13043",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "11/05/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11052020_11052020_12_reporttmp.pdf",
+    "page": 1,
+    "sha256": "ae3372895977b907040f2c73d85c3909882936cd46e690eedc1794cadc51b81f",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/18/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1118202011182020_16_reporttmp.pdf",
+    "page": 1,
+    "sha256": "f28f476bb5e667a26b77a894201904a86d7ecd2e27a94bfd5cf5b0f402ffc292",
+    "BHA": "11",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/05/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11520201152020_12_reporttmp.pdf",
+    "page": 1,
+    "sha256": "5704073dc4e6d373a2da451fc55526225f414b51eb80cf999dfd3df9cdcdd6d3",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/16/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1116202011162020_21_reporttmp.pdf",
+    "page": 1,
+    "sha256": "936313cb264c0a6d80052da60611dce63bbc66fce721e925f35b41c1d916340a",
+    "BHA": "10",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/15/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/11_15_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1115202011152020_20_reporttmp.pdf",
+    "page": 1,
+    "sha256": "6d7ec547a0a2873a939692de44c31eaf342e7a4f31d719f0e3f195ef0ea4c8fe",
+    "BHA": "9",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/13/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12132020_12132020_11_reporttmp.pdf",
+    "page": 1,
+    "sha256": "83390cf187f48329cb58b9b765222ff074c1450f637e76576c655fccfa8e12f7",
+    "BHA": "38",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/01/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/12_01_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12120201212020_11_reporttmp.pdf",
+    "page": 1,
+    "sha256": "5e039bd758d56a80a9f2a713bbf619dbdfd34ea6b6ad47173bcf09f5117e78af",
+    "BHA": "24",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/09/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11092020_11092020_11_reporttmp.pdf",
+    "page": 1,
+    "sha256": "0124a3b967f0bcee9d61f1101b0361be895ad819b37cb9d4f3cda423897f3100",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "12/04/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12042020_12042020_21_reporttmp.pdf",
+    "page": 1,
+    "sha256": "88b410ecee4673c717cf24d2bbe476a7d6203ae4fe87386ddaa9c8ed1e7a92b7",
+    "BHA": "30",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "11/09/2020",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11920201192020_11_reporttmp.pdf",
+    "page": 1,
+    "sha256": "c4c9110a1de05533816c12f91a490086f64c442e617998a5cae4e9b7da770494",
+    "BHA": "",
+    "table_count": 1,
+    "mud_parsed": true
+  },
+  {
+    "report_date": "1/6/21",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01062021_01062021_1_tmp.pdf",
+    "page": 1,
+    "sha256": "b45a0047a0d8e82d087a7f538b15e2eec0f8f714562716da2a57243546c08dee",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/12/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11220211122021_3_reporttmp.pdf",
+    "page": 1,
+    "sha256": "ed47dd7a51579e654681476eadada8037c3b0d17d22c9d2943ecf0e07acef62a",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/10/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11020211102021_16_reporttmp.pdf",
+    "page": 1,
+    "sha256": "4e890edaff1dc5ec9cc07467025c9734b62b4421de7e1f80f158ac8e8ad67b80",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/09/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_192021192021_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "f7a203bd9a30752e08a0bbf55e7d0aa48da92385242624dbb1a2821d34dd8ceb",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/12/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11220211122021_12_reporttmp.pdf",
+    "page": 1,
+    "sha256": "be3a570a6999ba60fd3764c0f2d0822c180b6b83000e386775f46f15603bb394",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/11/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11120211112021_16_reporttmp.pdf",
+    "page": 1,
+    "sha256": "8fd14f5200fa459da5b6bbfeb7dd6cd554fb42977adea286c4d9d7c2a9a9bc50",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/09/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01092021_01092021_21_reporttmp.pdf",
+    "page": 1,
+    "sha256": "cfaf4e4d5a5fed37c9e5689eb696c74199c3eaf35554f89a78bcd1e435d579ba",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/08/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_182021182021_17_reporttmp.pdf",
+    "page": 1,
+    "sha256": "4cf0cb62004b581343f5c6f305452ed6f049643e59da127935eddb6a99bb4ab9",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/10/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01102021_01102021_10_reporttmp.pdf",
+    "page": 1,
+    "sha256": "8056759ee5ec2cccaacfd13acf96b34b36ac38d89bcdfaed87c7342f953f463a",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "1/4/21",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion_01042021_01042021_tmp.pdf",
+    "page": 1,
+    "sha256": "809c600fe21a41ae22e4e342febcbce5f60dd969d5b42b98ff97c92b44982aa5",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/07/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_172021172021_19_reporttmp.pdf",
+    "page": 1,
+    "sha256": "6d0de2e7b3482eaf30bc076af40163bceea140e2e03ff499a1d8762781b2044b",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/07/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01072021_01072021_13_reporttmp.pdf",
+    "page": 1,
+    "sha256": "a0a700b7d49029d84cbfc788a7e6ebd7fcbabfb19467f76c64074136e6320477",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/11/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11120211112021_9_reporttmp.pdf",
+    "page": 1,
+    "sha256": "1c92eb18cc16c33e9f9d25567dab6f91b7ab91d1806228168cf5886afbd39fbf",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "01/08/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_182021182021_18_reporttmp.pdf",
+    "page": 1,
+    "sha256": "2faeb082bf2c4c8f22bc964768c32d9c9a9081e79974d7ec6ae00aef174c6047",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  },
+  {
+    "report_date": "1/5/2021",
+    "archive": "16A(78)-32_Daily_Reports.zip",
+    "member": "16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01052021_01052021.pdf",
+    "page": 1,
+    "sha256": "cf7f7cfc3d3dd27b3d461083fe8f23728f2a7cca0262ad8aaff867b499857954",
+    "BHA": "",
+    "table_count": 4,
+    "mud_parsed": false
+  }
+]
