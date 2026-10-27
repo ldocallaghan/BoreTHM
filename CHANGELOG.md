@@ -13,6 +13,16 @@ The 16A archive remains outside the installed package and source distribution.
 Pause outliers are traced to the quasi-steady starting states; run-in
 underprediction is stated explicitly as potentially non-conservative.
 
+Adds the FORGE 16B whole-well comparison, preserving the blind S1 result
+beside a labelled missing-rheology protocol revision. Archived diagnostics
+cover 16A water rheology at recorded density, annulus regimes and film
+coefficients, both wells' energy budgets and matched depths. Motorless
+16B pressure accounting separates the model's included terms from cited
+external geometry estimates and unquantified tool restrictions. The
+validation and limitations guides report the discrepancies without
+assigning a cause. Summary-arithmetic checks read the saved evidence;
+existing model functions and reference results remain unchanged.
+
 ## v1.5.0 (23 October 2026)
 
 An installed package can now assess a new site from a TOML file.

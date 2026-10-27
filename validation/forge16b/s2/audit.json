@@ -1,0 +1,17 @@
+{
+  "cases": 934,
+  "solver_failures": 0,
+  "diagnostic_failures": 0,
+  "original_primary_replays_verified": 467,
+  "profiles_independently_verified": 934,
+  "mud_field_assignments_verified": 54,
+  "unchanged_baseline_files": 64,
+  "unchanged_16a_source_files": 48,
+  "unchanged_16b_source_files": 69,
+  "pressure_samples_16A": 135,
+  "pressure_samples_16B": 109,
+  "missing_pressure_16A_return_only": 223,
+  "matched_bins": 10,
+  "unmatched_bins": 3,
+  "max_abs_temperature_balance_closure_C": 0.0009724313187913225
+}

@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "python": "3.14.4",
+  "versions": {
+    "borethm": "1.5.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "iapws": "1.5.5",
+    "matplotlib": "3.11.2"
+  },
+  "fitted_parameters_reused": true,
+  "no_fitting": true,
+  "checks": [
+    {
+      "chain": "saved_fitted",
+      "run": "BHA10",
+      "samples": 22,
+      "failures": 0,
+      "computed_mean_F": 184.05730750626765,
+      "saved_mean_F": 184.0573075063121,
+      "difference_F": -4.445155354915187e-11,
+      "pass_existing_1F_tolerance": true
+    },
+    {
+      "chain": "saved_fitted",
+      "run": "BHA11",
+      "samples": 20,
+      "failures": 0,
+      "computed_mean_F": 148.98989385591383,
+      "saved_mean_F": 148.98989385581118,
+      "difference_F": 1.0265921446261927e-10,
+      "pass_existing_1F_tolerance": true
+    },
+    {
+      "chain": "saved_fitted",
+      "run": "BHA12",
+      "samples": 16,
+      "failures": 0,
+      "computed_mean_F": 157.40440352345416,
+      "saved_mean_F": 157.4044035234492,
+      "difference_F": 4.973799150320701e-12,
+      "pass_existing_1F_tolerance": true
+    },
+    {
+      "chain": "saved_fitted",
+      "run": "BHA13",
+      "samples": 17,
+      "failures": 0,
+      "computed_mean_F": 217.88071658254563,
+      "saved_mean_F": 217.8807165825702,
+      "difference_F": -2.4556356947869062e-11,
+      "pass_existing_1F_tolerance": true
+    },
+    {
+      "chain": "saved_unfitted",
+      "run": "BHA10",
+      "samples": 22,
+      "failures": 0,
+      "computed_mean_F": 192.04072533568532,
+      "saved_mean_F": 192.040725335722,
+      "difference_F": -3.666400516522117e-11,
+      "pass_existing_1F_tolerance": true
+    },
+    {
+      "chain": "saved_unfitted",
+      "run": "BHA11",
+      "samples": 20,
+      "failures": 0,
+      "computed_mean_F": 148.98040788117993,
+      "saved_mean_F": 148.98040788132502,
+      "difference_F": -1.4509282664221246e-10,
+      "pass_existing_1F_tolerance": true
+    },
+    {
+      "chain": "saved_unfitted",
+      "run": "BHA12",
+      "samples": 16,
+      "failures": 0,
+      "computed_mean_F": 160.30521796111728,
+      "saved_mean_F": 160.3052179610991,
+      "difference_F": 1.8189894035458565e-11,
+      "pass_existing_1F_tolerance": true
+    },
+    {
+      "chain": "saved_unfitted",
+      "run": "BHA13",
+      "samples": 17,
+      "failures": 0,
+      "computed_mean_F": 227.6600165399568,
+      "saved_mean_F": 227.65997254545346,
+      "difference_F": 4.3994503357680514e-05,
+      "pass_existing_1F_tolerance": true
+    }
+  ]
+}

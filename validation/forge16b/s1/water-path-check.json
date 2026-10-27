@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "chain": "saved_fitted",
+      "run": "BHA10",
+      "samples": 22,
+      "failures": 0,
+      "max_abs_point_difference_C": 1.4210854715202004e-14,
+      "mean_difference_C": -1.2918958832001822e-15,
+      "matches_within_existing_seed_agreement_001C": true
+    },
+    {
+      "chain": "saved_fitted",
+      "run": "BHA11",
+      "samples": 20,
+      "failures": 0,
+      "max_abs_point_difference_C": 1.4210854715202004e-14,
+      "mean_difference_C": 1.4210854715202005e-15,
+      "matches_within_existing_seed_agreement_001C": true
+    },
+    {
+      "chain": "saved_fitted",
+      "run": "BHA12",
+      "samples": 16,
+      "failures": 0,
+      "max_abs_point_difference_C": 1.4210854715202004e-14,
+      "mean_difference_C": 2.220446049250313e-15,
+      "matches_within_existing_seed_agreement_001C": true
+    },
+    {
+      "chain": "saved_fitted",
+      "run": "BHA13",
+      "samples": 17,
+      "failures": 0,
+      "max_abs_point_difference_C": 1.4210854715202004e-14,
+      "mean_difference_C": 2.507797890918001e-15,
+      "matches_within_existing_seed_agreement_001C": true
+    },
+    {
+      "chain": "saved_unfitted",
+      "run": "BHA10",
+      "samples": 22,
+      "failures": 0,
+      "max_abs_point_difference_C": 1.4210854715202004e-14,
+      "mean_difference_C": -1.2918958832001822e-15,
+      "matches_within_existing_seed_agreement_001C": true
+    },
+    {
+      "chain": "saved_unfitted",
+      "run": "BHA11",
+      "samples": 20,
+      "failures": 0,
+      "max_abs_point_difference_C": 1.4210854715202004e-14,
+      "mean_difference_C": 1.7763568394002505e-15,
+      "matches_within_existing_seed_agreement_001C": true
+    },
+    {
+      "chain": "saved_unfitted",
+      "run": "BHA12",
+      "samples": 16,
+      "failures": 0,
+      "max_abs_point_difference_C": 1.4210854715202004e-14,
+      "mean_difference_C": 2.220446049250313e-15,
+      "matches_within_existing_seed_agreement_001C": true
+    },
+    {
+      "chain": "saved_unfitted",
+      "run": "BHA13",
+      "samples": 17,
+      "failures": 0,
+      "max_abs_point_difference_C": 1.4210854715202004e-14,
+      "mean_difference_C": 8.359326303060002e-16,
+      "matches_within_existing_seed_agreement_001C": true
+    }
+  ],
+  "main_plan_unchanged": true
+}

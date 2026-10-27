@@ -1,0 +1,774 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 06bafd5..0a786de 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -13,6 +13,16 @@ The 16A archive remains outside the installed package and source distribution.
+ Pause outliers are traced to the quasi-steady starting states; run-in
+ underprediction is stated explicitly as potentially non-conservative.
+ 
++Adds the FORGE 16B whole-well comparison, preserving the blind S1 result
++beside a labelled missing-rheology protocol revision. Archived diagnostics
++cover 16A water rheology at recorded density, annulus regimes and film
++coefficients, both wells' energy budgets and matched depths. Motorless
++16B pressure accounting separates the model's included terms from cited
++external geometry estimates and unquantified tool restrictions. The
++validation and limitations guides report the discrepancies without
++assigning a cause. Summary-arithmetic checks read the saved evidence;
++existing model functions and reference results remain unchanged.
++
+ ## v1.5.0 (23 October 2026)
+ 
+ An installed package can now assess a new site from a TOML file.
+diff --git a/docs/science/limitations.md b/docs/science/limitations.md
+index 91d1a6b..3afa718 100644
+--- a/docs/science/limitations.md
++++ b/docs/science/limitations.md
+@@ -21,7 +21,7 @@ Input acceptance, property-table coverage and field evidence impose different li
+ | Other numerical guards | The water-only heat-capacity path, `model1_coupled._cp`, clips its inputs to 1 to 480 °C and 0.1 to 220 MPa absolute, then calls the heat-capacity interpolator directly. That interpolator extrapolates over the small intervals beyond the final grid nodes at 479 °C and 218.1 MPa. `model1_coupled.solve` marks a circulation solution unsuccessful if either sampled fluid profile reaches 480 °C. The friction-heating lookup in `model1_coupled._friction_gradient` uses a minimum property pressure of 5 MPa absolute and clips temperature to 1 to 480 °C. The separate `hydraulics` function uses the approximate hydrostatic property pressure directly. |
+ | Fluid model | Circulation represents one single-phase fluid. The weighted-fluid model treats barite as a dispersed solid in water. There is no two-phase liquid-vapour flow calculation or vapour-fraction balance. |
+ | Circulation property pressure | `model1_coupled.P_of_z` supplies the approximate absolute pressure `P_surface + 10 MPa/km × TVD`, with true vertical depth (TVD) measured from surface and a default surface pressure of 0.1 MPa absolute. This property pressure is separate from the wall-pressure budget. The [property-pressure comparison, A1](approximation-comparisons.md#what-each-comparison-changes), tests a different treatment at fixed programme inputs. |
+-| Field comparison range | The FORGE 16B circulation trial spans about 2.31 to 2.99 km measured depth, or 2.12 to 2.41 km true vertical depth. Its adopted formation-temperature profile, from neighbouring well 16A, gives about 182 to 205 °C over that interval. These conditions are below the deep reference targets; the [validation guide](validation.md#circulation) describes the measured fluid temperatures and fitted parameters. |
++| Field comparison range | The original FORGE 16B circulation trial spans about 2.31 to 2.99 km measured depth, or 2.12 to 2.41 km true vertical depth, with adopted formation temperatures of about 182 to 205 °C. The whole-well comparison expands accepted samples to about 1.26 to 3.30 km measured depth and 1.26 to 2.54 km true vertical depth, with adopted formation temperatures of about 121 to 218 °C from neighbouring well 16A. These conditions are below the deep reference targets; the [validation guide](validation.md#circulation) describes the errors and fitted-input dependencies. |
+ | Site conditions | Deep stress and temperature profiles extend beyond the measured intervals. Strength assumptions and the transfer of calibrated parameters remain site-specific uncertainties, as described in [input evidence](#input-evidence). |
+ 
+ ### Accepted scalar ranges
+@@ -58,6 +58,14 @@ A published potassium-formate fluid retained a plastic viscosity of 30 mPa s aft
+ 
+ The manufacturer's 204 °C coating rating does not establish survival through a hotter drilling cycle. The cited managed-pressure drilling equipment has a stated mechanical pressure rating; qualification for the modelled thermal cycle remains unknown.
+ 
++## Circulation hydraulics and heat input
++
++The [FORGE pressure accounting](validation.md#motorless-16b-pressure-accounting) finds that the existing calculation accounts for only 42–49% of run-mean measured standpipe pressure in four motorless 16B assemblies under the revised mud protocol. The model includes straight-passage string and annulus friction and bit nozzles, with a signed density-column correction. It has no separate hydraulic tool-joint, surface-line or proprietary MWD/steering restriction term. The lower BHA uses length-weighted dimensions. External geometry estimates account for additional pressure, but installed connection machining, surface plumbing and tool loss curves remain unresolved. The remaining discrepancy cannot be assigned uniquely to distributed friction, even without a motor.
++
++The thermal and hydraulic routines also use different treatments of yield point. Heat-transfer Reynolds numbers use plastic viscosity; Bingham hydraulic regimes use apparent viscosity including yield point. In the saved FORGE samples, every annulus cell uses the turbulent heat-transfer branch, although the hydraulic calculation classifies substantial lengths as laminar. Distributed friction heating retains its plastic-viscosity friction factor and minimum property pressure of 5 MPa. The [regime and film diagnostics](validation.md#annulus-regime-and-film-coefficient) report these distinctions without changing the functions.
++
++The modelled friction, nozzle and motor-face heat totals are below measured standpipe pressure times inlet flow in both wells. That power comparison does not establish a missing downhole heating rate: surface losses, mechanical work and the location of dissipation affect how energy enters the circulating fluid. A small numerical temperature-balance residual checks the implemented equations, not the completeness of the physical energy budget. The [energy comparison](validation.md#pressure-and-heat-input-accounting) therefore does not validate the pump-pressure check or identify a cause of the temperature errors. A positive temperature margin alone does not establish a conservative hydraulic or thermal prediction.
++
+ ## Tool temperature and programme timing
+ 
+ At FORGE 16A, the run-in tool calculation underpredicted measured peaks by about 20–50 °C on partial legs with approximate initial states. The run-in tool check can therefore be non-conservative: it can predict a lower peak than the tool experiences. The [validation section](validation.md#forge-16a-conditional-transient-checks) gives the comparison and its initial-state limitations.
+diff --git a/docs/science/validation.md b/docs/science/validation.md
+index ba3c8fa..6b9ede8 100644
+--- a/docs/science/validation.md
++++ b/docs/science/validation.md
+@@ -12,7 +12,9 @@ MWD means measurement while drilling; the 16B comparison uses fluid temperature
+ |---|---|---|---|---|---|
+ | UT Austin benchmark | Wu et al.'s published fluid temperatures and standpipe pressures | No parameter fit; the initial comparison identified omitted friction heating | Published well geometry, pipe properties and operating conditions; assumptions where the paper is silent, including the unspecified bit nozzles | The published outputs were compared without fitting parameters to them | Agreement with another simulator for specified cases, with unresolved coated-pipe differences; this is a code-to-code benchmark |
+ | FORGE 16B circulation | Measured MWD fluid temperatures during regular-pipe and insulated-pipe runs | Multiplier on the annulus heat-transfer coefficient, fitted on the regular-pipe runs; effective insulated-pipe conductivity on BHA 11. The chain with the coefficient unfitted still fits that conductivity on BHA 11 | The 16B survey and rig record; formation temperatures from neighbouring well 16A; measured core thermal properties | BHA 12's partial-insulation temperatures, predicted without further fitting | Fluid-temperature prediction for the held-out run under the trial conditions, with the fitted-input dependencies stated |
++| FORGE 16B whole-well circulation | Pason EYE downhole temperatures in 109 half-hour samples from 13 assemblies | No new fit; film multiplier 1.0 is primary. Insulated runs retain previously fitted pipe conductivity | Recorded operating conditions and assembly dimensions; missing rheology substitutions are revised explicitly after S1 | Periods outside the earlier trial supplied no fitted parameter; trial runs retain their earlier fit roles | Blind disagreement across a wider depth range, with both mud protocols retained; the temperature error changes sign between runs |
+ | FORGE 16A circulation | Bit-box and top-sub temperatures while drilling, and mud-log surface return | Nothing on 16A; film multiplier 1.0 is primary, with the 16B-fitted 0.75 as a sensitivity | Recorded geometry, mud and operating inputs; FORGE core properties; formation logs previously used for 16B; unresolved sensor medium/offset and surface probe location | 16A downhole and return temperatures were not used to fit the primary calculation | Blind disagreement, including deep underprediction and shallower scatter; the cumulative circulation clock omits recovery |
++| FORGE hydraulic and energy accounting | Standpipe pressure and outlet-minus-inlet temperature; motorless 16B pressure terms | Nothing; declared geometry scenarios are retained without selecting by pressure agreement | The same fixed circulation inputs; generic joint and surface layouts where as-built dimensions are unavailable; proprietary tool restrictions remain unquantified | Measured pressures set no loss coefficient or model correction | Quantifies included pressure and heat terms and the remaining discrepancies; it does not locate the missing losses or identify a cause of the temperature errors |
+ | FORGE 16A transients | Pauses and peaks in observed run-in legs | Nothing | Approximate earlier wall history, local operating inputs and tool dimensions; run-in nodes start at the first observation; later operating-input boundaries enter earlier wall conditioning | Later temperatures within a leg or pause; the initial run-in observation is an input | Conditional transient comparison, with five unavailable cases; it does not independently validate complete trips or establish recovery as the cause |
+ | FORGE pauses | Return-temperature anomalies after five trips | One attenuation factor for the plug-flow temperature anomaly; each trip is predicted with the factor fitted on the other four | The FORGE geometry and circulation record; pipe conductivity from the MWD comparison; each pause's pre-stop return temperature sets an offset, and the restart record supplies flow and inlet conditions | Each trip's return-temperature anomaly is excluded from its own attenuation-factor fit | Limited predictive performance for the return anomaly; the comparison is too coarse to distinguish the wall-reheating treatments |
+ | UD-1 strength calibration | BGS breakout widths and intervals without breakouts in the near-vertical section | Weak-zone strengths and an intact-rock lower bound | Published stress and pore-pressure profiles; assumed wall-cooling range and fluid weight; strengths inferred directly from the breakout observations | The deeper deviated-section breakouts are excluded from the fit and used as a qualitative check | Strength ranges conditional on the adopted stresses and cooling; the calibration does not independently verify those inputs |
+@@ -55,6 +57,54 @@ Eavor estimated from the data how each change between the first two runs moved t
+ 
+ *Fig. 2. Left: modelled MWD temperature while drilling each run (points), against the measured run averages (bars) and BHA 12's levelled range (shaded). Right: the change between the first two runs, one factor at a time, from the model and from Eavor's estimate.*
+ 
++### FORGE 16B: whole-well circulation comparison
++
++The whole-well comparison uses the existing v1.5.0 calculation at `85f23db51f6661e6ca09bd05c16b9ffb48881d83`, after the 16A validation was added. It compares 109 half-hour samples from 13 bottom-hole assemblies with Pason's EYE temperature channel. Nothing is fitted in this comparison. Film multiplier 1.0 and cumulative circulating exposure are primary. The [input protocol](../../validation/forge16b/comparison_protocol.md) fixes the sampling and observational filters; the [S1 protocol](../../validation/forge16b/comparison_protocol_s1.md) records the reviewed geometry and sensor treatments. The source is GDR 1516, [DOI 10.15121/1998591](https://doi.org/10.15121/1998591), CC BY 4.0.
++
++EOW below means the End of Well Report assembly number. EOW 17–20 correspond to trial BHA 10–13 above. EOW 17 and 20 supplied the earlier film fit; EOW 18 supplied the insulated-pipe conductivity fit. EOW 19 was held out from those fits, but uses that conductivity. Other assemblies supplied neither fit. The insulated cases retain the previously fitted conductivity of 4.923748 W/(m K). The original trial calculation chains were replayed first on their own saved samples and parameters; all 150 solves converged, with maximum run-mean difference 0.000044 °F from the saved results.
++
++The first blind result, S1 version 1, uses the original period-mud substitutions. Positive bias means the bore-fluid prediction is hotter than EYE. Sensor-position ranges below retain every declared comparison and are not uncertainty intervals.
++
++| EOW assembly | Samples | Measured mean, °C | S1 v1 mean bias, °C | Sensor position above bit, ft |
++|---|---:|---:|---:|---|
++| 3 | 3 | 65.02 | −4.89 to −4.80 | 22, 69 and 84, unresolved |
++| 4 | 2 | 76.29 | −24.27 to −24.17 | 22 and 84, unresolved |
++| 11 | 4 | 62.97 | −16.18 | 22, drawing |
++| 12 | 12 | 68.75 | −18.27 | 22, drawing |
++| 13 | 14 | 64.34 | −8.42 | 22, drawing |
++| 15 | 4 | 63.04 | −4.21 | 22, drawing |
++| 16 | 15 | 73.85 | −4.80 | 22, drawing |
++| 17 | 14 | 81.36 | +3.18 | 84, earlier trial assumption |
++| 18 | 10 | 65.47 | +1.69 | 84, earlier trial assumption |
++| 19 | 10 | 71.29 | +1.18 | 84, drawing |
++| 20 | 11 | 105.57 | +1.49 | 84, drawing |
++| 27 | 5 | 113.27 | −3.80 to −3.73 | 84 assumed; 22 sensitivity |
++| 38 | 5 | 121.01 | −1.56 to −1.49 | 84 assumed; 22 sensitivity |
++
++The original primary underpredicts all pre-trial run means, overpredicts the four trial means and underpredicts the two later means. Small signed means can conceal scatter: at the assumed 84-ft position, EOW 27 has mean absolute error 11.84 °C and root-mean-square error 13.00 °C, despite its −3.80 °C bias. EOW 38 has mean absolute error 5.49 °C. The maximum within-sample spread over the requested sensor positions is below 0.10 °C. EOW 38's drawing gives 85 ft; the reviewed 84-ft assumption is retained, with the 85-ft interpolation archived. EOW 14 and 26 have no accepted comparison window.
++
++![FORGE 16B whole-well blind comparison](../../validation/forge16b/s1/wholewell-comparison.png?raw=1)
++
++*Original S1 version 1. The shaded depth interval is the earlier insulated-pipe trial. Per-run errors, fixed sensor branches and fit roles remain separate.*
++
++An optimistic full-recovery sensitivity resets the exposure clock after continuously observed pumps-off intervals longer than two hours and retains the existing one-hour floor. It brackets the measured means in EOW 15, 16, 27 and 38, while leaving other pre-trial means too cold and increasing trial overprediction. It raises the later EOW 27/38 means by about 24/27 °C. Reducing the film multiplier to 0.75 lowers the predictions and increases the pre-trial underprediction. These sensitivities remain attached to S1 version 1; they have not been rerun with the revised mud. Neither establishes recovery or heat transfer as the cause. The [S1 review](../../validation/forge16b/s1/S1-review.md) gives the complete temperature, recovery and water-property comparisons in °C and °F.
++
++#### Labelled mud-protocol revision
++
++S1's missing-property fallback used the reference programme mud, with plastic viscosity (PV) 27 cP and yield point (YP) 28 lbf/100 ft². Those values describe a weighted mud and are inconsistent with the input record's low-solids, water-rich system. After S1 review, the protocol changed: missing PV or YP takes the nearest actual measurement in either time direction within the same fluid system; a system without a measurement uses water rheology at its recorded density. No donor crosses a fluid-system boundary. Some donors are days away, so contemporaneous rheology remains uncertain. The [revision ledger](../../validation/forge16b/s2/mud-revision-ledger.csv) identifies every source and signed time offset.
++
++The original comparison remains version 1. The revised primary is version 2, calculated on the same 109 windows with the same geometry and film coefficient. Five run means change:
++
++| EOW assembly | S1 v1 bias, °C | Revised v2 bias, °C | Change in model mean, °C |
++|---|---:|---:|---:|
++| 11 | −16.18 | −8.49 | +7.69 |
++| 12 | −18.27 | −9.80 | +8.48 |
++| 16 | −4.80 | +0.14 | +4.94 |
++| 17 | +3.18 | +8.74 | +5.56 |
++| 18 | +1.69 | +2.08 | +0.39 |
++
++All other run means are unchanged. The revision removes an input-inconsistent substitution; it does not remove the changing sign of the field discrepancy. The [S2 review](../../validation/forge16b/s2/S2-review.md) preserves both complete versions and their input provenance.
++
+ ### FORGE 16A: blind circulation comparison
+ 
+ The unfitted calculation was compared with well 16A(78)-32 using model v1.5.0 at `b9a8a93` (`v1.5.0-1-gb9a8a93`). Nothing was fitted to its downhole or return temperatures. The primary annulus-film multiplier is 1.0; the 16B-fitted 0.75 is a sensitivity. Measured FORGE core properties are retained. The [source extracts and archived evidence](../../validation/forge16a/README.md) identify the survey, casing, mud properties and temperature logs.
+@@ -117,6 +167,79 @@ The source records distinguish cooler installation from operation. The 24 Octobe
+ 
+ The frozen [primary records](../../validation/forge16a/circulation-primary.csv) and [evidence manifest](../../validation/forge16a/evidence-manifest.json) preserve the comparison. Regression tests recompute summary arithmetic from those records without rerunning S1. They check the archived evidence; they do not test a future physical calculation against the field data.
+ 
++### FORGE wells: rheology and energy checks
++
++These diagnostics use the unchanged calculation and the fixed S1 samples. The original blind results above remain the field comparisons. They are followed by sensitivities and pressure accounting, with no parameter fitted to remove the discrepancies.
++
++#### 16A water-rheology sensitivity
++
++The sensitivity replaces viscosity and yield point with water rheology while retaining recorded density and the mixture's thermal properties. Inlet volumetric flow and mass flow remain unchanged. It evaluates all 358 primary samples, including 135 with downhole observations and 223 with return observations only. The ranges below retain the four fixed bore/annulus and bit/40-ft comparisons.
++
++| 16A assembly | Downhole samples | Original blind bias, °C | Water-rheology bias, °C |
++|---|---:|---:|---:|
++| 18 | 15 | −4.16 to −3.03 | +7.74 to +8.84 |
++| 23 | 13 | −0.24 to +0.90 | +17.35 to +18.45 |
++| 30 | 29 | +2.32 to +3.38 | +22.27 to +23.30 |
++| 34 | 9 | −0.81 to +0.36 | +20.81 to +21.95 |
++| 35r1 | 5 | −3.19 to −2.06 | +14.13 to +15.25 |
++| 35r2 | 4 | −8.98 to −7.54 | +10.54 to +11.96 |
++| 38 | 20 | −8.18 to −6.85 | +13.18 to +14.50 |
++| 39 | 25 | −9.75 to −8.49 | +16.84 to +18.09 |
++| 42 | 15 | −19.87 to −18.69 | +12.72 to +13.89 |
++
++All nine run means become too hot. BHA 42 increases by 32.57–32.60 °C. Across all 358 samples, mean return-temperature error worsens from −5.85 to −7.98 °C. Water rheology is a sensitivity, and is not established as the field mud's rheology. The two BHA 35 runs retain their washout flags.
++
++#### Annulus regime and film coefficient
++
++Reynolds number compares inertial and viscous effects in the flow. Every sampled annulus cell uses the turbulent branch of the heat-transfer correlation; the strong temperature sensitivities occur within that branch. Minimum sampled heat-transfer Reynolds numbers are 7,445 in original 16A and 5,113 in original 16B, above its 2,300 threshold. The annulus film coefficient describes local convective heat transfer, excluding the casing and rock resistance.
++
++| Treatment | Samples | Mean length-weighted annulus film, W/(m² K) | Mean hydraulic laminar length, % |
++|---|---:|---:|---:|
++| 16A blind | 358 | 2,020 | 29.7 |
++| 16A water rheology | 358 | 6,928 | 0.0 |
++| 16B S1 v1 | 109 | 3,218 | 71.4 |
++| 16B revised v2 | 109 | 3,874 | 4.6 |
++
++The heat-transfer correlation uses plastic viscosity. The Bingham hydraulic calculation uses apparent viscosity, which includes yield point, and its own 2,100 transition threshold. Thus a reported hydraulic laminar interval can still use the turbulent heat-transfer branch. The distributed friction-heating routine uses its existing plastic-viscosity friction factor and 5 MPa property-pressure floor. These treatments are reported separately and remain unchanged. Higher downhole predictions accompany larger film coefficients while calculated friction heat decreases; the whole rheology sensitivity does not isolate either contribution. [Per-sample diagnostics](../../validation/forge16b/s2/energy-samples.csv) and [depth profiles](../../validation/forge16b/s2/annulus-profiles.csv.gz) retain both regimes, film coefficients and applied rheology.
++
++#### Pressure and heat-input accounting
++
++The pressure comparison uses 135 paired Sanvean samples in 16A and 109 Pason windows in 16B. The 223 return-only 16A samples have no substituted pressure. The original S2 table below retains its subtraction of raw reported differential on every paired sample. That channel is not a verified total motor/MWD loss and is nonzero on motorless runs too. S2b separately examines the motorless 16B runs against raw measured standpipe pressure, without that subtraction.
++
++| Treatment | Pressure samples | Mean model minus (SPP minus raw differential), psi | Measured SPP × inlet flow, kW | Model distributed friction + nozzle + motor-face heat, kW |
++|---|---:|---:|---:|---:|
++| 16A blind | 135 | −1,624 | 928 | 500 |
++| 16A water rheology | 135 | −2,291 | 928 | 329 |
++| 16B S1 v1 | 109 | −770 | 527 | 264 |
++| 16B revised v2 | 109 | −969 | 527 | 244 |
++
++The measured hydraulic-power temperature equivalent, obtained by dividing SPP × inlet flow by inlet mass flow and heat capacity, averages 5.88 °C in 16A and 2.98 °C in 16B. These are scale comparisons, not predicted missing temperature increments. Surface dissipation and mechanical work need not enter the downhole fluid at the same location. The model's rock exchange and internal heat-capacity term remain in the temperature balance. Numerical quadrature reproduces that implemented balance to within 0.001 °C; this does not establish exact physical enthalpy conservation.
++
++Across all temperature samples, mean outlet-minus-inlet error is −5.85 °C for original 16A and −2.08 °C for revised 16B. The complete [per-run energy table](../../validation/forge16b/s2/energy-run-summary.csv) retains sample counts and all heat terms. The [matched-depth table](../../validation/forge16b/s2/matched-primary-comparison.csv) reports ten shared predeclared 500-ft MD bins and three unmatched bins. It includes flow and inlet temperature, geometry, applied mud, sensor branches, cooler context and pressure, with regime and film columns. Actual sampled depth ranges can differ within a shared bin. Time since a long observed pumps-off interval is a proxy; confirmed surface-trip timing is unavailable. These comparisons do not identify a unique cause for either well's temperature errors.
++
++#### Motorless 16B pressure accounting
++
++EOW 12, 13, 15 and 16 have no motor, but include the HALO steering and measurement-while-drilling assembly. Across their 45 fixed samples, the existing pressure calculation includes pipe and BHA bore friction, nozzles and annulus friction, with the signed density-column correction. HWDP is a separate segment and the lower BHA uses length-weighted dimensions. Tool joints, surface lines and proprietary tool restrictions have no separate term.
++
++The S2b diagnostic estimates the additional losses from recorded serial BHA passages and transitions. It also calculates two declared, FH-compatible catalogue joint geometries and generic API surface layouts. These external estimates are not fed back into the model. The installed joint machining and effective restricted length are unresolved. The representative comparison below uses an assumed 29-in restriction per joint, abrupt area changes and the API top-drive surface case; it is not an as-built reconstruction.
++
++| EOW | Samples | Measured mean SPP, psi | Included model, psi | Accounted with EIS geometry, psi | Accounted with GPDS55 geometry, psi | Remaining residual, EIS / GPDS55, psi |
++|---|---:|---:|---:|---:|---:|---:|
++| 12 | 12 | 1,175 | 539 | 707 | 842 | 468 / 333 |
++| 13 | 14 | 1,166 | 562 | 739 | 895 | 427 / 271 |
++| 15 | 4 | 1,189 | 577 | 769 | 941 | 420 / 249 |
++| 16 | 15 | 1,244 | 519 | 712 | 896 | 532 / 348 |
++
++The included model accounts for 42–49% of the run-mean measured pressure. Resolving lower-BHA bores adds about 30–37 psi, abrupt BHA transitions add 24–27 psi and the two joint scenarios add about 72–285 psi. The generic top-drive surface case adds about 35 psi. Full loss through the integrated HALO pulser/steering assembly and the float/filter internals cannot be estimated from the reported body IDs alone: their operating loss curves and open areas are missing. Their extra loss remains unquantified, with numeric pressure-per-unit-loss-coefficient values supplied in the archive. An omitted allowance in a subtotal is not evidence of zero loss.
++
++The raw differential means are +39.65, +15.65, −0.37 and +14.12 psi for EOW 12, 13, 15 and 16. Seven of the 45 windows have negative differential. The channel is retained without subtracting it or using it to set a loss coefficient. Other generic surface layouts give larger allowances, and some scenarios over-account individual sample pressures. Unknown pressure-tap position can also make part of a full surface-layout allowance inapplicable. No scenario is selected for agreement, and the remaining residual is not assigned to HALO or to distributed friction.
++
++![Motorless FORGE 16B pressure accounting](../../validation/forge16b/s2b/pressure-accounting.png?raw=1)
++
++*Revised mud; both assumed joint geometries use the same generic top-drive surface case. Black ticks show measured run-mean pressure. Unknown tool losses have no assigned numerical allowance.*
++
++The [S2b review](../../validation/forge16b/s2b/S2b-review.md) gives the included-term split and cited estimation methods, with limitations of the turbulent sudden-change correlations. It links every sample's pressure accounting, all geometry/layout sensitivities and the reported differential. All 90 original/revised circulation replays reproduce the saved S2 pressure and temperature endpoints exactly. The new archive tests recompute summary arithmetic from saved records; they introduce no physical regression tolerance or fitted parameter. The [limitations](limitations.md#circulation-hydraulics-and-heat-input) explain how the pressure and heat-input findings affect interpretation.
++
+ ## Rock reheating
+ 
+ The reheating of the wall when circulation stops is calculated with a transient model of conduction in the rock around the hole, described in the [physical-model guide](models.md#wall-reheating-and-thermal-stress). It was compared with the return temperature recorded in FORGE 16B when circulation resumed after each of the five trips in the trial (`validate_forge_pauses.py`). While the pumps are off, the fluid in the hole drifts towards the temperature of the rock around it, warming in the deep part of the hole and cooling near surface, and when they restart the annulus column reaches surface over the first bottoms-up, shallowest fluid first. In the model, the rock at points every 200 ft along the hole is taken through its own history of circulation and pauses from the rig's minute-by-minute record, and the column of fluid temperatures is pushed to surface as plug flow. Plug flow ignores the heat the returning fluid exchanges with the string and the rock on its way up, so one factor scales the modelled anomaly in the return temperature. Fitted on four of the five trips and used to predict the fifth, in turn, the factor is 0.56, and the predicted mean anomalies differ from the observed ones by 12 °F (root mean square), against observed anomalies of −10 to +38 °F (Fig. 3). The largest miss is the 33-hour trip, observed at +25 °F and predicted at 0 °F. With the fluid in the hole taken at the wall's temperature, the sensitivity used for the sites, the factor is 0.39 and the misfit 13 °F. The pauses with the bit on bottom could not be used, as most were for gyroscopic surveys or circulation at reduced flow, and their first bottoms-up runs into the next operation. The modelled curves are dominated by the arrival of the hot fluid from the bottom of the hole, which the observed curves do not show, and the fit barely separates the base case from the case with no fluid in the hole. The comparison is therefore too coarse to confirm or reject the reheating model, which rests on the [analytic checks](#analytic-checks). The 16A comparison below supplies a separate conditional check.
+--- /dev/null
++++ b/src/borethm/studies/forge16b_hydraulics.py
+@@ -0,0 +1,390 @@
++"""Motorless FORGE 16B pressure accounting, with external geometric estimates.
++
++Calls the existing circulation and hydraulics functions unchanged. External
++loss estimates are post-processing only and never alter a model result.
++The protocol is validation/forge16b/comparison_protocol_s2b.md.
++"""
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import math
++import platform
++import statistics
++import time
++from collections import defaultdict
++from pathlib import Path
++
++import numpy as np
++
++from borethm import fluids, model1_coupled as m1
++from borethm.studies import forge16_energy as energy
++from borethm.studies import validate_forge16b as trial
++from borethm.studies import validate_forge16b_wholewell as whole
++
++FT, INCH, GPM, PSI = whole.FT, whole.INCH, whole.GPM, whole.PSI
++RUNS = (12, 13, 15, 16)
++JOINTS = {'EIS': (7., 4.), 'GPDS55': (7.25, 3.5)}
++SURFACE = {1: 1., 2: .36, 3: .22, 4: .15, 5: .15}
++JOINT_PITCH_FT = 2378. / 75.
++JOINT_LENGTHS_IN = (0., 29., 58.)
++
++
++def digest(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def prepare(data, s2, output):
++    output.mkdir(parents=True, exist_ok=True)
++    if (output/'plan.json').exists():
++        raise FileExistsError('S2b plan already exists')
++    original = json.loads((s2/'plan.json').read_text(encoding='utf-8'))
++    expected = {r['case_id']: r for r in map(json.loads,
++                (s2/'results.jsonl').read_text().splitlines())}
++    samples = [s for s in original['samples']
++               if s['well'] == '16B' and int(s['run']) in RUNS]
++    assert len(samples) == 45 and all(not s['documented_motor'] for s in samples)
++    ids = {s['id'] for s in samples}
++    cases = [c for c in original['cases'] if c['sample'] in ids]
++    assert len(cases) == 90
++    preserved = {p.relative_to(data).as_posix(): digest(p)
++                 for sub in ('s1', 's2') for p in sorted((data/sub).rglob('*'))
++                 if p.is_file() and '__pycache__' not in p.parts}
++    plan = dict(baseline=original['baseline'], script_sha256=digest(__file__),
++                protocol_sha256=digest(data/'comparison_protocol_s2b.md'),
++                s2_plan_sha256=digest(s2/'plan.json'),
++                calculation_hashes=original['calculation_hashes'],
++                source_hashes=original['source_b'], preserved_archives=preserved,
++                samples=samples, cases=cases,
++                expected={c['case_id']: expected[c['case_id']] for c in cases},
++                components=original['components_b'], k_idp=original['k_idp'],
++                joint_scenarios=JOINTS, surface_cases=SURFACE,
++                joint_pitch_ft=JOINT_PITCH_FT, joint_lengths_in=JOINT_LENGTHS_IN,
++                versions={**original['versions'], 'Python': platform.python_version()})
++    whole.dump(output/'plan.json', plan)
++    (output/'plan.sha256').write_text(digest(output/'plan.json')+'\n', encoding='utf-8')
++    print('Frozen', len(samples), 'samples and', len(cases), 'replays')
++
++
++def local_change(area_up, area_down, rho, mass_rate, mu, dh_small):
++    """Idelchik sudden-change estimate and its documented Re applicability."""
++    small, large = min(area_up, area_down), max(area_up, area_down)
++    ratio = small/large
++    velocity = mass_rate/(rho*small)
++    expansion = area_down > area_up
++    k = (1-ratio)**2 if expansion else .5*(1-ratio)**.75
++    re = rho*velocity*dh_small/mu
++    threshold = 3300. if expansion else 10000.
++    return k*.5*rho*velocity**2, k, re, bool(re > threshold or k == 0)
++
++
++def properties(s, g, result, fluid, md, annulus=False):
++    temp = float(np.interp(md, result['z'], result['Tu' if annulus else 'Td']))
++    pressure = float(m1.P_of_z(g.survey.tvd(md)))
++    rho, _, mu, _ = (float(x[0]) for x in m1.fluid_props(
++        np.array([temp]), np.array([pressure]), fluid))
++    return temp, pressure, rho, mu
++
++
++def gradient(rho, mu, fluid, mass_rate, area, dh, annulus=False):
++    velocity = mass_rate/(rho*area)
++    if fluid.yield_point > 0:
++        value, re = fluids.bingham_gradient(rho, mu, fluid.yield_point,
++                                            velocity, dh, annulus)
++        return float(value), float(re)
++    re = rho*velocity*dh/mu
++    return float(m1.friction_factor(re))*rho*velocity**2/(2*dh), re
++
++
++def breakdown(s, case, g, fluid, result, mass_rate, plan):
++    ident = dict(case_id=case['case_id'], sample=s['id'], run=s['run'],
++                 rheology_case=case['rheology_case'])
++    hyd = m1.hydraulics(mass_rate, g, result=result, tfa=s['tfa_m2'], fluid=fluid)
++    model_pieces = []
++    included = dict(pipe_body_psi=0., bha_hwdp_psi=0., bha_lower_aggregate_psi=0.)
++    for p in hyd['pieces']:
++        mid = (p['md_top']+p['md_bottom'])/2
++        segment = int(g.segment_index(mid))
++        key = ('pipe_body_psi' if segment == 0 else
++               'bha_hwdp_psi' if 'HWDP' in g.string[segment].pipe.name else
++               'bha_lower_aggregate_psi')
++        included[key] += p['dp_bore']/PSI
++        model_pieces.append({**ident, **p, 'segment': segment,
++                             'pipe': g.string[segment].pipe.name, 'category': key})
++    included.update(bit_nozzles_psi=hyd['dp_bit']/PSI,
++                    annulus_psi=hyd['dp_annulus']/PSI,
++                    density_column_psi=hyd['dp_buoyancy']/PSI,
++                    tool_joints_psi=0., surface_lines_psi=0.)
++    assert abs(sum(included.values())-hyd['spp']/PSI) < 1e-8
++
++    # Serial lower BHA passages use their recorded dimensions and lengths.
++    lower = [dict(c) for c in reversed(plan['components'][str(s['eow_bha'])])
++             if c['kind'] != 'HWDP']
++    for c in lower:
++        # A gauge-size cutting bit is not a solid, sealed annular cylinder.
++        # Keep the existing lower-assembly OD over this short face interval.
++        c['annulus_od_used_in'] = (float(2*g.at(np.array([g.md_bit]))['r_out'][0])/INCH
++                                  if 'bit' in c['component'].lower() else c['od_in'])
++    md = float(g._seg_ends[1])
++    component_rows = []
++    refined_bore = refined_ann = 0.
++    for c in lower:
++        length = c['length_ft']*FT
++        midpoint = md+length/2
++        _, _, rb, mub = properties(s, g, result, fluid, midpoint)
++        _, _, ra, mua = properties(s, g, result, fluid, midpoint, True)
++        inside, outside = c['id_in']*INCH, c['annulus_od_used_in']*INCH
++        hole = float(2*g.at(np.array([midpoint]))['r_wall'][0])
++        bore_area = math.pi*inside**2/4
++        ann_area = math.pi*(hole**2-outside**2)/4
++        gb, reb = gradient(rb, mub, fluid, mass_rate, bore_area, inside)
++        ga, rea = gradient(ra, mua, fluid, mass_rate, ann_area, hole-outside, True)
++        refined_bore += gb*length/PSI
++        refined_ann += ga*length/PSI
++        component_rows.append({**ident, **c, 'md_top_ft': md/FT,
++            'md_bottom_ft': (md+length)/FT, 'bore_friction_psi': gb*length/PSI,
++            'annulus_friction_psi': ga*length/PSI, 'bore_Re_apparent': reb,
++            'annulus_Re_apparent': rea,
++            'extra_internal_psi_per_K': .5*rb*(mass_rate/(rb*bore_area))**2/PSI,
++            'proprietary_or_valve_loss_psi': '',
++            'unquantified_restriction': any(word in c['component'].lower()
++                for word in ('halo', 'float', 'filter', 'black box'))})
++        md += length
++    assert abs(md-g.md_bit) < 1e-6
++    lower_ann = sum(p['dp_ann']/PSI for p in hyd['pieces']
++                    if p['md_top'] >= g._seg_ends[1]-1e-6)
++    delta_bore = refined_bore-included['bha_lower_aggregate_psi']
++    delta_ann = refined_ann-lower_ann
++
++    # BHA transitions include the ordinary-pipe/HWDP boundary and both
++    # sides of every serial component; the terminal nozzle is separate.
++    sequence = [dict(component='ordinary pipe', length_ft=g.string[0].length/FT,
++                     id_in=4.670, od_in=5.5),
++                next(c for c in plan['components'][str(s['eow_bha'])]
++                     if c['kind'] == 'HWDP'), *lower]
++    transitions = []
++    md = 0.
++    for upper, down in zip(sequence, sequence[1:]):
++        md += upper['length_ft']*FT
++        hole = float(2*g.at(np.array([md]))['r_wall'][0])
++        for annulus in (False, True):
++            _, _, rho, mu = properties(s, g, result, fluid, md, annulus)
++            if annulus:  # Upward flow: lower component is upstream.
++                down_od = down.get('annulus_od_used_in', down['od_in'])
++                upper_od = upper.get('annulus_od_used_in', upper['od_in'])
++                au = math.pi*(hole**2-(down_od*INCH)**2)/4
++                ad = math.pi*(hole**2-(upper_od*INCH)**2)/4
++                dh = hole-max(upper_od, down_od)*INCH
++            else:
++                au, ad = (math.pi*(c['id_in']*INCH)**2/4 for c in (upper, down))
++                dh = min(upper['id_in'], down['id_in'])*INCH
++            dp, k, re, valid = local_change(au, ad, rho, mass_rate, mu, dh)
++            transitions.append({**ident, 'upper': upper['component'],
++                'lower': down['component'], 'md_ft': md/FT,
++                'conduit': 'annulus' if annulus else 'bore',
++                'loss_psi': dp/PSI, 'K': k, 'Re_small': re,
++                'newtonian_Re_domain': valid})
++    transition_sum = sum(r['loss_psi'] for r in transitions)
++
++    # Connection losses replace body-length friction, not the full string.
++    joints = []
++    for name, (od, inside) in JOINTS.items():
++        for segno in (0, 1):
++            top = 0. if segno == 0 else float(g._seg_ends[0])
++            bot = float(g._seg_ends[segno])
++            count = (bot-top)/FT/JOINT_PITCH_FT if segno == 0 else 30.
++            number = max(1, int(math.ceil(count)))
++            weight = count/number
++            body_id = 4.670 if segno == 0 else 3.625
++            joint_id = inside if segno == 0 else body_id
++            for i in range(number):
++                z = top+(i+.5)*(bot-top)/number
++                hole = float(2*g.at(np.array([z]))['r_wall'][0])
++                for annulus in (False, True):
++                    _, _, rho, mu = properties(s, g, result, fluid, z, annulus)
++                    if annulus:
++                        abody = math.pi*(hole**2-(5.5*INCH)**2)/4
++                        ajoint = math.pi*(hole**2-(od*INCH)**2)/4
++                        db, dj = hole-5.5*INCH, hole-od*INCH
++                    else:
++                        abody = math.pi*(body_id*INCH)**2/4
++                        ajoint = math.pi*(joint_id*INCH)**2/4
++                        db, dj = body_id*INCH, joint_id*INCH
++                    body_gradient, _ = gradient(rho, mu, fluid, mass_rate, abody, db, annulus)
++                    joint_gradient, re_app = gradient(rho, mu, fluid, mass_rate, ajoint, dj, annulus)
++                    # Symmetric entry/exit: sum of sudden contraction and expansion.
++                    entry = local_change(abody, ajoint, rho, mass_rate, mu, dj)
++                    exit_ = local_change(ajoint, abody, rho, mass_rate, mu, dj)
++                    joints.append({**ident, 'geometry': name,
++                        'segment': 'ordinary_pipe' if segno == 0 else 'HWDP',
++                        'conduit': 'annulus' if annulus else 'bore',
++                        'md_ft': z/FT, 'joint_count_weight': weight,
++                        'body_ID_in': body_id, 'joint_OD_in': od,
++                        'joint_ID_in': joint_id,
++                        'increment_psi_per_inch': weight*(joint_gradient-body_gradient)*INCH/PSI,
++                        'sudden_local_psi': weight*(entry[0]+exit_[0])/PSI,
++                        'Re_apparent': re_app, 'Re_plastic': entry[2],
++                        'newtonian_Re_domain': entry[3] and exit_[3]})
++
++    sample = {**ident, 'time': s['time'], 'depth_ft_MD': s['bit_ft'],
++        'flow_gpm': s['flow_gpm'], 'inlet_C': s['T_in_C'],
++        'density_ppg': s['density_ppg'], 'PV_cP': (s['original_mud'] if
++            case['rheology_case'] == 's1_original' else s['revised_mud'])['PV_cP'],
++        'YP_lbf_100ft2': (s['original_mud'] if case['rheology_case'] ==
++            's1_original' else s['revised_mud'])['YP_lbf_100ft2'],
++        'tfa_in2': s['tfa_m2']/INCH**2, 'measured_spp_psi': s['spp_psi'],
++        'raw_differential_psi': s['raw_differential_psi'], 'motor_allowance_psi': 0.,
++        **included, 'bha_included_total_psi': included['bha_hwdp_psi']+included['bha_lower_aggregate_psi'],
++        'model_spp_psi': hyd['spp']/PSI,
++        'model_accounted_fraction': hyd['spp']/PSI/s['spp_psi'],
++        'model_residual_psi': s['spp_psi']-hyd['spp']/PSI,
++        'serial_bha_bore_psi': refined_bore,
++        'serial_bha_annulus_psi': refined_ann,
++        'bha_bore_increment_psi': delta_bore,
++        'bha_annulus_increment_psi': delta_ann,
++        'bha_transition_sudden_psi': transition_sum,
++        'unknown_tool_loss_psi': '',
++        'dp_joint_expected_count': g.string[0].length/FT/JOINT_PITCH_FT,
++        'hwdp_joint_count': 30}
++    budgets = []
++    for name in JOINTS:
++        jj = [r for r in joints if r['geometry'] == name]
++        for length in JOINT_LENGTHS_IN:
++            internal = sum(r['increment_psi_per_inch']*length for r in jj if r['conduit'] == 'bore')
++            external = sum(r['increment_psi_per_inch']*length for r in jj if r['conduit'] == 'annulus')
++            for shape in ('gradual_zero_local', 'sudden'):
++                local = sum(r['sudden_local_psi'] for r in jj) if shape == 'sudden' else 0.
++                bha_local = transition_sum if shape == 'sudden' else 0.
++                for surface_case, coefficient in {0: 0., **SURFACE}.items():
++                    surface = coefficient*s['density_ppg']*(s['flow_gpm']/100)**1.86
++                    added = delta_bore+delta_ann+internal+external+local+bha_local+surface
++                    accounted = sample['model_spp_psi']+added
++                    budgets.append({**ident, 'joint_geometry': name,
++                        'joint_length_in': length, 'local_shape': shape,
++                        'surface_case': surface_case, 'surface_coefficient': coefficient,
++                        'measured_spp_psi': s['spp_psi'], 'model_spp_psi': sample['model_spp_psi'],
++                        'bha_bore_increment_psi': delta_bore,
++                        'bha_annulus_increment_psi': delta_ann,
++                        'joint_internal_increment_psi': internal,
++                        'joint_annulus_increment_psi': external,
++                        'joint_local_increment_psi': local,
++                        'bha_local_increment_psi': bha_local,
++                        'surface_lines_estimate_psi': surface,
++                        'estimated_increment_psi': added,
++                        'accounted_psi': accounted, 'accounted_fraction': accounted/s['spp_psi'],
++                        'remaining_residual_psi': s['spp_psi']-accounted,
++                        'unknown_tool_loss_psi': '',
++                        'raw_differential_psi': s['raw_differential_psi']})
++    return sample, model_pieces, component_rows, transitions, joints, budgets
++
++
++def verify_sources(data, output):
++    plan = json.loads((output/'plan.json').read_text(encoding='utf-8'))
++    assert digest(output/'plan.json') == (output/'plan.sha256').read_text().strip()
++    assert digest(__file__) == plan['script_sha256']
++    assert digest(data/'comparison_protocol_s2b.md') == plan['protocol_sha256']
++    for name, value in plan['source_hashes'].items():
++        assert digest(data/name) == value, name
++    for name, value in plan['calculation_hashes'].items():
++        assert digest(Path(m1.__file__).parent/name) == value, name
++    for name, value in plan['preserved_archives'].items():
++        assert digest(data/name) == value, name
++    return plan
++
++
++def run(data, output):
++    plan = verify_sources(data, output)
++    samples = {s['id']: s for s in plan['samples']}
++    _, times, circ, depth = whole.clock(data)
++    tables = [[] for _ in range(6)]
++    replays = []
++    (output/'profiles').mkdir(exist_ok=True)
++    for case in plan['cases']:
++        s = samples[case['sample']]
++        start = time.perf_counter()
++        g = whole.geometry(s, plan['components'], plan['k_idp'])
++        fluid, _, _ = energy.fluid_for(s, case['rheology_case'])
++        rho = float(m1.fluid_props(np.array([s['T_in_C']]), np.array([m1.P_SURF]), fluid)[0][0])
++        mass_rate = s['flow_gpm']*GPM*rho
++        exposure = m1.smooth_exposure(m1.exposure_from_history(circ, depth,
++            float(np.interp(s['time_s'], times, circ))), g.md_bit)
++        breaks = m1.exposure_breaks(exposure, g.md_bit)
++        result = m1.solve_seeded(exposure, breaks, m_dot=mass_rate, T_inj=s['T_in_C'],
++            geotherm=trial.T_FORM, geometry=g,
++            target_rock_T=float(trial.T_FORM(g.survey.tvd(g.md_bit))), Q_face=0.,
++            k_rock=trial.K_ROCK, rhocp_rock=trial.RHOCP_ROCK, friction_heat=True,
++            tfa=s['tfa_m2'], film_mult=1., fluid=fluid, verbose=False)
++        assert result['success'], case
++        expected = plan['expected'][case['case_id']]
++        difference = max(abs(float(result['Td'][-1])-expected['bore_0ft_C']),
++                         abs(float(result['Tu'][0])-expected['return_C']))
++        values = breakdown(s, case, g, fluid, result, mass_rate, plan)
++        assert abs(values[0]['model_spp_psi']-expected['spp']/PSI) < 1e-8
++        assert difference < 1e-10
++        tables[0].append(values[0])
++        for dest, rows in zip(tables[1:], values[1:]):
++            dest.extend(rows)
++        np.savez_compressed(output/'profiles'/f"{case['case_id']}.npz",
++                            z=result['z'], Td=result['Td'], Tu=result['Tu'])
++        replays.append(dict(case_id=case['case_id'], success=bool(result['success']),
++            max_temperature_difference_C=difference,
++            pressure_difference_psi=values[0]['model_spp_psi']-expected['spp']/PSI,
++            duration_s=time.perf_counter()-start))
++        print(case['case_id'], s['run'], case['rheology_case'], 'verified', flush=True)
++    names = ('pressure-samples', 'model-pieces', 'bha-components',
++             'bha-transitions', 'tool-joints', 'scenario-budgets')
++    for name, rows in zip(names, tables):
++        whole.csv_out(output/(name+'.csv'), rows)
++    whole.csv_out(output/'replays.csv', replays)
++    verify_sources(data, output)
++    print('Verified', len(replays), 'replays;', len(tables[-1]), 'scenario budgets')
++
++
++def summaries(output):
++    samples = whole.read(output/'pressure-samples.csv')
++    budgets = whole.read(output/'scenario-budgets.csv')
++    def aggregate(rows, keys):
++        groups = defaultdict(list)
++        for r in rows:
++            groups[tuple(r[k] for k in keys)].append(r)
++        answer = []
++        for group, data in groups.items():
++            row = dict(zip(keys, group))
++            row['n'] = len(data)
++            numeric = [k for k in data[0] if k.endswith(('_psi', '_fraction'))
++                       and all(r.get(k) not in ('', None) for r in data)]
++            for k in numeric:
++                numbers = [float(r[k]) for r in data]
++                row[k+'_mean'] = statistics.mean(numbers)
++                row[k+'_min'] = min(numbers)
++                row[k+'_max'] = max(numbers)
++            answer.append(row)
++        return answer
++    runs = aggregate(samples, ['rheology_case', 'run'])
++    scenario_runs = aggregate(budgets, ['rheology_case', 'run', 'joint_geometry',
++        'joint_length_in', 'local_shape', 'surface_case'])
++    whole.csv_out(output/'pressure-run-summary.csv', runs)
++    whole.csv_out(output/'scenario-run-summary.csv', scenario_runs)
++    print('Wrote', len(runs), 'run summaries and', len(scenario_runs), 'scenario/run summaries')
++
++
++def main():
++    p = argparse.ArgumentParser(description=__doc__)
++    p.add_argument('action', choices=('prepare', 'run', 'summarise'))
++    p.add_argument('--data', type=Path, required=True)
++    p.add_argument('--s2', type=Path)
++    p.add_argument('--output', type=Path, required=True)
++    args = p.parse_args()
++    if args.action == 'prepare':
++        if args.s2 is None:
++            p.error('--s2 is required for prepare')
++        prepare(args.data.resolve(), args.s2.resolve(), args.output.resolve())
++    elif args.action == 'run':
++        run(args.data.resolve(), args.output.resolve())
++    else:
++        summaries(args.output.resolve())
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ b/tests/test_forge16b_evidence.py
+@@ -0,0 +1,143 @@
++"""Check archived FORGE whole-well comparison arithmetic without new solves.
++
++Expected summaries are from the reviewed S1/S2 evidence and S2b accounting.
++These tests verify saved statistics, preservation and accounting identities;
++they do not validate a future physical model against the observations.
++"""
++import csv
++import hashlib
++import json
++import statistics
++from collections import Counter
++from pathlib import Path
++
++import pytest
++
++DATA = Path(__file__).resolve().parents[1]/'validation/forge16b'
++COUNTS = {3: 3, 4: 2, 11: 4, 12: 12, 13: 14, 15: 4, 16: 15,
++          17: 14, 18: 10, 19: 10, 20: 11, 27: 5, 38: 5}
++# One declared sensor branch per run. Extra unresolved/sensitivity branches
++# remain in the evidence and are checked against the complete summary table.
++S1_BIAS = {3: -4.803387058110474, 4: -24.173605, 11: -16.175196,
++           12: -18.273939, 13: -8.415683, 15: -4.208807, 16: -4.798524,
++           17: 3.180577, 18: 1.693255, 19: 1.178351, 20: 1.486791,
++           27: -3.800043, 38: -1.563843}
++
++
++def read(path):
++    with path.open(newline='', encoding='utf-8') as handle:
++        return list(csv.DictReader(handle))
++
++
++@pytest.fixture(scope='module')
++def s2():
++    plan = json.loads((DATA/'s2/plan.json').read_text())
++    samples = {s['id']: s for s in plan['samples']}
++    rows = [json.loads(line) for line in (DATA/'s2/results.jsonl').read_text().splitlines()]
++    return plan, samples, rows
++
++
++def test_complete_cases_and_unchanged_replays(s2):
++    plan, _, rows = s2
++    assert len(rows) == 934
++    assert {r['case_id'] for r in rows} == {r['case_id'] for r in plan['cases']}
++    assert all(r['success'] and r['solver_success'] for r in rows)
++    replays = [r for r in rows if 'max_saved_temperature_difference_C' in r]
++    assert len(replays) == 467
++    assert max(r['max_saved_temperature_difference_C'] for r in replays) == 0
++    assert Counter(r['rheology_case'] for r in rows) == {
++        's1_original': 109, 's2_revised': 109,
++        'blind_original': 358, 'water_rheology_sensitivity': 358}
++
++
++@pytest.mark.parametrize('run', tuple(COUNTS))
++def test_blind_run_summary(s2, run):
++    _, samples, rows = s2
++    data = [r for r in rows if r['well'] == '16B' and
++            r['rheology_case'] == 's1_original' and int(r['run']) == run]
++    assert len(data) == COUNTS[run]
++    branch = 'bore_22ft_C' if run <= 16 else 'bore_84ft_C'
++    bias = statistics.mean(r[branch]-samples[r['sample']]['measured_MWD_C'] for r in data)
++    assert bias == pytest.approx(S1_BIAS[run], abs=1e-6, rel=0)
++
++
++def test_both_protocol_versions_and_every_sensor_branch(s2):
++    _, samples, rows = s2
++    comparisons = read(DATA/'s2/16b-primary-revision.csv')
++    assert len(comparisons) == 18
++    for c in comparisons:
++        for version, mode in [('S1_v1', 's1_original'), ('S2_v2', 's2_revised')]:
++            data = [r for r in rows if r['well'] == '16B' and
++                    r['rheology_case'] == mode and r['run'] == c['run']]
++            model = statistics.mean(r[f"bore_{c['position_ft']}ft_C"] for r in data)
++            observed = statistics.mean(samples[r['sample']]['measured_MWD_C'] for r in data)
++            assert len(data) == int(c['n'])
++            assert model == pytest.approx(float(c[version+'_model_mean_C']), abs=1e-10, rel=0)
++            assert model-observed == pytest.approx(float(c[version+'_bias_C']), abs=1e-10, rel=0)
++        change = float(c['S2_v2_model_mean_C'])-float(c['S1_v1_model_mean_C'])
++        assert change == pytest.approx(float(c['change_model_C']), abs=1e-10, rel=0)
++    changed = {int(c['run']) for c in comparisons if abs(float(c['change_model_C'])) > 1e-10}
++    assert changed == {11, 12, 16, 17, 18}
++
++
++def test_matched_bins_and_pressure_coverage(s2):
++    _, samples, _ = s2
++    bins = read(DATA/'s2/matched-primary-comparison.csv')
++    assert len(bins) == 13
++    assert sum(r['shared'] == 'True' for r in bins) == 10
++    assert sum(s['well'] == '16A' and s['spp_psi'] is not None for s in samples.values()) == 135
++    assert sum(s['well'] == '16A' and s['spp_psi'] is None for s in samples.values()) == 223
++
++
++def test_motorless_included_terms_and_replays():
++    rows = read(DATA/'s2b/pressure-samples.csv')
++    assert len(rows) == 90
++    assert Counter((r['run'], r['rheology_case']) for r in rows) == {
++        (str(run), mode): count for run, count in ((12, 12), (13, 14), (15, 4), (16, 15))
++        for mode in ('s1_original', 's2_revised')}
++    for r in rows:
++        total = sum(float(r[k]) for k in ('pipe_body_psi', 'bha_hwdp_psi',
++            'bha_lower_aggregate_psi', 'bit_nozzles_psi', 'annulus_psi', 'density_column_psi'))
++        assert total == pytest.approx(float(r['model_spp_psi']), abs=1e-9, rel=0)
++        assert float(r['tool_joints_psi']) == float(r['surface_lines_psi']) == 0.
++        assert float(r['motor_allowance_psi']) == 0.
++        assert r['unknown_tool_loss_psi'] == ''
++    replays = read(DATA/'s2b/replays.csv')
++    assert len(replays) == 90 and all(r['success'] == 'True' for r in replays)
++    assert max(float(r['max_temperature_difference_C']) for r in replays) == 0.
++    assert max(abs(float(r['pressure_difference_psi'])) for r in replays) == 0.
++    primary = [r for r in rows if r['rheology_case'] == 's2_revised']
++    assert sum(float(r['raw_differential_psi']) < 0 for r in primary) == 7
++
++
++def test_external_estimate_accounting():
++    rows = read(DATA/'s2b/scenario-budgets.csv')
++    assert len(rows) == 6480
++    assert set(Counter(r['case_id'] for r in rows).values()) == {72}
++    for r in rows:
++        increment = sum(float(r[k]) for k in ('bha_bore_increment_psi',
++            'bha_annulus_increment_psi', 'joint_internal_increment_psi',
++            'joint_annulus_increment_psi', 'joint_local_increment_psi',
++            'bha_local_increment_psi', 'surface_lines_estimate_psi'))
++        total = float(r['model_spp_psi'])+increment
++        assert total == pytest.approx(float(r['accounted_psi']), abs=1e-9, rel=0)
++        assert float(r['measured_spp_psi'])-total == pytest.approx(
++            float(r['remaining_residual_psi']), abs=1e-9, rel=0)
++        assert total/float(r['measured_spp_psi']) == pytest.approx(
++            float(r['accounted_fraction']), abs=1e-12, rel=0)
++        assert r['unknown_tool_loss_psi'] == ''
++
++
++@pytest.mark.parametrize('stage', ('s1', 's2', 's2b'))
++def test_archived_file_hashes(stage):
++    folder = DATA/stage
++    manifest = json.loads((folder/'execution-manifest.json').read_text())
++    for name, expected in manifest['archived_output_sha256'].items():
++        assert hashlib.sha256((folder/name).read_bytes()).hexdigest() == expected, name
++
++
++def test_original_s1_and_s2_preserved_during_pressure_accounting():
++    plan = json.loads((DATA/'s2b/plan.json').read_text())
++    assert len(plan['preserved_archives']) == 66
++    for name, expected in plan['preserved_archives'].items():
++        assert hashlib.sha256((DATA/name).read_bytes()).hexdigest() == expected, name
+--- /dev/null
++++ b/validation/forge16b/comparison_protocol_s2b.md
+@@ -0,0 +1,34 @@
++# Motorless 16B pressure accounting
++
++This diagnostic uses the 45 frozen S1/S2 half-hour samples in EOW assemblies 12, 13, 15 and 16. These assemblies have no documented motor. The revised S2 mud is the primary treatment; the original S1 mud is retained as a separate comparison. Neither treatment is fitted. The original temperature results are preserved.
++
++## Included pressure terms
++
++The existing `model1_coupled.hydraulics` function sums bore friction, bit-nozzle loss and annulus friction, with the signed difference between annulus and bore density columns. The string geometry contains ordinary drill pipe, heavy-weight drill pipe (HWDP) and a length-weighted lower assembly. Each constant-geometry piece uses its midpoint circulating temperature and approximate hydrostatic property pressure. Mud with positive yield point uses the existing Bingham calculation; otherwise the existing Newtonian friction law applies. No tool-joint, surface-line or proprietary steering/MWD restriction term is present. The nozzle discharge coefficient remains 0.95.
++
++The included bore loss is separated into ordinary pipe, HWDP and lower-assembly contributions. HWDP belongs to the BHA subtotal in the six-category presentation. The density-column correction is shown separately, so the reported terms sum exactly to modelled standpipe pressure (SPP). A negative density correction is not frictional heat.
++
++## External estimates, fixed before their calculation
++
++All external calculations use the recorded flow, mud and string lengths, with the unchanged circulating temperatures. Replaying the 90 original/revised cases supplies the temperature profiles and must reproduce the saved S2 pressures and temperature endpoints. No estimate is fed back into a temperature or pressure solve.
++
++1. **Serial BHA passages.** Use every recorded component length, bore and body OD in `component_inputs_s1.csv`, read downwards from the HWDP. Apply the existing Bingham/Blasius pressure-gradient equations to each passage and its annulus. Subtract the existing aggregate lower-assembly losses before adding the serial estimates. The difference is an estimate of geometric aggregation error, and can have either sign. HWDP is already a separate model segment. The bit-body passage is retained separately from its nozzles. A bit's gauge diameter does not describe a sealed cylindrical body blocking the annulus. Over the short bit-body interval, retain the existing aggregate assembly OD for annulus estimates and flag it explicitly; a detailed bit-junk-slot flow calculation is unavailable.
++2. **Tool joints.** The field record identifies 5.5-in pipe with a 4.670-in body bore and 5.5 FH connections, but does not give a connection machining schedule. Use two compatible catalogue geometries as declared scenarios: NOV EIS 7.000-in OD / 4.000-in ID and GPDS 55 7.250-in OD / 3.500-in ID. Neither is asserted to be the installed connection. Use a representative 29-in total restricted length per connection, a stated assumption; also report 0-in and 58-in length sensitivities. Ordinary-pipe joint count is length / (2,378 ft / 75 joints), from the regular-pipe tally on EOW p266; fractional count represents distributed expected count, not an observed tally of each earlier run. The 30 HWDP joints and 913.42-ft length are recorded in each BHA drawing. HWDP connection OD is assigned the same catalogue OD, while its recorded 3.625-in bore is retained through the joint. Unknown internal HWDP machining and centre pads remain limitations.
++3. **Local geometric losses.** At every serial BHA bore transition and each representative joint, compute sudden expansion and contraction losses from the area ratios, using the smaller-passage velocity. For area ratio r = A_small / A_large, K_expansion = (1-r)^2 and K_contraction = 0.5(1-r)^0.75; loss = K rho v_small^2 / 2. Use the corresponding annular areas for external joint transitions. Subtract the body friction over the replacement joint length to prevent double counting. Also report zero local-loss scenarios for gradual transitions. These shape scenarios are not rigorous bounds on the as-built string or non-Newtonian restrictions. Check the Reynolds-number applicability of the sudden-change correlation explicitly.
++4. **Surface lines.** No as-built high-pressure line schedule or exact pressure-tap position was found in the downloaded reports. Retain all five API RP 13D (2009) surface-equipment cases, with C = 1.00, 0.36, 0.22, 0.15, 0.15, using P_surface = C rho_ppg (Q_gpm/100)^1.86 psi. These are alternative complete connection layouts, not five additive terms. Case 5 is a top-drive layout; the others include a kelly. No layout is selected by pressure agreement. The whole layout may include piping upstream of the Pason pressure tap, so its inclusion is conditional. Report zero-surface-loss accounting separately.
++5. **Unresolved tool internals.** HALO includes steering and an MWD pulser. The public manufacturer sheet supplies no operating pressure-loss curve. Float and filter restrictions also have no recorded port/open-area or loss curve. A body ID is insufficient to identify their hydraulic passages. Report the open-passage estimates and numeric pressure per unit additional K at each recorded bore; leave actual proprietary/valve/filter loss unquantified. Zero in a subtotal means no supplied allowance, not evidence of zero loss. API's vendor-curve method cannot supply an absolute number without its reference coefficient. Do not derive any coefficient from the observed SPP or the differential channel.
++
++## Accounting and evidence
++
++Report each sample and each run with measured SPP, every included term, each external increment, accounted pressure/fraction and remaining residual. Residual is measured minus accounted, with no subtraction of the reported differential on motorless runs. Preserve the differential mean and range as a separate diagnostic, including negative values. Summarise every declared geometry/layout scenario; do not select one by residual size. Counts and means weight each frozen sample equally.
++
++The archive will include the executed script, frozen plan and source hashes, model pieces, component and joint estimates, all scenario budgets, per-sample/per-run tables and a methods review. Verify both sums and preservation of the original S1/S2 archives and model files. The estimates do not complete the hydraulic budget where tool internals or surface geometry remain unknown, and they do not identify a cause of the temperature errors.
++
++## Sources
++
++- England, Swearingen and McLennan (2023), *End of Well Report: Utah FORGE 16B(78)-32*, GDR 1516, CC BY 4.0, pp75, 80, 93, 97 (assemblies), p266 (pipe tally), p366 (FH connection). [Dataset DOI](https://doi.org/10.15121/1998591).
++- API (2009), *Recommended Practice 13D: Rheology and Hydraulics of Oil-well Drilling Fluids*, sixth edition, §7.3 equation60/table4 (surface cases), §7.4.13 (tool joints), §7.6.2 equation103 (tool-specific coefficient). [Text of the API document](https://studylib.net/doc/27198826/api-recommended-practice-13d-rheology-and-hydraulics-of-o...). The five historic cases are used as explicit scenarios; this is not a claim of compliance with the current edition.
++- NOV, [GPDS and EIS connections](https://www.nov.com/products/gpds-and-eis-connections), S135 5.500-in 24.70-lb/ft rows and API interchangeability tables, accessed 27 October 2026.
++- Modelica Association, [sudden-change pressure-loss documentation](https://doc.modelica.org/Modelica%204.0.0/Resources/helpOM/Modelica.Fluid.Dissipation.Utilities.SharedDocumentation.PressureLoss.Orifice.dp_suddenChange.html), citing Idelchik (2006), pp208, 216–217. Smooth, turbulent-flow restriction; expansion Re > 3,300, contraction Re > 10,000. Annular hydraulic-diameter application is an approximation.
++- Scientific Drilling (2018), [HALO technical data sheet](https://scientificdrilling.com/assets/uploads/sites/3/2018/09/SC_TDS_HALO_9.24v3.pdf): integrated pulser and steering assembly. Hydrostatic rating is not an operating pressure drop.
++- The existing Bingham pressure-gradient equations cite Bourgoyne et al. (1986), *Applied Drilling Engineering*, chapter4; the model's unchanged implementation is archived by hash.

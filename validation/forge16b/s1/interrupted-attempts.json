@@ -1,0 +1,17 @@
+{
+  "case_id": "16b-c0001",
+  "completed_result": false,
+  "construction": "Standalone crossover in early-hole assembly",
+  "attempts": [
+    {
+      "threads": "default",
+      "outcome": "interrupted after convergence warnings"
+    },
+    {
+      "threads": "one",
+      "outcome": "interrupted after convergence warnings"
+    }
+  ],
+  "reason_for_correction": "Follow existing 16A non-HWDP length-weighted aggregation, preserving each input component",
+  "before_temperature_errors": true
+}

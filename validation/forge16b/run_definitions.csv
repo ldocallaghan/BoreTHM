@@ -1,0 +1,16 @@
+eow_bha,depth_in_ft,depth_out_ft,hole_in,contractor_bha,pipe_type,sensor_offset_ft,offset_basis,motor,eow_page,fit_role,jets_32nds
+3,1181,4353,14.75,2,regular,,69-ft survey offset; temperature offset unresolved,yes,38,not fitted,18;18;18;18;18;18
+4,4353,4845,14.75,3,regular,,temperature offset unresolved,yes,185,not fitted,15;15;15;15;16;16;16;16
+11,4980,5269,9.5,4,regular,22,Eye offset in drawing comments,yes,71,not fitted,15;15;15;15;15;15;15
+12,5269,5957,9.5,5,regular,22,Eye offset in drawing comments,no,75,not fitted,15;15;15;15;15;15;15
+13,5957,6545,9.5,6,regular,22,Eye offset in drawing comments,no,80,not fitted,15;15;15;15;15;15;15
+14,6545,6610,9.5,7,regular,22,Eye offset in drawing comments,no,85,not fitted,14;14;14;14;14;14;14;14
+15,6610,6950,9.5,8,regular,22,Eye offset in drawing comments,no,93,not fitted,14;14;14;14;14;14;14;14
+16,6950,7584,9.5,9,regular,22,Eye offset in drawing comments,no,97,not fitted,14;14;14;14;14;14;14;14
+17,7584,8085,9.5,10,regular,84,existing trial comparison assumption,yes,102,film fit,14;14;14;14;14;14;14;14
+18,8085,8585,9.5,11,full IDP,84,same trial BHA assumption,yes,189,IDP conductivity fit,14;14;14;14;14;14;14;14
+19,8585,9255,9.5,12,partial IDP,84,Eye offset in drawing comments,yes,115,held-out trial run; fitted IDP conductivity,14;14;14;16;16;16
+20,9255,9800,9.5,13,regular,84,Eye offset in drawing comments,yes,129,film fit,14;14;14;14;14;14;14;14
+26,9853,9863,9.5,,regular,,no MWD in Appendix B; possible stale channel,yes,191,not fitted; exclude stale-channel interval,24;24;24
+27,9863,10250,9.5,,regular,84,same lower component order; assumed offset needs review,yes,191,not fitted,14;14;14;13;13;13;13;13;13
+38,10503,10947,9.5,,regular,84,same lower component order; assumed offset needs review,yes,194,not fitted,15;15;15;18;18;18
