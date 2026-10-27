@@ -278,10 +278,14 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     # derivatives are blended between the geometry above and below.
     top, _ = _pieces(geometry, breaks)
     changes = top[1:]
+    # New serial assemblies can contain several components inside one ramp.
+    # Sequential two-sided assignments are discontinuous where those ramps
+    # overlap. Blend the same per-piece equations with occupancy weights there.
+    overlapping = loss_model is not None and len(changes)>1 and np.any(np.diff(changes)<BLEND)
 
     def odes(zz, y):
         dTd, dTu = derivs(zz, y[0], y[1])
-        for b in changes:
+        for b in (() if overlapping else changes):
             m = np.abs(zz - b) < 0.5 * BLEND
             if m.any():
                 zm = zz[m]
@@ -290,6 +294,21 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                 w = (zm - b) / BLEND + 0.5
                 dTd[m] = (1 - w) * aL[0] + w * aR[0]
                 dTu[m] = (1 - w) * aL[1] + w * aR[1]
+        if overlapping:
+            width=min(BLEND,L)
+            near=np.zeros(zz.shape,bool)
+            for boundary in loss_model.top[1:]:
+                near |= np.abs(zz-boundary)<width/2
+            dTd[near]=0.;dTu[near]=0.
+            for lower,upper in zip(loss_model.top,loss_model.bottom):
+                weight=np.zeros_like(zz)
+                for left,right in ((lower,upper),(-upper,-lower),(2*L-upper,2*L-lower)):
+                    weight+=np.maximum(0.,np.minimum(zz+width/2,right)-np.maximum(zz-width/2,left))/width
+                mask=near & (weight>0)
+                if np.any(mask):
+                    values=derivs(zz[mask],y[0][mask],y[1][mask],np.full(mask.sum(),(lower+upper)/2))
+                    dTd[mask]+=weight[mask]*values[0]
+                    dTu[mask]+=weight[mask]*values[1]
         if friction_heat and loss_model is not None:
             # Hydraulic sources have their own conservative piece weights.
             # Do not apply the thermal geometry blend a second time.
@@ -303,6 +322,10 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
 
     if len(changes):
         z = np.unique(np.concatenate([z, changes - 0.5 * BLEND, changes + 0.5 * BLEND]))
+        if loss_model is not None:
+            # A short final component can put a ramp endpoint below the bit.
+            # The boundary conditions must remain at the specified well ends.
+            z = z[(z >= 0.) & (z <= L)]
     y0 = np.vstack([np.interp(z, [0, L], [T_inj, T_inj + 30]),
                     np.interp(z, [0, L], [T_inj + 30, target_rock_T * 0.7])]) \
         if init is None else np.vstack([np.interp(z, init["z"], init["Td"]),

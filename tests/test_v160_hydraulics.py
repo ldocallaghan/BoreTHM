@@ -199,3 +199,29 @@ def test_variable_property_energy_balance(mud_density):
     assert check['surface_W_in_hole'] == check['density_column_W'] == 0.
     pressure=hydraulics(20.,geometry,result=result,fluid=fluid)
     assert pressure['dp_surface'] > 0.
+
+
+def test_short_bit_component_keeps_boundary_conditions_at_the_well_ends():
+    geometry=WellGeometry((wg.StringSegment(99.75,wg.CONVENTIONAL),
+                           wg.StringSegment(.25,wg.WU_COLLAR)),
+                          (wg.open_hole(0.,100.,.25),))
+    result=circulating_temperatures(m_dot=20.,geometry=geometry,fluid=WATER,
+                                   friction_heat=True)
+    assert result['success']
+    assert result['sol'].x[0] == 0.
+    assert result['sol'].x[-1] == geometry.md_bit
+    assert result['energy_check']['passed']
+
+
+def test_overlapping_geometry_ramps_converge_for_short_serial_components():
+    geometry=WellGeometry((wg.StringSegment(70.,wg.CONVENTIONAL),
+                           wg.StringSegment(.3,wg.WU_COLLAR),
+                           wg.StringSegment(.3,wg.WU_HWDP),
+                           wg.StringSegment(29.4,wg.CONVENTIONAL)),
+                          (wg.open_hole(0.,100.,.25),))
+    result=circulating_temperatures(m_dot=20.,geometry=geometry,fluid=WATER,
+                                   friction_heat=True)
+    assert result['success']
+    assert result['sol'].status == 0
+    assert result['sol'].x[-1] == geometry.md_bit
+    assert result['energy_check']['passed']

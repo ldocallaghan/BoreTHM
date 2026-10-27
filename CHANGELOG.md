@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+Keeps the revised circulation solver's mesh within the specified well when
+an end component is shorter than half the geometry-ramp width. Overlapping
+ramps in serial assemblies use continuous piece weights of the same width.
+The physical heat-transfer laws and explicit legacy calculation are unchanged.
+
 Adds shared hydraulic loss and dissipation accounting with optional
 tool-joint geometry, serial BHA components and supplied tool curves.
 Surface equipment contributes to standpipe pressure; bore and annulus
