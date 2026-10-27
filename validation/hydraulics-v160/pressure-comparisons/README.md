@@ -22,7 +22,7 @@ The `variant` column separates the original calculation with PV referenced to 26
 
 ![Residual by bottom-hole assembly](development-residual-bha.png)
 
-Vector copies of these plots have the same filenames with an `.svg` extension. Each plot names its source file and columns.
+Vector copies of these plots have the same filenames with an `.svg` extension. Each plot names its source file and columns. Checksums use LF newlines for text files and unchanged bytes for images, so they can be checked across platforms.
 
 ## Inputs and calculation
 

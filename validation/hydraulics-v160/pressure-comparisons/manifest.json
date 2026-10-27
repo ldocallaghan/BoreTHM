@@ -1,5 +1,6 @@
 {
   "description": "FORGE development-data pressure comparisons; no held-out pressure observations",
+  "checksum_convention": "SHA256; text normalised to LF newlines, binary images unchanged",
   "physical_code_commit": "8e6d0b9",
   "comparison_entry_point_commit": "a1cb3cb",
   "runtime": {
@@ -15,9 +16,9 @@
     "v1.6.0-48.9"
   ],
   "source_sha256": {
-    "validation/forge16b/s2/plan.json": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb",
-    "validation/forge16b/s2b/pressure-samples.csv": "d8b35e4d7aa8078fc430e56c52ca43f2d33dd4e68662d870465326e45d9cb7da",
-    "validation/forge16b/s2/results.jsonl": "5ce0b175ac8047b8715f79a94c1da1a56ee80c9af7d782f259651db2aeb542e1",
+    "validation/forge16b/s2/plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
+    "validation/forge16b/s2b/pressure-samples.csv": "720f6b742a0230726f1696e5cec33d73742b92e51804b02285d8ef363161e17e",
+    "validation/forge16b/s2/results.jsonl": "ffd1b1d510ad001b6b1e2edfa43562e6e6036732ce5826823c6ebfc5fd9a8bd9",
     "src/borethm/studies/pressure_comparison.py": "8f73658dfd7da5224d47b457d91ad0f8693a3348613087f7d687884684bee8e6",
     "src/borethm/model1_coupled.py": "6fbaec664c183f31ffd6079c95d83028664944d9448bf83599da7c8f90b58340",
     "src/borethm/hydraulic_losses.py": "3788113afb5f6c53f32c9563c81423744b3f0c5315933e955a62848c3fc27747",
@@ -32,13 +33,13 @@
     "development-bha.csv": "7b07fe12e410d55fe643dbd16ad0b67e32a284678a1f5115d1dff91d8104d9e7",
     "development-events.csv": "1ec317dbc22c0c7e408d382f45889b164e4d6f71bba7eae457b0ca0dc9f927e5",
     "development-measured-modelled.png": "83ed2aa9e905c17cbe6ba5a7f38d0bcb8ed870cd8a6f1d8ff7e48d3b284e622b",
-    "development-measured-modelled.svg": "209d51e9b5031b4c1bda062ceff9dfc2a659645c33a5de073d05c458b00367c2",
+    "development-measured-modelled.svg": "9ee05cbfad1530dbecfbf4037f6e2a0078381bdd87fadd57110f04d3b3909b7c",
     "development-residual-bha.png": "14164b41aae862449553a3b0826439fbfa5be9a5351ae8b112627b0dc5411fdd",
-    "development-residual-bha.svg": "3673ceaecc773f8e91ec33dd8b286589695ecb99417d2f10ffbf423a63c361ed",
+    "development-residual-bha.svg": "b7350cecdc51d968a3653a7117f57d20b7a57b15f419f6494188b4fc4b2b31b6",
     "development-residual-depth.png": "6090ea4b252315e2e4bf034e55b5ebec85b86869b087d42f90cea37b5dfecbcc",
-    "development-residual-depth.svg": "1e3aefd56144be600cad8eafb1fff8fc3d6e697ae60701911a8b483c21b5c729",
+    "development-residual-depth.svg": "2a4f1f6024130e4e0ca6a80d6e0e7e2540a125bdb5e89107aaeb719c0bbb2e0f",
     "development-residual-flow.png": "2457d78adc71e88e115f5c27bd5b9a3dd59cf9a9e87418f785bfa3c0495ab979",
-    "development-residual-flow.svg": "ebf417fbf650eb0000951e379cb9689a4c789e0ee7abb6979169acc03fb021b5",
+    "development-residual-flow.svg": "407b992a332acc4b4b7cdc98e8a736c7c78017528f52b1e2fa3cb64a21ab3d07",
     "development-windows.csv": "fca91403572a91d27480a358408fbec8903360f27f5f8c42765e37a980ac5080",
     "legacy-reproduction.csv": "435be18c1ea59f7b264777ffba7fd56e2fef51c94de60caed533bb28ff00d2a5"
   }
