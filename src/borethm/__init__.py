@@ -9,6 +9,11 @@ from importlib.metadata import version
 __version__ = version('borethm')
 
 _EXPORTS = {
+    'HydraulicJoint': ('hydraulic_losses','HydraulicJoint'),
+    'LocalLoss': ('hydraulic_losses','LocalLoss'),
+    'ReferenceToolLoss': ('hydraulic_losses','ReferenceToolLoss'),
+    'SurfaceLoss': ('hydraulic_losses','SurfaceLoss'),
+    'HydraulicProgramme': ('programme','HydraulicProgramme'),
     'evaluate': ('site_evaluation', 'evaluate'),
     'result_dict': ('site_evaluation', 'result_dict'),
     'export_result': ('site_evaluation', 'export_result'),

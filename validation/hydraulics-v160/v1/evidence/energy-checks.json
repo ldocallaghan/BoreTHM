@@ -1,0 +1,108 @@
+{
+  "synthetic_well": true,
+  "hydraulics_model": "v1.6.0",
+  "cases": [
+    {
+      "fluid": "water",
+      "m_dot_kg_s": 20.0,
+      "depth_m": 1500.0,
+      "inlet_C": 40.0,
+      "face_W": 28000.0,
+      "bore_bottom_C": 41.541124163971915,
+      "surface_return_C": 40.99757976622744,
+      "spp_Pa": 2752937.9030969744,
+      "energy_check": {
+        "enabled": true,
+        "assigned_terms_W": {
+          "bore": {
+            "body": 36365.898268240664,
+            "joint_replacement": 14.992300144089436,
+            "joint_local": 55.94515456946566,
+            "geometric_local": 92.59435575288595,
+            "supplied_local": 229.2216631907002,
+            "tool": 3869.804940371444
+          },
+          "annulus": {
+            "body": 3179.2353655842,
+            "joint_replacement": 1094.3561820583814,
+            "joint_local": 1586.433263083425,
+            "geometric_local": 5.116887872425816,
+            "supplied_local": 8.56245761796247,
+            "tool": 0.0
+          }
+        },
+        "nozzle_W": 7390.390920611202,
+        "face_W": 28000.0,
+        "assigned_W": 81892.55175909685,
+        "applied_bore_W": 40628.45668226925,
+        "applied_annulus_W": 5873.704156216394,
+        "applied_turnaround_W": 35390.39087336701,
+        "applied_W": 81892.55171185266,
+        "residual_W": -4.724418977275491e-05,
+        "relative_residual": -5.769045994772887e-10,
+        "tolerance_W": 0.018189255175909684,
+        "passed": true,
+        "surface_W_in_hole": 0.0,
+        "density_column_W": 0.0
+      },
+      "hydraulic_flags": [
+        "hydraulic_geometry_blend",
+        "joint_local_annular_or_Bingham_approximation",
+        "local_change_annular_or_Bingham_approximation",
+        "supplied_tool_loss_treated_as_dissipation"
+      ]
+    },
+    {
+      "fluid": "reference Bingham mud at 1200 kg/m3",
+      "m_dot_kg_s": 20.0,
+      "depth_m": 1500.0,
+      "inlet_C": 40.0,
+      "face_W": 28000.0,
+      "bore_bottom_C": 41.857308918581715,
+      "surface_return_C": 41.90464091286205,
+      "spp_Pa": 6159233.0558546055,
+      "energy_check": {
+        "enabled": true,
+        "assigned_terms_W": {
+          "bore": {
+            "body": 59559.58782256845,
+            "joint_replacement": 24.549694271459412,
+            "joint_local": 38.72090659401505,
+            "geometric_local": 64.09254888389329,
+            "supplied_local": 158.66702666043534,
+            "tool": 2678.6800654233643
+          },
+          "annulus": {
+            "body": 30081.96326385586,
+            "joint_replacement": 3192.068296603319,
+            "joint_local": 1098.128003834457,
+            "geometric_local": 3.5420957050227657,
+            "supplied_local": 5.927132543833324,
+            "tool": 0.0
+          }
+        },
+        "nozzle_W": 5115.621315050066,
+        "face_W": 28000.0,
+        "assigned_W": 130021.54817199417,
+        "applied_bore_W": 62524.29806440162,
+        "applied_annulus_W": 34381.62879254249,
+        "applied_turnaround_W": 33115.63005661823,
+        "applied_W": 130021.55691356234,
+        "residual_W": 0.00874156816280447,
+        "relative_residual": 6.723168802175013e-08,
+        "tolerance_W": 0.023002155691356233,
+        "passed": true,
+        "surface_W_in_hole": 0.0,
+        "density_column_W": 0.0
+      },
+      "hydraulic_flags": [
+        "hydraulic_geometry_blend",
+        "joint_local_annular_or_Bingham_approximation",
+        "joint_local_outside_Newtonian_Re_domain",
+        "local_change_annular_or_Bingham_approximation",
+        "local_change_outside_Newtonian_Re_domain",
+        "supplied_tool_loss_treated_as_dissipation"
+      ]
+    }
+  ]
+}

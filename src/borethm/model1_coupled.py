@@ -209,7 +209,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
           pipe=None, k_rock=C.K_ROCK, n_nodes=160, verbose=True,
           geotherm=None, target_depth=None, geometry=None, exposure=None,
           fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
-          tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF):
+          tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF,
+          hydraulics_model='v1.6.0', surface=None, transitions='abrupt'):
     # P_surface: pressure at the wellhead. Atmospheric by default; a closed,
     # pressurized loop (P_OP) keeps a return above 100 C liquid.
     # init: a previous solve() result whose profiles seed this one (continuation).
@@ -235,6 +236,14 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     elif pipe is not None:
         raise ValueError("give a pipe type or a WellGeometry, not both")
     L = geometry.md_bit
+    from borethm import hydraulic_losses as hl
+    if hydraulics_model not in ('v1.5.0','v1.6.0'):
+        raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
+    if hydraulics_model=='v1.5.0':
+        hl.check_legacy(geometry,surface,transitions)
+        loss_model=None
+    else:
+        loss_model=hl.LossModel(geometry,transitions=transitions)
     T_tvd = geotherm if geotherm is not None else (lambda d: T_surf + G * d)
     Trock = lambda zz: T_tvd(geometry.survey.tvd(zz))
     z = np.linspace(0, L, n_nodes)
@@ -247,7 +256,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
         cpu = _cp(Tu, P, fluid)
         dTd = UAi * (Tu - Td) / (m_dot * cpd)
         dTu = (-UAo * (Trock(zz) - Tu) + UAi * (Tu - Td)) / (m_dot * cpu)
-        if friction_heat:
+        if friction_heat and loss_model is None:
             g = geometry.at(zz if geom_z is None else geom_z)
             dTd = dTd + _friction_gradient(m_dot, Td, P, g["A_bore"], g["Dh_bore"], fluid) / cpd
             dTu = dTu - _friction_gradient(m_dot, Tu, P, g["A_ann"], g["Dh_ann"], fluid) / cpu
@@ -258,7 +267,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                       lambda T, P: fluid_props(T, P, fluid)[1])(np.array([Td_L]), np.array([P_L]))[0])
         dT = Q_face / (m_dot * cp_L)
         if friction_heat:
-            rho_L = float(np.ravel(fluid_props(np.array([Td_L]), np.array([P_L]), fluid)[0])[0])
+            property_P=P_L if loss_model is None else max(P_L,P_LIQUID)
+            rho_L = float(np.ravel(fluid_props(np.array([Td_L]), np.array([property_P]), fluid)[0])[0])
             dT += nozzle_dp(m_dot, rho_L, tfa) / (rho_L * cp_L)
         return dT
 
@@ -280,6 +290,12 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                 w = (zm - b) / BLEND + 0.5
                 dTd[m] = (1 - w) * aL[0] + w * aR[0]
                 dTu[m] = (1 - w) * aL[1] + w * aR[1]
+        if friction_heat and loss_model is not None:
+            # Hydraulic sources have their own conservative piece weights.
+            # Do not apply the thermal geometry blend a second time.
+            hd,hu=hl.heat_gradients(loss_model,zz,y[0],y[1],m_dot,fluid,P_surface)
+            dTd+=hd
+            dTu+=hu
         return np.vstack([dTd, dTu])
 
     def bc(ya, yb):
@@ -311,7 +327,12 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                Q_product=Q_product, m_dot=m_dot,
                # a solution outside the water table's range (above 480 C) is spurious
                success=bool(sol.success and max(Td.max(), Tu.max()) < 480.0),
-               P_bottom=P_L)
+               P_bottom=P_L,hydraulics_model=hydraulics_model,
+               surface=surface,transitions=transitions)
+    if loss_model is not None:
+        res['energy_check']=hl.energy_check(loss_model,res,fluid,Q_face,tfa,P_surface) if friction_heat else dict(enabled=False,status='friction heating disabled')
+        if friction_heat and not res['energy_check']['passed']:
+            res.update(success=False,failure='hydraulic dissipation and applied heat do not balance')
     if verbose:
         _print(res, T_inj, Q_face, t_years if exposure is None else "by depth")
     return res
@@ -365,7 +386,7 @@ def _pieces(geometry, breaks=()):
     return cuts[:-1], cuts[1:]
 
 
-def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
+def _hydraulics_v150(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
                friction="blasius", bit=True, fluid=None, P_surface=P_SURF):
     """Pressure losses along the string and annulus, bit nozzle loss,
     standpipe pressure and annular velocity.
@@ -431,6 +452,31 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
         over_pump_limit=spp > PUMP_LIMIT,
         v_ann_min=float(v_ann.min()), cleans_hole=float(v_ann.min()) >= HOLE_CLEANING_V,
         pump_power=spp * m_dot / float(np.mean(rho_b)))
+
+
+def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
+               friction='blasius', bit=True, fluid=None, P_surface=P_SURF,
+               hydraulics_model=None, surface=None, transitions=None):
+    """Pressure budget [Pa] with named pressure/heat loss terms.
+
+    Existing arguments retain their order and units. New calls use
+    v1.6.0; a supplied circulation result supplies its mode and surface
+    settings unless overridden. Use hydraulics_model='v1.5.0' for the
+    exact legacy midpoint calculation, which rejects new loss inputs.
+    surface is a SurfaceLoss or None; an explicit coefficient of zero
+    disables an inherited surface allowance. transitions is abrupt or
+    gradual (zero geometric-local loss). See hydraulic_losses for sources.
+    """
+    from borethm import hydraulic_losses as hl
+    mode=hydraulics_model or (result or {}).get('hydraulics_model','v1.6.0')
+    surface=surface if surface is not None else (result or {}).get('surface')
+    transitions=transitions or (result or {}).get('transitions','abrupt')
+    if mode=='v1.5.0':
+        hl.check_legacy(geometry,surface,transitions)
+        return _hydraulics_v150(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface)
+    if mode!='v1.6.0':
+        raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
+    return hl.hydraulics(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface,surface,transitions)
 
 
 def pump_power(m_dot, L=None, T_avg=80.0, geometry=None):

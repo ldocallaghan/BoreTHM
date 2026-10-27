@@ -1,0 +1,2024 @@
+diff --git a/validation/forge56-32/motor_mapping.csv b/validation/forge56-32/motor_mapping.csv
+new file mode 100644
+index 0000000..982060f
+--- /dev/null
++++ b/validation/forge56-32/motor_mapping.csv
+@@ -0,0 +1,12 @@
++bha_sheet_id,recorded_maker,recorded_OD_in,recorded_lobes,recorded_stages,sheet_id,sheet_page,rated_min_gpm,rated_max_gpm,no_load_psi,mapping_status,motor_interval_status,input_evidence
++1,unknown,9.625,6/7,5,,,,,,maker_unresolved,excluded_unknown_maker,BHA1 item2 and bit record row2 leave maker blank; daily report input scan has no maker assignment
++2,GeoGuidance,8,7/8,5.9,GG_Colossus_8_7-8_4,3,400,900,100,same_maker_OD_stage_mismatch,eligible_with_flag,BHA2 item2 GGDS and bit record row4
++3,GeoGuidance,8,7/8,5.9,GG_Colossus_8_7-8_4,3,400,900,100,same_maker_OD_stage_mismatch,eligible_with_flag,BHA3 item2 GGDS and bit record row5
++4,GeoGuidance,7,6/7,6.5,,,,,,no_same_OD_sheet,excluded_no_matching_sheet,BHA4 item2 GGDS and bit record row7; supplied GeoGuidance sheets are 6.75/8/9.62 in
++5,GeoGuidance,7,6/7,6.5,,,,,,no_same_OD_sheet,excluded_no_matching_sheet,BHA5 item2 GGDS and bit record row8
++6,GeoGuidance,7,6/7,6.5,,,,,,no_same_OD_sheet,excluded_no_matching_sheet,BHA6 item2 GGDS and bit record row9
++7,GeoGuidance,7,6/7,6.5,,,,,,no_same_OD_sheet,excluded_no_matching_sheet,BHA7 item2 GGDS and bit record row10
++8,Discovery,7,7/8,8.5,DDS_SS700_7885_HR,1,300,750,,maker_OD_configuration_match,excluded_no_published_no_load,BHA8 item2 Discovery serial700DDS023; DDR21Feb notes Discovery bearings
++9,BICO,7,7/8,6.1,BICO_SSS100_B5,1,300,700,475,same_maker_OD_exact_power_section_unverified,eligible_with_flag,BHA9 item2 BICO serialBPB5700-0050; bit record row12 maker blank
++10,BICO,7,7/8,6.1,BICO_SSS100_B5,1,300,700,475,same_maker_OD_exact_power_section_unverified,eligible_with_flag,BHA10 item2 BICO serialBPB5700-0042 and bit record row16
++11,Discovery,7,7/8,8.5,DDS_SS700_7885_HR,1,300,750,,maker_OD_configuration_match,excluded_no_published_no_load,BHA11 item2 Discovery serial700DDS025; bit record row17 maker blank
+diff --git a/validation/forge56-32/off_bottom_counts.csv b/validation/forge56-32/off_bottom_counts.csv
+new file mode 100644
+index 0000000..e3da27a
+--- /dev/null
++++ b/validation/forge56-32/off_bottom_counts.csv
+@@ -0,0 +1,16 @@
++rule,bha_id,selection,windows,events,outside_rated_windows
++new,10,excluded_outside_motor_rated_flow,19,1,19
++new,10,motor_interval,9,4,0
++new,11,excluded_no_published_no_load,89,3,3
++new,2,excluded_outside_motor_rated_flow,2,2,2
++new,2,motor_interval,4,3,0
++new,4,excluded_no_matching_sheet,38,3,0
++new,5,excluded_no_matching_sheet,9,1,0
++new,8,excluded_event_BHA_conflict,13,1,11
++new,8,excluded_no_published_no_load,1,1,0
++new,9,excluded_event_BHA_conflict,13,1,0
++new,9,motor_interval,5,2,0
++new,unresolved,excluded_BHA_unresolved,476,14,0
++old,10,excluded_outside_motor_rated_flow,1,1,1
++old,11,excluded_no_published_no_load,3,2,1
++old,unresolved,excluded_BHA_unresolved,14,2,0
+diff --git a/validation/forge56-32/protocol-amendment.md b/validation/forge56-32/protocol-amendment.md
+new file mode 100644
+index 0000000..cb6ddf8
+--- /dev/null
++++ b/validation/forge56-32/protocol-amendment.md
+@@ -0,0 +1,55 @@
++# Pressure protocol amendment
++
++This amendment applies the two V0 reviews before V1 and before target access. It governs the [56-32 comparison](comparison_protocol.md) and the [58-32 protocol](../forge58-32/comparison_protocol.md). The original ten-minute candidate archive is retained. The amendment commit, recorded in the V1 execution report, freezes the new selections and exclusions. No target value has been used to choose the cuts or assign a BHA.
++
++## Short off-bottom windows
++
++Pressure propagation is faster than thermal equilibration, so a ten-minute dwell would discard many connection circulations. Use a declared 60-second settling period after pumps-on or a significant flow change, followed by a 60-second measurement window. The settling period allows initial pump ramping and some gel breaking. It does not establish steady pressure or complete gel breakdown; those remain limitations because pressure is unavailable to selection.
++
++The shared input-only preparation script is [prepare_pressure_windows.py](../hydraulics-v160/prepare_pressure_windows.py). It uses ten-second bins. A flow epoch starts when flow becomes available above 100 US gpm, after a missing bin, or when mean flow leaves a band of 5% around the epoch's first flow. A bin with missing flow, minimum flow at or below 100 gpm, or within-bin range above 10% of its mean interrupts the epoch. Require twelve consecutive bins: six for settling and six for the first window. Further windows use successive non-overlapping groups of six bins. A new flow epoch restarts the settling clock.
++
++Every epoch bin has at least eight finite native observations each for flow, bit depth and hole depth. Every accepted window has all six input bins, bit depth at least 100 ft, and hole minimum minus bit maximum at least 10 ft in every bin. The full bit-depth span is at most 2 ft. The range of bin-mean flows divided by their median is at most 5%. The median of six values is the average of the middle pair. These stricter short-window movement cuts compensate partly for reducing the duration. No pressure, motor differential, weight-on-bit or temperature target selects an off-bottom window.
++
++An off-bottom event is contiguous occupancy with at least 10 ft clearance and bit depth at least 100 ft. Pump stops, flow changes and bit movement do not split an event. Stationarity selects windows within an event; it cannot create additional independent samples. End an event on depth failure, a depth-data gap above 60 seconds, a return within 10 ft of bottom or a bit shallower than 100 ft. An event may contain several flow epochs and windows. A window belongs to one event only. An event with more than one assigned BHA is excluded. Events containing only one assigned BHA may retain its qualified windows, with unassigned windows separately excluded.
++
++Keep window outputs, but summarise each event once. For each model and interval endpoint, take the median prediction over its qualified windows and the median measured pressure over those same windows. Form residuals and interval coverage from those medians. Each event has equal weight in BHA summaries, independently of duration or window count. Report event and window counts separately, including missing targets and convergence failures. Also publish the window-level results. Do not select a representative window using its pressure or residual.
++
++The original ten-minute counts and the new counts are in each well's `off_bottom_counts.csv`; the [amendment review](../hydraulics-v160/review-v0-amendment/README.md) presents all BHAs, including zero counts. Old and new rules use the same input-based assignment and motor exclusions. Rate-range checks use within-bin extrema, not just the window mean. Counts by exclusion are mutually exclusive primary reasons; the separate `outside_rated_flow` field also counts range failure where another exclusion applies.
++
++The on-bottom secondary method retains the original ten-minute drilling windows and the reported-differential caveats. The short rule applies to off-bottom circulation only.
++
++## Motors and primary observations
++
++All eleven 56-32 BHAs contain a motor. There are no motorless primary observations on this well. The [mapping table](motor_mapping.csv) uses the BHA component descriptions and the bit workbook, with daily-report input notes as a cross-check. The mapping was reported before freezing this amendment. A maker/OD match with a different lobe or stage count uses the supplied sheet with a mismatch flag. An unknown maker or an absent same-OD sheet excludes the motor-interval measure. Do not substitute a 6.75-in sheet for the recorded 7-in motor.
++
++Discovery motors without a published no-load value are excluded and counted. Every motor window with flow outside the mapped sheet's rated range is excluded and counted. The range check covers every available within-bin extreme. A source mapping is not revised in response to a comparison.
++
++For an eligible motor, use its published no-load pressure twice:
++
++`dp_motor = dp_published * (rho / rho_ref) * (Q / Q_ref)^2`.
++
++The upper rated flow as Q_ref gives the lower loss bound; the lower rated flow gives the upper loss bound. These are reference-flow uncertainty scenarios, not a claim that the entire manufacturer's curve is known. GeoGuidance's 8-in sheet, PDF page 3, supplies 100 psi and 400–900 gpm. Its test fluid is unstated: assume clean water at 20 C and 101,325 Pa for rho_ref. BICO SSS100-B5, page 1, supplies 475 psi and 300–700 gpm, with clean-water testing at 72 F; use water density at 72 F and an assumed 101,325 Pa. Preserve these assumptions in outputs. Density is calculated from the same water properties used by BoreTHM, without the downhole 5 MPa guard on this ambient reference.
++
++Report whether measured standpipe pressure falls inside each model's complete interval, and signed residuals, predicted minus measured, against both ends in psi and percent. A zero measured denominator retains absolute residuals and gives a missing percentage. Compare v1.5.0 and v1.6.0 on identical windows and endpoint inputs. Keep the v1.5.0/26.7 C, v1.5.0/48.9 C and v1.6.0/48.9 C variants distinct. No loss is inferred from measured pressure.
++
++A complete motor curve replaces its covered internal body losses, with the external annulus retained. Off-bottom rock-cutting face input is zero. Apply the declared no-load dissipation once. Secondary on-bottom calculations retain the separately qualified reported-differential face treatment. Do not infer mechanical efficiency from pressure residuals.
++
++## Geometry, timing and remaining input completion
++
++Unknown passage IDs use catalogue nominal values and the catalogue range as a sensitivity. Each substituted component must have its source, nominal ID and range in the numerical input ledger before that well's targets are accessed. A connection name or OD cannot establish a passage ID. If no compatible catalogue entry can be sourced, mark the geometry incomplete and exclude the numerical score. Do not fill an absent catalogue range with a fitted or arbitrary percentage. Where a whole-tool curve replaces the motor's internal losses, its unreported open bore does not add a second internal friction estimate; retain recorded external geometry.
++
++For 56-32, interpret the rounded 55-lb/ft surface casing as the standard 54.5-lb/ft, 13.375-in size, with nominal ID 12.615 in. Use the reported 36-lb/ft, 9.625-in casing's nominal 8.921-in ID. [Cudd Well Control Technical Data Book](https://www.cuddwellcontrol.com/images/Pages/Tech_Data/PDF/CWC_020_TECH_DATA_BK_10671_2021_04_23_DIGITAL.pdf), casing-capacity tables pp47–48, supplies these nominal sizes. Adjacent stock weights are size-identification sensitivities, not machining tolerances: surface ID 12.515–12.715 in; intermediate ID 8.885–9.001 in. With no conductor weight, a 20-in, 106.5-lb/ft nominal 19.000-in ID is an explicit transferred scenario; use the same table's 18.730–19.124-in stock range. Preserve source shoes and note the 3,494-ft casing shoe versus the 3,506-ft hole-section boundary.
++
++BHA 3's depth-out source contains a date. Keep that source cell and use the flagged candidate 3,308 + 192 = 3,500 ft. Its printed calendar date-out remains unchanged. BHA 5 has no date-out; the next BHA begins on 16 February, so its provisional assignment ends before that date. Do not erase the source discrepancy. The [56-32 crosswalk](bha_crosswalk.csv) preserves both numbering systems and endpoint differences. Calendar-only dates cannot resolve same-day trips. Match both date and recorded hole-depth range, and retain only unique assignments; uncertain endpoints and overlapping assemblies are excluded.
++
++For 58-32, daily reports give end-state BHAs. Assign an interior source day only when the previous, current and following calendar dates each identify the same single BHA. This is a conservative input-only clock treatment; transition days and days without adjacent reports are excluded. Raw source time zones and report-clock alignment remain unverified. The [58-32 archive](../forge58-32/README.md) distinguishes full component tables from early assembly-description lines. It lists reported rotary and motor assemblies. A short or incomplete assembly description cannot establish motor absence.
++
++The committed `off_bottom_windows.csv` files freeze BHA assignments and exclusion reasons. They are not revisited after comparison. Unreported component passage IDs and the field surface layout remain input qualifications. A sampling-qualified window is not yet a complete numerical case.
++
++Mud uses recorded density and the nearest non-missing paired PV/YP in the same recorded fluid system, in either time direction, with earlier samples breaking ties. If a system has no PV/YP, use water rheology at recorded density. Until fluid-system boundaries are sourced, the original 56-32 hole-section grouping is flagged as an assumption; 58-32 needs its own system ledger before scoring. No transfer across a documented fluid change is allowed. Unknown field PV test temperature remains the declared 48.9 C convention, with 26.7 C reported and yield point unchanged.
++
++## Accepted implementation and checks
++
++The public interface and shared friction kernel with explicit legacy mode are accepted. So are the surface-loss object, site-file programme field and S2b replay contract. Dual-wall and vacuum reference joints use their body bore, with no internal credit; only the external OD envelope is transferred. The plain reference collar length is 132.075968 m. API citations use edition/section/equation/table references without mirrored-document links.
++
++V1 must show an exact v1.5.0 legacy test, formula tests and heat/pressure consistency. On S2b's frozen samples, isolate the change caused by applying the 5 MPa guard to the old pressure path; record the result in the changelog. Formula replay uses the archived property/evaluation points. Production-mode guard and sampling changes are reported separately, without fitting or changing the frozen results. Stop at the V1 review, before V2 comparisons or golden changes.
+diff --git a/validation/forge58-32/README.md b/validation/forge58-32/README.md
+new file mode 100644
+index 0000000..f69f8b2
+--- /dev/null
++++ b/validation/forge58-32/README.md
+@@ -0,0 +1,36 @@
++# FORGE 58-32 pressure-comparison inputs
++
++Input extracts for the second pressure well. The [protocol](comparison_protocol.md) applies the shared off-bottom sampling rules and fixes the BHA assignment before targets are read. Observations remain restricted to availability counts.
++
++## Sources
++
++Nash and Moore (2018), *Utah FORGE: Logs and Data from Deep Well 58-32 (MU-ESW1)*, Energy and Geoscience Institute at the University of Utah. [GDR 1006](https://gdr.openei.org/submissions/1006), [DOI 10.15121/1452735](https://doi.org/10.15121/1452735), CC BY 4.0. Download `1006.zip`: 2,399,231,901 bytes, SHA-256 `43615d79d000104ae698de23dd5aee6a981bcaa9b9a72548690556eef5fb6caa`.
++
++The extractor opens only this archive. It streams the daily files in `Pason_Logs.zip`; pressure is counted for finite/missing availability only. Empty trailing CSV fields are discarded after checking that they are empty. Header/unit rows and unparseable time rows are counted separately. Source null -999.25 and non-finite values are missing; zero is retained. Flow outside 0–2,000 US gpm is unavailable input. Source row locators accompany every ten-second bin.
++
++## Files and rebuild
++
++| Files | Content |
++| --- | --- |
++| `rig_inputs_10s.csv` | 340,028 input bins from 3,397,398 source records; depth/flow extrema, input means and counts |
++| `target_availability.json` | Per-file pressure finite/missing counts, with no values or ranges |
++| `bha_reports.csv`, `bha_components.csv` | Dated BHA identity, complete reported component lists and available component OD/lengths; passage IDs remain unreported |
++| `mud_reports.csv` | Reported density, PV/YP and the explicit reference-temperature convention |
++| `bit_inputs.csv` | Whitelisted bit/jet cells from the input part of the DDR bit table |
++| `survey.csv` | 59 source MD/inclination/azimuth/TVD stations, in ft/degrees |
++| `casing_records.csv`, `operations.csv` | Dated casing headers and input-only chronology; mixed observation passages suppressed |
++| `source_reports.json`, `extract-summary.json` | Source hashes and extraction counts |
++| `motor_mapping.csv` | Reported motor status and source locators; unverified motor makers/sheets excluded |
++| `off_bottom_windows.csv`, `off_bottom_events.csv` | Short-window candidates and event membership, with assignment and exclusion status |
++| `old_off_bottom_qualification.csv`, `off_bottom_counts.csv` | Ten-minute comparison and counts by BHA/reason |
++
++From the repository root, using Python 3.12 with pdfplumber 0.11.9:
++
++```powershell
++python validation/forge58-32/build_extracts.py --raw PATH_TO_DOWNLOADS
++python validation/hydraulics-v160/prepare_pressure_windows.py --data validation/forge58-32 --well 58-32
++```
++
++No script imports BoreTHM or solves a model. Inlet temperature is an input; return temperature and PT-log values are excluded. The time zone is unverified. The pressure period stops before 14 September to separate subsequent completion operations. The raw one-foot drilling dataset and PT logs are not used to choose windows.
++
++Early DDRs state assemblies as one text line; later DDRs give component OD/length tables. Both formats retain source locators. Table lengths are preserved as reported; a later adapter must distinguish individual and quantity-total lengths before constructing geometry. Unknown passage IDs need sourced catalogue inputs and sensitivities before numerical scoring. A short bit-only assembly record does not prove motor absence. No compatible motor no-load sheet has been established for 58-32, so documented motor windows are excluded from the interval score.
+diff --git a/validation/forge58-32/comparison_protocol.md b/validation/forge58-32/comparison_protocol.md
+new file mode 100644
+index 0000000..34b452a
+--- /dev/null
++++ b/validation/forge58-32/comparison_protocol.md
+@@ -0,0 +1,13 @@
++# FORGE 58-32 pressure protocol
++
++Registered before target access, as the second pressure well for v1.6.0. The [shared amendment](../forge56-32/protocol-amendment.md) defines settling, windows, event weighting and interval measures. Its safeguards and model/rheology variants apply here. The commit containing this protocol precedes V1 and any target inspection or comparison.
++
++Use only the [documented input archive](README.md) to choose windows. The source column `Pump Pressure` is the later standpipe target, with psi as the DDR convention. Input `Flow In` is US gpm; depth is ft and inlet temperature follows the source Fahrenheit convention. These unit interpretations remain visible in numerical outputs. Do not inspect PT or thermal observations.
++
++Use the well's own component tables, survey and casing present at the time. Complete BHA descriptions identify rotary assemblies 1, 2 and 11 with no listed motor. Short bit-only descriptions on 15, 16 and 19 do not establish a complete motorless string and are excluded. Assemblies 21 and 22 occur after the pressure preparation cutoff. The remaining listed drilling BHAs carry a documented motor. No matching no-load specification has been sourced for them, so their motor-interval measure is excluded. Every status and source appears in `motor_mapping.csv`; it cannot be changed using pressure agreement.
++
++Assign a source day only when neighbouring daily reports identify the same single BHA. This excludes assembly-transition days and missing adjacent reports. No clock offset is selected from pressure. Sampling-qualified motorless windows belong to rotary BHA 2. They are not yet a claim of complete numerical geometry or convergence. The old ten-minute windows have no unique conservative assignment. The [amendment review](../hydraulics-v160/review-v0-amendment/README.md) and `off_bottom_counts.csv` report final old/new counts, including exclusions and separate event totals.
++
++Numerical inputs require the remaining catalogue passage IDs/ranges and fluid-system ledger before this well's targets are accessed. Keep density and PV/YP in the same reported system, use 48.9 C as the unknown test-temperature assumption, and report 26.7 C separately. Use the same transferred FORGE formation/rock boundary assumptions as 56-32, with this well's own MD-to-TVD survey. No film multiplier, inlet value or pressure coefficient is fitted.
++
++Report v1.5.0 and v1.6.0 standpipe residuals per window and event, in psi and percent of measured. Each event has equal weight in BHA summaries. Publish absolute and relative residuals, median/range by BHA, the pressure budget and planned/qualified/complete/converged/target-available counts. A zero target denominator gives no percentage; retain the absolute result. Missing targets, numerical failures and all exclusions remain in the evidence. No observed value or residual can remove or reassign an event.
+diff --git a/validation/forge58-32/off_bottom_counts.csv b/validation/forge58-32/off_bottom_counts.csv
+new file mode 100644
+index 0000000..3696b94
+--- /dev/null
++++ b/validation/forge58-32/off_bottom_counts.csv
+@@ -0,0 +1,7 @@
++rule,bha_id,selection,windows,events,outside_rated_windows
++new,10,excluded_unknown_maker,30,7,0
++new,17,excluded_unknown_maker,86,7,0
++new,2,motorless_primary,62,7,0
++new,3,excluded_unknown_maker,13,3,0
++new,unresolved,excluded_BHA_unresolved,1894,92,0
++old,unresolved,excluded_BHA_unresolved,59,12,0
+diff --git a/validation/hydraulics-v160/review-v0-amendment/README.md b/validation/hydraulics-v160/review-v0-amendment/README.md
+new file mode 100644
+index 0000000..95fa555
+--- /dev/null
++++ b/validation/hydraulics-v160/review-v0-amendment/README.md
+@@ -0,0 +1,100 @@
++# V0 protocol amendment review
++
++Prepared after both V0 rulings, before V1 and before target inspection. Starting commit: `a1927b310694eacbd3edc7c4d93c093296e8ab08`.
++
++## Review material
++
++- [Governing amendment](../../forge56-32/protocol-amendment.md): short-window reasoning, interval measures, event weighting and input rulings.
++- [56-32 motor mapping](../../forge56-32/motor_mapping.csv): all eleven motors, source identity and exclusions.
++- [56-32 archive](../../forge56-32/README.md) and [58-32 archive](../../forge58-32/README.md).
++- [58-32 protocol](../../forge58-32/comparison_protocol.md), [motor status](../../forge58-32/motor_mapping.csv) and source locators.
++- [Accepted interface](../review-v0/interface.md) and [corrected defaults/sources](../review-v0/sources-and-defaults.md).
++
++The short rule was chosen from operating considerations before counts were calculated. It uses 60 seconds of settling, then non-overlapping 60-second windows, with 10-ft clearance and a 2-ft stationary-bit cut. Events join continuous off-bottom occupancy across movement and pump/flow changes. Window stationarity cannot multiply event samples. Events with conflicting assigned BHAs are excluded. No threshold was chosen using pressure.
++
++The mapping table was shown before this amendment was frozen. All 56-32 BHAs have motors. Its supplied GeoGuidance sheets do not include the recorded 7-in configuration; matching maker alone cannot justify a 6.75-in transfer. Discovery has no published no-load value. The eligible motor curves use the rated-flow endpoint interval, with reference-density assumptions stated in the protocol.
++
++## 56-32 counts
++
++| BHA | Old windows/events | New windows/events | Qualified windows/events | Motor status |
++| --- | ---: | ---: | ---: | --- |
++| 1 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 2 | 0/0 | 6/3 | 4/3 | eligible with flag |
++| 3 | 0/0 | 0/0 | 0/0 | eligible with flag |
++| 4 | 0/0 | 38/3 | 0/0 | excluded no matching sheet |
++| 5 | 0/0 | 9/1 | 0/0 | excluded no matching sheet |
++| 6 | 0/0 | 0/0 | 0/0 | excluded no matching sheet |
++| 7 | 0/0 | 0/0 | 0/0 | excluded no matching sheet |
++| 8 | 0/0 | 14/2 | 0/0 | excluded no published no load |
++| 9 | 0/0 | 18/3 | 5/2 | eligible with flag |
++| 10 | 1/1 | 28/4 | 9/4 | eligible with flag |
++| 11 | 3/2 | 89/3 | 0/0 | excluded no published no load |
++| Unresolved | 14/2 | 476/14 | 0/0 | unresolved |
++
++New-rule exclusion accounting:
++- excluded BHA unresolved: 476 windows.
++- excluded outside motor rated flow: 21 windows.
++- motor interval: 18 windows.
++- excluded no matching sheet: 47 windows.
++- excluded no published no load: 90 windows.
++- excluded event BHA conflict: 26 windows.
++
++Separate rated-flow failures (including overlaps with another exclusion): 35.
++Qualified event count: 9.
++
++## 58-32 counts
++
++| BHA | Old windows/events | New windows/events | Qualified windows/events | Motor status |
++| --- | ---: | ---: | ---: | --- |
++| 1 | 0/0 | 0/0 | 0/0 | motorless reported BHA |
++| 2 | 0/0 | 62/7 | 62/7 | motorless reported BHA |
++| 3 | 0/0 | 13/3 | 0/0 | excluded unknown maker |
++| 4 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 5 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 6 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 7 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 8 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 9 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 10 | 0/0 | 30/7 | 0/0 | excluded unknown maker |
++| 11 | 0/0 | 0/0 | 0/0 | motorless reported BHA |
++| 12 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 13 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 14 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 15 | 0/0 | 0/0 | 0/0 | excluded motor status unresolved |
++| 16 | 0/0 | 0/0 | 0/0 | excluded motor status unresolved |
++| 17 | 0/0 | 86/7 | 0/0 | excluded unknown maker |
++| 18 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 19 | 0/0 | 0/0 | 0/0 | excluded motor status unresolved |
++| 20 | 0/0 | 0/0 | 0/0 | excluded unknown maker |
++| 21 | 0/0 | 0/0 | 0/0 | excluded motor status unresolved |
++| 22 | 0/0 | 0/0 | 0/0 | excluded motor status unresolved |
++| Unresolved | 59/12 | 1894/92 | 0/0 | unresolved |
++
++New-rule exclusion accounting:
++- excluded BHA unresolved: 1894 windows.
++- motorless primary: 62 windows.
++- excluded unknown maker: 129 windows.
++
++Separate rated-flow failures (including overlaps with another exclusion): 0.
++Qualified event count: 7.
++
++The short rule identifies motorless rotary BHA 2 windows in 58-32. Reports also identify rotary BHAs 1 and 11, but the conservative interior-day assignment produces no qualified windows for them. Short/incomplete assembly descriptions do not establish motor absence. Missing geometry/catalogue inputs still need completion before either well is numerically scored. The counts above are sampling and motor qualifications, not completed model cases.
++
++## Reproduction and checks
++
++From the repository root, with Python 3.12.14 and pdfplumber 0.11.9:
++
++```powershell
++python validation/forge58-32/build_extracts.py --raw PATH_TO_DOWNLOADS
++python validation/hydraulics-v160/prepare_pressure_windows.py --data validation/forge56-32 --well 56-32
++python validation/hydraulics-v160/prepare_pressure_windows.py --data validation/forge58-32 --well 58-32
++python validation/forge56-32/audit_extracts.py --data validation/forge56-32
++.venv/Scripts/python.exe tools/check_links.py
++git diff --check
++```
++
++Input/provenance checks cover finite/null accounting, unique window IDs, non-overlapping windows, rated-flow exclusions and single-BHA event eligibility. No extraction/preparation script imports BoreTHM. An independent 58-32 rebuild is compared by SHA-256, and the original 56-32 generated input files remain byte-identical. The file manifest records the amendment state. The two source archives remain outside the checkout; no 78B source is opened.
++
++API mirror links are removed from current citations, including the earlier S2b report and its report-writing script. These are citation-only edits; archived numerical evidence is unchanged. S2b's recorded historical hashes refer to their original commit. The dual-wall/vacuum hydraulic bores now equal body bores, and the reference collar arithmetic is corrected.
++
++V1 follows the protocol commit. Its execution record supplies that commit hash and the implementation diff. No held-out pressure comparison, golden regeneration, version change, tag, merge or release belongs to this amendment.
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 0a786de..708c494 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -4,0 +5,14 @@
++Adds shared hydraulic loss and dissipation accounting with optional
++tool-joint geometry, serial BHA components and supplied tool curves.
++Surface equipment contributes to standpipe pressure; bore and annulus
++losses supply heat to their respective streams. An explicit v1.5.0 mode
++preserves the old calculation. A typed programme can be supplied in Python
++or a site file. The reference programme includes the documented allowances.
++
++On the 90 frozen motorless FORGE 16B S2b states, applying only the 5 MPa
++property-pressure guard to the legacy pressure calculation reduces
++standpipe pressure by 0.040–0.111 psi (0.00654–0.0110%). The complete
++hydraulic changes have separate guard and integration accounting in
++`validation/hydraulics-v160/v1/`. This diagnostic retains the archived
++rheology convention and makes no new held-out pressure comparison.
++
+diff --git a/docs/api.md b/docs/api.md
+index 4abca88..216aec3 100644
+--- a/docs/api.md
++++ b/docs/api.md
+@@ -38,0 +39,57 @@ receive no atmospheric offset.
++## HydraulicJoint
++
++```python
++HydraulicJoint(outer_diameter: float, bore_diameter: float, restriction_length: float, spacing: float, transition: str = 'abrupt', source: str = '') -> None
++```
++
++Repeated connection geometry [m], independent of thermal joints.
++
++restriction_length is the effective narrow-passage length; spacing is
++the connection pitch. transition is abrupt or the zero-local-loss
++gradual idealisation. source records the catalogue and assumptions.
++
++## LocalLoss
++
++```python
++LocalLoss(bore_coefficient: float = 0.0, annulus_coefficient: float = 0.0, bore_reference_area: float | None = None, annulus_reference_area: float | None = None, source: str = '') -> None
++```
++
++Additional component K values; reference areas are m2.
++
++None uses that component's body bore/annulus area. These coefficients
++must exclude geometric transitions already represented automatically.
++
++## ReferenceToolLoss
++
++```python
++ReferenceToolLoss(dp_ref: float, flow_ref: float, density_ref: float, basis: str = 'additional', span_segments: int = 1, source: str = '', flow_range: tuple | None = None, temperature_max_C: float | None = None) -> None
++```
++
++Tool pressure loss [Pa] at reference flow [m3/s] and density [kg/m3].
++
++Scales as density times flow squared. total_internal replaces internal
++passage losses over span_segments contiguous segments, including the
++segment carrying this input; additional supplies an extra restriction.
++Optional flow_range is m3/s and temperature_max_C is a qualification.
++
++## SurfaceLoss
++
++```python
++SurfaceLoss(value: float, source: str = '') -> None
++```
++
++API surface-layout coefficient, in the psi/ppg/US-gpm convention.
++
++## HydraulicProgramme
++
++```python
++HydraulicProgramme(hydraulics_model: str = 'v1.6.0', reference: str | None = 'wu2025-with-hydraulic-allowances', segments: tuple = (), hole: tuple = (), surface: borethm.hydraulic_losses.SurfaceLoss | None = None, transitions: str = 'abrupt', joints: bool = True, tools: bool = True, joint_restriction_length: float = 0.7365999999999999, hwdp_restriction_length: float = 1.2191999999999998) -> None
++```
++
++Hydraulic mode, surface layout and reference or custom string.
++
++Python lengths are metres and losses use SI. reference_programme()
++selects the documented built-in allowances, including surface case 5.
++A custom string must explicitly supply its own tool curves. Optional
++hole intervals otherwise retain the reference well's casing scenario.
++
+@@ -42 +99 @@ receive no atmospheric offset.
+-evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupled=None)
++evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupled=None, programme=None, hydraulics_model=None, surface=None)
+@@ -77,0 +135,6 @@ This evaluation can require substantial computation.
++programme overrides the site's HydraulicProgramme. hydraulics_model
++optionally selects v1.6.0 or exact v1.5.0 legacy hydraulics; surface
++optionally overrides its SurfaceLoss. An explicit zero coefficient
++disables an allowance. Unspecified settings use the effective
++programme. The input SiteProfile is unchanged.
++
+@@ -115 +178 @@ described in result_dict.
+-SiteProfile(name: str, geotherm: Callable, target_depth: float, target_T: float, Sv_grad: float, K0_min: float, SHmax_over_Sv: float, rho_fluid_grad: float, k_rock: float, E_rock: float, UCS: float, T_inj: float = 40.0, stress_cases: tuple = (), stress_basis: str = 'v1.0 ratios', strength_cases: tuple = (), data_basis: dict = <factory>, geotherm_v11: Callable = None, target_depth_v11: float = None, temperature_data_to: float = None, mu: float = 0.8, coupled: bool = False) -> None
++SiteProfile(name: str, geotherm: Callable, target_depth: float, target_T: float, Sv_grad: float, K0_min: float, SHmax_over_Sv: float, rho_fluid_grad: float, k_rock: float, E_rock: float, UCS: float, T_inj: float = 40.0, stress_cases: tuple = (), stress_basis: str = 'v1.0 ratios', strength_cases: tuple = (), data_basis: dict = <factory>, geotherm_v11: Callable = None, target_depth_v11: float = None, temperature_data_to: float = None, mu: float = 0.8, coupled: bool = False, programme: borethm.programme.HydraulicProgramme | None = None) -> None
+@@ -137,0 +201,4 @@ Construct a profile, then call validate_site.
++programme optionally supplies a HydraulicProgramme. None selects the
++documented reference programme during circulation. A custom string
++keeps its supplied pipes and does not receive reference tool curves.
++
+@@ -270 +337 @@ Raises ValueError for an unknown or ambiguous name.
+-circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0)
++circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt')
+@@ -294,0 +362,7 @@ init is a previous circulation result used to seed the solver.
++hydraulics_model selects v1.6.0's shared Bingham/Newtonian pressure
++and dissipation kernel, or the exact v1.5.0 legacy calculation.
++surface is a SurfaceLoss, included in standpipe pressure with no
++downhole heat. transitions is abrupt or the zero-local-loss gradual
++idealisation. New geometry fields supply connection and tool losses.
++energy_check reports assigned and applied heat in W when enabled.
++
+@@ -306 +380 @@ verbose=False suppresses the solver's printed report by default.
+-hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='blasius', bit=True, fluid=None, P_surface=100000.0)
++hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='blasius', bit=True, fluid=None, P_surface=100000.0, hydraulics_model=None, surface=None, transitions=None)
+@@ -309,10 +383 @@ hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='bl
+-Pressure losses along the string and annulus, bit nozzle loss,
+-standpipe pressure and annular velocity.
+-
+-With a circulating_temperatures result, water properties use each piece's
+-bore or annulus temperature and the approximate absolute pressure
+-P_surface + 10,000 Pa/m times true vertical depth. The standpipe pressure
+-includes the buoyancy of the hot annulus against the cold bore. Without
+-one, properties are at T_avg and mid-depth pressure throughout.
+-
+-  SPP = dP_string + dP_bit + dP_annulus + integral (rho_ann - rho_bore) g dTVD
++Pressure budget [Pa] with named pressure/heat loss terms.
+@@ -320,10 +385,7 @@ one, properties are at T_avg and mid-depth pressure throughout.
+-The first two arguments, m_dot [kg/s] and geometry [WellGeometry],
+-are required. result is a circulating_temperatures result; T_avg is
+-degrees C, tfa is m2 and P_surface is Pa absolute, default 100,000 Pa.
+-bit enables nozzle loss;
+-friction selects the friction law. fluid=None uses water; otherwise
+-use a constant property dictionary or an object providing props.
+-Return a dictionary with dp_string, dp_annulus, dp_bit, dp_buoyancy and
+-spp [Pa as pressure differences]. The per-piece dp_bore and dp_ann
+-entries are also pressure differences [Pa]. Other outputs include
+-annular velocities [m/s], hydraulic pump power [W], and flow diagnostics.
++Existing arguments retain their order and units. New calls use
++v1.6.0; a supplied circulation result supplies its mode and surface
++settings unless overridden. Use hydraulics_model='v1.5.0' for the
++exact legacy midpoint calculation, which rejects new loss inputs.
++surface is a SurfaceLoss or None; an explicit coefficient of zero
++disables an inherited surface allowance. transitions is abrupt or
++gradual (zero geometric-local loss). See hydraulic_losses for sources.
+@@ -511 +573 @@ for measured depths s [m], including radii [m] and resistances [K m/W].
+-PipeType(name: str, layers: tuple, joint_fraction: float = 0.0, source: str = '') -> None
++PipeType(name: str, layers: tuple, joint_fraction: float = 0.0, source: str = '', hydraulic_joint: borethm.hydraulic_losses.HydraulicJoint | None = None) -> None
+@@ -563 +625 @@ Construct from r_in, r_out, k. resistance() returns K m/W.
+-StringSegment(length: float, pipe: borethm.well_geometry.PipeType) -> None
++StringSegment(length: float, pipe: borethm.well_geometry.PipeType, local_loss: borethm.hydraulic_losses.LocalLoss | None = None, tool_loss: borethm.hydraulic_losses.ReferenceToolLoss | None = None) -> None
+diff --git a/src/borethm/__init__.py b/src/borethm/__init__.py
+index 1cb2573..cbbc907 100644
+--- a/src/borethm/__init__.py
++++ b/src/borethm/__init__.py
+@@ -11,0 +12,5 @@ _EXPORTS = {
++    'HydraulicJoint': ('hydraulic_losses','HydraulicJoint'),
++    'LocalLoss': ('hydraulic_losses','LocalLoss'),
++    'ReferenceToolLoss': ('hydraulic_losses','ReferenceToolLoss'),
++    'SurfaceLoss': ('hydraulic_losses','SurfaceLoss'),
++    'HydraulicProgramme': ('programme','HydraulicProgramme'),
+diff --git a/src/borethm/_api.py b/src/borethm/_api.py
+index 2737d07..c5da41f 100644
+--- a/src/borethm/_api.py
++++ b/src/borethm/_api.py
+@@ -13 +13,2 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
+-                            init=None, P_surface=_model.P_SURF):
++                            init=None, P_surface=_model.P_SURF,
++                            hydraulics_model='v1.6.0', surface=None, transitions='abrupt'):
+@@ -35,0 +37,7 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
++    hydraulics_model selects v1.6.0's shared Bingham/Newtonian pressure
++    and dissipation kernel, or the exact v1.5.0 legacy calculation.
++    surface is a SurfaceLoss, included in standpipe pressure with no
++    downhole heat. transitions is abrupt or the zero-local-loss gradual
++    idealisation. New geometry fields supply connection and tool losses.
++    energy_check reports assigned and applied heat in W when enabled.
++
+diff --git a/src/borethm/hydraulic_losses.py b/src/borethm/hydraulic_losses.py
+new file mode 100644
+index 0000000..82f21ac
+--- /dev/null
++++ b/src/borethm/hydraulic_losses.py
+@@ -0,0 +1,493 @@
++"""Shared passage losses and distributed dissipation, in SI units.
++
++Surface cases: API RP 13D, sixth edition (2009), section 7.3,
++equation 60/table 4. Sudden changes: Idelchik, as documented by Modelica
++4.0.0, dp_suddenChange (expansion Re > 3300, contraction Re > 10000).
++Annular and Bingham use of the local correlations is an approximation.
++"""
++from dataclasses import dataclass
++import math
++
++import numpy as np
++
++PROPERTY_FLOOR = 5e6
++PSI = 6894.757
++GPM = 6.30902e-5
++PPG = 119.826
++SURFACE_CASES = {1: 1.0, 2: .36, 3: .22, 4: .15, 5: .15}
++
++
++def _finite(value, name, positive=False):
++    if isinstance(value, bool) or not math.isfinite(value) or value < 0 or (positive and value == 0):
++        raise ValueError(f'{name} must be finite and '+('positive' if positive else 'non-negative'))
++
++
++@dataclass(frozen=True)
++class HydraulicJoint:
++    """Repeated connection geometry [m], independent of thermal joints.
++
++    restriction_length is the effective narrow-passage length; spacing is
++    the connection pitch. transition is abrupt or the zero-local-loss
++    gradual idealisation. source records the catalogue and assumptions.
++    """
++    outer_diameter: float
++    bore_diameter: float
++    restriction_length: float
++    spacing: float
++    transition: str = 'abrupt'
++    source: str = ''
++
++    def __post_init__(self):
++        for name in ('outer_diameter','bore_diameter','spacing'):
++            _finite(getattr(self,name),name,True)
++        _finite(self.restriction_length,'restriction_length')
++        if self.bore_diameter >= self.outer_diameter or self.restriction_length > self.spacing:
++            raise ValueError('joint requires bore < OD and restriction length <= spacing')
++        if self.transition not in ('abrupt','gradual'):
++            raise ValueError('transition must be abrupt or gradual')
++
++
++@dataclass(frozen=True)
++class LocalLoss:
++    """Additional component K values; reference areas are m2.
++
++    None uses that component's body bore/annulus area. These coefficients
++    must exclude geometric transitions already represented automatically.
++    """
++    bore_coefficient: float = 0.0
++    annulus_coefficient: float = 0.0
++    bore_reference_area: float | None = None
++    annulus_reference_area: float | None = None
++    source: str = ''
++
++    def __post_init__(self):
++        for name in ('bore_coefficient','annulus_coefficient'):
++            _finite(getattr(self,name),name)
++        for name in ('bore_reference_area','annulus_reference_area'):
++            if getattr(self,name) is not None:
++                _finite(getattr(self,name),name,True)
++
++
++@dataclass(frozen=True)
++class ReferenceToolLoss:
++    """Tool pressure loss [Pa] at reference flow [m3/s] and density [kg/m3].
++
++    Scales as density times flow squared. total_internal replaces internal
++    passage losses over span_segments contiguous segments, including the
++    segment carrying this input; additional supplies an extra restriction.
++    Optional flow_range is m3/s and temperature_max_C is a qualification.
++    """
++    dp_ref: float
++    flow_ref: float
++    density_ref: float
++    basis: str = 'additional'
++    span_segments: int = 1
++    source: str = ''
++    flow_range: tuple | None = None
++    temperature_max_C: float | None = None
++
++    def __post_init__(self):
++        _finite(self.dp_ref,'dp_ref')
++        _finite(self.flow_ref,'flow_ref',True)
++        _finite(self.density_ref,'density_ref',True)
++        if self.basis not in ('additional','total_internal'):
++            raise ValueError('tool basis must be additional or total_internal')
++        if type(self.span_segments) is not int or self.span_segments < 1:
++            raise ValueError('span_segments must be a positive integer')
++        if self.flow_range is not None:
++            if len(self.flow_range)!=2 or not 0 <= self.flow_range[0] < self.flow_range[1] or not all(map(math.isfinite,self.flow_range)):
++                raise ValueError('flow_range must contain two increasing positive finite flows')
++        if self.temperature_max_C is not None and not math.isfinite(self.temperature_max_C):
++            raise ValueError('temperature_max_C must be finite')
++
++    def pressure(self, density, flow):
++        return self.dp_ref*(np.asarray(density)/self.density_ref)*(np.asarray(flow)/self.flow_ref)**2
++
++
++@dataclass(frozen=True)
++class SurfaceLoss:
++    """API surface-layout coefficient, in the psi/ppg/US-gpm convention."""
++    value: float
++    source: str = ''
++
++    def __post_init__(self):
++        _finite(self.value,'surface coefficient')
++        if not isinstance(self.source,str):
++            raise ValueError('surface source must be text')
++
++    @classmethod
++    def api_case(cls, case):
++        if type(case) is not int or case not in SURFACE_CASES:
++            raise ValueError('surface case must be an integer from 1 to 5')
++        return cls(SURFACE_CASES[case],f'API RP 13D, sixth edition (2009), section 7.3, equation 60/table 4, case {case}')
++
++    @classmethod
++    def coefficient(cls, value, source='user-supplied surface coefficient'):
++        return cls(value,source)
++
++    def pressure(self, density, flow):
++        return self.value*(density/PPG)*(flow/GPM/100.)**1.86*PSI
++
++
++def passage_gradient(rho, mu, yield_point, mass_rate, area, dh, annulus=False, friction='blasius'):
++    """Positive friction gradient [Pa/m], apparent Re and velocity [m/s].
++
++    Takes already evaluated properties so frozen-point formula replays do
++    not change their sampling. Mud uses the retained Bingham treatment.
++    """
++    from borethm import fluids, model1_coupled as m1
++    velocity=mass_rate/(np.asarray(rho)*area)
++    if yield_point > 0:
++        gradient,re=fluids.bingham_gradient(rho,mu,yield_point,velocity,dh,annulus)
++    else:
++        re=np.asarray(rho)*velocity*dh/mu
++        gradient=m1.friction_factor(re,friction)*np.asarray(rho)*velocity**2/(2*dh)
++    return gradient,re,velocity
++
++
++def local_change(area_up, area_down, rho, mass_rate, mu, dh_small):
++    """Sudden-change loss [Pa], K, plastic Re and correlation-domain flag."""
++    small=np.minimum(area_up,area_down)
++    ratio=small/np.maximum(area_up,area_down)
++    expansion=np.asarray(area_down)>area_up
++    k=np.where(expansion,(1-ratio)**2,.5*(1-ratio)**.75)
++    velocity=mass_rate/(rho*small)
++    re=rho*velocity*dh_small/mu
++    valid=(re>np.where(expansion,3300.,10000.)) | (k==0)
++    return k*.5*rho*velocity**2,k,re,valid
++
++
++def joint_increment(rho, mu, yield_point, mass_rate, body_area, body_dh,
++                    joint_area, joint_dh, restriction_length, annulus=False,
++                    transition='abrupt', friction='blasius'):
++    """Replacement and entry/exit loss [Pa] for one connection.
++
++    The body subtraction can give a negative increment. It replaces only
++    the declared restriction length, with the remaining body retained.
++    """
++    body=passage_gradient(rho,mu,yield_point,mass_rate,body_area,body_dh,annulus,friction)[0]
++    joint=passage_gradient(rho,mu,yield_point,mass_rate,joint_area,joint_dh,annulus,friction)[0]
++    local=0.
++    if transition=='abrupt':
++        # Both directions use the smaller passage's hydraulic diameter.
++        dh=np.where(np.asarray(body_area)<=joint_area,body_dh,joint_dh)
++        local=local_change(body_area,joint_area,rho,mass_rate,mu,dh)[0]+local_change(joint_area,body_area,rho,mass_rate,mu,dh)[0]
++    return (joint-body)*restriction_length,local
++
++
++class LossModel:
++    """Prepared geometry-only loss placement, shared by pressure and heat."""
++
++    def __init__(self, geometry, friction='blasius', transitions='abrupt'):
++        from borethm import model1_coupled as m1
++        if transitions not in ('abrupt','gradual'):
++            raise ValueError('transitions must be abrupt or gradual')
++        self.geometry=geometry
++        self.friction=friction
++        self.transitions=transitions
++        self.top,self.bottom=m1._pieces(geometry)
++        self.length=self.bottom-self.top
++        self.replaced=np.zeros(len(geometry.string),bool)
++        self.tool_owner=np.full(len(geometry.string),-1,int)
++        self.tools=[]
++        for i,segment in enumerate(geometry.string):
++            if segment.tool_loss is None:
++                continue
++            tool=segment.tool_loss
++            stop=i+tool.span_segments
++            if stop>len(geometry.string) or np.any(self.tool_owner[i:stop]>=0):
++                raise ValueError('tool spans must be contiguous, within the string and non-overlapping')
++            self.tool_owner[i:stop]=len(self.tools)
++            if tool.basis=='total_internal':
++                self.replaced[i:stop]=True
++            self.tools.append((i,stop,tool,sum(s.length for s in geometry.string[i:stop])))
++        # Boundary local losses are assigned over the downstream bore piece,
++        # or the upward annulus piece. Internal boundaries of a replaced tool
++        # are excluded. Hole changes are included on the upward return path.
++        self.boundaries=[]
++        for j,boundary in enumerate(self.top[1:],1):
++            left=geometry.at(np.array([boundary-1e-5]))
++            right=geometry.at(np.array([boundary+1e-5]))
++            il=int(geometry.segment_index(boundary-1e-5))
++            ir=int(geometry.segment_index(boundary+1e-5))
++            internal=(self.tool_owner[il]>=0 and self.tool_owner[il]==self.tool_owner[ir] and self.replaced[il] and self.replaced[ir])
++            for annulus in (False,True):
++                if internal and not annulus:
++                    continue
++                area='A_ann' if annulus else 'A_bore'
++                dh='Dh_ann' if annulus else 'Dh_bore'
++                up,down=(right,left) if annulus else (left,right)
++                a,b=float(up[area][0]),float(down[area][0])
++                if a==b:
++                    continue
++                small_dh=float((up if a<=b else down)[dh][0])
++                owner=j-1 if annulus else j
++                self.boundaries.append((annulus,owner,a,b,small_dh,float(boundary)))
++        for i,segment in enumerate(geometry.string):
++            joint=segment.pipe.hydraulic_joint
++            if joint is not None:
++                for h in geometry.hole:
++                    # Check the actual intersecting intervals below as well as
++                    # the geometry's ordinary body-clearance check.
++                    top=0 if i==0 else geometry._seg_ends[i-1]
++                    bottom=geometry._seg_ends[i]
++                    if top<h.md_bottom and bottom>h.md_top and joint.outer_diameter>=2*h.r_wall:
++                        raise ValueError('hydraulic joint closes the annulus')
++
++    def _at_geometry(self, z, temperature, pressure, mass_rate, fluid=None, annulus=False, geometry_z=None, guard=True):
++        """Named gradients, properties and approximation flags at MD [m]."""
++        from borethm import model1_coupled as m1
++        zz=np.atleast_1d(z).astype(float)
++        sample=zz if geometry_z is None else np.broadcast_to(geometry_z,zz.shape)
++        temperature=np.broadcast_to(temperature,zz.shape)
++        g=self.geometry.at(sample)
++        p=np.broadcast_to(pressure,zz.shape)
++        prop_p=np.maximum(p,PROPERTY_FLOOR) if guard else p
++        rho,cp,mu,_=m1.fluid_props(np.clip(temperature,1,480),prop_p,fluid)
++        rho,cp,mu=(np.broadcast_to(x,zz.shape) for x in (rho,cp,mu))
++        tau=getattr(fluid,'yield_point',0.)
++        area=g['A_ann' if annulus else 'A_bore']
++        dh=g['Dh_ann' if annulus else 'Dh_bore']
++        body,re,velocity=passage_gradient(rho,mu,tau,mass_rate,area,dh,annulus,self.friction)
++        seg=self.geometry.segment_index(sample)
++        piece=np.clip(np.searchsorted(self.bottom,sample,side='left'),0,len(self.bottom)-1)
++        body=np.asarray(body).copy()
++        if not annulus:
++            body=np.where(self.replaced[seg],0.,body)
++        terms={k:np.zeros_like(zz) for k in ('joint_replacement','joint_local','geometric_local','supplied_local','tool')}
++        flags=[]
++        for i,s in enumerate(self.geometry.string):
++            mask=seg==i
++            if not np.any(mask):
++                continue
++            joint=s.pipe.hydraulic_joint
++            if joint is not None and (annulus or not self.replaced[i]):
++                if annulus:
++                    diameter=2*g['r_wall'][mask]
++                    ja=np.pi*(diameter**2-joint.outer_diameter**2)/4
++                    jd=diameter-joint.outer_diameter
++                else:
++                    ja=np.full(mask.sum(),np.pi*joint.bore_diameter**2/4)
++                    jd=joint.bore_diameter
++                inc,loc=joint_increment(rho[mask],mu[mask],tau,mass_rate,area[mask],dh[mask],ja,jd,joint.restriction_length,annulus,joint.transition,self.friction)
++                terms['joint_replacement'][mask]=inc/joint.spacing
++                terms['joint_local'][mask]=loc/joint.spacing
++                if joint.transition=='abrupt':
++                    small_dh=np.where(area[mask]<=ja,dh[mask],jd)
++                    entry=local_change(area[mask],ja,rho[mask],mass_rate,mu[mask],small_dh)
++                    exit_=local_change(ja,area[mask],rho[mask],mass_rate,mu[mask],small_dh)
++                    if not np.all(entry[3] & exit_[3]):
++                        flags.append('joint_local_outside_Newtonian_Re_domain')
++                if annulus or tau>0:
++                    flags.append('joint_local_annular_or_Bingham_approximation')
++            if s.local_loss is not None and (annulus or not self.replaced[i]):
++                spec=s.local_loss
++                k=spec.annulus_coefficient if annulus else spec.bore_coefficient
++                ref=spec.annulus_reference_area if annulus else spec.bore_reference_area
++                a=area[mask] if ref is None else ref
++                terms['supplied_local'][mask]=k*.5*rho[mask]*(mass_rate/(rho[mask]*a))**2/s.length
++        if self.transitions=='abrupt':
++            for ann,owner,a,b,small_dh,depth in self.boundaries:
++                mask=(piece==owner)
++                if ann!=annulus or not np.any(mask):
++                    continue
++                loss,k,r,valid=local_change(a,b,rho[mask],mass_rate,mu[mask],small_dh)
++                terms['geometric_local'][mask]+=loss/self.length[owner]
++                if not np.all(valid):
++                    flags.append('local_change_outside_Newtonian_Re_domain')
++                if annulus or tau>0:
++                    flags.append('local_change_annular_or_Bingham_approximation')
++        if not annulus:
++            for i,stop,tool,length in self.tools:
++                mask=(seg>=i)&(seg<stop)
++                flow=mass_rate/rho[mask]
++                terms['tool'][mask]=tool.pressure(rho[mask],flow)/length
++                if np.any(mask):
++                    flags.append('supplied_tool_loss_treated_as_dissipation')
++                if tool.flow_range is not None and np.any((flow<tool.flow_range[0])|(flow>tool.flow_range[1])):
++                    flags.append('tool_flow_outside_published_range')
++                if tool.temperature_max_C is not None and np.any(np.asarray(temperature)[mask]>tool.temperature_max_C):
++                    flags.append('tool_temperature_outside_published_rating')
++        total=body+sum(terms.values())
++        if np.any(total < -1e-8):
++            raise ValueError('negative total passage dissipation')
++        return dict(body=body,**terms,total=total,rho=rho,cp=cp,mu=mu,re=re,velocity=velocity,
++                    property_pressure=prop_p,guard_active=p<prop_p,flags=sorted(set(flags)))
++
++    def gradients(self,z,temperature,pressure,mass_rate,fluid=None,annulus=False,guard=True,blend=True):
++        """Shared gradients with the existing geometry-blend width.
++
++        Convolve piece occupancy with a unit-area box of width BLEND.
++        Weights remain non-negative and sum to one even for short tools.
++        Pressure and thermal source assignment use these identical weights.
++        """
++        from borethm import model1_coupled as m1
++        zz=np.atleast_1d(z).astype(float)
++        temp=np.broadcast_to(temperature,zz.shape)
++        p=np.broadcast_to(pressure,zz.shape)
++        out=self._at_geometry(zz,temp,p,mass_rate,fluid,annulus,guard=guard)
++        if not blend or len(self.top)==1:
++            return out
++        width=min(m1.BLEND,self.geometry.md_bit)
++        near=np.zeros(zz.shape,bool)
++        for b in self.top[1:]:
++            near|=np.abs(zz-b)<width/2
++        if not np.any(near):
++            return out
++        names=('body','joint_replacement','joint_local','geometric_local','supplied_local','tool','total','re','velocity')
++        for key in names:
++            out[key][near]=0.
++        for i,(a,b) in enumerate(zip(self.top,self.bottom)):
++            # Reflect at the well ends. This preserves each component's
++            # integral even when a bit/tool is shorter than half the blend.
++            L=self.geometry.md_bit
++            weight=np.zeros_like(zz)
++            for lo,hi in ((a,b),(-b,-a),(2*L-b,2*L-a)):
++                weight+=np.maximum(0.,np.minimum(zz+width/2,hi)-np.maximum(zz-width/2,lo))/width
++            mask=near & (weight>0)
++            if not np.any(mask):
++                continue
++            value=self._at_geometry(zz[mask],temp[mask],p[mask],mass_rate,fluid,annulus,
++                                    np.full(mask.sum(),(a+b)/2),guard)
++            for key in names:
++                out[key][mask]+=weight[mask]*value[key]
++            out['flags'].extend(value['flags'])
++        out['flags']=sorted(set(out['flags']+['hydraulic_geometry_blend']))
++        return out
++
++    def integration_grid(self,result=None):
++        from borethm import model1_coupled as m1
++        L=self.geometry.md_bit
++        half_width=min(m1.BLEND,L)/2
++        edges=np.r_[self.top,self.bottom,-self.top,-self.bottom,2*L-self.top,2*L-self.bottom]
++        cuts=[self.top,self.bottom,np.clip(edges-half_width,0,L),np.clip(edges+half_width,0,L)]
++        if result is not None:
++            cuts.append(np.asarray(result['z']))
++        cuts.append(np.asarray(self.geometry.survey.md))
++        cuts=np.unique(np.concatenate(cuts))
++        cuts=cuts[(cuts>=0)&(cuts<=self.geometry.md_bit)]
++        x,w=np.polynomial.legendre.leggauss(8)
++        half=np.diff(cuts)/2
++        z=((cuts[:-1]+cuts[1:])[:,None]/2+half[:,None]*x).ravel()
++        weights=(half[:,None]*w).ravel()
++        return z,weights
++
++
++def check_legacy(geometry,surface,transitions):
++    if surface is not None or transitions!='abrupt' or any(s.pipe.hydraulic_joint is not None or s.local_loss is not None or s.tool_loss is not None for s in geometry.string):
++        raise ValueError('v1.5.0 mode rejects new hydraulic loss settings')
++
++
++def heat_gradients(model,z,td,tu,mass_rate,fluid=None,P_surface=1e5):
++    """Applied bore/down and annulus/up temperature gradients [K/m]."""
++    from borethm import model1_coupled as m1
++    p=m1.P_of_z(model.geometry.survey.tvd(z),P_surface)
++    bore=model.gradients(z,td,p,mass_rate,fluid)
++    ann=model.gradients(z,tu,p,mass_rate,fluid,True)
++    # Retain the circulation equation's enthalpy heat capacities. Only the
++    # friction kernel's liquid density/viscosity use the shared pressure guard.
++    return (bore['total']/bore['rho']/m1._cp(td,p,fluid),
++            -ann['total']/ann['rho']/m1._cp(tu,p,fluid))
++
++
++def energy_check(model,result,fluid,Q_face,tfa,P_surface):
++    """Compare assigned dissipation with applied equation sources [W].
++
++    Integrate each named pressure term times its own local volumetric flow.
++    Surface and density-column terms do not enter this balance. Compare to
++    the applied temperature source times m*cp and the solved turnaround jump.
++    """
++    from borethm import model1_coupled as m1
++    z,w=model.integration_grid(result)
++    td=np.interp(z,result['z'],result['Td'])
++    tu=np.interp(z,result['z'],result['Tu'])
++    p=m1.P_of_z(model.geometry.survey.tvd(z),P_surface)
++    b=model.gradients(z,td,p,result['m_dot'],fluid)
++    a=model.gradients(z,tu,p,result['m_dot'],fluid,True)
++    keys=('body','joint_replacement','joint_local','geometric_local','supplied_local','tool')
++    assigned={side:{key:float(np.sum(val[key]*result['m_dot']/val['rho']*w)) for key in keys}
++              for side,val in (('bore',b),('annulus',a))}
++    bit_p=m1.P_of_z(model.geometry.survey.tvd(model.geometry.md_bit),P_surface)
++    rho_bit=float(m1.fluid_props(np.array([result['Td'][-1]]),np.array([max(bit_p,PROPERTY_FLOOR)]),fluid)[0][0])
++    nozzle_W=float(m1.nozzle_dp(result['m_dot'],rho_bit,tfa)*result['m_dot']/rho_bit)
++    total=sum(sum(v.values()) for v in assigned.values())+nozzle_W+Q_face
++    hd,hu=heat_gradients(model,z,td,tu,result['m_dot'],fluid,P_surface)
++    bore_applied=float(np.sum(result['m_dot']*m1._cp(td,p,fluid)*hd*w))
++    ann_applied=float(np.sum(-result['m_dot']*m1._cp(tu,p,fluid)*hu*w))
++    cp_bit=float(m1._cp(np.array([result['Td'][-1]]),np.array([bit_p]),fluid)[0])
++    turnaround=float(result['m_dot']*cp_bit*(result['Tu'][-1]-result['Td'][-1]))
++    applied=bore_applied+ann_applied+turnaround
++    residual=applied-total
++    tolerance=.01+1e-7*max(abs(total),abs(applied))
++    return dict(enabled=True,assigned_terms_W=assigned,nozzle_W=nozzle_W,face_W=Q_face,
++                assigned_W=total,applied_bore_W=bore_applied,applied_annulus_W=ann_applied,
++                applied_turnaround_W=turnaround,applied_W=applied,residual_W=residual,
++                relative_residual=residual/max(abs(total),1.),tolerance_W=tolerance,
++                passed=bool(abs(residual)<=tolerance),surface_W_in_hole=0.,density_column_W=0.)
++
++
++def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
++               friction='blasius', bit=True, fluid=None, P_surface=1e5,
++               surface=None, transitions='abrupt', guard=True):
++    """Standpipe budget using the same local gradients as circulation heat."""
++    from borethm import model1_coupled as m1
++    _finite(mass_rate,'mass flow',True)
++    if surface is not None and not isinstance(surface,SurfaceLoss):
++        raise TypeError('surface must be SurfaceLoss or None')
++    model=LossModel(geometry,friction,transitions)
++    top,bot=model.top,model.bottom
++    mid,weights=model.integration_grid(result)
++    if result is None:
++        tb=ta=np.full_like(mid,T_avg)
++        p=np.full_like(mid,m1.P_of_z(geometry.survey.tvd(geometry.md_bit/2),P_surface))
++    else:
++        tb=np.interp(mid,result['z'],result['Td'])
++        ta=np.interp(mid,result['z'],result['Tu'])
++        p=m1.P_of_z(geometry.survey.tvd(mid),P_surface)
++    bore=model.gradients(mid,tb,p,mass_rate,fluid,guard=guard)
++    ann=model.gradients(mid,ta,p,mass_rate,fluid,True,guard=guard)
++    lengths=weights
++    bit_t=T_avg if result is None else float(result['Td'][-1])
++    bit_p=m1.P_of_z(geometry.survey.tvd(geometry.md_bit),P_surface) if result is not None else float(p[0])
++    rho_bit=float(m1.fluid_props(np.array([bit_t]),np.array([max(bit_p,PROPERTY_FLOOR) if guard else bit_p]),fluid)[0][0])
++    dp_bit=float(m1.nozzle_dp(mass_rate,rho_bit,tfa)) if bit else 0.
++    # The survey is linear between stations; cuts include those stations.
++    eps=1e-4
++    slope=(geometry.survey.tvd(mid+eps)-geometry.survey.tvd(mid-eps))/(2*eps)
++    dp_buoy=float(np.sum((ann['rho']-bore['rho'])*m1.G_GRAV*slope*weights))
++    tin=T_avg if result is None else float(result['Td'][0])
++    rho_in=float(m1.fluid_props(np.array([tin]),np.array([P_surface]),fluid)[0][0])
++    dp_surface=0. if surface is None else float(surface.pressure(rho_in,mass_rate/rho_in))
++    dpb=bore['total']*weights
++    dpa=ann['total']*weights
++    spp=float(dpb.sum()+dpa.sum())+dp_bit+dp_buoy+dp_surface
++    names=('body','joint_replacement','joint_local','geometric_local','supplied_local','tool')
++    totals={side:{key:float(np.sum(values[key]*lengths)) for key in names} for side,values in (('bore',bore),('annulus',ann))}
++    pieces=[]
++    for j,(a,b) in enumerate(zip(top,bot)):
++        mask=(mid>=a)&(mid<b)
++        def regime(re):
++            from borethm import fluids
++            lam=(re<=fluids.RE_CRITICAL) if getattr(fluid,'yield_point',0)>0 else (re<2300.)
++            return 'laminar' if np.all(lam) else ('turbulent' if not np.any(lam) else 'mixed')
++        pieces.append(dict(md_top=float(a),md_bottom=float(b),dp_bore=float(dpb[mask].sum()),dp_ann=float(dpa[mask].sum()),v_ann=float(ann['velocity'][mask].min()),
++            bore_terms={key:float(np.sum(bore[key][mask]*weights[mask])) for key in names},annulus_terms={key:float(np.sum(ann[key][mask]*weights[mask])) for key in names},
++            bore_Re=float(np.min(bore['re'][mask])),annulus_Re=float(np.min(ann['re'][mask])),
++            actual_property_profile_pressure=float(np.mean(p[mask])),
++            property_pressure=float(np.mean(bore['property_pressure'][mask])),guard_active=bool(np.any(bore['guard_active'][mask])),
++            bore_regime=regime(bore['re'][mask]),annulus_regime=regime(ann['re'][mask])))
++    # Save the cumulative annulus integral for partial-depth pressure queries.
++    cumulative_z=np.r_[0.,mid,geometry.md_bit]
++    cumulative_dp=np.r_[0.,np.cumsum(dpa)-dpa/2,float(dpa.sum())]
++    return dict(pieces=pieces,dp_string=float(dpb.sum()),dp_annulus=float(dpa.sum()),dp_bit=dp_bit,dp_buoyancy=dp_buoy,
++        dp_surface=dp_surface,spp=spp,over_pump_limit=spp>m1.PUMP_LIMIT,v_ann_min=float(ann['velocity'].min()),
++        cleans_hole=float(ann['velocity'].min())>=m1.HOLE_CLEANING_V,pump_power=spp*mass_rate/rho_in,
++        terms=totals,hydraulics_model='v1.6.0',property_guard_Pa=PROPERTY_FLOOR if guard else None,
++        flags=sorted(set(bore['flags']+ann['flags'])),
++        annulus_profile=dict(md=cumulative_z,dp=cumulative_dp),geometry_blend_m=m1.BLEND,
++        local_events=[dict(conduit='annulus' if ann else 'bore',depth_m=depth,
++            support_top_m=float(model.top[owner]),support_bottom_m=float(model.bottom[owner]),area_up_m2=a,area_down_m2=b,
++            source='Idelchik sudden-change geometry estimate; numerical blend applied') for ann,owner,a,b,dh,depth in model.boundaries],
++        sources=[s.pipe.source for s in geometry.string]+[s.local_loss.source for s in geometry.string if s.local_loss is not None]+
++            [s.pipe.hydraulic_joint.source for s in geometry.string if s.pipe.hydraulic_joint is not None]+
++            [s.tool_loss.source for s in geometry.string if s.tool_loss is not None]+([surface.source] if surface else []))
+diff --git a/src/borethm/model1_coupled.py b/src/borethm/model1_coupled.py
+index 34d3dfb..7043090 100644
+--- a/src/borethm/model1_coupled.py
++++ b/src/borethm/model1_coupled.py
+@@ -212 +212,2 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
+-          tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF):
++          tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF,
++          hydraulics_model='v1.6.0', surface=None, transitions='abrupt'):
+@@ -237,0 +239,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
++    from borethm import hydraulic_losses as hl
++    if hydraulics_model not in ('v1.5.0','v1.6.0'):
++        raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
++    if hydraulics_model=='v1.5.0':
++        hl.check_legacy(geometry,surface,transitions)
++        loss_model=None
++    else:
++        loss_model=hl.LossModel(geometry,transitions=transitions)
+@@ -250 +259 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
+-        if friction_heat:
++        if friction_heat and loss_model is None:
+@@ -261 +270,2 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
+-            rho_L = float(np.ravel(fluid_props(np.array([Td_L]), np.array([P_L]), fluid)[0])[0])
++            property_P=P_L if loss_model is None else max(P_L,P_LIQUID)
++            rho_L = float(np.ravel(fluid_props(np.array([Td_L]), np.array([property_P]), fluid)[0])[0])
+@@ -282,0 +293,6 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
++        if friction_heat and loss_model is not None:
++            # Hydraulic sources have their own conservative piece weights.
++            # Do not apply the thermal geometry blend a second time.
++            hd,hu=hl.heat_gradients(loss_model,zz,y[0],y[1],m_dot,fluid,P_surface)
++            dTd+=hd
++            dTu+=hu
+@@ -314 +330,6 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
+-               P_bottom=P_L)
++               P_bottom=P_L,hydraulics_model=hydraulics_model,
++               surface=surface,transitions=transitions)
++    if loss_model is not None:
++        res['energy_check']=hl.energy_check(loss_model,res,fluid,Q_face,tfa,P_surface) if friction_heat else dict(enabled=False,status='friction heating disabled')
++        if friction_heat and not res['energy_check']['passed']:
++            res.update(success=False,failure='hydraulic dissipation and applied heat do not balance')
+@@ -368 +389 @@ def _pieces(geometry, breaks=()):
+-def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
++def _hydraulics_v150(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
+@@ -435,0 +457,25 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
++def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
++               friction='blasius', bit=True, fluid=None, P_surface=P_SURF,
++               hydraulics_model=None, surface=None, transitions=None):
++    """Pressure budget [Pa] with named pressure/heat loss terms.
++
++    Existing arguments retain their order and units. New calls use
++    v1.6.0; a supplied circulation result supplies its mode and surface
++    settings unless overridden. Use hydraulics_model='v1.5.0' for the
++    exact legacy midpoint calculation, which rejects new loss inputs.
++    surface is a SurfaceLoss or None; an explicit coefficient of zero
++    disables an inherited surface allowance. transitions is abrupt or
++    gradual (zero geometric-local loss). See hydraulic_losses for sources.
++    """
++    from borethm import hydraulic_losses as hl
++    mode=hydraulics_model or (result or {}).get('hydraulics_model','v1.6.0')
++    surface=surface if surface is not None else (result or {}).get('surface')
++    transitions=transitions or (result or {}).get('transitions','abrupt')
++    if mode=='v1.5.0':
++        hl.check_legacy(geometry,surface,transitions)
++        return _hydraulics_v150(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface)
++    if mode!='v1.6.0':
++        raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
++    return hl.hydraulics(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface,surface,transitions)
++
++
+diff --git a/src/borethm/pressure.py b/src/borethm/pressure.py
+index f716eef..95a0db8 100644
+--- a/src/borethm/pressure.py
++++ b/src/borethm/pressure.py
+@@ -97,0 +98,3 @@ def annulus_friction(run, md):
++    profile=run['hyd'].get('annulus_profile')
++    if profile is not None:
++        return float(np.interp(md,profile['md'],profile['dp']))
+diff --git a/src/borethm/programme.py b/src/borethm/programme.py
+new file mode 100644
+index 0000000..76b2203
+--- /dev/null
++++ b/src/borethm/programme.py
+@@ -0,0 +1,198 @@
++"""Typed hydraulic programme and strict data-only site-file parsing."""
++from dataclasses import dataclass, fields, replace
++import math
++
++from borethm import well_geometry as wg
++from borethm.hydraulic_losses import HydraulicJoint, LocalLoss, ReferenceToolLoss, SurfaceLoss, PSI, GPM, PPG
++
++REFERENCE = 'wu2025-with-hydraulic-allowances'
++_DEFAULT = object()
++
++
++@dataclass(frozen=True)
++class HydraulicProgramme:
++    """Hydraulic mode, surface layout and reference or custom string.
++
++    Python lengths are metres and losses use SI. reference_programme()
++    selects the documented built-in allowances, including surface case 5.
++    A custom string must explicitly supply its own tool curves. Optional
++    hole intervals otherwise retain the reference well's casing scenario.
++    """
++    hydraulics_model: str = 'v1.6.0'
++    reference: str | None = REFERENCE
++    segments: tuple = ()
++    hole: tuple = ()
++    surface: SurfaceLoss | None = None
++    transitions: str = 'abrupt'
++    joints: bool = True
++    tools: bool = True
++    joint_restriction_length: float = 29*wg.INCH
++    hwdp_restriction_length: float = 48*wg.INCH
++
++    def __post_init__(self):
++        for name in ('joints','tools'):
++            if type(getattr(self,name)) is not bool:
++                raise ValueError(f'programme.{name} must be a boolean')
++        if not all(isinstance(s,wg.StringSegment) for s in self.segments) or not all(isinstance(h,wg.HoleInterval) for h in self.hole):
++            raise TypeError('programme segments and hole must contain typed geometry records')
++        if self.hydraulics_model not in ('v1.5.0','v1.6.0'):
++            raise ValueError('programme.hydraulics_model must be v1.5.0 or v1.6.0')
++        if self.reference not in (None,REFERENCE):
++            raise ValueError('unknown programme.reference')
++        if bool(self.segments)==bool(self.reference):
++            raise ValueError('programme requires either a reference or custom segments')
++        if self.transitions not in ('abrupt','gradual'):
++            raise ValueError('programme.transitions must be abrupt or gradual')
++        if self.surface is not None and not isinstance(self.surface,SurfaceLoss):
++            raise TypeError('programme.surface must be SurfaceLoss or None')
++        if self.hydraulics_model=='v1.5.0' and (self.surface is not None or self.transitions!='abrupt' or self.reference and (self.joints or self.tools)):
++            raise ValueError('legacy programme rejects new losses; disable reference joints/tools and surface')
++        for name in ('joint_restriction_length','hwdp_restriction_length'):
++            value=getattr(self,name)
++            if isinstance(value,bool) or not math.isfinite(value) or value<0:
++                raise ValueError(f'programme.{name} must be non-negative and finite')
++
++    @classmethod
++    def reference_programme(cls,hydraulics_model='v1.6.0',surface=_DEFAULT,**kwargs):
++        if surface is _DEFAULT:
++            surface=SurfaceLoss.api_case(5) if hydraulics_model=='v1.6.0' else None
++        if hydraulics_model=='v1.5.0':
++            kwargs.setdefault('joints',False)
++            kwargs.setdefault('tools',False)
++        return cls(hydraulics_model=hydraulics_model,surface=surface,**kwargs)
++
++    def geometry(self,depth,pipe,survey=None,shoes=wg.WU_SHOES):
++        def reference_hole():
++            # A shallow programme can end inside a casing. Keep only the
++            # intervals actually reached, with no reversed open-hole tail.
++            intervals=wg.wu2025_hole(max(depth,shoes[-1]),shoes)
++            return tuple(replace(h,md_bottom=min(h.md_bottom,depth)) for h in intervals if h.md_top<depth)
++        if self.segments:
++            if not math.isclose(sum(s.length for s in self.segments),depth,abs_tol=1e-6,rel_tol=0):
++                raise ValueError('custom programme segment lengths must sum to the circulation depth')
++            return wg.WellGeometry(self.segments,self.hole or reference_hole(),survey)
++        if self.hydraulics_model=='v1.5.0':
++            return wg.wu2025_well(depth,pipe,survey,shoes)
++        if self.joints:
++            transferred=pipe.name in (wg.DUAL_WALL.name,wg.VACUUM_INSULATED.name)
++            joint=HydraulicJoint(7*wg.INCH,2*pipe.r_bore if transferred else 4*wg.INCH,
++                self.joint_restriction_length,2378*0.3048/75,self.transitions,
++                'NOV GPDS/EIS catalogue; 29-in effective length and 16B tally pitch assumed; '+
++                ('external envelope transferred; joint bore equals body bore' if transferred else 'reference connection scenario'))
++            pipe=replace(pipe,hydraulic_joint=joint)
++            hw=replace(wg.WU_HWDP,hydraulic_joint=HydraulicJoint(7.25*wg.INCH,3.25*wg.INCH,
++                self.hwdp_restriction_length,31*.3048,self.transitions,
++                'Workstrings 91005000020000, 1 Aug 2025; 48-in effective length assumed'))
++        else:
++            hw=wg.WU_HWDP
++        lower=wg.WU_L_HWDP+wg.WU_L_COLLAR+wg.WU_L_BIT
++        if depth<=lower:
++            raise ValueError('reference programme depth must exceed the fixed lower assembly length')
++        pulser=wg.PipeType('reference MWD pulser',(wg.Layer(3.38*wg.INCH/2,7*wg.INCH/2,wg.K_STEEL),),
++                           source='xBolt G2-L Rev 7, p2')
++        collar=wg.PipeType('reference MWD collar',(wg.Layer(3.25*wg.INCH/2,6.75*wg.INCH/2,wg.K_STEEL),),
++                           source='xBolt G2-L Rev 7, p2')
++        tool=ReferenceToolLoss((1000/PPG)*500**2/30000*PSI,500*GPM,1000.,'total_internal',2,
++            'xBolt G2-L Rev 7 p2, 6.75-in mud-pulse allowance; not verified field hardware',
++            (0.,750*GPM),165.) if self.tools else None
++        string=(wg.StringSegment(depth-lower,pipe),wg.StringSegment(wg.WU_L_HWDP,hw),
++                wg.StringSegment(132.075968,wg.WU_COLLAR),wg.StringSegment(1.780032,pulser,tool_loss=tool),
++                wg.StringSegment(9.144,collar),wg.StringSegment(wg.WU_L_BIT,wg.WU_COLLAR))
++        return wg.WellGeometry(string,self.hole or reference_hole(),survey)
++
++
++def _keys(value,allowed,key):
++    if not isinstance(value,dict):
++        raise ValueError(f'{key}: expected a table')
++    extra=set(value)-set(allowed)
++    if extra:
++        raise ValueError(f'{key}.{sorted(extra)[0]}: unknown key')
++
++
++def _record(cls,value,key):
++    _keys(value,{f.name for f in fields(cls)},key)
++    numeric={f.name for f in fields(cls)}-{'source','transition','basis','flow_range'}
++    for name,item in value.items():
++        if name in numeric and (isinstance(item,bool) or not isinstance(item,(int,float)) or not math.isfinite(item)):
++            raise ValueError(f'{key}.{name}: expected a finite number')
++        if name in ('source','transition','basis') and not isinstance(item,str):
++            raise ValueError(f'{key}.{name}: expected text')
++    try:
++        return cls(**value)
++    except (TypeError,ValueError) as error:
++        raise ValueError(f'{key}: {error}') from None
++
++
++def programme_from_dict(value):
++    """Parse the optional programme TOML table; unknown nested keys fail."""
++    allowed={f.name for f in fields(HydraulicProgramme)}
++    _keys(value,allowed,'programme')
++    values=dict(value)
++    if 'surface' in values:
++        s=values['surface']
++        _keys(s,{'case','coefficient','enabled','source'},'programme.surface')
++        if sum(k in s for k in ('case','coefficient','enabled'))!=1:
++            raise ValueError('programme.surface: choose exactly one of case, coefficient, enabled=false')
++        if 'enabled' in s:
++            if s['enabled'] is not False:
++                raise ValueError('programme.surface.enabled must be false')
++            values['surface']=None
++        elif 'case' in s:
++            values['surface']=SurfaceLoss.api_case(s['case'])
++        else:
++            values['surface']=SurfaceLoss.coefficient(s['coefficient'],s.get('source','site-supplied surface coefficient'))
++    for name in ('joints','tools'):
++        if name in values and type(values[name]) is not bool:
++            raise ValueError(f'programme.{name}: expected a boolean')
++    if 'segments' in values:
++        if 'reference' in values:
++            raise ValueError('programme: reference and segments are mutually exclusive')
++        if not isinstance(values['segments'],list) or not values['segments']:
++            raise ValueError('programme.segments: expected a non-empty array of tables')
++        segments=[]
++        for i,s in enumerate(values['segments']):
++            key=f'programme.segments[{i}]'
++            _keys(s,{'length','name','bore_diameter','outer_diameter','conductivity','source','joint_fraction',
++                     'hydraulic_joint','local_loss','tool_loss'},key)
++            try:
++                for name in ('length','bore_diameter','outer_diameter','conductivity','joint_fraction'):
++                    if name in s and (isinstance(s[name],bool) or not isinstance(s[name],(float,int)) or not math.isfinite(s[name])):
++                        raise ValueError(f'{name} must be a finite number')
++                for name in ('name','source'):
++                    if name in s and not isinstance(s[name],str):
++                        raise ValueError(f'{name} must be text')
++                pipe=wg.PipeType(s.get('name',f'segment {i}'),
++                    (wg.Layer(s['bore_diameter']/2,s['outer_diameter']/2,s.get('conductivity',wg.K_STEEL)),),
++                    s.get('joint_fraction',0.),s.get('source','site-supplied geometry'),
++                    _record(HydraulicJoint,s['hydraulic_joint'],key+'.hydraulic_joint') if 'hydraulic_joint' in s else None)
++                if not 0 < pipe.r_bore < pipe.r_out or pipe.layers[0].k<=0:
++                    raise ValueError('require 0 < bore < OD and positive conductivity')
++                segments.append(wg.StringSegment(s['length'],pipe,
++                    _record(LocalLoss,s['local_loss'],key+'.local_loss') if 'local_loss' in s else None,
++                    _record(ReferenceToolLoss,s['tool_loss'],key+'.tool_loss') if 'tool_loss' in s else None))
++            except (KeyError,TypeError,ValueError) as error:
++                raise ValueError(f'{key}: {error}') from None
++        values.update(reference=None,segments=tuple(segments))
++    if 'hole' in values:
++        if not isinstance(values['hole'],list):
++            raise ValueError('programme.hole: expected an array of tables')
++        holes=[]
++        for i,h in enumerate(values['hole']):
++            _keys(h,{'md_top','md_bottom','r_wall','layers'},f'programme.hole[{i}]')
++            for name in ('md_top','md_bottom','r_wall'):
++                if name not in h or isinstance(h[name],bool) or not isinstance(h[name],(float,int)) or not math.isfinite(h[name]):
++                    raise ValueError(f'programme.hole[{i}].{name}: expected a finite number')
++            if not 0<=h['md_top']<h['md_bottom'] or h['r_wall']<=0:
++                raise ValueError(f'programme.hole[{i}]: require increasing depths and positive radius')
++            for row in h.get('layers',[]):
++                if len(row)!=3 or any(isinstance(x,bool) or not isinstance(x,(float,int)) or not math.isfinite(x) for x in row) or not 0<row[0]<row[1] or row[2]<=0:
++                    raise ValueError(f'programme.hole[{i}].layers: require [positive inner radius, larger outer radius, positive conductivity]')
++            layers=tuple(wg.Layer(*row) for row in h.get('layers',[]))
++            holes.append(wg.HoleInterval(h['md_top'],h['md_bottom'],h['r_wall'],layers))
++        values['hole']=tuple(holes)
++    if 'surface' not in values and not values.get('segments') and values.get('hydraulics_model','v1.6.0')=='v1.6.0':
++        values['surface']=SurfaceLoss.api_case(5)
++    if values.get('hydraulics_model')=='v1.5.0':
++        values.setdefault('joints',False)
++        values.setdefault('tools',False)
++    return HydraulicProgramme(**values)
+diff --git a/src/borethm/site_evaluation.py b/src/borethm/site_evaluation.py
+index f02c402..dd52b51 100644
+--- a/src/borethm/site_evaluation.py
++++ b/src/borethm/site_evaluation.py
+@@ -23 +23,2 @@ import sys
+-from dataclasses import dataclass, field, replace
++from dataclasses import dataclass, field, replace, asdict
++from borethm.programme import HydraulicProgramme
+@@ -179,0 +181,4 @@ class SiteProfile:
++    programme optionally supplies a HydraulicProgramme. None selects the
++    documented reference programme during circulation. A custom string
++    keeps its supplied pipes and does not receive reference tool curves.
++
+@@ -219,0 +225 @@ class SiteProfile:
++    programme: HydraulicProgramme | None = None
+@@ -315,0 +322,2 @@ def validate_site(site):
++    if site.programme is not None and not isinstance(site.programme,HydraulicProgramme):
++        raise ValueError('programme must be HydraulicProgramme or None')
+@@ -724 +732 @@ FILM_MULT_FORGE = 0.75   # fitted on FORGE 16B (validate_forge16b.py); a sensiti
+-def site_well(z, pipe):
++def site_well(z, pipe, programme=None):
+@@ -726 +734 @@ def site_well(z, pipe):
+-    return wg.wu2025_well(z, pipe, shoes=shoes)
++    return wg.wu2025_well(z, pipe, shoes=shoes) if programme is None else programme.geometry(z,pipe,shoes=shoes)
+@@ -730 +738 @@ def circulate(site, z, geotherm, pipe, m_dot, exposure=None, film_mult=1.0,
+-              P_surface=m1.P_SURF, fluid=None, retry=True):
++              P_surface=m1.P_SURF, fluid=None, retry=True, programme=None):
+@@ -744 +752,3 @@ def circulate(site, z, geotherm, pipe, m_dot, exposure=None, film_mult=1.0,
+-    g = site_well(z, pipe)
++    from borethm.programme import HydraulicProgramme
++    programme=programme or site.programme or HydraulicProgramme.reference_programme()
++    g = site_well(z, pipe,programme)
+@@ -750 +760,2 @@ def circulate(site, z, geotherm, pipe, m_dot, exposure=None, film_mult=1.0,
+-                  fluid=fluid)
++                  fluid=fluid,hydraulics_model=programme.hydraulics_model,
++                  surface=programme.surface,transitions=programme.transitions)
+@@ -856,0 +868,2 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
++    if site.programme is not None and site.programme.segments:
++        pipes=(site.programme.segments[0].pipe,)
+@@ -905 +918,2 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
+-def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None):
++def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None, programme=None,
++             hydraulics_model=None, surface=None):
+@@ -937,0 +952,6 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
++
++    programme overrides the site's HydraulicProgramme. hydraulics_model
++    optionally selects v1.6.0 or exact v1.5.0 legacy hydraulics; surface
++    optionally overrides its SurfaceLoss. An explicit zero coefficient
++    disables an allowance. Unspecified settings use the effective
++    programme. The input SiteProfile is unchanged.
+@@ -938,0 +959,12 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
++    from borethm.programme import HydraulicProgramme
++    if programme is not None:
++        if not isinstance(programme,HydraulicProgramme):
++            raise TypeError('programme must be HydraulicProgramme or None')
++    effective=programme or site.programme
++    if effective is None:
++        effective=HydraulicProgramme.reference_programme(hydraulics_model or 'v1.6.0')
++    elif hydraulics_model is not None:
++        effective=replace(effective,hydraulics_model=hydraulics_model)
++    if surface is not None:
++        effective=replace(effective,surface=surface)
++    site=replace(site,programme=effective)
+@@ -1151 +1183,2 @@ def _evaluate_v12(site, thermal=True, budget=False, fluid=None, rop=None, light=
+-    dual = choose_circulation(site, z, geotherm, exposure, pipes=(wg.DUAL_WALL,), P_surface=P_wh,
++    fixed_string=site.programme is not None and bool(site.programme.segments)
++    dual = circ if fixed_string else choose_circulation(site, z, geotherm, exposure, pipes=(wg.DUAL_WALL,), P_surface=P_wh,
+@@ -1156,2 +1189,3 @@ def _evaluate_v12(site, thermal=True, budget=False, fluid=None, rop=None, light=
+-                                    spp=float(dual["run"]["hyd"]["spp"]))
+-    alt["dual-wall pipe (not manufactured)"] = (dual["run"]["T_bottom_delivered"],
++                                    spp=float(dual["run"]["hyd"]["spp"]),available=not fixed_string)
++    if not fixed_string:
++        alt["dual-wall pipe (not manufactured)"] = (dual["run"]["T_bottom_delivered"],
+@@ -1159 +1193 @@ def _evaluate_v12(site, thermal=True, budget=False, fluid=None, rop=None, light=
+-    vit = choose_circulation(site, z, geotherm, exposure, pipes=(wg.VACUUM_INSULATED,),
++    vit = circ if fixed_string else choose_circulation(site, z, geotherm, exposure, pipes=(wg.VACUUM_INSULATED,),
+@@ -1162,2 +1196,3 @@ def _evaluate_v12(site, thermal=True, budget=False, fluid=None, rop=None, light=
+-                                 bhct=float(vit["run"]["T_bottom_delivered"]))
+-    alt["vacuum-insulated pipe"] = (vit["run"]["T_bottom_delivered"], ecd_sg(vit["run"], z),
++                                 bhct=float(vit["run"]["T_bottom_delivered"]),available=not fixed_string)
++    if not fixed_string:
++        alt["vacuum-insulated pipe"] = (vit["run"]["T_bottom_delivered"], ecd_sg(vit["run"], z),
+@@ -2438 +2473,2 @@ def _evaluate_v13(site, thermal=True, budget=False, corrected=False):
+-    run_dual = circulate(site, z, geotherm, wg.DUAL_WALL, mass_flow(dual["m_dot"], fluid), exposure,
++    if dual.get('available',True):
++        run_dual = circulate(site, z, geotherm, wg.DUAL_WALL, mass_flow(dual["m_dot"], fluid), exposure,
+@@ -2440 +2476 @@ def _evaluate_v13(site, thermal=True, budget=False, corrected=False):
+-    sens["dual-wall pipe"] = site_cycle(site, out, run=run_dual, label="dual-wall pipe")
++        sens["dual-wall pipe"] = site_cycle(site, out, run=run_dual, label="dual-wall pipe")
+@@ -2804,0 +2841,6 @@ def result_dict(o, *, site_file=None):
++        if 'terms' in c['hyd']:
++            configuration=s.programme or HydraulicProgramme.reference_programme()
++            d['programme'].update(hydraulic_configuration=asdict(configuration),
++                hydraulic_terms_Pa=c['hyd']['terms'],surface_loss_Pa=c['hyd']['dp_surface'],
++                hydraulic_flags=c['hyd']['flags'],hydraulic_sources=c['hyd']['sources'],
++                energy_check=o.get('m1',{}).get('energy_check'))
+diff --git a/src/borethm/site_files.py b/src/borethm/site_files.py
+index 5db8b32..2e6b204 100644
+--- a/src/borethm/site_files.py
++++ b/src/borethm/site_files.py
+@@ -200 +200,7 @@ def load_site(path):
+-        if name in ('geotherm', 'geotherm_v11'):
++        if name=='programme':
++            from borethm.programme import programme_from_dict
++            try:
++                arguments[name]=programme_from_dict(item)
++            except (ValueError,TypeError,KeyError) as error:
++                raise _error(path,name,str(error)) from None
++        elif name in ('geotherm', 'geotherm_v11'):
+diff --git a/src/borethm/well_geometry.py b/src/borethm/well_geometry.py
+index 4164f29..39b6399 100644
+--- a/src/borethm/well_geometry.py
++++ b/src/borethm/well_geometry.py
+@@ -21 +21 @@ conductivity k is ln(r_out/r_in) / (2 pi k), and layers add in series.
+-from dataclasses import dataclass
++from dataclasses import dataclass, replace
+@@ -25,0 +26 @@ from borethm import geo_constants as C
++from borethm.hydraulic_losses import HydraulicJoint, LocalLoss, ReferenceToolLoss
+@@ -64,0 +66 @@ class PipeType:
++    hydraulic_joint: HydraulicJoint | None = None
+@@ -86 +88 @@ class PipeType:
+-        return PipeType(self.name, self.layers, fraction, self.source)
++        return replace(self, joint_fraction=fraction)
+@@ -152,0 +155,6 @@ class StringSegment:
++    local_loss: LocalLoss | None = None
++    tool_loss: ReferenceToolLoss | None = None
++
++    def __post_init__(self):
++        if not np.isfinite(self.length) or self.length <= 0:
++            raise ValueError('string segment length must be positive and finite')
+diff --git a/tests/reference_v150_pressure.py b/tests/reference_v150_pressure.py
+new file mode 100644
+index 0000000..434ed37
+--- /dev/null
++++ b/tests/reference_v150_pressure.py
+@@ -0,0 +1,78 @@
++"""Frozen pressure reference from f61a5d918285948c7254f1458c83992cdfb935cb.
++
++The calculation is copied unchanged from BoreTHM v1.5.0. Shared property
++and friction helpers are unchanged by v1.6.0. Licensed under Apache-2.0.
++"""
++import numpy as np
++from borethm.model1_coupled import (
++    _pieces, P_of_z, fluid_props, friction_factor, nozzle_dp,
++    BIT_TFA_DEFAULT, P_SURF, G_GRAV, PUMP_LIMIT, HOLE_CLEANING_V,
++)
++
++
++def frozen_hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
++               friction="blasius", bit=True, fluid=None, P_surface=P_SURF):
++    """Pressure losses along the string and annulus, bit nozzle loss,
++    standpipe pressure and annular velocity.
++
++    With a circulating_temperatures result, water properties use each piece's
++    bore or annulus temperature and the approximate absolute pressure
++    P_surface + 10,000 Pa/m times true vertical depth. The standpipe pressure
++    includes the buoyancy of the hot annulus against the cold bore. Without
++    one, properties are at T_avg and mid-depth pressure throughout.
++
++      SPP = dP_string + dP_bit + dP_annulus + integral (rho_ann - rho_bore) g dTVD
++
++    The first two arguments, m_dot [kg/s] and geometry [WellGeometry],
++    are required. result is a circulating_temperatures result; T_avg is
++    degrees C, tfa is m2 and P_surface is Pa absolute, default 100,000 Pa.
++    bit enables nozzle loss;
++    friction selects the friction law. fluid=None uses water; otherwise
++    use a constant property dictionary or an object providing props.
++    Return a dictionary with dp_string, dp_annulus, dp_bit, dp_buoyancy and
++    spp [Pa as pressure differences]. The per-piece dp_bore and dp_ann
++    entries are also pressure differences [Pa]. Other outputs include
++    annular velocities [m/s], hydraulic pump power [W], and flow diagnostics.
++    """
++    top, bot = _pieces(geometry)
++    mid = 0.5 * (top + bot)
++    g = geometry.at(mid)
++    dtvd = geometry.survey.tvd(bot) - geometry.survey.tvd(top)
++    if result is None:
++        P = P_of_z(geometry.survey.tvd(geometry.md_bit / 2), P_surface)
++        rho, _, mu, _ = (float(np.ravel(x)[0]) for x in
++                         fluid_props(np.array([T_avg]), np.array([P]), fluid))
++        rho_b = rho_a = np.full_like(mid, rho)
++        mu_b = mu_a = np.full_like(mid, mu)
++        rho_bit = rho
++    else:
++        P = P_of_z(g["tvd"], P_surface)
++        T_b = np.interp(mid, result["z"], result["Td"])
++        T_a = np.interp(mid, result["z"], result["Tu"])
++        rho_b, _, mu_b, _ = fluid_props(T_b, P, fluid)
++        rho_a, _, mu_a, _ = fluid_props(T_a, P, fluid)
++        rho_bit = float(rho_b[-1])
++
++    tau_y = getattr(fluid, "yield_point", 0.0)
++
++    def loss(rho, mu, area, Dh, annulus):
++        v = m_dot / (rho * area)
++        if tau_y > 0.0:     # a Bingham plastic (fluids.Mud)
++            from borethm import fluids
++            return fluids.bingham_gradient(rho, mu, tau_y, v, Dh, annulus)[0] * (bot - top), v
++        f = friction_factor(rho * v * Dh / mu, friction)
++        return f * ((bot - top) / Dh) * 0.5 * rho * v ** 2, v
++
++    dp_bore, _ = loss(rho_b, mu_b, g["A_bore"], g["Dh_bore"], False)
++    dp_ann, v_ann = loss(rho_a, mu_a, g["A_ann"], g["Dh_ann"], True)
++    dp_bit = nozzle_dp(m_dot, rho_bit, tfa) if bit else 0.0
++    dp_buoy = float(np.sum((rho_a - rho_b) * G_GRAV * dtvd))
++    spp = float(dp_bore.sum() + dp_ann.sum()) + dp_bit + dp_buoy
++    return dict(
++        pieces=[dict(md_top=a, md_bottom=b, dp_bore=x, dp_ann=y, v_ann=v)
++                for a, b, x, y, v in zip(top, bot, dp_bore, dp_ann, v_ann)],
++        dp_string=float(dp_bore.sum()), dp_annulus=float(dp_ann.sum()),
++        dp_bit=dp_bit, dp_buoyancy=dp_buoy, spp=spp,
++        over_pump_limit=spp > PUMP_LIMIT,
++        v_ann_min=float(v_ann.min()), cleans_hole=float(v_ann.min()) >= HOLE_CLEANING_V,
++        pump_power=spp * m_dot / float(np.mean(rho_b)))
+diff --git a/tests/test_benchmarks.py b/tests/test_benchmarks.py
+index 5e32790..ad98676 100644
+--- a/tests/test_benchmarks.py
++++ b/tests/test_benchmarks.py
+@@ -57,0 +58,3 @@ def test_all_profile_fields_and_geotherm_samples_match_their_sources(key):
++    # Dataset 1.0 predates the optional hydraulic programme. Its published
++    # input snapshot stays fixed; absence must mean no custom programme.
++    assert original.pop('programme') is None
+@@ -91 +94,4 @@ def test_exported_parameters_match_the_named_source_attributes(case):
+-            assert inputs[field] == plain({name: asdict(pipe) for name, pipe in source.items()})
++            current={name:asdict(pipe) for name,pipe in source.items()}
++            for record in current.values():
++                assert record.pop('hydraulic_joint') is None
++            assert inputs[field] == plain(current)
+diff --git a/tests/test_v160_hydraulics.py b/tests/test_v160_hydraulics.py
+new file mode 100644
+index 0000000..f6b9d2f
+--- /dev/null
++++ b/tests/test_v160_hydraulics.py
+@@ -0,0 +1,180 @@
++"""Independent formula, legacy and energy checks for hydraulic additions."""
++from dataclasses import replace
++import math
++
++import numpy as np
++import pytest
++
++from borethm import (HydraulicJoint, LocalLoss, ReferenceToolLoss, SurfaceLoss,
++                     HydraulicProgramme, PipeType, Layer, StringSegment,
++                     WellGeometry, open_hole, hydraulics, circulating_temperatures)
++from borethm import hydraulic_losses as hl, well_geometry as wg, model1_coupled as m1, fluids, pressure
++from borethm.programme import programme_from_dict
++from reference_v150_pressure import frozen_hydraulics
++
++
++WATER=dict(rho=1000.,mu=.02,cp=4000.,k=.6)
++
++
++class Bingham:
++    yield_point=5.
++
++    def props(self,t,p):
++        shape=np.broadcast(t,p).shape
++        return tuple(np.full(shape,WATER[k]) for k in ('rho','cp','mu','k'))
++
++
++@pytest.mark.parametrize('fluid',[None,WATER,fluids.Mud(1200.)])
++@pytest.mark.parametrize('profile',[False,True])
++def test_legacy_is_bit_exact_against_frozen_function(fluid,profile):
++    g=wg.WellGeometry([StringSegment(300,wg.CONVENTIONAL),StringSegment(600,wg.WU_HWDP),StringSegment(150,wg.WU_COLLAR)],
++                      [open_hole(0,200,.25),open_hole(200,1050,.22)])
++    z=np.linspace(0,1050,101)
++    result=dict(z=z,Td=25+.02*z,Tu=75+.01*z) if profile else None
++    expected=frozen_hydraulics(20,g,result=result,fluid=fluid)
++    actual=hydraulics(20,g,result=result,fluid=fluid,hydraulics_model='v1.5.0')
++    assert actual==expected
++
++
++@pytest.mark.parametrize('tau,fluid',[(0.,WATER),(5.,Bingham())])
++def test_joint_body_replacement_and_local_losses_against_hand_calculation(tau,fluid):
++    L=1000.
++    joint=HydraulicJoint(.12,.06,.6,10.)
++    pipe=PipeType('hand case',(Layer(.04,.05,45.),),hydraulic_joint=joint)
++    g=WellGeometry.single(L,pipe,r_hole=.10)
++    mass=.2
++    rho,mu=1000.,.02
++    def grad(area,diameter,annulus):
++        v=mass/rho/area
++        if annulus and tau:
++            return 48*mu*v/diameter**2+6*tau/diameter
++        if tau:
++            return 32*mu*v/diameter**2+16*tau/(3*diameter)
++        return 32*mu*v/diameter**2
++    result=hydraulics(mass,g,fluid=fluid,bit=False)
++    for annulus,key in ((False,'dp_string'),(True,'dp_annulus')):
++        ab=math.pi*((.2**2-.1**2) if annulus else .08**2)/4
++        aj=math.pi*((.2**2-.12**2) if annulus else .06**2)/4
++        db,dj=(.10,.08) if annulus else (.08,.06)
++        ratio=min(ab,aj)/max(ab,aj)
++        k=(1-ratio)**2+.5*(1-ratio)**.75
++        local=k*.5*rho*(mass/rho/min(ab,aj))**2
++        expected=L*grad(ab,db,annulus)+L/10*((grad(aj,dj,annulus)-grad(ab,db,annulus))*.6+local)
++        assert result[key]==pytest.approx(expected,rel=2e-13)
++
++
++@pytest.mark.parametrize('case,coefficient',[(1,1.),(2,.36),(3,.22),(4,.15),(5,.15)])
++@pytest.mark.parametrize('density',[998.,1350.])
++def test_API_surface_cases(case,coefficient,density):
++    flow=.025
++    expected=coefficient*(density/119.826)*(flow/6.30902e-5/100)**1.86*6894.757
++    assert SurfaceLoss.api_case(case).pressure(density,flow)==pytest.approx(expected,rel=1e-15)
++
++
++def test_tool_density_and_flow_squared_scaling():
++    tool=ReferenceToolLoss(2e5,.02,1000.)
++    assert tool.pressure(1200.,.04)==960000.
++    low=ReferenceToolLoss(100*hl.PSI,900*hl.GPM,1000.)
++    high=ReferenceToolLoss(100*hl.PSI,400*hl.GPM,1000.)
++    assert low.pressure(1000.,600*hl.GPM)<high.pressure(1000.,600*hl.GPM)
++
++
++@pytest.mark.parametrize('fluid',[WATER,Bingham()])
++def test_supplied_local_K_uses_its_declared_reference_area(fluid):
++    pipe=wg.uniform_wall(45.,.04,.05)
++    bare=WellGeometry.single(100,pipe,r_hole=.11)
++    local=LocalLoss(2.,3.,.003,.012,'declared test restrictions')
++    g=WellGeometry([StringSegment(100,pipe,local_loss=local)],bare.hole)
++    a=hydraulics(.2,bare,fluid=fluid,bit=False)
++    b=hydraulics(.2,g,fluid=fluid,bit=False)
++    assert b['dp_string']-a['dp_string']==pytest.approx(2*.5*1000*(.2/1000/.003)**2,abs=1e-9)
++    assert b['dp_annulus']-a['dp_annulus']==pytest.approx(3*.5*1000*(.2/1000/.012)**2,abs=1e-9)
++
++
++@pytest.mark.parametrize('length',[.8,2.,15.])
++def test_whole_tool_replaces_internal_passage_and_conserves_short_tool_integral(length):
++    pipe=wg.uniform_wall(45.,.04,.05)
++    tool=ReferenceToolLoss(1e6,.02,1000.,basis='total_internal')
++    g=WellGeometry([StringSegment(100-length,pipe),StringSegment(length,pipe,tool_loss=tool)], [open_hole(0,100,.22)])
++    result=hydraulics(20,g,fluid=WATER,bit=False)
++    assert result['terms']['bore']['tool']==pytest.approx(1e6,rel=2e-13)
++    reference=hydraulics(20,WellGeometry.single(100-length,pipe,r_hole=.11),fluid=WATER,bit=False)
++    assert result['terms']['bore']['body']==pytest.approx(reference['dp_string'],rel=2e-13)
++
++
++def test_internal_tool_span_suppresses_its_internal_transition():
++    a=wg.uniform_wall(45.,.04,.05)
++    b=wg.uniform_wall(45.,.03,.06)
++    g=WellGeometry([StringSegment(80,a),StringSegment(10,a,tool_loss=ReferenceToolLoss(1e6,.02,1000.,'total_internal',2)),StringSegment(10,b)], [open_hole(0,100,.22)])
++    result=hydraulics(20,g,fluid=WATER,bit=False)
++    assert result['terms']['bore']['geometric_local']==0
++    assert result['terms']['annulus']['geometric_local']>0
++
++
++def test_overlap_and_closed_joint_are_rejected():
++    tool=ReferenceToolLoss(1e5,.02,1000.,span_segments=2)
++    p=wg.CONVENTIONAL
++    g=WellGeometry([StringSegment(50,p,tool_loss=tool),StringSegment(50,p,tool_loss=replace(tool,span_segments=1))], [open_hole(0,100,.22)])
++    with pytest.raises(ValueError,match='non-overlapping'):
++        hydraulics(20,g,fluid=WATER)
++    closed=replace(p,hydraulic_joint=HydraulicJoint(.23,.10,.5,10))
++    with pytest.raises(ValueError,match='closes'):
++        hydraulics(20,WellGeometry.single(100,closed,r_hole=.11),fluid=WATER)
++
++
++def test_legacy_rejects_new_fields_and_surface():
++    g=WellGeometry.single(100,wg.CONVENTIONAL)
++    with pytest.raises(ValueError,match='rejects'):
++        hydraulics(20,g,fluid=WATER,surface=SurfaceLoss.api_case(5),hydraulics_model='v1.5.0')
++    joint=replace(wg.CONVENTIONAL,hydraulic_joint=HydraulicJoint(.17,.10,.5,10))
++    with pytest.raises(ValueError,match='rejects'):
++        circulating_temperatures(geometry=WellGeometry.single(100,joint),hydraulics_model='v1.5.0')
++
++
++def test_reference_lengths_dual_wall_and_zero_allowances():
++    p=HydraulicProgramme.reference_programme()
++    for pipe in (wg.DUAL_WALL,wg.VACUUM_INSULATED):
++        g=p.geometry(1500,pipe,shoes=(50,300,750))
++        assert g.string[0].pipe.hydraulic_joint.bore_diameter==2*pipe.r_bore
++        assert g.string[0].pipe.with_joints(.1).hydraulic_joint==g.string[0].pipe.hydraulic_joint
++        assert sum(s.length for s in g.string[2:-1])==143.
++        assert sum(s.length for s in g.string)==1500.
++    g=HydraulicProgramme.reference_programme(tools=False,joints=False,surface=None).geometry(1500,wg.CONVENTIONAL,shoes=(50,300,750))
++    assert all(s.tool_loss is None and s.pipe.hydraulic_joint is None for s in g.string)
++
++
++@pytest.mark.parametrize('fluid',[WATER,Bingham()])
++def test_energy_balance_with_joints_tool_and_surface_excluded_from_hole(fluid):
++    p=HydraulicProgramme.reference_programme()
++    g=p.geometry(1500,wg.DUAL_WALL,shoes=(50,300,750))
++    string=list(g.string)
++    string[-1]=replace(string[-1],local_loss=LocalLoss(1.,.5,source='test component'))
++    g=WellGeometry(string,g.hole,g.survey)
++    r=circulating_temperatures(m_dot=20,geometry=g,fluid=fluid,friction_heat=True,surface=p.surface)
++    assert r['success']
++    check=r['energy_check']
++    assert check['passed'] and abs(check['residual_W'])<1e-5
++    assert check['surface_W_in_hole']==check['density_column_W']==0
++    assert check['assigned_terms_W']['bore']['tool']>0
++    assert check['assigned_terms_W']['annulus']['tool']==0
++    assert check['assigned_terms_W']['annulus']['supplied_local']>0
++    h=hydraulics(20,g,result=r,fluid=fluid)
++    assert h['dp_surface']>0
++    assert sum(sum(v.values()) for v in h['terms'].values())+h['dp_bit']+h['dp_buoyancy']+h['dp_surface']==pytest.approx(h['spp'],rel=1e-15)
++    r['hyd']=h
++    depths=np.linspace(0,g.md_bit,51)
++    dp=[pressure.annulus_friction(r,x) for x in depths]
++    assert np.all(np.diff(dp)>=0)
++    assert dp[0]==0 and dp[-1]==h['dp_annulus']
++
++
++def test_strict_programme_and_custom_string_have_no_reference_tool():
++    p=programme_from_dict(dict(segments=[dict(length=100.,bore_diameter=.08,outer_diameter=.10)],surface=dict(enabled=False)))
++    g=p.geometry(100.,wg.DUAL_WALL)
++    assert g.string[0].pipe.r_bore==.04 and g.string[0].tool_loss is None and p.surface is None
++    with pytest.raises(ValueError,match='unknown key'):
++        programme_from_dict(dict(surface=dict(case=5,coefficient_typo=1)))
++    with pytest.raises(ValueError,match='choose exactly one'):
++        programme_from_dict(dict(surface=dict(case=5,coefficient=.15)))
++    with pytest.raises(ValueError,match='unknown key'):
++        programme_from_dict(dict(segments=[dict(length=100.,bore_diameter=.08,outer_diameter=.10,tool_loss=dict(dp_ref=1.,flow_ref=.01,density_ref=1000.,typo=1))]))
+diff --git a/tests/test_v160_programme.py b/tests/test_v160_programme.py
+new file mode 100644
+index 0000000..ad8d4c8
+--- /dev/null
++++ b/tests/test_v160_programme.py
+@@ -0,0 +1,84 @@
++"""Site-file configuration and evaluator precedence, without field solves."""
++from dataclasses import replace
++
++import pytest
++from borethm import HydraulicProgramme, SurfaceLoss, load_site
++from borethm import site_evaluation as se, well_geometry as wg
++from borethm.programme import programme_from_dict
++from test_site_files import MINIMAL, SEGMENTS
++
++
++def test_site_file_loads_custom_components_and_new_fields(tmp_path):
++    text=MINIMAL+SEGMENTS+'''
++[programme]
++transitions = "gradual"
++[programme.surface]
++coefficient = 0.22
++[[programme.segments]]
++length = 10700.0
++bore_diameter = 0.08
++outer_diameter = 0.10
++name = "client pipe"
++[programme.segments.hydraulic_joint]
++outer_diameter = 0.14
++bore_diameter = 0.06
++restriction_length = 0.6
++spacing = 9.5
++[[programme.hole]]
++md_top = 0.0
++md_bottom = 10700.0
++r_wall = 0.11
++'''
++    path=tmp_path/'site.toml'
++    path.write_text(text)
++    site=load_site(path)
++    p=site.programme
++    assert p.reference is None and p.surface.value==.22
++    assert p.segments[0].pipe.hydraulic_joint.bore_diameter==.06
++    assert p.segments[0].tool_loss is None
++    assert p.geometry(10700.,p.segments[0].pipe).md_bit==10700.
++
++
++def test_override_precedence_and_original_profile_preserved(monkeypatch):
++    a=HydraulicProgramme.reference_programme(surface=SurfaceLoss.api_case(1))
++    b=HydraulicProgramme.reference_programme(surface=SurfaceLoss.api_case(2))
++    site=replace(se.SOULTZ,programme=a)
++    seen=[]
++    monkeypatch.setattr(se,'_evaluate_v13',lambda s,*args,**kwargs: seen.append(s.programme) or {})
++    se.evaluate(site)
++    se.evaluate(site,programme=b)
++    se.evaluate(site,programme=b,surface=SurfaceLoss.coefficient(0.))
++    assert seen[0]==a and seen[1]==b and seen[2].surface.value==0
++    assert site.programme==a
++    se.evaluate(se.SOULTZ,hydraulics_model='v1.5.0')
++    assert seen[-1].hydraulics_model=='v1.5.0' and seen[-1].surface is None
++    assert not seen[-1].joints and not seen[-1].tools
++    with pytest.raises(ValueError,match='legacy programme rejects'):
++        HydraulicProgramme.reference_programme('v1.5.0',joints=True)
++    assert se.SOULTZ.programme is None
++
++
++@pytest.mark.parametrize('value',[
++    dict(segments=[dict(length=100.,bore_diameter=.08,outer_diameter=.10,conductivity=float('nan'))]),
++    dict(segments=[dict(length=True,bore_diameter=.08,outer_diameter=.10)]),
++    dict(hole=[dict(md_top=0.,md_bottom=100.,r_wall=float('inf'))]),
++    dict(hole=[dict(md_top=0.,md_bottom=100.,r_wall=.10,layers=[[.10,.12,-1.]])]),
++    dict(joints='false'),
++])
++def test_bad_numeric_or_boolean_programme_inputs_fail_before_solving(value):
++    with pytest.raises(ValueError):
++        programme_from_dict(value)
++
++
++def test_unknown_nested_key_names_the_file_and_key(tmp_path):
++    path=tmp_path/'site.toml'
++    path.write_text(MINIMAL+SEGMENTS+'\n[programme.surface]\ncase = 5\ntypo = 1\n')
++    with pytest.raises(ValueError,match=r'site.toml.*programme.surface.typo'):
++        load_site(path)
++
++
++@pytest.mark.parametrize('depth',[500.,1500.,5000.])
++def test_reference_hole_ends_cleanly_inside_or_below_casings(depth):
++    g=HydraulicProgramme.reference_programme().geometry(depth,wg.CONVENTIONAL)
++    assert all(0<=h.md_top<h.md_bottom<=depth for h in g.hole)
++    assert g.hole[-1].md_bottom==depth
+diff --git a/validation/hydraulics-v160/v1/check_energy.py b/validation/hydraulics-v160/v1/check_energy.py
+new file mode 100644
+index 0000000..c0d9309
+--- /dev/null
++++ b/validation/hydraulics-v160/v1/check_energy.py
+@@ -0,0 +1,33 @@
++"""Save representative variable-property energy checks on a synthetic well."""
++import argparse
++from dataclasses import replace
++import json
++from pathlib import Path
++
++from borethm import HydraulicProgramme, LocalLoss, WellGeometry, circulating_temperatures, hydraulics
++from borethm import fluids, well_geometry as wg
++
++
++def run(out):
++    programme=HydraulicProgramme.reference_programme()
++    geometry=programme.geometry(1500.,wg.DUAL_WALL,shoes=(50.,300.,750.))
++    string=list(geometry.string)
++    string[-1]=replace(string[-1],local_loss=LocalLoss(1.,.5,source='synthetic bit-body restriction'))
++    geometry=WellGeometry(string,geometry.hole,geometry.survey)
++    records=[]
++    for name,fluid in [('water',None),('reference Bingham mud at 1200 kg/m3',fluids.Mud(1200.))]:
++        r=circulating_temperatures(m_dot=20.,geometry=geometry,fluid=fluid,friction_heat=True,surface=programme.surface)
++        assert r['success'] and r['energy_check']['passed'],name
++        h=hydraulics(20.,geometry,result=r,fluid=fluid)
++        records.append(dict(fluid=name,m_dot_kg_s=20.,depth_m=1500.,inlet_C=40.,face_W=28000.,
++            bore_bottom_C=float(r['Td'][-1]),surface_return_C=float(r['Tu'][0]),spp_Pa=h['spp'],
++            energy_check=r['energy_check'],hydraulic_flags=h['flags']))
++    out.parent.mkdir(parents=True,exist_ok=True)
++    out.write_text(json.dumps(dict(synthetic_well=True,hydraulics_model='v1.6.0',cases=records),indent=2)+'\n',encoding='utf-8',newline='\n')
++    print(json.dumps({r['fluid']:r['energy_check']['residual_W'] for r in records},indent=2))
++
++
++if __name__=='__main__':
++    parser=argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--output',type=Path,default=Path('validation/hydraulics-v160/v1/evidence/energy-checks.json'))
++    run(parser.parse_args().output)
+diff --git a/validation/hydraulics-v160/v1/replay_s2b.py b/validation/hydraulics-v160/v1/replay_s2b.py
+new file mode 100644
+index 0000000..1b368c3
+--- /dev/null
++++ b/validation/hydraulics-v160/v1/replay_s2b.py
+@@ -0,0 +1,240 @@
++"""Replay S2b frozen-point formulas and reconcile production differences.
++
++No circulation solves and no held-out 56-32/58-32 target access. The frozen
++S2b profiles and archived rheology convention are preserved. Uses package
++formula kernels at the original component, transition and joint points.
++"""
++import argparse
++import csv
++import gzip
++import hashlib
++import json
++import math
++import time
++from collections import defaultdict
++from dataclasses import replace
++from pathlib import Path
++
++import numpy as np
++from borethm import hydraulic_losses as hl, model1_coupled as m1, well_geometry as wg
++from borethm.studies import forge16b_hydraulics as old, forge16_energy as energy
++from borethm.studies import validate_forge16b_wholewell as whole
++
++FT,INCH,PSI,GPM=old.FT,old.INCH,old.PSI,old.GPM
++PROTOCOL_COMMIT='8bbfe2c44658dade8972a647970e3308047b6380'
++
++
++def read(path):
++    opener=gzip.open if path.suffix=='.gz' else open
++    with opener(path,'rt',encoding='utf-8',newline='') as f:
++        return list(csv.DictReader(f))
++
++
++def write(path,rows):
++    names=list(dict.fromkeys(k for r in rows for k in r))
++    with path.open('w',encoding='utf-8',newline='') as f:
++        w=csv.DictWriter(f,names,lineterminator='\n')
++        w.writeheader()
++        w.writerows(rows)
++
++
++class GuardedFluid:
++    def __init__(self,fluid):
++        self.original=fluid
++        self.yield_point=getattr(fluid,'yield_point',0.)
++
++    def props(self,t,p):
++        return m1.fluid_props(t,np.maximum(p,5e6),self.original)
++
++
++def props(g,result,fluid,depth,ann=False):
++    t=float(np.interp(depth,result['z'],result['Tu' if ann else 'Td']))
++    p=float(m1.P_of_z(g.survey.tvd(depth)))
++    rho,cp,mu,k=(float(v[0]) for v in m1.fluid_props(np.array([t]),np.array([p]),fluid))
++    return rho,mu
++
++
++def run(data,out,limit=None):
++    start=time.perf_counter()
++    out.mkdir(parents=True,exist_ok=True)
++    files=['plan.json','replayed-profiles.npz','pressure-samples.csv','bha-components.csv','bha-transitions.csv','tool-joints.csv.gz','scenario-budgets.csv']
++    source_hashes={n:hashlib.sha256((data/n).read_bytes()).hexdigest() for n in files}
++    plan=json.loads((data/'plan.json').read_text())
++    profiles=np.load(data/'replayed-profiles.npz')
++    samples={r['id']:r for r in plan['samples']}
++    tables={}
++    for name in ('pressure-samples','bha-components','bha-transitions','tool-joints','scenario-budgets'):
++        grouped=defaultdict(list)
++        for r in read(data/(name+('.csv.gz' if name=='tool-joints' else '.csv'))):
++            grouped[r['case_id']].append(r)
++        tables[name]=grouped
++    checks,guard_rows,production_rows=[],[],[]
++    maxima=defaultdict(float)
++    cases=plan['cases'] if limit is None else plan['cases'][:limit]
++    for case in cases:
++        cid=case['case_id']
++        s=samples[case['sample']]
++        g=whole.geometry(s,plan['components'],plan['k_idp'])
++        fluid=energy.fluid_for(s,case['rheology_case'])[0]
++        rho_in=float(m1.fluid_props(np.array([s['T_in_C']]),np.array([m1.P_SURF]),fluid)[0][0])
++        mass=s['flow_gpm']*GPM*rho_in
++        result={k:profiles[cid+'_'+k] for k in ('z','Td','Tu')}
++        legacy=m1.hydraulics(mass,g,result=result,fluid=fluid,tfa=s['tfa_m2'],hydraulics_model='v1.5.0')
++        guarded=m1.hydraulics(mass,g,result=result,fluid=GuardedFluid(fluid),tfa=s['tfa_m2'],hydraulics_model='v1.5.0')
++        oldrow=tables['pressure-samples'][cid][0]
++        error=legacy['spp']/PSI-float(oldrow['model_spp_psi'])
++        assert abs(error)<1e-8,(cid,'legacy',error)
++        maxima['legacy_psi']=max(maxima['legacy_psi'],abs(error))
++        guard_rows.append(dict(case_id=cid,run=s['run'],rheology_case=case['rheology_case'],
++            legacy_psi=legacy['spp']/PSI,guarded_legacy_psi=guarded['spp']/PSI,
++            guard_only_delta_psi=(guarded['spp']-legacy['spp'])/PSI,
++            guard_only_delta_percent=100*(guarded['spp']/legacy['spp']-1),
++            string_delta_psi=(guarded['dp_string']-legacy['dp_string'])/PSI,
++            annulus_delta_psi=(guarded['dp_annulus']-legacy['dp_annulus'])/PSI,
++            bit_delta_psi=(guarded['dp_bit']-legacy['dp_bit'])/PSI,
++            buoyancy_delta_psi=(guarded['dp_buoyancy']-legacy['dp_buoyancy'])/PSI))
++        component_values=[]
++        for r in tables['bha-components'][cid]:
++            depth=(float(r['md_top_ft'])+float(r['md_bottom_ft']))*FT/2
++            hole=2*float(g.at(np.array([depth]))['r_wall'][0])
++            inside=float(r['id_in'])*INCH
++            outside=float(r['annulus_od_used_in'])*INCH
++            values=[]
++            for ann in (False,True):
++                rho,mu=props(g,result,fluid,depth,ann)
++                area=math.pi*(hole**2-outside**2)/4 if ann else math.pi*inside**2/4
++                dh=hole-outside if ann else inside
++                value=float(hl.passage_gradient(rho,mu,fluid.yield_point,mass,area,dh,ann)[0])*float(r['length_ft'])*FT/PSI
++                expected=float(r['annulus_friction_psi' if ann else 'bore_friction_psi'])
++                maxima['component_psi']=max(maxima['component_psi'],abs(value-expected))
++                values.append(value)
++            component_values.append(values)
++        serial_bore=sum(v[0] for v in component_values)
++        serial_ann=sum(v[1] for v in component_values)
++        delta_bore=serial_bore-float(oldrow['bha_lower_aggregate_psi'])
++        lower_ann=sum(p['dp_ann']/PSI for p in legacy['pieces'] if p['md_top']>=g._seg_ends[1]-1e-6)
++        delta_ann=serial_ann-lower_ann
++        lower=[dict(c) for c in reversed(plan['components'][str(s['eow_bha'])]) if c['kind']!='HWDP']
++        for c in lower:
++            c['annulus_od_used_in']=2*float(g.at(np.array([g.md_bit]))['r_out'][0])/INCH if 'bit' in c['component'].lower() else c['od_in']
++        sequence=[dict(component='ordinary pipe',length_ft=g.string[0].length/FT,id_in=4.670,od_in=5.5),
++                  dict(next(c for c in plan['components'][str(s['eow_bha'])] if c['kind']=='HWDP')),*lower]
++        transition_values=[]
++        depth=0.
++        for upper,down in zip(sequence,sequence[1:]):
++            depth+=upper['length_ft']*FT
++            hole=2*float(g.at(np.array([depth]))['r_wall'][0])
++            for ann in (False,True):
++                rho,mu=props(g,result,fluid,depth,ann)
++                if ann:
++                    od1=down.get('annulus_od_used_in',down['od_in'])*INCH
++                    od2=upper.get('annulus_od_used_in',upper['od_in'])*INCH
++                    au,ad=math.pi*(hole**2-od1**2)/4,math.pi*(hole**2-od2**2)/4
++                    dh=hole-max(od1,od2)
++                else:
++                    au,ad=(math.pi*(c['id_in']*INCH)**2/4 for c in (upper,down))
++                    dh=min(upper['id_in'],down['id_in'])*INCH
++                value=float(hl.local_change(au,ad,rho,mass,mu,dh)[0])/PSI
++                expected=next(r for r in tables['bha-transitions'][cid] if r['upper']==upper['component'] and r['lower']==down['component']
++                    and r['conduit']==('annulus' if ann else 'bore') and abs(float(r['md_ft'])-depth/FT)<1e-5)
++                maxima['transition_psi']=max(maxima['transition_psi'],abs(value-float(expected['loss_psi'])))
++                transition_values.append(value)
++        joint_values=defaultdict(lambda:dict(internal=0.,annulus=0.,local=0.))
++        for r in tables['tool-joints'][cid]:
++            depth=float(r['md_ft'])*FT
++            ann=r['conduit']=='annulus'
++            rho,mu=props(g,result,fluid,depth,ann)
++            hole=2*float(g.at(np.array([depth]))['r_wall'][0])
++            bid=float(r['body_ID_in'])*INCH
++            jid=float(r['joint_ID_in'])*INCH
++            jod=float(r['joint_OD_in'])*INCH
++            if ann:
++                ab,aj=math.pi*(hole**2-(5.5*INCH)**2)/4,math.pi*(hole**2-jod**2)/4
++                db,dj=hole-5.5*INCH,hole-jod
++            else:
++                ab,aj=math.pi*bid**2/4,math.pi*jid**2/4
++                db,dj=bid,jid
++            replacement,local=hl.joint_increment(rho,mu,fluid.yield_point,mass,ab,db,aj,dj,INCH,ann)
++            weight=float(r['joint_count_weight'])
++            replacement=float(replacement)*weight/PSI
++            local=float(local)*weight/PSI
++            maxima['joint_per_inch_psi']=max(maxima['joint_per_inch_psi'],abs(replacement-float(r['increment_psi_per_inch'])))
++            maxima['joint_local_psi']=max(maxima['joint_local_psi'],abs(local-float(r['sudden_local_psi'])))
++            joint_values[r['geometry']]['annulus' if ann else 'internal']+=replacement
++            joint_values[r['geometry']]['local']+=local
++        formula={}
++        for r in tables['scenario-budgets'][cid]:
++            name=r['joint_geometry']
++            length=float(r['joint_length_in'])
++            sudden=r['local_shape']=='sudden'
++            surface_case=int(r['surface_case'])
++            jj=joint_values[name]
++            surface=0. if surface_case==0 else Surface(surface_case,s['density_ppg']*hl.PPG,s['flow_gpm']*GPM)/PSI
++            frozen=dict(body=legacy['dp_string']/PSI+legacy['dp_annulus']/PSI+delta_bore+delta_ann,
++                        joint_replacement=length*(jj['internal']+jj['annulus']),
++                        joint_local=jj['local'] if sudden else 0.,geometric_local=sum(transition_values) if sudden else 0.,
++                        bit=legacy['dp_bit']/PSI,buoyancy=legacy['dp_buoyancy']/PSI,surface=surface)
++            total=sum(frozen.values())
++            error=total-float(r['accounted_psi'])
++            maxima['scenario_total_psi']=max(maxima['scenario_total_psi'],abs(error))
++            formula[(name,length,sudden,surface_case)]=(frozen,total)
++            checks.append(dict(case_id=cid,joint_geometry=name,joint_length_in=length,local_shape=r['local_shape'],surface_case=surface_case,
++                               archived_psi=float(r['accounted_psi']),package_formula_replay_psi=total,difference_psi=error))
++        for name,(od,jid) in old.JOINTS.items():
++            for length in old.JOINT_LENGTHS_IN:
++                for sudden in (False,True):
++                    shape='abrupt' if sudden else 'gradual'
++                    strings=[]
++                    for i,c in enumerate(sequence):
++                        pipe=whole.steel(c['component'],c.get('annulus_od_used_in',c['od_in']),c['id_in'])
++                        if i<2:
++                            pitch=old.JOINT_PITCH_FT*FT if i==0 else c['length_ft']*FT/30
++                            joint=hl.HydraulicJoint(od*INCH,(jid if i==0 else c['id_in'])*INCH,length*INCH,pitch,shape,'frozen S2b scenario')
++                            pipe=replace(pipe,hydraulic_joint=joint)
++                        strings.append(wg.StringSegment(c['length_ft']*FT,pipe))
++                    serial=wg.WellGeometry(strings,g.hole,g.survey)
++                    raw=hl.hydraulics(mass,serial,result=result,fluid=fluid,tfa=s['tfa_m2'],transitions=shape,guard=False)
++                    production=hl.hydraulics(mass,serial,result=result,fluid=fluid,tfa=s['tfa_m2'],transitions=shape,guard=True)
++                    for surface_case in range(6):
++                        frozen,total=formula[(name,float(length),sudden,surface_case)]
++                        surface=0. if surface_case==0 else Surface(surface_case,rho_in,mass/rho_in)/PSI
++                        pieces={key:sum(side[key] for side in raw['terms'].values())/PSI for key in ('body','joint_replacement','joint_local','geometric_local')}
++                        deltas={key+'_delta_psi':pieces[key]-frozen[key] for key in pieces}
++                        deltas.update(bit_sampling_delta_psi=raw['dp_bit']/PSI-frozen['bit'],
++                                      buoyancy_integration_delta_psi=raw['dp_buoyancy']/PSI-frozen['buoyancy'],
++                                      surface_density_delta_psi=surface-frozen['surface'],
++                                      production_guard_delta_psi=(production['spp']-raw['spp'])/PSI)
++                        prediction=production['spp']/PSI+surface
++                        reconciliation=prediction-total-sum(deltas.values())
++                        assert abs(reconciliation)<1e-7,(cid,'reconciliation',reconciliation)
++                        production_rows.append(dict(case_id=cid,run=s['run'],rheology_case=case['rheology_case'],joint_geometry=name,
++                            joint_length_in=length,local_shape=shape,surface_case=surface_case,frozen_point_psi=total,
++                            production_psi=prediction,total_delta_psi=prediction-total,**deltas,reconciliation_error_psi=reconciliation))
++        print(cid,'formula replay and production accounting verified',flush=True)
++    assert all(v<1e-8 for v in maxima.values()),dict(maxima)
++    for filename,rows in (('formula-replay.csv',checks),('legacy-guard.csv',guard_rows),('production-reconciliation.csv',production_rows)):
++        write(out/filename,rows)
++    assert all(hashlib.sha256((data/n).read_bytes()).hexdigest()==h for n,h in source_hashes.items())
++    guard=[r['guard_only_delta_psi'] for r in guard_rows]
++    percent=[r['guard_only_delta_percent'] for r in guard_rows]
++    report=dict(protocol_commit=PROTOCOL_COMMIT,cases=len(cases),scenario_replays=len(checks),production_cases=len(production_rows),
++        formula_max_errors=dict(maxima),legacy_guard_delta_psi_min=min(guard),legacy_guard_delta_psi_max=max(guard),
++        legacy_guard_delta_percent_min=min(percent),legacy_guard_delta_percent_max=max(percent),
++        duration_s=time.perf_counter()-start,source_hashes=source_hashes,preserved_archives=True,
++        field_rheology_convention='archived 26.7 C retained for this formula replay',held_out_targets_read=False,
++        production_difference_notes='integrated properties, conservative geometry/source blend, added casing transitions, bottom nozzle state, buoyancy integration and inlet surface density; guard isolated separately')
++    (out/'replay-summary.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')
++    print(json.dumps(report,indent=2))
++
++
++def Surface(case,rho,flow):
++    return hl.SurfaceLoss.api_case(case).pressure(rho,flow)
++
++
++if __name__=='__main__':
++    parser=argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--data',type=Path,default=Path('validation/forge16b/s2b'))
++    parser.add_argument('--output',type=Path,required=True)
++    parser.add_argument('--limit',type=int)
++    args=parser.parse_args()
++    run(args.data,args.output,args.limit)

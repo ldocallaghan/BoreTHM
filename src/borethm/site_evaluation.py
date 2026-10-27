@@ -20,7 +20,8 @@ rock strength: Valley & Evans (2007); see data/sites/stress_sources.md.
 """
 import os
 import sys
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, field, replace, asdict
+from borethm.programme import HydraulicProgramme
 import numpy as np
 from borethm import geo_constants as C
 from borethm import model1_coupled as m1
@@ -177,6 +178,10 @@ class SiteProfile:
     enables the site's stiffness in the coupled thermal-stress calculation.
     Construct a profile, then call validate_site.
 
+    programme optionally supplies a HydraulicProgramme. None selects the
+    documented reference programme during circulation. A custom string
+    keeps its supplied pipes and does not receive reference tool curves.
+
     The target() method returns the effective depth [m]; temperature()
     returns the effective geotherm callable. Passing v10=True selects the
     original profile for historical evaluation modes.
@@ -217,6 +222,7 @@ class SiteProfile:
     # the site's E_rock in the thermal stress, Model 3 on the site's
     # circulation, the rate of penetration and exposure iterated together
     coupled: bool = False
+    programme: HydraulicProgramme | None = None
 
     def __post_init__(self):
         if not self.strength_cases:
@@ -313,6 +319,8 @@ def validate_site(site):
     table's temperature and absolute-pressure limits.
     """
     errs, warns = [], []
+    if site.programme is not None and not isinstance(site.programme,HydraulicProgramme):
+        raise ValueError('programme must be HydraulicProgramme or None')
     for k, (lo, hi, unit) in INPUT_RANGES.items():
         v = site.target() if k == 'target_depth' else getattr(site, k)
         if not lo <= v <= hi:
@@ -721,13 +729,13 @@ Q_FACE_SITE = 30000.0
 FILM_MULT_FORGE = 0.75   # fitted on FORGE 16B (validate_forge16b.py); a sensitivity
 
 
-def site_well(z, pipe):
+def site_well(z, pipe, programme=None):
     shoes = tuple(min(s, f * z) for s, f in zip(wg.WU_SHOES, (0.05, 0.25, 0.5)))
-    return wg.wu2025_well(z, pipe, shoes=shoes)
+    return wg.wu2025_well(z, pipe, shoes=shoes) if programme is None else programme.geometry(z,pipe,shoes=shoes)
 
 
 def circulate(site, z, geotherm, pipe, m_dot, exposure=None, film_mult=1.0,
-              P_surface=m1.P_SURF, fluid=None, retry=True):
+              P_surface=m1.P_SURF, fluid=None, retry=True, programme=None):
     """Model 1 on the site well, with friction heating. Solved first with the
     rock exposed for a year (the earlier setting, kept as `old`), then, if an
     exposure function is given, with that, seeded from the first.
@@ -741,13 +749,16 @@ def circulate(site, z, geotherm, pipe, m_dot, exposure=None, film_mult=1.0,
     (model1_coupled.solve_seeded); a search over flows passes False, since a
     flow too low to keep the fluid within the water table fails at every
     seed, and the retries are most of the cost."""
-    g = site_well(z, pipe)
+    from borethm.programme import HydraulicProgramme
+    programme=programme or site.programme or HydraulicProgramme.reference_programme()
+    g = site_well(z, pipe,programme)
 
     def solve(P_s):
         kw = dict(m_dot=m_dot, T_inj=site.T_inj, k_rock=site.k_rock, geotherm=geotherm,
                   geometry=g, target_rock_T=float(geotherm(z)), Q_face=Q_FACE_SITE,
                   friction_heat=True, film_mult=film_mult, P_surface=P_s, verbose=False,
-                  fluid=fluid)
+                  fluid=fluid,hydraulics_model=programme.hydraulics_model,
+                  surface=programme.surface,transitions=programme.transitions)
         old = m1.solve(**kw, t_years=1.0)
         if exposure is None:
             r = old
@@ -854,6 +865,8 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
     retry=False: a flow whose solve fails is passed over (recorded in
     "failed"), and only the run chosen is solved again with retries if it
     failed; v1.3.2 retried every flow."""
+    if site.programme is not None and site.programme.segments:
+        pipes=(site.programme.segments[0].pipe,)
     tried = []
 
     def solved(r, pipe, md):
@@ -902,7 +915,8 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
                          "within the pump limit")
 
 
-def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None):
+def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None, programme=None,
+             hydraulics_model=None, surface=None):
     """Evaluate a SiteProfile through circulation, connections and trips.
 
     Site inputs use m, Pa, degrees C and SI thermal properties. Validate the
@@ -935,7 +949,25 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
     use surface fluid density [kg/m3 at 20 degrees C]; cycle SG values are
     equivalent static densities. Use result_dict for a serialisable record.
     This evaluation can require substantial computation.
+
+    programme overrides the site's HydraulicProgramme. hydraulics_model
+    optionally selects v1.6.0 or exact v1.5.0 legacy hydraulics; surface
+    optionally overrides its SurfaceLoss. An explicit zero coefficient
+    disables an allowance. Unspecified settings use the effective
+    programme. The input SiteProfile is unchanged.
     """
+    from borethm.programme import HydraulicProgramme
+    if programme is not None:
+        if not isinstance(programme,HydraulicProgramme):
+            raise TypeError('programme must be HydraulicProgramme or None')
+    effective=programme or site.programme
+    if effective is None:
+        effective=HydraulicProgramme.reference_programme(hydraulics_model or 'v1.6.0')
+    elif hydraulics_model is not None:
+        effective=replace(effective,hydraulics_model=hydraulics_model)
+    if surface is not None:
+        effective=replace(effective,surface=surface)
+    site=replace(site,programme=effective)
     input_warnings = validate_site(site)
     # coupled: on by default with the pressure budget; on with "v1.3" alone
     # shows what the coupling moves in the v1.3.2 table
@@ -1148,19 +1180,22 @@ def _evaluate_v12(site, thermal=True, budget=False, fluid=None, rop=None, light=
         f"film x{FILM_MULT_FORGE}": (film["T_bottom_delivered"], ecd_sg(film, z), film),
         "static fracture bound": (T_wall, 0.0, run),
     }
-    dual = choose_circulation(site, z, geotherm, exposure, pipes=(wg.DUAL_WALL,), P_surface=P_wh,
+    fixed_string=site.programme is not None and bool(site.programme.segments)
+    dual = circ if fixed_string else choose_circulation(site, z, geotherm, exposure, pipes=(wg.DUAL_WALL,), P_surface=P_wh,
                               fluid=fluid, retry=not budget)
     out["circ"]["dual_wall"] = dict(pipe=dual["pipe"].name, m_dot=dual["m_dot"],
                                     conflict=dual["conflict"],
                                     bhct=float(dual["run"]["T_bottom_delivered"]),
-                                    spp=float(dual["run"]["hyd"]["spp"]))
-    alt["dual-wall pipe (not manufactured)"] = (dual["run"]["T_bottom_delivered"],
+                                    spp=float(dual["run"]["hyd"]["spp"]),available=not fixed_string)
+    if not fixed_string:
+        alt["dual-wall pipe (not manufactured)"] = (dual["run"]["T_bottom_delivered"],
                                                 ecd_sg(dual["run"], z), dual["run"])
-    vit = choose_circulation(site, z, geotherm, exposure, pipes=(wg.VACUUM_INSULATED,),
+    vit = circ if fixed_string else choose_circulation(site, z, geotherm, exposure, pipes=(wg.VACUUM_INSULATED,),
                              P_surface=P_wh, fluid=fluid, retry=not budget)
     out["circ"]["vacuum"] = dict(m_dot=vit["m_dot"], conflict=vit["conflict"],
-                                 bhct=float(vit["run"]["T_bottom_delivered"]))
-    alt["vacuum-insulated pipe"] = (vit["run"]["T_bottom_delivered"], ecd_sg(vit["run"], z),
+                                 bhct=float(vit["run"]["T_bottom_delivered"]),available=not fixed_string)
+    if not fixed_string:
+        alt["vacuum-insulated pipe"] = (vit["run"]["T_bottom_delivered"], ecd_sg(vit["run"], z),
                                     vit["run"])
     out["circ_sensitivity"] = {}
     for k, (Tw, e, rr) in alt.items():
@@ -2435,9 +2470,10 @@ def _evaluate_v13(site, thermal=True, budget=False, corrected=False):
         sens[k] = site_cycle(site, o2, label=k)
         sens[k].update(fluid=f2, fluid_passes=p2, fluid_converged=conv2)
     dual = out["circ"]["dual_wall"]
-    run_dual = circulate(site, z, geotherm, wg.DUAL_WALL, mass_flow(dual["m_dot"], fluid), exposure,
+    if dual.get('available',True):
+        run_dual = circulate(site, z, geotherm, wg.DUAL_WALL, mass_flow(dual["m_dot"], fluid), exposure,
                          P_surface=P_wh, fluid=fluid)
-    sens["dual-wall pipe"] = site_cycle(site, out, run=run_dual, label="dual-wall pipe")
+        sens["dual-wall pipe"] = site_cycle(site, out, run=run_dual, label="dual-wall pipe")
     # the highest flow within the pump limit on the base pipe, and the flow
     # ceiling: the highest flow, from the one used upwards, at which the
     # verdict over the cycle holds
@@ -2802,6 +2838,12 @@ def result_dict(o, *, site_file=None):
             bit_C=c["bhct"], return_C=c.get("T_return"), backpressure_Pa=c.get("backpressure"),
             spp_Pa=c["hyd"]["spp"], ecd_SG=c["ecd_SG"], v_ann_min=c["hyd"]["v_ann_min"],
             conflict=c["conflict"])
+        if 'terms' in c['hyd']:
+            configuration=s.programme or HydraulicProgramme.reference_programme()
+            d['programme'].update(hydraulic_configuration=asdict(configuration),
+                hydraulic_terms_Pa=c['hyd']['terms'],surface_loss_Pa=c['hyd']['dp_surface'],
+                hydraulic_flags=c['hyd']['flags'],hydraulic_sources=c['hyd']['sources'],
+                energy_check=o.get('m1',{}).get('energy_check'))
         if o.get('apply_trip_fluid'):
             trip = o.get('trip_fluid')
             water_rho = fluids.water().rho_surface

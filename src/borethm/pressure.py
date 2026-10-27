@@ -95,6 +95,9 @@ def circulating_temperatures(run):
 def annulus_friction(run, md):
     """Friction loss in the annulus [Pa] between measured depth md and the
     surface, from a run's hydraulics (model1_coupled.hydraulics)."""
+    profile=run['hyd'].get('annulus_profile')
+    if profile is not None:
+        return float(np.interp(md,profile['md'],profile['dp']))
     out = 0.0
     for p in run["hyd"]["pieces"]:
         if md <= p["md_top"]:

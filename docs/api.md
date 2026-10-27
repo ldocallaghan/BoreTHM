@@ -36,10 +36,67 @@ hydraulics result, spp, dp_string, dp_annulus, dp_bit and dp_buoyancy are
 differences, as are the per-piece dp_bore and dp_ann entries. Their values
 receive no atmospheric offset.
 
+## HydraulicJoint
+
+```python
+HydraulicJoint(outer_diameter: float, bore_diameter: float, restriction_length: float, spacing: float, transition: str = 'abrupt', source: str = '') -> None
+```
+
+Repeated connection geometry [m], independent of thermal joints.
+
+restriction_length is the effective narrow-passage length; spacing is
+the connection pitch. transition is abrupt or the zero-local-loss
+gradual idealisation. source records the catalogue and assumptions.
+
+## LocalLoss
+
+```python
+LocalLoss(bore_coefficient: float = 0.0, annulus_coefficient: float = 0.0, bore_reference_area: float | None = None, annulus_reference_area: float | None = None, source: str = '') -> None
+```
+
+Additional component K values; reference areas are m2.
+
+None uses that component's body bore/annulus area. These coefficients
+must exclude geometric transitions already represented automatically.
+
+## ReferenceToolLoss
+
+```python
+ReferenceToolLoss(dp_ref: float, flow_ref: float, density_ref: float, basis: str = 'additional', span_segments: int = 1, source: str = '', flow_range: tuple | None = None, temperature_max_C: float | None = None) -> None
+```
+
+Tool pressure loss [Pa] at reference flow [m3/s] and density [kg/m3].
+
+Scales as density times flow squared. total_internal replaces internal
+passage losses over span_segments contiguous segments, including the
+segment carrying this input; additional supplies an extra restriction.
+Optional flow_range is m3/s and temperature_max_C is a qualification.
+
+## SurfaceLoss
+
+```python
+SurfaceLoss(value: float, source: str = '') -> None
+```
+
+API surface-layout coefficient, in the psi/ppg/US-gpm convention.
+
+## HydraulicProgramme
+
+```python
+HydraulicProgramme(hydraulics_model: str = 'v1.6.0', reference: str | None = 'wu2025-with-hydraulic-allowances', segments: tuple = (), hole: tuple = (), surface: borethm.hydraulic_losses.SurfaceLoss | None = None, transitions: str = 'abrupt', joints: bool = True, tools: bool = True, joint_restriction_length: float = 0.7365999999999999, hwdp_restriction_length: float = 1.2191999999999998) -> None
+```
+
+Hydraulic mode, surface layout and reference or custom string.
+
+Python lengths are metres and losses use SI. reference_programme()
+selects the documented built-in allowances, including surface case 5.
+A custom string must explicitly supply its own tool curves. Optional
+hole intervals otherwise retain the reference well's casing scenario.
+
 ## evaluate
 
 ```python
-evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupled=None)
+evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupled=None, programme=None, hydraulics_model=None, surface=None)
 ```
 
 Evaluate a SiteProfile through circulation, connections and trips.
@@ -74,6 +131,12 @@ cycle cases, mud windows, tool gates and status. Whole-programme windows
 use surface fluid density [kg/m3 at 20 degrees C]; cycle SG values are
 equivalent static densities. Use result_dict for a serialisable record.
 This evaluation can require substantial computation.
+
+programme overrides the site's HydraulicProgramme. hydraulics_model
+optionally selects v1.6.0 or exact v1.5.0 legacy hydraulics; surface
+optionally overrides its SurfaceLoss. An explicit zero coefficient
+disables an allowance. Unspecified settings use the effective
+programme. The input SiteProfile is unchanged.
 
 ## result_dict
 
@@ -112,7 +175,7 @@ described in result_dict.
 ## SiteProfile
 
 ```python
-SiteProfile(name: str, geotherm: Callable, target_depth: float, target_T: float, Sv_grad: float, K0_min: float, SHmax_over_Sv: float, rho_fluid_grad: float, k_rock: float, E_rock: float, UCS: float, T_inj: float = 40.0, stress_cases: tuple = (), stress_basis: str = 'v1.0 ratios', strength_cases: tuple = (), data_basis: dict = <factory>, geotherm_v11: Callable = None, target_depth_v11: float = None, temperature_data_to: float = None, mu: float = 0.8, coupled: bool = False) -> None
+SiteProfile(name: str, geotherm: Callable, target_depth: float, target_T: float, Sv_grad: float, K0_min: float, SHmax_over_Sv: float, rho_fluid_grad: float, k_rock: float, E_rock: float, UCS: float, T_inj: float = 40.0, stress_cases: tuple = (), stress_basis: str = 'v1.0 ratios', strength_cases: tuple = (), data_basis: dict = <factory>, geotherm_v11: Callable = None, target_depth_v11: float = None, temperature_data_to: float = None, mu: float = 0.8, coupled: bool = False, programme: borethm.programme.HydraulicProgramme | None = None) -> None
 ```
 
 Site inputs for evaluate, with temperature and stress profiles.
@@ -134,6 +197,10 @@ fields. temperature_data_to is the deepest measured temperature depth
 [m], or None. mu is a dimensionless friction coefficient. coupled
 enables the site's stiffness in the coupled thermal-stress calculation.
 Construct a profile, then call validate_site.
+
+programme optionally supplies a HydraulicProgramme. None selects the
+documented reference programme during circulation. A custom string
+keeps its supplied pipes and does not receive reference tool curves.
 
 The target() method returns the effective depth [m]; temperature()
 returns the effective geotherm callable. Passing v10=True selects the
@@ -267,7 +334,7 @@ Raises ValueError for an unknown or ambiguous name.
 ## circulating_temperatures
 
 ```python
-circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0)
+circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt')
 ```
 
 Compute circulating bore and annulus temperatures along a well.
@@ -292,6 +359,13 @@ is optional; film_mult
 scales the annulus film coefficient. breaks are measured depths in m;
 init is a previous circulation result used to seed the solver.
 
+hydraulics_model selects v1.6.0's shared Bingham/Newtonian pressure
+and dissipation kernel, or the exact v1.5.0 legacy calculation.
+surface is a SurfaceLoss, included in standpipe pressure with no
+downhole heat. transitions is abrupt or the zero-local-loss gradual
+idealisation. New geometry fields supply connection and tool losses.
+energy_check reports assigned and applied heat in W when enabled.
+
 fluid=None uses water. A constant fluid dictionary supplies rho [kg/m3],
 cp [J/(kg K)], mu [Pa s] and k [W/(m K)]; a fluid object may provide props.
 Return a dictionary with z [measured depth, m], Td, Tu and Trock [degrees C],
@@ -303,30 +377,18 @@ verbose=False suppresses the solver's printed report by default.
 ## hydraulics
 
 ```python
-hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='blasius', bit=True, fluid=None, P_surface=100000.0)
+hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='blasius', bit=True, fluid=None, P_surface=100000.0, hydraulics_model=None, surface=None, transitions=None)
 ```
 
-Pressure losses along the string and annulus, bit nozzle loss,
-standpipe pressure and annular velocity.
+Pressure budget [Pa] with named pressure/heat loss terms.
 
-With a circulating_temperatures result, water properties use each piece's
-bore or annulus temperature and the approximate absolute pressure
-P_surface + 10,000 Pa/m times true vertical depth. The standpipe pressure
-includes the buoyancy of the hot annulus against the cold bore. Without
-one, properties are at T_avg and mid-depth pressure throughout.
-
-  SPP = dP_string + dP_bit + dP_annulus + integral (rho_ann - rho_bore) g dTVD
-
-The first two arguments, m_dot [kg/s] and geometry [WellGeometry],
-are required. result is a circulating_temperatures result; T_avg is
-degrees C, tfa is m2 and P_surface is Pa absolute, default 100,000 Pa.
-bit enables nozzle loss;
-friction selects the friction law. fluid=None uses water; otherwise
-use a constant property dictionary or an object providing props.
-Return a dictionary with dp_string, dp_annulus, dp_bit, dp_buoyancy and
-spp [Pa as pressure differences]. The per-piece dp_bore and dp_ann
-entries are also pressure differences [Pa]. Other outputs include
-annular velocities [m/s], hydraulic pump power [W], and flow diagnostics.
+Existing arguments retain their order and units. New calls use
+v1.6.0; a supplied circulation result supplies its mode and surface
+settings unless overridden. Use hydraulics_model='v1.5.0' for the
+exact legacy midpoint calculation, which rejects new loss inputs.
+surface is a SurfaceLoss or None; an explicit coefficient of zero
+disables an inherited surface allowance. transitions is abrupt or
+gradual (zero geometric-local loss). See hydraulic_losses for sources.
 
 ## mud_window
 
@@ -508,7 +570,7 @@ for measured depths s [m], including radii [m] and resistances [K m/W].
 ## PipeType
 
 ```python
-PipeType(name: str, layers: tuple, joint_fraction: float = 0.0, source: str = '') -> None
+PipeType(name: str, layers: tuple, joint_fraction: float = 0.0, source: str = '', hydraulic_joint: borethm.hydraulic_losses.HydraulicJoint | None = None) -> None
 ```
 
 A drill pipe's wall, inside out. A tool joint is modelled as bare steel
@@ -560,7 +622,7 @@ Construct from r_in, r_out, k. resistance() returns K m/W.
 ## StringSegment
 
 ```python
-StringSegment(length: float, pipe: borethm.well_geometry.PipeType) -> None
+StringSegment(length: float, pipe: borethm.well_geometry.PipeType, local_loss: borethm.hydraulic_losses.LocalLoss | None = None, tool_loss: borethm.hydraulic_losses.ReferenceToolLoss | None = None) -> None
 ```
 
 A drill-string segment of length [m], using the supplied PipeType.

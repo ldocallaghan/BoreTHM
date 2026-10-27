@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+Adds shared hydraulic loss and dissipation accounting with optional
+tool-joint geometry, serial BHA components and supplied tool curves.
+Surface equipment contributes to standpipe pressure; bore and annulus
+losses supply heat to their respective streams. An explicit v1.5.0 mode
+preserves the old calculation. A typed programme can be supplied in Python
+or a site file. The reference programme includes the documented allowances.
+
+On the 90 frozen motorless FORGE 16B S2b states, applying only the 5 MPa
+property-pressure guard to the legacy pressure calculation reduces
+standpipe pressure by 0.040–0.111 psi (0.00654–0.0110%). The complete
+hydraulic changes have separate guard and integration accounting in
+`validation/hydraulics-v160/v1/`. This diagnostic retains the archived
+rheology convention and makes no new held-out pressure comparison.
+
 Adds an unfitted field comparison with Utah FORGE well 16A(78)-32, with
 source extracts, frozen circulation evidence and conditional transient
 checks. Documentation presents the blind result before the recovery and

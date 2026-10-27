@@ -1,0 +1,32 @@
+{
+  "protocol_commit": "8bbfe2c44658dade8972a647970e3308047b6380",
+  "cases": 90,
+  "scenario_replays": 6480,
+  "production_cases": 6480,
+  "formula_max_errors": {
+    "legacy_psi": 0.0,
+    "component_psi": 5.684341886080802e-14,
+    "transition_psi": 0.0,
+    "joint_per_inch_psi": 1.5612511283791264e-17,
+    "joint_local_psi": 8.881784197001252e-16,
+    "scenario_total_psi": 6.821210263296962e-13
+  },
+  "legacy_guard_delta_psi_min": -0.11097130620800187,
+  "legacy_guard_delta_psi_max": -0.04004906508423984,
+  "legacy_guard_delta_percent_min": -0.010995076755593303,
+  "legacy_guard_delta_percent_max": -0.0065440720354192905,
+  "duration_s": 83.00246220012195,
+  "source_hashes": {
+    "plan.json": "e3d2cb9ac0145efa453d53204177449d5f241d064cf079962caf873b5b58f0e1",
+    "replayed-profiles.npz": "187cac48dd2736dee0b28dae3e714b881c365b94346f4089461801b2fc7e6c27",
+    "pressure-samples.csv": "d8b35e4d7aa8078fc430e56c52ca43f2d33dd4e68662d870465326e45d9cb7da",
+    "bha-components.csv": "84012ffeb210cbd630d429a0f82d79a1fb254644b9c62d0550b8af8ad2eef173",
+    "bha-transitions.csv": "3f1e33f7f9c3c5f9990e5a1261cba279f76533824c60990f7dcb768c1e008085",
+    "tool-joints.csv.gz": "8ed260c82c279c73af6e5ae328382972d22537fc3623915565f3ef17ffe440c7",
+    "scenario-budgets.csv": "44444d1d82ad00ed288f130777d45d660674e42a25aba18909fe81f1eef131d1"
+  },
+  "preserved_archives": true,
+  "field_rheology_convention": "archived 26.7 C retained for this formula replay",
+  "held_out_targets_read": false,
+  "production_difference_notes": "integrated properties, conservative geometry/source blend, added casing transitions, bottom nozzle state, buoyancy integration and inlet surface density; guard isolated separately"
+}

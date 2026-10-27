@@ -10,7 +10,8 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
                             target_depth=None, geometry=None, exposure=None, fluid=None,
                             rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
                             tfa=_model.BIT_TFA_DEFAULT, film_mult=1.0, breaks=(),
-                            init=None, P_surface=_model.P_SURF):
+                            init=None, P_surface=_model.P_SURF,
+                            hydraulics_model='v1.6.0', surface=None, transitions='abrupt'):
     """Compute circulating bore and annulus temperatures along a well.
 
     Supply either a PipeType or a WellGeometry. Mass flow m_dot is kg/s;
@@ -32,6 +33,13 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     is optional; film_mult
     scales the annulus film coefficient. breaks are measured depths in m;
     init is a previous circulation result used to seed the solver.
+
+    hydraulics_model selects v1.6.0's shared Bingham/Newtonian pressure
+    and dissipation kernel, or the exact v1.5.0 legacy calculation.
+    surface is a SurfaceLoss, included in standpipe pressure with no
+    downhole heat. transitions is abrupt or the zero-local-loss gradual
+    idealisation. New geometry fields supply connection and tool losses.
+    energy_check reports assigned and applied heat in W when enabled.
 
     fluid=None uses water. A constant fluid dictionary supplies rho [kg/m3],
     cp [J/(kg K)], mu [Pa s] and k [W/(m K)]; a fluid object may provide props.

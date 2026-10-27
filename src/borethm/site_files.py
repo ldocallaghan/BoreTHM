@@ -197,7 +197,13 @@ def load_site(path):
     arguments = {}
     definitions = {f.name: f for f in fields(SiteProfile)}
     for name, item in value.items():
-        if name in ('geotherm', 'geotherm_v11'):
+        if name=='programme':
+            from borethm.programme import programme_from_dict
+            try:
+                arguments[name]=programme_from_dict(item)
+            except (ValueError,TypeError,KeyError) as error:
+                raise _error(path,name,str(error)) from None
+        elif name in ('geotherm', 'geotherm_v11'):
             arguments[name] = _geotherm(item, path, name)
         elif name == 'stress_cases':
             arguments[name] = _stress_cases(item, path)

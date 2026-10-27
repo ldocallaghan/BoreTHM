@@ -18,11 +18,12 @@ pressure are taken.
 Resistances are per unit length [K m/W]: a layer from r_in to r_out with
 conductivity k is ln(r_out/r_in) / (2 pi k), and layers add in series.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 import numpy as np
 
 from borethm import geo_constants as C
+from borethm.hydraulic_losses import HydraulicJoint, LocalLoss, ReferenceToolLoss
 
 K_STEEL = 45.0   # W/m/K, drill pipe and casing (Wu et al. 2025, Tables 3 to 5)
 K_CEMENT = 1.0   # W/m/K, cement sheath (Dufrene et al. 2025)
@@ -62,6 +63,7 @@ class PipeType:
     layers: tuple
     joint_fraction: float = 0.0
     source: str = ""
+    hydraulic_joint: HydraulicJoint | None = None
 
     def __post_init__(self):
         _check_concentric(self.layers)
@@ -83,7 +85,7 @@ class PipeType:
         return Layer(self.r_bore, self.r_out, K_STEEL).resistance()
 
     def with_joints(self, fraction):
-        return PipeType(self.name, self.layers, fraction, self.source)
+        return replace(self, joint_fraction=fraction)
 
 
 def uniform_wall(k, r_in=C.R_INNER_PIPE_IN, r_out=C.R_INNER_PIPE_OUT, name=None):
@@ -150,6 +152,12 @@ class StringSegment:
     """
     length: float
     pipe: PipeType
+    local_loss: LocalLoss | None = None
+    tool_loss: ReferenceToolLoss | None = None
+
+    def __post_init__(self):
+        if not np.isfinite(self.length) or self.length <= 0:
+            raise ValueError('string segment length must be positive and finite')
 
 
 @dataclass(frozen=True)

@@ -26,12 +26,26 @@
     "pressure-samples.csv": "d8b35e4d7aa8078fc430e56c52ca43f2d33dd4e68662d870465326e45d9cb7da",
     "replayed-profiles.npz": "187cac48dd2736dee0b28dae3e714b881c365b94346f4089461801b2fc7e6c27",
     "replays.csv": "3452113049c0e73674511c250310dcca6ed76ae1800668e7e7878f2cb6de238d",
-    "S2b-review.md": "e5ebb3ae72dc73b72cf28ae50f186f20cc0fbbd0cd690c3ee88ab7bd7afa56d2",
+    "S2b-review.md": "1d2108b73f2ea4c7048c4c776447159b85cc37e27a105d1c0e483db15bf21cc3",
     "s2b_audit.py": "75b21078639a17a593c6d50bda140a31f5fac8812bb1e1de305c06dddc4a4840",
     "s2b_publish.py": "86d607bffadf049b01828ebedee52b645641ea182782ac5b89714792a8f61149",
-    "s2b_report.py": "6f7e7ea0daa2d2f63e076e7065dae529c7985121ac14efb9222aeb74552b2bcc",
+    "s2b_report.py": "a06cdb5e174f41ea080e4ac418ccaa0c40c1faf8b0cae6fc1093e4312fd40ed7",
     "scenario-budgets.csv": "44444d1d82ad00ed288f130777d45d660674e42a25aba18909fe81f1eef131d1",
     "scenario-run-summary.csv": "3f322da9e7860b600527e82a7b309f5ca3d2c5a72bf2e5f7ec16bf0ef58ad547",
     "tool-joints.csv.gz": "8ed260c82c279c73af6e5ae328382972d22537fc3623915565f3ef17ffe440c7"
+  },
+  "citation_only_amendment": {
+    "protocol_commit": "8bbfe2c44658dade8972a647970e3308047b6380",
+    "reason": "Remove mirrored API links under the V0 review ruling; numerical evidence unchanged",
+    "files": {
+      "S2b-review.md": {
+        "original_sha256": "e5ebb3ae72dc73b72cf28ae50f186f20cc0fbbd0cd690c3ee88ab7bd7afa56d2",
+        "amended_sha256": "1d2108b73f2ea4c7048c4c776447159b85cc37e27a105d1c0e483db15bf21cc3"
+      },
+      "s2b_report.py": {
+        "original_sha256": "6f7e7ea0daa2d2f63e076e7065dae529c7985121ac14efb9222aeb74552b2bcc",
+        "amended_sha256": "a06cdb5e174f41ea080e4ac418ccaa0c40c1faf8b0cae6fc1093e4312fd40ed7"
+      }
+    }
   }
 }
