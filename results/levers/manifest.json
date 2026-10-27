@@ -1,5 +1,5 @@
 {
-  "phase": "C6 STOP review; golden lever tables awaiting review",
+  "phase": "Archived design-comparison results",
   "final_model_source_sha256": "4937fdc373141ba066a8e333ba556374b478759a722b171158cb7082b31a040c",
   "source_files_sha256": {
     "src/benchmark_utaustin.py": "653199906a272f4e6e9e71fb200a213a796de6d2b9ffae8566370fb50bbfacf5",

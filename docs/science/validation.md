@@ -87,11 +87,11 @@ The original primary underpredicts all pre-trial run means, overpredicts the fou
 
 *Original S1 version 1. The shaded depth interval is the earlier insulated-pipe trial. Per-run errors, fixed sensor branches and fit roles remain separate.*
 
-An optimistic full-recovery sensitivity resets the exposure clock after continuously observed pumps-off intervals longer than two hours and retains the existing one-hour floor. It brackets the measured means in EOW 15, 16, 27 and 38, while leaving other pre-trial means too cold and increasing trial overprediction. It raises the later EOW 27/38 means by about 24/27 °C. Reducing the film multiplier to 0.75 lowers the predictions and increases the pre-trial underprediction. These sensitivities remain attached to S1 version 1; they have not been rerun with the revised mud. Neither establishes recovery or heat transfer as the cause. The [S1 review](../../validation/forge16b/s1/S1-review.md) gives the complete temperature, recovery and water-property comparisons in °C and °F.
+An optimistic full-recovery sensitivity resets the exposure clock after continuously observed pumps-off intervals longer than two hours and retains the existing one-hour floor. It brackets the measured means in EOW 15, 16, 27 and 38, while leaving other pre-trial means too cold and increasing trial overprediction. It raises the later EOW 27/38 means by about 24/27 °C. Reducing the film multiplier to 0.75 lowers the predictions and increases the pre-trial underprediction. These sensitivities remain attached to S1 version 1; they have not been rerun with the revised mud. Neither establishes recovery or heat transfer as the cause. The [original-protocol results](../../validation/forge16b/s1/results.md) gives the complete temperature, recovery and water-property comparisons in °C and °F.
 
 #### Labelled mud-protocol revision
 
-S1's missing-property fallback used the reference programme mud, with plastic viscosity (PV) 27 cP and yield point (YP) 28 lbf/100 ft². Those values describe a weighted mud and are inconsistent with the input record's low-solids, water-rich system. After S1 review, the protocol changed: missing PV or YP takes the nearest actual measurement in either time direction within the same fluid system; a system without a measurement uses water rheology at its recorded density. No donor crosses a fluid-system boundary. Some donors are days away, so contemporaneous rheology remains uncertain. The [revision ledger](../../validation/forge16b/s2/mud-revision-ledger.csv) identifies every source and signed time offset.
+S1's missing-property fallback used the reference programme mud, with plastic viscosity (PV) 27 cP and yield point (YP) 28 lbf/100 ft². Those values describe a weighted mud and are inconsistent with the input record's low-solids, water-rich system. After the original comparison, the protocol changed: missing PV or YP takes the nearest actual measurement in either time direction within the same fluid system; a system without a measurement uses water rheology at its recorded density. No donor crosses a fluid-system boundary. Some donors are days away, so contemporaneous rheology remains uncertain. The [revision ledger](../../validation/forge16b/s2/mud-revision-ledger.csv) identifies every source and signed time offset.
 
 The original comparison remains version 1. The revised primary is version 2, calculated on the same 109 windows with the same geometry and film coefficient. Five run means change:
 
@@ -103,7 +103,7 @@ The original comparison remains version 1. The revised primary is version 2, cal
 | 17 | +3.18 | +8.74 | +5.56 |
 | 18 | +1.69 | +2.08 | +0.39 |
 
-All other run means are unchanged. The revision removes an input-inconsistent substitution; it does not remove the changing sign of the field discrepancy. The [S2 review](../../validation/forge16b/s2/S2-review.md) preserves both complete versions and their input provenance.
+All other run means are unchanged. The revision removes an input-inconsistent substitution; it does not remove the changing sign of the field discrepancy. The [revised-rheology results](../../validation/forge16b/s2/results.md) preserves both complete versions and their input provenance.
 
 ### FORGE 16A: blind circulation comparison
 
@@ -238,7 +238,7 @@ The raw differential means are +39.65, +15.65, −0.37 and +14.12 psi for EOW 12
 
 *Revised mud; both assumed joint geometries use the same generic top-drive surface case. Black ticks show measured run-mean pressure. Unknown tool losses have no assigned numerical allowance.*
 
-The [S2b review](../../validation/forge16b/s2b/S2b-review.md) gives the included-term split and cited estimation methods, with limitations of the turbulent sudden-change correlations. It links every sample's pressure accounting, all geometry/layout sensitivities and the reported differential. All 90 original/revised circulation replays reproduce the saved S2 pressure and temperature endpoints exactly. The new archive tests recompute summary arithmetic from saved records; they introduce no physical regression tolerance or fitted parameter. The [limitations](limitations.md#circulation-hydraulics-and-heat-input) explain how the pressure and heat-input findings affect interpretation.
+The [motorless pressure results](../../validation/forge16b/s2b/results.md) gives the included-term split and cited estimation methods, with limitations of the turbulent sudden-change correlations. It links every sample's pressure accounting, all geometry/layout sensitivities and the reported differential. All 90 original/revised circulation replays reproduce the saved S2 pressure and temperature endpoints exactly. The new archive tests recompute summary arithmetic from saved records; they introduce no physical regression tolerance or fitted parameter. The [limitations](limitations.md#circulation-hydraulics-and-heat-input) explain how the pressure and heat-input findings affect interpretation.
 
 ## Rock reheating
 

@@ -12,7 +12,7 @@ def test_source_data_and_archive_links_use_the_release():
     docs = ROOT / 'docs'
     for path, expected in [('../../src/borethm/site_files.py#load_site', 'blob/v1.5.0/src/borethm/site_files.py#load_site'),
                            ('../../results/', 'tree/v1.5.0/results'),
-                           ('../archive/README.md', 'blob/v1.5.0/docs/archive/README.md')]:
+                           ('../../validation/forge16b/README.md', 'blob/v1.5.0/validation/forge16b/README.md')]:
         link = docs_links.rewrite_link(path, 'guides/new-site.md', docs, 'v1.5.0')
         assert link == 'https://github.com/ldocallaghan/BoreTHM/' + expected
 

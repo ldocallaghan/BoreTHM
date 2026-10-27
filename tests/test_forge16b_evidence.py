@@ -138,6 +138,6 @@ def test_archived_file_hashes(stage):
 
 def test_original_s1_and_s2_preserved_during_pressure_accounting():
     plan = json.loads((DATA/'s2b/plan.json').read_text())
-    assert len(plan['preserved_archives']) == 66
+    assert len(plan['preserved_archives']) == 62
     for name, expected in plan['preserved_archives'].items():
         assert hashlib.sha256((DATA/name).read_bytes()).hexdigest() == expected, name

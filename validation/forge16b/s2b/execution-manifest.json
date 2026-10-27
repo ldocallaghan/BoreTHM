@@ -9,43 +9,28 @@
     "matplotlib": "3.11.2"
   },
   "original_script_sha256": "362de5d7e4d07690da214ba9f3f6ded3e0c7d50be9e21ed5dab4a766c1c3bfc3",
-  "plan_sha256": "e3d2cb9ac0145efa453d53204177449d5f241d064cf079962caf873b5b58f0e1",
-  "archive_note": "New external S2b estimates; original S1/S2 evidence unchanged.",
+  "plan_sha256": "477797cee267f2b9190b50ecf115223900afbd41c98416f97fde64b89c83dc75",
+  "archive_note": "Published scientific results; numerical payloads retain their original values.",
   "archived_output_sha256": {
     "audit.json": "967653438df943601c7f53b8f6a7e4e8af39bb171d725ca6e8a7ca1187c7e8c1",
     "bha-components.csv": "84012ffeb210cbd630d429a0f82d79a1fb254644b9c62d0550b8af8ad2eef173",
     "bha-transitions.csv": "3f1e33f7f9c3c5f9990e5a1261cba279f76533824c60990f7dcb768c1e008085",
-    "commands.md": "d82d1cfb4933148d900a27ee10537aa3083c2c9959dd38efc605fd4dca8e298d",
     "execution-source.py": "362de5d7e4d07690da214ba9f3f6ded3e0c7d50be9e21ed5dab4a766c1c3bfc3",
     "model-pieces.csv": "5d99674a87d2891e9403c83fe354a661cf86fe36d7565503a3214df35040ae6d",
     "nominal-sample-accounting.csv": "4332497afce8e631d857373f2bc59c735ed1678cf4b9d6a66327b9bd79c6e176",
-    "plan.json": "e3d2cb9ac0145efa453d53204177449d5f241d064cf079962caf873b5b58f0e1",
-    "plan.sha256": "e5db569fe7223c0bfbb2a1315a3fe2b3289ba23022f07b71193a04f53a78bed4",
+    "plan.json": "477797cee267f2b9190b50ecf115223900afbd41c98416f97fde64b89c83dc75",
+    "plan.sha256": "4642a95f3f14720ecc7b4864abde8dd645ebaab2b576e2e734c6357a9d957f75",
     "pressure-accounting.png": "cbf90572c23db949033b8e7979fd2d50690def6c53fbddbd90c44bffd47e9a58",
     "pressure-run-summary.csv": "a4e8d91bfd0d9cb07d53716da7879ed4222fe0e9ce408fdfddcb3f3dddd55042",
     "pressure-samples.csv": "d8b35e4d7aa8078fc430e56c52ca43f2d33dd4e68662d870465326e45d9cb7da",
     "replayed-profiles.npz": "187cac48dd2736dee0b28dae3e714b881c365b94346f4089461801b2fc7e6c27",
     "replays.csv": "3452113049c0e73674511c250310dcca6ed76ae1800668e7e7878f2cb6de238d",
-    "S2b-review.md": "1d2108b73f2ea4c7048c4c776447159b85cc37e27a105d1c0e483db15bf21cc3",
     "s2b_audit.py": "75b21078639a17a593c6d50bda140a31f5fac8812bb1e1de305c06dddc4a4840",
-    "s2b_publish.py": "86d607bffadf049b01828ebedee52b645641ea182782ac5b89714792a8f61149",
-    "s2b_report.py": "a06cdb5e174f41ea080e4ac418ccaa0c40c1faf8b0cae6fc1093e4312fd40ed7",
+    "s2b_publish.py": "5af4052c327687f6b268220c7140cc7b053a3085b68e6ad937e12d9aee128c09",
+    "s2b_report.py": "1a1d9ea2ccf32fa25b502cc2e802766463db52ea444e00d6591db1fc4a6e5635",
     "scenario-budgets.csv": "44444d1d82ad00ed288f130777d45d660674e42a25aba18909fe81f1eef131d1",
     "scenario-run-summary.csv": "3f322da9e7860b600527e82a7b309f5ca3d2c5a72bf2e5f7ec16bf0ef58ad547",
-    "tool-joints.csv.gz": "8ed260c82c279c73af6e5ae328382972d22537fc3623915565f3ef17ffe440c7"
-  },
-  "citation_only_amendment": {
-    "protocol_commit": "8bbfe2c44658dade8972a647970e3308047b6380",
-    "reason": "Remove mirrored API links under the V0 review ruling; numerical evidence unchanged",
-    "files": {
-      "S2b-review.md": {
-        "original_sha256": "e5ebb3ae72dc73b72cf28ae50f186f20cc0fbbd0cd690c3ee88ab7bd7afa56d2",
-        "amended_sha256": "1d2108b73f2ea4c7048c4c776447159b85cc37e27a105d1c0e483db15bf21cc3"
-      },
-      "s2b_report.py": {
-        "original_sha256": "6f7e7ea0daa2d2f63e076e7065dae529c7985121ac14efb9222aeb74552b2bcc",
-        "amended_sha256": "a06cdb5e174f41ea080e4ac418ccaa0c40c1faf8b0cae6fc1093e4312fd40ed7"
-      }
-    }
+    "tool-joints.csv.gz": "8ed260c82c279c73af6e5ae328382972d22537fc3623915565f3ef17ffe440c7",
+    "results.md": "b6f935fff1603d166df0eec1553ff9aab2d1d90a72fe80aee678426ac554526a"
   }
 }

@@ -115,7 +115,7 @@ The confirmed mixture, fluid-feedback and depth-coverage errors are corrected. E
 | Pannonian | INDETERMINATE | NO-GO | 1.458734 / 1.459278 | 1.544787 / 1.545152 | corrected all-depth windows are closed; coating qualification remains unknown |
 | Newberry | GO | GO | 0.998201 / 0.998201 | 0.998201 / 0.998201 | water satisfies the corrected common windows and all evaluated gates |
 
-Weights are surface densities at 20 °C. Closed windows have no valid prescription, even when an attempted lower-bound weight is simulated. The complete before-and-after bounds, controlling cases and isolated C1 pressure changes are in `docs/archive/v1.3.4/checkpoint-1.md`.
+Weights are surface densities at 20 °C. Closed windows have no valid prescription, even when an attempted lower-bound weight is simulated. The complete before-and-after bounds, controlling cases and isolated C1 pressure changes are in [v1.3.4 comparison archive](results/v1.3.4/checkpoint-1/README.md).
 
 - **Conserved composition, C1.** Mud density uses component volumes at fixed barite mass fraction, conductivity uses the local volume fraction and heat capacity uses mass fractions. The historical adapter retains the prior mixture law. Independent component-volume tests and the four-state table check the correction.
 - **Prescribed fluid and depth coverage, C2 to C4.** Every fluid pass reruns the whole-hole requirement through circulation, hydraulics, drilling rate and tools. The heavier trip fluid occupies the column from trip start. Every depth has its own exposure check; the target and final stand are included. Binding bounds are refined twice. Public entry points validate inputs and export the effective target, retaining the former input as legacy metadata.

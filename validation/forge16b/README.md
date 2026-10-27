@@ -1,6 +1,6 @@
 # Utah FORGE 16B whole-well comparison inputs
 
-This directory contains source extracts and the input protocol for a whole-well comparison of circulating temperatures and hydraulic inputs. It contains no new model predictions. The [protocol](comparison_protocol.md) identifies the fixed filtering and sampling rules, with input questions for review before calculation.
+This directory contains source extracts and the input protocol for a whole-well comparison of circulating temperatures and hydraulic inputs. The [protocol](comparison_protocol.md) identifies the fixed filtering and sampling rules. Reader-facing results are archived for the [original comparison](s1/results.md), [rheology and energy comparisons](s2/results.md) and [motorless pressure accounting](s2b/results.md).
 
 ## Sources and licence
 
@@ -30,7 +30,7 @@ The Pason EYE channel is present in the raw download, despite the earlier packag
 | `surface_channel_crosscheck.csv`, `.json` | Observation-to-observation Pason/LAS temperature checks. |
 | `surface_crosscheck_rejected.csv` | Physically invalid source pairs excluded from the channel-comparison statistics. |
 
-S0 coverage differs from the four original trial averages. The candidate list applies drilling-progress requirements and temperature-quality rules, with explicit losses from limited or unchanging telemetry. See the [S0 review](S0-review.md) for the tables and unresolved inputs.
+S0 coverage differs from the four original trial averages. The candidate list applies drilling-progress requirements and temperature-quality rules, with explicit losses from limited or unchanging telemetry. See the [input summary](input-summary.md) for coverage tables and input uncertainties.
 
 ## Rebuild
 

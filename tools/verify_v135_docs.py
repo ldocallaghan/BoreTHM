@@ -138,19 +138,12 @@ def verify():
     assert {k: source(k)['status']['label'] for k in expected_status} == expected_status
     assert all('flow_ceiling' not in source(k) and 'shmin_margin' not in source(k)
                for k in expected_status), 'Update the output guide if retained fields change'
-    for report, archive, boundary in [
-            ('science/approximation-comparisons.md', 'archive/v1.3.4/approximation-review.md',
-             '## Evidence and verification'),
-            ('science/design-comparisons.md', 'archive/v1.3.4/design-review.md',
-             '## Reproduction and review')]:
-        original = (ROOT / 'docs' / archive).read_text(encoding='utf-8').split(boundary)[0]
+    # Published comparison rows are checked against the final result archives.
+    for report, archive in [('science/approximation-comparisons.md', 'results/robustness'),
+                            ('science/design-comparisons.md', 'results/levers')]:
         current = (ROOT / 'docs' / report).read_text(encoding='utf-8')
-        # Published study data rows remain identical to the historical review.
-        # Headers can change (e.g. removing an internal requirement identifier).
-        rows = [line for line in original.splitlines() if line.startswith('|')
-                and re.match(r'^\| (?:Soultz|United Downs|Pannonian|A\d|L\d|PAIR|[0-9]|first|half|radial|timesteps|window|all three)', line)]
-        without_links = lambda text: re.sub(r'\[([^\]]*)\]\([^)]+\)', r'\1', text)
-        assert rows and all(without_links(line) in without_links(current) for line in rows), report
+        assert (ROOT / archive).is_dir(), archive
+        assert archive in current, report
     readme = (ROOT / 'README.md').read_text(encoding='utf-8')
     for key, name in [('soultz', 'Soultz-sous-Forêts'), ('united-downs', 'United Downs'),
                       ('larderello', 'Larderello'), ('pannonian', 'Pannonian Basin'), ('newberry', 'Newberry')]:

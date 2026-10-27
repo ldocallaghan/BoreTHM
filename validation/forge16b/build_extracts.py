@@ -178,7 +178,7 @@ def tables(selected,out):
                  isolated_jump_rejected=int(isolated.sum()),qualified_drilling_rows=int(drilling.sum()),
                  qualified_clean_eye_rows=int((drilling&clean).sum()),candidate_samples=len(samples),
                  excluded_windows=len(excluded),minute_rows=len(data),pandas_version=pd.__version__,
-                 protocol='Protocol is subject to S0 review; no model error has been computed.')
+                 protocol='Observation extraction only; calculation methods are specified in the comparison protocols.')
     (out/'extract_summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     print(json.dumps(summary,indent=2))
 

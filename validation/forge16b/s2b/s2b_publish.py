@@ -1,4 +1,5 @@
 """Publish the compact S2b evidence archive outside the installed package."""
+import argparse
 import gzip
 import hashlib
 import json
@@ -8,15 +9,17 @@ from pathlib import Path
 import numpy as np
 
 HERE=Path(__file__).resolve().parent
-ROOT=HERE.parents[1]/'geothermal-thermo-hydraulic-model'
-SOURCE=HERE/'s2b'
+ROOT=HERE.parents[2]
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--source',type=Path,required=True,help='Directory containing the calculated pressure results')
+SOURCE=parser.parse_args().source
 DEST=ROOT/'validation/forge16b/s2b'
 DEST.mkdir(exist_ok=True)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 names=['plan.json','plan.sha256','pressure-samples.csv','model-pieces.csv',
        'bha-components.csv','bha-transitions.csv','scenario-budgets.csv',
        'pressure-run-summary.csv','scenario-run-summary.csv','nominal-sample-accounting.csv',
-       'replays.csv','audit.json','S2b-review.md','pressure-accounting.png','commands.md']
+       'replays.csv','audit.json','results.md','pressure-accounting.png']
 for name in names:shutil.copyfile(SOURCE/name,DEST/name)
 with (DEST/'tool-joints.csv.gz').open('wb') as dest:
     with gzip.GzipFile(filename='',mode='wb',fileobj=dest,mtime=0) as out:

@@ -142,5 +142,3 @@ python -m borethm.studies.robustness --sites pannonian --only A9 --legacy-thresh
 ```
 
 These commands preserve the saved outputs under `results/robustness/`. The `--legacy-threshold` run also reproduces the historical Pannonian threshold check.
-
-The [historical review](../archive/v1.3.4/approximation-review.md) records the original runtime and test evidence.
