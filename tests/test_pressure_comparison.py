@@ -1,6 +1,4 @@
 """Pressure summaries retain paired observations and equal event weights."""
-import pytest
-
 from borethm.studies.pressure_comparison import summaries
 
 

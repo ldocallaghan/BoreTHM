@@ -196,12 +196,60 @@ def development(output,limit=None):
     return rows
 
 
+def plots(output):
+    """Plot each saved development window without a residual-based selection."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    plt.rcParams.update({'font.size':9,'axes.spines.top':False,
+                         'axes.spines.right':False,'svg.hashsalt':'BoreTHM pressure comparisons'})
+    with (output/'development-windows.csv').open(newline='',encoding='utf-8') as stream:
+        rows=[r for r in csv.DictReader(stream) if r['status']=='ok']
+    colours={'v1.5.0-26.7':'#67717d','v1.5.0-48.9':'#b27a2b','v1.6.0-48.9':'#227c85'}
+    markers={'legacy':'o','EIS':'s','GPDS55':'^','NC50':'s'}
+    for kind,xfield,yfield,xlabel,ylabel in (
+        ('measured-modelled','comparison_target_psi','predicted_low_psi','Comparison pressure, psi','Modelled pressure, psi'),
+        ('residual-flow','flow_gpm','residual_low_psi','Flow, US gal/min','Model minus comparison pressure, psi'),
+        ('residual-depth','bit_depth_ft','residual_low_psi','Bit depth, ft measured depth','Model minus comparison pressure, psi'),
+        ('residual-bha','bha','residual_low_psi','Bottom-hole assembly','Model minus comparison pressure, psi')):
+        fig,axes=plt.subplots(1,2,figsize=(12,5.2))
+        for ax,well in zip(axes,('16B','16A')):
+            selected=[r for r in rows if r['well']==well]
+            bhas=sorted({r['bha'] for r in selected})
+            keys=sorted({(r['variant'],r['scenario']) for r in selected})
+            for variant,scenario in keys:
+                items=[r for r in selected if (r['variant'],r['scenario'])==(variant,scenario)]
+                x=[bhas.index(r['bha']) if xfield=='bha' else float(r[xfield]) for r in items]
+                y=[float(r[yfield]) for r in items]
+                ax.scatter(x,y,s=18,alpha=.55,color=colours[variant],marker=markers[scenario],
+                           label=variant+(' '+scenario if scenario!='legacy' else ''))
+            if kind=='measured-modelled' and selected:
+                bounds=[float(r[field]) for r in selected for field in (xfield,yfield)]
+                lo,hi=min(bounds),max(bounds)
+                ax.plot([lo,hi],[lo,hi],color='#999999',linewidth=.8,linestyle='--')
+            else:ax.axhline(0.,color='#999999',linewidth=.8)
+            if xfield=='bha':ax.set_xticks(range(len(bhas)),bhas)
+            ax.set(xlabel=xlabel,ylabel=ylabel,title='FORGE '+well+' development data')
+            ax.grid(alpha=.15);ax.set_axisbelow(True);ax.legend(fontsize=7,loc='best')
+        fig.subplots_adjust(bottom=.22,wspace=.27)
+        fig.text(.06,.08,'Source: development-windows.csv; x='+xfield+'; y='+yfield+
+                 '; colour=variant; marker=scenario.',fontsize=8)
+        fig.text(.06,.035,'16A comparison pressure subtracts the raw reported differential. '
+                 '16B uses the unadjusted standpipe pressure. Only status=ok rows are drawable.',fontsize=8)
+        for suffix in ('png','svg'):
+            metadata={'Date':None} if suffix=='svg' else None
+            fig.savefig(output/('development-'+kind+'.'+suffix),dpi=170,metadata=metadata)
+        plt.close(fig)
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--limit',type=int)
+    parser.add_argument('--plot-existing',action='store_true',help='Plot saved comparison CSVs without new solves')
     args=parser.parse_args()
-    development(args.output,args.limit)
+    if args.plot_existing:plots(args.output)
+    else:development(args.output,args.limit)
 
 
 if __name__=='__main__':main()
