@@ -225,3 +225,18 @@ def test_overlapping_geometry_ramps_converge_for_short_serial_components():
     assert result['sol'].status == 0
     assert result['sol'].x[-1] == geometry.md_bit
     assert result['energy_check']['passed']
+
+
+def test_turnaround_accuracy_meets_the_deep_well_energy_tolerance():
+    from borethm import site_evaluation as se
+    site=se.SOULTZ
+    programme=HydraulicProgramme.reference_programme()
+    geometry=programme.geometry(site.target(),wg.TK_DRAKON)
+    result=circulating_temperatures(m_dot=se.mass_flow(40.,None),geometry=geometry,
+        T_inj=site.T_inj,k_rock=site.k_rock,geotherm=site.temperature(),
+        target_rock_T=float(site.temperature()(site.target())),Q_face=se.Q_FACE_SITE,
+        friction_heat=True,surface=programme.surface)
+    assert result['success']
+    check=result['energy_check']
+    assert check['passed']
+    assert abs(check['applied_turnaround_W']-check['nozzle_W']-check['face_W']) <= check['tolerance_W']

@@ -330,7 +330,11 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                     np.interp(z, [0, L], [T_inj + 30, target_rock_T * 0.7])]) \
         if init is None else np.vstack([np.interp(z, init["z"], init["Td"]),
                                         np.interp(z, init["z"], init["Tu"])])
-    sol = solve_bvp(odes, bc, z, y0, max_nodes=20000, tol=1e-4)
+    # The energy diagnostic multiplies the turnaround temperature residual
+    # by mass flow and heat capacity. Resolve that boundary more accurately
+    # than the temperature profile; retain the original legacy tolerance.
+    sol = solve_bvp(odes, bc, z, y0, max_nodes=20000, tol=1e-4,
+                    bc_tol=1e-10 if loss_model is not None else None)
     sol_at = sol.sol
 
     zz = np.linspace(0, L, 400)
