@@ -40,7 +40,9 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     downhole heat. transitions is abrupt or the zero-local-loss gradual
     idealisation. New geometry fields supply connection and tool losses.
     energy_check reports assigned and applied heat in W when enabled.
-    Its residual flags are diagnostic and do not change solver success.
+    Residuals above 1 W or 0.1% of power, whichever is larger, are flagged.
+    The diagnostic does not change solver success; an unavailable diagnostic is
+    returned with its error and a flag.
 
     fluid=None uses water. A constant fluid dictionary supplies rho [kg/m3],
     cp [J/(kg K)], mu [Pa s] and k [W/(m K)]; a fluid object may provide props.
