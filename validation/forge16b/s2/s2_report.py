@@ -22,7 +22,7 @@ Ten predeclared depth bins have downhole observations in both wells. The Q4 tabl
 
 '''
 
-HERE=Path(__file__).resolve().parent/'s2'
+HERE=Path(__file__).resolve().parent
 plan=json.loads((HERE/'plan.json').read_text())
 rows=[json.loads(x) for x in (HERE/'results.jsonl').read_text().splitlines()]
 assert len(rows)==len(plan['cases'])==934
@@ -224,11 +224,11 @@ ax[0].set(xlabel='Measured SPP minus raw differential [psi]',ylabel='Modelled SP
 ax[1].set(xlabel='Measured outlet minus inlet [°C]',ylabel='Modelled outlet minus inlet [°C]',title='Paired temperature rise')
 fig.tight_layout();fig.savefig(HERE/'energy-comparison.png',dpi=160);plt.close(fig)
 
-text='''# FORGE 16B and 16A: S2 review
+text='''# FORGE 16B and 16A: rheology and energy results
 
 ## Protocol revision and preserved evidence
 
-The revised missing-rheology rule was fixed from the inputs after S1 review. Missing PV/YP uses the nearest actual measurement in either time direction within the same fluid system; a system without a measurement uses water viscosity or zero yield point at recorded density. The original S1 primary remains version 1. The new 16B primary is version 2. The 16A blind result remains unchanged; its water-rheology run is a sensitivity. No parameter was fitted and no model function, constant, default, golden or regression tolerance was changed.
+The revised missing-rheology rule was fixed from the inputs after original comparison. Missing PV/YP uses the nearest actual measurement in either time direction within the same fluid system; a system without a measurement uses water viscosity or zero yield point at recorded density. The original S1 primary remains version 1. The new 16B primary is version 2. The 16A blind result remains unchanged; its water-rheology run is a sensitivity. No parameter was fitted and no model function, constant, default, golden or regression tolerance was changed.
 
 The earlier weighted-programme reference PV 27 cP and YP 28 lbf/100 ft² are inconsistent with the reported low-solids water-rich 16B mud. The revised early low-solids assignments use PV 2 cP and YP 1 lbf/100 ft². The [donor ledger](mud-revision-ledger.csv) includes signed time offsets; no donor crosses a fluid-system boundary. The post-TD high-viscosity sweep/logging fluid is separated from drilling fluid using the 17 June operations report. Some nearest measurements remain days away from the selected sample, so the actual contemporaneous rheology remains uncertain.
 
@@ -295,15 +295,15 @@ The displayed model columns identify fixed branches; the full table retains all 
 
 The 16A recorded long stops are trip proxies, not confirmed string movements. A missing confirmed surface-trip time remains missing. 16B's near-surface proxy is labelled separately. Cooler operation and fluid sweeps are contextual observations, not fitted heat-removal or composition corrections.
 
-## Verification and scope
+## Numerical coverage
 
 '''
 good=[r for r in rows if r['success']];replays=[r for r in good if 'max_saved_temperature_difference_C' in r]
 text+=f"Completed {len(rows)}/{len(plan['cases'])} planned cases, with {len(rows)-len(good)} failures. Maximum replay difference from the preserved earlier primary is {max(r['max_saved_temperature_difference_C'] for r in replays):.9g} °C. Maximum absolute temperature-balance quadrature closure is {max(abs(r['rise_closure_error_C']) for r in good):.6f} °C. Summed solve/diagnostic execution time is {sum(r['duration_s'] for r in rows):.1f} s.\n\n"
-text+='The original S1 and 16A evidence are preserved. The revised 16B donor rule is a labelled protocol change made after seeing S1; no sample or filter was changed. This sensitivity does not establish that the true field fluid had water rheology. The [S2 protocol](../comparison_protocol_s2.md) records the definitions before these new results. Commands and versions are in [commands.md](commands.md). Work stops after S2; there is no documentation integration, commit, merge, push, tag or release.\n'
+text+='The original S1 and 16A evidence are preserved. The revised 16B donor rule is a labelled protocol change made after seeing S1; no sample or filter was changed. This sensitivity does not establish that the true field fluid had water rheology. The [S2 protocol](../comparison_protocol_s2.md) records the definitions before these new results. Numerical versions and solver coverage are retained in summary.json.\n'
 text=text.replace('## 16B primary: both protocol versions',FINDINGS+'## 16B primary: both protocol versions')
 text=text.replace('Temperature-rise columns use all listed samples.','Annulus and temperature-rise columns use all listed samples.')
-(HERE/'S2-review.md').write_text(text,encoding='utf-8')
+(HERE/'results.md').write_text(text,encoding='utf-8')
 summary=dict(cases=len(rows),failures=len(rows)-len(good),cases_by_type=dict(Counter(r['well']+' '+r['rheology_case'] for r in rows)),
              max_replay_difference_C=max(r['max_saved_temperature_difference_C'] for r in replays),
              max_abs_closure_C=max(abs(r['rise_closure_error_C']) for r in good),

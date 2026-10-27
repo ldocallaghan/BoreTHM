@@ -205,7 +205,7 @@ Sources checked on 11 October 2026. Availability describes the product or practi
 
 ## Evidence and reproduction
 
-The [reviewed trial outputs](../../results/levers/) and their [manifest](../../results/levers/manifest.json) retain all settings and brackets. The [historical review](../archive/v1.3.4/design-review.md) records implementation and testing history.
+The [trial outputs](../../results/levers/) and their [manifest](../../results/levers/manifest.json) retain all settings and brackets.
 
 From a checkout of the release tag, install the locked environment and write a separate reproduction beside the checkout:
 

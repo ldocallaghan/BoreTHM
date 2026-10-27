@@ -25,7 +25,6 @@ Choose a path based on what you want to do. Installation and the first command a
 
 ## Maintain the project
 
-- [Historical reviews](archive/README.md): dated checkpoints preserved for traceability.
 - [Maintenance notes](maintenance/README.md): implementation priorities and triggers.
 - [Contributing](../CONTRIBUTING.md) and [support](../SUPPORT.md): changes, problem reports and questions.
 

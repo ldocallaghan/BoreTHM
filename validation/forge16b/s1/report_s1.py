@@ -9,11 +9,11 @@ from collections import defaultdict
 from pathlib import Path
 
 HERE=Path(__file__).resolve().parent
-ROOT=HERE.parents[2]/'geothermal-thermo-hydraulic-model'
+ROOT=HERE.parents[2]
 DATA=ROOT/'validation/forge16b'
-OUT=HERE/'comparison'
+OUT=HERE
 ARCHIVE=DATA/'s1'
-plan=json.loads((OUT/'plan.json').read_text())
+plan=json.loads((OUT/'frozen-inputs.json').read_text())
 results=[json.loads(line) for line in (OUT/'results.jsonl').read_text().splitlines()]
 assert len(results)==len(plan['cases'])==872
 assert len({r['case_id'] for r in results})==872
@@ -180,7 +180,7 @@ fig.text(.5,.015,'Whiskers span run-mean errors over requested positions. No pos
 fig.tight_layout(rect=(0,.04,1,1));fig.savefig(OUT/'fluid-film-sensitivities.png',dpi=160);fig.savefig(OUT/'fluid-film-sensitivities.svg');plt.close(fig)
 
 primary=[r for r in run_metrics if r['fluid']=='recorded_mud' and r['film_mult']==1 and r['exposure']=='cumulative']
-text='''# FORGE 16B whole-well comparison: S1 review
+text='''# FORGE 16B whole-well comparison: original comparison
 
 ## Existing trial water check
 
@@ -265,15 +265,15 @@ for r in motorless:
 text+='''
 The motorless channel is not identically zero. It cannot be interpreted as verified motor-only loss. The two averaging columns use different sampling weights. No zero-offset correction is applied; motor-face heat is zero on these assemblies. Raw values, including negative values, remain in the inputs. Pressure/energy comparisons with 16A are deferred to S2.
 
-## Execution and checks
+## Numerical coverage
 
 '''
 text+=f"Completed **{len(results)} / {len(plan['cases'])} planned solves**, with **{len(failures)} failed results**. The separate trial replay completed 150 converged solves. Main solve time summed over cases was {sum(r['duration_s'] for r in results):.1f} s. Failures and exceptions are retained in [solver-failures.json](solver-failures.json).\n\n"
-text+='The first separate-crossover construction emitted convergence warnings and was interrupted before producing a whole-well result. It was corrected to the existing 16A aggregation of non-HWDP components; all source dimensions and lengths were retained. The original attempt is saved privately. No temperature error was used to select an aggregation, filter, sample or parameter. The [S1 protocol](../comparison_protocol_s1.md) records this correction and the S0 rulings.\n\n'
+text+='The first separate-crossover construction emitted convergence warnings and was interrupted before producing a whole-well result. It was corrected to the existing 16A aggregation of non-HWDP components; all source dimensions and lengths were retained. No temperature error was used to select an aggregation, filter, sample or parameter. The [S1 protocol](../comparison_protocol_s1.md) records this correction and the input treatments.\n\n'
 text+='The cumulative history contains '+str(plan['clock_summary']['missing_flow_rows'])+' missing-flow rows, '+str(plan['clock_summary']['incomplete_bins'])+' incomplete ten-minute bins and '+str(plan['clock_summary']['gaps_over_600s'])+' gaps longer than ten minutes. Missing coverage contributes no observed circulation and is not classified as a known stop. These are limits on both exposure clocks.\n\n'
-text+='Runtime versions: '+', '.join(k+' '+v for k,v in plan['versions'].items())+'. Calculations use the existing water-property cache with BLAS/OMP threads limited to one. No model function, constant, default, golden result or tolerance was changed. No fitting, commit, merge, push, tag or release was performed.\n\n'
-text+='The primary/variant outputs and source hashes are retained with this review. Commands are in [commands.md](commands.md). S1 stops here for review before energy-budget and matched-well comparisons.\n'
-control=json.loads((HERE/'water-path-control/water-path-check.json').read_text())
+text+='Runtime versions: '+', '.join(k+' '+v for k,v in plan['versions'].items())+'. Calculations use the existing water-property cache with BLAS/OMP threads limited to one. No model function, constant, default, golden result or tolerance was changed.\n\n'
+text+='The archive retains primary and variant outputs, numerical versions and source hashes.\n'
+control=json.loads((HERE/'water-path-check.json').read_text())
 assert control['passed'] and control['main_plan_unchanged']
 control_max=max(r['max_abs_point_difference_C'] for r in control['checks'])
 control_text=('A further implementation control replayed all 150 identical legacy sample/parameter combinations through the new whole-well study water path, using the legacy clock. '
@@ -292,9 +292,9 @@ Full recovery brackets the measured run mean in EOW 15, 16, 27 and 38. It leaves
 
 '''
 text=text.replace('## Fluid, film and recovery sensitivities',findings+'## Fluid, film and recovery sensitivities')
-(OUT/'S1-review.md').write_text(text,encoding='utf-8')
+(OUT/'results.md').write_text(text,encoding='utf-8')
 summary=dict(planned_cases=len(plan['cases']),completed_cases=len(results),failed_cases=len(failures),
              solve_duration_sum_s=sum(r['duration_s'] for r in results),samples=len(samples),
-             main_plan_sha256=hashlib.sha256((OUT/'plan.json').read_bytes()).hexdigest(),versions=plan['versions'])
+             main_plan_sha256=hashlib.sha256((OUT/'frozen-inputs.json').read_bytes()).hexdigest(),versions=plan['versions'])
 (OUT/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
 print(json.dumps(summary,indent=2))

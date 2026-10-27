@@ -1,4 +1,4 @@
-"""Build the S2b review from saved pressure tables; no model solves."""
+"""Build the motorless pressure results from saved pressure tables; no model solves."""
 import csv
 import json
 import statistics as st
@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 HERE=Path(__file__).resolve().parent
-OUT=HERE/'s2b'
+OUT=HERE
 read=lambda name:list(csv.DictReader((OUT/name).open(newline='',encoding='utf-8')))
 samples=read('pressure-samples.csv')
 runs=read('pressure-run-summary.csv')
@@ -73,7 +73,7 @@ The [recorded assembly inputs](../component_inputs_s1.csv) give the lengths and 
 
 The [Modelica Association's documented Idelchik correlations](https://doc.modelica.org/Modelica%204.0.0/Resources/helpOM/Modelica.Fluid.Dissipation.Utilities.SharedDocumentation.PressureLoss.Orifice.dp_suddenChange.html) supply abrupt expansion and contraction coefficients from area ratios. Zero local loss is also retained for gradual-transition scenarios. These correlations describe smooth turbulent Newtonian flow. All revised-mud geometric checks exceed their stated Reynolds-number thresholds, but applying them to Bingham mud and annular changes remains an approximation. Original S1 mud has 3,990 joint and 60 BHA transition rows outside those Reynolds thresholds; their estimates are retained and flagged, not treated as validated predictions.
 
-For surface equipment, API RP 13D (2009), §7.3 equation60/table4, gives P = C rho_ppg (Q_gpm/100)^1.86 psi, with the five C values 1.00, 0.36, 0.22, 0.15 and 0.15. Case5 represents a top-drive system; all are generic complete layouts. No as-built dimensions or exact Pason pressure-tap position were found. Including a complete layout is conditional because part could be upstream of that tap. [API document text](https://studylib.net/doc/27198826/api-recommended-practice-13d-rheology-and-hydraulics-of-o...). The old standard is used for explicit scenarios, not as a claim of current-edition compliance.
+For surface equipment, API RP 13D (2009), §7.3 equation60/table4, gives P = C rho_ppg (Q_gpm/100)^1.86 psi, with the five C values 1.00, 0.36, 0.22, 0.15 and 0.15. Case5 represents a top-drive system; all are generic complete layouts. No as-built dimensions or exact Pason pressure-tap position were found. Including a complete layout is conditional because part could be upstream of that tap. The old standard is used for explicit scenarios, not as a claim of current-edition compliance.
 
 API §7.6.2 requires a tool-specific reference pressure-loss coefficient. The [HALO manufacturer sheet](https://scientificdrilling.com/assets/uploads/sites/3/2018/09/SC_TDS_HALO_9.24v3.pdf) identifies an integrated steering assembly and MWD pulser but provides no operating loss curve. Its 20,000-psi hydrostatic rating is not an operating loss. The recorded float and filter subs likewise lack port/open-area data. A full numerical estimate of these terms cannot be obtained from body IDs alone without an unsupported coefficient. Their open-passage friction is estimated above, and the following dynamic heads give pressure per unit *additional* local-loss coefficient K at the recorded bore. Actual K and additional loss remain blank in the evidence, not set to zero. The motor contribution is zero because no motor is documented.
 
@@ -118,15 +118,15 @@ text+='''## Reported differential on motorless runs
 text+=table(['EOW','n','Mean psi','Minimum psi','Maximum psi','Negative sample windows'],[[r['run'],r['n'],*[f'{float(r[k]):.2f}' for k in ['raw_differential_psi_mean','raw_differential_psi_min','raw_differential_psi_max']],sum(float(s['raw_differential_psi'])<0 for s in samples if s['run']==r['run'] and s['rheology_case']=='s2_revised')] for r in runs if r['rheology_case']=='s2_revised'])
 text+='''The original S1 diagnostic also includes EOW14, which has no accepted temperature sample. The present accounting introduces no EOW14 sample. Its [original differential table](../s1/motorless-differential.csv) is preserved.
 
-## Reproducibility and checks
+## Archive and provenance
 
 '''
 text+=f"All {audit['replays']} replays converged in {audit['duration_s']:.2f} seconds of summed case time, including pressure post-processing. Maximum temperature-endpoint difference and SPP difference from S2 are both zero. The independent audit checks 1,000 serial-component rows, all scenario sums and source preservation. All {audit['existing_calculation_files_unchanged']} calculation files in the S2 hash list, 69 input/source files and 66 S1/S2 archive files are unchanged. No fit or model replacement was used.\n\n"
-text+='''[commands.md](commands.md) records exact execution commands and versions. [plan.json](plan.json) freezes inputs and hashes; [audit.json](audit.json) records verification. [bha-transitions.csv](bha-transitions.csv) retains local coefficients and applicability flags. [tool-joints.csv.gz](tool-joints.csv.gz) retains the connection calculations. [replayed-profiles.npz](replayed-profiles.npz) contains saved bore/annulus profiles, keyed by original S2 case ID. [execution-manifest.json](execution-manifest.json) records published file hashes.
+text+='''[plan.json](plan.json) freezes inputs and hashes; [audit.json](audit.json) records verification. [bha-transitions.csv](bha-transitions.csv) retains local coefficients and applicability flags. [tool-joints.csv.gz](tool-joints.csv.gz) retains the connection calculations. [replayed-profiles.npz](replayed-profiles.npz) contains saved bore/annulus profiles, keyed by original S2 case ID. [execution-manifest.json](execution-manifest.json) records published file hashes.
 
 The source data are GDR1516, [DOI 10.15121/1998591](https://doi.org/10.15121/1998591), CC BY4.0. This diagnostic adds pressure calculations and aggregation to those extracts; original downloads remain unchanged. The source report locators and estimate references are listed in the protocol. No new temperature prediction is substituted for S1 or S2.
 '''
-(OUT/'S2b-review.md').write_text(text,encoding='utf-8')
+(OUT/'results.md').write_text(text,encoding='utf-8')
 
 plt.rcParams.update({'font.size':10,'axes.spines.top':False,'axes.spines.right':False})
 fig,axes=plt.subplots(1,2,figsize=(11.6,5),sharey=True,constrained_layout=True)
@@ -150,4 +150,4 @@ fig.legend(handles,labels,loc='outside lower center',ncol=3,frameon=False)
 fig.suptitle('Motorless 16B: pressure accounted for in two declared scenarios\n29-in joint restrictions; abrupt changes; revised S2 mud',fontsize=13)
 fig.savefig(OUT/'pressure-accounting.png',dpi=170)
 plt.close(fig)
-print('Wrote S2b review, nominal sample table and pressure figure')
+print('Wrote pressure results, nominal sample table and pressure figure')

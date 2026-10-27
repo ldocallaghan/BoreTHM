@@ -1,10 +1,6 @@
-# Archived v1.3.4 implementation checkpoint
+# v1.3.4 programme and composition comparison
 
-**Historical record from the v1.3.4 development cycle.** Future-tense statements and release-status statements describe the checkpoint when this review was written. The release was published on 12 October 2026. For current reading paths, use the [documentation guide](../../README.md).
-
-This is the first STOP review in the supplied v1.3.4 specification. These are verdicts for the stated programme and assumptions. C5 and C6 have not begun, and the v1.3.3 goldens are unchanged.
-
-The earlier development-plan changes were reverted to `6170a12`. The v1.3.4 work has separate commits for C1 (`3028b17`), C4 (`1c69f19`), C2 (`42d0f99`) and C3 (`1a5da44`). Commit `b9b666b` rejects invalid circulation candidates encountered in the United Downs search and adds checkpoint resumption.
+These historical results compare v1.3.3 with the combined mass-conserving composition, fluid feedback, depth coverage and effective-target corrections in v1.3.4. C1–C4 in the tables identify those four corrections in that order. Surface densities are at 20 °C. The [comparison archive](comparison.json) and per-site JSON files retain the numerical results and solver checks.
 
 ## Site verdicts
 
@@ -85,26 +81,3 @@ The following comparison holds surface density and the full corrected trip tempe
 
 C1 lowers hot-column pressure in both deep sites, as the spec expects. The combined C1 to C4 trip widths are reported separately; those changes also include the heavier simulated fluids and the newly checked final stand.
 
-## Numerical checks and timing
-
-The default suite passed 336 tests with 89 slow tests deselected in 18.17 s. The focused Larderello and coverage run passed six tests in 81.11 s. The v1.3.3 regression passed all four tests in 1,560.34 s (26 min), with three numerical warnings. Its saved table was reproduced with C1 to C3 disabled. All five corrected selected drilling and trip solves passed their solver checks, and every prescribed versus simulated density difference was below 0.002 SG.
-
-| Site | Checkpoint evaluation, s | Fluid passes | Fluid converged | Window refinement converged | Largest refinement change, SG | Largest binding-depth movement, m |
-|---|---:|---:|---|---|---:|---:|
-| Soultz | 266.54 | 3 | True | True | 0.000000 | 0.0 |
-| United Downs | 723.56 | 3 | True | True | 0.000000 | 0.0 |
-| Larderello | 116.05 | 2 | True | True | 0.000000 | 0.0 |
-| Pannonian | 293.92 | 3 | True | True | 0.000000 | 0.0 |
-| Newberry | 31.09 | 1 | True | True | 0.000000 | 0.0 |
-
-The run uses Python 3.14.4 and the lock-file packages: NumPy 2.5.3, SciPy 1.18.1, IAPWS 1.5.5 and Matplotlib 3.11.2. The JSON evidence records the source commit for each site. Soultz and Larderello were run at `1a5da44`; the remaining sites use `b9b666b`.
-
-BVP divide warnings and a heat-transfer power warning occurred during the circulation search. The search rejected a diverged United Downs candidate whose surface temperature was outside the saturation-pressure domain. Selected drilling and trip solves must pass their solver gates; an unsuccessful solve produces INDETERMINATE.
-
-Raw per-site results and the full comparison are in [the checkpoint evidence](../../../results/v1.3.4/checkpoint-1/comparison.json). No reviewed golden files were regenerated. To rerun the checkpoint, use `python src/checkpoint_v134.py --output results/v1.3.4/checkpoint-1`. The site CLI defaults to v1.3.4; API callers select it with `evaluate(site, circulation="v1.3.4")`.
-
-## Review boundary
-
-Work stops here as required by the first STOP. After this review, C5 will test the remaining approximations with the nine ledger comparisons. C6 will follow its own review boundary. C7, the merge to main and the v1.3.4 tag remain after all three reviews.
-
-The five base evaluations sum to 23.9 minutes of measured run time; the two deep sites account for 16.5 minutes. The remaining effort estimate stays at 5 to 10 hours for C5 and 10 to 20 hours for C6, plus calculation time and the STOP reviews. Ten full evaluations of each deep site would take about 2.8 hours at these measured costs. Several lever searches could therefore need overnight runs. The cheap ledger comparisons should avoid that full-evaluation cost where their definitions allow it.

@@ -11,5 +11,5 @@
   "excluded_windows": 273,
   "minute_rows": 18579,
   "pandas_version": "3.0.1",
-  "protocol": "Protocol is subject to S0 review; no model error has been computed."
+  "protocol": "Observation extraction only; calculation methods are specified in the comparison protocols."
 }
