@@ -178,3 +178,24 @@ def test_strict_programme_and_custom_string_have_no_reference_tool():
         programme_from_dict(dict(surface=dict(case=5,coefficient=.15)))
     with pytest.raises(ValueError,match='unknown key'):
         programme_from_dict(dict(segments=[dict(length=100.,bore_diameter=.08,outer_diameter=.10,tool_loss=dict(dp_ref=1.,flow_ref=.01,density_ref=1000.,typo=1))]))
+
+
+@pytest.mark.parametrize('mud_density', [None, 1200.])
+def test_variable_property_energy_balance(mud_density):
+    """Actual water and mud properties preserve the in-hole energy balance."""
+    from borethm.fluids import Mud
+    fluid=None if mud_density is None else Mud(mud_density)
+    programme=HydraulicProgramme.reference_programme()
+    geometry=programme.geometry(1500.,wg.DUAL_WALL,shoes=(50.,300.,750.))
+    string=list(geometry.string)
+    string[-1]=replace(string[-1],local_loss=LocalLoss(1.,.5,source='synthetic bit-body restriction'))
+    geometry=WellGeometry(string,geometry.hole,geometry.survey)
+    result=circulating_temperatures(m_dot=20.,geometry=geometry,fluid=fluid,
+                                   friction_heat=True,surface=programme.surface)
+    assert result['success']
+    check=result['energy_check']
+    assert check['passed']
+    assert abs(check['residual_W']) <= .01 + 1e-7*check['assigned_W']
+    assert check['surface_W_in_hole'] == check['density_column_W'] == 0.
+    pressure=hydraulics(20.,geometry,result=result,fluid=fluid)
+    assert pressure['dp_surface'] > 0.

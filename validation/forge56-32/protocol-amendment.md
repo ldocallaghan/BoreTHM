@@ -1,6 +1,6 @@
 # Pressure protocol amendment
 
-This amendment applies the two V0 reviews before V1 and before target access. It governs the [56-32 comparison](comparison_protocol.md) and the [58-32 protocol](../forge58-32/comparison_protocol.md). The original ten-minute candidate archive is retained. The amendment commit, recorded in the V1 execution report, freezes the new selections and exclusions. No target value has been used to choose the cuts or assign a BHA.
+This amendment fixes the input-only sampling, motor-loss intervals and geometry treatments before target access. It governs the [56-32 comparison](comparison_protocol.md) and the [58-32 protocol](../forge58-32/comparison_protocol.md). The original ten-minute candidate archive is retained. Commit `8bbfe2c44658dade8972a647970e3308047b6380` registered these selections and exclusions before implementation and target access. No target value has been used to choose the cuts or assign a BHA.
 
 ## Short off-bottom windows
 
@@ -14,13 +14,13 @@ An off-bottom event is contiguous occupancy with at least 10 ft clearance and bi
 
 Keep window outputs, but summarise each event once. For each model and interval endpoint, take the median prediction over its qualified windows and the median measured pressure over those same windows. Form residuals and interval coverage from those medians. Each event has equal weight in BHA summaries, independently of duration or window count. Report event and window counts separately, including missing targets and convergence failures. Also publish the window-level results. Do not select a representative window using its pressure or residual.
 
-The original ten-minute counts and the new counts are in each well's `off_bottom_counts.csv`; the [amendment review](../hydraulics-v160/review-v0-amendment/README.md) presents all BHAs, including zero counts. Old and new rules use the same input-based assignment and motor exclusions. Rate-range checks use within-bin extrema, not just the window mean. Counts by exclusion are mutually exclusive primary reasons; the separate `outside_rated_flow` field also counts range failure where another exclusion applies.
+The original ten-minute counts and the new counts are in each well's `off_bottom_counts.csv`; the tables include all BHAs, including zero counts. Old and new rules use the same input-based assignment and motor exclusions. Rate-range checks use within-bin extrema, not just the window mean. Counts by exclusion are mutually exclusive primary reasons; the separate `outside_rated_flow` field also counts range failure where another exclusion applies.
 
 The on-bottom secondary method retains the original ten-minute drilling windows and the reported-differential caveats. The short rule applies to off-bottom circulation only.
 
 ## Motors and primary observations
 
-All eleven 56-32 BHAs contain a motor. There are no motorless primary observations on this well. The [mapping table](motor_mapping.csv) uses the BHA component descriptions and the bit workbook, with daily-report input notes as a cross-check. The mapping was reported before freezing this amendment. A maker/OD match with a different lobe or stage count uses the supplied sheet with a mismatch flag. An unknown maker or an absent same-OD sheet excludes the motor-interval measure. Do not substitute a 6.75-in sheet for the recorded 7-in motor.
+All eleven 56-32 BHAs contain a motor. There are no motorless primary observations on this well. The [mapping table](motor_mapping.csv) uses the BHA component descriptions and the bit workbook, with daily-report input notes as a cross-check. The mapping was registered before this amendment was frozen. A maker/OD match with a different lobe or stage count uses the supplied sheet with a mismatch flag. An unknown maker or an absent same-OD sheet excludes the motor-interval measure. Do not substitute a 6.75-in sheet for the recorded 7-in motor.
 
 Discovery motors without a published no-load value are excluded and counted. Every motor window with flow outside the mapped sheet's rated range is excluded and counted. The range check covers every available within-bin extreme. A source mapping is not revised in response to a comparison.
 
@@ -48,8 +48,8 @@ The committed `off_bottom_windows.csv` files freeze BHA assignments and exclusio
 
 Mud uses recorded density and the nearest non-missing paired PV/YP in the same recorded fluid system, in either time direction, with earlier samples breaking ties. If a system has no PV/YP, use water rheology at recorded density. Until fluid-system boundaries are sourced, the original 56-32 hole-section grouping is flagged as an assumption; 58-32 needs its own system ledger before scoring. No transfer across a documented fluid change is allowed. Unknown field PV test temperature remains the declared 48.9 C convention, with 26.7 C reported and yield point unchanged.
 
-## Accepted implementation and checks
+## Calculation and reproducibility requirements
 
-The public interface and shared friction kernel with explicit legacy mode are accepted. So are the surface-loss object, site-file programme field and S2b replay contract. Dual-wall and vacuum reference joints use their body bore, with no internal credit; only the external OD envelope is transferred. The plain reference collar length is 132.075968 m. API citations use edition/section/equation/table references without mirrored-document links.
+The calculation uses a shared friction kernel, an explicit legacy mode, a surface-loss object and a site-file programme field. The S2b replay uses frozen property and evaluation points. Dual-wall and vacuum reference joints use their body bore, with no internal credit; only the external OD envelope is transferred. The plain reference collar length is 132.075968 m. API citations use edition/section/equation/table references without mirrored-document links.
 
-V1 must show an exact v1.5.0 legacy test, formula tests and heat/pressure consistency. On S2b's frozen samples, isolate the change caused by applying the 5 MPa guard to the old pressure path; record the result in the changelog. Formula replay uses the archived property/evaluation points. Production-mode guard and sampling changes are reported separately, without fitting or changing the frozen results. Stop at the V1 review, before V2 comparisons or golden changes.
+Tests require exact v1.5.0 legacy agreement, formula agreement at arithmetic precision and heat/pressure consistency. On S2b's frozen samples, isolate the change caused by applying the 5 MPa guard to the old pressure path; record the result in the changelog. Formula replay uses the archived property/evaluation points. Production-mode guard and sampling changes are reported separately, without fitting or changing the frozen results. These calculation checks are independent of the held-out pressure comparisons.

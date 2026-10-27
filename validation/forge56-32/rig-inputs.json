@@ -1,0 +1,9 @@
+{
+  "file": "rig_inputs_10s.csv.gz",
+  "sha256": "95ca1cffca7474b509547decc949e5938a850b905ab41611202f34bbca1e5c23",
+  "uncompressed_sha256": "4f5df1ce205ada8bb0d17828c23962d7e97994c4f2de796dcacd0235eda3e9b8",
+  "compressed_bytes": 6575454,
+  "uncompressed_bytes": 48486201,
+  "compression": "gzip; mtime=0; no embedded filename",
+  "zlib_version": "1.3.2"
+}

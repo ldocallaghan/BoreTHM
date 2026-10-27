@@ -2,6 +2,7 @@
 import argparse
 import ast
 import csv
+import gzip
 import hashlib
 import json
 from collections import Counter
@@ -13,14 +14,14 @@ GENERATED = (
     'bha_components.csv', 'bha_runs.csv', 'bit_records.csv', 'casing_records.csv',
     'mud_reports.csv', 'operating_notes.csv', 'operations.csv', 'pipe_tallies.csv',
     'survey.csv', 'survey-source.json', 'source_reports.json',
-    'report_extraction_audit.json', 'rig_inputs_10s.csv', 'target_availability.json',
-    'extract-summary.json', 'bha_crosswalk.csv', 'candidate_windows.csv',
+    'report_extraction_audit.json', 'rig_inputs_10s.csv.gz', 'target_availability.json',
+    'rig-inputs.json', 'extract-summary.json', 'bha_crosswalk.csv', 'candidate_windows.csv',
     'window-preparation.json',
 )
 
 
 def read(root,name):
-    with (root/name).open(encoding='utf-8',newline='') as f:return list(csv.DictReader(f))
+    with (gzip.open(root/name,'rt',encoding='utf-8',newline='') if name.endswith('.gz') else (root/name).open(encoding='utf-8',newline='')) as f:return list(csv.DictReader(f))
 
 
 def audit(root):
@@ -33,7 +34,7 @@ def audit(root):
     assert sum(c['missing'] for c in spp)==29513
     target_tokens=('Standpipe','Differential','Temp OUT','MWD Temp','observed_pressure','measured_pressure')
     n=0;last=None
-    with (root/'rig_inputs_10s.csv').open(encoding='utf-8',newline='') as f:
+    with gzip.open(root/'rig_inputs_10s.csv.gz','rt',encoding='utf-8',newline='') as f:
         rr=csv.DictReader(f)
         assert not any(t.lower() in key.lower() for key in rr.fieldnames for t in target_tokens)
         for row in rr:

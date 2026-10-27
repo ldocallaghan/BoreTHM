@@ -5,6 +5,9 @@ mud and bit cells are whitelisted; all pressure/thermal observations stay out.
 """
 import argparse
 import csv
+import gzip
+import zlib
+from contextlib import contextmanager
 import hashlib
 import io
 import json
@@ -13,6 +16,25 @@ import re
 import zipfile
 from datetime import datetime
 from pathlib import Path
+
+
+@contextmanager
+def gzip_text(path):
+    """Write UTF-8 CSV with a fixed gzip header for reproducible extracts."""
+    with path.open('wb') as raw:
+        with gzip.GzipFile(filename='',mode='wb',fileobj=raw,mtime=0) as compressed:
+            with io.TextIOWrapper(compressed,encoding='utf-8',newline='') as text:
+                yield text
+
+
+def record_rig_archive(root):
+    path=root/'rig_inputs_10s.csv.gz'
+    packed=path.read_bytes()
+    unpacked=gzip.decompress(packed)
+    dump(root,'rig-inputs.json',dict(file=path.name,sha256=hashlib.sha256(packed).hexdigest(),
+        uncompressed_sha256=hashlib.sha256(unpacked).hexdigest(),
+        compressed_bytes=len(packed),uncompressed_bytes=len(unpacked),
+        compression='gzip; mtime=0; no embedded filename',zlib_version=zlib.ZLIB_RUNTIME_VERSION))
 
 
 def num(s):
@@ -25,7 +47,7 @@ def num(s):
 
 def save(root, name, rows):
     fields = list(dict.fromkeys(k for row in rows for k in row))
-    with (root/name).open('w', encoding='utf-8', newline='') as f:
+    with (gzip_text(root/name) if name.endswith('.gz') else (root/name).open('w',encoding='utf-8',newline='')) as f:
         writer = csv.DictWriter(f, fields, lineterminator='\n')
         writer.writeheader()
         writer.writerows(rows)
@@ -189,7 +211,8 @@ def rig(top, root):
             counts.append(dict(source_member=name,raw_rows=raw_rows,input_bins_10s=len(bins),standpipe_finite=finite,standpipe_missing=missing,non_data_rows=excluded))
     outputs.sort(key=lambda r:r['time'])
     assert len({r['time'] for r in outputs})==len(outputs), 'Resolve overlapping daily input bins before proceeding'
-    save(root,'rig_inputs_10s.csv',outputs)
+    save(root,'rig_inputs_10s.csv.gz',outputs)
+    record_rig_archive(root)
     dump(root,'target_availability.json',counts)
     return dict(raw_rows=sum(r['raw_rows'] for r in counts),bins_10s=len(outputs),standpipe_finite=sum(r['standpipe_finite'] for r in counts))
 

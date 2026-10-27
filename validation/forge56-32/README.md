@@ -28,7 +28,7 @@ To check an independent rebuild, add `--compare PATH_TO_REBUILD` to the audit co
 
 | File | Contents |
 | --- | --- |
-| `rig_inputs_10s.csv` | 250,629 input bins from 2,506,182 native rows, with source-row locators, validity counts and within-bin depth/flow extrema |
+| `rig_inputs_10s.csv.gz` | 250,629 input bins from 2,506,182 native rows, with source-row locators, validity counts and within-bin depth/flow extrema |
 | `survey.csv`, `survey-source.json` | 97 source survey stations and original headings; depths/elevation are ft, UTM coordinates are metres |
 | `bha_runs.csv` | Eleven BHA sheets, their dates/depths and preserved source conflicts |
 | `bha_components.csv` | 87 component entries, lengths and separate body/stabiliser dimensions; unknown IDs remain blank |
@@ -60,3 +60,5 @@ Pason labels inlet/return as Degrees. The input inlet is treated as Fahrenheit u
 Several motor/shock passage IDs and casing dimensions are absent. Manufacturer off-bottom pressure figures lack complete reference-flow/density information, and some motor configurations do not match the pictured sheets. The candidate list therefore remains input preparation. Its 18 off-bottom and 1,022 on-bottom candidates are not a certified complete primary score set. Source rulings and any amendments must be committed before targets are read for comparison.
 
 Prior inventory work exposed one report's pressure summary. That is disclosed in the protocol. No model prediction has been calculated for 56-32. Preserve that distinction in any later publication.
+
+The input history uses deterministic gzip compression. [rig-inputs.json](rig-inputs.json) records compressed and uncompressed SHA-256 hashes and sizes; decompression preserves the original CSV bytes. The same recorded zlib version reproduces the compressed bytes; the uncompressed hash checks CSV identity across compression-library versions.

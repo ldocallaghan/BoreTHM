@@ -5,6 +5,7 @@ list. Outputs distinguish events, windows, assignment and motor exclusions.
 """
 import argparse
 import csv
+import gzip
 import json
 import math
 from collections import Counter, defaultdict
@@ -13,7 +14,7 @@ from pathlib import Path
 
 
 def read(root,name):
-    with (root/name).open(encoding='utf-8',newline='') as f:
+    with (gzip.open(root/name,'rt',encoding='utf-8',newline='') if name.endswith('.gz') else (root/name).open(encoding='utf-8',newline='')) as f:
         return list(csv.DictReader(f))
 
 
@@ -87,7 +88,7 @@ def exclusion(bha, motor, qmin, qmax):
 
 def main(root,well):
     owner,motors=assign56(root) if well=='56-32' else assign58(root)
-    rows=read(root,'rig_inputs_10s.csv')
+    rows=read(root,'rig_inputs_10s.csv.gz')
     stop=datetime(2021,2,28) if well=='56-32' else datetime(2017,9,14)
     events=[]
     current=None

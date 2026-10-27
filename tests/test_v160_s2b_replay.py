@@ -4,7 +4,7 @@ No circulation solves and no held-out 56-32/58-32 target access. The frozen
 S2b profiles and archived rheology convention are preserved. Uses package
 formula kernels at the original component, transition and joint points.
 """
-import argparse
+import pytest
 import csv
 import gzip
 import hashlib
@@ -21,21 +21,12 @@ from borethm.studies import forge16b_hydraulics as old, forge16_energy as energy
 from borethm.studies import validate_forge16b_wholewell as whole
 
 FT,INCH,PSI,GPM=old.FT,old.INCH,old.PSI,old.GPM
-PROTOCOL_COMMIT='8bbfe2c44658dade8972a647970e3308047b6380'
 
 
 def read(path):
     opener=gzip.open if path.suffix=='.gz' else open
     with opener(path,'rt',encoding='utf-8',newline='') as f:
         return list(csv.DictReader(f))
-
-
-def write(path,rows):
-    names=list(dict.fromkeys(k for r in rows for k in r))
-    with path.open('w',encoding='utf-8',newline='') as f:
-        w=csv.DictWriter(f,names,lineterminator='\n')
-        w.writeheader()
-        w.writerows(rows)
 
 
 class GuardedFluid:
@@ -54,9 +45,8 @@ def props(g,result,fluid,depth,ann=False):
     return rho,mu
 
 
-def run(data,out,limit=None):
+def replay(data):
     start=time.perf_counter()
-    out.mkdir(parents=True,exist_ok=True)
     files=['plan.json','replayed-profiles.npz','pressure-samples.csv','bha-components.csv','bha-transitions.csv','tool-joints.csv.gz','scenario-budgets.csv']
     source_hashes={n:hashlib.sha256((data/n).read_bytes()).hexdigest() for n in files}
     plan=json.loads((data/'plan.json').read_text())
@@ -70,7 +60,7 @@ def run(data,out,limit=None):
         tables[name]=grouped
     checks,guard_rows,production_rows=[],[],[]
     maxima=defaultdict(float)
-    cases=plan['cases'] if limit is None else plan['cases'][:limit]
+    cases=plan['cases']
     for case in cases:
         cid=case['case_id']
         s=samples[case['sample']]
@@ -83,7 +73,7 @@ def run(data,out,limit=None):
         guarded=m1.hydraulics(mass,g,result=result,fluid=GuardedFluid(fluid),tfa=s['tfa_m2'],hydraulics_model='v1.5.0')
         oldrow=tables['pressure-samples'][cid][0]
         error=legacy['spp']/PSI-float(oldrow['model_spp_psi'])
-        assert abs(error)<1e-8,(cid,'legacy',error)
+        assert error == 0.,(cid,'legacy',error)
         maxima['legacy_psi']=max(maxima['legacy_psi'],abs(error))
         guard_rows.append(dict(case_id=cid,run=s['run'],rheology_case=case['rheology_case'],
             legacy_psi=legacy['spp']/PSI,guarded_legacy_psi=guarded['spp']/PSI,
@@ -210,31 +200,36 @@ def run(data,out,limit=None):
                         production_rows.append(dict(case_id=cid,run=s['run'],rheology_case=case['rheology_case'],joint_geometry=name,
                             joint_length_in=length,local_shape=shape,surface_case=surface_case,frozen_point_psi=total,
                             production_psi=prediction,total_delta_psi=prediction-total,**deltas,reconciliation_error_psi=reconciliation))
-        print(cid,'formula replay and production accounting verified',flush=True)
-    assert all(v<1e-8 for v in maxima.values()),dict(maxima)
-    for filename,rows in (('formula-replay.csv',checks),('legacy-guard.csv',guard_rows),('production-reconciliation.csv',production_rows)):
-        write(out/filename,rows)
+    assert maxima['legacy_psi'] == 0.
+    assert all(v <= 1e-12 for v in maxima.values()),dict(maxima)
     assert all(hashlib.sha256((data/n).read_bytes()).hexdigest()==h for n,h in source_hashes.items())
     guard=[r['guard_only_delta_psi'] for r in guard_rows]
     percent=[r['guard_only_delta_percent'] for r in guard_rows]
-    report=dict(protocol_commit=PROTOCOL_COMMIT,cases=len(cases),scenario_replays=len(checks),production_cases=len(production_rows),
+    report=dict(cases=len(cases),scenario_replays=len(checks),production_cases=len(production_rows),
         formula_max_errors=dict(maxima),legacy_guard_delta_psi_min=min(guard),legacy_guard_delta_psi_max=max(guard),
         legacy_guard_delta_percent_min=min(percent),legacy_guard_delta_percent_max=max(percent),
         duration_s=time.perf_counter()-start,source_hashes=source_hashes,preserved_archives=True,
         field_rheology_convention='archived 26.7 C retained for this formula replay',held_out_targets_read=False,
         production_difference_notes='integrated properties, conservative geometry/source blend, added casing transitions, bottom nozzle state, buoyancy integration and inlet surface density; guard isolated separately')
-    (out/'replay-summary.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')
-    print(json.dumps(report,indent=2))
+    return report
 
 
 def Surface(case,rho,flow):
     return hl.SurfaceLoss.api_case(case).pressure(rho,flow)
 
 
-if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--data',type=Path,default=Path('validation/forge16b/s2b'))
-    parser.add_argument('--output',type=Path,required=True)
-    parser.add_argument('--limit',type=int)
-    args=parser.parse_args()
-    run(args.data,args.output,args.limit)
+@pytest.mark.slow
+def test_s2b_frozen_formulas_and_production_accounting():
+    """Legacy is exact; the formula replay has a 1e-12 psi rounding budget.
+
+    The budget covers the reported 6.82e-13 psi summation difference, rather
+    than introducing a physical-model regression tolerance. Production
+    quadrature changes are reconciled separately at the archived states.
+    """
+    data=Path(__file__).resolve().parents[1]/'validation/forge16b/s2b'
+    report=replay(data)
+    assert report['cases'] == 90
+    assert report['scenario_replays'] == report['production_cases'] == 6480
+    assert report['formula_max_errors']['legacy_psi'] == 0.
+    assert report['formula_max_errors']['scenario_total_psi'] <= 1e-12
+    assert report['preserved_archives']

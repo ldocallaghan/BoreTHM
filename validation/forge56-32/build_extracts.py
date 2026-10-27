@@ -9,6 +9,9 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
+import zlib
+from contextlib import contextmanager
 import hashlib
 import io
 import json
@@ -37,6 +40,25 @@ INPUTS = {
 }
 TARGET_COUNTS = ('Standpipe Pressure (psi)', 'Differential Pressure (psi)',
                  'MWD Temp (Fahrenheit)', 'Temp OUT (Degrees)')
+
+
+@contextmanager
+def gzip_text(path):
+    """Write UTF-8 CSV with a fixed gzip header for reproducible extracts."""
+    with path.open('wb') as raw:
+        with gzip.GzipFile(filename='',mode='wb',fileobj=raw,mtime=0) as compressed:
+            with io.TextIOWrapper(compressed,encoding='utf-8',newline='') as text:
+                yield text
+
+
+def record_rig_archive(root):
+    path=root/'rig_inputs_10s.csv.gz'
+    packed=path.read_bytes()
+    unpacked=gzip.decompress(packed)
+    dump(root,'rig-inputs.json',dict(file=path.name,sha256=hashlib.sha256(packed).hexdigest(),
+        uncompressed_sha256=hashlib.sha256(unpacked).hexdigest(),
+        compressed_bytes=len(packed),uncompressed_bytes=len(unpacked),
+        compression='gzip; mtime=0; no embedded filename',zlib_version=zlib.ZLIB_RUNTIME_VERSION))
 
 
 def number(value):
@@ -94,7 +116,7 @@ def digest(data):
 def rig(top, out):
     counts = []; source_rows = []; fields = None; total_bins = 0
     with zipfile.ZipFile(io.BytesIO(top.read('56-32_Pason_Archive.zip'))) as z:
-        with (out / 'rig_inputs_10s.csv').open('w', newline='', encoding='utf-8') as dest:
+        with gzip_text(out / 'rig_inputs_10s.csv.gz') as dest:
             writer = None
             for name in sorted(n for n in z.namelist() if n.endswith('.csv') and '__MACOSX' not in n):
                 raw_rows = 0; first = last = None; bucket = None; values = {}; bin_count = 0; invalid_flow = 0
@@ -152,6 +174,7 @@ def rig(top, out):
                                    input_end=last.isoformat(sep=' '), input_bins_10s=bin_count,
                                    targets=[dict(channel=k, finite=valid[k], missing=raw_rows-valid[k]) for k in TARGET_COUNTS]))
                 print(name, 'input bins', bin_count, 'target counts only', flush=True)
+    record_rig_archive(out)
     dump(out, 'target_availability.json', counts)
     return dict(raw_rows=sum(x['raw_rows'] for x in counts), bins_10s=total_bins)
 

@@ -1,8 +1,8 @@
 # FORGE 56-32 pressure comparison protocol
 
-The [V0 review amendment](protocol-amendment.md) governs the current comparison. It replaces the off-bottom sampling and motor treatment below, and adds the accepted geometry/timing rulings. The original protocol is retained here to document what was registered at `a1927b3`.
+The [sampling and motor-loss amendment](protocol-amendment.md) governs the current comparison. It replaces the off-bottom sampling and motor treatment below, and adds the registered geometry and timing treatments. The original protocol is retained here to document what was registered at `a1927b3`.
 
-V0 preregistration, prepared before any 56-32 model prediction or pressure residual. Baseline: `f61a5d918285948c7254f1458c83992cdfb935cb`. This protocol and its input preparation are committed before V2. Any source clarification or protocol amendment must have a new commit before target pressure is read. Earlier access to one report's observed pressure summary is disclosed below.
+Protocol registered before any 56-32 model prediction or pressure residual. Baseline: `f61a5d918285948c7254f1458c83992cdfb935cb`. This protocol and its input preparation were committed before pressure comparison. Any source clarification or protocol amendment must have a new commit before target pressure is read. Earlier access to one report's observed pressure summary is disclosed below.
 
 ## Question and comparisons
 
@@ -16,7 +16,7 @@ Use the four full-channel weekly files in `1295.zip!56-32_Pason_Archive.zip`, th
 
 Before this protocol, file headers and some first rows had been inspected. During earlier inventory work the BHA 5 sheet, including its observed pressure summary, was viewed. Current extraction emits only finite/missing counts for target channels. No pressure residual or model prediction has been calculated. This is a comparison unseen by the model development process; describe the actual prior exposure when publishing it.
 
-78B-32 is excluded from this release's work. Existing development data are 16A and 16B, including motorless S2b. The 58-32 daily reports do provide BHA records, satisfying the proposed second-well inventory condition. It follows the same input-preparation and protocol-commit sequence before its V2 comparison. This file defines the 56-32 method.
+78B-32 is excluded from this release's work. Existing development data are 16A and 16B, including motorless S2b. The 58-32 daily reports do provide BHA records, satisfying the second-well input requirements. It follows the same input-preparation and protocol-commit sequence before pressure comparison. This file defines the 56-32 method.
 
 ## Input-only window method
 
@@ -64,6 +64,6 @@ Publish the component pressure budget, signed density-column correction, hydraul
 
 There is no fitted acceptance threshold. Do not remove a case because of its target value or error. Preserve convergence failures and missing targets as explicit statuses with the planned window ID. Report any permitted numerical retry unchanged and retain both attempts. Measures added after target inspection are post hoc.
 
-## V0 readiness
+## Input completeness
 
-The committed candidate list is an input-only preparation result, not a certified complete primary score set. Manufacturer reference points, assembly boundaries and missing geometry treatments require source rulings. Freeze their amendments before V2 reads targets. The inventory and candidate preparation can be reproduced without accessing pressure values beyond finite/null counts, and without importing BoreTHM.
+The committed candidate list is an input-only preparation result, not a certified complete primary score set. Manufacturer reference points, assembly boundaries and missing geometry treatments require sourced treatments. Freeze their amendments before pressure targets are read. The inventory and candidate preparation can be reproduced without accessing pressure values beyond finite/null counts, and without importing BoreTHM.

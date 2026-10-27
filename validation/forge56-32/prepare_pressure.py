@@ -6,6 +6,7 @@ explicit flags; this candidate list does not certify complete primary cases.
 import argparse
 import bisect
 import csv
+import gzip
 import json
 import math
 from collections import Counter
@@ -24,7 +25,7 @@ def num(s):
 
 
 def read(root,name):
-    with (root/name).open(encoding='utf-8',newline='') as f:
+    with (gzip.open(root/name,'rt',encoding='utf-8',newline='') if name.endswith('.gz') else (root/name).open(encoding='utf-8',newline='')) as f:
         return list(csv.DictReader(f))
 
 
@@ -39,7 +40,7 @@ def section(depth):
 
 
 def main(root):
-    history=read(root,'rig_inputs_10s.csv')
+    history=read(root,'rig_inputs_10s.csv.gz')
     times=[datetime.fromisoformat(r['time']) for r in history]
     bits=read(root,'bit_records.csv');bhas=read(root,'bha_runs.csv');mud=read(root,'mud_reports.csv')
     crosswalk=[]

@@ -13,7 +13,7 @@ On the 90 frozen motorless FORGE 16B S2b states, applying only the 5 MPa
 property-pressure guard to the legacy pressure calculation reduces
 standpipe pressure by 0.040–0.111 psi (0.00654–0.0110%). The complete
 hydraulic changes have separate guard and integration accounting in
-`validation/hydraulics-v160/v1/`. This diagnostic retains the archived
+the frozen-state replay test, `tests/test_v160_s2b_replay.py`. This diagnostic retains the archived
 rheology convention and makes no new held-out pressure comparison.
 
 Adds an unfitted field comparison with Utah FORGE well 16A(78)-32, with
