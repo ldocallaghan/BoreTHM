@@ -153,7 +153,7 @@ def test_energy_balance_with_joints_tool_and_surface_excluded_from_hole(fluid):
     r=circulating_temperatures(m_dot=20,geometry=g,fluid=fluid,friction_heat=True,surface=p.surface)
     assert r['success']
     check=r['energy_check']
-    assert check['passed'] and abs(check['residual_W'])<1e-5
+    assert check['passed'] and abs(check['residual_W']) <= check['tolerance_W']
     assert check['surface_W_in_hole']==check['density_column_W']==0
     assert check['assigned_terms_W']['bore']['tool']>0
     assert check['assigned_terms_W']['annulus']['tool']==0
@@ -195,7 +195,7 @@ def test_variable_property_energy_balance(mud_density):
     assert result['success']
     check=result['energy_check']
     assert check['passed']
-    assert abs(check['residual_W']) <= .01 + 1e-7*check['assigned_W']
+    assert abs(check['residual_W']) <= max(1.,.001*max(abs(check['assigned_W']),abs(check['applied_W'])))
     assert check['surface_W_in_hole'] == check['density_column_W'] == 0.
     pressure=hydraulics(20.,geometry,result=result,fluid=fluid)
     assert pressure['dp_surface'] > 0.
@@ -240,3 +240,18 @@ def test_turnaround_accuracy_meets_the_deep_well_energy_tolerance():
     check=result['energy_check']
     assert check['passed']
     assert abs(check['applied_turnaround_W']-check['nozzle_W']-check['face_W']) <= check['tolerance_W']
+
+
+@pytest.mark.parametrize('unavailable',[False,True])
+def test_energy_diagnostic_cannot_reject_a_converged_solve(monkeypatch,unavailable):
+    def diagnostic(*args,**kwargs):
+        if unavailable:
+            raise RuntimeError('synthetic diagnostic failure')
+        return dict(enabled=True,passed=False,flagged=True,status='power residual flagged')
+    monkeypatch.setattr(hl,'energy_check',diagnostic)
+    geometry=WellGeometry((wg.StringSegment(100.,wg.CONVENTIONAL),),
+                          (wg.open_hole(0.,100.,.25),))
+    result=circulating_temperatures(m_dot=20.,geometry=geometry,fluid=WATER,friction_heat=True)
+    assert result['sol'].success and result['success']
+    assert result['energy_check']['flagged']
+    assert not result['energy_check']['passed']

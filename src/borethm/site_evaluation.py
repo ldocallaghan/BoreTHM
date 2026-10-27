@@ -726,7 +726,7 @@ def rig_capacity_gpm(spp_Pa, pumps=RIG_PUMPS):
     return pumps * min(PUMP_HYD_HP * 1714.0 / max(psi, 1.0), PUMP_MAX_GPM)
 GPM = 6.30902e-5   # m^3/s
 Q_FACE_SITE = 30000.0
-FILM_MULT_FORGE = 0.75   # fitted on FORGE 16B (validate_forge16b.py); a sensitivity
+FILM_MULT_FORGE = 0.75   # fitted on FORGE 16B; retired sensitivity, never primary
 
 
 def site_well(z, pipe, programme=None):

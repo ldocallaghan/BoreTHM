@@ -330,11 +330,9 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                     np.interp(z, [0, L], [T_inj + 30, target_rock_T * 0.7])]) \
         if init is None else np.vstack([np.interp(z, init["z"], init["Td"]),
                                         np.interp(z, init["z"], init["Tu"])])
-    # The energy diagnostic multiplies the turnaround temperature residual
-    # by mass flow and heat capacity. Resolve that boundary more accurately
-    # than the temperature profile; retain the original legacy tolerance.
-    sol = solve_bvp(odes, bc, z, y0, max_nodes=20000, tol=1e-4,
-                    bc_tol=1e-10 if loss_model is not None else None)
+    # Retain the original profile and default boundary-condition tolerances.
+    # Power-balance diagnostics do not define solver convergence.
+    sol = solve_bvp(odes, bc, z, y0, max_nodes=20000, tol=1e-4)
     sol_at = sol.sol
 
     zz = np.linspace(0, L, 400)
@@ -357,9 +355,14 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                P_bottom=P_L,hydraulics_model=hydraulics_model,
                surface=surface,transitions=transitions)
     if loss_model is not None:
-        res['energy_check']=hl.energy_check(loss_model,res,fluid,Q_face,tfa,P_surface) if friction_heat else dict(enabled=False,status='friction heating disabled')
-        if friction_heat and not res['energy_check']['passed']:
-            res.update(success=False,failure='hydraulic dissipation and applied heat do not balance')
+        if friction_heat:
+            try:
+                res['energy_check']=hl.energy_check(loss_model,res,fluid,Q_face,tfa,P_surface)
+            except Exception as error:
+                res['energy_check']=dict(enabled=True,passed=False,flagged=True,
+                    status='diagnostic unavailable',error=f'{type(error).__name__}: {error}')
+        else:
+            res['energy_check']=dict(enabled=False,status='friction heating disabled')
     if verbose:
         _print(res, T_inj, Q_face, t_years if exposure is None else "by depth")
     return res

@@ -6,9 +6,9 @@ Keeps the revised circulation solver's mesh within the specified well when
 an end component is shorter than half the geometry-ramp width. Overlapping
 ramps in serial assemblies use continuous piece weights of the same width.
 The physical heat-transfer laws and explicit legacy calculation are unchanged.
-The revised turnaround boundary is solved more accurately so its power residual
-meets the existing energy diagnostic; neither the profile nor regression
-tolerances are relaxed.
+The original boundary-condition tolerance is retained. Energy accounting
+reports and flags residuals at 1 W or 0.1% of power, whichever is larger,
+without changing solver success. An unavailable diagnostic is flagged.
 
 Adds shared hydraulic loss and dissipation accounting with optional
 tool-joint geometry, serial BHA components and supplied tool curves.

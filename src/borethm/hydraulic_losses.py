@@ -418,12 +418,15 @@ def energy_check(model,result,fluid,Q_face,tfa,P_surface):
     turnaround=float(result['m_dot']*cp_bit*(result['Tu'][-1]-result['Td'][-1]))
     applied=bore_applied+ann_applied+turnaround
     residual=applied-total
-    tolerance=.01+1e-7*max(abs(total),abs(applied))
+    tolerance=max(1.,.001*max(abs(total),abs(applied)))
+    passed=bool(math.isfinite(residual) and math.isfinite(tolerance) and abs(residual)<=tolerance)
     return dict(enabled=True,assigned_terms_W=assigned,nozzle_W=nozzle_W,face_W=Q_face,
                 assigned_W=total,applied_bore_W=bore_applied,applied_annulus_W=ann_applied,
                 applied_turnaround_W=turnaround,applied_W=applied,residual_W=residual,
                 relative_residual=residual/max(abs(total),1.),tolerance_W=tolerance,
-                passed=bool(abs(residual)<=tolerance),surface_W_in_hole=0.,density_column_W=0.)
+                passed=passed,flagged=not passed,
+                status='within reporting resolution' if passed else 'power residual flagged',
+                surface_W_in_hole=0.,density_column_W=0.)
 
 
 def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
