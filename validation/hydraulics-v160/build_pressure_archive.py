@@ -65,6 +65,26 @@ def build(source, output):
             archive_source='validation/forge16b/s2/results.jsonl:spp/6894.757' if well == '16A'
                            else 'validation/forge16b/s2b/pressure-samples.csv:model_spp_psi'))
     write_csv(output / 'legacy-reproduction.csv', controls)
+    windows = read_csv(output / names[0])
+    legacy = {(row['window_id'], row['variant']): row for row in windows
+              if row['scenario'] == 'legacy' and row['status'] == 'ok'}
+    differences = []
+    fields = ('predicted_low_psi', 'bit_C', 'return_C', 'dp_string_psi',
+              'dp_annulus_psi', 'dp_bit_psi', 'dp_buoyancy_psi', 'dp_surface_psi')
+    for row in windows:
+        if row['variant'] != 'v1.6.0-48.9' or row['status'] != 'ok':
+            continue
+        old = legacy[row['window_id'], 'v1.5.0-26.7']
+        reference = legacy[row['window_id'], 'v1.5.0-48.9']
+        paired = {key: row[key] for key in ('well', 'bha', 'window_id', 'event_id', 'scenario',
+                                          'comparison_target_psi', 'flow_gpm', 'bit_depth_ft')}
+        for field in fields:
+            a, b, c = float(old[field]), float(reference[field]), float(row[field])
+            paired.update({field+'_v150_26_7': a, field+'_v150_48_9': b, field+'_v160_48_9': c,
+                           field+'_reference_change': b-a, field+'_hydraulics_change': c-b,
+                           field+'_total_change': c-a})
+        differences.append(paired)
+    write_csv(output / 'development-differences.csv', differences)
     source_names = (
         'validation/forge16b/s2/plan.json', 'validation/forge16b/s2b/pressure-samples.csv',
         'validation/forge16b/s2/results.jsonl', 'validation/hydraulics-v160/build_pressure_archive.py',

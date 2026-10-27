@@ -9,10 +9,13 @@ These comparisons use the previously examined FORGE 16A and 16B observations as 
 | [development-windows.csv](development-windows.csv) | One row per registered sample, calculation variant and connection scenario, including missing observations and solver flags. |
 | [development-events.csv](development-events.csv) | Paired medians for each observation group. |
 | [development-bha.csv](development-bha.csv) | Assembly summaries, with equal weight per observation group and separate available/missing counts. |
+| [development-differences.csv](development-differences.csv) | All three predictions side by side for each available sample and revised connection scenario, including pressure-budget and temperature differences. |
 | [legacy-reproduction.csv](legacy-reproduction.csv) | Original-mode pressure against the archived predictions, with signed differences. |
 | [manifest.json](manifest.json) | Calculation identity, runtime versions and input/output checksums. |
 
 The `variant` column separates the original calculation with PV referenced to 26.7 °C, the original calculation with PV referenced to the assumed field convention of 48.9 °C, and the revised calculation with the same 48.9 °C reference. Yield point is unchanged. The `scenario` column identifies the connection geometry. Signed residuals are modelled minus comparison pressure, in psi and percent; a zero comparison pressure has no percentage residual.
+
+In the difference table, `_reference_change` is original-mode 48.9 °C minus original-mode 26.7 °C, `_hydraulics_change` is revised mode minus original mode at 48.9 °C, and `_total_change` is revised mode at 48.9 °C minus original mode at 26.7 °C. These are differences between complete coupled calculations, including their changed temperature profiles.
 
 ![Measured and modelled development pressures](development-measured-modelled.png)
 

@@ -19,7 +19,7 @@
     "validation/forge16b/s2/plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
     "validation/forge16b/s2b/pressure-samples.csv": "720f6b742a0230726f1696e5cec33d73742b92e51804b02285d8ef363161e17e",
     "validation/forge16b/s2/results.jsonl": "ffd1b1d510ad001b6b1e2edfa43562e6e6036732ce5826823c6ebfc5fd9a8bd9",
-    "validation/hydraulics-v160/build_pressure_archive.py": "705de3e0c62dc6826d7d1b806457632ca31459ed60c6de90f5e31b654008c3b0",
+    "validation/hydraulics-v160/build_pressure_archive.py": "f9fbad61452855cee68bcc9d7ffaa75b1b62f3566f8967d9a63847647cd5e6f6",
     "src/borethm/studies/pressure_comparison.py": "8f73658dfd7da5224d47b457d91ad0f8693a3348613087f7d687884684bee8e6",
     "src/borethm/model1_coupled.py": "6fbaec664c183f31ffd6079c95d83028664944d9448bf83599da7c8f90b58340",
     "src/borethm/hydraulic_losses.py": "3788113afb5f6c53f32c9563c81423744b3f0c5315933e955a62848c3fc27747",
@@ -32,6 +32,7 @@
   },
   "results_sha256": {
     "development-bha.csv": "7b07fe12e410d55fe643dbd16ad0b67e32a284678a1f5115d1dff91d8104d9e7",
+    "development-differences.csv": "f366069ef2397359dc6709b5cb1f6144faee7168585d44532b23576d0c80588f",
     "development-events.csv": "1ec317dbc22c0c7e408d382f45889b164e4d6f71bba7eae457b0ca0dc9f927e5",
     "development-measured-modelled.png": "83ed2aa9e905c17cbe6ba5a7f38d0bcb8ed870cd8a6f1d8ff7e48d3b284e622b",
     "development-measured-modelled.svg": "9ee05cbfad1530dbecfbf4037f6e2a0078381bdd87fadd57110f04d3b3909b7c",
