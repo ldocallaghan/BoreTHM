@@ -12,7 +12,9 @@ MWD means measurement while drilling; the 16B comparison uses fluid temperature 
 |---|---|---|---|---|---|
 | UT Austin benchmark | Wu et al.'s published fluid temperatures and standpipe pressures | No parameter fit; the initial comparison identified omitted friction heating | Published well geometry, pipe properties and operating conditions; assumptions where the paper is silent, including the unspecified bit nozzles | The published outputs were compared without fitting parameters to them | Agreement with another simulator for specified cases, with unresolved coated-pipe differences; this is a code-to-code benchmark |
 | FORGE 16B circulation | Measured MWD fluid temperatures during regular-pipe and insulated-pipe runs | Multiplier on the annulus heat-transfer coefficient, fitted on the regular-pipe runs; effective insulated-pipe conductivity on BHA 11. The chain with the coefficient unfitted still fits that conductivity on BHA 11 | The 16B survey and rig record; formation temperatures from neighbouring well 16A; measured core thermal properties | BHA 12's partial-insulation temperatures, predicted without further fitting | Fluid-temperature prediction for the held-out run under the trial conditions, with the fitted-input dependencies stated |
+| FORGE 16B whole-well circulation | Pason EYE downhole temperatures in 109 half-hour samples from 13 assemblies | No new fit; film multiplier 1.0 is primary. Insulated runs retain previously fitted pipe conductivity | Recorded operating conditions and assembly dimensions; missing rheology substitutions are revised explicitly after S1 | Periods outside the earlier trial supplied no fitted parameter; trial runs retain their earlier fit roles | Blind disagreement across a wider depth range, with both mud protocols retained; the temperature error changes sign between runs |
 | FORGE 16A circulation | Bit-box and top-sub temperatures while drilling, and mud-log surface return | Nothing on 16A; film multiplier 1.0 is primary, with the 16B-fitted 0.75 as a sensitivity | Recorded geometry, mud and operating inputs; FORGE core properties; formation logs previously used for 16B; unresolved sensor medium/offset and surface probe location | 16A downhole and return temperatures were not used to fit the primary calculation | Blind disagreement, including deep underprediction and shallower scatter; the cumulative circulation clock omits recovery |
+| FORGE hydraulic and energy accounting | Standpipe pressure and outlet-minus-inlet temperature; motorless 16B pressure terms | Nothing; declared geometry scenarios are retained without selecting by pressure agreement | The same fixed circulation inputs; generic joint and surface layouts where as-built dimensions are unavailable; proprietary tool restrictions remain unquantified | Measured pressures set no loss coefficient or model correction | Quantifies included pressure and heat terms and the remaining discrepancies; it does not locate the missing losses or identify a cause of the temperature errors |
 | FORGE 16A transients | Pauses and peaks in observed run-in legs | Nothing | Approximate earlier wall history, local operating inputs and tool dimensions; run-in nodes start at the first observation; later operating-input boundaries enter earlier wall conditioning | Later temperatures within a leg or pause; the initial run-in observation is an input | Conditional transient comparison, with five unavailable cases; it does not independently validate complete trips or establish recovery as the cause |
 | FORGE pauses | Return-temperature anomalies after five trips | One attenuation factor for the plug-flow temperature anomaly; each trip is predicted with the factor fitted on the other four | The FORGE geometry and circulation record; pipe conductivity from the MWD comparison; each pause's pre-stop return temperature sets an offset, and the restart record supplies flow and inlet conditions | Each trip's return-temperature anomaly is excluded from its own attenuation-factor fit | Limited predictive performance for the return anomaly; the comparison is too coarse to distinguish the wall-reheating treatments |
 | UD-1 strength calibration | BGS breakout widths and intervals without breakouts in the near-vertical section | Weak-zone strengths and an intact-rock lower bound | Published stress and pore-pressure profiles; assumed wall-cooling range and fluid weight; strengths inferred directly from the breakout observations | The deeper deviated-section breakouts are excluded from the fit and used as a qualitative check | Strength ranges conditional on the adopted stresses and cooling; the calibration does not independently verify those inputs |
@@ -54,6 +56,54 @@ Eavor estimated from the data how each change between the first two runs moved t
 ![Model 1 against the FORGE 16B trial](../../figures/validate_forge16b.png)
 
 *Fig. 2. Left: modelled MWD temperature while drilling each run (points), against the measured run averages (bars) and BHA 12's levelled range (shaded). Right: the change between the first two runs, one factor at a time, from the model and from Eavor's estimate.*
+
+### FORGE 16B: whole-well circulation comparison
+
+The whole-well comparison uses the existing v1.5.0 calculation at `85f23db51f6661e6ca09bd05c16b9ffb48881d83`, after the 16A validation was added. It compares 109 half-hour samples from 13 bottom-hole assemblies with Pason's EYE temperature channel. Nothing is fitted in this comparison. Film multiplier 1.0 and cumulative circulating exposure are primary. The [input protocol](../../validation/forge16b/comparison_protocol.md) fixes the sampling and observational filters; the [S1 protocol](../../validation/forge16b/comparison_protocol_s1.md) records the reviewed geometry and sensor treatments. The source is GDR 1516, [DOI 10.15121/1998591](https://doi.org/10.15121/1998591), CC BY 4.0.
+
+EOW below means the End of Well Report assembly number. EOW 17–20 correspond to trial BHA 10–13 above. EOW 17 and 20 supplied the earlier film fit; EOW 18 supplied the insulated-pipe conductivity fit. EOW 19 was held out from those fits, but uses that conductivity. Other assemblies supplied neither fit. The insulated cases retain the previously fitted conductivity of 4.923748 W/(m K). The original trial calculation chains were replayed first on their own saved samples and parameters; all 150 solves converged, with maximum run-mean difference 0.000044 °F from the saved results.
+
+The first blind result, S1 version 1, uses the original period-mud substitutions. Positive bias means the bore-fluid prediction is hotter than EYE. Sensor-position ranges below retain every declared comparison and are not uncertainty intervals.
+
+| EOW assembly | Samples | Measured mean, °C | S1 v1 mean bias, °C | Sensor position above bit, ft |
+|---|---:|---:|---:|---|
+| 3 | 3 | 65.02 | −4.89 to −4.80 | 22, 69 and 84, unresolved |
+| 4 | 2 | 76.29 | −24.27 to −24.17 | 22 and 84, unresolved |
+| 11 | 4 | 62.97 | −16.18 | 22, drawing |
+| 12 | 12 | 68.75 | −18.27 | 22, drawing |
+| 13 | 14 | 64.34 | −8.42 | 22, drawing |
+| 15 | 4 | 63.04 | −4.21 | 22, drawing |
+| 16 | 15 | 73.85 | −4.80 | 22, drawing |
+| 17 | 14 | 81.36 | +3.18 | 84, earlier trial assumption |
+| 18 | 10 | 65.47 | +1.69 | 84, earlier trial assumption |
+| 19 | 10 | 71.29 | +1.18 | 84, drawing |
+| 20 | 11 | 105.57 | +1.49 | 84, drawing |
+| 27 | 5 | 113.27 | −3.80 to −3.73 | 84 assumed; 22 sensitivity |
+| 38 | 5 | 121.01 | −1.56 to −1.49 | 84 assumed; 22 sensitivity |
+
+The original primary underpredicts all pre-trial run means, overpredicts the four trial means and underpredicts the two later means. Small signed means can conceal scatter: at the assumed 84-ft position, EOW 27 has mean absolute error 11.84 °C and root-mean-square error 13.00 °C, despite its −3.80 °C bias. EOW 38 has mean absolute error 5.49 °C. The maximum within-sample spread over the requested sensor positions is below 0.10 °C. EOW 38's drawing gives 85 ft; the reviewed 84-ft assumption is retained, with the 85-ft interpolation archived. EOW 14 and 26 have no accepted comparison window.
+
+![FORGE 16B whole-well blind comparison](../../validation/forge16b/s1/wholewell-comparison.png?raw=1)
+
+*Original S1 version 1. The shaded depth interval is the earlier insulated-pipe trial. Per-run errors, fixed sensor branches and fit roles remain separate.*
+
+An optimistic full-recovery sensitivity resets the exposure clock after continuously observed pumps-off intervals longer than two hours and retains the existing one-hour floor. It brackets the measured means in EOW 15, 16, 27 and 38, while leaving other pre-trial means too cold and increasing trial overprediction. It raises the later EOW 27/38 means by about 24/27 °C. Reducing the film multiplier to 0.75 lowers the predictions and increases the pre-trial underprediction. These sensitivities remain attached to S1 version 1; they have not been rerun with the revised mud. Neither establishes recovery or heat transfer as the cause. The [S1 review](../../validation/forge16b/s1/S1-review.md) gives the complete temperature, recovery and water-property comparisons in °C and °F.
+
+#### Labelled mud-protocol revision
+
+S1's missing-property fallback used the reference programme mud, with plastic viscosity (PV) 27 cP and yield point (YP) 28 lbf/100 ft². Those values describe a weighted mud and are inconsistent with the input record's low-solids, water-rich system. After S1 review, the protocol changed: missing PV or YP takes the nearest actual measurement in either time direction within the same fluid system; a system without a measurement uses water rheology at its recorded density. No donor crosses a fluid-system boundary. Some donors are days away, so contemporaneous rheology remains uncertain. The [revision ledger](../../validation/forge16b/s2/mud-revision-ledger.csv) identifies every source and signed time offset.
+
+The original comparison remains version 1. The revised primary is version 2, calculated on the same 109 windows with the same geometry and film coefficient. Five run means change:
+
+| EOW assembly | S1 v1 bias, °C | Revised v2 bias, °C | Change in model mean, °C |
+|---|---:|---:|---:|
+| 11 | −16.18 | −8.49 | +7.69 |
+| 12 | −18.27 | −9.80 | +8.48 |
+| 16 | −4.80 | +0.14 | +4.94 |
+| 17 | +3.18 | +8.74 | +5.56 |
+| 18 | +1.69 | +2.08 | +0.39 |
+
+All other run means are unchanged. The revision removes an input-inconsistent substitution; it does not remove the changing sign of the field discrepancy. The [S2 review](../../validation/forge16b/s2/S2-review.md) preserves both complete versions and their input provenance.
 
 ### FORGE 16A: blind circulation comparison
 
@@ -116,6 +166,79 @@ The source records distinguish cooler installation from operation. The 24 Octobe
 *Crop from the GDR 1292 graphical mud log, page 2, CC BY 4.0; attribution is in the source-extract guide.*
 
 The frozen [primary records](../../validation/forge16a/circulation-primary.csv) and [evidence manifest](../../validation/forge16a/evidence-manifest.json) preserve the comparison. Regression tests recompute summary arithmetic from those records without rerunning S1. They check the archived evidence; they do not test a future physical calculation against the field data.
+
+### FORGE wells: rheology and energy checks
+
+These diagnostics use the unchanged calculation and the fixed S1 samples. The original blind results above remain the field comparisons. They are followed by sensitivities and pressure accounting, with no parameter fitted to remove the discrepancies.
+
+#### 16A water-rheology sensitivity
+
+The sensitivity replaces viscosity and yield point with water rheology while retaining recorded density and the mixture's thermal properties. Inlet volumetric flow and mass flow remain unchanged. It evaluates all 358 primary samples, including 135 with downhole observations and 223 with return observations only. The ranges below retain the four fixed bore/annulus and bit/40-ft comparisons.
+
+| 16A assembly | Downhole samples | Original blind bias, °C | Water-rheology bias, °C |
+|---|---:|---:|---:|
+| 18 | 15 | −4.16 to −3.03 | +7.74 to +8.84 |
+| 23 | 13 | −0.24 to +0.90 | +17.35 to +18.45 |
+| 30 | 29 | +2.32 to +3.38 | +22.27 to +23.30 |
+| 34 | 9 | −0.81 to +0.36 | +20.81 to +21.95 |
+| 35r1 | 5 | −3.19 to −2.06 | +14.13 to +15.25 |
+| 35r2 | 4 | −8.98 to −7.54 | +10.54 to +11.96 |
+| 38 | 20 | −8.18 to −6.85 | +13.18 to +14.50 |
+| 39 | 25 | −9.75 to −8.49 | +16.84 to +18.09 |
+| 42 | 15 | −19.87 to −18.69 | +12.72 to +13.89 |
+
+All nine run means become too hot. BHA 42 increases by 32.57–32.60 °C. Across all 358 samples, mean return-temperature error worsens from −5.85 to −7.98 °C. Water rheology is a sensitivity, and is not established as the field mud's rheology. The two BHA 35 runs retain their washout flags.
+
+#### Annulus regime and film coefficient
+
+Reynolds number compares inertial and viscous effects in the flow. Every sampled annulus cell uses the turbulent branch of the heat-transfer correlation; the strong temperature sensitivities occur within that branch. Minimum sampled heat-transfer Reynolds numbers are 7,445 in original 16A and 5,113 in original 16B, above its 2,300 threshold. The annulus film coefficient describes local convective heat transfer, excluding the casing and rock resistance.
+
+| Treatment | Samples | Mean length-weighted annulus film, W/(m² K) | Mean hydraulic laminar length, % |
+|---|---:|---:|---:|
+| 16A blind | 358 | 2,020 | 29.7 |
+| 16A water rheology | 358 | 6,928 | 0.0 |
+| 16B S1 v1 | 109 | 3,218 | 71.4 |
+| 16B revised v2 | 109 | 3,874 | 4.6 |
+
+The heat-transfer correlation uses plastic viscosity. The Bingham hydraulic calculation uses apparent viscosity, which includes yield point, and its own 2,100 transition threshold. Thus a reported hydraulic laminar interval can still use the turbulent heat-transfer branch. The distributed friction-heating routine uses its existing plastic-viscosity friction factor and 5 MPa property-pressure floor. These treatments are reported separately and remain unchanged. Higher downhole predictions accompany larger film coefficients while calculated friction heat decreases; the whole rheology sensitivity does not isolate either contribution. [Per-sample diagnostics](../../validation/forge16b/s2/energy-samples.csv) and [depth profiles](../../validation/forge16b/s2/annulus-profiles.csv.gz) retain both regimes, film coefficients and applied rheology.
+
+#### Pressure and heat-input accounting
+
+The pressure comparison uses 135 paired Sanvean samples in 16A and 109 Pason windows in 16B. The 223 return-only 16A samples have no substituted pressure. The original S2 table below retains its subtraction of raw reported differential on every paired sample. That channel is not a verified total motor/MWD loss and is nonzero on motorless runs too. S2b separately examines the motorless 16B runs against raw measured standpipe pressure, without that subtraction.
+
+| Treatment | Pressure samples | Mean model minus (SPP minus raw differential), psi | Measured SPP × inlet flow, kW | Model distributed friction + nozzle + motor-face heat, kW |
+|---|---:|---:|---:|---:|
+| 16A blind | 135 | −1,624 | 928 | 500 |
+| 16A water rheology | 135 | −2,291 | 928 | 329 |
+| 16B S1 v1 | 109 | −770 | 527 | 264 |
+| 16B revised v2 | 109 | −969 | 527 | 244 |
+
+The measured hydraulic-power temperature equivalent, obtained by dividing SPP × inlet flow by inlet mass flow and heat capacity, averages 5.88 °C in 16A and 2.98 °C in 16B. These are scale comparisons, not predicted missing temperature increments. Surface dissipation and mechanical work need not enter the downhole fluid at the same location. The model's rock exchange and internal heat-capacity term remain in the temperature balance. Numerical quadrature reproduces that implemented balance to within 0.001 °C; this does not establish exact physical enthalpy conservation.
+
+Across all temperature samples, mean outlet-minus-inlet error is −5.85 °C for original 16A and −2.08 °C for revised 16B. The complete [per-run energy table](../../validation/forge16b/s2/energy-run-summary.csv) retains sample counts and all heat terms. The [matched-depth table](../../validation/forge16b/s2/matched-primary-comparison.csv) reports ten shared predeclared 500-ft MD bins and three unmatched bins. It includes flow and inlet temperature, geometry, applied mud, sensor branches, cooler context and pressure, with regime and film columns. Actual sampled depth ranges can differ within a shared bin. Time since a long observed pumps-off interval is a proxy; confirmed surface-trip timing is unavailable. These comparisons do not identify a unique cause for either well's temperature errors.
+
+#### Motorless 16B pressure accounting
+
+EOW 12, 13, 15 and 16 have no motor, but include the HALO steering and measurement-while-drilling assembly. Across their 45 fixed samples, the existing pressure calculation includes pipe and BHA bore friction, nozzles and annulus friction, with the signed density-column correction. HWDP is a separate segment and the lower BHA uses length-weighted dimensions. Tool joints, surface lines and proprietary tool restrictions have no separate term.
+
+The S2b diagnostic estimates the additional losses from recorded serial BHA passages and transitions. It also calculates two declared, FH-compatible catalogue joint geometries and generic API surface layouts. These external estimates are not fed back into the model. The installed joint machining and effective restricted length are unresolved. The representative comparison below uses an assumed 29-in restriction per joint, abrupt area changes and the API top-drive surface case; it is not an as-built reconstruction.
+
+| EOW | Samples | Measured mean SPP, psi | Included model, psi | Accounted with EIS geometry, psi | Accounted with GPDS55 geometry, psi | Remaining residual, EIS / GPDS55, psi |
+|---|---:|---:|---:|---:|---:|---:|
+| 12 | 12 | 1,175 | 539 | 707 | 842 | 468 / 333 |
+| 13 | 14 | 1,166 | 562 | 739 | 895 | 427 / 271 |
+| 15 | 4 | 1,189 | 577 | 769 | 941 | 420 / 249 |
+| 16 | 15 | 1,244 | 519 | 712 | 896 | 532 / 348 |
+
+The included model accounts for 42–49% of the run-mean measured pressure. Resolving lower-BHA bores adds about 30–37 psi, abrupt BHA transitions add 24–27 psi and the two joint scenarios add about 72–285 psi. The generic top-drive surface case adds about 35 psi. Full loss through the integrated HALO pulser/steering assembly and the float/filter internals cannot be estimated from the reported body IDs alone: their operating loss curves and open areas are missing. Their extra loss remains unquantified, with numeric pressure-per-unit-loss-coefficient values supplied in the archive. An omitted allowance in a subtotal is not evidence of zero loss.
+
+The raw differential means are +39.65, +15.65, −0.37 and +14.12 psi for EOW 12, 13, 15 and 16. Seven of the 45 windows have negative differential. The channel is retained without subtracting it or using it to set a loss coefficient. Other generic surface layouts give larger allowances, and some scenarios over-account individual sample pressures. Unknown pressure-tap position can also make part of a full surface-layout allowance inapplicable. No scenario is selected for agreement, and the remaining residual is not assigned to HALO or to distributed friction.
+
+![Motorless FORGE 16B pressure accounting](../../validation/forge16b/s2b/pressure-accounting.png?raw=1)
+
+*Revised mud; both assumed joint geometries use the same generic top-drive surface case. Black ticks show measured run-mean pressure. Unknown tool losses have no assigned numerical allowance.*
+
+The [S2b review](../../validation/forge16b/s2b/S2b-review.md) gives the included-term split and cited estimation methods, with limitations of the turbulent sudden-change correlations. It links every sample's pressure accounting, all geometry/layout sensitivities and the reported differential. All 90 original/revised circulation replays reproduce the saved S2 pressure and temperature endpoints exactly. The new archive tests recompute summary arithmetic from saved records; they introduce no physical regression tolerance or fitted parameter. The [limitations](limitations.md#circulation-hydraulics-and-heat-input) explain how the pressure and heat-input findings affect interpretation.
 
 ## Rock reheating
 

@@ -1,0 +1,26 @@
+{
+  "baseline_commit": "85f23db51f6661e6ca09bd05c16b9ffb48881d83",
+  "baseline_files_unchanged": 64,
+  "forge16a_archive_files_unchanged": 48,
+  "original_S1_S2_files_unchanged": 66,
+  "published_output_hashes_verified": {
+    "s1": 35,
+    "s2": 29,
+    "s2b": 21
+  },
+  "tracked_text_mojibake": [],
+  "fast_suite": {
+    "tests": "720",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "104",
+    "time": "40.002"
+  },
+  "git_head": "85f23db51f6661e6ca09bd05c16b9ffb48881d83",
+  "branch": "forge16b-wholewell",
+  "diff_scope": "S3 reader documentation and added S2b protocol/study plus archive-arithmetic tests. Earlier reviewed S0/S1/S2 additions remain unchanged.",
+  "model_changed": false,
+  "committed": false,
+  "merged": false,
+  "pushed": false
+}
