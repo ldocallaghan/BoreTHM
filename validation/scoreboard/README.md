@@ -13,3 +13,31 @@ G3 uses bore fluid at the bit as a fixed proxy for the unresolved bit-box sensor
 G4 uses the eleven original run-in legs, retaining their original availability. The primary tool comparison is the internal-fluid node at the bit with a static fluid node. Initial tool temperature is the first observation, leg speed is the observed endpoint mean, and the modelled fluid column is frozen at leg start. Local circulation/static histories and earlier conditioning follow the original transient study. This conditional comparison does not represent a blind complete trip from the surface.
 
 The numerical reproduction resolutions are 1 psi, 0.1 °C and 0.1% of power. Diagnostics report discrepancies without changing a solve's convergence flag. The script, input extraction and aggregation rules become fixed with the baseline. Any subsequent change is recorded in the development log.
+
+## Reproduction
+
+The original transient study supplies event indices and its recorded component inputs. Extract them once, without running a model:
+
+```text
+python validation/scoreboard/scoreboard.py freeze-transients --study ORIGINAL_16A_STUDY
+```
+
+The committed `transient-inputs.json` is that extract, with source checksums. Subsequent runs need only the checkout archives:
+
+```text
+python validation/scoreboard/scoreboard.py run --mode legacy --output EMPTY_OUTPUT_DIRECTORY
+```
+
+The `current` mode is reserved for the declared candidate comparison. It retains the same samples, mud convention and primary sensor proxies, using the previously declared NC50 scenario for 16A and EIS for 16B. Its run-in conditioning profiles are recalculated using that hydraulic mode. It has not been run on this scoreboard.
+
+## Baseline archive
+
+| File | Contents |
+|---|---|
+| [scoreboard.csv](baseline/scoreboard.csv) | Every gap, population count and bias; psi percentages apply to pressure, and power is in kW. Temperature differences are in °C. |
+| [circulation.csv](baseline/circulation.csv) | Every original primary sample, its predictions, observations and solver status. |
+| [run-in.csv](baseline/run-in.csv) | All original run-in events, peak errors and unavailable cases. |
+| [baseline-reproduction.csv](baseline/baseline-reproduction.csv) | Archived and recalculated values with each numerical resolution and comparison result. |
+| [manifest.json](baseline/manifest.json) | Settings, historical calibration disclosure, runtime versions and normalised-LF source/result checksums. |
+
+The full calculation took 265.5 seconds on the recorded runtime. All 467 circulation cases and the nine originally available run-in cases succeeded. All 2,614 reproduction checks passed. Two originally unavailable run-in cases are retained. Subsequent metadata completion made the already-used 26.7 °C reference explicit and omitted percentages of Celsius temperatures; no numerical prediction was rerun. Source-data attribution remains in the [16A](../forge16a/README.md) and [16B](../forge16b/README.md) archives, under CC BY 4.0.

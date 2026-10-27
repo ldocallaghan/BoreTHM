@@ -1,0 +1,46 @@
+{
+  "mode": "legacy",
+  "settings": {
+    "pv_ref_T_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "mud": "original recorded-mud substitutions"
+  },
+  "calibration": "Historical fitted trial insulation conductivity retained; no new fit",
+  "versions": {
+    "python": "3.14.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "iapws": "1.5.5"
+  },
+  "sources_sha256": {
+    "validation/forge16b/s2/plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
+    "validation/scoreboard/transient-inputs.json": "ea1d6f211bfdd86fee8c69062aa714cf515f839215d1db37a21d348cae02e09b",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/forge16a/circulation-primary.csv": "73bf715421f2cc9ea79bfed3f1b789d1b78cf6ae0d041fedd02d9f506b729964",
+    "validation/forge16a/transient-comparisons.csv": "921e28bce9805c5d9c58e3af4e937a6190ddf51d71baa82c375b62fcd9ff7b19",
+    "validation/forge16b/s2/results.jsonl": "ffd1b1d510ad001b6b1e2edfa43562e6e6036732ce5826823c6ebfc5fd9a8bd9"
+  },
+  "results_sha256": {
+    "baseline-reproduction.csv": "c7b839c83197d3b80ae49a2d69369d76be738411fd0da5ad10459ad748526332",
+    "circulation.csv": "d79579e3ca9a54aa044291ce27f52b47f3ba936249b3cfb0b8431c81f67d8841",
+    "run-in.csv": "3a23e7a114ab9db6cfe670161c437584a4d66fd69a580ffb96b5325a1e3156ff",
+    "scoreboard.csv": "e05bb2907224ff72193552d9b9a8da79025b171370912316dbd0e85e451bd822"
+  },
+  "model_sources_sha256": {
+    "model1_coupled.py": "362e8d7c00d11ba3c541ca3a235e51aadb2801c11bb57e3cd4ae35a9981f8494",
+    "hydraulic_losses.py": "3cb1d2ffcdc1a8a22e1889df51dd87fb6b0d085e62dc45dd494523acb9f1f4d1",
+    "fluids.py": "b3557a12c92fb492996861085fd74077e0029a38d248f124bb01b44b85b099aa",
+    "pressure.py": "7a884c2743fc7b45462cfcf00df68a8e30d9e94d3f39410f3f7e1b74deaa4254",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "wall_thermal.py": "f3e9aa4573d406db4fe9ded011552c1c3f2b4e90b3f7308404e2e3c0d2688091",
+    "tool_thermal.py": "75752e7c6a2cd28734af065b7d4cf2e146019cb76dfbc04fc59edf2bb8110bca",
+    "studies/validate_forge16a.py": "d65af33954b201a8721ed682f1b83c69dd63b706e25824d69c98c55049e9a669",
+    "studies/validate_forge16a_transients.py": "916130dd0645eca6708f0c56c5dd403f6034613b65e89f0d67592a9a6637f71b",
+    "studies/validate_forge16b_wholewell.py": "654cb84d7075926f896919f54b2bcc800d415fccbeadb63190863456b45ee6aa",
+    "studies/validate_forge16b.py": "c71b67de95b08f21a5170a5cbfc977bf44ce7e315c7c5b54cbe587b6c031be77",
+    "studies/forge16_energy.py": "8a355b155a145a0fbc5c00fd245553974b1fd80fbc253f91f31971a2b78a7036",
+    "studies/pressure_comparison.py": "8f73658dfd7da5224d47b457d91ad0f8693a3348613087f7d687884684bee8e6"
+  },
+  "postprocessing": "Made the existing 26.7 C reference explicit, added model-source checksums, and omitted Celsius percentage errors. Numerical predictions were not rerun."
+}
