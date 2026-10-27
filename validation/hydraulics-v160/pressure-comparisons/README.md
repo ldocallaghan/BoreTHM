@@ -41,9 +41,10 @@ From a repository checkout with the calculation dependencies installed:
 ```text
 python -m borethm.studies.pressure_comparison --output OUTPUT_DIRECTORY
 python -m borethm.studies.pressure_comparison --output OUTPUT_DIRECTORY --plot-existing
+python validation/hydraulics-v160/build_pressure_archive.py --source OUTPUT_DIRECTORY
 ```
 
-The entry point saves resumable case records alongside the tables. The archive contains the final scientific tables and plots; per-case execution durations are omitted. It does not replace the earlier blind temperature results.
+The entry point saves resumable case records alongside the tables. The archive builder copies the final scientific tables and plots, omits per-case execution durations, calculates the legacy reproduction differences from the earlier archives and writes the checksums. Its optional `--output` selects a separate destination. This comparison does not replace the earlier blind temperature results.
 
 ## Sources and licence
 
