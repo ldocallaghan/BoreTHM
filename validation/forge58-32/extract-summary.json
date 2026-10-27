@@ -1,0 +1,15 @@
+{
+  "report_inputs": {
+    "BHA_reports": 47,
+    "components": 463,
+    "mud_samples": 52,
+    "survey_rows": 59,
+    "bits": 46
+  },
+  "rig": {
+    "raw_rows": 3397398,
+    "bins_10s": 340028,
+    "standpipe_finite": 3397398
+  },
+  "target_values_emitted": false
+}

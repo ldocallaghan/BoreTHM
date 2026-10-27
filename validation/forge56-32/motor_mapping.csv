@@ -1,0 +1,12 @@
+bha_sheet_id,recorded_maker,recorded_OD_in,recorded_lobes,recorded_stages,sheet_id,sheet_page,rated_min_gpm,rated_max_gpm,no_load_psi,mapping_status,motor_interval_status,input_evidence
+1,unknown,9.625,6/7,5,,,,,,maker_unresolved,excluded_unknown_maker,BHA1 item2 and bit record row2 leave maker blank; daily report input scan has no maker assignment
+2,GeoGuidance,8,7/8,5.9,GG_Colossus_8_7-8_4,3,400,900,100,same_maker_OD_stage_mismatch,eligible_with_flag,BHA2 item2 GGDS and bit record row4
+3,GeoGuidance,8,7/8,5.9,GG_Colossus_8_7-8_4,3,400,900,100,same_maker_OD_stage_mismatch,eligible_with_flag,BHA3 item2 GGDS and bit record row5
+4,GeoGuidance,7,6/7,6.5,,,,,,no_same_OD_sheet,excluded_no_matching_sheet,BHA4 item2 GGDS and bit record row7; supplied GeoGuidance sheets are 6.75/8/9.62 in
+5,GeoGuidance,7,6/7,6.5,,,,,,no_same_OD_sheet,excluded_no_matching_sheet,BHA5 item2 GGDS and bit record row8
+6,GeoGuidance,7,6/7,6.5,,,,,,no_same_OD_sheet,excluded_no_matching_sheet,BHA6 item2 GGDS and bit record row9
+7,GeoGuidance,7,6/7,6.5,,,,,,no_same_OD_sheet,excluded_no_matching_sheet,BHA7 item2 GGDS and bit record row10
+8,Discovery,7,7/8,8.5,DDS_SS700_7885_HR,1,300,750,,maker_OD_configuration_match,excluded_no_published_no_load,BHA8 item2 Discovery serial700DDS023; DDR21Feb notes Discovery bearings
+9,BICO,7,7/8,6.1,BICO_SSS100_B5,1,300,700,475,same_maker_OD_exact_power_section_unverified,eligible_with_flag,BHA9 item2 BICO serialBPB5700-0050; bit record row12 maker blank
+10,BICO,7,7/8,6.1,BICO_SSS100_B5,1,300,700,475,same_maker_OD_exact_power_section_unverified,eligible_with_flag,BHA10 item2 BICO serialBPB5700-0042 and bit record row16
+11,Discovery,7,7/8,8.5,DDS_SS700_7885_HR,1,300,750,,maker_OD_configuration_match,excluded_no_published_no_load,BHA11 item2 Discovery serial700DDS025; bit record row17 maker blank

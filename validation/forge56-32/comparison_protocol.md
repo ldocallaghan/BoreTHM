@@ -1,5 +1,7 @@
 # FORGE 56-32 pressure comparison protocol
 
+The [V0 review amendment](protocol-amendment.md) governs the current comparison. It replaces the off-bottom sampling and motor treatment below, and adds the accepted geometry/timing rulings. The original protocol is retained here to document what was registered at `a1927b3`.
+
 V0 preregistration, prepared before any 56-32 model prediction or pressure residual. Baseline: `f61a5d918285948c7254f1458c83992cdfb935cb`. This protocol and its input preparation are committed before V2. Any source clarification or protocol amendment must have a new commit before target pressure is read. Earlier access to one report's observed pressure summary is disclosed below.
 
 ## Question and comparisons

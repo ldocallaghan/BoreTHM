@@ -1,0 +1,55 @@
+# Pressure protocol amendment
+
+This amendment applies the two V0 reviews before V1 and before target access. It governs the [56-32 comparison](comparison_protocol.md) and the [58-32 protocol](../forge58-32/comparison_protocol.md). The original ten-minute candidate archive is retained. The amendment commit, recorded in the V1 execution report, freezes the new selections and exclusions. No target value has been used to choose the cuts or assign a BHA.
+
+## Short off-bottom windows
+
+Pressure propagation is faster than thermal equilibration, so a ten-minute dwell would discard many connection circulations. Use a declared 60-second settling period after pumps-on or a significant flow change, followed by a 60-second measurement window. The settling period allows initial pump ramping and some gel breaking. It does not establish steady pressure or complete gel breakdown; those remain limitations because pressure is unavailable to selection.
+
+The shared input-only preparation script is [prepare_pressure_windows.py](../hydraulics-v160/prepare_pressure_windows.py). It uses ten-second bins. A flow epoch starts when flow becomes available above 100 US gpm, after a missing bin, or when mean flow leaves a band of 5% around the epoch's first flow. A bin with missing flow, minimum flow at or below 100 gpm, or within-bin range above 10% of its mean interrupts the epoch. Require twelve consecutive bins: six for settling and six for the first window. Further windows use successive non-overlapping groups of six bins. A new flow epoch restarts the settling clock.
+
+Every epoch bin has at least eight finite native observations each for flow, bit depth and hole depth. Every accepted window has all six input bins, bit depth at least 100 ft, and hole minimum minus bit maximum at least 10 ft in every bin. The full bit-depth span is at most 2 ft. The range of bin-mean flows divided by their median is at most 5%. The median of six values is the average of the middle pair. These stricter short-window movement cuts compensate partly for reducing the duration. No pressure, motor differential, weight-on-bit or temperature target selects an off-bottom window.
+
+An off-bottom event is contiguous occupancy with at least 10 ft clearance and bit depth at least 100 ft. Pump stops, flow changes and bit movement do not split an event. Stationarity selects windows within an event; it cannot create additional independent samples. End an event on depth failure, a depth-data gap above 60 seconds, a return within 10 ft of bottom or a bit shallower than 100 ft. An event may contain several flow epochs and windows. A window belongs to one event only. An event with more than one assigned BHA is excluded. Events containing only one assigned BHA may retain its qualified windows, with unassigned windows separately excluded.
+
+Keep window outputs, but summarise each event once. For each model and interval endpoint, take the median prediction over its qualified windows and the median measured pressure over those same windows. Form residuals and interval coverage from those medians. Each event has equal weight in BHA summaries, independently of duration or window count. Report event and window counts separately, including missing targets and convergence failures. Also publish the window-level results. Do not select a representative window using its pressure or residual.
+
+The original ten-minute counts and the new counts are in each well's `off_bottom_counts.csv`; the [amendment review](../hydraulics-v160/review-v0-amendment/README.md) presents all BHAs, including zero counts. Old and new rules use the same input-based assignment and motor exclusions. Rate-range checks use within-bin extrema, not just the window mean. Counts by exclusion are mutually exclusive primary reasons; the separate `outside_rated_flow` field also counts range failure where another exclusion applies.
+
+The on-bottom secondary method retains the original ten-minute drilling windows and the reported-differential caveats. The short rule applies to off-bottom circulation only.
+
+## Motors and primary observations
+
+All eleven 56-32 BHAs contain a motor. There are no motorless primary observations on this well. The [mapping table](motor_mapping.csv) uses the BHA component descriptions and the bit workbook, with daily-report input notes as a cross-check. The mapping was reported before freezing this amendment. A maker/OD match with a different lobe or stage count uses the supplied sheet with a mismatch flag. An unknown maker or an absent same-OD sheet excludes the motor-interval measure. Do not substitute a 6.75-in sheet for the recorded 7-in motor.
+
+Discovery motors without a published no-load value are excluded and counted. Every motor window with flow outside the mapped sheet's rated range is excluded and counted. The range check covers every available within-bin extreme. A source mapping is not revised in response to a comparison.
+
+For an eligible motor, use its published no-load pressure twice:
+
+`dp_motor = dp_published * (rho / rho_ref) * (Q / Q_ref)^2`.
+
+The upper rated flow as Q_ref gives the lower loss bound; the lower rated flow gives the upper loss bound. These are reference-flow uncertainty scenarios, not a claim that the entire manufacturer's curve is known. GeoGuidance's 8-in sheet, PDF page 3, supplies 100 psi and 400–900 gpm. Its test fluid is unstated: assume clean water at 20 C and 101,325 Pa for rho_ref. BICO SSS100-B5, page 1, supplies 475 psi and 300–700 gpm, with clean-water testing at 72 F; use water density at 72 F and an assumed 101,325 Pa. Preserve these assumptions in outputs. Density is calculated from the same water properties used by BoreTHM, without the downhole 5 MPa guard on this ambient reference.
+
+Report whether measured standpipe pressure falls inside each model's complete interval, and signed residuals, predicted minus measured, against both ends in psi and percent. A zero measured denominator retains absolute residuals and gives a missing percentage. Compare v1.5.0 and v1.6.0 on identical windows and endpoint inputs. Keep the v1.5.0/26.7 C, v1.5.0/48.9 C and v1.6.0/48.9 C variants distinct. No loss is inferred from measured pressure.
+
+A complete motor curve replaces its covered internal body losses, with the external annulus retained. Off-bottom rock-cutting face input is zero. Apply the declared no-load dissipation once. Secondary on-bottom calculations retain the separately qualified reported-differential face treatment. Do not infer mechanical efficiency from pressure residuals.
+
+## Geometry, timing and remaining input completion
+
+Unknown passage IDs use catalogue nominal values and the catalogue range as a sensitivity. Each substituted component must have its source, nominal ID and range in the numerical input ledger before that well's targets are accessed. A connection name or OD cannot establish a passage ID. If no compatible catalogue entry can be sourced, mark the geometry incomplete and exclude the numerical score. Do not fill an absent catalogue range with a fitted or arbitrary percentage. Where a whole-tool curve replaces the motor's internal losses, its unreported open bore does not add a second internal friction estimate; retain recorded external geometry.
+
+For 56-32, interpret the rounded 55-lb/ft surface casing as the standard 54.5-lb/ft, 13.375-in size, with nominal ID 12.615 in. Use the reported 36-lb/ft, 9.625-in casing's nominal 8.921-in ID. [Cudd Well Control Technical Data Book](https://www.cuddwellcontrol.com/images/Pages/Tech_Data/PDF/CWC_020_TECH_DATA_BK_10671_2021_04_23_DIGITAL.pdf), casing-capacity tables pp47–48, supplies these nominal sizes. Adjacent stock weights are size-identification sensitivities, not machining tolerances: surface ID 12.515–12.715 in; intermediate ID 8.885–9.001 in. With no conductor weight, a 20-in, 106.5-lb/ft nominal 19.000-in ID is an explicit transferred scenario; use the same table's 18.730–19.124-in stock range. Preserve source shoes and note the 3,494-ft casing shoe versus the 3,506-ft hole-section boundary.
+
+BHA 3's depth-out source contains a date. Keep that source cell and use the flagged candidate 3,308 + 192 = 3,500 ft. Its printed calendar date-out remains unchanged. BHA 5 has no date-out; the next BHA begins on 16 February, so its provisional assignment ends before that date. Do not erase the source discrepancy. The [56-32 crosswalk](bha_crosswalk.csv) preserves both numbering systems and endpoint differences. Calendar-only dates cannot resolve same-day trips. Match both date and recorded hole-depth range, and retain only unique assignments; uncertain endpoints and overlapping assemblies are excluded.
+
+For 58-32, daily reports give end-state BHAs. Assign an interior source day only when the previous, current and following calendar dates each identify the same single BHA. This is a conservative input-only clock treatment; transition days and days without adjacent reports are excluded. Raw source time zones and report-clock alignment remain unverified. The [58-32 archive](../forge58-32/README.md) distinguishes full component tables from early assembly-description lines. It lists reported rotary and motor assemblies. A short or incomplete assembly description cannot establish motor absence.
+
+The committed `off_bottom_windows.csv` files freeze BHA assignments and exclusion reasons. They are not revisited after comparison. Unreported component passage IDs and the field surface layout remain input qualifications. A sampling-qualified window is not yet a complete numerical case.
+
+Mud uses recorded density and the nearest non-missing paired PV/YP in the same recorded fluid system, in either time direction, with earlier samples breaking ties. If a system has no PV/YP, use water rheology at recorded density. Until fluid-system boundaries are sourced, the original 56-32 hole-section grouping is flagged as an assumption; 58-32 needs its own system ledger before scoring. No transfer across a documented fluid change is allowed. Unknown field PV test temperature remains the declared 48.9 C convention, with 26.7 C reported and yield point unchanged.
+
+## Accepted implementation and checks
+
+The public interface and shared friction kernel with explicit legacy mode are accepted. So are the surface-loss object, site-file programme field and S2b replay contract. Dual-wall and vacuum reference joints use their body bore, with no internal credit; only the external OD envelope is transferred. The plain reference collar length is 132.075968 m. API citations use edition/section/equation/table references without mirrored-document links.
+
+V1 must show an exact v1.5.0 legacy test, formula tests and heat/pressure consistency. On S2b's frozen samples, isolate the change caused by applying the 5 MPa guard to the old pressure path; record the result in the changelog. Formula replay uses the archived property/evaluation points. Production-mode guard and sampling changes are reported separately, without fitting or changing the frozen results. Stop at the V1 review, before V2 comparisons or golden changes.

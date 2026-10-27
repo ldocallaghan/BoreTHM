@@ -1,5 +1,7 @@
 # Hydraulic pressure and heat: revised V0 review
 
+This is the original review record. The [accepted amendment](../review-v0-amendment/README.md) records both subsequent rulings and governs the transition to V1. The interface, explicit legacy mode and S2b replay context below have been accepted; the amendment replaces the initial motor and window treatment.
+
 Baseline: `f61a5d918285948c7254f1458c83992cdfb935cb`, after the FORGE 16B merge. Branch: `hydraulics-v1.6.0`. This stage prepares source inputs and the pressure protocol. No package calculation, default, version, golden file or published result is changed.
 
 ## Review material

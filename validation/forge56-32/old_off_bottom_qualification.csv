@@ -1,0 +1,19 @@
+window_id,time,event_id,bha_id,flow_gpm,flow_min_gpm,flow_max_gpm,selection,rule,outside_rated_flow
+56-20210218T083500-primary_off_bottom,2021-02-18 08:35:00,56-32-off0052,,188.28386666666665,158.25,207.95,excluded_BHA_unresolved,old_10minute,False
+56-20210218T084500-primary_off_bottom,2021-02-18 08:45:00,56-32-off0052,,186.52790000000002,184.62,187.66,excluded_BHA_unresolved,old_10minute,False
+56-20210218T085500-primary_off_bottom,2021-02-18 08:55:00,56-32-off0052,,186.45510000000002,184.62,189.69,excluded_BHA_unresolved,old_10minute,False
+56-20210218T090500-primary_off_bottom,2021-02-18 09:05:00,56-32-off0052,,186.6311,184.62,191.72,excluded_BHA_unresolved,old_10minute,False
+56-20210218T091500-primary_off_bottom,2021-02-18 09:15:00,56-32-off0052,,186.71071666666666,184.62,187.66,excluded_BHA_unresolved,old_10minute,False
+56-20210218T092500-primary_off_bottom,2021-02-18 09:25:00,56-32-off0052,,186.43645,184.62,188.68,excluded_BHA_unresolved,old_10minute,False
+56-20210218T093500-primary_off_bottom,2021-02-18 09:35:00,56-32-off0052,,186.79871666666668,183.61,188.68,excluded_BHA_unresolved,old_10minute,False
+56-20210222T014500-primary_off_bottom,2021-02-22 01:45:00,56-32-off0059,,384.2976,381.56,387.32,excluded_BHA_unresolved,old_10minute,False
+56-20210222T033500-primary_off_bottom,2021-02-22 03:35:00,56-32-off0059,,382.81621666666666,379.65,386.36,excluded_BHA_unresolved,old_10minute,False
+56-20210222T051500-primary_off_bottom,2021-02-22 05:15:00,56-32-off0059,,360.2108,358.55,362.39,excluded_BHA_unresolved,old_10minute,False
+56-20210222T052500-primary_off_bottom,2021-02-22 05:25:00,56-32-off0059,,360.02524999999997,357.6,362.39,excluded_BHA_unresolved,old_10minute,False
+56-20210222T053500-primary_off_bottom,2021-02-22 05:35:00,56-32-off0059,,360.18361666666664,357.6,362.39,excluded_BHA_unresolved,old_10minute,False
+56-20210222T054500-primary_off_bottom,2021-02-22 05:45:00,56-32-off0059,,361.4311666666666,346.09,413.2,excluded_BHA_unresolved,old_10minute,False
+56-20210222T124500-primary_off_bottom,2021-02-22 12:45:00,56-32-off0059,,408.9902,282.61,417.17,excluded_BHA_unresolved,old_10minute,False
+56-20210224T043500-primary_off_bottom,2021-02-24 04:35:00,56-32-off0064,10,119.0704,117.92,120.8,excluded_outside_motor_rated_flow,old_10minute,True
+56-20210226T210500-primary_off_bottom,2021-02-26 21:05:00,56-32-off0074,11,646.7718833333333,643.1,650.87,excluded_no_published_no_load,old_10minute,False
+56-20210226T221500-primary_off_bottom,2021-02-26 22:15:00,56-32-off0074,11,388.54378333333335,386.48,390.54,excluded_no_published_no_load,old_10minute,False
+56-20210227T125500-primary_off_bottom,2021-02-27 12:55:00,56-32-off0081,11,389.86744999999996,284.03,409.82,excluded_no_published_no_load,old_10minute,True

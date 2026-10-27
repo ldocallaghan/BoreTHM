@@ -18,7 +18,7 @@ The group starts at the segment carrying the curve and includes the stated numbe
 
 Automatic geometric transitions occur once at a physical change, including casing changes on the annular return path. Numerical mesh subdivisions do not create extra losses. Use the actual flow direction when identifying contraction and expansion. Spread each event over an explicitly recorded adjacent component interval, identically in pressure and heat integration. User coefficients describe additional restrictions and must not duplicate an automatically represented transition.
 
-Joint corrections replace body friction over the effective restriction length, then add the entry and exit losses. The correction can be negative when the joint passage is larger than the body passage. The total passage dissipation must remain non-negative. Do not cap a specified joint bore to the pipe-body bore.
+Joint corrections replace body friction over the effective restriction length, then add the entry and exit losses. The correction can be negative when a supplied joint passage is larger than the body passage. The total passage dissipation must remain non-negative. The dual-wall and vacuum reference variants use their body bore at the joint, so they receive no internal joint credit; their external joint envelope remains a flagged transfer.
 
 The existing thermal joint treatment remains independent. Helpers such as `PipeType.with_joints` must preserve the new hydraulic fields. A bare geometry with no supplied client tool curve receives no hidden reference tool allowance.
 
@@ -71,7 +71,7 @@ A supplied motor curve must identify whether it includes useful mechanical power
 
 For field PV, the existing `Mud(..., pv_ref_T=...)` argument already represents the measurement reference temperature. Study adapters will pass the reported temperature when available, otherwise the declared 48.9 C assumption, and expose 26.7 C as a separate sensitivity. Preserve the original S1 archives. Site-file PV and the default remain referenced to `fluids.PV_REF_T = 26.7 C`. This is an input change; computed film coefficients may change although their correlations do not.
 
-For the 56-32 off-bottom protocol, the manufacturer's no-load curve must include an identified reference flow and density before constructing `ReferenceToolLoss`. The provided GeoGuidance pressure table lacks those reference quantities. Its printed scalar is not automatically a complete rho-Q-squared curve. A manufacturer-constant interpretation would require an explicit additional input-model decision; it is not implemented by this proposal.
+The motor-interval protocol supplies two separate `ReferenceToolLoss` inputs using the manufacturer's rated flow endpoints as alternative reference flows. These are declared uncertainty scenarios. Reference density follows the stated clean-water conditions, with water at 20 C and atmospheric pressure as the explicit fallback assumption. Neither curve is asserted to be the uniquely identified manufacturer curve. The interval calculation does not require a different package formula.
 
 Per-solve diagnostics compare integrated applied sources against the independently summed assigned in-hole dissipation plus the existing face input, with explicit absolute/relative residuals. Compare like definitions and the same local flow. This checks source assignment; it does not establish that measured pump power is completely represented. Set and justify numerical tolerances in V1 using integration error, without adjusting physical coefficients.
 

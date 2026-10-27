@@ -1,0 +1,7 @@
+rule,bha_id,selection,windows,events,outside_rated_windows
+new,10,excluded_unknown_maker,30,7,0
+new,17,excluded_unknown_maker,86,7,0
+new,2,motorless_primary,62,7,0
+new,3,excluded_unknown_maker,13,3,0
+new,unresolved,excluded_BHA_unresolved,1894,92,0
+old,unresolved,excluded_BHA_unresolved,59,12,0

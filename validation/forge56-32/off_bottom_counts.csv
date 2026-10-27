@@ -1,0 +1,16 @@
+rule,bha_id,selection,windows,events,outside_rated_windows
+new,10,excluded_outside_motor_rated_flow,19,1,19
+new,10,motor_interval,9,4,0
+new,11,excluded_no_published_no_load,89,3,3
+new,2,excluded_outside_motor_rated_flow,2,2,2
+new,2,motor_interval,4,3,0
+new,4,excluded_no_matching_sheet,38,3,0
+new,5,excluded_no_matching_sheet,9,1,0
+new,8,excluded_event_BHA_conflict,13,1,11
+new,8,excluded_no_published_no_load,1,1,0
+new,9,excluded_event_BHA_conflict,13,1,0
+new,9,motor_interval,5,2,0
+new,unresolved,excluded_BHA_unresolved,476,14,0
+old,10,excluded_outside_motor_rated_flow,1,1,1
+old,11,excluded_no_published_no_load,3,2,1
+old,unresolved,excluded_BHA_unresolved,14,2,0

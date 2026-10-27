@@ -1,0 +1,322 @@
+[
+  {
+    "source_member": "Pason_Logs/7-31-17.csv",
+    "raw_rows": 49655,
+    "input_bins_10s": 4976,
+    "standpipe_finite": 49655,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-01-17.csv",
+    "raw_rows": 86305,
+    "input_bins_10s": 8638,
+    "standpipe_finite": 86305,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-02-17.csv",
+    "raw_rows": 86390,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86390,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-03-17.csv",
+    "raw_rows": 68840,
+    "input_bins_10s": 6892,
+    "standpipe_finite": 68840,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-04-17.csv",
+    "raw_rows": 86231,
+    "input_bins_10s": 8639,
+    "standpipe_finite": 86231,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-05-17.csv",
+    "raw_rows": 86286,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86286,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-06-17.csv",
+    "raw_rows": 86240,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86240,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-07-17.csv",
+    "raw_rows": 86384,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86384,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-08-17.csv",
+    "raw_rows": 86315,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86315,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-09-17.csv",
+    "raw_rows": 86317,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86317,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-10-17.csv",
+    "raw_rows": 85971,
+    "input_bins_10s": 8605,
+    "standpipe_finite": 85971,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-11-17.csv",
+    "raw_rows": 86013,
+    "input_bins_10s": 8622,
+    "standpipe_finite": 86013,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-12-17.csv",
+    "raw_rows": 86309,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86309,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-13-17.csv",
+    "raw_rows": 86323,
+    "input_bins_10s": 8638,
+    "standpipe_finite": 86323,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-14-17.csv",
+    "raw_rows": 86212,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86212,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-15-17.csv",
+    "raw_rows": 86323,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86323,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-16-17.csv",
+    "raw_rows": 86290,
+    "input_bins_10s": 8639,
+    "standpipe_finite": 86290,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-17-17.csv",
+    "raw_rows": 86323,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86323,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-18-17.csv",
+    "raw_rows": 86320,
+    "input_bins_10s": 8636,
+    "standpipe_finite": 86320,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-19-17.csv",
+    "raw_rows": 86309,
+    "input_bins_10s": 8639,
+    "standpipe_finite": 86309,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-20-17.csv",
+    "raw_rows": 86312,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86312,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-21-17.csv",
+    "raw_rows": 85868,
+    "input_bins_10s": 8602,
+    "standpipe_finite": 85868,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-22-17.csv",
+    "raw_rows": 86304,
+    "input_bins_10s": 8639,
+    "standpipe_finite": 86304,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-23-17.csv",
+    "raw_rows": 86104,
+    "input_bins_10s": 8614,
+    "standpipe_finite": 86104,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-24-17.csv",
+    "raw_rows": 86312,
+    "input_bins_10s": 8639,
+    "standpipe_finite": 86312,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-25-17.csv",
+    "raw_rows": 86257,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86257,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/8-26-17.csv",
+    "raw_rows": 86242,
+    "input_bins_10s": 8639,
+    "standpipe_finite": 86242,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-01-17.csv",
+    "raw_rows": 86045,
+    "input_bins_10s": 8639,
+    "standpipe_finite": 86045,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-02-17.csv",
+    "raw_rows": 85759,
+    "input_bins_10s": 8638,
+    "standpipe_finite": 85759,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-03-17.csv",
+    "raw_rows": 86357,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86357,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-04-17.csv",
+    "raw_rows": 86289,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86289,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-05-17.csv",
+    "raw_rows": 86365,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86365,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-06-17.csv",
+    "raw_rows": 86259,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86259,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-07-17.csv",
+    "raw_rows": 86332,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86332,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-08-17.csv",
+    "raw_rows": 86299,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86299,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-09-17.csv",
+    "raw_rows": 86290,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86290,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-10-17.csv",
+    "raw_rows": 86375,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86375,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-11-17.csv",
+    "raw_rows": 86683,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 86683,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-12-17.csv",
+    "raw_rows": 87069,
+    "input_bins_10s": 8640,
+    "standpipe_finite": 87069,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  },
+  {
+    "source_member": "Pason_Logs/9-13-17.csv",
+    "raw_rows": 86521,
+    "input_bins_10s": 8614,
+    "standpipe_finite": 86521,
+    "standpipe_missing": 0,
+    "non_data_rows": 3
+  }
+]

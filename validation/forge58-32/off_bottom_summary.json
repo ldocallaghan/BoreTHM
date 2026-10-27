@@ -1,0 +1,12 @@
+{
+  "well": "58-32",
+  "old_windows": 59,
+  "new_windows": 2085,
+  "new_events": 114,
+  "new_selection_counts": {
+    "excluded_BHA_unresolved": 1894,
+    "motorless_primary": 62,
+    "excluded_unknown_maker": 129
+  },
+  "targets_read": false
+}

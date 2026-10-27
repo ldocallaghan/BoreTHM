@@ -1,0 +1,15 @@
+{
+  "well": "56-32",
+  "old_windows": 18,
+  "new_windows": 678,
+  "new_events": 29,
+  "new_selection_counts": {
+    "excluded_BHA_unresolved": 476,
+    "excluded_outside_motor_rated_flow": 21,
+    "motor_interval": 18,
+    "excluded_no_matching_sheet": 47,
+    "excluded_no_published_no_load": 90,
+    "excluded_event_BHA_conflict": 26
+  },
+  "targets_read": false
+}

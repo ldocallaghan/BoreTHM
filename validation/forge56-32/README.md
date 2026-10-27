@@ -2,6 +2,8 @@
 
 Input extracts for the planned unfitted comparison of BoreTHM v1.5.0 and v1.6.0 standpipe pressure. Stationary off-bottom circulation is primary; on-bottom pressure minus reported differential is secondary. The [comparison protocol](comparison_protocol.md) defines the method before predictions or errors are calculated.
 
+The [review amendment](protocol-amendment.md) replaces the original off-bottom rule with short windows and event weighting. All eleven BHAs contain motors, so this well supplies the motor-interval measure; motorless primary observations come from 58-32. Current selections are in `off_bottom_windows.csv`, event membership in `off_bottom_events.csv` and old/new counts in `off_bottom_counts.csv`. The [motor mapping](motor_mapping.csv) records all exclusions. The original ten-minute files below remain reproducible historical inputs.
+
 ## Sources and attribution
 
 Bristol, Caldwell, Welch, Stroud and colleagues (2021), *Utah FORGE: Well 56-32 Drilling Data and Logs*, Energy and Geoscience Institute at the University of Utah. [GDR 1295](https://gdr.openei.org/submissions/1295), [DOI 10.15121/1777170](https://doi.org/10.15121/1777170), [OEDI record](https://data.openei.org/submissions/9753). The source drilling dataset is supplied under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Manufacturer specifications retain their own attribution; this archive includes transcribed input facts and source hashes, without redistributing their PDF sheets.
