@@ -1,0 +1,12 @@
+bha_sheet_id,hole_size_in,motor_identifier_source,motor_OD_in,date_in_source,date_out_source,date_in,date_out,depth_in_ft,depth_out_ft,depth_out_source,footage_ft,source_member,page,depth_out_status,depth_out_derived_candidate_ft
+1,17.5,9004,9.625,02/07/21,2021/02/08,2021-02-07,2021-02-08,133.0,380.0,380,247.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf,1,reported,
+10,8.75,10,7.0,2021/02/24,2/25/2021,2021-02-24,2021-02-25,7666.0,8900.0,8900,1234.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,reported,
+11,8.75,700DDS025,7.0,2/25/2021,02/27/21,2021-02-25,2021-02-27,8900.0,9145.0,9145,245.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,reported,
+2,12.25,2,8.0,2/9/21,2021/02/10,2021-02-09,2021-02-10,390.0,3308.0,3308,2918.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,reported,
+3,12.25,3,8.0,2/10/2021 Date Out:,2/10/2021,2021-02-10,2021-02-10,3308.0,,2021/02/11,192.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,unresolved_source_cell,3500.0
+4,8.75,4,7.0,02/12/21,2021/02/14,2021-02-12,2021-02-14,3500.0,4595.0,4595,1095.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,reported,
+5,8.75,5,7.0,2021/02/14,,2021-02-14,,4595.0,5143.0,5143,548.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,reported,
+6,8.75,6,7.0,2/16/2021,2/17/2021,2021-02-16,2021-02-17,5143.0,5610.0,5610,467.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,reported,
+7,8.75,7,7.0,02/17/2021,2021/02/18,2021-02-17,2021-02-18,5610.0,5999.0,5999,389.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,reported,
+8,8.75,8,7.0,2/18/2021,2/20/2021,2021-02-18,2021-02-20,5999.0,7207.0,7207,1208.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf,1,reported,
+9,8.75,9,7.0,2021/02/21,2021/02/21,2021-02-21,2021-02-21,7207.0,7620.0,7620,413.0,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf,1,reported,

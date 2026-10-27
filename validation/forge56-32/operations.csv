@@ -1,0 +1,331 @@
+report_date,time_from,time_to,elapsed_hours,end_MD_ft,code,description_input,description_status,trip_out,trip_in,named_bit_or_BHA_ids,source_member,page
+2021-02-06,0:00,6:00,6.00,128,OTHER,Wait on Day Light.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210205202148.pdf,1
+2021-02-06,6:00,18:00,12.00,128,RIGU,"Set in place rig components and heavy loads, Draw works, A-Frame, Derrick and
+strung blocks. Raised derrick. Rigged up equipment.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210205202148.pdf,1
+2021-02-06,18:00,0:00,6.00,128,OTHER,Wait on Day Light.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210205202148.pdf,1
+2021-02-07,0:00,6:00,6.00,128,OTHER,Waited on Day Light.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210206193435.pdf,1
+2021-02-07,6:00,18:00,12.00,128,RIGU,"Set in Top Drive and track, wind walls and nippled up equipment.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210206193435.pdf,1
+2021-02-07,18:00,0:00,6.00,128,OTHER,Waited on Day Light.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210206193435.pdf,1
+2021-02-07,0:00,6:00,6.00,128,WOD,Wait on Day Light,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210208085316.pdf,1
+2021-02-07,6:00,10:30,4.50,128,OTHER,Pre-Spud Inspection of Rig,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210208085316.pdf,1
+2021-02-07,10:30,17:00,6.50,128,3-34-1,"Picked up 112 joints (37 stands) 5"" DP and stood back in derrick. Strapp.ed, OD, ID,
+FN 24 joints of HWDP and nine 8"" DC",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210208085316.pdf,1
+2021-02-07,17:00,17:30,0.50,128,SERV,Serviced Rig and Top Drive.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210208085316.pdf,1
+2021-02-07,17:30,21:00,3.50,128,3-34-1,"Picked up 7 stands of HWDP and 3 stands of 8"" DC",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210208085316.pdf,1
+2021-02-07,21:00,22:30,1.50,128,OTHER,"Cleaned and strapped 13-3/8"" casing.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210208085316.pdf,1
+2021-02-07,22:30,23:00,0.50,128,OTHER,Cleaned Rig floor.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210208085316.pdf,1
+2021-02-07,23:00,0:00,1.00,128,3-34-3,Picked up directional tools.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210208085316.pdf,1
+2021-02-08,0:00,1:00,1.00,128,10-6-1,Picked up directional tools.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,1:00,1:30,0.50,128,OTHER,Installed rotating head rubber.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,1:30,2:00,0.50,128,03-051,Filled pipe and hole.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,2:00,4:00,2.00,128,REPR,Trouble shot and replaced swivel packing. X,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,4:00,4:30,0.50,128,OTHER,Changed rotating head rubber,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,4:30,6:00,1.50,381,03-021,"Drilled 17-1/2"" hole from 128' to 380.5'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,6:00,6:30,0.50,381,03-051,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,6:30,7:00,0.50,381,WIPE,Wiper Trip.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,7:00,7:30,0.50,381,03-051,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,7:30,8:00,0.50,381,3-6-2,Pulled out of the hole.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,8:00,9:00,1.00,381,11-344,Laid down BHA.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,9:00,12:00,3.00,381,4-12-1,"Rigged up and ran 13-3/8"", 54.5 ppf, J-55 buttress casing with shoe set at 381'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,12:00,13:30,1.50,381,5-12-2,Rigged up cementers and circulated hole clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,13:30,14:30,1.00,381,5-12-2,,mixed_observation_text_suppressed,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,14:30,21:00,6.50,381,5-13,"Waited on cement. Cut off 20"" conductor and 13.375"" casing.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-08,21:00,0:00,3.00,381,6-35,,mixed_observation_text_suppressed,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210209085032.pdf,1
+2021-02-09,0:00,1:00,1.00,381,1-14,Installed valves on well head and tightened.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,1:00,5:30,4.50,381,1-14,"Insstalled spool, mud cross, double gates, annular, flow spool, choke line, choke
+hose and torqued all flanges.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,5:30,10:30,5.00,381,1-15,"Tested BOPE system, emailed results to DWR (Jim Goddard).",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,10:30,11:00,0.50,381,3-6-1,"Ran in the hole with 12-1/4"" Bit.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,11:00,12:00,1.00,390,03-021,"Drilled out float, shoe and drilled 12-1/4"" hole from 380' to 390'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,12:00,12:30,0.50,390,03-051,Circulated hole clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,12:30,13:00,0.50,390,3-46,Performed FiT,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,13:00,13:30,0.50,390,3-6-2,Pulled out of the well bore.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,13:30,15:30,2.00,390,4-34-3,Made up Bit #3 with mud motor and tools.,input_excerpt,False,False,3,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,15:30,16:30,1.00,390,4-6-1,Ran in hole and installed rotating well head.,input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,16:30,22:30,6.00,"2,226",3-2-2,"Drilled 12-1/4"" hole rotating and sliding from 390' to 2,226'",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,22:30,23:00,0.50,"2,226",03-051,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-09,23:00,0:00,1.00,"2,500",3-2-2,"Drilled 12-1/4"" hole rotating and sliding from 2,226' to 2,500'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf,1
+2021-02-10,0:00,1:00,1.00,"2,698",3-2-2,"Rotary Drilled 12-1/4"" hole from 2,500' to 2,698'",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,1:00,1:30,0.50,"2,698",03-051,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,1:30,2:00,0.50,"2,730",3-2-2,"Slide drilled 12-1/4"" hole from 2,698' to 2,730'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,2:00,2:30,0.50,"2,812",3-2-2,"Rotary drilled 12-1/4"" hole from 2,730' to 2,812'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,2:30,3:00,0.50,"2,852",3-2-2,"Slide drilled 12-1/4"" hole from 28,12' to 2,852'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,3:00,4:00,1.00,"3,082",3-2-2,"Rotary drilled 12-1/4"" hole from 2,852' to 3,082'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,4:00,5:30,1.50,"3,270",3-2-2,"Rotary drilled 12-1/4"" hole from 3,082' to 3,270'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,5:30,6:30,1.00,"3,270",03-051,Circulated and conditioned mud.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,6:30,11:30,5.00,"3,270",3-27,"Wiper trip to 380' with tight hole at 2,300'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,11:30,13:30,2.00,"3,308",3-2-2,"Rotary drilled 12-1/4"" hole from 3,270' to 3,308'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,13:30,16:00,2.50,"3,208",3-6-2,Pulled out of the well bore for new bit and motor.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,16:00,19:00,3.00,"3,208",3-34-4,Laid down tools and picked up new bit with mud motor.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,19:00,20:00,1.00,"3,208",3-6-1,"Ran in the hole to 2,331'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,20:00,22:30,2.50,"3,305",3-3,"Encountered tight spot and reamed 12-1/4"" hole from 2,331' to 3,305'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-10,22:30,0:00,1.50,"3,404",3-2-2,"Rotary drilled 12-1/4"" hole from 3,305' to 3,404'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210211070024.pdf,1
+2021-02-11,0:00,1:30,1.50,"3,500",3-2-2,"Drilled 12.25"" hole from 3404' to 3500'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,1:30,2:30,1.00,"3,500",03-051,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,2:30,4:00,1.50,"3,500",WIPE,Wiped hole from 3500' to 2000' and backed to bottom at 3500'.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,4:00,5:00,1.00,"3,500",03-051,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,5:00,6:30,1.50,"3,500",WIPE,Wiped hole from 3500' to 2000' and back to bottom at 3500'.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,6:30,7:30,1.00,"3,500",03-051,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,7:30,11:00,3.50,"3,500",3-6-2,Pulled out of the hole and laid down BHA.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,11:00,11:30,0.50,"3,500",3-97,Cleared rig floor for casing run.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,11:30,12:00,0.50,"3,500",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,12:00,14:00,2.00,"3,500",WOE,"Waited on Power Tongs. (Power tong truck had the rear end go out, waited on new
+truck).",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,14:00,19:00,5.00,"3,500",CASE,"Rigged up and ran 83 joints of 9.625"" 36 ppf, J-55, LT&C casing with shoe set at
+3488'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,19:00,21:30,2.50,"3,500",03-051,Rigged down casers and circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-11,21:30,0:00,2.50,"3,500",5-12-2,,mixed_observation_text_suppressed,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210212042428.pdf,1
+2021-02-12,0:00,6:00,6.00,"3,500",1-14,"Break stack at well head. Lift stack, cleaned out cement from well head. Set slips in
+well head around 9-5/8"" casing. Set down stack and nipped up. Cleaned BOPE
+stack of cement.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-12,6:00,9:00,3.00,"3,500",1-15,Tested BOPE. Cleaned flow line of cement.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-12,9:00,9:30,0.50,"3,500",11-343,"Strapped drill collars, made up bit.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-12,9:30,10:30,1.00,"3,500",11-6-1,"Ran in the hole to 3,200'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-12,10:30,13:00,2.50,"3,500",3-28,"Cleaned out cement stringers from 3,200' to 3,414' and drilled out baffle plate,
+cement and shoe at 3,488' and cement to 3,500'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-12,13:00,14:30,1.50,"3,500",03-021,"Drilled 8.-3/4"" hole from 3,500' to 3,506'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-12,14:30,15:00,0.50,"3,500",11-99,,mixed_observation_text_suppressed,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-12,15:00,16:00,1.00,"3,500",11-6-2,Pulled out of the hole.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-12,16:00,0:00,8.00,"3,500",10-341,Picked up drill pipe single and stood back in derrick.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210213071836.pdf,1
+2021-02-13,0:00,0:30,0.50,"3,506",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,0:30,2:30,2.00,"3,506",7-34-3,Strapped collars and made up tools.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,2:30,4:30,2.00,"3,506",7-6-1,Ran in the hole.,input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,4:30,5:00,0.50,"3,579",DRILR,"Rotary drilled 8-3/4"" hole from 3,506' to 3,579'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,5:00,5:30,0.50,"3,599",3-2-3,"Slide drilled 8-3/4"" hole from 3,579' to 3,599'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,5:30,9:30,4.00,"3,938",3-2-2,"Rotary drilled 8-3/4"" hole from 3,599' to 3,938'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,9:30,10:00,0.50,"3,950",3-2-3,"Slide drilled 8-3/4"" hole from 3,938' to 3,950'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,10:00,11:30,1.50,"4,033",3-2-2,"Rotary drilled 8-3/4"" hole from 3,950' to 4,033'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,11:30,12:00,0.50,"4,060",3-2-3,"Slide drilled 8-3/4"" hole from 4,033' to 4,060'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,12:00,15:30,3.50,"4,214",3-2-2,"Rotary drilled 8-3/4"" hole from 4,060' to 4,214'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,15:30,16:00,0.50,"4,214",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-13,16:00,0:00,8.00,"4,385",3-2-2,"Rotary drilled 8-3/4"" hole from 4,214' to 4,385'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210214071406.pdf,1
+2021-02-14,0:00,1:00,1.00,"4,405",3-2-2,"Rotary drilled 8-3/4"" hole from 4,385' to 4,405'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-14,1:00,3:00,2.00,"4,420",3-2-3,"Slide drilled 8-3/4"" hole from 4,405' to 4,420'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-14,3:00,12:30,9.50,"4,595",3-2-2,"Rotary drilled 8-3/4"" hole from 4,420' to 4,595'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-14,12:30,16:30,4.00,"4,595",3-6-4,Pulled out of the hole laying down bit and tools.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-14,16:30,19:00,2.50,"4,595",3-34-3,"Made up bit, directional tools and ran in the hole.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-14,19:00,19:30,0.50,"4,595",3-5-1,Filled pipe and circulated.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-14,19:30,20:30,1.00,"4,620",3-2-3,"Slide drilled 8-3/4"" hole from 4,595' to 4,620'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-14,20:30,23:30,3.00,"4,692",3-2-2,"Rotary drilled 8-3/4"" hole from 4,620' to 4,692'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-14,23:30,0:00,0.50,"4,702",3-2-3,"Slide drilled 8-3/4"" hole from 4,692' to 4,702'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210215064844.pdf,1
+2021-02-15,0:00,1:00,1.00,"4,715",3-2-3,"Slide drilled 8.-3/4"" hole from 4,702' to 4,715'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210216061015.pdf,1
+2021-02-15,1:00,11:30,10.50,"4,932",3-2-2,"Rotary drilled 8.-3/4"" hole from 4,715' to 4,932'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210216061015.pdf,1
+2021-02-15,11:30,12:00,0.50,"4,932",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210216061015.pdf,1
+2021-02-15,12:00,23:15,11.25,"5,143",3-2-2,"Rotary drilled 8-3/4"" hole from 4,932' to 5,143'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210216061015.pdf,1
+2021-02-15,23:15,0:00,0.75,"5,143",3-5-1,Circulated bottoms up in preparation for trip out of hole.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210216061015.pdf,1
+2021-02-16,0:00,5:00,5.00,"5,143",3-6-2,Pulled out of the hole and laid down bit and mud motor.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,5:00,7:30,2.50,"5,143",3-6-1,"Made up new bit and mud motor, ran in the hole to 5,083'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,7:30,8:00,0.50,"5,143",3-53,"Filled pipe and washed to bottom at 5,143'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,8:00,8:30,0.50,"5,174",3-2-2,"Rotary drilled 8-3/4"" hole from 5,143' to 5,174'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,8:30,9:00,0.50,"5,189",3-2-3,"Slide drilled 8-3/4"" hole from 5,174' to 5,189'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,9:00,14:30,5.50,"5,363",3-2-2,"Rotary drilled 8-3/4"" hole from 5,189' to 5,363'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,14:30,15:30,1.00,"5,375",3-2-3,"Slide drilled 8-3/4"" hole from 5,363' to 5,375'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,15:30,22:00,6.50,"5,543",3-2-2,"Rotary drilled 8-3/4"" hole from 5,375' 5,543'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,22:00,22:30,0.50,"5,558",3-2-3,"Slide drilled 8-3/4"" hole from 5,543' to 5,558'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-16,22:30,0:00,1.50,"5,610",3-2-2,"Rotary drilled 8-3/4"" hole from 5,558' to 5,610'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210217063653.pdf,1
+2021-02-17,0:00,1:30,1.50,"5,610",03-051,Trouble shoot MWD while circulating.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,1:30,6:00,4.50,"5,610",3-6-2,"Pulled out of the well bore laying down bit, mud motor and tools.",input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,6:00,8:00,2.00,"5,610",3-34-3,Made up tools and ran in the hole.,input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,8:00,9:00,1.00,"5,610",3-57,Filled pipe and took surveys.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,9:00,9:30,0.50,"5,649",3-2-1,"Rotate drilled 8-3/4"""" hole from 5,610' to 5,649'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,9:30,10:00,0.50,"5,662",3-2-3,"Slide drilled 8-3/4""hole from 5,649' to 5,662'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,10:00,11:30,1.50,"5,742",3-2-1,"Rotate drilled 8-3/4"" hole from 5,642' to 5,742'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,11:30,12:30,1.00,"5,759",3-2-3,"Slide drilled 8-3/4"" hole from 5,742' to 5,759'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,12:30,16:00,3.50,"5,827",3-2-1,"Rotate drilled 8-3/4"" hole from 5,759' to 5,827'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,16:00,16:30,0.50,"5,827",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,16:30,17:00,0.50,"5,837",3-2-1,"Rotate drilled 8-3/4"" hole from 5,827; to 5,837'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,17:00,19:00,2.00,"5,852",3-2-3,"Slide drilled8-3/4"" hole from 5,837' to 5,852'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,19:00,21:00,2.00,"5,904",3-2-1,"Rotate drilled 8-3/4"" hole from 5,852' to ,5904'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,21:00,22:00,1.00,"5,920",3-2-3,"Slide drilled 8-3/4"" hole from 5,904' to 5,920'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,22:00,23:30,1.50,"5,920",3-2-1,"Rotate drilled 8-3/4"" hole from 5,920' to 5,973'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-17,23:30,0:00,0.50,"5,920",3-2-3,"Slide drilled 8-3/4"" hole from 5,973' to 5,978'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210218064145.pdf,1
+2021-02-18,0:00,1:30,1.50,"5,999",3-2-3,"Slide drilled 8-3/4"" hole from 5,978' to 5,999'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,1:30,2:00,0.50,"5,999",03-051,,mixed_observation_text_suppressed,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,2:00,5:00,3.00,"5,999",3-6-2,Pulled out of the well bore with broken shaft on mud motor.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,5:00,8:30,3.50,"5,999",3-34-3,"Made up bit and new BHA. Ran in the hole to shoe at 3,512'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,8:30,9:30,1.00,"5,999",CUTDL,Slipped and cut drilling line.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,9:30,10:30,1.00,"5,999",3-6-1,"Ran in the hole to 5,782'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,10:30,11:00,0.50,"5,999",3-3,"Reamed 8-3/4"" hole from 5,782' to 5,999'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,11:00,12:00,1.00,"6,053",3-2-2,"Rotary drilled 8-3/4"" hole from 5,999' to 6,053'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,12:00,12:30,0.50,"6,068",3-2-3,"Slide drilled 8-3/4"" hole from 6,053' to 6,068'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,12:30,18:30,6.00,"6,197",3-2-2,"Rotary drilled 8-3/4"" hole from 6,068' to 6,197'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,18:30,20:00,1.50,"6,222",3-2-3,"Side drilled8-3/4"" hole from 6,197' to 6,222'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-18,20:00,0:00,4.00,"6,222",3-2-2,"Rotary drilled 8-3/4"" hole from 6,222' to 6,295'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210219065325.pdf,1
+2021-02-19,0:00,9:30,9.50,"6,490",3-2-2,"Rotary drilled 8-3/4"" hole from 6,295' to 6,490'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-19,9:30,11:30,2.00,"6,515",3-2-3,"Slide drilled 8-3/4"" hole from 6,490' to 6,515'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-19,11:30,14:00,2.50,"6,575",3-2-2,"Rotary drilled 8-3/4"" hole from 6,515' to 6,575'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-19,14:00,14:30,0.50,"6,575",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-19,14:30,15:00,0.50,"6,585",3-2-2,"Rotary drilled 8-3/4"" hole from 6,575' to 6,585'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-19,15:00,17:00,2.00,"6,606",3-2-3,"Slide drilled 8-3/4"" hole from 6,585' to 6,606'",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-19,17:00,19:30,2.50,"6,672",3-2-2,"Rotary drilled 8-3/4"" hole from 6,606' to 6,672'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-19,19:30,21:00,1.50,"6,697",3-2-3,"Slide drilled 8-3/4"" hole from 6,672' to 6,697'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-19,21:00,0:00,3.00,"6,765",3-2-2,"Rotary drilled 8-3/4"" hole from 6,697' to 6,765'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210220063258.pdf,1
+2021-02-20,0:00,8:30,8.50,"6,965",3-2-2,"Rotary drilled 8-3/4"" hole from 6,765' to 6,965'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-20,8:30,10:00,1.50,"6,990",3-2-3,"Slide drilled 8-3/4"" hole from 6,965' to 6,990'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-20,10:00,12:00,2.00,"7,050",3-2-2,"Rotary drilled 8-3/4"" hole from 6,990' to 7,050'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-20,12:00,12:30,0.50,"7,050",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-20,12:30,13:00,0.50,"7,060",3-2-2,"Rotary drilled 8-3/4"" hole from 7,050' to 7,060'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-20,13:00,15:00,2.00,"7,085",3-2-3,"Slide drilled 8-3/4"" hole from 7,060' to 7,085'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-20,15:00,19:30,4.50,"7,207",3-2-2,"Rotary drilled 8-3/4"" hole from 7,085' to 7,207'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-20,19:30,20:00,0.50,"7,207",3-5-1,Circulated bottoms up.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-20,20:00,0:00,4.00,"7,207",3-6-2,Pulled out of the well bore laying down BHA and bit.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210221062651.pdf,1
+2021-02-21,0:00,5:00,5.00,"7,207",10-6-2,"Made up Bit #11 and new BHA. Ran in the hole to 7,141'.",input_excerpt,False,True,11,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,5:00,5:30,0.50,"7,207",3-3,"Washed and reamed 8-3/4"" hole from 7,141' to 7,208'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,5:30,7:30,2.00,"7,434",3-2-2,"Rotary drilled 8-3/4"" hole from 7,208' to 7,434'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,7:30,8:30,1.00,"7,460",3-2-3,"Slide drilled 8-3/4"" hole from 7,434' to 7,460'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,8:30,11:00,2.50,"7,620",3-2-2,"Rotary drilled 8-3/4"" hole from 7,560' to 7,620'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,11:00,12:00,1.00,"7,620",3-5-1,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,12:00,15:30,3.50,"7,620",3-6-2,Pulled out of the well bore laying down bit and BHA.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,15:30,18:00,2.50,"7,620",3-34-3,Made up mud hammer and BHA.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,18:00,18:30,0.50,"7,620",3-6-1,Ran in the hole with BHA.,input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,18:30,21:30,3.00,"7,620",3-34-4,"Fill pipe and test hammer, pulled out to trouble shoot Mud Hammer, changed out jet
+and mud orifice.",input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-21,21:30,0:00,2.50,"7,620",3-6-1,Ran in the hole with mud hammer,input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210222070614.pdf,1
+2021-02-22,0:00,1:00,1.00,"7,620",3-6-1,"Ran in the well bore with Mud Hammer to 5,790'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,1:00,5:00,4.00,"7,620",3-33,"BHA stuck at 5,790' and worked string. Spotted torqueaze and worked pipe free.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,5:00,6:00,1.00,"7,620",3-5-1,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,6:00,9:00,3.00,"7,620",3-6-2,Pulled out of the hole laying down reamers.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,9:00,10:00,1.00,"7,620",3-6-1,Ran in the hole with mud motor.,input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,10:00,10:30,0.50,"7,620",3-97,Tested MWD.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,10:30,11:00,0.50,"7,620",3-6-1,"Ran in the hole to 5,790'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,11:00,12:00,1.00,"7,620",3-3,"Reamed 8-3/4"" hole from 5,790' to 5,850'. (Tagged up at 5,790')",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,12:00,12:30,0.50,"7,620",3-6-1,"Ran in the hole to 6,920'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,12:30,13:00,0.50,"7,620",3-5-1,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,13:00,13:30,0.50,"7,620",3-6-1,"Ran in the hole to bottom at 7,620'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,13:30,15:30,2.00,"7,620",3-2-1,,mixed_observation_text_suppressed,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,15:30,16:00,0.50,"7,620",3-5-1,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,16:00,19:30,3.50,"7,620",3-6-2,Pulled out of the hole laying down mud hammer and tools.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-22,19:30,0:00,4.50,"7,620",3-6-1,"Made up bit and reaming assembly, RIH to 5,703'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210223064031.pdf,1
+2021-02-23,0:00,3:00,3.00,"7,627",3-3,"Reamed 8-3/4"" hole from 5,703' to 5,983'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,3:00,4:00,1.00,"7,627",3-6-1,"Ran in the hole un-obstructed from 5,983' to 7,600'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,4:00,4:30,0.50,"7,627",3-3,"Washed and reamed 8-3/4"" hole from 7,600' to 7,627'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,4:30,5:30,1.00,"7,662",3-2-2,"Rotary drilled 8-3/4"" hole from 7,627' to 7,662'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,5:30,6:00,0.50,"7,662",3-5-1,Circulated hole clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,6:00,9:00,3.00,"7,662",3-6-2,Pulled out of the well bore laying down BHA.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,9:00,13:00,4.00,"7,662",3-34-3,Made up mud hammer and ran in the hole to 5500'.,input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,13:00,17:00,4.00,"7,666",3-2-2,,mixed_observation_text_suppressed,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,17:00,22:00,5.00,"7,666",3-6-2,Pulled out of the hole laying down mud hammer and tools.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-23,22:00,0:00,2.00,"7,666",OTHER,Ran mud hammer in mouse hole and tested hammer. Hammer would not fire.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210224062934.pdf,1
+2021-02-24,0:00,4:00,4.00,"7,666",03-061,"Made up bit and tools. Ran in hole to 3,561'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,4:00,6:00,2.00,"7,666",CUTDL,Slipped and cut 100' to drilling line.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,6:00,7:30,1.50,"7,666",3-6-1,"Ran in the hole to bottom at 7,666'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,7:30,8:00,0.50,"7,751",3-2-2,"Rotary drilled 8-3/4"" hole from 7,666' to 7,751'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,8:00,8:30,0.50,"7,776",3-2-3,"Slide drilled 8-3/4"" hole from 7,751' to 7,776'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,8:30,9:30,1.00,"7,846",3-2-2,"Rotary drilled 8-3/4"" hole from 7,776' to 7,846'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,9:30,10:30,1.00,"7,871",3-2-3,"Slide drilled 8-3/4"" hole from 7,846' to 7,871'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,10:30,12:30,2.00,"8,000",3-2-2,"Rotary drilled 8-3/4"" hole from 7,871' to 8,000'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,12:30,13:00,0.50,"8,000",3-5-1,Circulated bottoms up.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,13:00,13:30,0.50,"8,000",3-6-2,"Pulled out of the hole from 8,000' to 7,750'.",input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,13:30,14:00,0.50,"8,000",3-3,"Reamed 8-3/4"" hole from 7,750' to 8,000'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,14:00,14:30,0.50,"8,035",3-2-2,"Rotary drilled 8-3/4"" hole from 8,000' to 8,035'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,14:30,16:00,1.50,"8,065",3-2-3,"Slide drilled 8-3/4"" hole from 8,035' to 8,065'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,16:00,18:00,2.00,"8,140",3-2-2,"Rotary drilled 8-3/4"" hole from 8,065' to 8,140'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,18:00,18:30,0.50,"8,147",3-2-3,"Slide drilled 8-3/4"" hole from 8,140' to 8,147'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-24,18:30,0:00,5.50,"8,353",3-2-2,"Rotary drilled 8-3/4"" hole from 8,147' to 8,353'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210225063703.pdf,1
+2021-02-25,0:00,2:00,2.00,"8,404",DRILR,"Rotate drilled 8-3/4"" hole from 8353' to 8404'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,2:00,4:30,2.50,"8,434",DRILS,"Slide drilled 8-3/4"" hole from 8404' to 8434'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,4:30,10:30,6.00,"8,598",DRILR,"Rotate drilled 8-3/4"" hole from 8434' to 8598'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,10:30,12:00,1.50,"8,611",DRILS,"Slide drilled 8-3/4"" hole from 8598' to 8611'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,12:00,12:30,0.50,"8,627",DRILR,"Rotate drilled 8-3/4"" hole from 8611' to 8627'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,12:30,14:00,1.50,"8,642",DRILS,"Slide drilled 8-3/4"" hole from 8627' to 8642'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,14:00,15:00,1.00,"8,661",DRILR,"Rotate drilled 8-3/4"" hole from 8642' to 8661'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,15:00,16:00,1.00,"8,676",DRILS,"Slide drilled 8-3/4"" hole from 8661' to 8676'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,16:00,17:00,1.00,"8,693",DRILR,"Rotate drilled 8-3/4"" hole from 8676' to 8693'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,17:00,18:30,1.50,"8,708",DRILS,"Slide drilled 8-3/4"" hole from 8693' to 8708'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,18:30,19:00,0.50,"8,728",DRILR,"Rotary drilled 8-3/4"" hole from 8708' to 8728'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,19:00,20:00,1.00,"8,743",DRILS,"Slide drilled 8-3/4"" hole from 8728' to 8743'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,20:00,20:30,0.50,"8,758",DRILR,"Rotary drilled 8-3/4"" hole from 8743' to 8758'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,20:30,21:30,1.00,"8,773",DRILS,"Slide drilled 8-3/4"" hole from 8758' to 8773'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,21:30,22:00,0.50,"8,785",DRILR,"Rotary drilled 8-3/4""hole from 8773' to 8785'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-25,22:00,0:00,2.00,"8,810",DRILS,"Slide drilled 8-3/4"" hole from 8785' to 8810'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210226055850.pdf,1
+2021-02-26,0:00,1:00,1.00,"8,855",3-2-2,"Rotary drilled 8-3/4"" hole from 8,810' to 8,855'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-26,1:00,2:00,1.00,"8,871",3-2-3,"Slide drilled 8-3/4"" hole from 8,855' to 8,871'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-26,2:00,3:00,1.00,"8,900",3-2-2,"Rotary drilled 8-3/4"" hole from 8,871' to 8,900'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-26,3:00,4:00,1.00,"8,900",3-5-1,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-26,4:00,9:00,5.00,"8,900",3-6-1,Pulled out of the hole laying down bit and tools.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-26,9:00,14:00,5.00,"8,900",OTHER,"Tested 2 mud hammers in ""Mouse Hole"" with mud and water. Hammers worked with
+water but not with mud.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-26,14:00,21:30,7.50,"8,900",3-6-1,"Made up bit and BHA 15 and staged in the hole 2,200-7,651' cooling well bore.",input_excerpt,False,False,15,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-26,21:30,22:00,0.50,"8,900",3-6-1,"Ran in the hole and encountered tight spot at 7651', jarred drill string free and worked
+tight spot to 8,188'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-26,22:00,0:00,2.00,"8,900",3-3,"Reamed 8-3/4"" hole from 8,188' to 8,923'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210227060538.pdf,1
+2021-02-27,0:00,0:30,0.50,"8,900",3-3,"Reamed 8-3/4"" hole to 8900'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,0:30,1:00,0.50,"8,900",3-2-2,"Rotary drilled 8-3/4"" hole from 8900' to 8923'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,1:00,2:00,1.00,"8,948",3-2-3,"Slide drilled 8-3/4"" hole from 8923' to 8948'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,2:00,2:30,0.50,"9,000",3-2-2,"Rotary drilled 8-3/4"" hole from 8948' to 9000'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,2:30,3:30,1.00,"9,025",3-2-3,"Slide drilled 8-3/4"" hole from 9000' to 9025'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,3:30,5:00,1.50,"9,145",3-2-2,"Rotary drilled 8-3/4"" hole from 9025' to TD of 9145'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,5:00,5:30,0.50,"9,145",3-5-1,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,5:30,10:30,5.00,"9,145",3-6-2,"Pulled out of the hole laying down bit, tools and drill collars.",input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,10:30,14:00,3.50,"9,145",10-343,"Made up logging bit, float and tools on HWDP and ran in the hole to 9145'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,14:00,15:00,1.00,"9,145",10-5-1,Circulated and cooled well bore.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,15:00,18:00,3.00,"9,145",10-11,"Rigged up loggers and picked up tools. Ran in to bottom through drill pipe with wire
+line.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,18:00,18:30,0.50,"9,145",10-11,Rigged down wire line unit and pump in sub.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-27,18:30,0:00,5.50,"9,145",10-11,Pulled out of the hole with Triple Combo and Gyro 30'/minute.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210228054849.pdf,1
+2021-02-28,0:00,2:00,2.00,"9,145",10-11,Rigged down loggers and download data.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-02-28,2:00,5:00,3.00,"9,145",10-6-1,"Ran in the hole to 9,145'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-02-28,5:00,7:00,2.00,"9,145",10-5-1,Circulate to cool well bore for wire-line coring.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-02-28,7:00,10:00,3.00,"9,145",10-6-2,Pulled out of the hole.,input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-02-28,10:00,19:00,9.00,"9,145",10-11,Rigged up loggers and run side core logs. Rigged down loggers.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-02-28,19:00,20:00,1.00,"9,145",10-6-3,"Ran in the well bore to 3,489'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-02-28,20:00,21:30,1.50,"9,145",10-99,Slip and cut 85' of drilling line.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-02-28,21:30,23:00,1.50,"9,145",10-6-3,"Ran in the hole to TD at 9,145'.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-02-28,23:00,0:00,1.00,"9,145",10-5-1,Circulated to cool well bore.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210301064028.pdf,1
+2021-03-01,0:00,12:00,12.00,"9,145",11-342,"Laid down drill pipe and heavy wall drill pipe, bit and subs.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210302064301.pdf,1
+2021-03-01,12:00,15:30,3.50,"9,145",6-99,"Nippled down BOPE and picked up with rig. Cut off casing and removed slips,
+installed BOPE.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210302064301.pdf,1
+2021-03-01,15:30,0:00,8.50,"9,145",4-12-1,"Rigged up and ran 5-1/2"" 17 ppf, L-80, Buttress Liner equipped with Fiber Optics
+cable attached to the liner.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210302064301.pdf,1
+2021-03-02,0:00,7:00,7.00,"9,145",4-12-1,"Ran 5-1/2"" 17 ppf, L-88, Buttress casing equipped with fiber optic cable to 7,280'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-02,7:00,8:00,1.00,"9,145",03-051,Circulated to cool and clean well bore.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-02,8:00,9:30,1.50,"9,145",4-12-1,"Ran 5-1/2"" 17 ppf, L-80, Buttress casing equipped with fiber optic cable to 8,192'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-02,9:30,10:00,0.50,"9,145",03-051,Circulated to cool well bore.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-02,10:00,11:30,1.50,"9,145",4-12-1,"Ran 5-1/2"" 17 ppf, L-80, Buttress casing equipped with fiber optic cable to 9,130'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-02,11:30,13:00,1.50,"9,145",03-051,Circulated to cool well bore.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-02,13:00,16:30,3.50,"9,145",5-99,,mixed_observation_text_suppressed,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-02,16:30,17:00,0.50,"9,145",11-47,"Closed Annular Preventer and pumped 330 barrels down back side to clear annulus
+of cement.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-02,17:00,0:00,7.00,"9,145",3-32,Waited on cement and tools.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210303072553.pdf,1
+2021-03-03,0:00,0:00,24.00,"9,145",3-32,"Waited on cement for ""Top Down"" cement job and tools for clean out. Cut and laid
+down 25' of 5-1/2"" liner at KB level. Removed flow line and check valve in kill line.
+Made preparations for Top Down cement job.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210304061249.pdf,1
+2021-03-04,0:00,13:30,13.50,"9,145",3-13,"Waited on cement. Cut off casing and laid down cementing equipment. Rigged
+down casing equipment and unloaded 2-7/8"" drill pipe, 4"" drill collars and running
+tools.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210305062554.pdf,1
+2021-03-04,13:30,17:00,3.50,"9,145",5-12-2,,mixed_observation_text_suppressed,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210305062554.pdf,1
+2021-03-04,17:00,21:30,4.50,"9,145",1-14,"Nippled down BOPE and removed 9-5/8"" casing head.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210305062554.pdf,1
+2021-03-04,21:30,0:00,2.50,"9,145",3-97,Weld on well head.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210305062554.pdf,1
+2021-03-05,0:00,1:30,1.50,"9,145",3-97,"Weld on 5-1/5"" well head.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-05,1:30,3:30,2.00,"9,145",3-97,"Flanged up flow line, installed chains on flow nipple, set catwalk and mouse hole.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-05,3:30,5:30,2.00,"9,145",3-97,"Rigged up tongs for 2-7/8"" drill pipe and tools, strapped drill pipe.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-05,5:30,8:00,2.50,"9,145",4-6-1,Made up bit collars and tools. Ran in the well bore and tagged top of cement at 731'.,input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-05,8:00,10:30,2.50,"9,145",4-34-1,Picked up 10 stands of drill pipe and stood back in derrick.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-05,10:30,16:30,6.00,"9,145",7-28,Drilled out cement float at 820' and drilled out cement fro 820' to 1709'.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-05,16:30,17:00,0.50,"9,145",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-05,17:00,21:30,4.50,"9,145",10-6-2,"Pulled out of the well bore and changed BHA for mud motor and PDC bit. Ran in the
+hole.",input_excerpt,True,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-05,21:30,0:00,2.50,"9,145",7-28,Cleaned out cement from 1709' to 2666'.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210306154843.pdf,1
+2021-03-06,0:00,2:30,2.50,"9,145",3-28,"Cleaned out cement from 1,709' to 2,666'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210307112920.pdf,1
+2021-03-06,2:30,3:30,1.00,"9,145",03-051,Swept hole.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210307112920.pdf,1
+2021-03-06,3:30,10:00,6.50,"9,145",3-28,"Cleaned out cement from 2,666' to 3,700'.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210307112920.pdf,1
+2021-03-06,10:00,10:30,0.50,"9,145",SERV,Serviced Rig.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210307112920.pdf,1
+2021-03-06,10:30,0:00,13.50,"9,145",3-28,"Cleaned out cement from 3,700' to 6,238' at 2400 hours.",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210307112920.pdf,1
+2021-03-07,0:00,9:00,9.00,"9,145",3-28,Cleaned out cement from 6238' to 8072'.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210308090408.pdf,1
+2021-03-07,9:00,9:30,0.50,"9,145",3-5-1,Circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210308090408.pdf,1
+2021-03-07,9:30,15:00,5.50,"9,145",3-28,Cleaned out cement from 8072' to 9034'.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210308090408.pdf,1
+2021-03-07,15:00,16:00,1.00,"9,145",3-5-1,Pumped sweep and circulated well bore clean.,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210308090408.pdf,1
+2021-03-07,16:00,21:30,5.50,"9,145",10-6-2,"Pulled out of the hole laying down 4"" drill collars and bit.",input_excerpt,True,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210308090408.pdf,1
+2021-03-07,21:30,0:00,2.50,"9,145",10-6-1,"Made up bit, casing scraper, bumper sub and ran in the hole scraping Liner.",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210308090408.pdf,1
+2021-03-08,0:00,2:30,2.50,"9,145",10-6-1,"RIH scraping casing to 8,933'",input_excerpt,False,True,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,2:30,4:30,2.00,"9,145",3-3,"Wash and Ream from 8,933' to 9,034'",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,4:30,5:00,0.50,"9,145",3-5-1,Circulate hole clean,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,5:00,6:00,1.00,"9,145",3-5-1,Displace the mud in the hole with 200 bbl fresh water,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,6:00,8:00,2.00,"9,145",3-5-1,Displace the water in the hole with 266 bbl Biocide water,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,8:00,16:00,8.00,"9,145",10-342,"POH laying down all 2-7/8"" drill pipe",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,16:00,16:30,0.50,"9,145",10-344,Lay down BHA,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,16:30,18:00,1.50,"9,145",1-14,"Remove flow line and cut casing at ground level, separate cross over spools, load out
+3rd truck of rental tools and 4th truck w/ motors to Casper",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,18:00,22:00,4.00,"9,145",WELLHD,"Weld on wellhead and install master valve. Weld on weldalet and install threaded
+valve",input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1
+2021-03-08,22:00,0:00,2.00,"9,145",3-97,Clean pits,input_excerpt,False,False,,56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210309095105.pdf,1

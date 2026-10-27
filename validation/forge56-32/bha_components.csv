@@ -1,0 +1,207 @@
+bha_sheet_id,item,description,vendor,serial,stabilizer_OD_source,OD_source,ID_source,connection,length_source,cumulative_length_source,source_member,page,OD_in,ID_in,length_ft,stabilizer_OD_in,input_flag
+1,1,"JETS 5 X 18 REED
+PDC BIT TFA=1.243",,"TK59
+A25419",,17 1/2,3,7 5/8RegP,1.20,1.20,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf,1,17.5,3.0,1.2,,
+1,2,"9 5/8 MOTOR
+6.7L 5.0Stg .13RPG",,9004,,9 5/8,,"7 5/8RegB
+6 5/8RegB",33.63,34.83,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf,1,9.625,,33.63,,missing_or_unreadable_passage
+1,3,NMST STAB,DHS,800734,17.25,8 1/16,3,6 5/8RegB,5.40,40.23,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf,1,8.0625,3.0,5.4,17.25,
+1,4,SHOCK TOOL,,"CAXP235-
+########",,8 1/16,2 7/8,6 5/8RegB,12.68,52.91,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf,1,8.0625,2.875,12.68,,
+1,5,NMUBHO,BT,"UBHO
+501580",,8 1/8,3 3/4,6 5/8RegB,3.53,56.44,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf,1,8.125,3.75,3.53,,
+1,6,NMDC,GGDS,DR6020,,7 7/8,3 1/4,6 5/8RegB,28.96,85.40,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf,1,7.875,3.25,28.96,,
+1,7,XO,RIG,RIG,,,,,3.34,88.74,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf,1,,,3.34,,missing_or_unreadable_passage
+10,1,"Jets 3x13 3x14
+PDC/TFA .840","REED
+TKC63",A271437,,8 3/4,1 1/2,4 1/2RegP,0.85,0.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,8.75,1.5,0.85,,
+10,2,"7"" Motor BICO
+7:8 8 6.1 1.50Fixed",,BPB5700-0042,8.5,7,,"4 1/2IFB
+4 1/2RegB",30.17,31.02,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,7.0,,30.17,8.5,missing_or_unreadable_passage
+10,3,NMUBHO,BT,6751608,,6 13/16,3 1/4,"4 1/2IFB
+4 1/2IFP",3.42,34.44,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,6.8125,3.25,3.42,,
+10,4,NMST Stab,DHS,670327,8.5,6 1/2,2 13/16,"4 1/2IFB
+4 1/2IFP",3.20,37.64,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,6.5,2.8125,3.2,8.5,
+10,5,NMDC,GGDS,DR 26583,,6 1/2,3 1/4,"4 1/2IFB
+4 1/2IFP",27.10,64.74,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,6.5,3.25,27.1,,
+10,6,12XDC'S,RIG,RIG,,6 1/2,2 7/8,"4 1/2IFB
+4 1/2IFP",368.05,432.79,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,6.5,2.875,368.05,,
+10,7,JARS,RIG,USKW13554349,,6 1/2,3,"4 1/2 IFP
+4 1/2 IFP",33.51,466.30,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,6.5,3.0,33.51,,
+10,8,24XHWDP,RIG,RIG,,5,3 1/4,"4 1/2 IFP
+4 1/2 IFP",730.42,1196.72,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf,1,5.0,3.25,730.42,,
+11,1,"Jets 4x12 4x11
+PDC/TFA .813","REED
+SKC813",A276071,,8 3/4,1 1/2,4 1/2RegP,0.85,0.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,8.75,1.5,0.85,,
+11,2,"7"" Motor
+7:8 8.5 1.50Fixed","Discovery
+700DDS025",,8.5,7,,"4 1/2IFB
+4 1/2RegB",34.28,35.13,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,7.0,,34.28,8.5,missing_or_unreadable_passage
+11,3,NMUBHO,BT,6751608,,6 13/16,3 1/4,"4 1/2IFB
+4 1/2IFP",3.42,38.55,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,6.8125,3.25,3.42,,
+11,4,NMST Stab,DHS,670462,8.5,6 1/2,2 13/16,"4 1/2IFB
+4 1/2IFP",4.55,43.10,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,6.5,2.8125,4.55,8.5,
+11,5,NMDC,GGDS,DR 26583,,6 1/2,3 1/4,"4 1/2IFB
+4 1/2IFP",27.10,70.20,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,6.5,3.25,27.1,,
+11,6,12XDC'S,RIG,RIG,,6 1/2,2 7/8,"4 1/2IFB
+4 1/2IFP",368.05,438.25,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,6.5,2.875,368.05,,
+11,7,JARS,RIG,USKW13554349,,6 1/2,3,"4 1/2 IFP
+4 1/2 IFP",33.51,471.76,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,6.5,3.0,33.51,,
+11,8,24XHWDP,RIG,RIG,,5,3 1/4,"4 1/2 IFP
+4 1/2 IFP",730.42,1202.18,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf,1,5.0,3.25,730.42,,
+2,1,"JETs 6 x 14
+PDC BIT TFA=","REED
+0.9019","TKC66
+A266974",,12 1/4,3,6 5/8RP,1.20,1.20,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,12.25,3.0,1.2,,
+2,2,"8"" MOTOR GGDS
+7:8L 5.9Stg .16RPG",,"TOP800
+ML010",12,8,,"6 5/8RB
+6 5/8RB",33.12,34.32,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,8.0,,33.12,12.0,missing_or_unreadable_passage
+2,3,NMUBHO,BT,"UBHO
+501580",,8 1/8,3 3/4,"6 5/8RB
+6 5/8RP",3.53,37.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,8.125,3.75,3.53,,
+2,4,NM STAB,DHS,800761,12,8,3,"6 5/8RB
+6 5/8RP",4.85,42.70,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,8.0,3.0,4.85,12.0,
+2,5,NMDC,GGDS,DR6020,,7 7/8,3 1/4,"6 5/8RB
+6 5/8RP",28.96,71.66,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,7.875,3.25,28.96,,
+2,6,SHOCK TOOL,,"CAXP235-
+########",,8 1/16,2 7/8,"6 5/8RB
+6 5/8RP",12.68,84.34,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,8.0625,2.875,12.68,,
+2,7,DRILL COLLAR,RIG,RIG,,8,3,"6 5/8RB
+6 5/8RP",273.61,357.95,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,8.0,3.0,273.61,,
+2,8,XO,RIG,RIG,,,,"4 1/2IFB
+6 5/8RP",3.19,361.14,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,,,3.19,,missing_or_unreadable_passage
+2,9,24 x HWDP,RIG,RIG,,5,3 1/4,"4 1/2IFB
+4 1/2IFP",730.42,1091.56,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf,1,5.0,3.25,730.42,,
+3,1,"JETs 6x12 3x11REED
+PDC BIT TFA=.941",,"TKC63
+A268226",,12 1/4,3,6 5/8RP,1.20,1.20,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,12.25,3.0,1.2,,
+3,2,"8"" MOTOR GGDS
+7:8L 5.9Stg .16RPG",,"TOP800
+ML007",12,8,,"6 5/8RB
+6 5/8RB",35.09,36.29,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,8.0,,35.09,12.0,missing_or_unreadable_passage
+3,3,NMUBHO,BT,"UBHO
+501580",,8 1/8,3 3/4,"6 5/8RB
+6 5/8RP",3.53,39.82,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,8.125,3.75,3.53,,
+3,4,NM STAB,DHS,800761,12,8,3,"6 5/8RB
+6 5/8RP",4.85,44.67,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,8.0,3.0,4.85,12.0,
+3,5,NMDC,GGDS,DR6020,,7 7/8,3 1/4,"6 5/8RB
+6 5/8RP",28.96,73.63,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,7.875,3.25,28.96,,
+3,6,SHOCK TOOL,,"CAXP235-
+########",,8 1/16,2 7/8,"6 5/8RB
+6 5/8RP",12.68,86.31,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,8.0625,2.875,12.68,,
+3,7,DRILL COLLAR,RIG,RIG,,8,3,"6 5/8RB
+6 5/8RP",273.61,359.92,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,8.0,3.0,273.61,,
+3,8,XO,RIG,RIG,,,,"4 1/2IFB
+6 5/8RP",3.19,363.11,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,,,3.19,,missing_or_unreadable_passage
+3,9,24 x HWDP,RIG,RIG,,5,3 1/4,"4 1/2IFB
+4 1/2IFP",730.42,1093.53,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf,1,5.0,3.25,730.42,,
+4,1,"Jets4x13 3x12
+PDC TFA=.849","REED
+TKC73",A275660,,8 3/4,1 1/2,4 1/2RegP,0.85,0.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,8.75,1.5,0.85,,
+4,2,"7"" Motor
+6:7 6.5 1.50Fixed",GGDS,RM7007,8.5,7,,"4 1/2IFB
+4 1/2RegB",33.02,33.87,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,7.0,,33.02,8.5,missing_or_unreadable_passage
+4,3,NMUBHO,BT,6751447,,6 13/16,3 1/4,"4 1/2IFB
+4 1/2IFP",3.04,36.91,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,6.8125,3.25,3.04,,
+4,4,NMST Stab,DHS,670045,8.5,6 1/2,3,"4 1/2IFB
+4 1/2IFP",4.12,41.03,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,6.5,3.0,4.12,8.5,
+4,5,NMDC,GGDS,DR9901,,6 1/2,3 1/4,"4 1/2IFB
+4 1/2IFP",27.81,68.84,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,6.5,3.25,27.81,,
+4,6,Shock Tool,Other,"AW
+17678794",,6 3/4,,"4 1/2IFB
+4 1/2IFP",10.73,79.57,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,6.75,,10.73,,missing_or_unreadable_passage
+4,7,12XDC'S,RIG,RIG,,6 1/2,2 7/8,"4 1/2 IFP
+4 1/2 IFP",368.13,447.70,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,6.5,2.875,368.13,,
+4,8,24XHWDP,RIG,RIG,,5,3 1/4,"4 1/2 IFP
+4 1/2 IFP",730.42,1178.12,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf,1,5.0,3.25,730.42,,
+5,1,"Jets 3x20
+TriCone/TFA .92","BHI
+EP5475",5865475-01,,8 3/4,1 1/2,4 1/2RegP,0.85,0.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,8.75,1.5,0.85,,
+5,2,"7"" Motor
+6:7 6.5 1.50Fixed",GGDS,RM7004,8.5,7,,"4 1/2IFB
+4 1/2RegB",33.07,33.92,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,7.0,,33.07,8.5,missing_or_unreadable_passage
+5,3,NMUBHO,BT,6751447,,6 13/16,3 1/4,"4 1/2IFB
+4 1/2IFP",3.04,36.96,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,6.8125,3.25,3.04,,
+5,4,NMST Stab,DHS,670452,8.5,6 1/2,3,"4 1/2IFB
+4 1/2IFP",4.54,41.50,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,6.5,3.0,4.54,8.5,
+5,5,NMDC,GGDS,DR9901,,6 1/2,3 1/4,"4 1/2IFB
+4 1/2IFP",27.81,69.31,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,6.5,3.25,27.81,,
+5,6,Shock Tool,Other,"USKW
+3009389-1",,6 3/4,,"4 1/2IFB
+4 1/2IFP",10.69,80.00,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,6.75,,10.69,,missing_or_unreadable_passage
+5,7,12XDC'S,RIG,RIG,,6 1/2,2 7/8,"4 1/2 IFP
+4 1/2 IFP",368.13,448.13,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,6.5,2.875,368.13,,
+5,8,24XHWDP,RIG,RIG,,5,3 1/4,"4 1/2 IFP
+4 1/2 IFP",730.42,1178.55,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf,1,5.0,3.25,730.42,,
+6,1,"Jets 6X14
+PDC/TFA .902","REED
+TKC63",A277166,,8 3/4,1 1/2,4 1/2RegP,0.85,0.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,8.75,1.5,0.85,,
+6,2,"7"" Motor
+6:7 6.5 1.50Fixed",GGDS,RM7003,8.5,7,,"4 1/2IFB
+4 1/2RegB",33.02,33.87,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,7.0,,33.02,8.5,missing_or_unreadable_passage
+6,3,NMUBHO,BT,6751447,,6 13/16,3 1/4,"4 1/2IFB
+4 1/2IFP",3.04,36.91,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,6.8125,3.25,3.04,,
+6,4,NMST Stab,DHS,670452,8.5,6 1/2,3,"4 1/2IFB
+4 1/2IFP",4.54,41.45,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,6.5,3.0,4.54,8.5,
+6,5,NMDC,GGDS,DR9901,,6 1/2,3 1/4,"4 1/2IFB
+4 1/2IFP",27.81,69.26,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,6.5,3.25,27.81,,
+6,6,Shock Tool,Other,"USKW
+3009389-1",,6 3/4,,"4 1/2IFB
+4 1/2IFP",10.69,79.95,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,6.75,,10.69,,missing_or_unreadable_passage
+6,7,12XDC'S,RIG,RIG,,6 1/2,2 7/8,"4 1/2 IFP
+4 1/2 IFP",368.13,448.08,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,6.5,2.875,368.13,,
+6,8,24XHWDP,RIG,RIG,,5,3 1/4,"4 1/2 IFP
+4 1/2 IFP",730.42,1178.50,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf,1,5.0,3.25,730.42,,
+7,1,"Jets 3X14 3X13
+PDC/TFA .846","REED
+TKC63",A271436,,8 3/4,1 1/2,4 1/2RegP,0.85,0.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,8.75,1.5,0.85,,
+7,2,"7"" Motor
+6:7 6.5 1.50Fixed",GGDS,RM7002,8.5,7,,"4 1/2IFB
+4 1/2RegB",33.07,33.92,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,7.0,,33.07,8.5,missing_or_unreadable_passage
+7,3,NMUBHO,BT,6751447,,6 13/16,3 1/4,"4 1/2IFB
+4 1/2IFP",3.04,36.96,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,6.8125,3.25,3.04,,
+7,4,NMST Stab,DHS,650946,8.5,6 9/16,3,"4 1/2IFB
+4 1/2IFP",5.10,42.06,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,6.5625,3.0,5.1,8.5,
+7,5,NMDC,GGDS,DR9901,,6 1/2,3 1/4,"4 1/2IFB
+4 1/2IFP",27.81,69.87,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,6.5,3.25,27.81,,
+7,6,Shock Tool,Other,"SHTLO
+6750040",,6 7/8,,"4 1/2IFB
+4 1/2IFP",10.80,80.67,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,6.875,,10.8,,missing_or_unreadable_passage
+7,7,12XDC'S,RIG,RIG,,6 1/2,2 7/8,"4 1/2 IFP
+4 1/2 IFP",368.13,448.80,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,6.5,2.875,368.13,,
+7,8,24XHWDP,RIG,RIG,,5,3 1/4,"4 1/2 IFP
+4 1/2 IFP",730.42,1179.22,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf,1,5.0,3.25,730.42,,
+8,1,"Jets 3X12 4X13
+PDC/TFA .850","REED
+FTKC73",A275803,,8 3/4,1 1/2,4 1/2RegP,0.85,0.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf,1,8.75,1.5,0.85,,
+8,2,"7"" Motor
+7:8 8.5 1.50Fixed","DISCOVERY
+700DDS023",,8.5,7,,"4 1/2IFB
+4 1/2RegB",34.24,35.09,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf,1,7.0,,34.24,8.5,missing_or_unreadable_passage
+8,3,NMUBHO,BT,6751447,,6 13/16,3 1/4,"4 1/2IFB
+4 1/2IFP",3.04,38.13,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf,1,6.8125,3.25,3.04,,
+8,4,NMST Stab,DHS,650948,8.5,6 9/16,3,"4 1/2IFB
+4 1/2IFP",4.70,42.83,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf,1,6.5625,3.0,4.7,8.5,
+8,5,NMDC,GGDS,DR9901,,6 1/2,3 1/4,"4 1/2IFB
+4 1/2IFP",27.81,70.64,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf,1,6.5,3.25,27.81,,
+8,6,12XDC'S,RIG,RIG,,6 1/2,2 7/8,"4 1/2IFB
+4 1/2IFP",368.13,438.77,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf,1,6.5,2.875,368.13,,
+8,7,24XHWDP,RIG,RIG,,5,3 1/4,"4 1/2 IFP
+4 1/2 IFP",730.42,1169.19,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf,1,5.0,3.25,730.42,,
+9,1,"Jets 3X14 4X13
+PDC/TFA .840","REED
+FTKC63",A276121,,8 3/4,1 1/2,4 1/2RegP,0.85,0.85,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf,1,8.75,1.5,0.85,,
+9,2,"7"" Motor BICO
+7:8 8 6.1 1.50Fixed",,BPB5700-0050,8.5,7,,"4 1/2IFB
+4 1/2RegB",30.18,31.03,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf,1,7.0,,30.18,8.5,missing_or_unreadable_passage
+9,3,NMUBHO,BT,6751447,,6 13/16,3 1/4,"4 1/2IFB
+4 1/2IFP",3.04,34.07,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf,1,6.8125,3.25,3.04,,
+9,4,NMST Stab,DHS,650784,8.5,6 5/8,2 13/16,"4 1/2IFB
+4 1/2IFP",4.61,38.68,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf,1,6.625,2.8125,4.61,8.5,
+9,5,NMDC,GGDS,DR9901,,6 1/2,3 1/4,"4 1/2IFB
+4 1/2IFP",27.81,66.49,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf,1,6.5,3.25,27.81,,
+9,6,12XDC'S,RIG,RIG,,6 1/2,2 7/8,"4 1/2IFB
+4 1/2IFP",368.13,434.62,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf,1,6.5,2.875,368.13,,
+9,7,24XHWDP,RIG,RIG,,5,3 1/4,"4 1/2 IFP
+4 1/2 IFP",730.42,1165.04,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf,1,5.0,3.25,730.42,,

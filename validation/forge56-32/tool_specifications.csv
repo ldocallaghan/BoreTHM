@@ -1,0 +1,7 @@
+spec_id,maker,configuration,off_bottom_pressure_psi,flow_min_gpm,flow_max_gpm,flow_reference_gpm,density_reference_kg_m3,reference_status,source_member,page
+GG_Juggernaut_675_7-8_5.7,GeoGuidance,6.75 in 7/8 lobe 5.7 stage,100,300,600,,,reference_flow_and_density_not_stated,56-32 drill bit BHA data.zip!GeoGuidance Proposed Motor and Tool Specification Sheets UU139143280.pdf,2
+GG_Juggernaut_962_6-7_5,GeoGuidance,9.62 in 6/7 lobe 5 stage,140,600,1300,,,reference_flow_and_density_not_stated,56-32 drill bit BHA data.zip!GeoGuidance Proposed Motor and Tool Specification Sheets UU139143280.pdf,2
+GG_Colossus_675_7-8_5,GeoGuidance,6.75 in 7/8 lobe 5 stage,100,300,600,,,reference_flow_and_density_not_stated,56-32 drill bit BHA data.zip!GeoGuidance Proposed Motor and Tool Specification Sheets UU139143280.pdf,3
+GG_Colossus_8_7-8_4,GeoGuidance,8 in 7/8 lobe 4 stage,100,400,900,,,reference_flow_and_density_not_stated,56-32 drill bit BHA data.zip!GeoGuidance Proposed Motor and Tool Specification Sheets UU139143280.pdf,3
+BICO_SSS100_B5,BICO,7 in 7/8 lobe SSS100-B5,475,300,700,,,clean_water_at_72F_but_reference_flow_not_stated,56-32 drill bit BHA data.zip!Bico 7.00 SSS100-B5.pdf,1
+DDS_SS700_7885_HR,Discovery,7 in 7/8 lobe 8.5 stage HR,,300,750,,,no_no_load_reference_value_identified,56-32 drill bit BHA data.zip!Discovery - Short SuperHawk SS700 - 7885 - HR.pdf,1

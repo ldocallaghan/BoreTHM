@@ -1,0 +1,12 @@
+{
+  "member": "Well 56-32 trajectory survey data.zip!56-32 well_survey_final.csv",
+  "sha256": "8e86095ca0d1d3602cce88b3525f95b5521f74a160a6e0d73b64a4338bcd58ea",
+  "columns": [
+    "UTM_E",
+    "UTM_N",
+    "Depth",
+    "Tru_Vdepth",
+    "Elev_msl_ft"
+  ],
+  "units": "ft for depth; degrees for angles, source report convention"
+}

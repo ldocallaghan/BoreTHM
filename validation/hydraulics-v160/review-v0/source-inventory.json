@@ -1,0 +1,1978 @@
+{
+  "56-32": {
+    "GDR": 1295,
+    "DOI": "10.15121/1777170",
+    "archive": "1295.zip",
+    "bytes": 9636698484,
+    "sha256": "7ffa76e05cbd89984f04b15cac00dcf88df425ecac79a011c8f1c300a7067781",
+    "input_inventory": "../../forge56-32/README.md",
+    "source_hashes": "../../forge56-32/source_reports.json"
+  },
+  "58-32": {
+    "GDR": 1006,
+    "archive": "1006.zip",
+    "bytes": 2399231901,
+    "sha256": "43615d79d000104ae698de23dd5aee6a981bcaa9b9a72548690556eef5fb6caa",
+    "inventory_basis": "Existing input-only H0 inventory; no pressure values copied",
+    "daily_report_BHA_records": 94,
+    "BHA_ids": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22"
+    ],
+    "BHA_records": [
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt_170816113724.pdf",
+        "page": 1,
+        "report_date": "15-Aug-17",
+        "bha_id": "7",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt10-20170805.pdf",
+        "page": 1,
+        "report_date": "05-Aug-17",
+        "bha_id": "2",
+        "component_description": "BS; DCM; STAB; SHOCK; DC; DC; STAB; DC; DC; JAR",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt11-20170806.pdf",
+        "page": 1,
+        "report_date": "06-Aug-17",
+        "bha_id": "2",
+        "component_description": "BS; DCM; STAB; SHOCK; DC; DC; STAB; DC; DC; JAR",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt13-20170808.pdf",
+        "page": 1,
+        "report_date": "08-Aug-17",
+        "bha_id": "3",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt14-20170809.pdf",
+        "page": 1,
+        "report_date": "09-Aug-17",
+        "bha_id": "3",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt15-20170810.pdf",
+        "page": 1,
+        "report_date": "10-Aug-17",
+        "bha_id": "3",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt16-20170811.pdf",
+        "page": 1,
+        "report_date": "11-Aug-17",
+        "bha_id": "4",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt17-201708012.pdf",
+        "page": 1,
+        "report_date": "12-Aug-17",
+        "bha_id": "5",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt18-20170813.pdf",
+        "page": 1,
+        "report_date": "13-Aug-17",
+        "bha_id": "5",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt19-20170814.pdf",
+        "page": 1,
+        "report_date": "14-Aug-17",
+        "bha_id": "6",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt20-20170815.pdf",
+        "page": 1,
+        "report_date": "14-Aug-17",
+        "bha_id": "6",
+        "component_description": "MMTR; STAB; SHOCK; DCM; STAB; DC; JAR; DC; XO; HWDP",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt21-20170816.pdf",
+        "page": 1,
+        "report_date": "16-Aug-17",
+        "bha_id": "8",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt22-20170817.pdf",
+        "page": 1,
+        "report_date": "17-Aug-17",
+        "bha_id": "8",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt23-20170818.pdf",
+        "page": 1,
+        "report_date": "18-Aug-17",
+        "bha_id": "9",
+        "component_description": "MMTR; STAB; SHOCK; XO; OTHER; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt24-20170819.pdf",
+        "page": 1,
+        "report_date": "19-Aug-17",
+        "bha_id": "9",
+        "component_description": "MMTR; STAB; SHOCK; XO; OTHER; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt25-20170820.pdf",
+        "page": 1,
+        "report_date": "20-Aug-17",
+        "bha_id": "10",
+        "component_description": "MMTR; STAB; SHOCK; XO; OTHER; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt26-20170821.pdf",
+        "page": 1,
+        "report_date": "21-Aug-17",
+        "bha_id": "10",
+        "component_description": "MMTR; STAB; SHOCK; XO; OTHER; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt27-20170822.pdf",
+        "page": 1,
+        "report_date": "22-Aug-17",
+        "bha_id": "10",
+        "component_description": "MMTR; STAB; SHOCK; XO; OTHER; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt28-20170823.pdf",
+        "page": 1,
+        "report_date": "23-Aug-17",
+        "bha_id": "10",
+        "component_description": "MMTR; STAB; SHOCK; XO; OTHER; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt29-20170824.pdf",
+        "page": 1,
+        "report_date": "24-Aug-17",
+        "bha_id": "11",
+        "component_description": "BIT; RR; DCM; STAB; SHOCK; STAB; DC; STAB; DC; JAR; DC",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt29-20170824.pdf",
+        "page": 1,
+        "report_date": "24-Aug-17",
+        "bha_id": "11",
+        "component_description": "RR; DCM; STAB; SHOCK; STAB; DC; STAB; DC; JAR; DC",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt30-20170825.pdf",
+        "page": 1,
+        "report_date": "25-Aug-17",
+        "bha_id": "11",
+        "component_description": "RR; DCM; STAB; SHOCK; STAB; DC; STAB; DC; JAR; DC",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt31-20170826.pdf",
+        "page": 1,
+        "report_date": "26-Aug-17",
+        "bha_id": "12",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt32-20170827.pdf",
+        "page": 1,
+        "report_date": "27-Aug-17",
+        "bha_id": "12",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt33-20170828.pdf",
+        "page": 1,
+        "report_date": "28-Aug-17",
+        "bha_id": "12",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt34-20170829.pdf",
+        "page": 1,
+        "report_date": "29-Aug-17",
+        "bha_id": "12",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt35-20170830.pdf",
+        "page": 1,
+        "report_date": "30-Aug-17",
+        "bha_id": "13",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt36-20170831.pdf",
+        "page": 1,
+        "report_date": "31-Aug-17",
+        "bha_id": "13",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt37-20170901.pdf",
+        "page": 1,
+        "report_date": "01-Sep-17",
+        "bha_id": "13",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt38-20170902.pdf",
+        "page": 1,
+        "report_date": "02-Sep-17",
+        "bha_id": "14",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt39-20170903.pdf",
+        "page": 1,
+        "report_date": "03-Sep-17",
+        "bha_id": "14",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt40-20170904.pdf",
+        "page": 1,
+        "report_date": "04-Sep-17",
+        "bha_id": "15",
+        "component_description": "STAB; CORE; STAB; CORE; STAB; TOPHD; CIRC; FLOAT; XO; JAR",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt41-20170906.pdf",
+        "page": 1,
+        "report_date": "05-Sep-17",
+        "bha_id": "16",
+        "component_description": "EXT; XO; XO; BMPSUB; JAR; DC; XO; HWDP",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt42-20170906.pdf",
+        "page": 1,
+        "report_date": "06-Sep-17",
+        "bha_id": "17",
+        "component_description": "MMTR; STAB; SHOCK; XO; HSUB; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt43-20170907.pdf",
+        "page": 1,
+        "report_date": "07-Sep-17",
+        "bha_id": "17",
+        "component_description": "MMTR; STAB; SHOCK; XO; HSUB; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt44-20170908.pdf",
+        "page": 1,
+        "report_date": "08-Sep-17",
+        "bha_id": "17",
+        "component_description": "MMTR; STAB; SHOCK; XO; HSUB; DCM; DCM; XO; DC; JAR",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt45-20170909.pdf",
+        "page": 1,
+        "report_date": "09-Sep-17",
+        "bha_id": "18",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt46-20170910.pdf",
+        "page": 1,
+        "report_date": "10-Sep-17",
+        "bha_id": "18",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt47-20170911.pdf",
+        "page": 1,
+        "report_date": "11-Sep-17",
+        "bha_id": "19",
+        "component_description": "STAB; CORE; STAB; TOPHD; CIRC; TOPHD; CIRC; FLOAT; XO; OTHER",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt48-20170912.pdf",
+        "page": 1,
+        "report_date": "12-Sep-17",
+        "bha_id": "19",
+        "component_description": "STAB; CORE; STAB; TOPHD; CIRC; TOPHD; CIRC; FLOAT; XO; RR",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt49-20170913.pdf",
+        "page": 1,
+        "report_date": "13-Sep-17",
+        "bha_id": "20",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt5_20170731.pdf",
+        "page": 1,
+        "report_date": "31-Jul-17",
+        "bha_id": "1",
+        "component_description": "BIT, NBS, DCM, STAB, SHOCK, 2 DC = 116.61",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt50-20170914.pdf",
+        "page": 1,
+        "report_date": "14-Sep-17",
+        "bha_id": "20",
+        "component_description": "MMTR; STAB; SHOCK; STAB; DCM; STAB; DC; JAR; DC; XO",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt55-20170919.pdf",
+        "page": 1,
+        "report_date": "19-Sep-17",
+        "bha_id": "21",
+        "component_description": "SCRAP; BS; DCS; HWDP",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt56-20170920.pdf",
+        "page": 1,
+        "report_date": "20-Sep-17",
+        "bha_id": "22",
+        "component_description": "SCRAP; BS; DCS; HWDP",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt6-20170801.pdf",
+        "page": 1,
+        "report_date": "01-Aug-17",
+        "bha_id": "1",
+        "component_description": "BIT, NBS, DCM, STAB, SHOCK, 2 DC = 116.61",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt8-20170803.pdf",
+        "page": 1,
+        "report_date": "03-Aug-17",
+        "bha_id": "2",
+        "component_description": "BIT, BS, DCM, STAB, SHOCK, 2 DC, STAB, 2 DC, JAR, 3 DC, 2 XO, 6 HWDP = 490.98",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt9-20170804.pdf",
+        "page": 1,
+        "report_date": "04-Aug-17",
+        "bha_id": "2",
+        "component_description": "BIT, BS, DCM, STAB, SHOCK, 2 DC, STAB, 2 DC, JAR, 3 DC, 2 XO, 9 HWDP = 581.73",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 2,
+        "report_date": "01-Aug-17",
+        "bha_id": "1",
+        "component_description": "BIT, NBS, DCM, STAB, SHOCK, 2 DC, STAB, 2 DC, JAR, 2 DC = 273.36",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": [
+          "98",
+          "342"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 7,
+        "report_date": "03-Aug-17",
+        "bha_id": "2",
+        "component_description": "BIT, BS, DCM, STAB, SHOCK, 2 DC, STAB, 2 DC, JAR, 3 DC, 2 XO, 9 HWDP = 581.73",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": [
+          "342",
+          "532"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 10,
+        "report_date": "04-Aug-17",
+        "bha_id": "2",
+        "component_description": "BIT, BS, DCM, STAB, SHOCK, 2 DC, STAB, 2 DC, JAR, 3 DC, 2 XO, 9 HWDP = 581.73",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": [
+          "532",
+          "1,512"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 13,
+        "report_date": "05-Aug-17",
+        "bha_id": "2",
+        "component_description": "BIT, BS, DCM, STAB, SHOCK, 2 DC, STAB, 2 DC, JAR, 3 DC, 2 XO, 9 HWDP = 581.73",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": [
+          "1,512",
+          "1,909"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 16,
+        "report_date": "06-Aug-17",
+        "bha_id": "2",
+        "component_description": "BIT, BS, DCM, STAB, SHOCK, 2 DC, STAB, 2 DC, JAR, 3 DC, 2 XO, 9 HWDP = 581.73",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": [
+          "1,957",
+          "2,180"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 22,
+        "report_date": "08-Aug-17",
+        "bha_id": "3",
+        "component_description": "BIT, MMTR, STAB, SHOCK, DCM, STAB, 6 DC, JAR, 2 DC, XO, 9 HWDP = 636.14",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "2,180",
+          "2,340"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 24,
+        "report_date": "09-Aug-17",
+        "bha_id": "3",
+        "component_description": "BIT, MMTR, STAB, SHOCK, DCM, STAB, 6 DC, JAR, 2 DC, XO, 9 HWDP = 636.14",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "2,340",
+          "2,994"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 28,
+        "report_date": "10-Aug-17",
+        "bha_id": "3",
+        "component_description": "BIT, MMTR, STAB, SHOCK, DCM, STAB, 6 DC, JAR, 2 DC, XO, 9 HWDP = 636.14",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "2,994",
+          "3,187"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 31,
+        "report_date": "11-Aug-17",
+        "bha_id": "4",
+        "component_description": "BIT, MMTR, STAB, SHOCK, DCM, STAB, 6 DC, JAR, 2 DC, XO, 9 HWDP = 637.82",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "3,187",
+          "3,238"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 34,
+        "report_date": "12-Aug-17",
+        "bha_id": "5",
+        "component_description": "BIT, MMTR, STAB, SHOCK, DCM, STAB, 6 DC, JAR, 2 DC, XO, 9 HWDP = 643.84",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "3,238",
+          "3,505"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 36,
+        "report_date": "13-Aug-17",
+        "bha_id": "5",
+        "component_description": "BIT, MMTR, STAB, SHOCK, DCM, STAB, 6 DC, JAR, 2 DC, XO, 9 HWDP = 643.84",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "3,505",
+          "3,793"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 40,
+        "report_date": "14-Aug-17",
+        "bha_id": "6",
+        "component_description": "BIT, MMTR, STAB, SHOCK, DCM, STAB, 6 DC, JAR, 2 DC, XO, 9 HWDP = 636.55",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "3,793",
+          "3,961"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 43,
+        "report_date": "15-Aug-17",
+        "bha_id": "7",
+        "component_description": "BIT, MMTR, STAB, SHOCK, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 730.56",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "3,971",
+          "4,233"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 46,
+        "report_date": "16-Aug-17",
+        "bha_id": "8",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 736.24",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "4,233",
+          "4,392"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 48,
+        "report_date": "17-Aug-17",
+        "bha_id": "8",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 736.24",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "4,402",
+          "4,593"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 52,
+        "report_date": "18-Aug-17",
+        "bha_id": "9",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, OTHER, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 768.69",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "4,593",
+          "4,630"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 54,
+        "report_date": "19-Aug-17",
+        "bha_id": "9",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, OTHER, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 768.69",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "4,671",
+          "4,855"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 58,
+        "report_date": "20-Aug-17",
+        "bha_id": "10",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, MWD, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 767.25",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "4,937",
+          "4,875"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 60,
+        "report_date": "21-Aug-17",
+        "bha_id": "10",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, MWD, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 767.25",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 63,
+        "report_date": "22-Aug-17",
+        "bha_id": "10",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, MWD, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 767.25",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 66,
+        "report_date": "23-Aug-17",
+        "bha_id": "10",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, MWD, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 767.25",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "5,273",
+          "5,440"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 69,
+        "report_date": "24-Aug-17",
+        "bha_id": "11",
+        "component_description": ", monel dc, stab., near bit roller reamer and bit, stab,shock sub, stab.",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 70,
+        "report_date": "24-Aug-17",
+        "bha_id": "11",
+        "component_description": "BIT, RR, DCM, STAB, SHOCK, STAB, DC, STAB, 8 DC, JAR, 2 DC, XO, 9 HWDP = 713.13",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": [
+          "5,440",
+          "5,477"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 72,
+        "report_date": "25-Aug-17",
+        "bha_id": "11",
+        "component_description": "BIT, RR, DCM, STAB, SHOCK, STAB, DC, STAB, 8 DC, JAR, 2 DC, XO, 9 HWDP = 713.13",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": [
+          "5,477",
+          "5,606"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 75,
+        "report_date": "26-Aug-17",
+        "bha_id": "12",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 737.69",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 79,
+        "report_date": "27-Aug-17",
+        "bha_id": "12",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 737.69",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "5,708",
+          "5,839"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 81,
+        "report_date": "28-Aug-17",
+        "bha_id": "12",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 737.69",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 85,
+        "report_date": "29-Aug-17",
+        "bha_id": "12",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 737.69",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "6,023",
+          "6,177"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 87,
+        "report_date": "30-Aug-17",
+        "bha_id": "13",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 732.64",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 90,
+        "report_date": "31-Aug-17",
+        "bha_id": "13",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 732.64",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 94,
+        "report_date": "01-Sep-17",
+        "bha_id": "13",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 732.64",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "6,507",
+          "6,552"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 96,
+        "report_date": "02-Sep-17",
+        "bha_id": "14",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 730.91",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 100,
+        "report_date": "03-Sep-17",
+        "bha_id": "14",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 730.91",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "6,792",
+          "6,800"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 102,
+        "report_date": "04-Sep-17",
+        "bha_id": "15",
+        "component_description": "CORBIT, STAB, CORE, STAB, CORE, STAB, TOPHD, CIRC, FLOAT, XO, JAR, XO, 9 DC, XO = 356.47",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 105,
+        "report_date": "05-Sep-17",
+        "bha_id": "16",
+        "component_description": "SPEAR, EXT, 2 XO, BMPSUB, JAR, 9 DC, XO, 9 HWDP = 587.30",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 109,
+        "report_date": "06-Sep-17",
+        "bha_id": "17",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, MWD, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 763.16",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 112,
+        "report_date": "07-Sep-17",
+        "bha_id": "17",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, MWD, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 763.16",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "6,812",
+          "7,008"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 114,
+        "report_date": "08-Sep-17",
+        "bha_id": "17",
+        "component_description": "BIT, MMTR, STAB, SHOCK, XO, MWD, 2 DCM, XO, 9 DC, JAR, 2 DC, XO, 9 HWDP = 763.16",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 117,
+        "report_date": "09-Sep-17",
+        "bha_id": "18",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 734.98",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 121,
+        "report_date": "10-Sep-17",
+        "bha_id": "18",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 734.98",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "7,200",
+          "7,393"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 124,
+        "report_date": "11-Sep-17",
+        "bha_id": "19",
+        "component_description": "CORBIT, STAB, CORE, STAB, TOPHD, CIRC, TOPHD, CIRC, FLOAT, XO, RR, JAR, XO, 9 DC, XO = 347.04",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": [
+          "7,393",
+          "7,440"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 126,
+        "report_date": "12-Sep-17",
+        "bha_id": "19",
+        "component_description": "CORBIT, STAB, CORE, STAB, TOPHD, CIRC, TOPHD, CIRC, FLOAT, XO, RR, JAR, XO, 9 DC, XO = 347.04",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 130,
+        "report_date": "13-Sep-17",
+        "bha_id": "20",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 734.98",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": [
+          "7,460",
+          "7,536"
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 133,
+        "report_date": "14-Sep-17",
+        "bha_id": "20",
+        "component_description": "BIT, MMTR, STAB, SHOCK, STAB, DCM, STAB, 9 DC, JAR, 2 DC, XO, 9 HWDP = 734.98",
+        "motor": "documented",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 145,
+        "report_date": "19-Sep-17",
+        "bha_id": "21",
+        "component_description": "BIT, SCRAP, BS, 3 DCS, 3 HWDP = 187.95",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "page": 147,
+        "report_date": "20-Sep-17",
+        "bha_id": "22",
+        "component_description": "BIT, SCRAP, BS, 3 DCS, 3 HWDP = 187.95",
+        "motor": "not_listed",
+        "drilling_depth_from_to_ft": []
+      }
+    ],
+    "report_locators_and_hashes": [
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt_170816113724.pdf",
+        "sha256": "880a9f98924c4c7fa809573f3d93150f19937c44b672ca997510c7d9412ae59e",
+        "pages": 1,
+        "report_dates": [
+          "15-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt_57-20170921.pdf",
+        "sha256": "c01ecb2f26996a9e0826cf57323e80e7e5e059946a2de860fa0a2f5d01642843",
+        "pages": 1,
+        "report_dates": [
+          "21-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt10-20170805.pdf",
+        "sha256": "42bf2000abb6aad2658f438f24da7d15e39cdc0373374d309af40edda6226b8c",
+        "pages": 1,
+        "report_dates": [
+          "05-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt11-20170806.pdf",
+        "sha256": "48eb8e5778ed5575aadfbf1a94fdacd545ee13c2deb564d435c184623df56a84",
+        "pages": 1,
+        "report_dates": [
+          "06-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt12-20170807.pdf",
+        "sha256": "5cd9701ac64543002a20d3f4b532e183ee2366b2b597ed87c800b0630195d52a",
+        "pages": 1,
+        "report_dates": [
+          "07-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt13-20170808.pdf",
+        "sha256": "47eaf1d1e3ce742e67a5ab1b0385c1990f2699068e94fbeb4b7190c0612e0aad",
+        "pages": 1,
+        "report_dates": [
+          "08-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt14-20170809.pdf",
+        "sha256": "76dcaad462fc9894461d36cc94d36760e9308edb21ec6dbb6a36699450e3e1ae",
+        "pages": 1,
+        "report_dates": [
+          "09-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt15-20170810.pdf",
+        "sha256": "6185f7fe6267fc684c1441ca988d8c841306fe2224194c9a63f116880825d2c8",
+        "pages": 1,
+        "report_dates": [
+          "10-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt16-20170811.pdf",
+        "sha256": "3bc6aefc96b6ea197095c3cdcc37f808bbabcf42f6c7375cdffb06ecee0b7f07",
+        "pages": 1,
+        "report_dates": [
+          "11-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt17-201708012.pdf",
+        "sha256": "ecb73c34bb2868420fb7caafef21d65595e850a9ba42c59d023b01c6f60a7586",
+        "pages": 1,
+        "report_dates": [
+          "12-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt18-20170813.pdf",
+        "sha256": "6920d71559eec2ddc04771a182e31e9167fb8c54687e816c750e9c243ebf1609",
+        "pages": 1,
+        "report_dates": [
+          "13-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt19-20170814.pdf",
+        "sha256": "9e9b23d77346b3ec41becfb051353244f03350749c9978289010c6fd34f75529",
+        "pages": 1,
+        "report_dates": [
+          "14-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt20-20170815.pdf",
+        "sha256": "dfe7fb946553a000ae9104312eeea625b9584692f0d29eda2077281cc0f973cf",
+        "pages": 1,
+        "report_dates": [
+          "14-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt21-20170816.pdf",
+        "sha256": "5483fea5b9f928dc2ed2ac594988400247057317c89e2365095de8592ad4ed76",
+        "pages": 1,
+        "report_dates": [
+          "16-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt22-20170817.pdf",
+        "sha256": "bce09d28316a74124d00fa8924a26fcec5a129f907ff74a89eeac217e6609d26",
+        "pages": 1,
+        "report_dates": [
+          "17-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt23-20170818.pdf",
+        "sha256": "2bf0cff7637f7d2a6c703018e91eaee9cedc582a3e99b8b6330a2576e4c3d0dc",
+        "pages": 1,
+        "report_dates": [
+          "18-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt24-20170819.pdf",
+        "sha256": "4adce4ee396850e394f64285bb43c14a75d39165b1fd6d80367344e2f0bff248",
+        "pages": 1,
+        "report_dates": [
+          "19-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt25-20170820.pdf",
+        "sha256": "b745e78a5592749d9a28e1d45501e6a2019e808c7ebaea4e5a3cef2b1aaf0bd1",
+        "pages": 1,
+        "report_dates": [
+          "20-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt26-20170821.pdf",
+        "sha256": "ae40fd9567b21821e7ec31212c3f9160c0c87feb8fe1701c6dce63893fbd8dff",
+        "pages": 1,
+        "report_dates": [
+          "21-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt27-20170822.pdf",
+        "sha256": "154bb44b2a6082f7ff6b1e51b510e6b0f279c02bd29fd3006f89f3bb7ea6e69d",
+        "pages": 1,
+        "report_dates": [
+          "22-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt28-20170823.pdf",
+        "sha256": "c843d2708ce54ce98d5c7dbee5cf31343653df4dc088835f5e11d83221ea40fd",
+        "pages": 1,
+        "report_dates": [
+          "23-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt29-20170824.pdf",
+        "sha256": "34c8c67987a32b91c9973a0ba0819316d26d78494531a179f28c9f7ac547c001",
+        "pages": 1,
+        "report_dates": [
+          "24-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1,
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt30-20170825.pdf",
+        "sha256": "7a9bfa31cc0ff3f0971c2d46c131b4ece1313ce62015a8f0d13fff306527665b",
+        "pages": 1,
+        "report_dates": [
+          "25-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt31-20170826.pdf",
+        "sha256": "acd8ad5a4fceffe42a27bbcf3083ccec03c41b40bc50d89672848bba9c6e9b31",
+        "pages": 1,
+        "report_dates": [
+          "26-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt32-20170827.pdf",
+        "sha256": "e6619c3e52c4379f67c05e851435f34e7e72f671a460994a2d2233a0ac55be07",
+        "pages": 1,
+        "report_dates": [
+          "27-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt33-20170828.pdf",
+        "sha256": "280c230380c9b18e9410f00a07a6f58d6fa1231686d6c6d948989a33060c4e46",
+        "pages": 1,
+        "report_dates": [
+          "28-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt34-20170829.pdf",
+        "sha256": "283249b63c20d461bb6f0801b36407c18a2f2ecc6e139e2ccb227c16a9702c64",
+        "pages": 1,
+        "report_dates": [
+          "29-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt35-20170830.pdf",
+        "sha256": "9d182ad60a746a760d328bd0f96bef256a942eac3cc98b6fe4c53a632a181f9a",
+        "pages": 1,
+        "report_dates": [
+          "30-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt36-20170831.pdf",
+        "sha256": "30b80e38da4929d766a75d235696607824d6b6515d151f839cff4baac6e0136a",
+        "pages": 1,
+        "report_dates": [
+          "31-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt37-20170901.pdf",
+        "sha256": "c159ed1ae651bcf60d671c94a43ebe1c3bd12fbb19b2933f6efba89666e9853c",
+        "pages": 1,
+        "report_dates": [
+          "01-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt38-20170902.pdf",
+        "sha256": "aac46b69b9d0f7b690e3e72a7f513d19f897184877da58b2fa48d0fb6da57128",
+        "pages": 1,
+        "report_dates": [
+          "02-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt39-20170903.pdf",
+        "sha256": "bba434ada25f3c4c8c586f1f5aab28fdbcc922a53144f0122d1e641e3defff4d",
+        "pages": 1,
+        "report_dates": [
+          "03-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt40-20170904.pdf",
+        "sha256": "0ff1ce68c1b41c76a6ec39daba3605b72a5404431adef8bd6373a94d545e015c",
+        "pages": 1,
+        "report_dates": [
+          "04-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt41-20170906.pdf",
+        "sha256": "770be531a5e9566780c6ed215a1420447c89f8553815ae4edce44646897f817e",
+        "pages": 1,
+        "report_dates": [
+          "05-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt42-20170906.pdf",
+        "sha256": "f001e06ed7cd92f083e9f6270255f2e1d8e983d11dcc6cc280c8b69962a20525",
+        "pages": 1,
+        "report_dates": [
+          "06-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt43-20170907.pdf",
+        "sha256": "9d8813756bc46e2539c528c55919ca4ce7eec855f44f8348982af67a52a24310",
+        "pages": 1,
+        "report_dates": [
+          "07-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt44-20170908.pdf",
+        "sha256": "411d11326fb87c6b250a2ab148ff6d9ab67b80d8f9e04c34edef785e7a06bc32",
+        "pages": 1,
+        "report_dates": [
+          "08-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt45-20170909.pdf",
+        "sha256": "0b1195871b170ac8cd8bb3007756adcbb96ac4cf642b5cf8f7d766ca206fe334",
+        "pages": 1,
+        "report_dates": [
+          "09-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt46-20170910.pdf",
+        "sha256": "72fb13319e945bf6aa465dbcb6ff3ebb0a74ad4c03e6d6606ce3fb27a80e3b36",
+        "pages": 1,
+        "report_dates": [
+          "10-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt47-20170911.pdf",
+        "sha256": "bc25e3b680d4d4ca2e80ad906019d4d120a126132c1eb1dd796eeeb426d842da",
+        "pages": 1,
+        "report_dates": [
+          "11-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt48-20170912.pdf",
+        "sha256": "543f23ac6ba0673628e9481ae2306d5b38c9a7f3ac154d417eaadbdda414079b",
+        "pages": 1,
+        "report_dates": [
+          "12-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt49-20170913.pdf",
+        "sha256": "9665d4f0fe42febf53034bcb4a54e894198e57ec486c2e401e2911e34e0c5fef",
+        "pages": 1,
+        "report_dates": [
+          "13-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt5_20170731.pdf",
+        "sha256": "9f8399fe56bbc07a09dc58b1101764faffb6a096cac07032c71caccdb3906399",
+        "pages": 1,
+        "report_dates": [
+          "31-Jul-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt50-20170914.pdf",
+        "sha256": "cb1d8aaece3ddf9e11689e2f28aaebb174583bc53c3441a8bc0bdd4626cc9d4f",
+        "pages": 1,
+        "report_dates": [
+          "14-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt51-20170915.pdf",
+        "sha256": "d3545c969702067bb5727f0166b560f84ec7a490277cefc34b57ea993ee64f3b",
+        "pages": 1,
+        "report_dates": [
+          "15-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt52-20170916.pdf",
+        "sha256": "8294a0a80912adedab9c89055312c9d3a989ea0a5a3bd89db426237ed32e84b6",
+        "pages": 1,
+        "report_dates": [
+          "16-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt53-20170917.pdf",
+        "sha256": "09f29aa2927fe50b41da52dd605cb4c065c545a12d12f3237a07256e9b45c524",
+        "pages": 1,
+        "report_dates": [
+          "17-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt54-20170918.pdf",
+        "sha256": "63cf1b88b2e9d2a7d2e2977b455a81b2fb8df2856aab84acc0392dfd3b822cc4",
+        "pages": 1,
+        "report_dates": [
+          "18-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt55-20170919.pdf",
+        "sha256": "951889e79ce303f07f5c9b00768dca5311a089e1dc60c4fb46a61b71f32a833d",
+        "pages": 1,
+        "report_dates": [
+          "19-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt56-20170920.pdf",
+        "sha256": "10758660bfc127e252d03c7fedd41d7ee98c48ea4d5afe728295c6a99b69942f",
+        "pages": 1,
+        "report_dates": [
+          "20-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt58-20170922.pdf",
+        "sha256": "70a54243f9597fcee0026ab2393369bf52c781c4fc9d120950767d91f5ac3b70",
+        "pages": 1,
+        "report_dates": [
+          "22-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt59-20170923.pdf",
+        "sha256": "12d9ef6d6698d01973aa0be28b07c398152c405a4f6f02a0a7eb22aaf5edf825",
+        "pages": 1,
+        "report_dates": [
+          "23-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt60-20170924.pdf",
+        "sha256": "e23a1b5d5f52114f4c3a5ac0688af25e3ebe6a1ea0e9f90c3561d154c541ce27",
+        "pages": 1,
+        "report_dates": [
+          "24-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt61-20170925.pdf",
+        "sha256": "a368f20d2478ed6947361b6fc3816a86882f5148316ce27b478f97851731f07f",
+        "pages": 1,
+        "report_dates": [
+          "25-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt6-20170801.pdf",
+        "sha256": "3120696bcaabfcb559557e1260dffd053d7054082f6861588434cb238103c2ff",
+        "pages": 1,
+        "report_dates": [
+          "01-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt62-20170926.pdf",
+        "sha256": "f5a6158185592a325ea7fb458aa5b4f4074926b255bd5621aaefb7e2ebd3465d",
+        "pages": 1,
+        "report_dates": [
+          "26-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt63-20170927.pdf",
+        "sha256": "1e5266556f8a6be28478fc8565e23141bb97d6bbf88102e74822e12777d4ced5",
+        "pages": 1,
+        "report_dates": [
+          "27-Sep-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt7-20170802.pdf",
+        "sha256": "18abb857d7d1b5b60be3a70db763bbbfdf96c74971a372a2a1b2fa9992f40d4d",
+        "pages": 1,
+        "report_dates": [
+          "02-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": []
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt8-20170803.pdf",
+        "sha256": "d03bbec483ae7c5dceb98fa749946a6ddd7089506fbef7ac1ad22dcab107f718",
+        "pages": 1,
+        "report_dates": [
+          "03-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt9-20170804.pdf",
+        "sha256": "17dbc8c1ef68f09a38dde7feac3d588363c83448eb1fe8fc1500c0bc97caf51d",
+        "pages": 1,
+        "report_dates": [
+          "04-Aug-17"
+        ],
+        "mud_input_pages": [
+          1
+        ],
+        "bha_pages": [
+          1
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf",
+        "sha256": "be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2",
+        "pages": 159,
+        "report_dates": [
+          "01-Aug-17",
+          "01-Sep-17",
+          "02-Aug-17",
+          "02-Sep-17",
+          "03-Aug-17",
+          "03-Sep-17",
+          "04-Aug-17",
+          "04-Sep-17",
+          "05-Aug-17",
+          "05-Sep-17",
+          "06-Aug-17",
+          "06-Sep-17",
+          "07-Aug-17",
+          "07-Sep-17",
+          "08-Aug-17",
+          "08-Sep-17",
+          "09-Aug-17",
+          "09-Sep-17",
+          "10-Aug-17",
+          "10-Sep-17",
+          "11-Aug-17",
+          "11-Sep-17",
+          "12-Aug-17",
+          "12-Sep-17",
+          "13-Aug-17",
+          "13-Sep-17",
+          "14-Aug-17",
+          "14-Sep-17",
+          "15-Aug-17",
+          "15-Sep-17",
+          "16-Aug-17",
+          "16-Sep-17",
+          "17-Aug-17",
+          "17-Sep-17",
+          "18-Aug-17",
+          "18-Sep-17",
+          "19-Aug-17",
+          "19-Sep-17",
+          "20-Aug-17",
+          "20-Sep-17",
+          "21-Aug-17",
+          "21-Sep-17",
+          "22-Aug-17",
+          "22-Sep-17",
+          "23-Aug-17",
+          "23-Sep-17",
+          "24-Aug-17",
+          "24-Sep-17",
+          "25-Aug-17",
+          "25-Sep-17",
+          "26-Aug-17",
+          "26-Sep-17",
+          "27-Aug-17",
+          "27-Sep-17",
+          "28-Aug-17",
+          "29-Aug-17",
+          "30-Aug-17",
+          "31-Aug-17"
+        ],
+        "mud_input_pages": [
+          1,
+          4,
+          7,
+          9,
+          12,
+          15,
+          19,
+          21,
+          24,
+          27,
+          30,
+          33,
+          36,
+          39,
+          42,
+          45,
+          48,
+          51,
+          54,
+          57,
+          60,
+          63,
+          66,
+          69,
+          72,
+          75,
+          78,
+          81,
+          84,
+          87,
+          90,
+          93,
+          96,
+          99,
+          102,
+          105,
+          108,
+          111,
+          114,
+          117,
+          120,
+          123,
+          126,
+          129,
+          132,
+          135,
+          138,
+          140,
+          142,
+          144
+        ],
+        "bha_pages": [
+          2,
+          7,
+          10,
+          13,
+          16,
+          22,
+          24,
+          28,
+          31,
+          34,
+          36,
+          40,
+          43,
+          46,
+          48,
+          52,
+          54,
+          58,
+          60,
+          63,
+          66,
+          69,
+          70,
+          72,
+          75,
+          79,
+          81,
+          85,
+          87,
+          90,
+          94,
+          96,
+          100,
+          102,
+          105,
+          109,
+          112,
+          114,
+          117,
+          121,
+          124,
+          126,
+          130,
+          133,
+          145,
+          147
+        ]
+      },
+      {
+        "locator": "1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf",
+        "sha256": "73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49",
+        "pages": 49,
+        "report_dates": [
+          "1-760-341",
+          "7-1/16"
+        ],
+        "mud_input_pages": [
+          7,
+          25,
+          31,
+          36,
+          38
+        ],
+        "bha_pages": []
+      }
+    ]
+  },
+  "stage": "V0; no model solves; no further 78B source-data access"
+}

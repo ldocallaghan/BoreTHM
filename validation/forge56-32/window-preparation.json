@@ -1,0 +1,15 @@
+{
+  "counts": {
+    "grid_windows": 2852,
+    "non_circulating_or_unsteady_flow": 1537,
+    "not_off_bottom_stationary_or_on_bottom_drilling": 255,
+    "insufficient_continuous_circulation": 10,
+    "secondary_on_bottom": 1022,
+    "unique_BHA_assigned": 990,
+    "insufficient_input_coverage": 10,
+    "primary_off_bottom": 18
+  },
+  "model_runs": 0,
+  "target_files_read": 0,
+  "status": "input-only candidates; not certified complete primary cases"
+}

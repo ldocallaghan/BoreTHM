@@ -1,0 +1,12 @@
+bha_sheet_id,bit_run_sequence,depth_in_ft,depth_out_ft,date_in,date_out,match_status,depth_out_basis,source_member
+1,1,133.0,380.0,2021-02-07,2021-02-08,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #1.pdf
+10,15,7666.0,8900.0,2021-02-24,2021-02-25,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #10.pdf
+11,16,8900.0,9145.0,2021-02-25,2021-02-27,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #11.pdf
+2,3,390.0,3308.0,2021-02-09,2021-02-10,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #2.pdf
+3,4,3308.0,3500.0,2021-02-10,2021-02-10,start_within_10ft_end_within_2ft,unresolved_source_cell,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #3.pdf
+4,6,3500.0,4595.0,2021-02-12,2021-02-14,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #4.pdf
+5,7,4595.0,5143.0,2021-02-14,,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #5.pdf
+6,8,5143.0,5610.0,2021-02-16,2021-02-17,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #6.pdf
+7,9,5610.0,5999.0,2021-02-17,2021-02-18,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #7.pdf
+8,10,5999.0,7207.0,2021-02-18,2021-02-20,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #8.pdf
+9,11,7207.0,7620.0,2021-02-21,2021-02-21,start_within_10ft_end_within_2ft,reported,56-32 drill bit BHA data.zip!BHAs FORGE.zip!BHAs FORGE/BHA #9.pdf

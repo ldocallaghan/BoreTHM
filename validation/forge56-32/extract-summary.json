@@ -1,0 +1,18 @@
+{
+  "survey_stations": 97,
+  "report_inputs": {
+    "bha_sheets": 11,
+    "components": 87,
+    "bits": 16,
+    "mud_samples": 28,
+    "casings": 94,
+    "daily_BHA_descriptions": 22
+  },
+  "rig": {
+    "raw_rows": 2506182,
+    "bins_10s": 250629
+  },
+  "model_imports": false,
+  "target_series_written": false,
+  "pressure_values_inspected": false
+}

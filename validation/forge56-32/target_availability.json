@@ -1,0 +1,118 @@
+[
+  {
+    "member": "27029986-3.csv",
+    "raw_rows": 586808,
+    "input_start": "2021-02-08 04:30:00",
+    "input_end": "2021-02-14 23:59:00",
+    "input_bins_10s": 58685,
+    "targets": [
+      {
+        "channel": "Standpipe Pressure (psi)",
+        "finite": 586794,
+        "missing": 14
+      },
+      {
+        "channel": "Differential Pressure (psi)",
+        "finite": 586794,
+        "missing": 14
+      },
+      {
+        "channel": "MWD Temp (Fahrenheit)",
+        "finite": 0,
+        "missing": 586808
+      },
+      {
+        "channel": "Temp OUT (Degrees)",
+        "finite": 579959,
+        "missing": 6849
+      }
+    ]
+  },
+  {
+    "member": "27029986-4.csv",
+    "raw_rows": 604091,
+    "input_start": "2021-02-15 00:00:00",
+    "input_end": "2021-02-21 23:59:00",
+    "input_bins_10s": 60412,
+    "targets": [
+      {
+        "channel": "Standpipe Pressure (psi)",
+        "finite": 604043,
+        "missing": 48
+      },
+      {
+        "channel": "Differential Pressure (psi)",
+        "finite": 604043,
+        "missing": 48
+      },
+      {
+        "channel": "MWD Temp (Fahrenheit)",
+        "finite": 0,
+        "missing": 604091
+      },
+      {
+        "channel": "Temp OUT (Degrees)",
+        "finite": 604090,
+        "missing": 1
+      }
+    ]
+  },
+  {
+    "member": "27029986-5.csv",
+    "raw_rows": 602693,
+    "input_start": "2021-02-22 00:00:00",
+    "input_end": "2021-02-28 23:59:00",
+    "input_bins_10s": 60271,
+    "targets": [
+      {
+        "channel": "Standpipe Pressure (psi)",
+        "finite": 602693,
+        "missing": 0
+      },
+      {
+        "channel": "Differential Pressure (psi)",
+        "finite": 602693,
+        "missing": 0
+      },
+      {
+        "channel": "MWD Temp (Fahrenheit)",
+        "finite": 4493,
+        "missing": 598200
+      },
+      {
+        "channel": "Temp OUT (Degrees)",
+        "finite": 599870,
+        "missing": 2823
+      }
+    ]
+  },
+  {
+    "member": "27029986-6.csv",
+    "raw_rows": 712590,
+    "input_start": "2021-03-01 00:00:00",
+    "input_end": "2021-03-09 06:00:00",
+    "input_bins_10s": 71261,
+    "targets": [
+      {
+        "channel": "Standpipe Pressure (psi)",
+        "finite": 683139,
+        "missing": 29451
+      },
+      {
+        "channel": "Differential Pressure (psi)",
+        "finite": 683139,
+        "missing": 29451
+      },
+      {
+        "channel": "MWD Temp (Fahrenheit)",
+        "finite": 0,
+        "missing": 712590
+      },
+      {
+        "channel": "Temp OUT (Degrees)",
+        "finite": 712589,
+        "missing": 1
+      }
+    ]
+  }
+]
