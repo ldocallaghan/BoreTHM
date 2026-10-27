@@ -1,0 +1,16 @@
+{
+  "planned_cases": 872,
+  "completed_cases": 872,
+  "failed_cases": 0,
+  "solve_duration_sum_s": 500.71116199623793,
+  "samples": 109,
+  "main_plan_sha256": "3ab90f0fd68e3d01688e363486afc4105e69aee4209cb2e07c7cc3bc172f1771",
+  "versions": {
+    "Python": "3.14.4",
+    "borethm": "1.5.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "iapws": "1.5.5",
+    "matplotlib": "3.11.2"
+  }
+}

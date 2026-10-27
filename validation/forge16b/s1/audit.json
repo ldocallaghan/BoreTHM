@@ -1,0 +1,11 @@
+{
+  "completed_cases": 872,
+  "failed_cases": 0,
+  "water_path_controls_verified": 150,
+  "s0_files_unchanged": 29,
+  "baseline_files_unchanged": 64,
+  "verified_run_metric_rows": 144,
+  "verified_mud_field_assignments": 54,
+  "verified_component_totals": 7,
+  "no_fitting_entrypoint_calls": true
+}
