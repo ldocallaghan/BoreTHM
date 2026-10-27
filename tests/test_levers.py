@@ -6,6 +6,19 @@ from borethm.studies import levers as lv
 from borethm import pressure as pr
 
 
+def test_geometry_settings_preserve_shoe_and_hydraulic_programme():
+    from borethm import HydraulicProgramme,well_geometry as wg
+    settings=lv.Settings(flow_L_s=40.,shoe_m=3500.)
+    revised=lv.geometry_for_settings(5000.,wg.TK_DRAKON,settings,
+                                   HydraulicProgramme.reference_programme())
+    legacy=lv.geometry_for_settings(5000.,wg.TK_DRAKON,settings,
+                                  HydraulicProgramme.reference_programme('v1.5.0'))
+    assert revised.string[0].pipe.hydraulic_joint is not None
+    assert any(s.tool_loss is not None for s in revised.string)
+    assert all(s.pipe.hydraulic_joint is None and s.tool_loss is None for s in legacy.string)
+    assert revised.hole[-1].md_top == legacy.hole[-1].md_top == settings.shoe_m
+
+
 def constant_fluid(rho):
     return dict(rho=rho, cp=4000., mu=1.e-3, k=0.6)
 

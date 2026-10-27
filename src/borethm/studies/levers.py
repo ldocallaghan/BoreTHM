@@ -22,6 +22,7 @@ from borethm import pressure as pr
 from borethm.studies import robustness as rb
 from borethm import site_evaluation as se
 from borethm import well_geometry as wg
+from borethm.programme import HydraulicProgramme
 
 from borethm._paths import repository_path, require_path
 
@@ -105,12 +106,12 @@ class MPD:
         return reference
 
     def circulate(self, site, z, geotherm, pipe, mass_flow, exposure=None, film_mult=1.,
-                  P_surface=m1.P_SURF, fluid=None, retry=True):
+                  P_surface=m1.P_SURF, fluid=None, retry=True, programme=None):
         bp = max(0., P_surface - m1.P_SURF)
         run = None
         for _ in range(8):
             run = NATIVE_CIRCULATE(site, z, geotherm, pipe, mass_flow, exposure, film_mult,
-                                   m1.P_SURF + bp, fluid, retry)
+                                   m1.P_SURF + bp, fluid, retry, programme=programme)
             if not run['success']:
                 raise SolveFailure(run.get('failure', 'MPD circulation did not converge'))
             control = controlled_column(self.target, pr.circulating_temperatures(run), fluid,
@@ -315,6 +316,13 @@ def gates(out):
                 qualification_indeterminate=qualification, evaluated_status=out['status'])
 
 
+def geometry_for_settings(depth, chosen_pipe, settings, programme=None):
+    """Keep the selected shoe depth while applying the supplied programme."""
+    programme=programme or HydraulicProgramme.reference_programme()
+    return programme.geometry(depth,chosen_pipe,
+        shoes=(min(100.,.05*depth),min(1000.,.25*depth),settings.shoe_m))
+
+
 def evaluate_settings(key, settings):
     site = replace(se.find_site(key), coupled=True)
     se.validate_site(site)
@@ -322,15 +330,14 @@ def evaluate_settings(key, settings):
     factory = lambda rho: fluids.Mud(rho, fluids.PV_REF * settings.pv_fraction, fluids.YP_REF)
     controller = MPD(settings.bhp_Pa) if settings.bhp_Pa is not None else None
 
-    def geometry(depth, chosen_pipe):
-        return wg.wu2025_well(depth, chosen_pipe,
-                              shoes=(min(100., 0.05 * depth), min(1000., 0.25 * depth), settings.shoe_m))
+    def geometry(depth, chosen_pipe, programme=None):
+        return geometry_for_settings(depth,chosen_pipe,settings,programme)
 
     def selected(site, z, geotherm, exposure=None, **kwargs):
         fluid = kwargs.get('fluid')
         run = se.circulate(site, z, geotherm, pipe, se.mass_flow(settings.flow_L_s, fluid), exposure,
                            P_surface=kwargs.get('P_surface', m1.P_SURF), fluid=fluid,
-                           retry=kwargs.get('retry', True))
+                           retry=kwargs.get('retry', True),programme=kwargs.get('programme'))
         if not run['success']:
             raise SolveFailure(run.get('failure', 'selected circulation did not converge'))
         return dict(pipe=pipe, m_dot=settings.flow_L_s, run=run, conflict=None, tried=[])
