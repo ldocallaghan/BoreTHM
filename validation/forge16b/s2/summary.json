@@ -1,0 +1,21 @@
+{
+  "cases": 934,
+  "failures": 0,
+  "cases_by_type": {
+    "16B s1_original": 109,
+    "16B s2_revised": 109,
+    "16A blind_original": 358,
+    "16A water_rheology_sensitivity": 358
+  },
+  "max_replay_difference_C": 0.0,
+  "max_abs_closure_C": 0.0009724313187913225,
+  "versions": {
+    "Python": "3.14.4",
+    "borethm": "1.5.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "iapws": "1.5.5",
+    "matplotlib": "3.11.2"
+  },
+  "sum_case_duration_s": 828.3667458982673
+}

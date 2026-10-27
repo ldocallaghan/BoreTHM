@@ -1,0 +1,15 @@
+density_ppg,PV_cP,YP_lbf_100ft2,eow_bha,mud_samples,fluid_system,drilling_start,drilling_end,source_ids,period_sample_carried,carried_fields,reference_fields,rule,future_donor_fields,water_fallback_fields
+9.0,11.0,8.0,3,1,intermediate-hole mud,2023-04-29T21:31:30+00:00,2023-05-01T00:28:20+00:00,mud_samples.csv:3,False,0,0,S2 nearest either direction; water rheology if no measurement,0,0
+9.1,13.0,7.0,4,1,intermediate-hole mud,2023-05-01T21:09:50+00:00,2023-05-02T09:09:40+00:00,mud_samples.csv:4,True,0,0,S2 nearest either direction; water rheology if no measurement,0,0
+8.4,2.0,1.0,11,1,post-clean rotary fluid,2023-05-13T07:04:50+00:00,2023-05-13T11:15:20+00:00,mud_supplement_s1.csv:2,False,2,0,S2 nearest either direction; water rheology if no measurement,2,0
+8.35,2.0,1.0,12,1,post-clean rotary fluid,2023-05-13T22:33:10+00:00,2023-05-15T04:16:30+00:00,mud_samples.csv:11,False,2,0,S2 nearest either direction; water rheology if no measurement,2,0
+8.35,2.0,1.0,13,1,post-clean rotary fluid,2023-05-15T19:14:20+00:00,2023-05-16T08:58:20+00:00,mud_samples.csv:13,False,1,0,S2 nearest either direction; water rheology if no measurement,1,0
+8.3,2.0,1.0,14,1,post-clean rotary fluid,2023-05-17T13:08:30+00:00,2023-05-17T14:37:10+00:00,mud_samples.csv:17,False,2,0,S2 nearest either direction; water rheology if no measurement,1,0
+8.350000000000001,2.0,1.0,15,2,post-clean rotary fluid,2023-05-18T00:48:50+00:00,2023-05-18T23:37:50+00:00,mud_samples.csv:16;mud_samples.csv:19,False,4,0,S2 nearest either direction; water rheology if no measurement,2,0
+8.4,1.0,1.0,16,1,post-clean rotary fluid,2023-05-20T07:04:40+00:00,2023-05-20T20:52:50+00:00,mud_samples.csv:23,False,2,0,S2 nearest either direction; water rheology if no measurement,2,0
+8.4,1.0,1.0,17,1,post-clean rotary fluid,2023-05-21T10:45:40+00:00,2023-05-21T21:43:20+00:00,mud_samples.csv:25,False,2,0,S2 nearest either direction; water rheology if no measurement,2,0
+8.4,1.0,1.0,18,1,post-clean rotary fluid,2023-05-23T00:00:50+00:00,2023-05-23T10:24:30+00:00,mud_samples.csv:26,True,2,0,S2 nearest either direction; water rheology if no measurement,2,0
+8.4,1.0,1.0,19,1,post-clean rotary fluid,2023-05-25T02:40:00+00:00,2023-05-25T10:50:20+00:00,mud_samples.csv:29,True,0,0,S2 nearest either direction; water rheology if no measurement,0,0
+8.4475,1.0,1.0,20,4,post-clean rotary fluid,2023-05-25T10:54:40+00:00,2023-05-27T08:49:40+00:00,mud_samples.csv:31;mud_samples.csv:30;mud_samples.csv:33;mud_samples.csv:32,False,4,0,S2 nearest either direction; water rheology if no measurement,2,0
+8.4,1.0,1.0,27,1,post-clean rotary fluid,2023-06-04T03:16:50+00:00,2023-06-04T07:53:20+00:00,mud_samples.csv:46,True,0,0,S2 nearest either direction; water rheology if no measurement,0,0
+8.4,1.0,1.0,38,1,post-clean rotary fluid,2023-06-17T09:07:40+00:00,2023-06-17T13:43:20+00:00,mud_samples.csv:69,False,2,0,S2 nearest either direction; water rheology if no measurement,0,0
