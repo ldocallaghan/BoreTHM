@@ -38,6 +38,7 @@ nav:
       - Study summary: guides/summary.md
   - Understand the science:
       - Physical models: science/models.md
+      - Model development: science/model-development.md
       - Validation and calibration: science/validation.md
       - Limitations: science/limitations.md
       - Sources: science/sources.md

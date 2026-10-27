@@ -12,6 +12,7 @@ Choose a path based on what you want to do. Installation and the first command a
 ## Understand the science
 
 - [Physical models](science/models.md): component calculations, programme evaluation and equations.
+- [Model development](science/model-development.md): declared changes, development-data gaps and candidate outcomes.
 - [Validation and calibration](science/validation.md): what the observations and analytic checks establish.
 - [Limitations and open questions](science/limitations.md): input uncertainties, approximations and the deferred work.
 - [Sources and related work](science/sources.md): bibliography and links to data provenance.
