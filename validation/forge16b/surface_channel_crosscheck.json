@@ -1,0 +1,18 @@
+{
+  "raw_paired_depths": 8758,
+  "invalid_temperature_pairs": 2,
+  "versions": 54,
+  "LAS_units": "Fahrenheit, explicit MTIA.F and MTOA.F headers",
+  "paired_depths": 8756,
+  "comparison": "Pason qualified drilling means at rounded hole depth versus final compiled LAS; source-to-source, not model errors",
+  "temp_in_F": {
+    "mean_difference_F": 5.123049316884412,
+    "MAE_F": 5.994890236236157,
+    "max_abs_F": 59.349999999999994
+  },
+  "temp_out_F": {
+    "mean_difference_F": 4.088619063907041,
+    "MAE_F": 4.9636360191671764,
+    "max_abs_F": 57.18736842105264
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "raw_rows": 746904,
+  "first": "2023-04-26 02:30:00",
+  "last": "2023-07-21 18:00:00",
+  "EYE_nonnull": 59960,
+  "physical_rejected": 9,
+  "isolated_jump_rejected": 497,
+  "qualified_drilling_rows": 75346,
+  "qualified_clean_eye_rows": 26930,
+  "candidate_samples": 109,
+  "excluded_windows": 273,
+  "minute_rows": 18579,
+  "pandas_version": "3.0.1",
+  "protocol": "Protocol is subject to S0 review; no model error has been computed."
+}

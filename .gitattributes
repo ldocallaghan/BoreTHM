@@ -6,3 +6,4 @@
 /tests/golden/** -text
 /src/borethm/data/** -text
 /validation/forge16a/** -text -whitespace
+/validation/forge16b/** -text -whitespace

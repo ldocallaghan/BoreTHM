@@ -1,0 +1,113 @@
+eow_bha,item,component,length_ft,od_in,id_in,kind,length_source,dimension_source,input_note
+3,1,PDC bit,1.55,9.688,3.375,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,2,Mud motor,38.47,9.5,4.625,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,3,String stabiliser,5.5,10,2.875,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,4,NMDC,30.56,9.563,4.25,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,5,NM pony DC,9,9.875,4.25,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,6,Hangoff sub,3.01,9.5,4.25,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,7,Hybrid sub,5.4,9.375,3.5,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,8,NM pony DC,12.32,9.25,4.25,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,9,Crossover,4.31,8,3,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,10,Nine drill collars,271.72,8.125,3,collar,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,11,Crossover,2.91,8,2.875,assembly,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+3,12,15 HWDP joints,456.67,7.188,3.875,HWDP,EOW p38,EOW p38,Reported body OD retained; 14.75 in hole/bit gauge is separate from component body OD
+4,1,PDC bit,1.56,9.688,3.375,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,2,Mud motor,37.96,9.5,4.625,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,3,14.75 in roller reamer,7.8,10,2.875,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,4,NMDC,30.56,9.563,4.25,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,5,NM pony DC,9,9.875,4.25,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,6,Hangoff sub,3.01,9.5,4.25,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,7,Hybrid sub,5.4,9.375,3.5,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,8,NM pony DC,12.32,9.25,4.25,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,9,Crossover,4.31,8,3,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,10,Nine drill collars,363.21,8.125,3,collar,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,11,Crossover,2.91,8,2.875,assembly,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+4,12,15 HWDP joints,913.42,7.188,3.875,HWDP,EOW p185,"EOW p38, BHA 3, borrowed","Own Appendix B lengths; OD/ID borrowed from EOW 3 p38, including stabiliser body for roller reamer"
+11,1,PDC bit,1.13,6.375,2.75,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,2,HALO RSS,35.38,6.75,2,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,3,Spiral stabiliser,5.62,6.5,2.813,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,4,NM pony DC,9.22,6.438,3.25,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,5,NMDC,31.11,6.813,3.25,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,6,Roller reamer,5.64,6.375,3,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,7,Black box,6,6.75,2.25,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,8,RipStick,19.93,6.75,2,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,9,Mud motor,41.28,7.188,2,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,10,Filter sub,3.93,6.688,3.25,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,11,Nine drill collars,278.27,6.813,2.875,collar,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,12,Crossover,3.15,6.937,3,assembly,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+11,13,30 HWDP joints,913.42,5.5,3.625,HWDP,EOW p71,EOW p71,Bit row body OD 6.375 in retained as reported; bit gauge 9.5 in
+12,1,PDC bit,1.13,9.5,2.75,assembly,EOW p75,EOW p75,
+12,2,HALO RSS,35.31,6.75,2,assembly,EOW p75,EOW p75,
+12,3,Spiral stabiliser,5.66,6.5,2.813,assembly,EOW p75,EOW p75,
+12,4,NM pony DC,9.22,6.438,3.25,assembly,EOW p75,EOW p75,
+12,5,NMDC,31.11,6.813,3.25,assembly,EOW p75,EOW p75,
+12,6,Roller reamer,6.71,6.625,2.938,assembly,EOW p75,EOW p75,
+12,7,Black box,6,6.75,2.25,assembly,EOW p75,EOW p75,
+12,8,Float sub,2.45,6.375,2.875,assembly,EOW p75,EOW p75,
+12,9,Filter sub,3.93,6.688,3.25,assembly,EOW p75,EOW p75,
+12,10,Nine drill collars,278.27,6.813,2.875,collar,EOW p75,EOW p75,
+12,11,Crossover,3.15,6.937,3,assembly,EOW p75,EOW p75,
+12,12,30 HWDP joints,913.42,5.5,3.625,HWDP,EOW p75,EOW p75,
+13,1,PDC bit,1.13,9.5,2.75,assembly,EOW p80,EOW p80,
+13,2,HALO RSS,35.31,6.75,2,assembly,EOW p80,EOW p80,
+13,3,Spiral stabiliser,5.42,6.5,2.813,assembly,EOW p80,EOW p80,
+13,4,NMDC,31.11,6.813,3.25,assembly,EOW p80,EOW p80,
+13,5,Roller reamer,6.71,6.625,2.938,assembly,EOW p80,EOW p80,
+13,6,Black box,5.9,6.75,2.25,assembly,EOW p80,EOW p80,
+13,7,Float sub,2.45,6.375,2.875,assembly,EOW p80,EOW p80,
+13,8,Filter sub,3.93,6.688,3.25,assembly,EOW p80,EOW p80,
+13,9,Nine drill collars,278.27,6.813,2.875,collar,EOW p80,EOW p80,
+13,10,Crossover,3.15,6.937,3,assembly,EOW p80,EOW p80,
+13,11,30 HWDP joints,913.42,5.5,3.625,HWDP,EOW p80,EOW p80,
+15,1,PDC bit,1.22,9.5,2.75,assembly,EOW p93,EOW p93,
+15,2,HALO RSS,35.48,6.75,2,assembly,EOW p93,EOW p93,
+15,3,Spiral stabiliser,4.14,6.5,2.875,assembly,EOW p93,EOW p93,
+15,4,NM pony DC,12.24,6.438,3.5,assembly,EOW p93,EOW p93,
+15,5,NM pony DC,9.83,6.813,3.25,assembly,EOW p93,EOW p93,
+15,6,Roller reamer,5.39,6.625,3,assembly,EOW p93,EOW p93,
+15,7,NMDC,31.11,6.813,3.25,assembly,EOW p93,EOW p93,
+15,8,Black box,6,6.75,2.25,assembly,EOW p93,EOW p93,
+15,9,Filter sub,3.93,6.688,3.25,assembly,EOW p93,EOW p93,
+15,10,Float sub,2.45,6.375,2.875,assembly,EOW p93,EOW p93,
+15,11,Nine drill collars,278.27,6.813,2.875,collar,EOW p93,EOW p93,
+15,12,Crossover,3.15,6.937,3,assembly,EOW p93,EOW p93,
+15,13,30 HWDP joints,913.42,5.5,3.625,HWDP,EOW p93,EOW p93,
+16,1,PDC bit,1.18,9.5,2.75,assembly,EOW p97,EOW p97,
+16,2,HALO RSS,35.33,6.75,2,assembly,EOW p97,EOW p97,
+16,3,Spiral stabiliser,4.14,6.5,2.875,assembly,EOW p97,EOW p97,
+16,4,NM pony DC,12.24,6.438,3.5,assembly,EOW p97,EOW p97,
+16,5,NM pony DC,9.83,6.813,3.25,assembly,EOW p97,EOW p97,
+16,6,Roller reamer,5.39,6.625,3,assembly,EOW p97,EOW p97,
+16,7,NMDC,31.11,6.813,3.25,assembly,EOW p97,EOW p97,
+16,8,Black box,5.97,6.75,2.25,assembly,EOW p97,EOW p97,
+16,9,Filter sub,3.93,6.688,3.25,assembly,EOW p97,EOW p97,
+16,10,Float sub,2.45,6.375,2.875,assembly,EOW p97,EOW p97,
+16,11,Nine drill collars,278.27,6.813,2.875,collar,EOW p97,EOW p97,
+16,12,Crossover,3.15,6.937,3,assembly,EOW p97,EOW p97,
+16,13,30 HWDP joints,913.42,5.5,3.625,HWDP,EOW p97,EOW p97,
+38,1,PDC bit,1.05,9.5,2.75,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,2,Mud motor,41.92,7.188,2,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,3,Roller reamer,6.71,6.563,3,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,4,NM pony DC,9.22,6.438,3.25,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,5,NMDC,31.11,6.813,3.25,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,6,Pulser sub,5.6,6.5,3.5,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,7,NMDC,31.1,6.813,3.5,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,8,NM pony DC,12.24,6.438,3.5,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,9,NM pony DC,9.83,6.813,3.25,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,10,Black box,5.9,6.75,2.25,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,11,Filter sub,3.93,6.688,3.25,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,12,Float sub,2.45,6.375,2.875,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,13,Crossover,3.15,6.937,3,assembly,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+38,14,30 HWDP joints,918.47,5.5,3.625,HWDP,EOW p160,EOW p160,Own drawing dimensions/lengths; temperature position 84 ft plus 22 ft sensitivity as ruled; drawing says Eye=85 ft
+27,1,PDC bit,1.25,9.5,2.75,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,2,Mud motor,41.92,7.188,2,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,3,Roller reamer,6.71,6.563,3,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,4,NM pony DC,9.22,6.438,3.25,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,5,NMDC,31.11,6.813,3.25,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,6,Pulser sub,5.6,6.5,3.5,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,7,NMDC,31.1,6.813,3.5,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,8,Black box,6,6.75,2.25,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,9,Filter sub,3.93,6.688,3.25,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,10,Float sub,2.45,6.375,2.875,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,11,Crossover,3.15,6.937,3,assembly,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
+27,12,30 HWDP joints,920.94,5.5,3.625,HWDP,EOW p191,"EOW p160, BHA 38, borrowed",Own Appendix B lengths; matching component OD/ID borrowed from BHA 38 drawing p160
