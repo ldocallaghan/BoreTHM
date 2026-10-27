@@ -1,0 +1,15 @@
+{
+  "samples": 45,
+  "replays": 90,
+  "scenario_budgets": 6480,
+  "max_replay_temperature_difference_C": 0,
+  "max_replay_pressure_difference_psi": 0.0,
+  "duration_s": 48.44210119941272,
+  "existing_calculation_files_unchanged": 26,
+  "preserved_S1_S2_archive_files": 66,
+  "source_files_unchanged": 69,
+  "independent_component_rows_checked": 1000,
+  "revised_joint_Re_domain_failures": 0,
+  "original_joint_Re_domain_failures": 3990,
+  "all_checks_passed": true
+}
