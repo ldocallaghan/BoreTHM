@@ -12,7 +12,7 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
                             tfa=_model.BIT_TFA_DEFAULT, film_mult=1.0, breaks=(),
                             init=None, P_surface=_model.P_SURF,
                             hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
-                            rock_response=None):
+                            rock_response=None, annulus_heat=None):
     """Compute circulating bore and annulus temperatures along a well.
 
     Supply either a PipeType or a WellGeometry. Mass flow m_dot is kg/s;
@@ -26,7 +26,10 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     constant-wall-temperature step response of a cylindrical hole, and
     'logarithmic' the original quasi-steady term ln(1 + 2 sqrt(alpha t)/r).
     None selects cylinder with v1.6.0 and logarithmic with v1.5.0, which
-    accepts only the logarithmic term.
+    accepts only the logarithmic term. annulus_heat is an optional callable
+    returning heat [W/m] released into the annulus fluid at measured depth
+    [m], for example rotary friction from rotary_heat.partition; v1.5.0
+    rejects it. Heat released at the bit is part of Q_face.
     The separate radial wall-temperature solver uses its supplied state
     durations, with fluid-temperature and film-coefficient boundaries from
     circulation. The exposure floors set no breakout formation delay.

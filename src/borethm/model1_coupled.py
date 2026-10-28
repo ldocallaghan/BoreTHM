@@ -218,7 +218,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
           fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
           tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF,
           hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
-          rock_response=None):
+          rock_response=None, annulus_heat=None):
     # P_surface: pressure at the wellhead. Atmospheric by default; a closed,
     # pressurized loop (P_OP) keeps a return above 100 C liquid.
     # init: a previous solve() result whose profiles seed this one (continuation).
@@ -227,6 +227,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     # film_mult: multiplier on the annulus film coefficient (a calibration knob).
     # rock_response: 'cylinder' (exact step response, the default with v1.6.0)
     # or 'logarithmic' (the original term, always used by v1.5.0).
+    # annulus_heat: optional callable MD[m] -> W/m released into the annulus
+    # fluid, such as rotary friction (rotary_heat). Not accepted by v1.5.0.
     # friction_heat: add the heat dissipated by friction in the bore and annulus,
     # and across the bit nozzles (total flow area tfa), to the fluid. Off by
     # default, which is how the model was first calibrated.
@@ -255,6 +257,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
         raise ValueError(f'rock_response must be one of {_rock.RESPONSES}')
     if hydraulics_model == 'v1.5.0' and rock_response != 'logarithmic':
         raise ValueError('hydraulics_model v1.5.0 reproduces the original logarithmic rock response')
+    if hydraulics_model == 'v1.5.0' and annulus_heat is not None:
+        raise ValueError('hydraulics_model v1.5.0 accepts no annulus heat source')
     if hydraulics_model=='v1.5.0':
         hl.check_legacy(geometry,surface,transitions)
         loss_model=None
@@ -332,6 +336,9 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
             hd,hu=hl.heat_gradients(loss_model,zz,y[0],y[1],m_dot,fluid,P_surface)
             dTd+=hd
             dTu+=hu
+        if annulus_heat is not None:
+            P = P_of_z(geometry.survey.tvd(zz), P_surface)
+            dTu -= np.asarray(annulus_heat(zz), float) / (m_dot * _cp(y[1], P, fluid))
         return np.vstack([dTd, dTu])
 
     def bc(ya, yb):
@@ -370,6 +377,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                # a solution outside the water table's range (above 480 C) is spurious
                success=bool(sol.success and max(Td.max(), Tu.max()) < 480.0),
                P_bottom=P_L,hydraulics_model=hydraulics_model,rock_response=rock_response,
+               annulus_heat_W=(None if annulus_heat is None else
+                               float(np.trapezoid(np.asarray(annulus_heat(zz), float), zz))),
                surface=surface,transitions=transitions)
     if loss_model is not None:
         if friction_heat:
