@@ -95,6 +95,25 @@ def serial_development_geometry(s,components,legacy,scenario):
     as in the motorless pressure accounting. Gauge OD is not a cylindrical
     blockage. Unknown proprietary tool operating losses remain unspecified.
     """
+    if s['well']=='16B' and s['run'] in ('17','18','19','20'):
+        # The trial protocol retains aggregate assemblies. Preserve both
+        # ordinary-pipe sections in the partial insulated string.
+        segments=[]
+        for original in legacy.string:
+            pipe=original.pipe
+            if pipe.name==b.HWDP.name:
+                joint=hl.HydraulicJoint((7. if scenario=='EIS' else 7.25)*INCH,
+                    2*pipe.r_bore,29*INCH,b.HWDP_JOINT_FT*FT,
+                    source='S2b connection scenario; trial HWDP bore and recorded pitch')
+            elif pipe.name==b.DRILL_PIPE.name or pipe.name.startswith('IDP,'):
+                od,jid=(7.,4.) if scenario=='EIS' else (7.25,3.5)
+                joint=hl.HydraulicJoint(od*INCH,jid*INCH,29*INCH,(2378/75)*FT,
+                    source='S2b NOV connection scenario; original trial ordinary-pipe pitch')
+            else:
+                segments.append(original)
+                continue
+            segments.append(replace(original,pipe=replace(pipe,hydraulic_joint=joint)))
+        return wg.WellGeometry(segments,legacy.hole,legacy.survey)
     records=components[s['run']]
     bottom=[]
     for component in records:
