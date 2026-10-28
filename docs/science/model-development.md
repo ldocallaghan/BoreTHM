@@ -50,7 +50,8 @@ This table includes work performed before this log existed. Earlier development 
 | D1 endpoint and overlapping-ramp correction | Restore a continuous numerical geometry transition | The same short-component case converged | Retained numerical correction; gap score pending |
 | D2 boundary tolerance 1e-10 K | Reduce the turnaround power residual | Reduced the numerical residual; no independent physical justification for that precision | Return to the original boundary tolerance; diagnostic-only policy below |
 | D3 programme forwarding | Pass the declared geometry to design comparisons | Programme-adapter tests passed | Retained API correction; no new physical coefficient |
-| D4 aggregate trial adapter | Retain the original trial geometry and remove missing serial-table lookups | Four trial geometry tests pass; all 22 diagnosis windows converge | Retained input-contract correction; frozen scoreboard unchanged |
+| D4 aggregate trial adapter | Retain the original trial geometry and remove missing serial-table lookups | Four trial geometry tests pass; all 45 trial samples and all 22 diagnosis windows converge | Retained input-contract correction; frozen scoreboard unchanged |
+| Entry 1, original 26.7 °C convention, NC50/EIS | Additional hydraulic losses and local heat; temperature effects estimated at tenths to a few °C | G1/G2 deficits decrease; G3 warms by 8.4–16.1 °C, worsening five assembly biases; G6 trials become warmer | Revert recommended for the integrated candidate; decision pending |
 | Entry 2 component diagnosis | Separate a length-dependent connection contribution from assembly-passage losses | The assumed 1.25-in motor passage is a large calculated contribution on 16A; connection losses also contribute | Diagnosis only; no model change or acceptance decision |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
@@ -278,3 +279,116 @@ BHA 42 contains about 85 m of heavy-weight pipe, compared with about 426 m in BH
 Across the thirteen selected 16B assemblies, string increases are about 105–328 psi and current bore connection contributions about 75–209 psi. Those are selected-window calculations, not well-wide means. Every component's geometry and source is in the component archive. Trial runs retain their original aggregate passages. Unknown proprietary operating losses remain unspecified.
 
 No new solver failure or unavailable case occurred in the diagnosis. The existing local-loss validity flags identify 16B BHA 11 and 12 as outside the published Newtonian Reynolds-number range at some restrictions. All cases flag the annular or Bingham transfer approximation. These diagnostics do not reject converged solves. No energy residual was flagged. The relative importance of the calculated terms does not establish the cause of a measured temperature error.
+
+## 28 October 2026: entry 1 six-gap score
+
+The [entry-1 archive](../../validation/model-development/entry-1/README.md) compares the approved legacy baseline with the declared NC50/EIS candidate at the original 26.7 °C viscosity reference. The completed candidate calculation took 1,058.8 seconds (17 minutes 38.8 seconds). All 467 circulation samples converged. All nine originally available run-in events were calculated, and the same two originally unavailable events remain unavailable. No energy residual was flagged. Every comparison population is unchanged.
+
+Every number in the following tables is from `validation/model-development/entry-1/comparison.csv`. Before and after refer to legacy and entry 1. Bias is model minus measurement. The `group` column identifies the assembly, event or population, and `before_compared` / `after_compared` give the counts. Pressure percentage errors are means of paired sample percentages, not percentages of the group means.
+
+### G1: Standpipe pressure
+
+Columns: `before_bias`, `after_bias`, `before_mean_percent_error` and `after_mean_percent_error`.
+
+| Well / assembly | Samples | Before bias, psi | After bias, psi | Before, % | After, % |
+|---|---|---|---|---|---|
+| 16A / 18 | 15 | -1,529 | -402 | -54.7 | -14.4 |
+| 16A / 23 | 13 | -1,858 | -566 | -56.9 | -17.4 |
+| 16A / 30 | 29 | -1,604 | -87 | -50.7 | -2.7 |
+| 16A / 34 | 9 | -1,477 | -76 | -45.9 | -2.3 |
+| 16A / 35r1 | 5 | -1,884 | -297 | -50.8 | -8.0 |
+| 16A / 35r2 | 4 | -1,767 | -235 | -50.1 | -6.7 |
+| 16A / 38 | 20 | -1,358 | 270 | -42.1 | 8.4 |
+| 16A / 39 | 25 | -1,270 | 473 | -38.6 | 14.4 |
+| 16A / 42 | 15 | -2,464 | -935 | -59.8 | -22.7 |
+| 16B / 12 | 12 | -157 | 56 | -13.4 | 4.8 |
+| 16B / 13 | 14 | -441 | -261 | -37.8 | -22.4 |
+| 16B / 15 | 4 | -433 | -239 | -36.3 | -20.1 |
+| 16B / 16 | 15 | -462 | -259 | -37.1 | -20.8 |
+
+### G2: Hydraulic power
+
+Columns: `before_model_mean`, `after_model_mean` and `after_measured_mean`. All values are kW.
+
+| Well | Paired samples | Before model | After model | Measured |
+|---|---|---|---|---|
+| 16A | 135 | 500.0 | 908.0 | 928.3 |
+| 16B | 109 | 264.3 | 349.9 | 526.5 |
+
+### G3: 16A bore-at-bit temperature
+
+Columns: `before_bias` and `after_bias`, in °C.
+
+| Group or event | Compared / planned | Before bias | After bias |
+|---|---|---|---|
+| 18 | 15 / 15 | -4.1 | 4.3 |
+| 23 | 13 / 13 | -0.2 | 9.7 |
+| 30 | 29 / 29 | 2.4 | 14.9 |
+| 34 | 9 / 9 | -0.7 | 11.4 |
+| 35r1 | 5 / 5 | -3.1 | 11.1 |
+| 35r2 | 4 / 4 | -8.9 | 5.1 |
+| 38 | 20 / 20 | -8.1 | 7.1 |
+| 39 | 25 / 25 | -9.7 | 6.4 |
+| 42 | 15 / 15 | -19.8 | -4.1 |
+
+### G4: 16A run-in peak error
+
+Columns: `before_bias` and `after_bias`, in °C.
+
+| Group or event | Compared / planned | Before bias | After bias |
+|---|---|---|---|
+| 23-off004 | 1 / 1 | -28.4 | -23.7 |
+| 23-off005 | 1 / 1 | -13.9 | -13.8 |
+| 23-off006 | 0 / 1 | unavailable | unavailable |
+| 35r2-off001 | 1 / 1 | -6.5 | -6.5 |
+| 35r2-off006 | 1 / 1 | -41.0 | -33.9 |
+| 35r2-off008 | 0 / 1 | unavailable | unavailable |
+| 38-off009 | 1 / 1 | -9.4 | -6.0 |
+| 39-off004 | 1 / 1 | -10.1 | -10.1 |
+| 39-off007 | 1 / 1 | -46.5 | -36.5 |
+| 42-off004 | 1 / 1 | -46.0 | -32.7 |
+| 42-off013 | 1 / 1 | -54.4 | -43.5 |
+
+### G5: 16A return temperature
+
+Columns: `before_bias` and `after_bias`, in °C.
+
+| Group or event | Compared / planned | Before bias | After bias |
+|---|---|---|---|
+| ALL | 358 / 358 | -5.8 | -4.0 |
+| Sanvean on-bottom | 135 / 135 | -6.0 | -4.1 |
+| rig inferred bit depth, return only | 223 / 223 | -5.8 | -3.9 |
+
+### G6: 16B temperature
+
+Columns: `before_bias` and `after_bias`, in °C.
+
+| Group or event | Compared / planned | Before bias | After bias |
+|---|---|---|---|
+| independent regular pipe | 59 / 59 | -8.8 | -6.9 |
+| trial | 45 / 45 | 2.0 | 3.3 |
+| 3 | 3 / 3 | -4.8 | -3.8 |
+| 4 | 2 / 2 | -24.2 | -23.3 |
+| 11 | 4 / 4 | -16.2 | -14.8 |
+| 12 | 12 / 12 | -18.3 | -17.3 |
+| 13 | 14 / 14 | -8.4 | -6.7 |
+| 15 | 4 / 4 | -4.2 | -2.2 |
+| 16 | 15 / 15 | -4.8 | -2.5 |
+| 17 | 14 / 14 | 3.2 | 5.1 |
+| 18 | 10 / 10 | 1.7 | 2.5 |
+| 19 | 10 / 10 | 1.2 | 1.9 |
+| 20 | 11 / 11 | 1.5 | 2.8 |
+| 27 | 5 / 5 | -3.8 | -1.2 |
+| 38 | 5 / 5 | -1.6 | 1.1 |
+
+### Recommendation and physical interpretation
+
+**Recommendation: revert the integrated entry-1 candidate as currently scored. The decision is pending; no reversion has been performed.** The added pressure and dissipation terms reduce the G1/G2 deficits, but the complete change produces substantial thermal deterioration on several assemblies and retains unresolved passage/joint representations. Those limitations prevent treating the pressure improvement as confirmation of this implementation.
+
+Calculated: all nine 16A assembly mean bit temperatures increase by 8.4–16.1 °C, exceeding the earlier tenths-to-a-few-degrees estimate. Absolute mean bit bias worsens on five assemblies. BHA 42 improves from -19.8 to -4.1 °C, while BHA 30 changes from +2.4 to +14.9 °C. G5 improves by about 1.8 °C but remains about 4.0 °C cold. The independent 16B regular-pipe pool improves from -8.8 to -6.9 °C; the trial pool deteriorates from +2.0 to +3.3 °C. G4 remains non-conservative on all nine available events, with errors about -43.5 to -6.0 °C.
+
+Calculated: entry 2 identifies large losses in the assumed straight motor passages, with substantial connection contributions and incomplete repeated-joint coverage inside the BHA 42 assembly. These are properties of the current representation. They do not measure the physical motor pressure curve. The remaining 16B power deficit also shows that entry 1 does not complete the hydraulic-power accounting.
+
+Inferred: changes in the serial thermal geometry or internal bore/annulus exchange could contribute to the larger-than-predicted bit warming. An alternative is that the location and concentration of the added heat dominate that response. A later declaration can separate them using fixed thermal geometry and separately changed heat-source placement. That diagnostic has not been run. The closer 16A total-power values do not establish where the measured pump power is dissipated or converted into mechanical work.
+
+No additional candidate or measurement diagnostic from the 28 October inventory was executed. No golden was regenerated, no slow suite was run, and no held-out validation target was read. The original fitted trial conductivity and transferred pitch remain as approved. Acceptance or reversion will be recorded after the decision.

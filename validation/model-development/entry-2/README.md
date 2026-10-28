@@ -5,7 +5,7 @@ The component budget implements the entry 2 method in the [development log](../.
 | File | Contents |
 |---|---|
 | [selected-windows.csv](selected-windows.csv) | Selected sample identifier, time and depth, with flow. |
-| [pressure-budget.csv](pressure-budget.csv) | Named bore/annulus terms and total pressure, archived legacy string pressure, string increase and the remaining pressure residual. All pressure columns are psi. `sum_residual_psi` checks arithmetic closure; `scoreboard_difference_psi` checks the repeated candidate calculation. |
+| [pressure-budget.csv](pressure-budget.csv) | Named bore/annulus terms and total pressure, archived legacy string pressure, string increase and the remaining pressure residual. All pressure columns are psi. `sum_residual_psi` checks arithmetic closure. The optional `scoreboard_difference_psi` is populated only when a completed candidate archive is supplied to the builder; it is blank in this independent run. |
 | [component-budget.csv](component-budget.csv) | Individual component geometry and its source, with pipe-body friction, connection replacement/local losses and other hydraulic contributions. |
 | [manifest.json](manifest.json) | Input selection, settings and checksums. |
 | [build_breakdown.py](build_breakdown.py) | Reproducible accounting using the fixed sample plan and shared model functions. |

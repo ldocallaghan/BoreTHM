@@ -1,0 +1,62 @@
+{
+  "mode": "current",
+  "settings": {
+    "pv_ref_T_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "mud": "original recorded-mud substitutions"
+  },
+  "calibration": "Historical fitted trial insulation conductivity retained; no new fit",
+  "versions": {
+    "python": "3.14.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "iapws": "1.5.5"
+  },
+  "sources_sha256": {
+    "validation/forge16b/s2/plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
+    "validation/scoreboard/transient-inputs.json": "ea1d6f211bfdd86fee8c69062aa714cf515f839215d1db37a21d348cae02e09b",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/forge16a/circulation-primary.csv": "73bf715421f2cc9ea79bfed3f1b789d1b78cf6ae0d041fedd02d9f506b729964",
+    "validation/forge16a/transient-comparisons.csv": "921e28bce9805c5d9c58e3af4e937a6190ddf51d71baa82c375b62fcd9ff7b19",
+    "validation/forge16b/s2/results.jsonl": "ffd1b1d510ad001b6b1e2edfa43562e6e6036732ce5826823c6ebfc5fd9a8bd9"
+  },
+  "model_sources_sha256": {
+    "model1_coupled.py": "362e8d7c00d11ba3c541ca3a235e51aadb2801c11bb57e3cd4ae35a9981f8494",
+    "hydraulic_losses.py": "3cb1d2ffcdc1a8a22e1889df51dd87fb6b0d085e62dc45dd494523acb9f1f4d1",
+    "fluids.py": "b3557a12c92fb492996861085fd74077e0029a38d248f124bb01b44b85b099aa",
+    "pressure.py": "7a884c2743fc7b45462cfcf00df68a8e30d9e94d3f39410f3f7e1b74deaa4254",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "wall_thermal.py": "f3e9aa4573d406db4fe9ded011552c1c3f2b4e90b3f7308404e2e3c0d2688091",
+    "tool_thermal.py": "75752e7c6a2cd28734af065b7d4cf2e146019cb76dfbc04fc59edf2bb8110bca",
+    "studies/validate_forge16a.py": "d65af33954b201a8721ed682f1b83c69dd63b706e25824d69c98c55049e9a669",
+    "studies/validate_forge16a_transients.py": "916130dd0645eca6708f0c56c5dd403f6034613b65e89f0d67592a9a6637f71b",
+    "studies/validate_forge16b_wholewell.py": "654cb84d7075926f896919f54b2bcc800d415fccbeadb63190863456b45ee6aa",
+    "studies/validate_forge16b.py": "c71b67de95b08f21a5170a5cbfc977bf44ce7e315c7c5b54cbe587b6c031be77",
+    "studies/forge16_energy.py": "8a355b155a145a0fbc5c00fd245553974b1fd80fbc253f91f31971a2b78a7036",
+    "studies/pressure_comparison.py": "f92bfb586413148ec10a023bf69c03b1940cfd77f3e43ac6002d5e3859293ac8"
+  },
+  "results_sha256": {
+    "circulation.csv": "96ca4ed4fef4132cf3cbbf929cf6273a559be540aff70029a34a87aab6598682",
+    "comparison.csv": "870fa4ba8573179acde7a55067803e8623a55fec11358b2a465ff7ff7305bc4d",
+    "run-in.csv": "8eb1ca3fc895eece6c88df23007fb9b1e9409e4302893606c7de9891cdebfbe3",
+    "scoreboard.csv": "44f46f92d301e1fe4d7643016590e3b8316c1ac9d447d3676b7a0770cdadff91"
+  },
+  "baseline_manifest_sha256": "c23ad8335fe99e7d4a0324813aa483add46e68726f7bf9b769d49539d2302f63",
+  "declaration_commit": "f99825f81355369dc3d245ca3df64f5570e72b6c",
+  "geometry_correction_commit": "26bac89",
+  "comparison_definition": "Frozen reductions; original 16B fitted conductivity and transferred connection pitch retained by approval",
+  "figures_sha256": {
+    "pressure-bias.png": "362586bf79abb40a41086c6eb6fd971cea18a9edf5c068ca13d9cb7dd7bf1ef2",
+    "temperature-bias.png": "c8a3d09ef4b3258b0a874310054581e287efc5250f33b8a36221be07cc2e3e5a"
+  },
+  "runtime_s": 1058.7922039001714,
+  "coverage": {
+    "circulation": 467,
+    "circulation_failures": 0,
+    "available_run_in": 9,
+    "originally_unavailable_run_in": 2,
+    "new_run_in_failures": 0
+  },
+  "decision": "Revert recommended; decision pending; candidate code unchanged"
+}
