@@ -1,0 +1,9 @@
+{
+  "components": 248,
+  "assemblies": 22,
+  "source_sha256": {
+    "validation/forge16b/s2/plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
+    "validation/forge16a/bha_components.csv": "48faa141b4cc82217b955febbc2909dab24738fe9220b8eed6e908fa67be6a40",
+    "src/borethm/data/forge16b/string_components.csv": "59e2d1e1b75f3a6f47820928a6850ece6ed3ba2f2525aee1c1e65e58effcf137"
+  }
+}
