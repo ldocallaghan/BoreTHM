@@ -14,6 +14,8 @@ BoreTHM combines circulating temperatures with wall thermal stress and fluid-pre
 
 Abate, J., Valkó, P.P., 2004. Multi-precision Laplace transform inversion. International Journal for Numerical Methods in Engineering 60 (5–7), 979–993.
 
+American Petroleum Institute, 2009. Rheology and Hydraulics of Oil-well Drilling Fluids. API Recommended Practice 13D, sixth edition.
+
 Anawe, P.A.L., Folayan, J.A., 2018. Data analyses on temperature-dependent behaviour of water based drilling fluid rheological models. Data in Brief 21, 289–298. https://doi.org/10.1016/j.dib.2018.09.100
 
 Bada, G., Dövényi, P., Horváth, F., Szafián, P., Windhoffer, G., 2007. Present-day stress field in the Pannonian Basin and the surrounding Alpine-Carpathian-Dinaric orogens. Földtani Közlöny 137 (3).
@@ -57,6 +59,8 @@ Jaeger, J.C., 1956. Conduction of heat in an infinite region bounded internally 
 Jaeger, J.C., Cook, N.G.W., Zimmerman, R.W., 2007. Fundamentals of Rock Mechanics, 4th edition. Blackwell.
 
 Gilmour, B., Wooden, J., Pulka, F., Rose, B., Barker, C. and Borchardt, E., 2021. Utah FORGE: Well 16A(78)-32 Logs. Geothermal Data Repository, submission 1292. https://doi.org/10.15121/1777912. CC-BY 4.0.
+
+Johancsik, C.A., Friesen, D.B., Dawson, R., 1984. Torque and drag in directional wells: prediction and measurement. Journal of Petroleum Technology 36 (6), 987–992.
 
 Jones, C., 2022. Utah FORGE: Deep Wells Temperature Surveys as of September 2022. Geothermal Data Repository, submission 1421. https://doi.org/10.15121/1893533. CC-BY 4.0.
 

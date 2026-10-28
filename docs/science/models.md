@@ -10,7 +10,7 @@ The thermal models are one-dimensional or axisymmetric. Spallation, drilling-rat
 
 ## Circulation and heat transfer
 
-The circulation model (Model 1, `model1_coupled.py`) calculates fluid temperature down the drill string and back up the annulus, the space between the string and the borehole wall. It represents the casing and cement, the string geometry and the steel and insulation layers in the pipe. Friction in the pipe, annulus and bit nozzles generates heat. Heat transfer to the rock depends on how long each depth has been exposed to circulation. The programme evaluations supply the exposure of rock encountered while drilling; the circulation rock term applies a one-hour minimum to that exposure, as described in the [equations](#circulation-heat-balance).
+The circulation model (Model 1, `model1_coupled.py`) calculates fluid temperature down the drill string and back up the annulus, the space between the string and the borehole wall. It represents the casing and cement, the string geometry and the steel and insulation layers in the pipe. Friction in the pipe, annulus, connections, assembly components and bit nozzles generates heat where it occurs, and so do supplied tool losses. Surface equipment adds to standpipe pressure without heating the well. Heat transfer to the rock depends on how long each depth has been exposed to circulation. The programme evaluations supply the exposure of rock encountered while drilling; the circulation rock term applies a one-hour minimum to that exposure, as described in the [equations](#circulation-heat-balance).
 
 Figure 1 is a separate illustrative comparison with rock exposed to circulation for a year. It uses a 12.4 km well reaching 450 °C rock at a mass flow of 30 kg/s. The calculated bit temperatures are 390 °C with conventional pipe, 222 °C with NOV TK-Drakon coated pipe and 56 °C with the dual-wall pipe of Xiao et al. (2022). These are the conditions of that figure; the [site programmes](#programme-evaluation) have their own targets, flows and exposure histories. Heat returned to surface in the figure is limited by conduction from the surrounding rock and does not constitute a reservoir-production assessment.
 
@@ -84,9 +84,13 @@ $$T_d(0)=T_{\text{inj}},\qquad T_u(L)=T_d(L)+\frac{Q_{\text{face}}}{\dot{m}c_p}+
 
 The conductances per unit length are resistances in series: the films on each side, each layer of the pipe wall, and on the rock side any casing and cement and the conduction into the rock, which limits the heat per unit length:
 
-$$\frac{1}{UA_i}=\frac{1}{2\pi r_b h_d}+\sum_j\frac{\ln(r_{j+1}/r_j)}{2\pi k_j}+\frac{1}{2\pi r_o h_u},\qquad \frac{1}{UA_o}=\frac{1}{2\pi r_w h_u}+\sum_c\frac{\ln(r_{c+1}/r_c)}{2\pi k_c}+\frac{\ln(r_\infty/r_r)}{2\pi k_{\text{rock}}}$$
+$$\frac{1}{UA_i}=\frac{1}{2\pi r_b h_d}+\sum_j\frac{\ln(r_{j+1}/r_j)}{2\pi k_j}+\frac{1}{2\pi r_o h_u},\qquad \frac{1}{UA_o}=\frac{1}{2\pi r_w h_u}+\sum_c\frac{\ln(r_{c+1}/r_c)}{2\pi k_c}+\frac{1}{2\pi k_{\text{rock}}G(t_D)}$$
 
-$$q'(z)=\frac{2\pi k_{\text{rock}}\Delta T}{\ln(r_\infty/r_r)},\qquad r_\infty=r_r+2\sqrt{\alpha t_{\text{eff}}(z)}$$
+The rock term is the exact response of a cylindrical hole of radius r_r in infinite, initially uniform rock whose wall temperature changes by a step and is then held (Carslaw and Jaeger, 1959). With t_D = α t_eff / r_r², G is the inverse Laplace transform of
+
+$$\bar G(s)=\frac{K_1(\sqrt s)}{\sqrt s\,K_0(\sqrt s)},$$
+
+where K_0 and K_1 are modified Bessel functions. `rock_response.py` evaluates it once by numerical inversion and interpolates it. At short times G ≈ 1/√(π t_D) + 1/2; at long times it falls slowly, as 2/(ln 4t_D − 2γ). The original calculation used the quasi-steady approximation 1/G ≈ ln(1 + 2√t_D), which overstates the rock resistance by about 5% after 30 days and 9% after one hour. The explicit v1.5.0 mode keeps it.
 
 Here t(z) is the time the wall at z has been exposed to circulation, and t_eff is the effective time used by `model1_coupled.exposure_seconds` in the rock term. For a depth-dependent exposure history,
 
@@ -94,13 +98,21 @@ $$t_{\text{eff}}(z)=\max\big(t(z),\;3600\ \mathrm{s}\big).$$
 
 With a uniform `t_years` and no exposure history, the minimum is 0.001 years, about 8.8 hours. Programme evaluations supply each depth's own exposure, including the youngest rock at the target, and the circulation calculation applies the one-hour floor to that history.
 
-The rock term approximates quasi-steady line-source conduction, which requires the conduction radius to be well beyond the hole radius. A transient cylindrical-source solution would be needed to represent shorter exposures in this term. The separate radial wall-temperature solver used by the stability checks and the [breakout-timing study](breakout-timing.md) resolves early cooling with its supplied state durations and does not apply these circulation floors. Its fluid-temperature and film-coefficient boundaries come from the circulation calculation. The exposure floor sets no breakout formation time; the timing study's assumed delay is a separate input.
+The cylindrical response is valid at all exposure times; the one-hour floor is retained so that earlier results remain comparable, and removing it would be a separate change. The separate radial wall-temperature solver used by the stability checks and the [breakout-timing study](breakout-timing.md) resolves early cooling with its supplied state durations and does not apply these circulation floors. Its fluid-temperature and film-coefficient boundaries come from the circulation calculation. The exposure floor sets no breakout formation time; the timing study's assumed delay is a separate input.
 
-Where a pipe has bare tool joints over a fraction f of its length, UA_i is the length-weighted mean of the insulated body and bare steel. Friction follows the laminar and Blasius factors, and the bit nozzles lose
+Where a pipe has bare tool joints over a fraction f of its length, UA_i is the length-weighted mean of the insulated body and bare steel. The bit nozzles lose
 
 $$\Delta p_{\text{bit}}=\frac{\rho Q^2}{2C_d^2A_n^2},\qquad C_d=0.95$$
 
-The standpipe pressure is the sum of the friction losses down the pipe and up the annulus, the bit loss, and the buoyancy of the hotter annulus, the integral of (ρ_u − ρ_d) g over true vertical depth.
+The standpipe pressure is the sum of the friction losses down the pipe and up the annulus, the bit loss, the surface-equipment loss, and the buoyancy of the hotter annulus, the integral of (ρ_u − ρ_d) g over true vertical depth.
+
+### Pressure losses and their heat
+
+`hydraulic_losses.py` calculates every in-hole pressure loss with one kernel and releases each as heat where it occurs, q' = Q |dp/dz|, in the stream that carries it. Straight passages use the Bingham law for mud and the Newtonian law for water (Bourgoyne et al., 1986). Repeated connections replace the body friction over their restriction length with friction at the connection's bore and outside diameter. Changes of area lose K ρ v²/2 at the smaller area, with K = (1 − r)² for an expansion and 0.5(1 − r)^0.75 for a contraction, r being the area ratio. A supplied tool curve scales as Δp_ref (ρ/ρ_ref)(Q/Q_ref)² (API RP 13D, 2009) and replaces the internal passage losses it covers. Surface equipment uses the API RP 13D layout coefficients and adds to standpipe pressure only. The sources and the development comparisons are recorded in the [development log](model-development.md#27-october-2026-entry-1-hydraulic-losses-and-heat-placement).
+
+### Rotary heat
+
+A circulation solve can also take heat released into the annulus fluid along the string, `annulus_heat`, and heat released at the bit, as part of `Q_face`. `rotary_heat.partition` derives both from measured surface rotary speed and torque. A soft-string torque balance (Johancsik et al., 1984) gives the force with which each element of string presses on the wall, from its buoyed weight, tension and the hole's curvature. A friction factor set from the off-bottom rotating torque then splits the on-bottom torque into wall friction and work at the bit. The site evaluations do not use it, since a programme has no measured torque; it is used in the [development comparisons](model-development.md#28-october-2026-entry-4-declaration-rotary-heat-m2), where all of the heat is assumed to reach the fluid, an upper limit.
 
 ### Quenched-face stress
 
