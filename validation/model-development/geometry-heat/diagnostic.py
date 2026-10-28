@@ -82,9 +82,11 @@ def solve(thermal,source,new_thermal,new_heat,exposure,breaks,mass,fluid,inlet,f
         jump=face/(mass*cp)+m1.nozzle_dp(mass,rho,tfa)/(rho*cp)
         return np.array([ya[0]-inlet,yb[1]-yb[0]-jump])
 
-    z=np.unique(np.r_[np.linspace(0,length,160),changes-.5*m1.BLEND,changes+.5*m1.BLEND,
-                      heat_changes-.5*m1.BLEND,heat_changes+.5*m1.BLEND])
-    if new_thermal or new_heat:z=z[(z>=0)&(z<=length)]
+    # Two descriptions of the same boundary can differ at floating-point
+    # precision. Merge nodes within 10 nanometres before BVP refinement.
+    z=np.unique(np.round(np.r_[np.linspace(0,length,160),changes-.5*m1.BLEND,changes+.5*m1.BLEND,
+                      heat_changes-.5*m1.BLEND,heat_changes+.5*m1.BLEND],8))
+    z=np.r_[0.,z[(z>1e-7)&(z<length-1e-7)],length]
     target=float(form(thermal.survey.tvd(length)))
     y=(np.vstack([np.interp(z,[0,length],[inlet,inlet+30]),np.interp(z,[0,length],[inlet+30,target*.7])])
        if init is None else np.vstack([np.interp(z,init['z'],init['Td']),np.interp(z,init['z'],init['Tu'])]))
