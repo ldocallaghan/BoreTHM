@@ -53,6 +53,11 @@ def build():
                 elif well=='16A' and original_id is None:
                     adopted_id=hydraulic_id=thermal_id=None
                     treatment='unresolved bore; assembly calculation unavailable'
+                    if (bha,item) in (('23',6),('38',3),('39',3)):
+                        thermal_id=3.25
+                        treatment='instrument: thermal-only 3.25 in assumption; internal hydraulic loss unknown'
+                        flags.append('internal instrument loss unknown')
+                        loc+='; thermal-only bore: declared engineering assumption, 28 October 2026'
                 tool=motor or any(x in label.lower() for x in ('sensor','mwd','puk','pulser','float','filter','black box','jar'))
                 rows.append(dict(well=well,bha=bha,item=item,component=label,kind=c['kind'],
                     length_ft=c['length_ft'],reported_od_in=original_od,reported_id_in=original_id,

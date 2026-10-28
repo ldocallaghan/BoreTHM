@@ -154,7 +154,8 @@ def unknown_motor(source):
 def serial_development_geometry(s,components,legacy,scenario):
     """D5: motor thermal bores are separate from internal tool pressure loss.
 
-    Unknown non-motor bores prevent a calculation. A bit is represented only
+    Three unknown instrument bores have declared thermal-only assumptions;
+    their internal losses remain unknown. A bit is represented only
     by the nozzle boundary. The pre-correction adapter remains available as
     entry1_geometry for reproducing the declared diagnostic and its archive.
     """
@@ -189,8 +190,12 @@ def serial_development_geometry(s,components,legacy,scenario):
             pipe=replace(pipe,hydraulic_joint=hl.HydraulicJoint(joint_od*INCH,inside*INCH,29*INCH,
                 row['length_ft']*FT/30 if s['well']=='16B' else 31.5*FT,
                 source='S2b declared connection scenario; recorded HWDP bore and pitch'))
-        bottom.append(wg.StringSegment(row['length_ft']*FT,pipe,
-            tool_loss=unknown_motor(row['source']) if row['motor'] else None))
+        tool=unknown_motor(row['source']) if row['motor'] else None
+        if not row['motor'] and row['hydraulic_id_in'] is None:
+            tool=hl.ReferenceToolLoss(0.,1.,1000.,basis='total_internal',
+                source='internal instrument loss unknown; '+row['source'],
+                unresolved=True,include_boundary_changes=False)
+        bottom.append(wg.StringSegment(row['length_ft']*FT,pipe,tool_loss=tool))
     regular=legacy.md_bit-sum(c.length for c in bottom)
     if regular<=0:raise ValueError('Assembly longer than circulation depth')
     od,jid=(7.,4.) if scenario=='EIS' else (7.25,3.5) if scenario=='GPDS55' else (6.625,3.25)

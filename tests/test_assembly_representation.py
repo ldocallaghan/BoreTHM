@@ -53,11 +53,17 @@ def test_corrected_motor_and_nozzle_boundary_preserve_depth_and_real_sub():
 
 
 @pytest.mark.parametrize('run,item',[('23',6),('38',3),('39',3)])
-def test_unknown_instrument_bores_cannot_be_filled_silently(run,item):
+def test_unknown_instrument_bores_remain_unknown_with_separate_thermal_assumption(run,item):
     plan=json.loads((ROOT/'validation/forge16b/s2/plan.json').read_text())
     legacy=a.geometry(run,10000.,plan['components_a'])
-    with pytest.raises(ValueError,match=f'item {item}'):
-        study.serial_development_geometry(dict(well='16A',run=run),plan['components_a'],legacy,'NC50')
+    row=next(r for r in study.assembly_audit() if (r['well'],r['bha'],r['item'])==('16A',run,item))
+    assert row['reported_id_in'] is row['adopted_id_in'] is row['hydraulic_id_in'] is None
+    assert row['thermal_id_in']==3.25
+    geometry=study.serial_development_geometry(dict(well='16A',run=run),plan['components_a'],legacy,'NC50')
+    section=next(s for s in geometry.string if s.tool_loss is not None and 'instrument' in s.tool_loss.source)
+    assert 2*section.pipe.r_bore/study.INCH==3.25
+    assert section.tool_loss.unresolved and section.tool_loss.dp_ref==0
+    assert not section.tool_loss.include_boundary_changes
 
 
 @pytest.mark.parametrize('run',['17','18','19','20'])
