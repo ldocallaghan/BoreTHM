@@ -62,7 +62,7 @@ must exclude geometric transitions already represented automatically.
 ## ReferenceToolLoss
 
 ```python
-ReferenceToolLoss(dp_ref: float, flow_ref: float, density_ref: float, basis: str = 'additional', span_segments: int = 1, source: str = '', flow_range: tuple | None = None, temperature_max_C: float | None = None) -> None
+ReferenceToolLoss(dp_ref: float, flow_ref: float, density_ref: float, basis: str = 'additional', span_segments: int = 1, source: str = '', flow_range: tuple | None = None, temperature_max_C: float | None = None, include_boundary_changes: bool = True, unresolved: bool = False) -> None
 ```
 
 Tool pressure loss [Pa] at reference flow [m3/s] and density [kg/m3].
@@ -71,6 +71,9 @@ Scales as density times flow squared. total_internal replaces internal
 passage losses over span_segments contiguous segments, including the
 segment carrying this input; additional supplies an extra restriction.
 Optional flow_range is m3/s and temperature_max_C is a qualification.
+include_boundary_changes=False excludes internal entry/exit restrictions
+inferred from a thermal-only bore. unresolved qualifies an omitted loss
+and requires zero reference pressure; it never makes a solve fail.
 
 ## SurfaceLoss
 

@@ -1,0 +1,23 @@
+{
+  "declaration": "71b2c10",
+  "sample_count": 244,
+  "cases": 488,
+  "failures": 0,
+  "runtime_s": 1265.886908300221,
+  "settings": {
+    "PV_reference_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "controls_resolution_C": 0.1
+  },
+  "meaning": "Bulk heating scale is not a pointwise counterflow temperature bound",
+  "results_sha256": {
+    "assemblies.csv": "c4b814bdc27116e06cdfe191b4731b857ea4fb79d22910acfa6d3db612bfdb1a",
+    "controls.csv": "2dee95195ddac1db298fef39b9ff403c089208e54406f28323079f7fdc100c25",
+    "samples.csv": "2a9f41b47b66a20d762ef0a1cf1106adbdae44c0185900b0dc235e47fa9853c1"
+  },
+  "pre_D5_model_snapshot": "c60a187",
+  "executed_study_sha256": "3d54f3bf453ee110dc4b11f227b77a98bf0c16866e3dd9e9ee72eef7184a27e7",
+  "reproduction_script_sha256": "41527474c2aedee4a2f89efb16fa4474bddd64fbb42b8e4d91e397d4b1ec6d47",
+  "figure_sha256": "2669acf7f5d37b6b873cf152b5be1615d7b6376a41ff5bba0afd44bb6c3c3bd2"
+}

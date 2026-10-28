@@ -53,6 +53,9 @@ This table includes work performed before this log existed. Earlier development 
 | D4 aggregate trial adapter | Retain the original trial geometry and remove missing serial-table lookups | Four trial geometry tests pass; all 45 trial samples and all 22 diagnosis windows converge | Retained input-contract correction; frozen scoreboard unchanged |
 | Entry 1, original 26.7 °C convention, NC50/EIS | Additional hydraulic losses and local heat; temperature effects estimated at tenths to a few °C | G1/G2 deficits decrease; G3 warms by 8.4–16.1 °C, worsening five assembly biases; G6 trials become warmer | not kept; BHA representation under correction |
 | Entry 2 component diagnosis | Separate a length-dependent connection contribution from assembly-passage losses | The assumed 1.25-in motor passage is a large calculated contribution on 16A; connection losses also contribute | Diagnosis only; no model change or acceptance decision |
+| Thermal geometry and heat-source separation | A should reproduce a heat-source effect; B should reproduce a thermal-geometry effect; compare with the single-pass power scale | A reproduces assembly mean bit rises within 0.02 °C; B changes them by less than 0.01 °C. A exceeds the bulk scale at the bit. | Diagnosis only; no model correction selected from it |
+| D5 equipment representation | Remove a motor mandrel's full-length passage and invented bit IDs; pressure and dissipation should decrease | All 467 circulation cases and nine available run-in cases calculated, with explicit thermal-only instrument assumptions and unknown internal tool losses | Debugging correction; acceptance of integrated entry 1 remains pending |
+| Entry 1 with D5, original 26.7 °C convention | Revised hydraulic losses with equipment-corrected assembly passages | 16A in-hole power 654 versus measured pump power 928 kW; G3 rises 1.3–3.7 °C from legacy; G6 regular bias -7.2 °C and trial bias +3.0 °C | Recommend keep as the working development calculation; decision pending |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -428,3 +431,185 @@ Estimated directions before re-scoring: removing fictitious narrow motor and bit
 The original IDs of the BHA 23 MWD tool and BHA 38/39 PUK subs remain unknown. A 3.25-inch thermal-only bore is now explicitly authorised for these three components. Their internal hydraulic loss will be zero and flagged as unknown, including restrictions inferred from their assumed thermal interfaces. Their recorded lengths and outside diameters remain unchanged. This is an engineering assumption, with no dimension inferred from a pressure or temperature residual.
 
 The first D5 execution retains 467 planned circulation cases. The missing bores prevented 156 circulation calculations and five previously available run-in calculations; these input failures are preserved separately. Complete only those cases using the unchanged frozen circulation and run-in functions with this declared assumption. Retain the already completed unaffected predictions, restore the original sample and event order, and calculate the full frozen scoreboard from the merged results. No comparison measure or sample changes. Report both execution durations and the source qualification for the retained batch. This completion method avoids repeating unaffected solves and is declared before calculating the newly authorised cases.
+
+
+## 28 October 2026: geometry and heat separation results
+
+Source: [mixed-case archive](../../validation/model-development/geometry-heat/README.md), `assemblies.csv`, paired by well/BHA and case. All changes are °C from the legacy calculation. Complete denotes the original entry 1. Power scale is added in-hole dissipation / (mass flow × legacy bit heat capacity).
+
+| Well | BHA | Samples | Complete bit | A bit | B bit | Complete return | A return | B return | Power scale |
+|---|---|---|---|---|---|---|---|---|---|
+| 16A | 18 | 15 | 8.41 | 8.40 | 0.00 | 1.64 | 1.64 | -0.00 | 2.03 |
+| 16A | 23 | 13 | 9.86 | 9.85 | 0.00 | 1.67 | 1.67 | -0.00 | 2.19 |
+| 16A | 30 | 29 | 12.55 | 12.54 | 0.00 | 1.96 | 1.96 | -0.00 | 2.63 |
+| 16A | 34 | 9 | 12.17 | 12.16 | 0.00 | 1.89 | 1.89 | -0.00 | 2.54 |
+| 16A | 35r1 | 5 | 14.21 | 14.20 | 0.00 | 2.01 | 2.01 | -0.00 | 2.70 |
+| 16A | 35r2 | 4 | 13.98 | 13.97 | 0.00 | 1.90 | 1.90 | -0.00 | 2.61 |
+| 16A | 38 | 20 | 15.20 | 15.19 | 0.00 | 1.99 | 1.99 | -0.00 | 2.76 |
+| 16A | 39 | 25 | 16.07 | 16.06 | 0.00 | 2.10 | 2.10 | -0.00 | 2.96 |
+| 16A | 42 | 15 | 15.71 | 15.70 | 0.00 | 1.71 | 1.71 | -0.00 | 2.60 |
+| 16B | 11 | 4 | 1.52 | 1.52 | 0.00 | 0.62 | 0.62 | -0.00 | 0.70 |
+| 16B | 12 | 12 | 1.06 | 1.06 | 0.00 | 0.47 | 0.47 | -0.00 | 0.54 |
+| 16B | 13 | 14 | 1.76 | 1.76 | 0.00 | 0.40 | 0.40 | -0.00 | 0.52 |
+| 16B | 15 | 4 | 2.09 | 2.09 | 0.00 | 0.44 | 0.44 | -0.00 | 0.57 |
+| 16B | 16 | 15 | 2.38 | 2.38 | 0.00 | 0.45 | 0.45 | -0.00 | 0.61 |
+| 16B | 17 | 14 | 1.95 | 1.95 | 0.00 | 0.40 | 0.40 | 0.00 | 0.56 |
+| 16B | 18 | 10 | 0.82 | 0.82 | -0.00 | 0.53 | 0.53 | 0.00 | 0.61 |
+| 16B | 19 | 10 | 0.68 | 0.68 | -0.00 | 0.25 | 0.25 | 0.00 | 0.31 |
+| 16B | 20 | 11 | 1.31 | 1.31 | -0.00 | 0.20 | 0.20 | -0.00 | 0.31 |
+| 16B | 27 | 5 | 2.75 | 2.75 | 0.00 | 0.27 | 0.27 | -0.00 | 0.45 |
+| 16B | 3 | 3 | 0.99 | 1.00 | -0.00 | 0.52 | 0.52 | 0.00 | 0.57 |
+| 16B | 38 | 5 | 2.72 | 2.71 | 0.00 | 0.24 | 0.24 | -0.00 | 0.42 |
+| 16B | 4 | 2 | 0.90 | 0.90 | -0.00 | 0.49 | 0.49 | 0.00 | 0.53 |
+
+![Thermal geometry and heat split](../../validation/model-development/geometry-heat/thermal-heat-split.png)
+
+Calculated: 44/44 matched controls pass at 0.1 °C. The mixed calculations contain 488/488 converged cases. Runtime was 1265.9 seconds, including controls. Per-sample outcomes and exceedances remain in `samples.csv`.
+
+The heat-placement prediction has two parts: reproduction of the temperature rise and a within-scale condition. Their outcomes must be assessed separately. The bulk quotient does not impose a strict upper bound on a local bit temperature in the coupled counterflow equations. A larger local response can occur through bore/annulus exchange and changed formation heat transfer. This diagnostic does not independently partition those two contributions. D5 is justified by the equipment records, with no correction selected from the diagnostic.
+
+## 28 October 2026: entry 1 with D5, frozen scoreboard
+
+Sources: [corrected comparison archive](../../validation/model-development/d5/results/README.md), `comparison.csv`. Legacy is the approved baseline; original entry 1 is the second scored calculation; D5 is the corrected assembly representation. Full counts stay visible. Paired means and biases below use identical available sample IDs in all three calculations. Unavailable cases supply no numerical improvement.
+
+### G1: standpipe pressure
+
+| Well | Group / event | D5 compared / planned | Legacy bias | Original entry 1 bias | D5 bias | D5 mean error % |
+|---|---|---|---|---|---|---|
+| 16A | 18 | 15/15 | -1529.48 | -402.07 | -1132.15 | -40.50 |
+| 16A | 23 | 13/13 | -1858.21 | -565.73 | -1467.37 | -44.96 |
+| 16A | 30 | 29/29 | -1603.63 | -87.14 | -943.34 | -29.81 |
+| 16A | 34 | 9/9 | -1477.33 | -76.48 | -988.46 | -30.69 |
+| 16A | 35r1 | 5/5 | -1884.25 | -297.16 | -1277.44 | -34.43 |
+| 16A | 35r2 | 4/4 | -1767.19 | -234.98 | -1172.75 | -33.28 |
+| 16A | 38 | 20/20 | -1357.52 | 270.36 | -708.68 | -21.95 |
+| 16A | 39 | 25/25 | -1269.88 | 473.50 | -563.95 | -17.12 |
+| 16A | 42 | 15/15 | -2463.80 | -935.37 | -1874.97 | -45.53 |
+| 16B | 12 | 12/12 | -157.31 | 56.49 | 50.19 | 4.27 |
+| 16B | 13 | 14/14 | -440.94 | -261.36 | -267.27 | -22.90 |
+| 16B | 15 | 4/4 | -432.76 | -239.16 | -245.10 | -20.56 |
+| 16B | 16 | 15/15 | -462.11 | -258.87 | -264.83 | -21.28 |
+
+Columns: `legacy_paired_bias`, `entry1_paired_bias`, `d5_paired_bias`; coverage uses `d5_compared` / `d5_planned`. Where D5 is unavailable, prior results marked full use `legacy_bias` or `entry1_bias` and make no paired-change claim. Bias is in psi; percentages use `d5_paired_mean_percent_error`.
+
+### G2: in-hole hydraulic power
+
+| Well | Group / event | D5 compared / planned | Legacy model kW | Original entry 1 kW | D5 model kW | Measured kW |
+|---|---|---|---|---|---|---|
+| 16A | paired pressure samples | 135/135 | 500.04 | 908.00 | 654.21 | 928.27 |
+| 16B | paired pressure samples | 109/109 | 264.29 | 349.88 | 342.54 | 526.52 |
+
+Columns: `legacy_paired_model_mean`, `entry1_paired_model_mean`, `d5_paired_model_mean`, `d5_paired_measured_mean`; coverage uses `d5_compared` / `d5_planned`. Where D5 is unavailable, prior results marked full use `legacy_bias` or `entry1_bias` and make no paired-change claim. Power is in kW.
+
+### G3: 16A bit temperature
+
+| Well | Group / event | D5 compared / planned | Legacy bias | Original entry 1 bias | D5 bias |
+|---|---|---|---|---|---|
+| 16A | 18 | 15/15 | -4.11 | 4.30 | -2.01 |
+| 16A | 23 | 13/13 | -0.19 | 9.67 | 1.13 |
+| 16A | 30 | 29/29 | 2.38 | 14.93 | 6.08 |
+| 16A | 34 | 9/9 | -0.75 | 11.42 | 1.68 |
+| 16A | 35r1 | 5/5 | -3.13 | 11.09 | -0.36 |
+| 16A | 35r2 | 4/4 | -8.91 | 5.06 | -6.13 |
+| 16A | 38 | 20/20 | -8.12 | 7.09 | -4.98 |
+| 16A | 39 | 25/25 | -9.68 | 6.39 | -6.28 |
+| 16A | 42 | 15/15 | -19.81 | -4.09 | -17.58 |
+
+Columns: `legacy_paired_bias`, `entry1_paired_bias`, `d5_paired_bias`; coverage uses `d5_compared` / `d5_planned`. Where D5 is unavailable, prior results marked full use `legacy_bias` or `entry1_bias` and make no paired-change claim. Bias is in °C.
+
+### G4: 16A run-in peak
+
+| Well | Group / event | D5 compared / planned | Legacy bias | Original entry 1 bias | D5 bias |
+|---|---|---|---|---|---|
+| 16A | 23-off004 | 1/1 | -28.41 | -23.69 | -28.85 |
+| 16A | 23-off005 | 1/1 | -13.87 | -13.78 | -13.87 |
+| 16A | 23-off006 | 0/1 | unavailable | unavailable | unavailable |
+| 16A | 35r2-off001 | 1/1 | -6.53 | -6.53 | -6.53 |
+| 16A | 35r2-off006 | 1/1 | -40.97 | -33.85 | -42.13 |
+| 16A | 35r2-off008 | 0/1 | unavailable | unavailable | unavailable |
+| 16A | 38-off009 | 1/1 | -9.38 | -5.96 | -9.92 |
+| 16A | 39-off004 | 1/1 | -10.15 | -10.15 | -10.15 |
+| 16A | 39-off007 | 1/1 | -46.47 | -36.45 | -48.87 |
+| 16A | 42-off004 | 1/1 | -45.96 | -32.71 | -49.42 |
+| 16A | 42-off013 | 1/1 | -54.35 | -43.50 | -56.51 |
+
+Columns: `legacy_paired_bias`, `entry1_paired_bias`, `d5_paired_bias`; coverage uses `d5_compared` / `d5_planned`. Where D5 is unavailable, prior results marked full use `legacy_bias` or `entry1_bias` and make no paired-change claim. Bias is in °C.
+
+### G5: 16A return temperature
+
+| Well | Group / event | D5 compared / planned | Legacy bias | Original entry 1 bias | D5 bias |
+|---|---|---|---|---|---|
+| 16A | ALL | 358/358 | -5.85 | -4.00 | -5.09 |
+| 16A | Sanvean on-bottom | 135/135 | -6.00 | -4.11 | -5.22 |
+| 16A | rig inferred bit depth, return only | 223/223 | -5.75 | -3.94 | -5.02 |
+
+Columns: `legacy_paired_bias`, `entry1_paired_bias`, `d5_paired_bias`; coverage uses `d5_compared` / `d5_planned`. Where D5 is unavailable, prior results marked full use `legacy_bias` or `entry1_bias` and make no paired-change claim. Bias is in °C.
+
+### G6: 16B sensor temperature
+
+| Well | Group / event | D5 compared / planned | Legacy bias | Original entry 1 bias | D5 bias |
+|---|---|---|---|---|---|
+| 16B | independent regular pipe | 59/59 | -8.77 | -6.90 | -7.19 |
+| 16B | trial | 45/45 | 1.99 | 3.25 | 3.03 |
+| 16B | 3 | 3/3 | -4.80 | -3.81 | -3.86 |
+| 16B | 4 | 2/2 | -24.17 | -23.26 | -23.31 |
+| 16B | 11 | 4/4 | -16.18 | -14.76 | -15.53 |
+| 16B | 12 | 12/12 | -18.27 | -17.32 | -17.35 |
+| 16B | 13 | 14/14 | -8.42 | -6.72 | -6.77 |
+| 16B | 15 | 4/4 | -4.21 | -2.18 | -2.23 |
+| 16B | 16 | 15/15 | -4.80 | -2.48 | -2.54 |
+| 16B | 17 | 14/14 | 3.18 | 5.13 | 4.90 |
+| 16B | 18 | 10/10 | 1.69 | 2.52 | 2.40 |
+| 16B | 19 | 10/10 | 1.18 | 1.85 | 1.65 |
+| 16B | 20 | 11/11 | 1.49 | 2.80 | 2.49 |
+| 16B | 27 | 5/5 | -3.80 | -1.16 | -2.34 |
+| 16B | 38 | 5/5 | -1.56 | 1.05 | -0.08 |
+
+Columns: `legacy_paired_bias`, `entry1_paired_bias`, `d5_paired_bias`; coverage uses `d5_compared` / `d5_planned`. Where D5 is unavailable, prior results marked full use `legacy_bias` or `entry1_bias` and make no paired-change claim. Bias is in °C.
+
+### Bit-temperature changes and energy scales by assembly
+
+Source: `bit-energy-assemblies.csv`. L denotes change from legacy; E denotes change from original entry 1. Temperatures and power scales are °C. The bit and the frozen sensor proxy remain distinct in the per-sample archive.
+
+| Well | BHA | Compared / planned | L bit change | L return change | L power scale | E bit change | E power scale |
+|---|---|---|---|---|---|---|---|
+| 16A | 18 | 15/15 | 2.11 | 0.65 | 0.77 | -6.31 | -1.26 |
+| 16A | 23 | 13/13 | 1.32 | 0.51 | 0.61 | -8.54 | -1.57 |
+| 16A | 30 | 29/29 | 3.70 | 0.89 | 1.13 | -8.84 | -1.50 |
+| 16A | 34 | 9/9 | 2.43 | 0.76 | 0.94 | -9.74 | -1.60 |
+| 16A | 35r1 | 5/5 | 2.77 | 0.78 | 0.97 | -11.44 | -1.72 |
+| 16A | 35r2 | 4/4 | 2.78 | 0.76 | 0.95 | -11.20 | -1.65 |
+| 16A | 38 | 20/20 | 3.13 | 0.82 | 1.04 | -12.07 | -1.72 |
+| 16A | 39 | 25/25 | 3.40 | 0.89 | 1.14 | -12.67 | -1.82 |
+| 16A | 42 | 15/15 | 2.22 | 0.72 | 0.93 | -13.49 | -1.66 |
+| 16B | 11 | 4/4 | 0.75 | 0.39 | 0.44 | -0.78 | -0.26 |
+| 16B | 12 | 12/12 | 1.02 | 0.46 | 0.52 | -0.03 | -0.01 |
+| 16B | 13 | 14/14 | 1.70 | 0.40 | 0.51 | -0.06 | -0.01 |
+| 16B | 15 | 4/4 | 2.03 | 0.43 | 0.56 | -0.06 | -0.01 |
+| 16B | 16 | 15/15 | 2.31 | 0.44 | 0.60 | -0.07 | -0.01 |
+| 16B | 17 | 14/14 | 1.70 | 0.38 | 0.53 | -0.25 | -0.04 |
+| 16B | 18 | 10/10 | 0.68 | 0.50 | 0.57 | -0.14 | -0.04 |
+| 16B | 19 | 10/10 | 0.45 | 0.22 | 0.27 | -0.23 | -0.04 |
+| 16B | 20 | 11/11 | 0.98 | 0.18 | 0.27 | -0.33 | -0.04 |
+| 16B | 27 | 5/5 | 1.45 | 0.21 | 0.32 | -1.31 | -0.13 |
+| 16B | 3 | 3/3 | 0.92 | 0.50 | 0.54 | -0.07 | -0.03 |
+| 16B | 38 | 5/5 | 1.47 | 0.19 | 0.30 | -1.25 | -0.12 |
+| 16B | 4 | 2/2 | 0.84 | 0.46 | 0.50 | -0.06 | -0.03 |
+
+Columns: `legacy_bit_change_C`, `legacy_return_change_C`, `legacy_bulk_scale_C`, `entry1_bit_change_C`, `entry1_bulk_scale_C`. The archive also provides `assembly-power-return.csv` for all assembly-level G2 and G5 descriptive comparisons. The frozen well-level measures are unchanged.
+
+### Interpretation, coverage and recommendation
+
+Calculated: the heat-source case A reproduces every assembly mean bit rise from the original entry 1 within 0.02 °C. Thermal-geometry case B changes every assembly mean by less than 0.01 °C. On 16A, A raises the bit by 8.40–16.06 °C and the return by 1.64–2.10 °C. The corresponding archived power scales are 2.03–2.96 °C. The reproduction part of the heat-source prediction is supported; its within-scale condition fails at the bit. The thermal-geometry prediction is unsupported at the declared 0.1 °C resolution. These statements describe the calculation before D5, including its erroneous motor passages.
+
+The counterflow equations exchange heat between ascending annulus fluid and descending bore fluid along the string. The power quotient describes a single traversal of the added heat. It does not limit the local temperature response after internal exchange. The small return rise and larger bit rise can coexist within those equations. The diagnostic separates the heat-source and thermal-geometry changes; it does not measure the individual contributions from internal exchange and formation heat-transfer feedback. No claim that either is the sole amplification mechanism is made.
+
+Calculated after D5: 16A bit rises from legacy are 1.32–3.70 °C, with power scales 0.61–1.14 °C. Relative to the original entry 1, the corrected bit is cooler by 6.31–13.49 °C. The motor and bit corrections remove fictitious straight-passage dissipation. All nine 16A pressure means remain low, by about 564–1,875 psi. The 16B motorless means range from about -267 to +50 psi. These residuals retain their declared pressure definitions. Motor off-bottom losses remain unknown, so this is incomplete equipment accounting.
+
+Calculated: G2 changes from legacy 500.04 to 654.21 kW on 16A, against measured pump power 928.27 kW. On 16B it changes from 264.29 to 342.54 kW, against 526.52 kW. These comparisons do not establish that all measured pump power becomes fluid heat. The deep-run bit biases are -4.98, -6.28 and -17.58 °C for BHA 38, 39 and 42. The BHA 30 warm bias increases from +2.38 to +6.08 °C; BHA 23 and 34 also have larger absolute mean biases than legacy. The pooled return bias improves from -5.85 to -5.09 °C. The 16B regular-pipe bias improves from -8.77 to -7.19 °C, while the trial bias increases from +1.99 to +3.03 °C. All nine available run-in peaks remain low, with errors -56.51 to -6.53 °C. The correction does not resolve the thermal gaps.
+
+All 467 circulation cases and all nine originally available run-in cases complete. The two original unavailable events remain excluded from numerical comparison. No completed circulation case has an energy-residual flag. The initial missing-input batch took 886.31 seconds. Authorised completion of 156 circulation cases and five run-in events took 168.88 seconds, giving 1,055.19 seconds of scoring execution. The 311 unaffected circulation predictions and four unaffected run-in predictions are retained. Only the three declared instrument records change between audit batches. Source hashes and the batch distinction are in `d5/results/manifest.json`; original input failures remain in `initial-input-unavailable.csv`. Every assembly's motor and thermal-only qualifications are listed in `assembly-qualifications.csv`.
+
+**Recommendation: keep entry 1 with D5 as the working development calculation. The acceptance decision remains pending.** The hydraulic terms have explicit physical definitions and published correlations; D5 removes equipment representations that were unjustified independently of their residuals. The recommendation does not depend on reproducing a rounded historical gap. Unknown motor losses require verified equipment curves, and the thermal gaps require their separately declared physics entries. The fitted trial insulation conductivity and FORGE-derived 16B connection pitch remain disclosed. This development score provides no independent validation.
+
+No golden regeneration or slow suite was performed. No 56-32, 58-32 or 78B-32 target was read. No model correction was chosen from the geometry/heat diagnostic. No additional measurement diagnostic was run.

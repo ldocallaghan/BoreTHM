@@ -1,0 +1,157 @@
+sample_id,well,bha,source,success,calibrated_insulation,measured_bit_C,measured_return_C,raw_spp_psi,raw_differential_psi,film_multiplier,pv_ref_T_C,solver_status,spp_psi,bit_C,return_C,energy_flagged,bore_0ft_C,annulus_0ft_C,bore_22ft_C,annulus_22ft_C,bore_40ft_C,annulus_40ft_C,bore_69ft_C,annulus_69ft_C,bore_84ft_C,annulus_84ft_C,bore_85ft_C,annulus_85ft_C,model_hydraulic_W,measured_hydraulic_W,model_standpipe_flow_W,surface_W,error_type
+16A-s0016,16A,23,Sanvean on-bottom,False,False,81.6953553038105,66.11111111111111,3388.6467700000003,30.293118,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0017,16A,23,Sanvean on-bottom,False,False,82.59616379310344,65.33953333333355,3491.2387900000003,139.150984,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0018,16A,23,Sanvean on-bottom,False,False,83.38531881804043,67.77777777777777,3415.20083,153.414073,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0019,16A,23,Sanvean on-bottom,False,False,83.76882483370288,65.55555555555556,3530.1088499999996,225.00822,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0020,16A,23,Sanvean on-bottom,False,False,83.94582408198121,66.11111111111111,3546.2529600000003,231.15992799999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0021,16A,23,Sanvean on-bottom,False,False,80.69084070796461,65.68147666666644,3352.1148829999997,117.504699,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0022,16A,23,Sanvean on-bottom,False,False,81.008,65.55555555555556,3371.7967360000002,127.17947000000001,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0023,16A,23,Sanvean on-bottom,False,False,81.99911894273127,65.55555555555556,3358.049272,91.459942,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0024,16A,23,Sanvean on-bottom,False,False,82.47347305389222,65.72983333333367,3474.5705199999998,208.83374600000002,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0025,16A,23,Sanvean on-bottom,False,False,80.17574958813839,64.44444444444444,3407.0822500000004,157.520353,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0026,16A,23,Sanvean on-bottom,False,False,81.36771338250792,63.97340555555527,3433.86947,158.437924,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0027,16A,23,Sanvean on-bottom,False,False,81.40642324888226,64.44444444444444,3406.61511,197.874446,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0028,16A,23,Sanvean on-bottom,False,False,82.05144414168937,65.0,3327.6715400000003,204.654963,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0076,16A,38,Sanvean on-bottom,False,False,97.07783595113438,55.55555555555556,3330.13009,39.85498,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0077,16A,38,Sanvean on-bottom,False,False,95.13553956834532,55.0,3611.2803700000004,428.923369,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0078,16A,38,Sanvean on-bottom,False,False,92.96094958968347,54.78119444444423,3366.12428,85.224516,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0079,16A,38,Sanvean on-bottom,False,False,91.86452234881682,52.77777777777778,3443.5572,132.48819699999999,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0080,16A,38,Sanvean on-bottom,False,False,89.12297055057617,52.77777777777778,3436.1895400000003,198.196719,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0081,16A,38,Sanvean on-bottom,False,False,88.43888440860215,52.77777777777778,3509.56931,352.473259,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0082,16A,38,Sanvean on-bottom,False,False,89.7064332247557,51.666666666666664,3496.52607,356.086522,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0083,16A,38,Sanvean on-bottom,False,False,90.9569118982743,51.71394444444458,3595.32119,415.098669,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0084,16A,38,Sanvean on-bottom,False,False,91.74365175332527,51.11111111111111,3499.59818,323.805564,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0085,16A,38,Sanvean on-bottom,False,False,91.87668679896463,36.64155555553912,3552.68683,236.21990999999997,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0086,16A,38,Sanvean on-bottom,False,False,92.35392340425533,49.68663888888942,3476.01517,150.140111,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0087,16A,38,Sanvean on-bottom,False,False,91.96242443729903,50.55555555555556,3424.54176,227.82247999999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0088,16A,38,Sanvean on-bottom,False,False,87.99312162162163,48.888888888888886,3374.8808799999997,130.670492,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0089,16A,38,Sanvean on-bottom,False,False,88.12022988505747,48.888888888888886,3327.8557,164.617373,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0090,16A,38,Sanvean on-bottom,False,False,87.92538645418327,49.99694444444483,3261.62815,66.638953,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0091,16A,38,Sanvean on-bottom,False,False,86.10796361091673,49.46200000000014,3403.96057,213.309138,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0092,16A,38,Sanvean on-bottom,False,False,86.00166939443535,49.44444444444444,3417.7928699999998,229.78731499999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0093,16A,38,Sanvean on-bottom,False,False,87.74526840066409,48.93316666666679,3472.29502,268.561282,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0094,16A,38,Sanvean on-bottom,False,False,88.78997867803838,49.44444444444444,3498.79449,223.28205699999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0095,16A,38,Sanvean on-bottom,False,False,88.91157894736843,49.44444444444444,3380.3741199999995,131.696442,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0096,16A,39,Sanvean on-bottom,False,False,100.6452691680261,44.97777777777729,3389.3394500000004,128.872332,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0097,16A,39,Sanvean on-bottom,False,False,95.26355040701316,48.888888888888886,3411.7819799999997,125.27924,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0098,16A,39,Sanvean on-bottom,False,False,94.62460100647017,48.888888888888886,3493.01919,206.779065,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0099,16A,39,Sanvean on-bottom,False,False,95.8859287338893,47.77777777777778,3438.0852299999997,170.826124,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0100,16A,39,Sanvean on-bottom,False,False,93.72339819318971,48.33333333333333,3383.0444,81.779301,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0101,16A,39,Sanvean on-bottom,False,False,91.99129053606883,49.44444444444444,3408.7809500000003,103.090658,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0102,16A,39,Sanvean on-bottom,False,False,92.17925291828793,49.44444444444444,3504.87865,243.843757,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0103,16A,39,Sanvean on-bottom,False,False,93.31913558318531,49.44444444444444,3451.8568,195.002951,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0104,16A,39,Sanvean on-bottom,False,False,92.34066098081023,48.888888888888886,3344.9736600000006,83.530468,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0105,16A,39,Sanvean on-bottom,False,False,91.77838014369694,48.888888888888886,3454.1407999999997,232.771522,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0106,16A,39,Sanvean on-bottom,False,False,92.38998862343573,49.78466666666766,3466.0558600000004,229.69497900000002,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0107,16A,39,Sanvean on-bottom,False,False,92.87551652892562,50.0,3281.8879500000003,54.28786699999999,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0108,16A,39,Sanvean on-bottom,False,False,90.64087779690189,50.0,3364.63027,74.22072499999999,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0109,16A,39,Sanvean on-bottom,False,False,89.67740863787375,49.822722222222886,3547.8300900000004,215.76425600000002,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0110,16A,39,Sanvean on-bottom,False,False,91.368322147651,48.888888888888886,3477.3425199999997,145.827766,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0111,16A,39,Sanvean on-bottom,False,False,92.13587278106509,49.569111111111646,3530.4722500000003,226.099676,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0112,16A,39,Sanvean on-bottom,False,False,92.52445247359644,49.94144444444424,3538.11518,237.89170399999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0113,16A,39,Sanvean on-bottom,False,False,92.81465605457647,49.46533333333314,3555.0505299999995,245.92460599999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0114,16A,39,Sanvean on-bottom,False,False,93.21711936662606,45.540388888889034,3545.93908,235.371938,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0115,16A,39,Sanvean on-bottom,False,False,94.48817647058824,47.48266666666697,3451.8026,93.634,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0116,16A,39,Sanvean on-bottom,False,False,93.13576403695807,47.77777777777778,3472.39263,197.924758,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0117,16A,39,Sanvean on-bottom,False,False,94.24334073251943,47.77777777777778,3513.11985,220.800272,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0118,16A,39,Sanvean on-bottom,False,False,95.1974274509804,47.77777777777778,3557.7085400000005,268.819519,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0119,16A,39,Sanvean on-bottom,False,False,92.05764449291166,48.888888888888886,3577.2633200000005,168.939124,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0120,16A,39,Sanvean on-bottom,False,False,93.56721793973372,47.77777777777778,3490.2739300000003,130.690993,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0169,16A,23,"rig inferred bit depth, return only",False,False,,65.0,,-30.254559999999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0170,16A,23,"rig inferred bit depth, return only",False,False,,67.22222222222221,,1085.769555,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0171,16A,23,"rig inferred bit depth, return only",False,False,,66.11111111111111,,24.732533333333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0172,16A,23,"rig inferred bit depth, return only",False,False,,67.77777777777777,,183.61224666666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0173,16A,23,"rig inferred bit depth, return only",False,False,,67.77777777777777,,173.4135816666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0174,16A,23,"rig inferred bit depth, return only",False,False,,67.77777777777777,,97.59808333333332,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0175,16A,23,"rig inferred bit depth, return only",False,False,,68.88888888888889,,143.50230833333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0176,16A,23,"rig inferred bit depth, return only",False,False,,68.88888888888889,,89.98704500000001,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0177,16A,23,"rig inferred bit depth, return only",False,False,,67.22222222222221,,121.40992666666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0178,16A,23,"rig inferred bit depth, return only",False,False,,67.26841666666637,,48.31119666666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0179,16A,23,"rig inferred bit depth, return only",False,False,,67.77777777777777,,147.11172000000002,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0180,16A,23,"rig inferred bit depth, return only",False,False,,65.88294444444425,,121.19541333333335,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0181,16A,23,"rig inferred bit depth, return only",False,False,,65.55555555555556,,226.25723833333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0182,16A,23,"rig inferred bit depth, return only",False,False,,63.888888888888886,,187.35708499999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0183,16A,23,"rig inferred bit depth, return only",False,False,,66.0507314814817,,237.63454833333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0184,16A,23,"rig inferred bit depth, return only",False,False,,66.11111111111111,,31.964326666666665,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0185,16A,23,"rig inferred bit depth, return only",False,False,,65.68784999999984,,117.73038833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0186,16A,23,"rig inferred bit depth, return only",False,False,,65.55555555555556,,171.402525,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0187,16A,23,"rig inferred bit depth, return only",False,False,,65.55555555555556,,132.03980166666665,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0188,16A,23,"rig inferred bit depth, return only",False,False,,65.66919444444414,,208.41325666666668,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0189,16A,23,"rig inferred bit depth, return only",False,False,,66.11111111111111,,222.98762333333332,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0190,16A,23,"rig inferred bit depth, return only",False,False,,66.11111111111111,,65.48391333333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0191,16A,23,"rig inferred bit depth, return only",False,False,,66.11111111111111,,71.50832,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0192,16A,23,"rig inferred bit depth, return only",False,False,,63.888888888888886,,179.6455,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0193,16A,23,"rig inferred bit depth, return only",False,False,,65.0,,113.76836833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0194,16A,23,"rig inferred bit depth, return only",False,False,,64.44444444444444,,160.14462333333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0195,16A,23,"rig inferred bit depth, return only",False,False,,63.888888888888886,,161.058245,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0196,16A,23,"rig inferred bit depth, return only",False,False,,64.44444444444444,,178.64201833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0197,16A,23,"rig inferred bit depth, return only",False,False,,64.44444444444444,,198.98915833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0198,16A,23,"rig inferred bit depth, return only",False,False,,64.44444444444444,,202.99516833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0199,16A,23,"rig inferred bit depth, return only",False,False,,65.0,,211.55129833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0200,16A,23,"rig inferred bit depth, return only",False,False,,64.44444444444444,,207.44677833333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0201,16A,23,"rig inferred bit depth, return only",False,False,,64.4723703703701,,201.050425,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0202,16A,23,"rig inferred bit depth, return only",False,False,,63.35116666666686,,207.03069833333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0203,16A,23,"rig inferred bit depth, return only",False,False,,64.42105925925918,,203.55425833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0204,16A,23,"rig inferred bit depth, return only",False,False,,64.44444444444444,,174.92212333333336,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0205,16A,23,"rig inferred bit depth, return only",False,False,,67.15480925925931,,232.65727166666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0275,16A,38,"rig inferred bit depth, return only",False,False,,62.489629629627515,,-4.880231666666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0276,16A,38,"rig inferred bit depth, return only",False,False,,57.77777777777778,,241.94593833333332,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0277,16A,38,"rig inferred bit depth, return only",False,False,,55.55555555555556,,111.562315,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0278,16A,38,"rig inferred bit depth, return only",False,False,,55.0,,434.8021616666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0279,16A,38,"rig inferred bit depth, return only",False,False,,54.99759259259311,,91.68155833333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0280,16A,38,"rig inferred bit depth, return only",False,False,,52.77777777777778,,123.83057166666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0281,16A,38,"rig inferred bit depth, return only",False,False,,53.33333333333333,,275.8526483333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0282,16A,38,"rig inferred bit depth, return only",False,False,,52.77777777777778,,201.326055,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0283,16A,38,"rig inferred bit depth, return only",False,False,,52.77777777777778,,309.41708166666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0284,16A,38,"rig inferred bit depth, return only",False,False,,51.666666666666664,,308.31688333333335,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0285,16A,38,"rig inferred bit depth, return only",False,False,,52.17546296296354,,419.0974066666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0286,16A,38,"rig inferred bit depth, return only",False,False,,51.11111111111111,,331.3534716666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0287,16A,38,"rig inferred bit depth, return only",False,False,,46.36148148147994,,234.084565,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0288,16A,38,"rig inferred bit depth, return only",False,False,,49.47185185185238,,249.00295833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0289,16A,38,"rig inferred bit depth, return only",False,False,,50.05811111111143,,228.87140399999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0290,16A,38,"rig inferred bit depth, return only",False,False,,49.44444444444444,,162.77013333333335,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0291,16A,38,"rig inferred bit depth, return only",False,False,,48.888888888888886,,131.779695,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0292,16A,38,"rig inferred bit depth, return only",False,False,,48.888888888888886,,111.82915000000001,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0293,16A,38,"rig inferred bit depth, return only",False,False,,50.0,,63.06733,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0294,16A,38,"rig inferred bit depth, return only",False,False,,49.24009259259239,,227.30524333333335,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0295,16A,38,"rig inferred bit depth, return only",False,False,,49.44444444444444,,222.0767933333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0296,16A,38,"rig inferred bit depth, return only",False,False,,49.44444444444444,,277.00012,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0297,16A,38,"rig inferred bit depth, return only",False,False,,49.44444444444444,,264.8756,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0298,16A,38,"rig inferred bit depth, return only",False,False,,49.44444444444444,,134.89972333333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0299,16A,38,"rig inferred bit depth, return only",False,False,,47.8074074074094,,224.59621666666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0300,16A,39,"rig inferred bit depth, return only",False,False,,46.11111111111111,,337.06993166666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0301,16A,39,"rig inferred bit depth, return only",False,False,,44.68592592592662,,134.35875000000001,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0302,16A,39,"rig inferred bit depth, return only",False,False,,48.33333333333333,,126.56464166666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0303,16A,39,"rig inferred bit depth, return only",False,False,,48.888888888888886,,131.47584166666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0304,16A,39,"rig inferred bit depth, return only",False,False,,48.888888888888886,,265.471725,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0305,16A,39,"rig inferred bit depth, return only",False,False,,47.77777777777778,,172.781355,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0306,16A,39,"rig inferred bit depth, return only",False,False,,47.810833333332994,,142.72157833333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0307,16A,39,"rig inferred bit depth, return only",False,False,,48.34240740740724,,92.15379166666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0308,16A,39,"rig inferred bit depth, return only",False,False,,49.44444444444444,,99.89604666666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0309,16A,39,"rig inferred bit depth, return only",False,False,,49.44444444444444,,249.71713499999998,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0310,16A,39,"rig inferred bit depth, return only",False,False,,49.44444444444444,,192.22569,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0311,16A,39,"rig inferred bit depth, return only",False,False,,49.44444444444444,,60.79450833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0312,16A,39,"rig inferred bit depth, return only",False,False,,48.888888888888886,,53.01091666666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0313,16A,39,"rig inferred bit depth, return only",False,False,,48.888888888888886,,12.657771666666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0314,16A,39,"rig inferred bit depth, return only",False,False,,48.888888888888886,,84.37525666666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0315,16A,39,"rig inferred bit depth, return only",False,False,,48.888888888888886,,232.26104166666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0316,16A,39,"rig inferred bit depth, return only",False,False,,49.63685185185063,,227.7454283333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0317,16A,39,"rig inferred bit depth, return only",False,False,,50.0,,214.200645,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0318,16A,39,"rig inferred bit depth, return only",False,False,,49.46898148148143,,11.906325,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0319,16A,39,"rig inferred bit depth, return only",False,False,,50.54185185185209,,90.62305666666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0320,16A,39,"rig inferred bit depth, return only",False,False,,49.7031481481483,,102.30620833333334,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0321,16A,39,"rig inferred bit depth, return only",False,False,,49.44444444444444,,161.21883333333332,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0322,16A,39,"rig inferred bit depth, return only",False,False,,50.0,,175.61230833333335,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0323,16A,39,"rig inferred bit depth, return only",False,False,,50.0,,172.30839333333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0324,16A,39,"rig inferred bit depth, return only",False,False,,49.569629629629866,,228.01263166666664,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0325,16A,39,"rig inferred bit depth, return only",False,False,,50.0,,258.20833666666664,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0326,16A,39,"rig inferred bit depth, return only",False,False,,46.11111111111111,,242.81449166666667,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0327,16A,39,"rig inferred bit depth, return only",False,False,,46.11111111111111,,118.98595499999999,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0328,16A,39,"rig inferred bit depth, return only",False,False,,47.49212962963005,,91.58385500000001,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0329,16A,39,"rig inferred bit depth, return only",False,False,,47.77777777777778,,195.21544333333335,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0330,16A,39,"rig inferred bit depth, return only",False,False,,47.77777777777778,,220.79646333333335,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0331,16A,39,"rig inferred bit depth, return only",False,False,,47.77777777777778,,261.83865166666664,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0332,16A,39,"rig inferred bit depth, return only",False,False,,48.59694444444358,,7.481938333333333,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0333,16A,39,"rig inferred bit depth, return only",False,False,,48.43643518518547,,131.83902833333335,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0334,16A,39,"rig inferred bit depth, return only",False,False,,48.888888888888886,,167.70380166666666,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError
+16A-s0335,16A,39,"rig inferred bit depth, return only",False,False,,47.77777777777778,,130.95037,1.0,26.7,,,,,,,,,,,,,,,,,,,,,,ValueError

@@ -8,7 +8,9 @@ from collections import defaultdict
 import csv
 import importlib.util
 import json
+import hashlib
 from pathlib import Path
+import subprocess
 
 import numpy as np
 
@@ -94,7 +96,8 @@ def main():
         summaries.append(row)
     score.write_csv(output/'bit-energy-samples.csv',bounds)
     score.write_csv(output/'bit-energy-assemblies.csv',summaries)
-    score.write_csv(output/'unavailable.csv',failures)
+    if failures:score.write_csv(output/'unavailable.csv',failures)
+    else:(output/'unavailable.csv').write_text('sample_id,well,bha,reason\n',encoding='utf-8')
     # Extra per-assembly summaries do not replace the frozen well totals.
     extra=[]
     for well,bha in sorted(groups):
@@ -105,15 +108,37 @@ def main():
                 if gap=='G5' and well!='16A':continue
                 pairs=[(r[field]/1000 if unit=='kW' else r[field],r[observed]/1000 if unit=='kW' else r[observed])
                     for r in rows if r.get(observed) is not None]
-                extra.append(dict(variant=key,**score.aggregate(gap,well,bha,pairs,len(ids),units=unit)))
+                planned=(sum(r['raw_spp_psi']!='' for r in cases['d5'] if r['sample_id'] in ids)
+                         if gap=='G2' else len(ids))
+                extra.append(dict(variant=key,**score.aggregate(gap,well,bha,pairs,planned,units=unit)))
     score.write_csv(output/'assembly-power-return.csv',extra)
     manifest=score.read_json(output/'manifest.json')
     manifest['supplement_sha256']={name:score.sha(output/name) for name in
         ('comparison.csv','bit-energy-samples.csv','bit-energy-assemblies.csv','unavailable.csv','assembly-power-return.csv')}
     manifest['comparison']='Paired columns use identical available sample IDs across all three calculations'
     manifest['assembly_audit_sha256']=score.sha(ROOT/'validation/model-development/d5/components.json')
-    manifest['declaration_commit']='11fc892'
-    manifest['implementation_commit']='dd2545c'
+    manifest.setdefault('declaration_commit','11fc892')
+    manifest.setdefault('implementation_commit','dd2545c')
+    original_audit=subprocess.check_output(['git','show','dd2545c:validation/model-development/d5/components.json'],cwd=ROOT)
+    old_rows=json.loads(original_audit)
+    new_rows=score.read_json(ROOT/'validation/model-development/d5/components.json')
+    changed={(old['well'],old['bha'],old['item']) for old,new in zip(old_rows,new_rows) if old!=new}
+    assert len(old_rows)==len(new_rows) and changed=={('16A','23',6),('16A','38',3),('16A','39',3)}
+    manifest['retained_assembly_audit_sha256']=hashlib.sha256(original_audit).hexdigest()
+    manifest['authorised_instrument_records']=[list(key) for key in sorted(changed)]
+    manifest['unaffected_audit_records_identical']=True
+    qualifications=[]
+    for well,bha in sorted(groups):
+        components=[r for r in new_rows if (r['well'],r['bha'])==(well,bha)]
+        qualifications.append(dict(well=well,bha=bha,
+            motor_loss='motor loss unknown' if any(r['motor'] for r in components) else 'no motor recorded',
+            thermal_only_instrument_items=';'.join(str(r['item']) for r in components
+                if not r['motor'] and not r['bit'] and r['hydraulic_id_in'] is None),
+            fitted_insulation=well=='16B' and bha in ('18','19'),
+            transferred_connection_pitch=well=='16B',
+            source='components.csv; well, bha, item, reported_id_in, thermal_id_in, hydraulic_id_in, flags'))
+    score.write_csv(output/'assembly-qualifications.csv',qualifications)
+    manifest['supplement_sha256']['assembly-qualifications.csv']=score.sha(output/'assembly-qualifications.csv')
     score.write_json(output/'manifest.json',manifest)
 
 

@@ -1,0 +1,99 @@
+{
+  "mode": "current",
+  "settings": {
+    "pv_ref_T_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "mud": "original recorded-mud substitutions"
+  },
+  "calibration": "Historical fitted trial insulation conductivity retained; no new fit",
+  "versions": {
+    "python": "3.14.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "iapws": "1.5.5"
+  },
+  "sources_sha256": {
+    "validation/forge16b/s2/plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
+    "validation/scoreboard/transient-inputs.json": "ea1d6f211bfdd86fee8c69062aa714cf515f839215d1db37a21d348cae02e09b",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/forge16a/circulation-primary.csv": "73bf715421f2cc9ea79bfed3f1b789d1b78cf6ae0d041fedd02d9f506b729964",
+    "validation/forge16a/transient-comparisons.csv": "921e28bce9805c5d9c58e3af4e937a6190ddf51d71baa82c375b62fcd9ff7b19",
+    "validation/forge16b/s2/results.jsonl": "ffd1b1d510ad001b6b1e2edfa43562e6e6036732ce5826823c6ebfc5fd9a8bd9"
+  },
+  "model_sources_sha256": {
+    "model1_coupled.py": "362e8d7c00d11ba3c541ca3a235e51aadb2801c11bb57e3cd4ae35a9981f8494",
+    "hydraulic_losses.py": "31e088acc820433140d71b47b0b02f1875e0091565e181e7f99f113111b063af",
+    "fluids.py": "b3557a12c92fb492996861085fd74077e0029a38d248f124bb01b44b85b099aa",
+    "pressure.py": "7a884c2743fc7b45462cfcf00df68a8e30d9e94d3f39410f3f7e1b74deaa4254",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "wall_thermal.py": "f3e9aa4573d406db4fe9ded011552c1c3f2b4e90b3f7308404e2e3c0d2688091",
+    "tool_thermal.py": "75752e7c6a2cd28734af065b7d4cf2e146019cb76dfbc04fc59edf2bb8110bca",
+    "studies/validate_forge16a.py": "d65af33954b201a8721ed682f1b83c69dd63b706e25824d69c98c55049e9a669",
+    "studies/validate_forge16a_transients.py": "916130dd0645eca6708f0c56c5dd403f6034613b65e89f0d67592a9a6637f71b",
+    "studies/validate_forge16b_wholewell.py": "654cb84d7075926f896919f54b2bcc800d415fccbeadb63190863456b45ee6aa",
+    "studies/validate_forge16b.py": "c71b67de95b08f21a5170a5cbfc977bf44ce7e315c7c5b54cbe587b6c031be77",
+    "studies/forge16_energy.py": "8a355b155a145a0fbc5c00fd245553974b1fd80fbc253f91f31971a2b78a7036",
+    "studies/pressure_comparison.py": "eeb1f712dd9a409d419d7f8d12be3b43da4ef07917edb9bf8f4e98b566b70bb2"
+  },
+  "results_sha256": {
+    "circulation.csv": "983e4e3c5b19e3928c0fa4a5fd79b5e6af3a9db9660a1927e018e453b0a64293",
+    "initial-input-unavailable.csv": "7ed3f644df5700cbc5cc852917c56b1150ba4718acca55dff910b8623a581ade",
+    "run-in.csv": "dbb18a680ac5c7483a96968348bde96e0266e6981270f40b8303bae058cfff1d",
+    "scoreboard.csv": "26859a5aff765ca4ecdb6e883720ec828b3aeb26d85f98be7dad25bb4f3d6632"
+  },
+  "declaration_commit": "ae98695",
+  "retained_batch_model_sources_sha256": {
+    "model1_coupled.py": "362e8d7c00d11ba3c541ca3a235e51aadb2801c11bb57e3cd4ae35a9981f8494",
+    "hydraulic_losses.py": "31e088acc820433140d71b47b0b02f1875e0091565e181e7f99f113111b063af",
+    "fluids.py": "b3557a12c92fb492996861085fd74077e0029a38d248f124bb01b44b85b099aa",
+    "pressure.py": "7a884c2743fc7b45462cfcf00df68a8e30d9e94d3f39410f3f7e1b74deaa4254",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "wall_thermal.py": "f3e9aa4573d406db4fe9ded011552c1c3f2b4e90b3f7308404e2e3c0d2688091",
+    "tool_thermal.py": "75752e7c6a2cd28734af065b7d4cf2e146019cb76dfbc04fc59edf2bb8110bca",
+    "studies/validate_forge16a.py": "d65af33954b201a8721ed682f1b83c69dd63b706e25824d69c98c55049e9a669",
+    "studies/validate_forge16a_transients.py": "916130dd0645eca6708f0c56c5dd403f6034613b65e89f0d67592a9a6637f71b",
+    "studies/validate_forge16b_wholewell.py": "654cb84d7075926f896919f54b2bcc800d415fccbeadb63190863456b45ee6aa",
+    "studies/validate_forge16b.py": "c71b67de95b08f21a5170a5cbfc977bf44ce7e315c7c5b54cbe587b6c031be77",
+    "studies/forge16_energy.py": "8a355b155a145a0fbc5c00fd245553974b1fd80fbc253f91f31971a2b78a7036",
+    "studies/pressure_comparison.py": "44a5f86e6314aa6331ebe37e75dc4f3516d8cba1cb3128427aa12a8d01dc2b5b"
+  },
+  "assembly_audit_sha256": "98f78cf04589129f9fb8d0b75e1083ffe0ce25b960a923a0a0f180085fc97e2d",
+  "completion_implementation_commit": "8668b4ec01d35243f698c29f3bc2860395e7fb73",
+  "completion_script_sha256": "1d8d0521168e22d1a2c852d22440ca9718568f31b78eb61ba2ee309cd4c76199",
+  "retained_circulation_cases": 311,
+  "completed_circulation_cases": 156,
+  "retained_run_in_cases": 4,
+  "completed_run_in_cases": 5,
+  "completion_runtime_s": 168.88159960019402,
+  "initial_runtime_s": 886.3102178999688,
+  "supplement_sha256": {
+    "comparison.csv": "18bae288adf3db1f68fa78dbef16d662cd0505a3210fed3960f58c8d3cab895b",
+    "bit-energy-samples.csv": "0fffc8c9ca0bc1e958af3276e62829b359596a37b2b4162530ce286e282125dd",
+    "bit-energy-assemblies.csv": "32052c14b74d9a271792493fbcd68590d0fa2a95520ff571e7f447d94c4de856",
+    "unavailable.csv": "4f5eb96df9e8c71ef3f6ff9730a844e421ad1ab552333d6b20d941cfe41f0ab6",
+    "assembly-power-return.csv": "949b8239b6c771adc04313b7d7c09b0fdd35dc39054ef540ba435f9bb9ffcde6",
+    "assembly-qualifications.csv": "2eee983c8f444698c7d972310ed27852fd77007b751e8acd6287a2acbbdbeeeb"
+  },
+  "comparison": "Paired columns use identical available sample IDs across all three calculations",
+  "implementation_commit": "dd2545c",
+  "retained_assembly_audit_sha256": "7033bb44f0123dd0b8976ed58a2e91260e43cda84794bd015ea278422d2e6e12",
+  "authorised_instrument_records": [
+    [
+      "16A",
+      "23",
+      6
+    ],
+    [
+      "16A",
+      "38",
+      3
+    ],
+    [
+      "16A",
+      "39",
+      3
+    ]
+  ],
+  "unaffected_audit_records_identical": true
+}
