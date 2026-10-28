@@ -57,6 +57,7 @@ This table includes work performed before this log existed. Earlier development 
 | D5 equipment representation | Remove a motor mandrel's full-length passage and invented bit IDs; pressure and dissipation should decrease | All 467 circulation cases and nine available run-in cases calculated, with explicit thermal-only instrument assumptions and unknown internal tool losses | Debugging correction; acceptance of integrated entry 1 remains pending |
 | Entry 1 with D5, original 26.7 °C convention | Revised hydraulic losses with equipment-corrected assembly passages | 16A in-hole power 654 versus measured pump power 928 kW; G3 rises 1.3–3.7 °C from legacy; G6 regular bias -7.2 °C and trial bias +3.0 °C | Kept as the working development calculation, 28 October 2026; independent review of D5 outstanding |
 | Entry 3, cylindrical rock response (R1) | Exact wall-temperature step response replaces the logarithmic rock term; bit +0.2 to +2.2 °C and return +0.1 to +0.35 °C in the working calculation | Every expected score change met within 0.1 °C. Cold biases shrink; warm biases grow, including the trial bias, from +3.03 to +4.62 °C | Kept under its declared rule, 28 October 2026 |
+| Entry 4, rotary heat (M2) | Measured surface rotary power released as wall friction along the string and as work at the bit, split by a soft-string torque balance; warmer everywhere, most where the string rotates fast and deep | Score pending | Declared; kept unless the score exposes an implementation error |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -248,6 +249,7 @@ The following author/year identities and DOI or stable publication URLs were che
 | C8 | Ajima, K. and Naganawa, S. (2022). *Evaluating Wellbore Cooling Effect with Insulated Drill Pipes in Supercritical Geothermal Well Drilling*. GRC Transactions 46, 805–818. [Original paper](https://publications.mygeoenergynow.org/grc/1034636.pdf). |
 | C9 | Workstrings International (2025). *Drill Pipe Performance Sheet*, asset WS41-42, 1 August 2025, page 1. [Supplier catalogue](https://www.workstringsinternational.com/assets/Spec-Sheets/Drill%20Pipe/WS41-42-Imperial.pdf). |
 | C10 | Abate, J. and Valkó, P.P. (2004). *Multi-precision Laplace transform inversion*. International Journal for Numerical Methods in Engineering 60(5), 979–993. [Author's listing](https://valko.engr.tamu.edu/numerical-methods-for-the-inversion-of-the-laplace-transform). Added 28 October 2026 for entry 3. |
+| C11 | Johancsik, C.A., Friesen, D.B. and Dawson, R. (1984). *Torque and Drag in Directional Wells: Prediction and Measurement*. Journal of Petroleum Technology 36(6), 987–992. [DOI 10.2118/11380-PA](https://doi.org/10.2118/11380-PA). First presented as SPE 11380 at the 1983 IADC/SPE Drilling Conference. Added 28 October 2026 for entry 4. |
 
 The BICO motor sheet is undated; its identity and contents were checked directly, without assigning a publication year from its URL. GDR source identities are McLennan et al. (2021), GDR 1283, [DOI 10.15121/1776602](https://doi.org/10.15121/1776602); Gilmour et al. (2021), GDR 1292, [DOI 10.15121/1777912](https://doi.org/10.15121/1777912); Jones (2022), GDR 1421, [DOI 10.15121/1893533](https://doi.org/10.15121/1893533); and McLennan et al. (2023), GDR 1516, [DOI 10.15121/1998591](https://doi.org/10.15121/1998591). These identify the development-data inputs for future diagnostics; no new observation is extracted here.
 
@@ -704,4 +706,66 @@ The trial bias grows from +3.03 to +4.62 °C. The trial geometry uses an insulat
 Under the rule declared before scoring, entry 3 is kept: the score shows no implementation error. The calculation with entry 3 becomes the working calculation for later entries. The largest remaining temperature gaps are the deep 16A bit (BHA 42 at -15.92 °C), the 16A return at -4.93 °C, the cold 16B regular-pipe runs and every run-in peak. All of them are cold.
 
 With entry 3 in place, the legacy mode still reproduces the baseline: all 2,614 archive checks pass, and its scoreboard differs from the saved baseline by at most 1.2e-4 °C, 2e-9 psi and 7e-7 kW. The same differences appeared when the baseline was reproduced on this computer before the change. The fast test suite passes. No golden regeneration or slow suite was run. No 56-32, 58-32 or 78B-32 target was read.
+
+## 28 October 2026: entry 4 declaration, rotary heat (M2)
+
+This entry implements candidate M2, declared before the first entry-1 score. The working calculation is entry 1 with D5 and entry 3.
+
+### Inputs
+
+The top drive turns the string, and its mechanical power, omega times torque, becomes heat in the well. The rig records give this power for every sample. [`build_rotary.py`](../../validation/model-development/entry-4/build_rotary.py) reads the ten-second records of GDR 1283 (16A) and GDR 1516 (16B). It takes the on-bottom rows with flow above 300 gal/min in each sample's frozen window: the centred 30 minutes on 16A and the frozen source rows on 16B. From them it records the mean rotary speed, the mean torque, the median weight on bit and the mean power. It also records the median off-bottom rotating torque, from rows with flow above 300 gal/min and speed above 20 rpm in the two hours before the window and during it. Only drive channels, flow and the on-bottom flag are read.
+
+The 16A ten-second export labels top-drive torque in kft-lbs, but the values are ft-lbf. The on-bottom rotating median is about 4,300, the daily report for 26 November 2020 gives 6,500 at 50 rpm, and the raw export labels the same channel ft-lbs.
+
+On the samples, the measured on-bottom rotary power has a median of 39 kW on 16A (interquartile range 4.5–89.5 kW) and 147 kW on 16B (78–206 kW). The low 16A values are sliding intervals, where the motor turns the bit and the string barely rotates. For comparison, the modelled in-hole hydraulic power is 654 kW on 16A and 342 kW on 16B.
+
+### Placement
+
+The power has two destinations. Friction where the string touches the casing or rock heats the annulus fluid along the string. Torque that reaches the bottom does work at the bit. The new module `rotary_heat.py` splits them with the soft-string torque model of Johancsik, Friesen and Dawson (reference C11). Each element of string presses on the wall with a force set by its buoyed weight, its tension and the hole's curvature. Friction torque per unit length is the friction factor times that force times the contact radius, which is the tool-joint radius where the pipe has joints.
+
+The friction factor is set for each sample from its measured off-bottom torque, with no weight on bit. The same factor, with the measured weight on bit, then gives the on-bottom friction torque. The rest of the measured on-bottom torque does work at the bit. If the calculated friction exceeds the measured torque, the friction is scaled down to it and the bit receives none. Six 16A samples have no off-bottom reference and use the median factor of their assembly. Across the windows below, the factors are 0.11–0.32. No factor is adjusted.
+
+The friction heat enters the annulus fluid where it is generated, averaged over 30 m, about one survey-station spacing. The bit share is added to the heat released at the bit. A new optional source in the circulation solve, `annulus_heat`, carries the friction heat; legacy mode rejects it.
+
+### Assumptions
+
+Each of these is a simplification of the torque balance or of where the heat goes:
+
+- All friction heat enters the fluid locally. Part of it enters the casing and rock and only some of that returns to the fluid during the sample, so this is an upper limit for the fluid.
+- All bit work enters the fluid at the bit, which is also an upper limit, since part heats the rock face and the cuttings.
+- Viscous drag from rotation is part of the measured torque and is placed with the friction.
+- The string has no bending stiffness and does not buckle, one friction factor applies in casing and open hole, and axial friction is neglected because the string is rotating.
+- All wall layers have the density of steel, and connection steel is added over the connection length.
+- Rotary speed and torque vary within a window. The mean power is used, and the torque in the split is that power divided by the mean speed.
+
+The run-in comparison (G4) receives no rotary heat, because the rotation before each trip is not part of the frozen event inputs. G2 remains hydraulic power and excludes rotary power.
+
+### What stays the same
+
+The frozen scoreboard, its samples and its conventions are unchanged. [`score.py`](../../validation/model-development/entry-4/score.py) runs the frozen circulation and run-in functions and adds each sample's rotary heat to its solve. Nothing is fitted to a temperature, pressure or residual.
+
+### Decision rule
+
+The rotary power is measured, and conservation of energy requires it to appear as heat in the well. The torque balance and the factors come from the drilling literature and the off-bottom records. The entry will therefore be kept whatever the score, unless the score exposes an implementation error. The fraction that reaches the fluid stays an open uncertainty, and the treatment above is its upper limit. The score will be reported in full, including the gaps that are predicted to worsen.
+
+### Predictions
+
+These come from a model-only calculation with [`predict.py`](../../validation/model-development/entry-4/predict.py), on the windows used for entry 3. No measurement of temperature or pressure was read. Changes are from the working calculation, in `predictions.csv`.
+
+| Well | Rotary power in the windows, kW | Bit change, °C | Return change, °C |
+|---|---|---|---|
+| 16A, nine windows | 3.4–126 | +0.09 to +3.68 | +0.02 to +0.53 |
+| 16B, thirteen windows | 36–327 | +0.33 to +13.30 | +0.13 to +1.14 |
+
+Three 16A windows (BHA 30, 34 and 39) fall in sliding intervals with under 5 kW of rotary power, so they do not represent their assemblies. Where the power exceeds 20 kW, the 16A bit rises 0.020–0.029 °C per kW and the return 0.004–0.006 °C per kW. The expected score changes below scale each assembly's mean measured rotary power by its window's response per kW, using the 16A median of 0.027 °C per kW where the window was sliding:
+
+| Gap | Working calculation | Expected after entry 4 |
+|---|---|---|
+| G3, BHA 38, 39 and 42 | -3.83, -5.00 and -15.92 °C | about -2.1, -3.0 and -13.7 °C |
+| G3, BHA 23, 30 and 34 | +1.90, +6.87 and +2.55 °C | about +2.7, +7.7 and +3.7 °C, so worse |
+| G5, all 358 samples | -4.93 °C | about -4.7 °C |
+| G6, independent regular pipe | -5.97 °C | about -1.5 °C |
+| G6, trial | +4.62 °C | about +7.4 °C, so worse |
+
+G6 compares bore temperature 22 ft or 84 ft above the bit, so the bit change is a proxy for it. G1 and G2 change only through temperature-dependent fluid properties. G4 is unchanged, because the run-in profiles receive no rotary heat.
 
