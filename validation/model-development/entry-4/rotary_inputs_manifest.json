@@ -1,0 +1,20 @@
+{
+  "sources": {
+    "GDR 1283": {
+      "file": "16A_time_data_10s_standard.csv",
+      "sha256": "ffacbea833e7b7d4eb8c7cd5fe726c35eba7cdcb957483b6188a1a634caa3ce3"
+    },
+    "GDR 1516": {
+      "file": "16B_Pason.zip",
+      "sha256": "858a6eaf56c2cb3cbf45b59f431e59f82fc0ef2502ced244608d4d7b76ac54a2"
+    }
+  },
+  "plan_sha256": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb",
+  "output_sha256": "7c99cba192f10ff1132800f136ff882787886bcdabdf8084c555665820b21422",
+  "rules": {
+    "flow_min_gpm": 300.0,
+    "rpm_min": 20.0,
+    "reference_hours": 2.0,
+    "minimum_reference_rows": 3
+  }
+}
