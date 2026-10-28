@@ -1,0 +1,50 @@
+{
+  "mode": "current with entry 4 rotary heat",
+  "settings": {
+    "pv_ref_T_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "mud": "original recorded-mud substitutions"
+  },
+  "calibration": "Historical fitted trial insulation conductivity retained; friction factors from off-bottom torque",
+  "versions": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "sources_sha256": {
+    "validation/forge16b/s2/plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
+    "validation/scoreboard/transient-inputs.json": "ea1d6f211bfdd86fee8c69062aa714cf515f839215d1db37a21d348cae02e09b",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/model-development/entry-4/rotary_inputs.csv": "7c99cba192f10ff1132800f136ff882787886bcdabdf8084c555665820b21422",
+    "validation/model-development/entry-4/rotary.py": "91e74399df2822a58541d1bd22e4c1a5f04e8b35e437012467dfdb3100b7e631",
+    "validation/model-development/entry-4/score.py": "876ff80903686bba837644f611058e84779b238796e7c1e24134149e9c4136dd"
+  },
+  "model_sources_sha256": {
+    "model1_coupled.py": "83b7d992fc6c2b0768ff792fe1ab2d4bfd1c0d6a7991171e9427da897c057519",
+    "rotary_heat.py": "c48ca483cafc652f4c27143556f002535744ea53f1337c7c0571bc3f917af7c8",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a",
+    "hydraulic_losses.py": "31e088acc820433140d71b47b0b02f1875e0091565e181e7f99f113111b063af",
+    "fluids.py": "b3557a12c92fb492996861085fd74077e0029a38d248f124bb01b44b85b099aa",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "studies/pressure_comparison.py": "eeb1f712dd9a409d419d7f8d12be3b43da4ef07917edb9bf8f4e98b566b70bb2"
+  },
+  "results_sha256": {
+    "circulation.csv": "b9aa0936cac75aaf5fabc20d7f1051b404338dab0dcf3c59449ad15d29ea6932",
+    "rotary-heat-applied.csv": "2026ec3c9740eced549ce81fbece97d0bafa7ae5f7e225245549e42f4c1e86c8",
+    "run-in.csv": "dcf8b9c2ee303bb70dbbb6234dbb9e2ce1cb59acfaca986092715232f1db365b",
+    "scoreboard.csv": "916d8527c46662ca113a28b5bf3a65a8a0975b53310a73b72603b076362eeb2e"
+  },
+  "runtime_s": 704.7816897420003,
+  "declaration_commit": "e157fdf",
+  "implementation_commit": "a25a9d5",
+  "inputs_commit": "b4b8b36",
+  "working_calculation": "validation/model-development/entry-3/results",
+  "rotary_heat_sha256": "c48ca483cafc652f4c27143556f002535744ea53f1337c7c0571bc3f917af7c8",
+  "comparison_script_sha256": "ca515ba43517071d0345f730baaa2b96ff9e1af503175f3e9681432b30995999",
+  "scored_commit": "e157fdf407639c71996844547c39da04157a4a81",
+  "derived_sha256": {
+    "comparison.csv": "84d0c25a726205771dc6e474064c4d22456c8d29bccd84926ffbc41a3e7c811c",
+    "assembly-changes.csv": "6ace99572681ca68d01943125ef9743f19c496ba0786d463fc2ccf5ca8060f73"
+  }
+}
