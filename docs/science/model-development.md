@@ -56,7 +56,7 @@ This table includes work performed before this log existed. Earlier development 
 | Thermal geometry and heat-source separation | A should reproduce a heat-source effect; B should reproduce a thermal-geometry effect; compare with the single-pass power scale | A reproduces assembly mean bit rises within 0.02 °C; B changes them by less than 0.01 °C. A exceeds the bulk scale at the bit. | Diagnosis only; no model correction selected from it |
 | D5 equipment representation | Remove a motor mandrel's full-length passage and invented bit IDs; pressure and dissipation should decrease | All 467 circulation cases and nine available run-in cases calculated, with explicit thermal-only instrument assumptions and unknown internal tool losses | Debugging correction; acceptance of integrated entry 1 remains pending |
 | Entry 1 with D5, original 26.7 °C convention | Revised hydraulic losses with equipment-corrected assembly passages | 16A in-hole power 654 versus measured pump power 928 kW; G3 rises 1.3–3.7 °C from legacy; G6 regular bias -7.2 °C and trial bias +3.0 °C | Kept as the working development calculation, 28 October 2026; independent review of D5 outstanding |
-| Entry 3, cylindrical rock response (R1) | Exact wall-temperature step response replaces the logarithmic rock term; bit +0.2 to +2.2 °C and return +0.1 to +0.35 °C in the working calculation | Score pending | Declared; kept unless the score exposes an implementation error |
+| Entry 3, cylindrical rock response (R1) | Exact wall-temperature step response replaces the logarithmic rock term; bit +0.2 to +2.2 °C and return +0.1 to +0.35 °C in the working calculation | Every expected score change met within 0.1 °C. Cold biases shrink; warm biases grow, including the trial bias, from +3.03 to +4.62 °C | Kept under its declared rule, 28 October 2026 |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -663,4 +663,45 @@ The expected score changes follow from these, assuming each window represents it
 | G6, trial | +3.03 °C | about +4.6 °C, so worse |
 
 G6 compares bore temperature 22 ft or 84 ft above the bit, so the bit change is a proxy for it. G1 and G2 change only through temperature-dependent fluid properties, and no numerical prediction is made for them. The run-in comparison (G4) starts from the circulation state before each trip. A warmer starting state should raise the predicted peaks, but no size is predicted.
+
+## 28 October 2026: entry 3 score
+
+Source: [entry 3 archive](../../validation/model-development/entry-3/results/README.md), `comparison.csv` and `assembly-changes.csv`. The declaration is commit `8c21e95` and the implementation `6de7abe`. All 467 circulation cases and all nine originally available run-in events completed. The sample counts equal those of the working calculation and the legacy baseline in every row, so every comparison below is paired. The scoring run took 803 seconds.
+
+### Pressure and power (G1, G2)
+
+Standpipe pressure falls by 0.9–3.5 psi on the nine 16A assemblies and by 1.2–1.6 psi on the four motorless 16B assemblies. The warmer fluid has a lower viscosity. Modelled in-hole power changes from 654.21 to 653.92 kW on 16A and from 342.54 to 342.46 kW on 16B, against measured 928.27 and 526.52 kW. No numerical prediction was made for these.
+
+### Temperatures (G3, G4, G5, G6)
+
+Biases in °C, model minus measured.
+
+| Gap and group | Legacy | Working calculation | Entry 3 | Declared expectation |
+|---|---|---|---|---|
+| G3, BHA 18 | -4.11 | -2.01 | -1.53 | |
+| G3, BHA 23 | -0.19 | +1.13 | +1.90 | about 0.8 warmer |
+| G3, BHA 30 | +2.38 | +6.08 | +6.87 | about 0.8 warmer |
+| G3, BHA 34 | -0.75 | +1.68 | +2.55 | about 0.8 warmer |
+| G3, BHA 35r1 | -3.13 | -0.36 | +0.52 | |
+| G3, BHA 35r2 | -8.91 | -6.13 | -5.21 | |
+| G3, BHA 38 | -8.12 | -4.98 | -3.83 | about -3.8 |
+| G3, BHA 39 | -9.68 | -6.28 | -5.00 | about -5.0 |
+| G3, BHA 42 | -19.81 | -17.58 | -15.92 | about -15.9 |
+| G5, all 358 samples | -5.85 | -5.09 | -4.93 | about -4.9 |
+| G6, independent regular pipe | -8.77 | -7.19 | -5.97 | about -6.0 |
+| G6, trial | +1.99 | +3.03 | +4.62 | about +4.6 |
+
+The nine run-in peak errors (G4) change by 0.00 to +0.44 °C and now range from -56.23 to -6.53 °C. The declaration expected a positive sign without a size.
+
+Over every sample, the mean bit change by assembly is +0.50 to +1.69 °C on 16A and +0.16 to +2.28 °C on 16B. The single-window predictions were +0.47 to +1.68 °C and +0.16 to +2.23 °C. The return changes are +0.11 to +0.22 °C on 16A and +0.12 to +0.37 °C on 16B.
+
+### Interpretation and decision
+
+The exact response lowers the rock resistance by about 5–8% for exposures between one hour and 30 days. More heat therefore reaches the fluid from the rock, and every circulating temperature rises. Each cold bias becomes smaller and each warm bias larger. The calculated changes reproduce the model-only predictions to within 0.1 °C in every row of the declaration table. The predictions used the same code on one window per assembly, so this agreement shows that those windows represent their assemblies. It is not an independent test of the physics.
+
+The trial bias grows from +3.03 to +4.62 °C. The trial geometry uses an insulation conductivity that was fitted to 16B with the logarithmic rock term, so the fit may have absorbed part of that term's error. This log does not allow a refit. The check is an independently sourced value for the trial pipe's insulation (candidate P1).
+
+Under the rule declared before scoring, entry 3 is kept: the score shows no implementation error. The calculation with entry 3 becomes the working calculation for later entries. The largest remaining temperature gaps are the deep 16A bit (BHA 42 at -15.92 °C), the 16A return at -4.93 °C, the cold 16B regular-pipe runs and every run-in peak. All of them are cold.
+
+With entry 3 in place, the legacy mode still reproduces the baseline: all 2,614 archive checks pass, and its scoreboard differs from the saved baseline by at most 1.2e-4 °C, 2e-9 psi and 7e-7 kW. The same differences appeared when the baseline was reproduced on this computer before the change. The fast test suite passes. No golden regeneration or slow suite was run. No 56-32, 58-32 or 78B-32 target was read.
 

@@ -6,5 +6,7 @@ These archives compare declared changes with the frozen FORGE 16A and 16B develo
 |---|---|
 | 1: hydraulic losses and heat placement | [Six-gap before/after comparison](entry-1/README.md) |
 | 2: string-loss diagnosis | [Component pressure accounting](entry-2/README.md) |
+| D5: assembly passage representation, with entry 1 | [Corrected comparison](d5/results/README.md) |
+| 3: cylindrical rock response | [Score beside the legacy and working calculations](entry-3/results/README.md) |
 
 The [original scoreboard and legacy baseline](../scoreboard/README.md) remain fixed. No held-out pressure target is included here. Source observations retain the attribution and CC BY 4.0 terms stated in the [16A](../forge16a/README.md) and [16B](../forge16b/README.md) archives.
