@@ -56,6 +56,7 @@ This table includes work performed before this log existed. Earlier development 
 | Thermal geometry and heat-source separation | A should reproduce a heat-source effect; B should reproduce a thermal-geometry effect; compare with the single-pass power scale | A reproduces assembly mean bit rises within 0.02 °C; B changes them by less than 0.01 °C. A exceeds the bulk scale at the bit. | Diagnosis only; no model correction selected from it |
 | D5 equipment representation | Remove a motor mandrel's full-length passage and invented bit IDs; pressure and dissipation should decrease | All 467 circulation cases and nine available run-in cases calculated, with explicit thermal-only instrument assumptions and unknown internal tool losses | Debugging correction; acceptance of integrated entry 1 remains pending |
 | Entry 1 with D5, original 26.7 °C convention | Revised hydraulic losses with equipment-corrected assembly passages | 16A in-hole power 654 versus measured pump power 928 kW; G3 rises 1.3–3.7 °C from legacy; G6 regular bias -7.2 °C and trial bias +3.0 °C | Kept as the working development calculation, 28 October 2026; independent review of D5 outstanding |
+| Entry 3, cylindrical rock response (R1) | Exact wall-temperature step response replaces the logarithmic rock term; bit +0.2 to +2.2 °C and return +0.1 to +0.35 °C in the working calculation | Score pending | Declared; kept unless the score exposes an implementation error |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -246,6 +247,7 @@ The following author/year identities and DOI or stable publication URLs were che
 | C7 | Allis, R., Gwynn, M., Hardwick, C., Hurlbut, W. and Moore, J. (2018). *Thermal Characteristics of the FORGE site, Milford, Utah*. GRC Transactions 42. [Original paper](https://publications.mygeoenergynow.org/grc/1033913.pdf). Only material-property evidence is used in this declaration. |
 | C8 | Ajima, K. and Naganawa, S. (2022). *Evaluating Wellbore Cooling Effect with Insulated Drill Pipes in Supercritical Geothermal Well Drilling*. GRC Transactions 46, 805–818. [Original paper](https://publications.mygeoenergynow.org/grc/1034636.pdf). |
 | C9 | Workstrings International (2025). *Drill Pipe Performance Sheet*, asset WS41-42, 1 August 2025, page 1. [Supplier catalogue](https://www.workstringsinternational.com/assets/Spec-Sheets/Drill%20Pipe/WS41-42-Imperial.pdf). |
+| C10 | Abate, J. and Valkó, P.P. (2004). *Multi-precision Laplace transform inversion*. International Journal for Numerical Methods in Engineering 60(5), 979–993. [Author's listing](https://valko.engr.tamu.edu/numerical-methods-for-the-inversion-of-the-laplace-transform). Added 28 October 2026 for entry 3. |
 
 The BICO motor sheet is undated; its identity and contents were checked directly, without assigning a publication year from its URL. GDR source identities are McLennan et al. (2021), GDR 1283, [DOI 10.15121/1776602](https://doi.org/10.15121/1776602); Gilmour et al. (2021), GDR 1292, [DOI 10.15121/1777912](https://doi.org/10.15121/1777912); Jones (2022), GDR 1421, [DOI 10.15121/1893533](https://doi.org/10.15121/1893533); and McLennan et al. (2023), GDR 1516, [DOI 10.15121/1998591](https://doi.org/10.15121/1998591). These identify the development-data inputs for future diagnostics; no new observation is extracted here.
 
@@ -617,3 +619,48 @@ No golden regeneration or slow suite was performed. No 56-32, 58-32 or 78B-32 ta
 ## 28 October 2026: decision on entry 1 with D5
 
 Entry 1 with D5 is kept as the working development calculation. Later entries are declared and scored against it, and each comparison continues to report the legacy baseline beside it. The decision is based on the physical definitions of the hydraulic terms and on the equipment records behind D5. The gap changes are mixed and did not decide it: G2, G5 and the deep-run G3 biases improve, while the BHA 23, 30 and 34 biases and the trial bias grow. A review of the D5 commits by someone who did not write them is still outstanding, and its findings will be recorded here.
+
+## 28 October 2026: entry 3 declaration, cylindrical rock response (R1)
+
+This entry implements candidate R1, declared above before the first entry-1 score.
+
+### Change
+
+The circulation model passes heat from the rock to the annulus fluid through a resistance per unit length, in series with the annulus film and any hole lining. The rock part has been R = ln(1 + 2 sqrt(t_D)) / (2 pi k), where t_D = alpha t / a², a is the hole radius, alpha is the rock diffusivity and t is the exposure time. This logarithm is a quasi-steady approximation. The model's stated problem is a cylindrical hole in infinite, initially uniform rock whose wall temperature changes by a step and is then held. Its exact solution gives R = 1 / (2 pi k G(t_D)), where G is the inverse Laplace transform of K1(sqrt(s)) / (sqrt(s) K0(sqrt(s))) (reference C4). The new module `rock_response.py` computes G once by the fixed Talbot inversion of Abate and Valkó (2004, reference C10), for t_D from 1e-6 to 1e12, and interpolates it in log-log coordinates.
+
+`tests/test_rock_response.py` checks the result in three ways. The tabulated G agrees with its short-time series to within 1e-6 relative for t_D up to 1e-4, and its departure from the two-term long-time series decreases with time. A finite-volume radial conduction solve gives the same wall flux within 0.5% at t_D = 0.03, 0.3, 3 and 30. The interpolated table agrees with direct inversion within 2e-5 relative.
+
+Against the exact response, the logarithm overstates the rock resistance by 9.2% at t_D = 0.29, 6.5% at t_D = 7 and 4.9% at t_D = 211. For the 16A hole radius of 0.111 m and the frozen rock properties, these are exposures of one hour, one day and 30 days.
+
+### What stays the same
+
+The calculation is otherwise the working calculation, entry 1 with D5. The one-hour exposure floor, the cumulative exposure clock, the rock properties and the formation profiles are unchanged. The exact response does not need the floor, but removing it would be a separate change with its own declaration. The legacy mode, `hydraulics_model='v1.5.0'`, keeps the logarithm and reproduces the baseline. The frozen scoreboard, its samples and its conventions are unchanged, and nothing is fitted.
+
+### Decision rule
+
+The change replaces an approximation by the exact solution of the boundary problem the model already states. It comes from published theory, and no residual entered its choice. It will therefore be kept whatever the score, unless the score exposes an implementation error. The score will be reported in full, including the gaps that are predicted to worsen.
+
+### Predictions
+
+These come from a model-only calculation with [`predict.py`](../../validation/model-development/entry-3/predict.py). It takes one window per assembly, at the lower median bit-depth rank among the frozen circulation samples, and solves the working calculation with each rock response. No measurement was read. Changes are the exact response minus the logarithm, from `predictions.csv`.
+
+| Well and assemblies | Bit change, °C | Return change, °C |
+|---|---|---|
+| 16A, BHA 18 to 35r2 | +0.47 to +0.95 | +0.10 to +0.16 |
+| 16A, BHA 38, 39 and 42 | +1.16, +1.27 and +1.68 | +0.19 to +0.22 |
+| 16B regular pipe (EOW 11, 12, 13, 15, 16, 27 and 38) | +0.22 to +2.03 | +0.13 to +0.23 |
+| 16B trial (EOW 17 to 20) | +0.71 to +2.23 | +0.20 to +0.35 |
+| 16B early runs (EOW 3 and 4) | +0.16 and +0.17 | +0.13 and +0.15 |
+
+The expected score changes follow from these, assuming each window represents its assembly:
+
+| Gap | Working calculation | Expected after entry 3 |
+|---|---|---|
+| G3, BHA 38, 39 and 42 | -4.98, -6.28 and -17.58 °C | about -3.8, -5.0 and -15.9 °C |
+| G3, BHA 23, 30 and 34 | +1.13, +6.08 and +1.68 °C | each about 0.8 °C warmer, so worse |
+| G5, all 358 samples | -5.09 °C | about -4.9 °C |
+| G6, independent regular pipe | -7.19 °C | about -6.0 °C |
+| G6, trial | +3.03 °C | about +4.6 °C, so worse |
+
+G6 compares bore temperature 22 ft or 84 ft above the bit, so the bit change is a proxy for it. G1 and G2 change only through temperature-dependent fluid properties, and no numerical prediction is made for them. The run-in comparison (G4) starts from the circulation state before each trip. A warmer starting state should raise the predicted peaks, but no size is predicted.
+
