@@ -1,0 +1,23 @@
+sample_id,well,bha,time,bit_depth_ft,flow_gpm,selection
+16A-s0008,16A,18,2020-11-24 08:17:30,6079.35022,558.6468590000001,lower median depth rank; time and identifier ties
+16A-s0022,16A,23,2020-11-28 23:40:00,7151.37334,562.385484,lower median depth rank; time and identifier ties
+16A-s0043,16A,30,2020-12-04 22:25:20,7753.32928,575.1669469999999,lower median depth rank; time and identifier ties
+16A-s0062,16A,34,2020-12-07 21:12:30,8140.22923,590.19589,lower median depth rank; time and identifier ties
+16A-s0069,16A,35r1,2020-12-08 22:17:50,8314.392100000001,648.395435,lower median depth rank; time and identifier ties
+16A-s0073,16A,35r2,2020-12-09 14:17:40,8458.32505,633.791029,lower median depth rank; time and identifier ties
+16A-s0085,16A,38,2020-12-12 18:43:50,8809.043399999999,648.571349,lower median depth rank; time and identifier ties
+16A-s0108,16A,39,2020-12-13 22:46:30,9418.54895,652.800067,lower median depth rank; time and identifier ties
+16A-s0128,16A,42,2020-12-18 15:46:00,10739.4428,619.561284,lower median depth rank; time and identifier ties
+16B-16b-11-202305130800,16B,11,2023-05-13 08:00:00,5055.340303030303,650.0405303030303,lower median depth rank; time and identifier ties
+16B-16b-12-202305141830,16B,12,2023-05-14 18:30:00,5558.034166666666,603.3948888888888,lower median depth rank; time and identifier ties
+16B-16b-13-202305160100,16B,13,2023-05-16 01:00:00,6195.711023622048,599.4677165354334,lower median depth rank; time and identifier ties
+16B-16b-15-202305180330,16B,15,2023-05-18 03:30:00,6741.661626506026,600.9619879518073,lower median depth rank; time and identifier ties
+16B-16b-16-202305201500,16B,16,2023-05-20 15:00:00,7365.064611111111,600.6064999999999,lower median depth rank; time and identifier ties
+16B-16b-17-202305211630,16B,17,2023-05-21 16:30:00,7874.566358024691,610.2841975308643,lower median depth rank; time and identifier ties
+16B-16b-18-202305230500,16B,18,2023-05-23 05:00:00,8325.404764705883,646.9390588235294,lower median depth rank; time and identifier ties
+16B-16b-19-202305250730,16B,19,2023-05-25 07:30:00,8938.145714285714,709.2768571428572,lower median depth rank; time and identifier ties
+16B-16b-20-202305270430,16B,20,2023-05-27 04:30:00,9466.958504672897,709.3245794392523,lower median depth rank; time and identifier ties
+16B-16b-27-202306040530,16B,27,2023-06-04 05:30:00,9992.22411111111,711.6882222222223,lower median depth rank; time and identifier ties
+16B-16b-03-202304302330,16B,3,2023-04-30 23:30:00,4285.8682499999995,1138.01425,lower median depth rank; time and identifier ties
+16B-16b-38-202306171030,16B,38,2023-06-17 10:30:00,10609.865408163265,608.1073469387755,lower median depth rank; time and identifier ties
+16B-16b-04-202305012200,16B,4,2023-05-01 22:00:00,4450.3150467289715,1072.0032710280375,lower median depth rank; time and identifier ties

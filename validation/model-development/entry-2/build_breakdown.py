@@ -73,7 +73,8 @@ def calculate(sample, plan, clocks):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--candidate', type=Path, required=True)
+    parser.add_argument('--candidate', type=Path,
+                        help='Optional completed scoreboard archive for a repeated-pressure check')
     args = parser.parse_args()
     if args.output.exists() and any(args.output.iterdir()):
         parser.error('Choose an empty output directory')
@@ -86,7 +87,8 @@ def main():
     references = {row['sample']: row for row in map(json.loads,
         (ROOT/'validation/forge16b/s2/results.jsonl').read_text().splitlines())
         if row['rheology_case'] in ('s1_original', 'blind_original')}
-    candidate = {row['sample_id']: row for row in score.read_csv(args.candidate/'circulation.csv')}
+    candidate = ({row['sample_id']: row for row in score.read_csv(args.candidate/'circulation.csv')}
+                 if args.candidate is not None else {})
     selected = select(plan['samples'])
     inventory = [dict(sample_id=s['id'], well=s['well'], bha=s['run'], time=s['time'],
         bit_depth_ft=s['bit_ft'], flow_gpm=s['flow_gpm'], selection='lower median depth rank; time and identifier ties') for s in selected]
@@ -110,7 +112,8 @@ def main():
                 legacy_spp_psi=baseline['spp']/whole.PSI,
                 sum_residual_psi=total-budget['spp']/whole.PSI,
                 budget_flagged=abs(total-budget['spp']/whole.PSI)>1.,
-                scoreboard_difference_psi=budget['spp']/whole.PSI-float(candidate[sample['id']]['spp_psi']),
+                scoreboard_difference_psi=(budget['spp']/whole.PSI-float(candidate[sample['id']]['spp_psi'])
+                                          if sample['id'] in candidate else None),
                 energy_flagged=result.get('energy_check', {}).get('flagged', False),
                 unknown_proprietary_operating_losses=True, scenario='NC50' if sample['well']=='16A' else 'EIS',
                 flags='; '.join(budget['flags']))

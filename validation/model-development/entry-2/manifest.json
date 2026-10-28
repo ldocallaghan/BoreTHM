@@ -1,0 +1,28 @@
+{
+  "commit": "e57864c00632492aa147a6ced45cf4c8e394df51",
+  "declaration": "f99825f; entry 2 input-selection method declared in 1ee2ac8",
+  "settings": {
+    "PV_reference_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "mud": "original blind",
+    "scenarios": {
+      "16A": "NC50",
+      "16B": "EIS"
+    }
+  },
+  "selection": "One pressure-available window per assembly, lower median depth rank with time and identifier ties",
+  "runtime_s": 114.4940700000152,
+  "selected": 22,
+  "failures": 0,
+  "sources_sha256": {
+    "validation\\model-development\\entry-2\\build_breakdown.py": "e5dcac2be893f5386a4cf5c87c4af9401836e2fcfa531244c34855cc48541d29",
+    "validation\\forge16b\\s2\\plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
+    "validation\\scoreboard\\scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478"
+  },
+  "results_sha256": {
+    "component-budget.csv": "0a83f13eeb434a0e5232641c3c565adec88df209d245bfee2ef382a767255b2a",
+    "pressure-budget.csv": "46728bd660f3dd5a5c709b753cb5583cac87d4bceeba0c5cca39f9bdb4295e7e",
+    "selected-windows.csv": "85b7ad1528dffa4cdd8e63e7eccacc2cff19b76ba1fdf6f59b8e920d16556422"
+  }
+}
