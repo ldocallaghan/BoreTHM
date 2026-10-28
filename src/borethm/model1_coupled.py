@@ -39,6 +39,7 @@ is calculated separately by pressure.py.
 import numpy as np
 from scipy.integrate import solve_bvp
 from borethm import geo_constants as C
+from borethm import rock_response as _rock
 from borethm import water_table as wt
 from borethm import well_geometry as wg
 from borethm.well_geometry import WellGeometry
@@ -168,11 +169,12 @@ def exposure_seconds(z, t_years, exposure):
     constant t_years (floored at 1e-3 yr, as the model always has); otherwise
     exposure(z), floored at one hour.
 
-    The rock term is quasi-steady line-source conduction, r_inf = r + 2 sqrt(alpha t).
-    Its logarithm only makes sense once 2 sqrt(alpha t) is well beyond the hole
-    radius; at alpha ~1e-6 m^2/s it is about 12 cm after an hour, comparable to
-    a 10 cm hole. Shorter times would need the transient cylindrical-source
-    solution, so they are floored instead."""
+    The original logarithmic rock term, r_inf = r + 2 sqrt(alpha t), only makes
+    sense once 2 sqrt(alpha t) is well beyond the hole radius; at alpha ~1e-6
+    m^2/s it is about 12 cm after an hour, comparable to a 10 cm hole, so
+    shorter times were floored. The cylindrical response is valid at all
+    times; the same floor is kept for both so that changing the response
+    changes nothing else."""
     if exposure is None:
         return np.full_like(np.asarray(z, float), max(t_years, 1e-3) * SECONDS_PER_YEAR)
     return np.maximum(exposure(z), T_EXPOSURE_FLOOR)
@@ -180,10 +182,12 @@ def exposure_seconds(z, t_years, exposure):
 
 def conductances(z, T_d, T_u, m_dot, t_years, k_rock, geometry, exposure=None,
                  fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, geom_z=None,
-                 film_mult=1.0, P_surface=P_SURF):
+                 film_mult=1.0, P_surface=P_SURF, rock_response='logarithmic'):
     """Vectorized per-length UAi (centre<->annulus), UAo (rock<->annulus).
     geom_z, if given, is where the string and hole are looked up (a point inside
-    the same piece), so that nodes on a piece boundary take that piece's geometry."""
+    the same piece), so that nodes on a piece boundary take that piece's geometry.
+    rock_response is 'logarithmic' (the original quasi-steady term) or
+    'cylinder' (the exact wall-temperature step response; see rock_response)."""
     g = geometry.at(z if geom_z is None else geom_z)
     g["tvd"] = geometry.survey.tvd(z)
     P = P_of_z(g["tvd"], P_surface)
@@ -199,7 +203,10 @@ def conductances(z, T_d, T_u, m_dot, t_years, k_rock, geometry, exposure=None,
     t = exposure_seconds(z, t_years, exposure)
     r_inf = g["r_rock"] + 2.0 * np.sqrt(alpha * t)
     R_aw = 1.0 / (h_a * 2 * np.pi * g["r_wall"])
-    R_rock = np.log(r_inf / g["r_rock"]) / (2 * np.pi * k_rock)
+    if rock_response == 'logarithmic':
+        R_rock = np.log(r_inf / g["r_rock"]) / (2 * np.pi * k_rock)
+    else:
+        R_rock = _rock.resistance(t, alpha, g["r_rock"], k_rock, rock_response)
     UAo = 1.0 / (R_aw + g["R_hole"] + R_rock)
     return UAi, UAo, P
 
@@ -210,13 +217,16 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
           geotherm=None, target_depth=None, geometry=None, exposure=None,
           fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
           tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF,
-          hydraulics_model='v1.6.0', surface=None, transitions='abrupt'):
+          hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
+          rock_response=None):
     # P_surface: pressure at the wellhead. Atmospheric by default; a closed,
     # pressurized loop (P_OP) keeps a return above 100 C liquid.
     # init: a previous solve() result whose profiles seed this one (continuation).
     # breaks: extra measured depths at which to split the solve, where a
     # coefficient jumps for a reason other than geometry (exposure_breaks).
     # film_mult: multiplier on the annulus film coefficient (a calibration knob).
+    # rock_response: 'cylinder' (exact step response, the default with v1.6.0)
+    # or 'logarithmic' (the original term, always used by v1.5.0).
     # friction_heat: add the heat dissipated by friction in the bore and annulus,
     # and across the bit nozzles (total flow area tfa), to the fluid. Off by
     # default, which is how the model was first calibrated.
@@ -239,6 +249,12 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     from borethm import hydraulic_losses as hl
     if hydraulics_model not in ('v1.5.0','v1.6.0'):
         raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
+    if rock_response is None:
+        rock_response = 'logarithmic' if hydraulics_model == 'v1.5.0' else 'cylinder'
+    if rock_response not in _rock.RESPONSES:
+        raise ValueError(f'rock_response must be one of {_rock.RESPONSES}')
+    if hydraulics_model == 'v1.5.0' and rock_response != 'logarithmic':
+        raise ValueError('hydraulics_model v1.5.0 reproduces the original logarithmic rock response')
     if hydraulics_model=='v1.5.0':
         hl.check_legacy(geometry,surface,transitions)
         loss_model=None
@@ -251,7 +267,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
 
     def derivs(zz, Td, Tu, geom_z=None):
         UAi, UAo, P = conductances(zz, Td, Tu, m_dot, t_years, k_rock, geometry, exposure,
-                                   fluid, rhocp_rock, geom_z, film_mult, P_surface)
+                                   fluid, rhocp_rock, geom_z, film_mult, P_surface,
+                                   rock_response)
         cpd = _cp(Td, P, fluid)
         cpu = _cp(Tu, P, fluid)
         dTd = UAi * (Tu - Td) / (m_dot * cpd)
@@ -352,7 +369,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                Q_product=Q_product, m_dot=m_dot,
                # a solution outside the water table's range (above 480 C) is spurious
                success=bool(sol.success and max(Td.max(), Tu.max()) < 480.0),
-               P_bottom=P_L,hydraulics_model=hydraulics_model,
+               P_bottom=P_L,hydraulics_model=hydraulics_model,rock_response=rock_response,
                surface=surface,transitions=transitions)
     if loss_model is not None:
         if friction_heat:

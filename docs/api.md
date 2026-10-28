@@ -337,7 +337,7 @@ Raises ValueError for an unknown or ambiguous name.
 ## circulating_temperatures
 
 ```python
-circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt')
+circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt', rock_response=None)
 ```
 
 Compute circulating bore and annulus temperatures along a well.
@@ -348,8 +348,12 @@ Rock conductivity k_rock is W/(m K), rhocp_rock is J/(m3 K), and
 t_years is years. A geotherm maps true vertical depth in m to degrees C;
 exposure maps measured depth in m to seconds and overrides t_years.
 The circulation rock term floors exposure at 3,600 s, or t_years at
-0.001 years (about 8.8 hours) when exposure=None. This restriction of
-the quasi-steady line-source approximation applies only to circulation.
+0.001 years (about 8.8 hours) when exposure=None. These floors apply
+only to circulation. rock_response='cylinder' uses the exact
+constant-wall-temperature step response of a cylindrical hole, and
+'logarithmic' the original quasi-steady term ln(1 + 2 sqrt(alpha t)/r).
+None selects cylinder with v1.6.0 and logarithmic with v1.5.0, which
+accepts only the logarithmic term.
 The separate radial wall-temperature solver uses its supplied state
 durations, with fluid-temperature and film-coefficient boundaries from
 circulation. The exposure floors set no breakout formation delay.

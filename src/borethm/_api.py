@@ -11,7 +11,8 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
                             rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
                             tfa=_model.BIT_TFA_DEFAULT, film_mult=1.0, breaks=(),
                             init=None, P_surface=_model.P_SURF,
-                            hydraulics_model='v1.6.0', surface=None, transitions='abrupt'):
+                            hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
+                            rock_response=None):
     """Compute circulating bore and annulus temperatures along a well.
 
     Supply either a PipeType or a WellGeometry. Mass flow m_dot is kg/s;
@@ -20,8 +21,12 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     t_years is years. A geotherm maps true vertical depth in m to degrees C;
     exposure maps measured depth in m to seconds and overrides t_years.
     The circulation rock term floors exposure at 3,600 s, or t_years at
-    0.001 years (about 8.8 hours) when exposure=None. This restriction of
-    the quasi-steady line-source approximation applies only to circulation.
+    0.001 years (about 8.8 hours) when exposure=None. These floors apply
+    only to circulation. rock_response='cylinder' uses the exact
+    constant-wall-temperature step response of a cylindrical hole, and
+    'logarithmic' the original quasi-steady term ln(1 + 2 sqrt(alpha t)/r).
+    None selects cylinder with v1.6.0 and logarithmic with v1.5.0, which
+    accepts only the logarithmic term.
     The separate radial wall-temperature solver uses its supplied state
     durations, with fluid-temperature and film-coefficient boundaries from
     circulation. The exposure floors set no breakout formation delay.
