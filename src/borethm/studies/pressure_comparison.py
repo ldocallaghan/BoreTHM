@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 from dataclasses import replace
+from functools import lru_cache
 import json
 import math
 from pathlib import Path
@@ -88,7 +89,7 @@ def summaries(rows):
     return events,bhas
 
 
-def serial_development_geometry(s,components,legacy,scenario):
+def entry1_geometry(s,components,legacy,scenario):
     """Serial recorded passages with the declared connection scenarios.
 
     The short bit-body annulus retains the existing aggregate envelope,
@@ -135,6 +136,66 @@ def serial_development_geometry(s,components,legacy,scenario):
     pipe=replace(legacy.string[0].pipe,hydraulic_joint=hl.HydraulicJoint(od*INCH,jid*INCH,29*INCH,
         (2378/75 if s['well']=='16B' else 31.5)*FT,
         source='S2b NOV connection scenarios' if s['well']=='16B' else 'NOV GPDS50 compatible connection scenario; 31.5-ft catalogue pitch'))
+    return wg.WellGeometry([wg.StringSegment(regular,pipe),*reversed(bottom)],legacy.hole,legacy.survey)
+
+
+@lru_cache(maxsize=1)
+def assembly_audit():
+    """Original unknowns and declared D5 interpretations, never targets."""
+    return json.loads(repository_path('validation/model-development/d5/components.json').read_text(encoding='utf-8'))
+
+
+def unknown_motor(source):
+    """Zero internal loss placeholder, explicitly qualified as unmeasured."""
+    return hl.ReferenceToolLoss(0.,1.,1000.,basis='total_internal',
+        source='motor loss unknown; '+source,unresolved=True,include_boundary_changes=False)
+
+
+def serial_development_geometry(s,components,legacy,scenario):
+    """D5: motor thermal bores are separate from internal tool pressure loss.
+
+    Unknown non-motor bores prevent a calculation. A bit is represented only
+    by the nozzle boundary. The pre-correction adapter remains available as
+    entry1_geometry for reproducing the declared diagnostic and its archive.
+    """
+    rows=[r for r in assembly_audit() if r['well']==s['well'] and r['bha']==s['run']]
+    if not rows:raise ValueError('Assembly is absent from the component audit')
+    if s['well']=='16B' and s['run'] in ('17','18','19','20'):
+        original=entry1_geometry(s,components,legacy,scenario)
+        # Keep the original trial layout and its transferred Figure 90 basis.
+        # Separate the motor from the residual compact assembly, excluding
+        # the reported motor mandrel from the thermal weighted mean.
+        source=[r for r in rows if 2<=r['item']<=10]
+        motor=next(r for r in source if r['motor'])
+        other=[r for r in source if not r['motor']]
+        total=sum(r['length_ft'] for r in other)
+        od=sum(r['length_ft']*r['adopted_od_in'] for r in other)/total
+        inside=sum(r['length_ft']*r['thermal_id_in'] for r in other)/total
+        end=original.string[-1];length=motor['length_ft']*FT
+        remainder=wg.StringSegment(end.length-length,whole.steel('trial non-motor compact BHA',od,inside))
+        section=wg.StringSegment(length,whole.steel('trial motor; motor loss unknown',motor['adopted_od_in'],motor['thermal_id_in']),
+            tool_loss=unknown_motor(motor['source']))
+        return wg.WellGeometry([*original.string[:-1],remainder,section],legacy.hole,legacy.survey)
+    bottom=[]
+    for row in rows:
+        if row['bit']:continue
+        inside=row['thermal_id_in']
+        if inside is None:
+            raise ValueError(f"Unknown component bore: {s['well']} BHA {s['run']} item {row['item']}")
+        name=row['component']+('; motor loss unknown' if row['motor'] else '')
+        pipe=whole.steel(name,row['adopted_od_in'],inside)
+        if row['kind']=='HWDP':
+            joint_od=7. if scenario=='EIS' else 7.25 if scenario=='GPDS55' else 6.625
+            pipe=replace(pipe,hydraulic_joint=hl.HydraulicJoint(joint_od*INCH,inside*INCH,29*INCH,
+                row['length_ft']*FT/30 if s['well']=='16B' else 31.5*FT,
+                source='S2b declared connection scenario; recorded HWDP bore and pitch'))
+        bottom.append(wg.StringSegment(row['length_ft']*FT,pipe,
+            tool_loss=unknown_motor(row['source']) if row['motor'] else None))
+    regular=legacy.md_bit-sum(c.length for c in bottom)
+    if regular<=0:raise ValueError('Assembly longer than circulation depth')
+    od,jid=(7.,4.) if scenario=='EIS' else (7.25,3.5) if scenario=='GPDS55' else (6.625,3.25)
+    pipe=replace(legacy.string[0].pipe,hydraulic_joint=hl.HydraulicJoint(od*INCH,jid*INCH,29*INCH,
+        (2378/75 if s['well']=='16B' else 31.5)*FT,source='Declared NC50/EIS connection scenario'))
     return wg.WellGeometry([wg.StringSegment(regular,pipe),*reversed(bottom)],legacy.hole,legacy.survey)
 
 

@@ -12,6 +12,7 @@ import time
 
 import numpy as np
 from scipy.integrate import solve_bvp
+from borethm.studies.pressure_comparison import entry1_geometry
 
 ROOT=Path(__file__).resolve().parents[3]
 spec=importlib.util.spec_from_file_location('frozen_scoreboard',ROOT/'validation/scoreboard/scoreboard.py')
@@ -107,7 +108,9 @@ def seeded(**kw):
 
 
 def setup(sample,plan,clocks):
-    legacy=score.geometry(sample,plan,'legacy');current=score.geometry(sample,plan,'current')
+    legacy=score.geometry(sample,plan,'legacy')
+    current=entry1_geometry(sample,plan['components_a' if sample['well']=='16A' else 'components_b'],
+                            legacy,'NC50' if sample['well']=='16A' else 'EIS')
     _,pv,yp=energy.fluid_for(sample,'s1_original' if sample['well']=='16B' else 'blind_original')
     fluid=score.Mud(sample['density_ppg']*whole.PPG,pv_ref=None if pv is None else pv*.001,
                     yield_point=yp*whole.YP_PA,pv_ref_T=26.7)

@@ -45,10 +45,10 @@ def test_motor_interval_uses_median_endpoints_and_retains_zero_denominator():
 @pytest.mark.parametrize('eow,trial_run', [('17','BHA10'),('18','BHA11'),('19','BHA12'),('20','BHA13')])
 def test_trial_adapter_preserves_aggregate_thermal_geometry(eow,trial_run):
     from borethm.studies import validate_forge16b as trial
-    from borethm.studies.pressure_comparison import serial_development_geometry
+    from borethm.studies.pressure_comparison import entry1_geometry
     depth=sum(trial.DEPTHS[trial_run])/2
     original=trial.geometry(trial_run,depth,4.9237482416889895)
-    revised=serial_development_geometry(dict(well='16B',run=eow),{},original,'EIS')
+    revised=entry1_geometry(dict(well='16B',run=eow),{},original,'EIS')
     assert len(revised.string)==len(original.string)
     assert revised.hole==original.hole and revised.survey is original.survey
     for before,after in zip(original.string,revised.string):

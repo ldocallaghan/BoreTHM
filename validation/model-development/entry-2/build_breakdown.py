@@ -12,6 +12,7 @@ import subprocess
 import time
 
 import numpy as np
+from borethm.studies.pressure_comparison import entry1_geometry
 
 ROOT = Path(__file__).resolve().parents[3]
 spec = importlib.util.spec_from_file_location('frozen_scoreboard', ROOT/'validation/scoreboard/scoreboard.py')
@@ -46,7 +47,9 @@ def provenance(sample, plan, segment_index):
 
 
 def calculate(sample, plan, clocks):
-    geometry = score.geometry(sample, plan, 'current')
+    legacy = score.geometry(sample, plan, 'legacy')
+    geometry = entry1_geometry(sample, plan['components_a' if sample['well']=='16A' else 'components_b'],
+        legacy, 'NC50' if sample['well']=='16A' else 'EIS')
     form = b.T_FORM if sample['well'] == '16B' else a.formation('216', geometry.survey)[0]
     _, pv, yp = energy.fluid_for(sample, 's1_original' if sample['well'] == '16B' else 'blind_original')
     fluid = score.Mud(sample['density_ppg']*whole.PPG, pv_ref=None if pv is None else pv*.001,

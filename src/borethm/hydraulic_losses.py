@@ -76,6 +76,9 @@ class ReferenceToolLoss:
     passage losses over span_segments contiguous segments, including the
     segment carrying this input; additional supplies an extra restriction.
     Optional flow_range is m3/s and temperature_max_C is a qualification.
+    include_boundary_changes=False excludes internal entry/exit restrictions
+    inferred from a thermal-only bore. unresolved qualifies an omitted loss
+    and requires zero reference pressure; it never makes a solve fail.
     """
     dp_ref: float
     flow_ref: float
@@ -85,11 +88,17 @@ class ReferenceToolLoss:
     source: str = ''
     flow_range: tuple | None = None
     temperature_max_C: float | None = None
+    include_boundary_changes: bool = True
+    unresolved: bool = False
 
     def __post_init__(self):
         _finite(self.dp_ref,'dp_ref')
         _finite(self.flow_ref,'flow_ref',True)
         _finite(self.density_ref,'density_ref',True)
+        if type(self.include_boundary_changes) is not bool or type(self.unresolved) is not bool:
+            raise ValueError('tool boundary and unresolved qualifiers must be boolean')
+        if self.unresolved and self.dp_ref != 0:
+            raise ValueError('an unresolved tool loss must have zero reference pressure')
         if self.basis not in ('additional','total_internal'):
             raise ValueError('tool basis must be additional or total_internal')
         if type(self.span_segments) is not int or self.span_segments < 1:
@@ -211,8 +220,10 @@ class LossModel:
             il=int(geometry.segment_index(boundary-1e-5))
             ir=int(geometry.segment_index(boundary+1e-5))
             internal=(self.tool_owner[il]>=0 and self.tool_owner[il]==self.tool_owner[ir] and self.replaced[il] and self.replaced[ir])
+            excluded_boundary=any(owner>=0 and not self.tools[owner][2].include_boundary_changes
+                                  for owner in (self.tool_owner[il],self.tool_owner[ir]))
             for annulus in (False,True):
-                if internal and not annulus:
+                if (internal or excluded_boundary) and not annulus:
                     continue
                 area='A_ann' if annulus else 'A_bore'
                 dh='Dh_ann' if annulus else 'Dh_bore'
@@ -304,6 +315,8 @@ class LossModel:
                 terms['tool'][mask]=tool.pressure(rho[mask],flow)/length
                 if np.any(mask):
                     flags.append('supplied_tool_loss_treated_as_dissipation')
+                    if tool.unresolved:
+                        flags.append('internal_tool_loss_unknown')
                 if tool.flow_range is not None and np.any((flow<tool.flow_range[0])|(flow>tool.flow_range[1])):
                     flags.append('tool_flow_outside_published_range')
                 if tool.temperature_max_C is not None and np.any(np.asarray(temperature)[mask]>tool.temperature_max_C):
