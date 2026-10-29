@@ -2,48 +2,57 @@
 
 ## Unreleased
 
-Keeps the revised circulation solver's mesh within the specified well when
-an end component is shorter than half the geometry-ramp width. Overlapping
-ramps in serial assemblies use continuous piece weights of the same width.
-The physical heat-transfer laws and explicit legacy calculation are unchanged.
-The original boundary-condition tolerance is retained. Energy accounting
-reports and flags residuals at 1 W or 0.1% of power, whichever is larger,
-without changing solver success. An unavailable diagnostic is flagged.
+The circulation model calculates pressure losses component by component:
+drill pipe with optional tool-joint restrictions, serial assembly
+components with their recorded bores, supplied tool curves such as a
+motor's no-load loss, the bit nozzles and the surface equipment. Each loss
+heats the stream in which it occurs. A typed programme supplies these
+inputs in Python or a site file, and the reference programme includes the
+documented allowances. `hydraulics_model='v1.5.0'` keeps the previous
+calculation.
 
-Adds shared hydraulic loss and dissipation accounting with optional
-tool-joint geometry, serial BHA components and supplied tool curves.
-Surface equipment contributes to standpipe pressure; bore and annulus
-losses supply heat to their respective streams. An explicit v1.5.0 mode
-preserves the old calculation. A typed programme can be supplied in Python
-or a site file. The reference programme includes the documented allowances.
+The rock around the well responds as an infinite cylinder to a step in
+wall temperature, calculated from the exact solution. In the v1.6.0 calculation this
+replaces the logarithmic approximation and lowers the rock resistance by
+about 5–8% for exposures from one hour to 30 days, so circulating
+temperatures rise. `rock_response` selects either term; the v1.5.0
+calculation keeps the logarithmic one.
 
-On the 90 frozen motorless FORGE 16B S2b states, applying only the 5 MPa
-property-pressure guard to the legacy pressure calculation reduces
-standpipe pressure by 0.040–0.111 psi (0.00654–0.0110%). The complete
-hydraulic changes have separate guard and integration accounting in
-the frozen-state replay test, `tests/test_v160_s2b_replay.py`. This diagnostic retains the archived
-rheology convention and makes no new held-out pressure comparison.
+`solve` accepts `annulus_heat`, a heat source per unit length in the
+annulus. `rotary_heat.partition` divides measured surface rotary power
+between wall friction along the string and work at the bit with a
+soft-string torque balance. Site evaluations have no torque input and do
+not apply it.
 
-Adds an unfitted field comparison with Utah FORGE well 16A(78)-32, with
-source extracts, frozen circulation evidence and conditional transient
-checks. Documentation presents the blind result before the recovery and
-inlet diagnostics, with their limitations and the cooler annotations.
-Regression checks recompute archived S1 summary arithmetic without
-rerunning that experiment. Existing model calculations, constants and
-reference results are unchanged.
-The 16A archive remains outside the installed package and source distribution.
-Pause outliers are traced to the quasi-steady starting states; run-in
-underprediction is stated explicitly as potentially non-conservative.
+In the default mode the five built-in sites keep their status. Bit
+temperatures rise by 2.2 °C at Larderello, 3.1 °C at Newberry, 10.5 °C at
+Pannonian and 33.7 °C at United Downs. No pipe keeps the bit below 200 °C
+at United Downs, so the pump limit sets the flow, and the added losses
+lower it from 50 to 40 L/s. At Soultz the selected flow rises from 40 to 45 L/s and the
+bit temperature falls by 0.7 °C. Pannonian's tool check now fails: with
+the logarithmic rock term it still passes, and the cylindrical term adds
+the last 3.3 °C. The drilling-fluid windows at Soultz, Pannonian and
+United Downs stay closed. The added annulus losses raise the circulating
+pressure and lower the upper drilling bound, so fewer target cases have an
+open drilling interval: two of nine at Soultz, from eight, and one of four
+at United Downs, from two. The rows are in `tests/golden/v160_site_table.json`.
 
-Adds the FORGE 16B whole-well comparison, preserving the blind S1 result
-beside a labelled missing-rheology protocol revision. Archived diagnostics
-cover 16A water rheology at recorded density, annulus regimes and film
-coefficients, both wells' energy budgets and matched depths. Motorless
-16B pressure accounting separates the model's included terms from cited
-external geometry estimates and unquantified tool restrictions. The
-validation and limitations guides report the discrepancies without
-assigning a cause. Summary-arithmetic checks read the saved evidence;
-existing model functions and reference results remain unchanged.
+The v1.0 calculation, the circulation modes before v1.3.4 and the
+archived v1.3.4 and v1.3.6 studies use the v1.5.0 calculation unless a
+programme is given, so they reproduce their published tables. Benchmark
+dataset 1.0 is unchanged. The current calculation's UT Austin values are
+0.1–2.0 °C warmer and have their own golden.
+
+Adds field comparisons with Utah FORGE 16A(78)-32 and the whole of well
+16B, and a standpipe-pressure comparison with 56-32, a well that played no
+part in development. A development log records each model change with its
+predictions before scoring against a frozen scoreboard of six gaps on 16A
+and 16B. The validation and limitations guides report the discrepancies
+that remain.
+
+The 16B validation keeps the drill string inside the hole when the bit is
+shallower than the assembly. Energy accounting flags residuals above 1 W
+or 0.1% of power, whichever is larger, without changing solver success.
 
 ## v1.5.0 (23 October 2026)
 
