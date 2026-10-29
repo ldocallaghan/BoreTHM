@@ -340,7 +340,7 @@ Raises ValueError for an unknown or ambiguous name.
 ## circulating_temperatures
 
 ```python
-circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt', rock_response=None, annulus_heat=None)
+circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt', rock_response=None, annulus_heat=None, annulus_model='v1.6.0')
 ```
 
 Compute circulating bore and annulus temperatures along a well.
@@ -360,6 +360,12 @@ accepts only the logarithmic term. annulus_heat is an optional callable
 returning heat [W/m] released into the annulus fluid at measured depth
 [m], for example rotary friction from rotary_heat.partition; v1.5.0
 rejects it. Heat released at the bit is part of Q_face.
+annulus_model 'v1.6.0' is the released annulus heat transfer and the
+apparent-viscosity criterion for laminar flow of a Bingham mud.
+'bingham' is a development candidate: the Wilson-Thomas criterion,
+shared with the pressure loss, Gnielinski's annulus correlation on the
+wall apparent viscosity, and laminar annulus values for each wall.
+v1.5.0 accepts only 'v1.6.0'.
 The separate radial wall-temperature solver uses its supplied state
 durations, with fluid-temperature and film-coefficient boundaries from
 circulation. The exposure floors set no breakout formation delay.
@@ -393,7 +399,7 @@ verbose=False suppresses the solver's printed report by default.
 ## hydraulics
 
 ```python
-hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='blasius', bit=True, fluid=None, P_surface=100000.0, hydraulics_model=None, surface=None, transitions=None)
+hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='blasius', bit=True, fluid=None, P_surface=100000.0, hydraulics_model=None, surface=None, transitions=None, annulus_model=None)
 ```
 
 Pressure budget [Pa] with named pressure/heat loss terms.

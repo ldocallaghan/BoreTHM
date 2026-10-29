@@ -138,16 +138,18 @@ class SurfaceLoss:
         return self.value*(density/PPG)*(flow/GPM/100.)**1.86*PSI
 
 
-def passage_gradient(rho, mu, yield_point, mass_rate, area, dh, annulus=False, friction='blasius'):
+def passage_gradient(rho, mu, yield_point, mass_rate, area, dh, annulus=False, friction='blasius',
+                     regime='apparent-viscosity'):
     """Positive friction gradient [Pa/m], apparent Re and velocity [m/s].
 
     Takes already evaluated properties so frozen-point formula replays do
-    not change their sampling. Mud uses the retained Bingham treatment.
+    not change their sampling. Mud uses the retained Bingham treatment,
+    with the laminar-turbulent criterion regime (fluids.REGIMES).
     """
     from borethm import fluids, model1_coupled as m1
     velocity=mass_rate/(np.asarray(rho)*area)
     if yield_point > 0:
-        gradient,re=fluids.bingham_gradient(rho,mu,yield_point,velocity,dh,annulus)
+        gradient,re=fluids.bingham_gradient(rho,mu,yield_point,velocity,dh,annulus,regime)
     else:
         re=np.asarray(rho)*velocity*dh/mu
         gradient=m1.friction_factor(re,friction)*np.asarray(rho)*velocity**2/(2*dh)
@@ -168,14 +170,14 @@ def local_change(area_up, area_down, rho, mass_rate, mu, dh_small):
 
 def joint_increment(rho, mu, yield_point, mass_rate, body_area, body_dh,
                     joint_area, joint_dh, restriction_length, annulus=False,
-                    transition='abrupt', friction='blasius'):
+                    transition='abrupt', friction='blasius', regime='apparent-viscosity'):
     """Replacement and entry/exit loss [Pa] for one connection.
 
     The body subtraction can give a negative increment. It replaces only
     the declared restriction length, with the remaining body retained.
     """
-    body=passage_gradient(rho,mu,yield_point,mass_rate,body_area,body_dh,annulus,friction)[0]
-    joint=passage_gradient(rho,mu,yield_point,mass_rate,joint_area,joint_dh,annulus,friction)[0]
+    body=passage_gradient(rho,mu,yield_point,mass_rate,body_area,body_dh,annulus,friction,regime)[0]
+    joint=passage_gradient(rho,mu,yield_point,mass_rate,joint_area,joint_dh,annulus,friction,regime)[0]
     local=0.
     if transition=='abrupt':
         # Both directions use the smaller passage's hydraulic diameter.
@@ -187,13 +189,16 @@ def joint_increment(rho, mu, yield_point, mass_rate, body_area, body_dh,
 class LossModel:
     """Prepared geometry-only loss placement, shared by pressure and heat."""
 
-    def __init__(self, geometry, friction='blasius', transitions='abrupt'):
-        from borethm import model1_coupled as m1
+    def __init__(self, geometry, friction='blasius', transitions='abrupt', regime='apparent-viscosity'):
+        from borethm import fluids, model1_coupled as m1
         if transitions not in ('abrupt','gradual'):
             raise ValueError('transitions must be abrupt or gradual')
+        if regime not in fluids.REGIMES:
+            raise ValueError(f'regime must be one of {fluids.REGIMES}')
         self.geometry=geometry
         self.friction=friction
         self.transitions=transitions
+        self.regime=regime
         self.top,self.bottom=m1._pieces(geometry)
         self.length=self.bottom-self.top
         self.replaced=np.zeros(len(geometry.string),bool)
@@ -259,7 +264,7 @@ class LossModel:
         tau=getattr(fluid,'yield_point',0.)
         area=g['A_ann' if annulus else 'A_bore']
         dh=g['Dh_ann' if annulus else 'Dh_bore']
-        body,re,velocity=passage_gradient(rho,mu,tau,mass_rate,area,dh,annulus,self.friction)
+        body,re,velocity=passage_gradient(rho,mu,tau,mass_rate,area,dh,annulus,self.friction,self.regime)
         seg=self.geometry.segment_index(sample)
         piece=np.clip(np.searchsorted(self.bottom,sample,side='left'),0,len(self.bottom)-1)
         body=np.asarray(body).copy()
@@ -280,7 +285,7 @@ class LossModel:
                 else:
                     ja=np.full(mask.sum(),np.pi*joint.bore_diameter**2/4)
                     jd=joint.bore_diameter
-                inc,loc=joint_increment(rho[mask],mu[mask],tau,mass_rate,area[mask],dh[mask],ja,jd,joint.restriction_length,annulus,joint.transition,self.friction)
+                inc,loc=joint_increment(rho[mask],mu[mask],tau,mass_rate,area[mask],dh[mask],ja,jd,joint.restriction_length,annulus,joint.transition,self.friction,self.regime)
                 terms['joint_replacement'][mask]=inc/joint.spacing
                 terms['joint_local'][mask]=loc/joint.spacing
                 if joint.transition=='abrupt':
@@ -324,8 +329,11 @@ class LossModel:
         total=body+sum(terms.values())
         if np.any(total < -1e-8):
             raise ValueError('negative total passage dissipation')
+        from borethm import fluids
+        turbulent=(fluids.bingham_turbulent(rho,mu,tau,velocity,dh,annulus,self.regime) if tau>0
+                   else np.asarray(re)>=2300.).astype(float)
         return dict(body=body,**terms,total=total,rho=rho,cp=cp,mu=mu,re=re,velocity=velocity,
-                    property_pressure=prop_p,guard_active=p<prop_p,flags=sorted(set(flags)))
+                    turbulent=turbulent,property_pressure=prop_p,guard_active=p<prop_p,flags=sorted(set(flags)))
 
     def gradients(self,z,temperature,pressure,mass_rate,fluid=None,annulus=False,guard=True,blend=True):
         """Shared gradients with the existing geometry-blend width.
@@ -347,7 +355,7 @@ class LossModel:
             near|=np.abs(zz-b)<width/2
         if not np.any(near):
             return out
-        names=('body','joint_replacement','joint_local','geometric_local','supplied_local','tool','total','re','velocity')
+        names=('body','joint_replacement','joint_local','geometric_local','supplied_local','tool','total','re','velocity','turbulent')
         for key in names:
             out[key][near]=0.
         for i,(a,b) in enumerate(zip(self.top,self.bottom)):
@@ -444,13 +452,14 @@ def energy_check(model,result,fluid,Q_face,tfa,P_surface):
 
 def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
                friction='blasius', bit=True, fluid=None, P_surface=1e5,
-               surface=None, transitions='abrupt', guard=True):
-    """Standpipe budget using the same local gradients as circulation heat."""
+               surface=None, transitions='abrupt', guard=True, regime='apparent-viscosity'):
+    """Standpipe budget using the same local gradients as circulation heat.
+    regime names the laminar-turbulent criterion for a Bingham mud."""
     from borethm import model1_coupled as m1
     _finite(mass_rate,'mass flow',True)
     if surface is not None and not isinstance(surface,SurfaceLoss):
         raise TypeError('surface must be SurfaceLoss or None')
-    model=LossModel(geometry,friction,transitions)
+    model=LossModel(geometry,friction,transitions,regime)
     top,bot=model.top,model.bottom
     mid,weights=model.integration_grid(result)
     if result is None:
@@ -482,16 +491,19 @@ def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
     pieces=[]
     for j,(a,b) in enumerate(zip(top,bot)):
         mask=(mid>=a)&(mid<b)
-        def regime(re):
+        def regime(re,turbulent):
             from borethm import fluids
-            lam=(re<=fluids.RE_CRITICAL) if getattr(fluid,'yield_point',0)>0 else (re<2300.)
+            if model.regime=='apparent-viscosity':
+                lam=(re<=fluids.RE_CRITICAL) if getattr(fluid,'yield_point',0)>0 else (re<2300.)
+            else:
+                lam=turbulent<.5
             return 'laminar' if np.all(lam) else ('turbulent' if not np.any(lam) else 'mixed')
         pieces.append(dict(md_top=float(a),md_bottom=float(b),dp_bore=float(dpb[mask].sum()),dp_ann=float(dpa[mask].sum()),v_ann=float(ann['velocity'][mask].min()),
             bore_terms={key:float(np.sum(bore[key][mask]*weights[mask])) for key in names},annulus_terms={key:float(np.sum(ann[key][mask]*weights[mask])) for key in names},
             bore_Re=float(np.min(bore['re'][mask])),annulus_Re=float(np.min(ann['re'][mask])),
             actual_property_profile_pressure=float(np.mean(p[mask])),
             property_pressure=float(np.mean(bore['property_pressure'][mask])),guard_active=bool(np.any(bore['guard_active'][mask])),
-            bore_regime=regime(bore['re'][mask]),annulus_regime=regime(ann['re'][mask])))
+            bore_regime=regime(bore['re'][mask],bore['turbulent'][mask]),annulus_regime=regime(ann['re'][mask],ann['turbulent'][mask])))
     # Save the cumulative annulus integral for partial-depth pressure queries.
     cumulative_z=np.r_[0.,mid,geometry.md_bit]
     cumulative_dp=np.r_[0.,np.cumsum(dpa)-dpa/2,float(dpa.sum())]

@@ -180,29 +180,127 @@ def exposure_seconds(z, t_years, exposure):
     return np.maximum(exposure(z), T_EXPOSURE_FLOOR)
 
 
+# Annulus heat transfer. 'v1.6.0' is Dittus-Boelter on the plastic viscosity,
+# with a laminar floor Nu = 4.36 below Re 2300, on both walls. 'bingham' is
+# the development candidate of entry 5 (annulus_films).
+ANNULUS_MODELS = ('v1.6.0', 'bingham')
+
+# Fully developed laminar flow in a concentric annulus, one wall at constant
+# heat flux and the other insulated: Nusselt numbers on the hydraulic
+# diameter at the heated inner wall (Nu_ii) and heated outer wall (Nu_oo)
+# against r* = r_inner / r_outer. Lundberg, Reynolds and Kays (1963), NASA
+# TN D-1972, table II.D.2.
+_LAMINAR_R = np.array([0.05, 0.06, 0.08, 0.10, 0.20, 0.25, 0.30, 0.40, 0.50,
+                       0.60, 0.70, 0.80, 0.90, 1.0])
+_LAMINAR_NU_II = np.array([17.8113, 15.9335, 13.4681, 11.9058, 8.49892, 7.75348, 7.24116,
+                           6.58331, 6.18102, 5.91176, 5.72215, 5.58, 5.47, 5.38461])
+_LAMINAR_NU_OO = np.array([4.79198, 4.80322, 4.82070, 4.83421, 4.88259, 4.90475, 4.92801,
+                           4.97918, 5.03655, 5.09922, 5.16653, 5.24, 5.31, 5.38461])
+
+
+def gnielinski_annulus(Re, Pr, a, wall):
+    """Turbulent Nusselt number on the hydraulic diameter for a concentric
+    annulus of diameter ratio a = d_inner / d_outer, at the heated inner or
+    outer wall (Gnielinski 2009, Heat Transfer Engineering 30(6), 431-436,
+    in the form implemented in the MOOSE framework):
+
+        Re* = Re [(1 + a^2) ln a + (1 - a^2)] / [(1 - a)^2 ln a]
+        f   = (1.8 log10 Re* - 1.5)^-2
+        k1  = 1.07 + 900/Re - 0.63/(1 + 10 Pr)
+        Nu  = (f/8) Re Pr / [k1 + 12.7 (f/8)^0.5 (Pr^(2/3) - 1)] F
+        F   = 0.75 a^-0.17 (inner wall), 0.9 - 0.15 a^0.6 (outer wall)
+
+    The entrance factor (1 + (d_h/L)^(2/3)) is 1 for a well's length, and
+    the wall-property ratio (Pr/Pr_w)^0.11 is not applied."""
+    Re, Pr, a = (np.asarray(x, float) for x in (Re, Pr, a))
+    re_star = Re * ((1 + a ** 2) * np.log(a) + (1 - a ** 2)) / ((1 - a) ** 2 * np.log(a))
+    f = (1.8 * np.log10(re_star) - 1.5) ** -2.0
+    k1 = 1.07 + 900.0 / Re - 0.63 / (1.0 + 10.0 * Pr)
+    nu = f / 8.0 * Re * Pr / (k1 + 12.7 * np.sqrt(f / 8.0) * (Pr ** (2.0 / 3.0) - 1.0))
+    if wall == 'inner':
+        return nu * 0.75 * a ** -0.17
+    if wall == 'outer':
+        return nu * (0.9 - 0.15 * a ** 0.6)
+    raise ValueError('wall must be inner or outer')
+
+
+def annulus_films(m_dot, g, T_u, P, fluid=None):
+    """Annulus film coefficients [W/m^2/K] at the drill-string wall and the
+    hole wall, for annulus_model 'bingham' (development entry 5):
+
+    - Regime: a Bingham mud is turbulent by the criterion of Wilson and
+      Thomas (2006) on the hydraulic diameter (fluids.wilson_thomas_turbulent),
+      the criterion its pressure loss then uses too; a fluid without a yield
+      stress is turbulent from Re 2300, as in the pressure loss.
+    - Turbulent: Gnielinski's annulus correlation (gnielinski_annulus) with
+      Re and Pr on the wall apparent viscosity of a Bingham plastic,
+      eta_w = PV / (1 - tau_y / tau_w), the wall shear stress tau_w from the
+      turbulent (Blasius) pressure gradient. Between Re 2300 and 1e4 the
+      Nusselt number is interpolated linearly in Re between the laminar
+      value and the correlation at 1e4, as Gnielinski does for tubes.
+    - Laminar: the fully developed values of Lundberg, Reynolds and Kays
+      (1963) for a heated inner and a heated outer wall at the local r*.
+    """
+    from borethm import fluids
+    rho, cp, mu, k = fluid_props(T_u, P, fluid)
+    area, dh = g["A_ann"], g["Dh_ann"]
+    a = np.clip(g["r_out"] / g["r_wall"], _LAMINAR_R[0], 0.999)
+    v = m_dot / (rho * area)
+    re_p = rho * v * dh / mu
+    tau_y = float(getattr(fluid, 'yield_point', 0.) or 0.)
+    if tau_y > 0:
+        tau_w = 0.316 * re_p ** -0.25 * rho * v ** 2 / 8.0
+        ratio = tau_y / tau_w
+        turbulent = fluids.wilson_thomas_turbulent(rho, mu, tau_y, v, dh) & (ratio < 1.0)
+        eta = mu / (1.0 - np.minimum(ratio, 0.999))
+    else:
+        turbulent = re_p >= 2300.0
+        eta = mu
+    re_w = rho * v * dh / eta
+    pr_w = cp * eta / k
+    out = []
+    for wall, table in (('inner', _LAMINAR_NU_II), ('outer', _LAMINAR_NU_OO)):
+        laminar = np.interp(a, _LAMINAR_R, table)
+        at_1e4 = gnielinski_annulus(1e4, pr_w, a, wall)
+        gamma = np.clip((re_w - 2300.0) / (1e4 - 2300.0), 0.0, 1.0)
+        turb = np.where(re_w >= 1e4, gnielinski_annulus(np.maximum(re_w, 1e4), pr_w, a, wall),
+                        (1.0 - gamma) * laminar + gamma * at_1e4)
+        out.append(np.where(turbulent, turb, laminar) * k / dh)
+    return out[0], out[1]
+
+
 def conductances(z, T_d, T_u, m_dot, t_years, k_rock, geometry, exposure=None,
                  fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, geom_z=None,
-                 film_mult=1.0, P_surface=P_SURF, rock_response='logarithmic'):
+                 film_mult=1.0, P_surface=P_SURF, rock_response='logarithmic',
+                 annulus_model='v1.6.0'):
     """Vectorized per-length UAi (centre<->annulus), UAo (rock<->annulus).
     geom_z, if given, is where the string and hole are looked up (a point inside
     the same piece), so that nodes on a piece boundary take that piece's geometry.
     rock_response is 'logarithmic' (the original quasi-steady term) or
-    'cylinder' (the exact wall-temperature step response; see rock_response)."""
+    'cylinder' (the exact wall-temperature step response; see rock_response).
+    annulus_model is one of ANNULUS_MODELS; 'bingham' gives the string wall
+    and the hole wall their own film coefficients (annulus_films)."""
     g = geometry.at(z if geom_z is None else geom_z)
     g["tvd"] = geometry.survey.tvd(z)
     P = P_of_z(g["tvd"], P_surface)
     h_d = h_dittus(m_dot, g["A_bore"], g["Dh_bore"], T_d, P, fluid=fluid)
-    h_a = film_mult * h_dittus(m_dot, g["A_ann"], g["Dh_ann"], T_u, P, fluid=fluid)
+    if annulus_model == 'bingham':
+        h_string, h_hole = annulus_films(m_dot, g, T_u, P, fluid)
+        h_string, h_hole = film_mult * h_string, film_mult * h_hole
+    elif annulus_model == 'v1.6.0':
+        h_string = h_hole = film_mult * h_dittus(m_dot, g["A_ann"], g["Dh_ann"], T_u, P, fluid=fluid)
+    else:
+        raise ValueError(f'annulus_model must be one of {ANNULUS_MODELS}')
 
     R_in = 1.0 / (h_d * 2 * np.pi * g["r_bore"])
-    R_ao = 1.0 / (h_a * 2 * np.pi * g["r_out"])
+    R_ao = 1.0 / (h_string * 2 * np.pi * g["r_out"])
     f = g["f_joint"]
     UAi = (1 - f) / (R_in + g["R_body"] + R_ao) + f / (R_in + g["R_joint"] + R_ao)
 
     alpha = k_rock / rhocp_rock
     t = exposure_seconds(z, t_years, exposure)
     r_inf = g["r_rock"] + 2.0 * np.sqrt(alpha * t)
-    R_aw = 1.0 / (h_a * 2 * np.pi * g["r_wall"])
+    R_aw = 1.0 / (h_hole * 2 * np.pi * g["r_wall"])
     if rock_response == 'logarithmic':
         R_rock = np.log(r_inf / g["r_rock"]) / (2 * np.pi * k_rock)
     else:
@@ -227,7 +325,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
           fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
           tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF,
           hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
-          rock_response=None, annulus_heat=None):
+          rock_response=None, annulus_heat=None, annulus_model='v1.6.0'):
     # P_surface: pressure at the wellhead. Atmospheric by default; a closed,
     # pressurized loop (P_OP) keeps a return above 100 C liquid.
     # init: a previous solve() result whose profiles seed this one (continuation).
@@ -238,6 +336,12 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     # or 'logarithmic' (the original term, always used by v1.5.0).
     # annulus_heat: optional callable MD[m] -> W/m released into the annulus
     # fluid, such as rotary friction (rotary_heat). Not accepted by v1.5.0.
+    # annulus_model: annulus heat transfer and the laminar-turbulent criterion
+    # of a Bingham mud's pressure loss, one of ANNULUS_MODELS: 'v1.6.0'
+    # (Dittus-Boelter; apparent-viscosity criterion) or 'bingham' (entry 5:
+    # the Wilson-Thomas criterion shared with the pressure loss, wall
+    # viscosity, Gnielinski's annulus correlation and laminar annulus values).
+    # v1.5.0 accepts only 'v1.6.0', which reproduces its calculation.
     # friction_heat: add the heat dissipated by friction in the bore and annulus,
     # and across the bit nozzles (total flow area tfa), to the fluid. Off by
     # default, which is how the model was first calibrated.
@@ -268,11 +372,16 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
         raise ValueError('hydraulics_model v1.5.0 reproduces the original logarithmic rock response')
     if hydraulics_model == 'v1.5.0' and annulus_heat is not None:
         raise ValueError('hydraulics_model v1.5.0 accepts no annulus heat source')
+    if annulus_model not in ANNULUS_MODELS:
+        raise ValueError(f'annulus_model must be one of {ANNULUS_MODELS}')
+    if hydraulics_model == 'v1.5.0' and annulus_model != 'v1.6.0':
+        raise ValueError('hydraulics_model v1.5.0 accepts only annulus_model v1.6.0')
+    regime = 'wilson-thomas' if annulus_model == 'bingham' else 'apparent-viscosity'
     if hydraulics_model=='v1.5.0':
         hl.check_legacy(geometry,surface,transitions)
         loss_model=None
     else:
-        loss_model=hl.LossModel(geometry,transitions=transitions)
+        loss_model=hl.LossModel(geometry,transitions=transitions,regime=regime)
     T_tvd = geotherm if geotherm is not None else (lambda d: T_surf + G * d)
     Trock = lambda zz: T_tvd(geometry.survey.tvd(zz))
     z = np.linspace(0, L, n_nodes)
@@ -281,7 +390,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     def derivs(zz, Td, Tu, geom_z=None):
         UAi, UAo, P = conductances(zz, Td, Tu, m_dot, t_years, k_rock, geometry, exposure,
                                    fluid, rhocp_rock, geom_z, film_mult, P_surface,
-                                   rock_response)
+                                   rock_response, annulus_model)
         cpd = _cp(Td, P, fluid)
         cpu = _cp(Tu, P, fluid)
         dTd = UAi * (Tu - Td) / (m_dot * cpd)
@@ -386,6 +495,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                # a solution outside the water table's range (above 480 C) is spurious
                success=bool(sol.success and max(Td.max(), Tu.max()) < 480.0),
                P_bottom=P_L,hydraulics_model=hydraulics_model,rock_response=rock_response,
+               annulus_model=annulus_model,
                annulus_heat_W=(None if annulus_heat is None else _source_integral(annulus_heat, L)),
                surface=surface,transitions=transitions)
     if loss_model is not None:
@@ -520,7 +630,7 @@ def _hydraulics_v150(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAU
 
 def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
                friction='blasius', bit=True, fluid=None, P_surface=P_SURF,
-               hydraulics_model=None, surface=None, transitions=None):
+               hydraulics_model=None, surface=None, transitions=None, annulus_model=None):
     """Pressure budget [Pa] with named pressure/heat loss terms.
 
     Existing arguments retain their order and units. New calls use
@@ -535,12 +645,19 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     mode=hydraulics_model or (result or {}).get('hydraulics_model','v1.6.0')
     surface=surface if surface is not None else (result or {}).get('surface')
     transitions=transitions or (result or {}).get('transitions','abrupt')
+    annulus_model=annulus_model or (result or {}).get('annulus_model','v1.6.0')
+    if annulus_model not in ANNULUS_MODELS:
+        raise ValueError(f'annulus_model must be one of {ANNULUS_MODELS}')
     if mode=='v1.5.0':
         hl.check_legacy(geometry,surface,transitions)
+        if annulus_model!='v1.6.0':
+            raise ValueError('hydraulics_model v1.5.0 accepts only annulus_model v1.6.0')
         return _hydraulics_v150(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface)
     if mode!='v1.6.0':
         raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
-    return hl.hydraulics(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface,surface,transitions)
+    regime='wilson-thomas' if annulus_model=='bingham' else 'apparent-viscosity'
+    return hl.hydraulics(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface,surface,transitions,
+                         regime=regime)
 
 
 def pump_power(m_dot, L=None, T_avg=80.0, geometry=None):

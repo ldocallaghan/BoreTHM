@@ -73,6 +73,11 @@ YP_REF = 28.0 * LBF_100FT2    # Pa (28 lbf/100 ft2 at 80 F), held in temperature
 MUD_T_LIMIT = 150.0           # C
 
 RE_CRITICAL = 2100.0          # apparent-viscosity Reynolds number (Bourgoyne et al. 1986)
+# Criteria for the change from laminar to turbulent flow of a Bingham plastic:
+# the apparent-viscosity Reynolds number above (the original), or the
+# Hedstrom-number fits of Wilson and Thomas (2006), applied in an annulus on
+# its hydraulic diameter.
+REGIMES = ('apparent-viscosity', 'wilson-thomas')
 
 
 def _water(T, P):
@@ -138,7 +143,42 @@ def water():
     return Mud(_rho_water_ref(), pv_ref=None, yield_point=0.0)
 
 
-def bingham_gradient(rho, mu_p, tau_y, v, D, annulus):
+def wilson_thomas_turbulent(rho, mu_p, tau_y, v, D):
+    """True where a Bingham plastic of plastic viscosity mu_p [Pa s] and yield
+    stress tau_y [Pa] is turbulent at mean velocity v [m/s] in a duct of
+    diameter D [m], by the fits of Wilson and Thomas (2006) to their model of
+    the transition (Can. J. Chem. Eng. 84, 520-526, eqs. 17-20), with the
+    Hedstrom number He = rho tau_y D^2 / mu_p^2:
+
+        He < 1700:          rho V_T D / mu_p = 2100 / (1 + 8.3e-8 log10(He)^13)
+        1700 <= He <= 1e5:  rho V_T D / mu_p = 80 He^0.40
+        He > 1e5:           V_T = 25 (tau_y / rho)^0.5
+
+    The fits are for pipes; an annulus uses its hydraulic diameter."""
+    rho, mu_p, v, D = (np.asarray(x, float) for x in (rho, mu_p, v, D))
+    he = rho * tau_y * D ** 2 / mu_p ** 2
+    with np.errstate(divide='ignore', invalid='ignore'):
+        # below He = 1 the first fit is 2100 to within 1e-7; it also covers no yield stress
+        log_he = np.log10(np.maximum(he, 1.0))
+        re_t = np.where(he < 1700.0, 2100.0 / (1.0 + 8.3e-8 * log_he ** 13), 80.0 * he ** 0.40)
+    v_t = np.where(he > 1e5, 25.0 * np.sqrt(tau_y / rho), re_t * mu_p / (rho * D))
+    return np.abs(v) > v_t
+
+
+def bingham_turbulent(rho, mu_p, tau_y, v, D, annulus, regime='apparent-viscosity'):
+    """True where a Bingham plastic is turbulent by the named criterion
+    (REGIMES), with the apparent viscosity of bingham_gradient."""
+    if regime == 'wilson-thomas':
+        return wilson_thomas_turbulent(rho, mu_p, tau_y, v, D)
+    if regime != 'apparent-viscosity':
+        raise ValueError(f'regime must be one of {REGIMES}')
+    rho, mu_p, D = (np.asarray(x, float) for x in (rho, mu_p, D))
+    v = np.maximum(np.abs(np.asarray(v, float)), 1e-9)
+    mu_a = mu_p + tau_y * D / ((8.0 if annulus else 6.0) * v)
+    return rho * v * D / mu_a > RE_CRITICAL
+
+
+def bingham_gradient(rho, mu_p, tau_y, v, D, annulus, regime='apparent-viscosity'):
     """Frictional pressure gradient [Pa/m] of a Bingham plastic at mean
     velocity v in a pipe of diameter D, or an annulus of hydraulic diameter D
     (outer less inner diameter). Laminar, from the plug-flow limits of
@@ -151,7 +191,8 @@ def bingham_gradient(rho, mu_p, tau_y, v, D, annulus):
     mu_p v / (1000 (d2 - d1)^2) + tau_y / (200 (d2 - d1)), psi/ft). The flow
     is turbulent when the Reynolds number on the apparent viscosity, the
     Newtonian viscosity giving the same laminar loss, exceeds RE_CRITICAL;
-    then the Blasius friction factor on the plastic viscosity."""
+    then the Blasius friction factor on the plastic viscosity. regime names
+    the criterion (REGIMES); wilson-thomas uses wilson_thomas_turbulent."""
     rho, mu_p, v, D = (np.asarray(x, float) for x in (rho, mu_p, v, D))
     v = np.maximum(np.abs(v), 1e-9)
     if annulus:
@@ -162,4 +203,5 @@ def bingham_gradient(rho, mu_p, tau_y, v, D, annulus):
         mu_a = mu_p + tau_y * D / (6.0 * v)
     Re_a = rho * v * D / mu_a
     turb = 0.316 * (rho * v * D / mu_p) ** -0.25 * rho * v ** 2 / (2.0 * D)
-    return np.where(Re_a > RE_CRITICAL, turb, lam), Re_a
+    turbulent = bingham_turbulent(rho, mu_p, tau_y, v, D, annulus, regime)
+    return np.where(turbulent, turb, lam), Re_a

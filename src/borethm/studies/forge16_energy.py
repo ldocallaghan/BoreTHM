@@ -238,7 +238,7 @@ def diagnostics(s,g,fluid,result,exposure,breaks,mdot):
     def terms(geom_z=None):
         gm=g.at(z if geom_z is None else geom_z);P=m1.P_of_z(g.survey.tvd(z))
         ui,uo,_=m1.conductances(z,td,tu,mdot,1/365,b.K_ROCK,g,exposure,fluid,b.RHOCP_ROCK,geom_z,1.,
-                                 rock_response=response)
+                                 rock_response=response,annulus_model=result.get('annulus_model') or 'v1.6.0')
         rock=uo*(form(g.survey.tvd(z))-tu);internal=ui*(tu-td)
         cb=m1._cp(td,P,fluid);ca=m1._cp(tu,P,fluid)
         gb=m1._friction_gradient(mdot,td,P,gm['A_bore'],gm['Dh_bore'],fluid)
