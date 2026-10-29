@@ -6,6 +6,10 @@ No evaluated individual design change or evaluated pair made either deep-site pr
 
 At Soultz, eight of nine selected stress/strength cases have an open target drilling interval; at United Downs, two of four do. Both complete programmes remain **NO-GO** because no mud density satisfies the pressure limits throughout the evaluated hole, and tool-temperature limits are exceeded.
 
+### With the v1.6.0 calculation
+
+The results in this guide come from the v1.3.4 programme study. They use the v1.5.0 calculation, which still reproduces them. With the v1.6.0 calculation both programmes remain **NO-GO**. At Soultz the selected flow is 45 L/s and two of nine cases have an open target drilling interval. At United Downs the pump limit sets the flow at 40 L/s, and one of four cases is open. The added annulus losses raise the circulating pressure: at the Soultz target, annular friction rises from 0.070 to 0.157 SG-equivalent, and the upper drilling bound falls from 1.296 to 1.209 SG-equivalent. Tool peaks while drilling are 196.3 °C at Soultz and 239.4 °C at United Downs. The design changes and the breakout-timing study have not been repeated with v1.6.0.
+
 ### Target-depth cases
 
 UCS is unconfined compressive strength; SHmax is maximum horizontal stress. Need and limit are static-column SG-equivalent values at the target. They differ from the surface mud densities a programme would prescribe. The saved target stability-cycle verdict also checks connections and the trip; it excludes separate whole-hole, tool and equipment gates. Each site's reference thermal/hydraulic solution is reused across cases without a fresh coupled evaluation for each case. An open interval does not prove the saved attempted fluid lies inside it.

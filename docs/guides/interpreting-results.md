@@ -66,7 +66,7 @@ particular failure mode.
 
 ## A worked JSON excerpt
 
-This excerpt selects one of the nine target cases and part of the whole-hole pressure results from a [saved Soultz assessment](../../results/v1.3.4/ci/38186784798-1/reference/soultz.json). Extra fields are omitted and the exported numbers are unchanged. It uses the base assumption of immediate breakout formation.
+This excerpt selects one of the nine target cases and part of the whole-hole pressure results from a [saved Soultz assessment](../../results/v1.3.4/ci/38186784798-1/reference/soultz.json). Extra fields are omitted and the exported numbers are unchanged. It uses the base assumption of immediate breakout formation. The saved assessment used the v1.5.0 calculation; with v1.6.0 the same Soultz evaluation gives a whole-hole drilling-fluid upper bound of about 1,228 kg/m³, and the window remains closed.
 
 ```json
 {

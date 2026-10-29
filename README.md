@@ -146,7 +146,7 @@ The reference assessments target rock at 400 °C. The table reports the base cas
 | Soultz-sous-Forêts | 10.70 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; the best attempted run-in exceeds the tool limit. |
 | United Downs | 12.86 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; drilling and run-in exceed the tool limit. |
 | Larderello | 2.40 | CONDITIONAL | Requires weighted drilling and trip fluids. |
-| Pannonian Basin | 9.71 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; coating qualification is unresolved. |
+| Pannonian Basin | 9.71 | NO-GO | No drilling or trip fluid density satisfies all pressure limits; run-in exceeds the tool limit, and coating qualification is unresolved. |
 | Newberry | 3.63 | GO | The evaluated programme passes with water. |
 
 These sites have different evidence quality. Soultz and United Downs use measured or calibrated stresses and strengths, extrapolated to the targets. Larderello and Pannonian retain unsourced strength assumptions. Newberry's well check does not reproduce the observed pattern in every rock type. The [input-source records](https://github.com/ldocallaghan/BoreTHM/blob/main/src/borethm/data/sites/stress_sources.md) explain those differences.
@@ -160,6 +160,8 @@ At Soultz and United Downs, some stress and strength cases have an open drilling
 The assumed time between rock exposure and breakout formation can change the **whole-hole drilling-fluid window**. In the saved scan, that window first opens between delays of 15 and 20 minutes at Soultz, and between 10 and 15 minutes at United Downs. These are brackets from calculations with assumed delays. Breakout formation time in hot granite has not been measured in the studies reviewed here. Both complete programmes remain NO-GO because other checks still fail. The [breakout-timing study](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/breakout-timing.md) explains the assumptions and results.
 
 ### Design comparisons
+
+The breakout-timing study and the design comparisons were calculated with the v1.5.0 calculation and have not been repeated with v1.6.0.
 
 No evaluated design change or evaluated pair made either deep-site programme pass. The [design comparisons](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/design-comparisons.md) describe the tested settings and remaining failures. They do not establish a complete operating envelope or show that every possible design would fail.
 
