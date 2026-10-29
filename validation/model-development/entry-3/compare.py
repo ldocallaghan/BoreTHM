@@ -2,7 +2,9 @@
 
 Reads saved scoreboard outputs only; runs no model. The working calculation
 is entry 1 with D5. A row is paired only when all three calculations compare
-the same number of samples.
+the same number of samples and the same successful samples: the same
+sample IDs in the row's well for the circulation gaps, and the same events
+for G4.
 """
 from collections import defaultdict
 import argparse
@@ -23,17 +25,29 @@ def number(value):
     return None if value in ('', None) else float(value)
 
 
+def successes(root):
+    """Successful sample IDs by well, and successful run-in events."""
+    ids = defaultdict(set)
+    for r in score.read_csv(root/'circulation.csv'):
+        if r['success'] == 'True':
+            ids[r['well']].add(r['sample_id'])
+    ids['G4'] = {r['event_id'] for r in score.read_csv(root/'run-in.csv') if r['success'] == 'True'}
+    return ids
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--score', type=Path, default=Path(__file__).with_name('results'))
     args = parser.parse_args()
     roots = {**ROOTS, 'entry3': args.score}
     boards = {k: {(r['gap'], r['well'], r['group']): r for r in score.read_csv(p/'scoreboard.csv')} for k, p in roots.items()}
+    succeeded = {k: successes(p) for k, p in roots.items()}
     rows = []
     for key, new in boards['entry3'].items():
         row = dict(gap=key[0], well=key[1], group=key[2], units=new['units'], planned=int(new['planned']))
         counts = {k: boards[k][key]['compared'] for k in boards}
-        row['paired'] = len(set(counts.values())) == 1
+        samples = {k: frozenset(succeeded[k]['G4' if key[0] == 'G4' else key[1]]) for k in boards}
+        row['paired'] = len(set(counts.values())) == 1 and len(set(samples.values())) == 1
         for name in boards:
             old = boards[name][key]
             row[f'{name}_compared'] = int(old['compared'])

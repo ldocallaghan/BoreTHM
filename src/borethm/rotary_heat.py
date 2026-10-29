@@ -88,10 +88,16 @@ def contact_force(grid, inc, azi, buoyed_weight, wob):
 class RotaryHeat:
     """Heat released by string rotation.
 
-    bit_W is released at the bit. annulus(md) returns heat per unit length
-    [W/m] released into the annulus fluid. friction_factor is the value
-    implied by the off-bottom torque; capped is True when the calculated
-    on-bottom friction exceeded the measured torque and was scaled down.
+    bit_W is released at the bit. density holds the friction heat per unit
+    length [W/m] of each cell, centred on grid, and sums to friction_W over
+    the cells. annulus(md) returns the continuous source released into the
+    annulus fluid: the cell values joined linearly between cell centres,
+    held level to the surface and the bit, and scaled so that its exact
+    integral from 0 to length is friction_W. The callable's knots attribute
+    gives the points between which it is linear. friction_factor is the
+    value implied by the off-bottom torque; capped is True when the
+    calculated on-bottom friction exceeded the measured torque and was
+    scaled down.
     """
     bit_W: float
     friction_W: float
@@ -99,9 +105,22 @@ class RotaryHeat:
     capped: bool
     grid: np.ndarray
     density: np.ndarray
+    length: float = None
 
-    def annulus(self, md):
-        return np.interp(md, self.grid, self.density)
+    @property
+    def annulus(self):
+        start = min(0.0, float(self.grid[0]))
+        end = float(self.grid[-1]) if self.length is None else max(float(self.length), float(self.grid[-1]))
+        knots = np.r_[start, self.grid, end]
+        values = np.r_[self.density[0], self.density, self.density[-1]]
+        total = float(np.trapezoid(values, knots))
+        if total > 0:
+            values = values*self.friction_W/total
+
+        def source(md):
+            return np.interp(md, knots, values)
+        source.knots = knots
+        return source
 
 
 def partition(geometry, survey_md, inc_deg, azi_deg, mud_density, rpm, torque_on, torque_off,
@@ -144,4 +163,4 @@ def partition(geometry, survey_md, inc_deg, azi_deg, mud_density, rpm, torque_on
         per_length = spread*friction_W/np.sum(spread*ds)
     bit_W = max(omega*float(torque_on)-friction_W, 0.0)
     centres = 0.5*(grid[1:]+grid[:-1])
-    return RotaryHeat(bit_W, friction_W, float(friction_factor), bool(capped), centres, per_length)
+    return RotaryHeat(bit_W, friction_W, float(friction_factor), bool(capped), centres, per_length, float(L))

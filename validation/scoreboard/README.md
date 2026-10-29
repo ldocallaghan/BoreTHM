@@ -28,7 +28,7 @@ The committed `transient-inputs.json` is that extract, with source checksums. Su
 python validation/scoreboard/scoreboard.py run --mode legacy --output EMPTY_OUTPUT_DIRECTORY
 ```
 
-The `current` mode is reserved for the declared candidate comparison. It retains the same samples, mud convention and primary sensor proxies, using the previously declared NC50 scenario for 16A and EIS for 16B. Its run-in conditioning profiles are recalculated using that hydraulic mode. It has not been run on this scoreboard.
+The `current` mode is reserved for the declared candidate comparison. It retains the same samples, mud convention and primary sensor proxies, using the previously declared NC50 scenario for 16A and EIS for 16B. Its run-in conditioning profiles are recalculated using that hydraulic mode. The development entries are scored through their own scripts on the frozen functions, with results under `validation/model-development/`; see the [development log](../../docs/science/model-development.md).
 
 ## Baseline archive
 

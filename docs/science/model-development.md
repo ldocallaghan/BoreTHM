@@ -55,9 +55,9 @@ This table includes work performed before this log existed. Earlier development 
 | Entry 2 component diagnosis | Separate a length-dependent connection contribution from assembly-passage losses | The assumed 1.25-in motor passage is a large calculated contribution on 16A; connection losses also contribute | Diagnosis only; no model change or acceptance decision |
 | Thermal geometry and heat-source separation | A should reproduce a heat-source effect; B should reproduce a thermal-geometry effect; compare with the single-pass power scale | A reproduces assembly mean bit rises within 0.02 °C; B changes them by less than 0.01 °C. A exceeds the bulk scale at the bit. | Diagnosis only; no model correction selected from it |
 | D5 equipment representation | Remove a motor mandrel's full-length passage and invented bit IDs; pressure and dissipation should decrease | All 467 circulation cases and nine available run-in cases calculated, with explicit thermal-only instrument assumptions and unknown internal tool losses | Debugging correction; acceptance of integrated entry 1 remains pending |
-| Entry 1 with D5, original 26.7 °C convention | Revised hydraulic losses with equipment-corrected assembly passages | 16A in-hole power 654 versus measured pump power 928 kW; G3 rises 1.3–3.7 °C from legacy; G6 regular bias -7.2 °C and trial bias +3.0 °C | Kept as the working development calculation, 28 October 2026; independent review of D5 outstanding |
-| Entry 3, cylindrical rock response (R1) | Exact wall-temperature step response replaces the logarithmic rock term; bit +0.2 to +2.2 °C and return +0.1 to +0.35 °C in the working calculation | Every expected score change met within 0.1 °C. Cold biases shrink; warm biases grow, including the trial bias, from +3.03 to +4.62 °C | Kept under its declared rule, 28 October 2026 |
-| Entry 4, rotary heat (M2) | Measured surface rotary power released as wall friction along the string and as work at the bit, split by a soft-string torque balance; warmer everywhere, most where the string rotates fast and deep | Every expected score change met within 0.25 °C. Deep 16A biases shrink to -2.1, -2.8 and -13.6 °C; 16B regular pipe -1.40 °C, with its deep runs now warm; trial bias +7.55 °C | Kept under its declared rule, 28 October 2026 |
+| Entry 1 with D5, original 26.7 °C convention | Revised hydraulic losses with equipment-corrected assembly passages | 16A in-hole power 654 versus measured pump power 928 kW; G3 rises 1.3–3.7 °C from legacy; G6 regular bias -7.2 °C and trial bias +3.0 °C | Kept as the working development calculation, 28 October 2026; upheld by independent review, 29 October 2026 |
+| Entry 3, cylindrical rock response (R1) | Exact wall-temperature step response replaces the logarithmic rock term; bit +0.2 to +2.2 °C and return +0.1 to +0.35 °C in the working calculation | Every expected score change met within 0.1 °C. Cold biases shrink, except BHA 35r1, which crosses zero; warm biases grow, including the trial bias, from +3.03 to +4.62 °C | Kept under its declared rule, 28 October 2026; upheld by independent review, 29 October 2026 |
+| Entry 4, rotary heat (M2) | Measured surface rotary power released as wall friction along the string and as work at the bit, split by a soft-string torque balance; warmer everywhere, most where the string rotates fast and deep | Every expected score change met within 0.25 °C. Deep 16A biases shrink to -2.1, -2.8 and -13.6 °C; 16B regular pipe -1.40 °C, with its deep runs now warm; trial bias +7.55 °C | Kept under its declared rule, 28 October 2026; upheld by independent review, 29 October 2026 |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -620,7 +620,7 @@ No golden regeneration or slow suite was performed. No 56-32, 58-32 or 78B-32 ta
 
 ## 28 October 2026: decision on entry 1 with D5
 
-Entry 1 with D5 is kept as the working development calculation. Later entries are declared and scored against it, and each comparison continues to report the legacy baseline beside it. The decision is based on the physical definitions of the hydraulic terms and on the equipment records behind D5. The gap changes are mixed and did not decide it: G2, G5 and the deep-run G3 biases improve, while the BHA 23, 30 and 34 biases and the trial bias grow. A review of the D5 commits by someone who did not write them is still outstanding, and its findings will be recorded here.
+Entry 1 with D5 is kept as the working development calculation. Later entries are declared and scored against it, and each comparison continues to report the legacy baseline beside it. The decision is based on the physical definitions of the hydraulic terms and on the equipment records behind D5. The gap changes are mixed and did not decide it: G2, G5 and the deep-run G3 biases improve, while the BHA 23, 30 and 34 biases and the trial bias grow. A review of the D5 commits by someone who did not write them followed; its outcome is recorded under 29 October 2026.
 
 ## 28 October 2026: entry 3 declaration, cylindrical rock response (R1)
 
@@ -672,7 +672,7 @@ Source: [entry 3 archive](../../validation/model-development/entry-3/results/REA
 
 ### Pressure and power (G1, G2)
 
-Standpipe pressure falls by 0.9–3.5 psi on the nine 16A assemblies and by 1.2–1.6 psi on the four motorless 16B assemblies. The warmer fluid has a lower viscosity. Modelled in-hole power changes from 654.21 to 653.92 kW on 16A and from 342.54 to 342.46 kW on 16B, against measured 928.27 and 526.52 kW. No numerical prediction was made for these.
+Standpipe pressure falls by 0.8–3.5 psi on the nine 16A assemblies and by 1.2–1.6 psi on the four motorless 16B assemblies. The warmer fluid has a lower viscosity. Modelled in-hole power changes from 654.21 to 653.92 kW on 16A and from 342.54 to 342.46 kW on 16B, against measured 928.27 and 526.52 kW. No numerical prediction was made for these.
 
 ### Temperatures (G3, G4, G5, G6)
 
@@ -699,7 +699,7 @@ Over every sample, the mean bit change by assembly is +0.50 to +1.69 °C on 16A 
 
 ### Interpretation and decision
 
-The exact response lowers the rock resistance by about 5–8% for exposures between one hour and 30 days. More heat therefore reaches the fluid from the rock, and every circulating temperature rises. Each cold bias becomes smaller and each warm bias larger. The calculated changes reproduce the model-only predictions to within 0.1 °C in every row of the declaration table. The predictions used the same code on one window per assembly, so this agreement shows that those windows represent their assemblies. It is not an independent test of the physics.
+The exact response lowers the rock resistance by about 5–8% for exposures between one hour and 30 days. More heat therefore reaches the fluid from the rock, and every circulating temperature rises. Each warm bias becomes larger, and the cold biases become smaller except where they cross zero: BHA 35r1 moves from -0.36 to +0.52 °C, so its absolute bias grows by 0.17 °C. The calculated changes reproduce the model-only predictions to within 0.1 °C in every row of the declaration table. The predictions used the same code on one window per assembly, so this agreement shows that those windows represent their assemblies. It is not an independent test of the physics.
 
 The trial bias grows from +3.03 to +4.62 °C. The trial geometry uses an insulation conductivity that was fitted to 16B with the logarithmic rock term, so the fit may have absorbed part of that term's error. This log does not allow a refit. The check is an independently sourced value for the trial pipe's insulation (candidate P1).
 
@@ -804,11 +804,11 @@ The pooled 16B regular-pipe bias hides a split. The shallow runs stay cold: EOW 
 
 ### Interpretation and decision
 
-Measured rotary power reaches 340 kW on 16B and 130 kW on 16A, and it warms every circulating temperature. On 16A it closes about 1.7–2.9 °C of the BHA 35r2, 38, 39 and 42 cold biases and widens the warm biases of BHA 23, 30 and 34 by about 0.7–1.0 °C. On 16B its effect is larger, because the power is larger and much of it reaches the bit. The deep 16B runs move from cold to warm.
+Measured rotary power reaches 340 kW on 16B and 130 kW on 16A, and it warms every circulating temperature that has rotary input. Two 16A samples on BHA 42, 16A-s0357 and 16A-s0358, record zero on-bottom torque and so receive none. On 16A it closes about 1.7–2.9 °C of the BHA 35r2, 38, 39 and 42 cold biases and widens the warm biases of BHA 23, 30 and 34 by about 0.7–1.0 °C. On 16B its effect is larger, because the power is larger and much of it reaches the bit. The deep 16B runs move from cold to warm.
 
 The predictions used the same code and inputs on one window per assembly, so their agreement with the score shows only that the windows and the per-kW scaling represented the assemblies.
 
-The declaration placed all rotary heat in the fluid, which is an upper limit. The warm deep 16B runs and trial runs are consistent with that limit overstating the fluid's share, but other explanations remain open: the fitted trial insulation, the unresolved 16B sensor positions and the soft-string simplifications. In the 133 capped samples the torque balance found more friction than the measured on-bottom torque allows, which suggests the off-bottom rows can overstate the friction, for example when they include reaming. A measured partition would separate these. The 16A downhole-torque channel and the 16B bit-torque channel, if their basis can be established, would measure the torque reaching the bottom.
+The declaration placed all rotary heat in the fluid, which is an upper limit on the energy the fluid receives. It is not a bound on every local temperature, because where the heat is released changes the exchange with the string and the rock (see the review outcome below). The warm deep 16B runs and trial runs are consistent with that limit overstating the fluid's share, but other explanations remain open: the fitted trial insulation, the unresolved 16B sensor positions and the soft-string simplifications. In the 133 capped samples the torque balance found more friction than the measured on-bottom torque allows, which suggests the off-bottom rows can overstate the friction, for example when they include reaming. A measured partition would separate these. The 16A downhole-torque channel and the 16B bit-torque channel, if their basis can be established, would measure the torque reaching the bottom.
 
 Under the rule declared before scoring, entry 4 is kept: the score shows no implementation error, and every expected change was met within 0.25 °C. The calculation with entries 1 to 4 and D5 becomes the working calculation. The largest remaining gaps are BHA 42 at -13.63 °C, the 16A return at -4.70 °C, the shallow 16B runs, the warm 16B deep and trial runs, and every run-in peak.
 
@@ -824,3 +824,28 @@ The difference between v1.5.0 and v1.6.0 comes mostly from the connection losses
 
 This result was not used to change any entry, input or setting.
 
+
+## 29 October 2026: independent review of D5, entry 3 and entry 4
+
+A review by someone who did not write the commits reran the D5, entry 3 and entry 4 calculations, rederived the cylindrical rock response and the soft-string torque balance, and checked the declarations against the commit order. It found nothing that reverses a decision. D5 stays as the working equipment representation, and entries 3 and 4 stay kept within their declared scope. The reruns reproduced the archived results: for entry 4, to within 0.0007 °C in circulation temperature and 0.0004 psi in standpipe pressure.
+
+### Corrections to the declarations
+
+The declarations are left as committed. These statements in them were inaccurate or too broad:
+
+- Entries 3 and 4 say that no measurement, or no measured temperature or pressure, was read by the prediction scripts. The scripts used no scored target and no residual: no bit, MWD or return temperature target and no standpipe-pressure target. They did use measured operating inputs, as declared elsewhere: the inlet temperature, the reported motor differential for the face heat, the flow, and the formation temperature and exposure, which come from observations. Entry 4 also used the measured rotary inputs.
+- The entry 4 field inventory for `build_rotary.py` omitted the timestamps, which set the windows, and the 16B bit-depth and hole-depth columns, which are read and not used. A sample's off-bottom reference also needs at least three qualifying rows.
+- Entry 4 called the placement of all rotary heat in the fluid an upper limit. It is an upper limit on the rotary energy the fluid receives, and not on each local temperature. In the review's check on a capped 16B sample, moving the whole 78.7 kW to the bit raised the bit temperature by 1.38 °C and lowered the return by 0.07 °C. The partition between friction and bit work is a separate uncertainty.
+
+The results sections have been corrected where the review found the same kind of overstatement: the entry 3 pressure range, the BHA 35r1 bias that crosses zero, and the two entry 4 samples with no rotary input.
+
+### Code changes from the review
+
+- The continuous annulus source joined the cell values linearly, and its exact integral differed from the friction heat by up to 5.4 W in 467 samples (0.016%). It is now scaled so that its integral equals the friction heat, and the solve reports the integral exactly. In the review's check on 16A-s0218, this changes the bit temperature by 0.0001 °C. The archived entry 4 results were calculated before the change and are not rerun.
+- The 16A and 16B energy diagnostics used the logarithmic rock term whatever the diagnosed solve had used. They now take the solve's rock term.
+- The entry 3 and entry 4 comparison scripts treated a row as paired when the calculations compared the same number of samples. They now also require the same successful samples. The archived comparisons are unchanged under the stricter check.
+
+### Left open
+
+- Before entry 4 is used as evidence of how rotary heat divides between the wall and the bit, the off-bottom reference rows need an audit of the operation, axial movement, speed and depth in each. In the five capped samples the review examined, the off-bottom speed was 1.74 to 2.25 times the on-bottom speed, so the reference torque can include speed-dependent drag and reaming.
+- The motor-loss candidates considered for D5 and not adopted should be listed with the reason for each, so that no unmatched manufacturer figure is later read as a verified loss.

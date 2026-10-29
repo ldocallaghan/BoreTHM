@@ -233,9 +233,12 @@ def diagnostics(s,g,fluid,result,exposure,breaks,mdot):
     z=np.unique(np.r_[np.linspace(0,g.md_bit,int(np.ceil(g.md_bit))+1),changes,changes-.5*m1.BLEND,changes+.5*m1.BLEND])
     z=z[(z>=0)&(z<=g.md_bit)];td,tu=result['sol'].sol(z)
     form=b.T_FORM if s['well']=='16B' else a.formation('216',g.survey)[0]
+    # the rock term the diagnosed solve used; results without one are from the original logarithmic term
+    response=result.get('rock_response') or 'logarithmic'
     def terms(geom_z=None):
         gm=g.at(z if geom_z is None else geom_z);P=m1.P_of_z(g.survey.tvd(z))
-        ui,uo,_=m1.conductances(z,td,tu,mdot,1/365,b.K_ROCK,g,exposure,fluid,b.RHOCP_ROCK,geom_z,1.)
+        ui,uo,_=m1.conductances(z,td,tu,mdot,1/365,b.K_ROCK,g,exposure,fluid,b.RHOCP_ROCK,geom_z,1.,
+                                 rock_response=response)
         rock=uo*(form(g.survey.tvd(z))-tu);internal=ui*(tu-td)
         cb=m1._cp(td,P,fluid);ca=m1._cp(tu,P,fluid)
         gb=m1._friction_gradient(mdot,td,P,gm['A_bore'],gm['Dh_bore'],fluid)

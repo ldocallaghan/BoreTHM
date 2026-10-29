@@ -211,6 +211,15 @@ def conductances(z, T_d, T_u, m_dot, t_years, k_rock, geometry, exposure=None,
     return UAi, UAo, P
 
 
+
+def _source_integral(source, L):
+    """Integral over the well of a heat source per unit length [W]. A source
+    with a knots attribute is linear between its knots, so including them
+    makes the trapezoidal sum exact."""
+    knots = np.asarray(getattr(source, 'knots', ()), float)
+    z = np.unique(np.r_[np.linspace(0, L, 4001), knots[(knots > 0) & (knots < L)]])
+    return float(np.trapezoid(np.asarray(source(z), float), z))
+
 def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
           target_rock_T=C.TARGET_ROCK_TEMP, Q_face=28000.0, t_years=1.0,
           pipe=None, k_rock=C.K_ROCK, n_nodes=160, verbose=True,
@@ -377,8 +386,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                # a solution outside the water table's range (above 480 C) is spurious
                success=bool(sol.success and max(Td.max(), Tu.max()) < 480.0),
                P_bottom=P_L,hydraulics_model=hydraulics_model,rock_response=rock_response,
-               annulus_heat_W=(None if annulus_heat is None else
-                               float(np.trapezoid(np.asarray(annulus_heat(zz), float), zz))),
+               annulus_heat_W=(None if annulus_heat is None else _source_integral(annulus_heat, L)),
                surface=surface,transitions=transitions)
     if loss_model is not None:
         if friction_heat:

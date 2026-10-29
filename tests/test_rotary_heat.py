@@ -81,3 +81,13 @@ def test_friction_source_is_smooth_and_continuous_to_the_well_ends():
     z = np.linspace(0., 1000., 2001)
     assert np.max(np.abs(np.diff(heat.annulus(z)))) < 0.05*np.max(heat.annulus(z))
     assert np.sum(heat.density*np.diff(np.unique(np.r_[np.arange(0., 1000., 2.), 1000.]))) == pytest.approx(heat.friction_W)
+
+
+def test_continuous_source_carries_exactly_the_friction_heat():
+    g = well()
+    md, inc, azi = np.array([0., 400., 1000.]), np.array([0., 20., 40.]), np.zeros(3)
+    heat = rh.partition(g, md, inc, azi, 1000., 60., 5e3, 4e3, 50e3, step=3.0)
+    source = heat.annulus
+    assert source.knots[0] == 0. and source.knots[-1] == g.md_bit
+    assert np.trapezoid(source(source.knots), source.knots) == pytest.approx(heat.friction_W, rel=1e-12)
+    assert m1._source_integral(source, g.md_bit) == pytest.approx(heat.friction_W, rel=1e-12)
