@@ -849,3 +849,58 @@ The results sections have been corrected where the review found the same kind of
 
 - Before entry 4 is used as evidence of how rotary heat divides between the wall and the bit, the off-bottom reference rows need an audit of the operation, axial movement, speed and depth in each. In the five capped samples the review examined, the off-bottom speed was 1.74 to 2.25 times the on-bottom speed, so the reference torque can include speed-dependent drag and reaming.
 - The motor-loss candidates considered for D5 and not adopted should be listed with the reason for each, so that no unmatched manufacturer figure is later read as a verified loss.
+
+## 29 October 2026: entry 5 declaration, measured 16B mud rheology (I1)
+
+### Change
+
+For 16B, the frozen scoreboard keeps the original S1 mud ("s1_original"). Where a run's mud report gave no plastic viscosity or yield point, S1 filled the field from BoreTHM's reference programme mud: PV 27 cP and YP 28 lbf/100 ft², a weighted-mud value. Seven assemblies carry these fills:
+
+- EOW 11 and 12: PV and YP;
+- EOW 13 and 15–18: YP.
+
+They are inconsistent with the recorded low-solids, water-rich fluid. The S2 protocol (`validation/forge16b/comparison_protocol_s2.md`, committed at `d4a4c12`) replaces a missing PV or YP with the nearest actual measurement, in either time direction, within the same fluid system. If the system has no measurement, it uses water rheology at the recorded density.
+
+This entry scores the working calculation with the S2 mud for 16B. The fills become PV 1–2 cP and YP 1 lbf/100 ft². For EOW 16–18 the rule also replaces a PV of 2 cP, which S1 carried from an earlier period sample, with the nearest measurement of 1 cP. Every donor, its source page and its time offset are in `validation/forge16b/s2/mud-revision-ledger.csv`. Some donors come from after the run, and some are days away. 16A uses the run-averaged daily-report measurements and is unchanged.
+
+The fills matter now because the next entry's candidate makes the yield stress decide whether the annulus flow is laminar. They also matter for the 16B pressure: the working calculation already treats the annulus as laminar for these runs, and a laminar Bingham pressure loss includes a yield-stress term.
+
+### Provenance
+
+The S2 rule was adopted in the 16B whole-well study after its S1 comparison had been seen. That study's revised results, under the earlier calculation, are already in the [validation guide](validation.md): the EOW 11, 12, 16, 17 and 18 run means warmed by 0.4–8.5 °C. This entry is therefore not blind to the direction of the temperature change. Its justification is input consistency: measured values replace a value taken from a different mud. Agreement with the targets played no part.
+
+### What stays the same
+
+The calculation is entry 4's working calculation. The scoreboard samples, the 16B densities, the geometry, the PV reference temperature of 26.7 °C, the fitted trial insulation conductivity and the legacy baseline are unchanged. The baseline keeps S1's mud, so that it reproduces the original blind result.
+
+### Decision rule
+
+The entry replaces default values with measurements under a protocol committed before this development work. It will be kept whatever the score, unless the score exposes an implementation error. The score will be reported in full, including the gaps predicted to worsen.
+
+### Predictions
+
+These come from a model-only calculation with [`predict.py`](../../validation/model-development/entry-5/predict.py). It uses the 16B windows of entries 3 and 4 and solves the working calculation with each mud record. The inputs are the frozen operating inputs, the rotary inputs and the two mud records. No scored temperature or pressure target, and no residual, was read. Changes are S2 minus S1, from `predictions.csv`.
+
+| EOW assembly | Mud, S1 → S2 (PV cP / YP lbf/100 ft²) | Bit change, °C | Return change, °C | Standpipe change, psi |
+|---|---|---|---|---|
+| 11 | 27/28 → 2/1 | +7.6 | −1.2 | −576 |
+| 12 | 27/28 → 2/1 | +11.3 | −1.4 | −545 |
+| 13 | 2/28 → 2/1 | −0.8 | −0.2 | −165 |
+| 15 | 2/28 → 2/1 | −0.9 | −0.2 | −182 |
+| 16 | 2/28 → 1/1 | +4.8 | −0.7 | −275 |
+| 17 | 2/28 → 1/1 | +4.6 | −0.8 | −284 |
+| 18 | 2/28 → 1/1 | 0.0 | −0.5 | −293 |
+| 3, 4, 19, 20, 27, 38 | unchanged | 0 | 0 | 0 |
+
+The expected score changes follow from these, assuming each window represents its assembly:
+
+| Gap | Working calculation | Expected after entry 5 |
+|---|---|---|
+| G1, 16B BHA 12, 13, 15 and 16 | +43, −273, −253 and −272 psi | about −500, −440, −435 and −550 psi, so worse |
+| G2, 16B | −184 kW | more negative, by the dissipation of the removed yield-stress loss |
+| G6, EOW 11 and 12 | −14.53 and −14.61 °C | about −7 and −3 °C |
+| G6, EOW 16 and 17 | +5.30 and +9.92 °C | about +10 and +14.5 °C, so worse |
+| G6, independent regular pipe | −1.40 °C | about 3 °C warmer |
+| G6, trial | +7.55 °C | about 1 °C warmer, so worse |
+
+The G6 group values are rough, because the window changes within each group range widely. 16A (G1–G5 for 16A) is unchanged.
