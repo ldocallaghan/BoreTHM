@@ -107,7 +107,10 @@ jobs:
       - run: pip install -r requirements-lock.txt
       - run: pip install --no-deps -e .
       - run: python -m borethm.water_table
-      - run: pytest --runslow --durations=20 --junitxml=full-tests.xml
+      # four test files at a time; the fresh lever-table solves alone take
+      # about two hours, which a serial run would add to the rest
+      - run: pip install pytest-xdist==3.8.0 execnet==2.1.2
+      - run: pytest --runslow -n 4 --dist loadfile --durations=20 --junitxml=full-tests.xml
       - uses: actions/upload-artifact@v7
         if: always()
         with:
