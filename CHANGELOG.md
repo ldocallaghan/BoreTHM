@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v1.6.0 (29 October 2026)
 
 The circulation model calculates pressure losses component by component:
 drill pipe with optional tool-joint restrictions, serial assembly

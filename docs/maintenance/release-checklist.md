@@ -1,5 +1,25 @@
 # Release checklist
 
+## v1.6.0
+
+- [x] Declare and score each model change in the development log, and record the independent review.
+- [x] Keep the earlier calculation modes and archived studies on the v1.5.0 calculation, and check that they reproduce their records.
+- [x] Record the five built-in sites and the UT Austin benchmark under the v1.6.0 calculation, and update the documents that quote them.
+- [x] Build and check the wheel and source distribution.
+- [x] Check a fresh wheel installation outside the checkout.
+- [x] Compare public names and signatures with v1.5.0, allowing the documented additions.
+- [x] Compare the saved evidence of v1.5.0.
+- [x] Pass the local fast suite and link checker.
+- [x] Pass the fast suite across Python 3.11 to 3.14 on Linux, Windows and macOS, the wheel installations and the strict documentation build on CI.
+- [x] Pass the full physical suite locally.
+- [ ] Pass the full physical suite on CI at the release candidate.
+- [ ] Review the complete diff and verified release checks before tagging.
+- [ ] Confirm the citation date against the actual tag date.
+- [ ] Tag v1.6.0 and publish the GitHub release.
+- [ ] Verify the PyPI installation, documentation website and Zenodo archive.
+
+See the [v1.6.0 release record](../releases/v1.6.0.md) for the checks.
+
 ## v1.5.0
 
 - [x] Review the packaged TOML starter, generated site files and input checks.

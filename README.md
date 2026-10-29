@@ -44,7 +44,7 @@ Use Python 3.14.4 and the locked dependencies in a source checkout:
 ```bash
 git clone https://github.com/ldocallaghan/BoreTHM.git
 cd BoreTHM
-git checkout v1.5.0
+git checkout v1.6.0
 python -m venv .venv
 ```
 

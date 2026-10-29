@@ -4,4 +4,4 @@ These pages are for maintaining the repository. For model use and scientific int
 
 - [Implementation priorities and triggers](development.md)
 - [Release checklist](release-checklist.md)
-- [v1.5.0 release record](../releases/v1.5.0.md)
+- [v1.6.0 release record](../releases/v1.6.0.md)
