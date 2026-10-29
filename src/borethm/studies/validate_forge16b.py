@@ -39,6 +39,7 @@ import os
 import sys
 from datetime import datetime, timezone
 
+import math
 import numpy as np
 from scipy.optimize import brentq, minimize_scalar
 
@@ -158,18 +159,24 @@ def string(run, bit_ft, k_idp=None):
     bha_ft = float(r["bha_nmdc_ft"])
     dc_ft = float(r["drill_collars_ft"] or 0)
     hw_ft = int(r["hwdp_joints"]) * HWDP_JOINT_FT
-    dp_ft = bit_ft - bha_ft - dc_ft - hw_ft
-    segs = []
+    # Nominal stack from the bit upwards; the top piece runs to surface.
+    stack = [(bha_ft, BHA)] + ([(dc_ft, COLLAR)] if dc_ft else []) + [(hw_ft, HWDP)]
     if run == "BHA11":
-        segs.append((dp_ft, idp(k_idp)))
+        stack.append((math.inf, idp(k_idp)))
     elif run == "BHA12":
-        segs += [(dp_ft - BHA12_REGULAR_FT, idp(k_idp)), (BHA12_REGULAR_FT, DRILL_PIPE)]
+        stack += [(BHA12_REGULAR_FT, DRILL_PIPE), (math.inf, idp(k_idp))]
     else:
-        segs.append((dp_ft, DRILL_PIPE))
-    segs.append((hw_ft, HWDP))
-    if dc_ft:
-        segs.append((dc_ft, COLLAR))
-    segs.append((bha_ft, BHA))
+        stack.append((math.inf, DRILL_PIPE))
+    # Only the part below surface is in the hole. With the bit shallower than
+    # the assembly, as during trips, the upper components are out of the hole.
+    segs, remaining = [], bit_ft
+    for length, pipe in stack:
+        take = min(length, remaining)
+        if take > 0:
+            segs.insert(0, (take, pipe))
+        remaining -= take
+        if remaining <= 0:
+            break
     return [wg.StringSegment(L * FT, p) for L, p in segs]
 
 
