@@ -2,6 +2,8 @@
 drilling cycle."""
 import numpy as np
 import pytest
+
+from borethm.programme import HydraulicProgramme
 from iapws.iapws97 import _PSat_T
 
 from borethm import geo_constants as C
@@ -97,7 +99,9 @@ def test_water_columns_match_the_review(evaluated, site, circ, formation):
     as the review integrated them."""
     o = evaluated(site)
     z = o["z"]
-    water = se.circulate(site, z, site.temperature(), o["circ"]["pipe"], float(o["circ"]["m_dot"]))
+    legacy = HydraulicProgramme.reference_programme('v1.5.0')    # the review's calculation
+    water = se.circulate(site, z, site.temperature(), o["circ"]["pipe"], float(o["circ"]["m_dot"]),
+                         programme=legacy)
     b = pr.bottomhole_pressure("connection", z, pr.circulating_temperatures(water))
     assert b["SG"] == pytest.approx(circ, abs=0.005)
     tvd = np.linspace(0.0, z, 1001)

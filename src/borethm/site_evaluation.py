@@ -915,6 +915,11 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
                          "within the pump limit")
 
 
+def _hydraulics_model(site):
+    """The circulation calculation a site's programme selects; v1.6.0 without one."""
+    return site.programme.hydraulics_model if site.programme is not None else 'v1.6.0'
+
+
 def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None, programme=None,
              hydraulics_model=None, surface=None):
     """Evaluate a SiteProfile through circulation, connections and trips.
@@ -951,7 +956,10 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
     This evaluation can require substantial computation.
 
     programme overrides the site's HydraulicProgramme. hydraulics_model
-    optionally selects v1.6.0 or exact v1.5.0 legacy hydraulics; surface
+    optionally selects v1.6.0 or exact v1.5.0 legacy hydraulics. With
+    neither given, v10 and the earlier circulation modes use v1.5.0, which
+    also keeps the original logarithmic rock term, so they reproduce the
+    releases they belong to; circulation='v1.3.4' uses v1.6.0. surface
     optionally overrides its SurfaceLoss. An explicit zero coefficient
     disables an allowance. Unspecified settings use the effective
     programme. The input SiteProfile is unchanged.
@@ -961,6 +969,8 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
         if not isinstance(programme,HydraulicProgramme):
             raise TypeError('programme must be HydraulicProgramme or None')
     effective=programme or site.programme
+    if effective is None and hydraulics_model is None and (v10 or circulation != 'v1.3.4'):
+        hydraulics_model='v1.5.0'
     if effective is None:
         effective=HydraulicProgramme.reference_programme(hydraulics_model or 'v1.6.0')
     elif hydraulics_model is not None:
@@ -995,7 +1005,7 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
     for md in (2, 4, 7, 10, 14, 20):
         r = m1.solve(m_dot=md, T_inj=site.T_inj, pipe=wg.LEGACY_VACUUM, k_rock=site.k_rock,
                      geotherm=geotherm, target_depth=z, Q_face=30000.0,
-                     verbose=False)
+                     verbose=False, hydraulics_model=_hydraulics_model(site))
         if r["T_bottom_delivered"] < C.BHA_SURVIVAL_TEMP:
             surv = (md, r); break
     if surv is None:
@@ -1012,15 +1022,16 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
 
     # --- (2/3) DRILLABILITY: regime + quench ROP gain (spallation uses K0=Shmin)
     drill = m3.evaluate(G_deep, K0, out["m_min"], pipe=wg.LEGACY_VACUUM,
-                        target_rock_T=T_rock, quench=True)
+                        target_rock_T=T_rock, quench=True, hydraulics_model=_hydraulics_model(site))
     drill_nq = m3.evaluate(G_deep, K0, out["m_min"], pipe=wg.LEGACY_VACUUM,
-                           target_rock_T=T_rock, quench=False)
+                           target_rock_T=T_rock, quench=False, hydraulics_model=_hydraulics_model(site))
     out["drill"] = drill
     out["rop_gain"] = drill["ROP"] / drill_nq["ROP"] if drill_nq["ROP"] > 0 else np.nan
 
     # production-flow energy (the survival run uses min flow, which minimises MW)
     rp = m1.solve(m_dot=10.0, T_inj=site.T_inj, pipe=wg.LEGACY_VACUUM, k_rock=site.k_rock,
-                  geotherm=geotherm, target_depth=z, Q_face=30000.0, verbose=False)
+                  geotherm=geotherm, target_depth=z, Q_face=30000.0, verbose=False,
+                  hydraulics_model=_hydraulics_model(site))
     out["MW_prod"] = rp["Q_product"] / 1e6
     out["Tret_prod"] = rp["T_return_surface"]
     out["circulation"] = "v1.1"
@@ -1108,7 +1119,7 @@ def _evaluate_v12(site, thermal=True, budget=False, fluid=None, rop=None, light=
                                    retry=not budget)
         rop = (face(first["run"]) if site.coupled else
                m3.evaluate(G_deep, K0, first["m_dot"], pipe=first["pipe"],
-                           target_rock_T=T_rock, quench=True))["ROP"]
+                           target_rock_T=T_rock, quench=True, hydraulics_model=_hydraulics_model(site)))["ROP"]
         if site.coupled:
             # the rate of penetration and the exposure it sets, to a fixed point
             for _ in range(ROP_MAX_PASSES):
@@ -1155,9 +1166,9 @@ def _evaluate_v12(site, thermal=True, budget=False, fluid=None, rop=None, light=
         drill, drill_nq = face(run), face(run, quench=False)
     else:
         drill = m3.evaluate(G_deep, K0, circ["m_dot"], pipe=circ["pipe"],
-                            target_rock_T=T_rock, quench=True)
+                            target_rock_T=T_rock, quench=True, hydraulics_model=_hydraulics_model(site))
         drill_nq = m3.evaluate(G_deep, K0, circ["m_dot"], pipe=circ["pipe"],
-                               target_rock_T=T_rock, quench=False)
+                               target_rock_T=T_rock, quench=False, hydraulics_model=_hydraulics_model(site))
     out["rop_passes"] = rop_passes
     out["drill"] = drill
     out["rop_gain"] = drill["ROP"] / drill_nq["ROP"] if drill_nq["ROP"] > 0 else np.nan

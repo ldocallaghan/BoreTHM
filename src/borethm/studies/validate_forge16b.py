@@ -244,7 +244,8 @@ def solve_at(run, s, film_mult=1.0, k_idp=None, k_rock=K_ROCK):
     kw = dict(m_dot=Q * rho_in, T_inj=T_in, geotherm=T_FORM, geometry=g,
               target_rock_T=float(T_FORM(SURVEY.tvd(g.md_bit))),
               Q_face=s["motor_dp_psi"] * PSI * Q, k_rock=k_rock, rhocp_rock=RHOCP_ROCK,
-              friction_heat=True, tfa=tfa(run), film_mult=film_mult, verbose=False)
+              friction_heat=True, tfa=tfa(run), film_mult=film_mult, verbose=False,
+              hydraulics_model='v1.5.0')    # the archived S1 study's calculation
     return m1.solve_seeded(exp, m1.exposure_breaks(exp, g.md_bit), **kw), g
 
 

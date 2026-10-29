@@ -84,14 +84,18 @@ def face_load(P_mech, ROP, T_rock, T_cold, regime):
 
 # ----------------------------------------------------- one coupled evaluation
 def evaluate(G, K0, m_dot, pipe=wg.LEGACY_VACUUM, T_inj=40.0, P_mech=8000.0,
-             target_rock_T=C.TARGET_ROCK_TEMP, quench=True, n_iter=5):
-    """Self-consistent coupled solve for one design at one site."""
+             target_rock_T=C.TARGET_ROCK_TEMP, quench=True, n_iter=5, hydraulics_model='v1.6.0'):
+    """Self-consistent coupled solve for one design at one site.
+
+    hydraulics_model is passed to the circulation solve; 'v1.5.0' also keeps
+    the original logarithmic rock term."""
     L = (target_rock_T - C.SURFACE_TEMP) / G
     Q_face = 25000.0
     T_cold = T_inj
     for _ in range(n_iter):
         r = m1.solve(m_dot=m_dot, T_inj=T_inj, G=G, target_rock_T=target_rock_T,
-                     Q_face=Q_face, pipe=pipe, n_nodes=80, verbose=False)
+                     Q_face=Q_face, pipe=pipe, n_nodes=80, verbose=False,
+                     hydraulics_model=hydraulics_model)
         T_cold = r["T_bottom_delivered"]
         if quench:
             MSE_eff, regime, info = effective_mse(L, target_rock_T, T_cold, K0)

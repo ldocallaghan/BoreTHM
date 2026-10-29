@@ -136,7 +136,10 @@ equivalent static densities. Use result_dict for a serialisable record.
 This evaluation can require substantial computation.
 
 programme overrides the site's HydraulicProgramme. hydraulics_model
-optionally selects v1.6.0 or exact v1.5.0 legacy hydraulics; surface
+optionally selects v1.6.0 or exact v1.5.0 legacy hydraulics. With
+neither given, v10 and the earlier circulation modes use v1.5.0, which
+also keeps the original logarithmic rock term, so they reproduce the
+releases they belong to; circulation='v1.3.4' uses v1.6.0. surface
 optionally overrides its SurfaceLoss. An explicit zero coefficient
 disables an allowance. Unspecified settings use the effective
 programme. The input SiteProfile is unchanged.
