@@ -16,6 +16,8 @@ from borethm._paths import repository_root, repository_path, require_path
 ROOT = repository_root()
 GOLDEN = repository_path('tests/golden')
 SITES = ('soultz', 'united-downs', 'larderello', 'pannonian', 'newberry')
+# The release records are reproduced with their own calculation.
+RELEASE_HYDRAULICS = lv.rb.RELEASE_HYDRAULICS
 
 
 def windows_row(windows):
@@ -143,7 +145,8 @@ def main():
     reference = {}
     for key in SITES:
         print('Release reference:', key, flush=True)
-        data = se.result_dict(se.evaluate(se.find_site(key), circulation='v1.3.4'))
+        data = se.result_dict(se.evaluate(se.find_site(key), circulation='v1.3.4',
+                                            hydraulics_model=RELEASE_HYDRAULICS))
         reviewed = json.loads((ROOT / 'results/v1.3.4/checkpoint-1' / (key + '.json')).read_text())
         reference[key] = reference_row(data)
         assert_reviewed(reference[key], reference_row(reviewed))

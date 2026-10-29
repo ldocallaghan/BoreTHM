@@ -90,7 +90,10 @@ def well(pipe, horizontal=False):
     return wg.wu2025_well(md, pipe, survey)
 
 
-def run(pipe, G_per_km=24.0, gpm=600.0, fluid=MUD, horizontal=False, friction_heat=True):
+def run(pipe, G_per_km=24.0, gpm=600.0, fluid=MUD, horizontal=False, friction_heat=True,
+        hydraulics_model='v1.6.0'):
+    """hydraulics_model 'v1.5.0' reproduces the original calculation, with
+    the logarithmic rock term, as recorded in benchmark dataset 1.0."""
     Q = gpm * GPM
     m_dot = Q * (fluid["rho"] if fluid is not None else RHO_WATER_INLET)
     g = well(pipe, horizontal)
@@ -98,7 +101,7 @@ def run(pipe, G_per_km=24.0, gpm=600.0, fluid=MUD, horizontal=False, friction_he
     r = m1.solve(m_dot=m_dot, T_inj=T_INLET, G=G, T_surf=T_SURF,
                  target_rock_T=T_SURF + G * TVD, Q_face=0.0, k_rock=K_ROCK,
                  geometry=g, fluid=fluid, rhocp_rock=RHOCP_ROCK, verbose=False,
-                 friction_heat=friction_heat,
+                 friction_heat=friction_heat, hydraulics_model=hydraulics_model,
                  exposure=lambda s: np.full_like(np.asarray(s, float), EXPOSURE))
     r["hyd"] = m1.hydraulics(m_dot, g, result=r, fluid=fluid)
     return r
@@ -216,20 +219,23 @@ def figure(out, path):
 
 from borethm._paths import repository_path, require_path
 
+# The original calculation, copied into benchmark dataset 1.0, and the current one.
 GOLDEN = repository_path("tests/golden/benchmark_utaustin.json")
+GOLDEN_CURRENT = repository_path("tests/golden/benchmark_utaustin_v160.json")
 
 
-def golden_rows():
+def golden_rows(hydraulics_model='v1.6.0'):
     """The base-case comparison and standpipe pressures, as pinned by the tests."""
     rows = {}
+    kw = dict(hydraulics_model=hydraulics_model)
     for orient in ("vertical", "horizontal"):
         for name, pipe in PIPES.items():
             h = orient == "horizontal"
             rows[f"{orient}/{name}"] = dict(
-                wu=FIG2[orient][name], mud=bhct(run(pipe, horizontal=h)),
-                whole_wall=bhct(run(WHOLE_WALL[name], horizontal=h)))
+                wu=FIG2[orient][name], mud=bhct(run(pipe, horizontal=h, **kw)),
+                whole_wall=bhct(run(WHOLE_WALL[name], horizontal=h, **kw)))
     for name, pipe in PIPES.items():
-        rows[f"spp/{name}"] = dict(spp_MPa=run(pipe)["hyd"]["spp"] / 1e6)
+        rows[f"spp/{name}"] = dict(spp_MPa=run(pipe, **kw)["hyd"]["spp"] / 1e6)
     return rows
 
 
@@ -237,9 +243,9 @@ if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if "--write-golden" in sys.argv:
         import json
-        with open(require_path(GOLDEN, "Writing regression goldens"), "w") as fh:
+        with open(require_path(GOLDEN_CURRENT, "Writing regression goldens"), "w") as fh:
             json.dump(golden_rows(), fh, indent=1)
-        print("wrote", os.path.basename(GOLDEN))
+        print("wrote", os.path.basename(GOLDEN_CURRENT))
         sys.exit()
     out = tables()
     path = require_path(repository_path("figures/benchmark_utaustin.png"), "The UT Austin figure")

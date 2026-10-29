@@ -324,7 +324,7 @@ def geometry_for_settings(depth, chosen_pipe, settings, programme=None):
 
 
 def evaluate_settings(key, settings):
-    site = replace(se.find_site(key), coupled=True)
+    site = rb.reviewed_site(key)
     se.validate_site(site)
     pipe = wg.PIPE_TYPES[settings.pipe]
     factory = lambda rho: fluids.Mud(rho, fluids.PV_REF * settings.pv_fraction, fluids.YP_REF)
@@ -576,7 +576,7 @@ def run_lever(key, lever, root=RESULTS):
             note='qualification threshold; full-site reopening assessed separately')
     else:
         if lever == 'L1':
-            site = replace(se.find_site(key), coupled=True)
+            site = rb.reviewed_site(key)
             rock = float(site.temperature()(target))
             cases = se.stability_inputs(site, target, rock, T_wall=rock)[1]
             floor = max(c['window']['Pw_lo'] for c in cases)

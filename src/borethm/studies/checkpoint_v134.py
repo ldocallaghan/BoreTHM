@@ -28,7 +28,7 @@ def main():
         site = se.find_site(key)
         print('Evaluating C1-C4:', key, flush=True)
         started = time.perf_counter()
-        output = se.evaluate(site, circulation='v1.3.4')
+        output = se.evaluate(site, circulation='v1.3.4', hydraulics_model='v1.5.0')    # the release's calculation
         se.export_result(output, args.output / (key + '.json'))
         data = se.result_dict(output)
         old = baseline[site.name]

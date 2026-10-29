@@ -26,10 +26,20 @@ from borethm import wall_thermal as wt
 from borethm import well_geometry as wg
 
 from borethm._paths import repository_root, repository_path, require_path
+from borethm.programme import HydraulicProgramme
 
 ROOT = repository_root()
 CHECKPOINT = repository_path('results/v1.3.4/checkpoint-1')
 IDS = tuple('A' + str(i) for i in range(1, 10))
+# The calculation of the release whose records the reviewed v1.3.4 studies
+# reproduce. v1.5.0 also keeps the original logarithmic rock term.
+RELEASE_HYDRAULICS = 'v1.5.0'
+
+
+def reviewed_site(key):
+    """A built-in site, coupled, with the reviewed studies' calculation."""
+    return replace(se.find_site(key), coupled=True,
+                   programme=HydraulicProgramme.reference_programme(RELEASE_HYDRAULICS))
 
 
 def fresh_output(output):
@@ -75,7 +85,7 @@ def recorded_tool_gates(site, out, **kwargs):
 
 
 def reviewed_base(key):
-    site = replace(se.find_site(key), coupled=True)
+    site = reviewed_site(key)
     checkpoint = require_path(CHECKPOINT, 'Reviewed programme evidence')
     saved = json.loads((checkpoint / (key + '.json')).read_text())
     p = saved['programme']

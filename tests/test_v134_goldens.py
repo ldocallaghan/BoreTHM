@@ -53,7 +53,8 @@ def test_release_evidence_checksums_and_brackets():
 @pytest.mark.parametrize('key', release.SITES)
 def test_corrected_reference_matches_ci_golden(key, evaluated):
     pin = read_pin('v134_site_table.json')
-    data = se.result_dict(evaluated(se.find_site(key), circulation='v1.3.4'))
+    data = se.result_dict(evaluated(se.find_site(key), circulation='v1.3.4',
+                                     hydraulics_model=release.RELEASE_HYDRAULICS))
     release.assert_reviewed(release.reference_row(data), pin['sites'][key])
 
 
