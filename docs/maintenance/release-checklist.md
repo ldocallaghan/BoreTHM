@@ -12,7 +12,7 @@
 - [x] Pass the local fast suite and link checker.
 - [x] Pass the fast suite across Python 3.11 to 3.14 on Linux, Windows and macOS, the wheel installations and the strict documentation build on CI.
 - [x] Pass the full physical suite locally.
-- [ ] Pass the full physical suite on CI at the release candidate.
+- [x] Pass the full physical suite on CI at the release candidate.
 - [ ] Review the complete diff and verified release checks before tagging.
 - [ ] Confirm the citation date against the actual tag date.
 - [ ] Tag v1.6.0 and publish the GitHub release.
