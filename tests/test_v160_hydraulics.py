@@ -137,8 +137,9 @@ def test_reference_lengths_dual_wall_and_zero_allowances():
         g=p.geometry(1500,pipe,shoes=(50,300,750))
         assert g.string[0].pipe.hydraulic_joint.bore_diameter==2*pipe.r_bore
         assert g.string[0].pipe.with_joints(.1).hydraulic_joint==g.string[0].pipe.hydraulic_joint
-        assert sum(s.length for s in g.string[2:-1])==143.
-        assert sum(s.length for s in g.string)==1500.
+        # Python 3.11's sum() rounds at each step; compare to rounding.
+        assert sum(s.length for s in g.string[2:-1])==pytest.approx(143.,abs=1e-9)
+        assert sum(s.length for s in g.string)==pytest.approx(1500.,abs=1e-9)
     g=HydraulicProgramme.reference_programme(tools=False,joints=False,surface=None).geometry(1500,wg.CONVENTIONAL,shoes=(50,300,750))
     assert all(s.tool_loss is None and s.pipe.hydraulic_joint is None for s in g.string)
 
