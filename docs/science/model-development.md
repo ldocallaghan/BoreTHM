@@ -58,6 +58,7 @@ This table includes work performed before this log existed. Earlier development 
 | Entry 1 with D5, original 26.7 °C convention | Revised hydraulic losses with equipment-corrected assembly passages | 16A in-hole power 654 versus measured pump power 928 kW; G3 rises 1.3–3.7 °C from legacy; G6 regular bias -7.2 °C and trial bias +3.0 °C | Kept as the working development calculation, 28 October 2026; upheld by independent review, 29 October 2026 |
 | Entry 3, cylindrical rock response (R1) | Exact wall-temperature step response replaces the logarithmic rock term; bit +0.2 to +2.2 °C and return +0.1 to +0.35 °C in the working calculation | Every expected score change met within 0.1 °C. Cold biases shrink, except BHA 35r1, which crosses zero; warm biases grow, including the trial bias, from +3.03 to +4.62 °C | Kept under its declared rule, 28 October 2026; upheld by independent review, 29 October 2026 |
 | Entry 4, rotary heat (M2) | Measured surface rotary power released as wall friction along the string and as work at the bit, split by a soft-string torque balance; warmer everywhere, most where the string rotates fast and deep | Every expected score change met within 0.25 °C. Deep 16A biases shrink to -2.1, -2.8 and -13.6 °C; 16B regular pipe -1.40 °C, with its deep runs now warm; trial bias +7.55 °C | Kept under its declared rule, 28 October 2026; upheld by independent review, 29 October 2026 |
+| Entry 5, measured 16B mud rheology (I1) | Measured PV and YP replace reference-mud fills on seven 16B assemblies; 16B standpipe pressure falls by 166–524 psi; EOW 11, 12, 16 and 17 warm by 4.8–10.9 °C | Every expected change met within 1.1 °C and 20 psi. 16B G1 biases fall to -435 to -546 psi; 16B regular pipe +2.40 °C, trial +9.08 °C | Kept under its declared rule, 29 October 2026 |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -904,3 +905,45 @@ The expected score changes follow from these, assuming each window represents it
 | G6, trial | +7.55 °C | about 1 °C warmer, so worse |
 
 The G6 group values are rough, because the window changes within each group range widely. 16A (G1–G5 for 16A) is unchanged.
+
+## 29 October 2026: entry 5 score
+
+Source: [entry 5 archive](../../validation/model-development/entry-5/results/README.md), `comparison.csv` and `assembly-changes.csv`. The declaration is commit `72b5281`. All 467 circulation cases and all nine originally available run-in events completed with the same sample counts as both reference calculations, so every comparison below is paired. All 109 16B samples received their S2 mud. The scoring run took 727 seconds.
+
+### Pressure and power (G1, G2)
+
+| Gap and group | Legacy | Working calculation | Entry 5 | Declared expectation |
+|---|---|---|---|---|
+| G1, 16B BHA 12 | −157 psi | +43 psi | −481 psi | about −500 psi |
+| G1, 16B BHA 13 | −441 psi | −273 psi | −439 psi | about −440 psi |
+| G1, 16B BHA 15 | −433 psi | −253 psi | −435 psi | about −435 psi |
+| G1, 16B BHA 16 | −462 psi | −272 psi | −546 psi | about −550 psi |
+| G2, 16B | −262 kW | −184 kW | −239 kW | more negative |
+
+The yield-stress term of the laminar annulus loss had supplied much of the 16B pressure that entry 1 appeared to gain. With the measured yield point of 1 lbf/100 ft², the 16B motorless runs are 435–546 psi below the measured standpipe pressure. The legacy baseline also uses the reference mud, so it is not a like-for-like comparison: EOW 13 and 15 happen to lie within 2 psi of their legacy deficits, EOW 16 is 84 psi further below, and EOW 12, where the reference mud also supplied a PV of 27 cP, is 324 psi further below. 16A pressures are unchanged.
+
+### Temperatures (G6)
+
+Biases in °C, model minus measured.
+
+| Group | Legacy | Working calculation | Entry 5 | Declared expectation |
+|---|---|---|---|---|
+| EOW 11 | −16.18 | −14.53 | −5.94 | about −7 |
+| EOW 12 | −18.27 | −14.61 | −3.63 | about −3 |
+| EOW 13 | −8.42 | −1.95 | −2.72 | |
+| EOW 15 | −4.21 | +4.82 | +3.89 | |
+| EOW 16 | −4.80 | +5.30 | +10.14 | about +10 |
+| EOW 17 | +3.18 | +9.92 | +14.75 | about +14.5 |
+| EOW 18 | +1.69 | +4.10 | +4.19 | |
+| Independent regular pipe | −8.77 | −1.40 | +2.40 | about 3 °C warmer |
+| Trial | +1.99 | +7.55 | +9.08 | about 1 °C warmer |
+
+The assembly means change as the window predictions did: EOW 11 and 12 by +8.5 and +10.9 °C, EOW 16 and 17 by +4.8 °C each, and EOW 13, 15 and 18 by under 1 °C. Return temperatures fall by 0.2–1.4 °C. Assemblies whose mud does not change, and all of 16A, differ from entry 4 by at most 0.0006 °C, from the exact rotary-source scaling added after entry 4 was scored. G3, G4 and G5 are unchanged.
+
+### Interpretation and decision
+
+The reference mud's PV of 27 cP on EOW 11 and 12 lowered the film coefficient and cooled those runs. Its YP of 28 lbf/100 ft² raised the 16B standpipe pressure. With measurements in their place, the two shallow cold runs move most of the way to the measurements, the deep and trial runs become warmer, and the 16B pressure deficit returns to about its legacy size. The current calculation does not explain the remaining 16B pressure deficit.
+
+Under the rule declared before scoring, entry 5 is kept: the score shows no implementation error, and every expected change was met within 1.1 °C and 20 psi. The calculation with entries 1 to 5 and D5 becomes the working calculation. For the annulus heat-transfer entry, the 16B runs with measured mud are water-like: they have a yield point of 1 lbf/100 ft², except EOW 3 and 4 at 8 and 7.
+
+With entry 5 in place, the legacy mode still passes all 2,614 baseline checks. The fast test suite passes. No 56-32, 58-32 or 78B-32 target was read.
