@@ -1,0 +1,51 @@
+{
+  "mode": "current with entries 4 and 5 and the entry 7 annulus, hypothesis no-yield",
+  "settings": {
+    "pv_ref_T_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "annulus_model": "herschel-bulkley-erge",
+    "hypothesis": "no-yield",
+    "gel_scale": 0.0,
+    "rise": null,
+    "mud": "16A recorded mud; 16B S2 mud (s2_revised); 10-s gels from gel_inputs.csv"
+  },
+  "calibration": "Historical fitted trial insulation conductivity retained; friction factors from off-bottom torque",
+  "versions": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "sources_sha256": {
+    "validation/forge16b/s2/plan.json": "9c0912ef649782139c9153f5e86b43664e0306b7ee3f3384cbbafdf67b974bde",
+    "validation/scoreboard/transient-inputs.json": "ea1d6f211bfdd86fee8c69062aa714cf515f839215d1db37a21d348cae02e09b",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/model-development/entry-4/rotary_inputs.csv": "7c99cba192f10ff1132800f136ff882787886bcdabdf8084c555665820b21422",
+    "validation/model-development/entry-4/rotary.py": "91e74399df2822a58541d1bd22e4c1a5f04e8b35e437012467dfdb3100b7e631",
+    "validation/model-development/entry-6/gel_inputs.csv": "10a8f060669c5a82ec456308d4d0ed1254fce25e333b9ba025ad7027062394a4",
+    "validation/model-development/entry-6/hypotheses.py": "096933f79a9cb53996401f0c06bab32f05abbab7ede7f4859774c17d7012c5dc",
+    "validation/model-development/entry-7/predict.py": "fae2dedb3a7e0512791280ca6ac1814321f50fa20cbe51ec985f59b9ebc23132",
+    "validation/model-development/entry-7/score.py": "4d2a39bec788a06ec7e2b83e720aa22441b89dcd6ab0734661d3f10dc1adf470"
+  },
+  "model_sources_sha256": {
+    "model1_coupled.py": "0a126d1de406c1ffcdcbe2da0a2c275f8dbab1a18486940dc64fc16763b4fe50",
+    "rotary_heat.py": "3715bed3cf60584fbe96192a1deff1a9429d8fbc62bab07e925988ae1f870d8d",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a",
+    "hydraulic_losses.py": "bb94840eb7b1e9fe038606766687632d13964d6ac967a76bdf23ea30c6325617",
+    "fluids.py": "0dd1f30149a5893bfc7030f0d9fafecaa5b3697a14aec9e39973ce55a82389a2",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "studies/pressure_comparison.py": "eeb1f712dd9a409d419d7f8d12be3b43da4ef07917edb9bf8f4e98b566b70bb2"
+  },
+  "results_sha256": {
+    "circulation.csv": "1a0271a4318bc9d8014b35d2e10c924dc2f22b8f70cd05b87283882cc0949316",
+    "rheology-applied.csv": "17484a063001f916c2f58be4f621fef541612c80368f49e2ecaa505c8200ca6d",
+    "rotary-heat-applied.csv": "2026ec3c9740eced549ce81fbece97d0bafa7ae5f7e225245549e42f4c1e86c8",
+    "run-in.csv": "dcf8b9c2ee303bb70dbbb6234dbb9e2ce1cb59acfaca986092715232f1db365b",
+    "scoreboard.csv": "6d522d43948cdc85a07be87233e7d18aeef0c74980bf3a630005036bb97b6030"
+  },
+  "runtime_s": 2032.9399832069998,
+  "declaration_commit": "d3c5419",
+  "working_calculation": "validation/model-development/entry-5/results",
+  "comparison_script_sha256": "9ef1a61eb9acedd82e3f587aaf94f9c1f3b0815cfbdfe6bf1644d3424f614329",
+  "scored_commit": "d3c54190ca49db6cc2b08d96bf424872f7af0ae5"
+}

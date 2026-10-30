@@ -11,6 +11,6 @@ These archives compare declared changes with the frozen FORGE 16A and 16B develo
 | 4: rotary heat | [Inputs](entry-4/README.md) and [score](entry-4/results/README.md) |
 | 5: measured 16B mud rheology | [Score](entry-5/results/README.md) |
 | 6: Herschel–Bulkley annulus | [Score of three yield-stress hypotheses](entry-6/results/README.md) |
-| 7: plastic-viscosity heat transfer and Erge band | Predictions in [entry-7](entry-7/) |
+| 7: plastic-viscosity heat transfer and Erge band | [Score of the same three hypotheses](entry-7/results/README.md) |
 
 The [original scoreboard and legacy baseline](../scoreboard/README.md) remain fixed. No held-out pressure target is included here. Source observations retain the attribution and CC BY 4.0 terms stated in the [16A](../forge16a/README.md) and [16B](../forge16b/README.md) archives.
