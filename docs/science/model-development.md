@@ -61,6 +61,7 @@ This table includes work performed before this log existed. Earlier development 
 | Entry 5, measured 16B mud rheology (I1) | Measured PV and YP replace reference-mud fills on seven 16B assemblies; 16B standpipe pressure falls by 166–524 psi; EOW 11, 12, 16 and 17 warm by 4.8–10.9 °C | Every expected change met within 1.1 °C and 20 psi. 16B G1 biases fall to -435 to -546 psi; 16B regular pipe +2.40 °C, trial +9.08 °C | Kept under its declared rule, 29 October 2026 |
 | Bingham annulus candidate, Wilson–Thomas criterion on the report YP (`bec37fe`) | Shared laminar-turbulent criterion for annulus pressure and heat transfer, Gnielinski on the wall apparent viscosity | Never scored. Model-only checks found the 16A annulus laminar on the YP and turbulent with a low-shear yield stress | Removed before scoring, 30 October 2026; replaced by entry 6 |
 | Entry 6, Herschel–Bulkley annulus (A1), hypotheses no-yield, gel and gel-rising | Founargiotakis slot model for annulus pressure and regime; Gnielinski on the wall viscosity; all three cool 16A, by about 4–10, 7–34 and 14–34 °C at the bit | Every expected change met. RMS of the nine 16A assembly bit biases 10.0, 19.7 and 24.6 °C against 5.6 °C for the working calculation; 16A pressure and 16B water-like runs nearly unchanged | Not adopted under its declared rule, 30 October 2026; the downhole rheology is unmeasured |
+| Entry 7, plastic-viscosity heat transfer and the Erge band (A2), the same three hypotheses | Gnielinski on PV (Chhabra and Richardson eq. 6.55 class) and the transition band of Erge et al. (2015); 16A bit about −1 to −2, −1 to −19 and −4 to −26 °C from the working calculation | Declared 30 October 2026; score pending | Not adoptable under its rule until the downhole rheology is measured |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -1151,3 +1152,109 @@ Two explanations fit the no-yield result.
 The non-Newtonian heat-transfer source requested (Chhabra and Richardson, chapter 6), a quantified rotation term (Abdelhafiz 2023) and the 16A mud recap would separate these explanations.
 
 Under the rule declared before scoring, no hypothesis becomes the working calculation. Entries 1–5 with D5 remain the working calculation. The candidate stays in the package as `annulus_model='herschel-bulkley'`, unused by default. No 56-32, 58-32 or 78B-32 target was read.
+
+## 30 October 2026: entry 7 declaration, plastic-viscosity heat transfer and the Erge transition band (A2)
+
+### Change
+
+Entry 7 changes two elements of entry 6's candidate. It is selected with `annulus_model='herschel-bulkley-erge'`. Entry 6's `annulus_model='herschel-bulkley'` is unchanged; its predictions reproduce exactly.
+
+**Turbulent heat transfer on the plastic viscosity.** Gnielinski's annulus correlation (Gnielinski 2009, eqs. 22–24) now takes Re and Pr on the plastic viscosity at the local state, in place of entry 6's wall viscosity.
+
+- Chhabra and Richardson (2008, §6.9) give two turbulent correlations for non-Newtonian fluids:
+  - For purely viscous fluids, Yoo's (eq. 6.54), on the viscosity at the nominal wall shear rate.
+  - For particulate suspensions with 0.42 ≤ n ≤ 0.89, the Sieder–Tate form on the Bingham plastic viscosity (eq. 6.55).
+- A drilling mud is a suspension of bentonite and barite. The 16A muds' n values from PV, YP and the gel are 0.57–0.85, inside the range of eq. 6.55.
+- Gnielinski on PV agrees with eq. 6.55 to within 2% at the working calculation's states, and it keeps separate factors for the string wall and the hole wall.
+- The same book cites Peixinho et al. (2007): in fully turbulent flow, the yield stress does not affect heat transfer.
+
+**The transition band of Erge et al. (2015).** It replaces Founargiotakis' band in both the pressure loss and the heat transfer.
+
+- Erge et al.'s Reynolds number 12ρV²/τ_w and flow index N use the same slot as Founargiotakis. Their band (eqs. 17–18) is Re1 = 2100 [N^0.331 (1 + 1.402κ − 0.977κ²) − 0.019εN^−0.868 κ] and Re2 = 2900 N^(−0.039 Re1^0.307), with κ the local diameter ratio and N = n′.
+- Eq. 17 follows from their stability analysis and is stated for 0.1 < N < 1. Eq. 18 is fitted to their measurements at κ = 0.5 and 0.15 < N < 0.4. The 16A muds' N of 0.27–0.39 and κ of 0.57 lie within or close to those ranges.
+- Outside 0.15–0.4, eq. 18 is evaluated at the nearest end of the range. This keeps Re2 above Re1 up to N = 1, and it affects only the water-like 16B runs, which are far above Re2.
+- Eccentricity is taken as zero, because the model does not represent the pipe's position in the hole. Full eccentricity would lower Re1 by 2–3% for these muds and Re2 by under 1%.
+- For the 16A muds the band is about 2,000–4,900, against Founargiotakis' 2,800–3,850.
+- In the band the friction factor is interpolated linearly from 24/Re1 to the Dodge–Metzner value at Re2, as Erge et al. do after Founargiotakis. Over this wider band the gradient can fall by up to about 5% with increasing velocity before the flow is turbulent; it rises outside the band. The heat transfer is interpolated with the same weights.
+
+Everything else is entry 6's:
+
+- the slot model and the bound on the friction factor;
+- the laminar annulus values;
+- the gel inputs and the three hypotheses (no-yield, gel, gel-rising);
+- the solution path starting from the working solution.
+
+### Provenance
+
+This entry is not blind to entry 6's score, which showed every hypothesis too cold at 16A. Liam supplied both sources after that score: Chhabra and Richardson's §6.9 and Erge et al. (2015, SPE 167950). Before choosing, he saw model-only comparisons:
+
+- the film coefficient under each viscosity at four window states;
+- the two bands at each 16A window.
+
+He chose Gnielinski on PV over eq. 6.55 as published, and Erge's band over Founargiotakis'. No new target was read.
+
+**The basis for each element:**
+
+- The viscosity follows the fluid class, a particulate suspension. Its effect is known in direction: it warms 16A relative to entry 6.
+- The band follows the annulus geometry and the range of N, and its effect on temperature was not computed before the choice.
+
+### What stays the same
+
+As entry 6:
+
+- the working calculation (entries 1–5 with D5);
+- the scoreboard samples and the PV reference temperature of 26.7 °C;
+- the fitted trial insulation;
+- the legacy baseline;
+- G4.
+
+### Decision rule
+
+This is entry 6's rule. The three hypotheses are scored on the frozen scoreboard, and none becomes the working calculation under this entry, because the downhole yield stress is unmeasured. The summary measures are:
+
+- the RMS of the nine 16A assembly bit biases;
+- the 16A standpipe biases;
+- the 16A return bias.
+
+RMS differences under 2 °C are not called. An implementation error found by the score is corrected in its own entry.
+
+### Predictions
+
+These come from a model-only calculation with [`predict.py`](../../validation/model-development/entry-7/predict.py), on the same windows. Changes are each hypothesis minus the working calculation, from `predictions.csv`. All 22 windows converged under every hypothesis.
+
+| Window | Bit change, °C (no-yield / gel / gel-rising) | Standpipe change, psi | Drill-pipe annulus laminar/transitional/turbulent, % (no-yield; gel; gel-rising) |
+|---|---|---|---|
+| 16A BHA 18 | −1.6 / −8.4 / −11.8 | −79 / −58 / −45 | 0/30/70; 0/100/0; 0/100/0 |
+| 16A BHA 23 | −1.4 / −4.3 / −11.1 | −3 / −5 / +24 | 0/0/100; 0/100/0; 0/100/0 |
+| 16A BHA 30 | −2.2 / −15.3 / −23.3 | −94 / −14 / +23 | 0/0/100; 0/100/0; 0/100/0 |
+| 16A BHA 34 | −2.0 / −19.3 / −26.3 | −91 / −25 / +7 | 0/2/98; 0/100/0; 0/100/0 |
+| 16A BHA 35r1 | −1.0 / −5.3 / −17.7 | −15 / −4 / +70 | 0/0/100; 0/100/0; 0/100/0 |
+| 16A BHA 35r2 | −1.1 / −7.4 / −18.6 | −13 / +7 / +68 | 0/0/100; 0/100/0; 0/100/0 |
+| 16A BHA 38 | −1.2 / −1.3 / −4.4 | −12 / −33 / −5 | 0/0/100; 0/0/100; 0/67/33 |
+| 16A BHA 39 | −1.9 / −4.4 / −9.3 | −11 / −15 / +21 | 0/0/100; 0/47/53; 0/100/0 |
+| 16A BHA 42 | −1.9 / −2.3 / −11.9 | −9 / −31 / +21 | 0/0/100; 0/15/85; 0/91/9 |
+| 16B EOW 3 | +0.1 / −3.9 / −4.2 | −13 / −1 / 0 | 0/0/100; 0/100/0; 0/100/0 |
+| 16B EOW 4 | −0.1 / −4.3 / −4.3 | −11 / +6 / +6 | 0/0/100; 0/100/0; 0/100/0 |
+| 16B EOW 11–38 | −0.6 to +0.6, the same under each | −5 to −1 | turbulent |
+
+Return temperatures change by −0.05 to +0.12 °C on 16A under no-yield, +0.02 to +0.95 °C under gel and +0.14 to +1.23 °C under gel-rising. On 16B they change by under 0.15 °C.
+
+**Reading the predictions:**
+
+- No window is laminar. Erge's onset is low enough that the yield stress moves cells into the band and no further.
+- With no yield stress, the plastic-viscosity film coefficient leaves 16A within about 2 °C of the working calculation.
+- The gel hypotheses cool 16A through transitional cells, where the film coefficient is interpolated towards the laminar value.
+
+The expected score changes follow, assuming each window represents its assembly:
+
+| Measure | Working calculation | no-yield | gel | gel-rising |
+|---|---|---|---|---|
+| RMS of the nine 16A assembly bit biases (G3) | 5.6 °C | about 6.0 °C | about 9.6 °C | about 16.8 °C |
+| Mean of the nine | −0.75 °C | about −2.3 °C | about −8.3 °C | about −15.7 °C |
+| G3, 16A BHA 38, 39 and 42 | −2.1, −2.8 and −13.6 °C | about −3.3, −4.7 and −15.5 °C | about −3.4, −7.2 and −15.9 °C | about −6.5, −12.0 and −25.6 °C |
+| G1, 16A | −573 to −1,881 psi | changes of −94 to −3 psi | changes of −58 to +7 psi | changes of −45 to +70 psi |
+| G5, 16A return | −4.70 °C | within 0.1 °C | about 0.4 °C warmer | about 0.7 °C warmer |
+| G6, EOW 3 and 4 | −2.6 and −22.1 °C | within 0.1 °C | about 4 °C colder | about 4 °C colder |
+| G6, other 16B runs | | within 0.6 °C | the same as no-yield | the same as no-yield |
+
+If the score confirms these, the hypotheses would still be ranked as in entry 6. The difference between no-yield and the working calculation, 0.4 °C in RMS, would be below the 2 °C threshold.
