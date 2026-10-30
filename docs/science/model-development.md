@@ -62,6 +62,7 @@ This table includes work performed before this log existed. Earlier development 
 | Bingham annulus candidate, Wilson–Thomas criterion on the report YP (`bec37fe`) | Shared laminar-turbulent criterion for annulus pressure and heat transfer, Gnielinski on the wall apparent viscosity | Never scored. Model-only checks found the 16A annulus laminar on the YP and turbulent with a low-shear yield stress | Removed before scoring, 30 October 2026; replaced by entry 6 |
 | Entry 6, Herschel–Bulkley annulus (A1), hypotheses no-yield, gel and gel-rising | Founargiotakis slot model for annulus pressure and regime; Gnielinski on the wall viscosity; all three cool 16A, by about 4–10, 7–34 and 14–34 °C at the bit | Every expected change met. RMS of the nine 16A assembly bit biases 10.0, 19.7 and 24.6 °C against 5.6 °C for the working calculation; 16A pressure and 16B water-like runs nearly unchanged | Not adopted under its declared rule, 30 October 2026; the downhole rheology is unmeasured |
 | Entry 7, plastic-viscosity heat transfer and the Erge band (A2), the same three hypotheses | Gnielinski on PV (Chhabra and Richardson eq. 6.55 class) and the transition band of Erge et al. (2015); 16A bit about −1 to −2, −1 to −19 and −4 to −26 °C from the working calculation | Every expected change met. RMS of the nine 16A assembly bit biases 6.0, 9.9 and 16.5 °C against 5.6 °C for the working calculation; 16B within 0.5 °C except EOW 3 and 4 under the gel | Not adopted under its declared rule, 30 October 2026; no-yield matches the working calculation within the 2 °C threshold |
+| Entry 8, one regime criterion for annulus pressure and heat transfer (A3) | Entry 7's treatment with no yield stress as the working calculation; the score expected to equal entry 7 no-yield within 0.01 °C and 1 psi per sample, with a film band of 0.85–1.05 | Declared 30 October 2026; score pending | Pending |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -1319,3 +1320,110 @@ Every expected change was met.
 - So the 16A temperatures favour a downhole yield stress below the surface 10-s gel, or else an effect outside the model that brings transition on earlier in these runs. Drill-string rotation is the candidate: Erge et al. measured an earlier transition with rotation but gave no correlation for it.
 
 **Decision.** Under the rule declared before scoring, no hypothesis becomes the working calculation, because the downhole yield stress is unmeasured. Entries 1–5 with D5 remain the working calculation. `annulus_model='herschel-bulkley-erge'` stays in the package, unused by default. Two additions would let a later entry adopt it under a rule declared then: a measured downhole or high-temperature rheology, or a sourced rotation term for the transition. No 56-32, 58-32 or 78B-32 target was read.
+
+## 30 October 2026: entry 8 declaration, one regime criterion for annulus pressure and heat transfer (A3)
+
+### Change
+
+Entry 8 proposes entry 7's annulus treatment, with no yield stress, as the working calculation:
+
+- `annulus_model='herschel-bulkley-erge'`: the Founargiotakis slot model with the transition band of Erge et al. (2015) for the annulus pressure loss and flow regime, and Gnielinski's annulus correlation on the plastic viscosity for turbulent heat transfer;
+- each mud's rheology is the power law through its 600 and 300 rpm readings, computed from the report PV and YP (entry 6's hypothesis no-yield).
+
+The equations are entry 7's. Two implementation details differ.
+
+- When the yield stress is zero, `fluids.hb_annulus` now evaluates the power-law slot solution directly. It agrees with the general solver to a relative 10⁻⁸ or better (`test_power_law_path_matches_the_general_solver`), and one evaluation over 200 cells takes about 0.2 ms. With it a window takes about 1.5 s to solve on average, against 2.1 s for the working calculation.
+- The solve starts from the usual seeds (`solve_seeded`). Entries 6 and 7 started it from the working solution. At the 22 windows both starts give the same bit temperature to within 0.0002 °C.
+
+The package default stays `annulus_model='v1.6.0'`. It changes, if at all, in a release after the stage 2 score.
+
+### Why
+
+The working calculation decides the drill-pipe annulus flow regime twice, by two criteria:
+
+- its pressure loss uses the Bingham apparent-viscosity Reynolds number on the report YP, with laminar flow at 2,100 and below;
+- its heat transfer uses the Reynolds number on PV, with laminar flow below 2,300.
+
+At five of the 22 windows the two disagree. The pressure loss is calculated as laminar over 32–100% of the drill-pipe annulus, while the heat transfer is calculated as turbulent over all of it (table below). Entry 8 decides the regime once, from one Reynolds number and one band, and uses that decision for both. Each part has a published basis:
+
+- the band and the slot model are stated for yield-power-law fluids in concentric annuli, at diameter ratios and flow indices that include or adjoin the 16A values (entry 7);
+- the turbulent heat transfer follows Chhabra and Richardson's (2008, §6.9) treatment of particulate suspensions, which uses the plastic viscosity.
+
+Entry 7's score showed that this treatment, with no yield stress, reproduces the 16A temperatures within 0.4 °C in RMS of the working calculation and the 16B temperatures within 0.5 °C. Entry 8 is therefore not proposed to improve the temperature score. It is proposed so that the pressure and temperature calculations make the same statement about the flow, and so that the statement can be traced to sources.
+
+**Cost to the pressure score.** Entry 8 lowers the 16A standpipe pressure by 3–94 psi. The 16A standpipe is already calculated 573–1,881 psi below the measurement (G1), so this moves it further away. In entry 7 the RMS of the 16A standpipe biases rose from 1,190 to 1,222 psi. The pressure shortfall is not an annulus regime question: under every annulus treatment tried, it remains above 500 psi.
+
+### Provenance
+
+This entry is not blind. The zero yield stress was chosen after the scores of entries 6 and 7, which showed every 16A assembly colder under a yield stress equal to the 10-s gel. The 16A and 16B scores therefore cannot test the choice. Its first test is stage 2, the 56-32 temperatures, which have not been read.
+
+Entry 7's decision named two additions that would let a later entry adopt its treatment: a measured downhole rheology or a sourced rotation term for the transition. Neither is available, and entry 8 departs from that statement. Its case is as follows. The working calculation also makes an unmeasured choice about the downhole yield stress: it uses the report YP for the pressure loss and no yield stress for the heat transfer. Entry 8 makes one choice, the lowest yield stress the reports allow, and uses it for both. It also reports, for every sample, where a yield stress equal to the 10-s gel would move the flow into the transition band, so that a user can see where the choice matters.
+
+### Uncertainty band
+
+The score is repeated with the annulus film coefficients scaled by 0.85 and by 1.05. Each end of the band is an effect the model omits.
+
+- **0.85.** The model places the pipe at the centre of the hole. Nikitin et al.'s (2009) direct numerical simulation of an eccentric annulus (Re 8,000, Pr 1, eccentricity 0.5) gives about 0.87 of the concentric Gnielinski value.
+- **1.05.** Gnielinski's correlation carries an entrance factor, 1 + (d_h/L)^(2/3), which the model omits. If the flow redeveloped at every tool joint (L about 9 m, d_h about 0.1 m), the factor would be about 1.05.
+
+The band does not include the scatter of the correlation itself. Dirker and Meyer (2003) found published annulus correlations scattered by about ±20% against their water measurements. The band is reported beside the score and does not enter the decision.
+
+### Regime flag
+
+For every circulation sample, `regime.csv` records the shares of drill-pipe annulus length that are laminar and transitional at the solved state. It also records the shares that would be laminar and transitional at that state if the yield stress equalled the 10-s gel. The gel shares are evaluated at the entry 8 temperatures without a new solve.
+
+### What stays the same
+
+As entries 6 and 7:
+
+- the scoreboard samples and the PV reference temperature of 26.7 °C;
+- the rotary heat and the S2 16B mud;
+- the fitted trial insulation;
+- the legacy baseline;
+- G4, whose run-in transients keep their Dittus–Boelter films.
+
+### Decision rule
+
+[`score.py`](../../validation/model-development/entry-8/score.py) scores entry 8 on the frozen scoreboard at film multipliers 1.0, 0.85 and 1.05.
+
+- At 1.0, every circulation sample's bit and return temperatures are expected within 0.01 °C, and its standpipe pressure within 1 psi, of entry 7's no-yield score. The summary measures are then those of entry 7 no-yield: RMS of the nine 16A assembly bit biases 6.02 °C, their mean −2.47 °C, RMS of the 16A standpipe biases 1,222 psi and 16A return bias −4.64 °C.
+- If that holds, entry 8 becomes the working calculation.
+- If it does not, the difference is an implementation difference between entries 7 and 8. It is reported and traced, and entry 8 is not adopted until it is resolved in its own entry.
+
+The scores at 0.85 and 1.05 are reported as the uncertainty of the summary measures and do not change the decision.
+
+### Predictions
+
+These come from a model-only calculation with [`predict.py`](../../validation/model-development/entry-8/predict.py) on the same 22 windows, from `predictions.csv`. All 22 windows converged under the working calculation, under entry 8 and at both ends of the band.
+
+- The bit and standpipe changes are entry 8 minus the working calculation.
+- The laminar shares are of drill-pipe annulus length, at each calculation's own solved temperatures.
+- The band columns are the bit temperature at film multipliers 0.85 and 1.05 minus entry 8 at 1.0.
+- The gel column is the share that is transitional when solved with a yield stress equal to the 10-s gel, from entry 7's predictions. None is laminar.
+
+| Window | Bit change, °C | Standpipe change, psi | Working pressure loss laminar | Working heat transfer laminar | Entry 8 laminar | Band, °C | Transitional with the gel |
+|---|---|---|---|---|---|---|---|
+| 16A BHA 18 | −1.6 | −79 | 100% | 0% | 0% | −1.6 to +0.5 | 100% |
+| 16A BHA 23 | −1.4 | −3 | 0% | 0% | 0% | −2.1 to +0.6 | 100% |
+| 16A BHA 30 | −2.2 | −94 | 32% | 0% | 0% | −2.4 to +0.7 | 100% |
+| 16A BHA 34 | −2.0 | −91 | 100% | 0% | 0% | −2.6 to +0.8 | 100% |
+| 16A BHA 35r1 | −1.0 | −15 | 0% | 0% | 0% | −2.9 to +0.9 | 100% |
+| 16A BHA 35r2 | −1.1 | −13 | 0% | 0% | 0% | −3.1 to +0.9 | 100% |
+| 16A BHA 38 | −1.2 | −12 | 0% | 0% | 0% | −3.5 to +1.0 | 0% |
+| 16A BHA 39 | −1.9 | −11 | 0% | 0% | 0% | −3.6 to +1.1 | 47% |
+| 16A BHA 42 | −1.9 | −9 | 0% | 0% | 0% | −4.5 to +1.3 | 15% |
+| 16B EOW 3 | +0.1 | −13 | 100% | 0% | 0% | −0.7 to +0.2 | 100% |
+| 16B EOW 4 | −0.1 | −11 | 100% | 0% | 0% | −0.6 to +0.2 | 100% |
+| 16B EOW 11–38 | −0.6 to +0.6 | −5 to −1 | 0% | 0% | 0% | about −3.9 to +1.1 | 0% |
+
+The bit and standpipe changes equal entry 7's no-yield predictions. At 16A BHA 18, 30% of the drill-pipe annulus is in the transition band under entry 8; every other window is turbulent throughout.
+
+The expected score at the ends of the band follows from the window changes, assuming each window represents its assembly:
+
+| Measure | Film 0.85 | Film 1.0 | Film 1.05 |
+|---|---|---|---|
+| RMS of the nine 16A assembly bit biases | about 8.2 °C | 6.02 °C | about 5.6 °C |
+| Mean of the nine | about −5.4 °C | −2.47 °C | about −1.6 °C |
+| 16A BHA 42 | about −20.0 °C | −15.51 °C | about −14.2 °C |
+
+The return temperatures and standpipe pressures at the ends of the band were not predicted.
