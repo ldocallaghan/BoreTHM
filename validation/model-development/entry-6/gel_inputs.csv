@@ -1,0 +1,24 @@
+well,run,gel_10s_lbf_100ft2,method,sources,donor_offset_days
+16A,18,4.0,mean over run report dates,Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf p1,
+16A,23,5.0,mean over run report dates,Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf p1,
+16A,30,7.5,mean over run report dates,Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12420201242020_21_reporttmp.pdf p1; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12052020_12052020_10_reporttmp.pdf p1; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12520201252020_10_reporttmp.pdf p1; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12042020_12042020_21_reporttmp.pdf p1,
+16A,34,8.0,mean over run report dates,Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12082020_12082020_10_reporttmp.pdf p1; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12820201282020_10_reporttmp.pdf p1,
+16A,35r1,7.0,mean over run report dates,Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf p1; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12092020_12092020_16_reporttmp.pdf p1,
+16A,35r2,7.0,mean over run report dates,Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf p1; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12092020_12092020_16_reporttmp.pdf p1,
+16A,38,5.0,mean over run report dates,Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1213202012132020_11_reporttmp.pdf p1; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12132020_12132020_11_reporttmp.pdf p1,
+16A,39,5.0,mean over run report dates,Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_15_reporttmp.pdf p1; 12_14_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_19_reporttmp.pdf p1,
+16A,42,4.5,mean over run report dates,Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12192020_12192020_12_reporttmp.pdf p1; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf p1,
+16B,3,3.0,S2 rule applied to the 10-s gel,"mud_samples.csv:3 nearest mud_samples.csv:4 (01-May-23 16:00, p215)",+0.958
+16B,4,3.0,S2 rule applied to the 10-s gel,mud_samples.csv:4 reported,+0.000
+16B,11,0.0,S2 rule applied to the 10-s gel,mud_supplement_s1.csv:2 no gel in post-clean rotary fluid: zero,
+16B,12,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:11 no gel in post-clean rotary fluid: zero,
+16B,13,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:13 no gel in post-clean rotary fluid: zero,
+16B,14,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:17 no gel in post-clean rotary fluid: zero,
+16B,15,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:16 no gel in post-clean rotary fluid: zero; mud_samples.csv:19 no gel in post-clean rotary fluid: zero,; 
+16B,16,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:23 no gel in post-clean rotary fluid: zero,
+16B,17,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:25 no gel in post-clean rotary fluid: zero,
+16B,18,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:26 no gel in post-clean rotary fluid: zero,
+16B,19,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:29 no gel in post-clean rotary fluid: zero,
+16B,20,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:31 no gel in post-clean rotary fluid: zero; mud_samples.csv:30 no gel in post-clean rotary fluid: zero; mud_samples.csv:33 no gel in post-clean rotary fluid: zero; mud_samples.csv:32 no gel in post-clean rotary fluid: zero,; ; ; 
+16B,27,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:46 no gel in post-clean rotary fluid: zero,
+16B,38,0.0,S2 rule applied to the 10-s gel,mud_samples.csv:69 no gel in post-clean rotary fluid: zero,
