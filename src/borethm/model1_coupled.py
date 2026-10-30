@@ -181,9 +181,9 @@ def exposure_seconds(z, t_years, exposure):
 
 
 # Annulus heat transfer. 'v1.6.0' is Dittus-Boelter on the plastic viscosity,
-# with a laminar floor Nu = 4.36 below Re 2300, on both walls. 'bingham' is
-# the development candidate of entry 5 (annulus_films).
-ANNULUS_MODELS = ('v1.6.0', 'bingham')
+# with a laminar floor Nu = 4.36 below Re 2300, on both walls.
+# 'herschel-bulkley' is the development candidate of entry 6 (annulus_films).
+ANNULUS_MODELS = ('v1.6.0', 'herschel-bulkley')
 
 # Fully developed laminar flow in a concentric annulus, one wall at constant
 # heat flux and the other insulated: Nusselt numbers on the hydraulic
@@ -202,7 +202,7 @@ def gnielinski_annulus(Re, Pr, a, wall):
     """Turbulent Nusselt number on the hydraulic diameter for a concentric
     annulus of diameter ratio a = d_inner / d_outer, at the heated inner or
     outer wall (Gnielinski 2009, Heat Transfer Engineering 30(6), 431-436,
-    in the form implemented in the MOOSE framework):
+    eqs. 22-24):
 
         Re* = Re [(1 + a^2) ln a + (1 - a^2)] / [(1 - a)^2 ln a]
         f   = (1.8 log10 Re* - 1.5)^-2
@@ -210,8 +210,10 @@ def gnielinski_annulus(Re, Pr, a, wall):
         Nu  = (f/8) Re Pr / [k1 + 12.7 (f/8)^0.5 (Pr^(2/3) - 1)] F
         F   = 0.75 a^-0.17 (inner wall), 0.9 - 0.15 a^0.6 (outer wall)
 
-    The entrance factor (1 + (d_h/L)^(2/3)) is 1 for a well's length, and
-    the wall-property ratio (Pr/Pr_w)^0.11 is not applied."""
+    Gnielinski states it for Re > 1e4; his tube correlation of the same form
+    holds from Re 4000 (Gnielinski 2013, Int. J. Heat Mass Transfer 63,
+    134-140). The entrance factor (1 + (d_h/L)^(2/3)) is 1 for a well's
+    length, and the wall-property ratio (Pr/Pr_w)^0.11 is not applied."""
     Re, Pr, a = (np.asarray(x, float) for x in (Re, Pr, a))
     re_star = Re * ((1 + a ** 2) * np.log(a) + (1 - a ** 2)) / ((1 - a) ** 2 * np.log(a))
     f = (1.8 * np.log10(re_star) - 1.5) ** -2.0
@@ -226,46 +228,48 @@ def gnielinski_annulus(Re, Pr, a, wall):
 
 def annulus_films(m_dot, g, T_u, P, fluid=None):
     """Annulus film coefficients [W/m^2/K] at the drill-string wall and the
-    hole wall, for annulus_model 'bingham' (development entry 5):
+    hole wall, for annulus_model 'herschel-bulkley' (development entry 6).
 
-    - Regime: a Bingham mud is turbulent by the criterion of Wilson and
-      Thomas (2006) on the hydraulic diameter (fluids.wilson_thomas_turbulent),
-      the criterion its pressure loss then uses too; a fluid without a yield
-      stress is turbulent from Re 2300, as in the pressure loss.
+    - Flow regime: the Herschel-Bulkley slot model of Founargiotakis et al.
+      (2008) (fluids.hb_annulus), which the annulus pressure loss then uses
+      too, with the mud's rheology (fluids.HerschelBulkley) at the local
+      temperature; a fluid without one is Newtonian (tau_0 = 0, K = mu,
+      n = 1). Its generalised Reynolds number sets the position in the
+      transition band Re1 = 3250 - 1150 n' to Re2 = 4150 - 1150 n'.
     - Turbulent: Gnielinski's annulus correlation (gnielinski_annulus) with
-      Re and Pr on the wall apparent viscosity of a Bingham plastic,
-      eta_w = PV / (1 - tau_y / tau_w), the wall shear stress tau_w from the
-      turbulent (Blasius) pressure gradient. Between Re 2300 and 1e4 the
-      Nusselt number is interpolated linearly in Re between the laminar
-      value and the correlation at 1e4, as Gnielinski does for tubes.
+      Re and Pr on the wall viscosity mu_w = tau_w / gamma_w, the
+      rheology's viscosity at the wall stress of the slot model; the
+      thermal resistance of turbulent flow lies in the viscous wall layer.
+      For a Newtonian fluid mu_w = mu.
     - Laminar: the fully developed values of Lundberg, Reynolds and Kays
-      (1963) for a heated inner and a heated outer wall at the local r*.
+      (1963) for a heated inner and a heated outer wall at the local r*;
+      Soares et al. (2003) found the inner-wall value insensitive to
+      Herschel-Bulkley rheology.
+    - In the band: linear in the generalised Re from the laminar value at
+      Re1 to the turbulent one at Re2, the weights the friction factor uses,
+      as Gnielinski (2013) interpolates between Re 2300 and 4000 in tubes.
+      The turbulent value is taken at the local state, with Re on the wall
+      viscosity floored at 2300.
     """
     from borethm import fluids
     rho, cp, mu, k = fluid_props(T_u, P, fluid)
     area, dh = g["A_ann"], g["Dh_ann"]
     a = np.clip(g["r_out"] / g["r_wall"], _LAMINAR_R[0], 0.999)
     v = m_dot / (rho * area)
-    re_p = rho * v * dh / mu
-    tau_y = float(getattr(fluid, 'yield_point', 0.) or 0.)
-    if tau_y > 0:
-        tau_w = 0.316 * re_p ** -0.25 * rho * v ** 2 / 8.0
-        ratio = tau_y / tau_w
-        turbulent = fluids.wilson_thomas_turbulent(rho, mu, tau_y, v, dh) & (ratio < 1.0)
-        eta = mu / (1.0 - np.minimum(ratio, 0.999))
+    rheology = getattr(fluid, 'rheology', None)
+    if rheology is None:
+        tau0, K, n = 0.0, mu, 1.0
     else:
-        turbulent = re_p >= 2300.0
-        eta = mu
-    re_w = rho * v * dh / eta
-    pr_w = cp * eta / k
+        tau0, K, n = rheology.at(T_u, mu, fluid)
+    state = fluids.hb_annulus(rho, tau0, K, n, v, dh)
+    blend, mu_w = state['blend'], state['mu_w']
+    re_w = np.maximum(rho * v * dh / mu_w, 2300.0)
+    pr_w = cp * mu_w / k
     out = []
     for wall, table in (('inner', _LAMINAR_NU_II), ('outer', _LAMINAR_NU_OO)):
         laminar = np.interp(a, _LAMINAR_R, table)
-        at_1e4 = gnielinski_annulus(1e4, pr_w, a, wall)
-        gamma = np.clip((re_w - 2300.0) / (1e4 - 2300.0), 0.0, 1.0)
-        turb = np.where(re_w >= 1e4, gnielinski_annulus(np.maximum(re_w, 1e4), pr_w, a, wall),
-                        (1.0 - gamma) * laminar + gamma * at_1e4)
-        out.append(np.where(turbulent, turb, laminar) * k / dh)
+        turbulent = gnielinski_annulus(re_w, pr_w, a, wall)
+        out.append(((1.0 - blend) * laminar + blend * turbulent) * k / dh)
     return out[0], out[1]
 
 
@@ -278,13 +282,13 @@ def conductances(z, T_d, T_u, m_dot, t_years, k_rock, geometry, exposure=None,
     the same piece), so that nodes on a piece boundary take that piece's geometry.
     rock_response is 'logarithmic' (the original quasi-steady term) or
     'cylinder' (the exact wall-temperature step response; see rock_response).
-    annulus_model is one of ANNULUS_MODELS; 'bingham' gives the string wall
-    and the hole wall their own film coefficients (annulus_films)."""
+    annulus_model is one of ANNULUS_MODELS; 'herschel-bulkley' gives the
+    string wall and the hole wall their own film coefficients (annulus_films)."""
     g = geometry.at(z if geom_z is None else geom_z)
     g["tvd"] = geometry.survey.tvd(z)
     P = P_of_z(g["tvd"], P_surface)
     h_d = h_dittus(m_dot, g["A_bore"], g["Dh_bore"], T_d, P, fluid=fluid)
-    if annulus_model == 'bingham':
+    if annulus_model == 'herschel-bulkley':
         h_string, h_hole = annulus_films(m_dot, g, T_u, P, fluid)
         h_string, h_hole = film_mult * h_string, film_mult * h_hole
     elif annulus_model == 'v1.6.0':
@@ -336,11 +340,13 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     # or 'logarithmic' (the original term, always used by v1.5.0).
     # annulus_heat: optional callable MD[m] -> W/m released into the annulus
     # fluid, such as rotary friction (rotary_heat). Not accepted by v1.5.0.
-    # annulus_model: annulus heat transfer and the laminar-turbulent criterion
-    # of a Bingham mud's pressure loss, one of ANNULUS_MODELS: 'v1.6.0'
-    # (Dittus-Boelter; apparent-viscosity criterion) or 'bingham' (entry 5:
-    # the Wilson-Thomas criterion shared with the pressure loss, wall
-    # viscosity, Gnielinski's annulus correlation and laminar annulus values).
+    # annulus_model: annulus heat transfer and annulus flow, one of
+    # ANNULUS_MODELS: 'v1.6.0' (Dittus-Boelter; Bingham pressure loss with the
+    # apparent-viscosity criterion) or 'herschel-bulkley' (entry 6: the
+    # Founargiotakis slot model for the annulus pressure loss and flow regime,
+    # with the fluid's Herschel-Bulkley rheology; Gnielinski's annulus
+    # correlation on the wall viscosity and laminar annulus values, blended
+    # over the same band).
     # v1.5.0 accepts only 'v1.6.0', which reproduces its calculation.
     # friction_heat: add the heat dissipated by friction in the bore and annulus,
     # and across the bit nozzles (total flow area tfa), to the fluid. Off by
@@ -376,7 +382,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
         raise ValueError(f'annulus_model must be one of {ANNULUS_MODELS}')
     if hydraulics_model == 'v1.5.0' and annulus_model != 'v1.6.0':
         raise ValueError('hydraulics_model v1.5.0 accepts only annulus_model v1.6.0')
-    regime = 'wilson-thomas' if annulus_model == 'bingham' else 'apparent-viscosity'
+    regime = 'herschel-bulkley' if annulus_model == 'herschel-bulkley' else 'apparent-viscosity'
     if hydraulics_model=='v1.5.0':
         hl.check_legacy(geometry,surface,transitions)
         loss_model=None
@@ -655,7 +661,7 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
         return _hydraulics_v150(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface)
     if mode!='v1.6.0':
         raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
-    regime='wilson-thomas' if annulus_model=='bingham' else 'apparent-viscosity'
+    regime='herschel-bulkley' if annulus_model=='herschel-bulkley' else 'apparent-viscosity'
     return hl.hydraulics(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface,surface,transitions,
                          regime=regime)
 

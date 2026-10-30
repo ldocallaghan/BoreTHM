@@ -35,6 +35,17 @@ the larger annular friction, the conservative side for the fracture bound.
 Thermal properties. Heat capacity by mass fraction; conductivity by the
 Maxwell relation for dispersed spheres.
 
+Herschel-Bulkley annulus (development entry 6; HerschelBulkley and
+hb_annulus). A mud may also carry a Herschel-Bulkley rheology,
+tau = tau_0 + K gamma^n, built from its report: the 600 and 300 rpm dial
+readings implied by PV and YP, and a low-shear yield stress tau_0 (for
+example the 10-s gel). K follows the plastic viscosity's temperature
+dependence, as the high-shear viscosity of water-based muds follows water's
+(Alderman et al. 1988). tau_0 is held constant or, as an option, rises
+above a characteristic temperature T* as Alderman et al. measured. The
+annulus is then a slot, with laminar, transitional and turbulent flow after
+Founargiotakis et al. (2008).
+
 Hydraulics (bingham_gradient): the laminar pressure loss of a Bingham plastic
 in pipe and in the narrow-slot annulus, with the apparent-viscosity Reynolds
 number for the change to turbulence, after Bourgoyne et al. (1986), ch. 4;
@@ -50,6 +61,14 @@ Sources:
     minerals. USGS Bulletin 2131: barite heat capacity at 298 K.
   Bourgoyne, A.T., Millheim, K.K., Chenevert, M.E. and Young, F.S. (1986).
     Applied Drilling Engineering. SPE Textbook Series 2, ch. 4.
+  Founargiotakis, K., Kelessidis, V.C. and Maglione, R. (2008). Laminar,
+    transitional and turbulent flow of Herschel-Bulkley fluids in concentric
+    annulus. Can. J. Chem. Eng. 86, 676-683.
+  Alderman, N.J., Gavignet, A., Guillot, D. and Maitland, G.C. (1988).
+    High-temperature, high-pressure rheology of water-based muds. SPE 18035.
+  API Recommended Practice 13D (2010). Rheology and hydraulics of oil-well
+    drilling fluids: a Fann dial degree is 1.0678 lbf/100 ft2, and 600 and
+    300 rpm give 1022 and 511 1/s in the standard R1-B1 geometry.
 """
 import numpy as np
 
@@ -73,11 +92,14 @@ YP_REF = 28.0 * LBF_100FT2    # Pa (28 lbf/100 ft2 at 80 F), held in temperature
 MUD_T_LIMIT = 150.0           # C
 
 RE_CRITICAL = 2100.0          # apparent-viscosity Reynolds number (Bourgoyne et al. 1986)
-# Criteria for the change from laminar to turbulent flow of a Bingham plastic:
-# the apparent-viscosity Reynolds number above (the original), or the
-# Hedstrom-number fits of Wilson and Thomas (2006), applied in an annulus on
-# its hydraulic diameter.
-REGIMES = ('apparent-viscosity', 'wilson-thomas')
+# Annulus flow treatments: the Bingham plastic with the apparent-viscosity
+# Reynolds number above (the original), or the Herschel-Bulkley slot model
+# of Founargiotakis et al. (2008) (hb_annulus).
+REGIMES = ('apparent-viscosity', 'herschel-bulkley')
+
+DIAL_PA = 1.0678 * LBF_100FT2      # Pa per Fann dial degree (API RP 13D)
+RATE_600 = 1022.0                  # 1/s at 600 rpm (API RP 13D)
+RATE_300 = 511.0                   # 1/s at 300 rpm
 
 
 def _water(T, P):
@@ -110,6 +132,10 @@ class Mud:
         self.yield_point = float(yield_point)
         mu_w_ref = float(np.ravel(_water([pv_ref_T], [P_ATM])[2])[0])
         self.mu_ratio = 1.0 if pv_ref is None else pv_ref / mu_w_ref
+        # plastic viscosity at the reference state, for HerschelBulkley's K(T)
+        self.pv_ref = mu_w_ref * self.mu_ratio
+        # optional Herschel-Bulkley rheology for annulus_model 'herschel-bulkley'
+        self.rheology = None
 
     @property
     def sg(self):
@@ -143,42 +169,16 @@ def water():
     return Mud(_rho_water_ref(), pv_ref=None, yield_point=0.0)
 
 
-def wilson_thomas_turbulent(rho, mu_p, tau_y, v, D):
-    """True where a Bingham plastic of plastic viscosity mu_p [Pa s] and yield
-    stress tau_y [Pa] is turbulent at mean velocity v [m/s] in a duct of
-    diameter D [m], by the fits of Wilson and Thomas (2006) to their model of
-    the transition (Can. J. Chem. Eng. 84, 520-526, eqs. 17-20), with the
-    Hedstrom number He = rho tau_y D^2 / mu_p^2:
-
-        He < 1700:          rho V_T D / mu_p = 2100 / (1 + 8.3e-8 log10(He)^13)
-        1700 <= He <= 1e5:  rho V_T D / mu_p = 80 He^0.40
-        He > 1e5:           V_T = 25 (tau_y / rho)^0.5
-
-    The fits are for pipes; an annulus uses its hydraulic diameter."""
-    rho, mu_p, v, D = (np.asarray(x, float) for x in (rho, mu_p, v, D))
-    he = rho * tau_y * D ** 2 / mu_p ** 2
-    with np.errstate(divide='ignore', invalid='ignore'):
-        # below He = 1 the first fit is 2100 to within 1e-7; it also covers no yield stress
-        log_he = np.log10(np.maximum(he, 1.0))
-        re_t = np.where(he < 1700.0, 2100.0 / (1.0 + 8.3e-8 * log_he ** 13), 80.0 * he ** 0.40)
-    v_t = np.where(he > 1e5, 25.0 * np.sqrt(tau_y / rho), re_t * mu_p / (rho * D))
-    return np.abs(v) > v_t
-
-
-def bingham_turbulent(rho, mu_p, tau_y, v, D, annulus, regime='apparent-viscosity'):
-    """True where a Bingham plastic is turbulent by the named criterion
-    (REGIMES), with the apparent viscosity of bingham_gradient."""
-    if regime == 'wilson-thomas':
-        return wilson_thomas_turbulent(rho, mu_p, tau_y, v, D)
-    if regime != 'apparent-viscosity':
-        raise ValueError(f'regime must be one of {REGIMES}')
+def bingham_turbulent(rho, mu_p, tau_y, v, D, annulus):
+    """True where a Bingham plastic is turbulent by the apparent-viscosity
+    Reynolds number of bingham_gradient."""
     rho, mu_p, D = (np.asarray(x, float) for x in (rho, mu_p, D))
     v = np.maximum(np.abs(np.asarray(v, float)), 1e-9)
     mu_a = mu_p + tau_y * D / ((8.0 if annulus else 6.0) * v)
     return rho * v * D / mu_a > RE_CRITICAL
 
 
-def bingham_gradient(rho, mu_p, tau_y, v, D, annulus, regime='apparent-viscosity'):
+def bingham_gradient(rho, mu_p, tau_y, v, D, annulus):
     """Frictional pressure gradient [Pa/m] of a Bingham plastic at mean
     velocity v in a pipe of diameter D, or an annulus of hydraulic diameter D
     (outer less inner diameter). Laminar, from the plug-flow limits of
@@ -191,8 +191,7 @@ def bingham_gradient(rho, mu_p, tau_y, v, D, annulus, regime='apparent-viscosity
     mu_p v / (1000 (d2 - d1)^2) + tau_y / (200 (d2 - d1)), psi/ft). The flow
     is turbulent when the Reynolds number on the apparent viscosity, the
     Newtonian viscosity giving the same laminar loss, exceeds RE_CRITICAL;
-    then the Blasius friction factor on the plastic viscosity. regime names
-    the criterion (REGIMES); wilson-thomas uses wilson_thomas_turbulent."""
+    then the Blasius friction factor on the plastic viscosity."""
     rho, mu_p, v, D = (np.asarray(x, float) for x in (rho, mu_p, v, D))
     v = np.maximum(np.abs(v), 1e-9)
     if annulus:
@@ -203,5 +202,201 @@ def bingham_gradient(rho, mu_p, tau_y, v, D, annulus, regime='apparent-viscosity
         mu_a = mu_p + tau_y * D / (6.0 * v)
     Re_a = rho * v * D / mu_a
     turb = 0.316 * (rho * v * D / mu_p) ** -0.25 * rho * v ** 2 / (2.0 * D)
-    turbulent = bingham_turbulent(rho, mu_p, tau_y, v, D, annulus, regime)
-    return np.where(turbulent, turb, lam), Re_a
+    return np.where(Re_a > RE_CRITICAL, turb, lam), Re_a
+
+
+class HerschelBulkley:
+    """Herschel-Bulkley rheology, tau = tau_0 + K gamma^n, of a mud report.
+
+    from_report takes the plastic viscosity PV [cP], yield point YP and a
+    low-shear yield stress tau_0 [both lbf/100 ft2, i.e. Fann dial degrees]
+    and uses the dial readings they imply, R600 = 2 PV + YP and
+    R300 = PV + YP:
+
+        n = ln((R600 - tau_0) / (R300 - tau_0)) / ln(1022 / 511)
+        K = (R300 - tau_0) DIAL_PA / 511^n
+
+    K is taken at the mud's reference state and scales with its plastic
+    viscosity, K(T, P) = K mu_p(T, P) / mu_p,ref. tau_0 is constant, or with
+    rise = (T_star [K], E_H [K]) follows Alderman et al. (1988, eqs. 8-9):
+
+        tau_0(T) = tau_0                                 T <= T*
+        tau_0(T) = tau_0 exp(E_H (1/T* - 1/T))           T >  T*
+    """
+
+    def __init__(self, tau0, n, K, rise=None):
+        if not (np.isfinite(tau0) and tau0 >= 0):
+            raise ValueError('yield stress must be non-negative')
+        if not (np.isfinite(n) and 0 < n <= 2 and np.isfinite(K) and K > 0):
+            raise ValueError('flow index and consistency must be positive')
+        if rise is not None and not (len(rise) == 2 and rise[0] > 0 and rise[1] >= 0):
+            raise ValueError('rise is (T_star [K] > 0, E_H [K] >= 0)')
+        self.tau0, self.n, self.K = float(tau0), float(n), float(K)
+        self.rise = None if rise is None else (float(rise[0]), float(rise[1]))
+
+    @classmethod
+    def from_report(cls, pv_cP, yp, tau0, rise=None):
+        r600, r300 = 2.0 * pv_cP + yp, pv_cP + yp
+        if not (0 <= tau0 < r300):
+            raise ValueError('the low-shear yield stress must lie below the 300 rpm reading')
+        n = np.log((r600 - tau0) / (r300 - tau0)) / np.log(RATE_600 / RATE_300)
+        K = (r300 - tau0) * DIAL_PA / RATE_300 ** n
+        return cls(tau0 * DIAL_PA, n, K, rise)
+
+    def at(self, T_C, mu, mud):
+        """tau_0 [Pa], K [Pa s^n] and n at temperature T_C, where mu is the
+        mud's plastic viscosity there (fluid_props)."""
+        T_C, mu = np.broadcast_arrays(np.asarray(T_C, float), np.asarray(mu, float))
+        tau0 = np.full(T_C.shape, self.tau0)
+        if self.rise is not None and self.tau0 > 0:
+            # the solver can try temperatures outside the physical range; the
+            # loss model clips the same way
+            t_star, e_h = self.rise
+            T_K = np.clip(T_C, 1.0, 480.0) + 273.15
+            tau0 = tau0 * np.exp(e_h * np.maximum(1.0 / t_star - 1.0 / T_K, 0.0))
+        return tau0, self.K * mu / mud.pv_ref, self.n
+
+
+def _slot_velocity(tau_w, tau0, K, n, h):
+    """Mean velocity of laminar Herschel-Bulkley flow in a slot of gap h at
+    wall shear stress tau_w (Founargiotakis et al. 2008, eq. 5)."""
+    m = 1.0 / n
+    xi = np.clip(tau0 / tau_w, 0.0, 1.0)
+    return (h / 2.0) * (tau_w / K) ** m * (1.0 - xi) ** (m + 1) * (xi + m + 1) / ((m + 1) * (m + 2))
+
+
+def dodge_metzner(re, n_prime, iterations=5):
+    """Fanning friction factor of Dodge and Metzner (1959) as adjusted to
+    the annulus by Founargiotakis et al. (2008, eq. 16):
+
+        1/f^0.5 = (4 / n'^0.75) log10(Re f^(1 - n'/2)) - 0.395 / n'^1.2
+
+    solved for x = f^-0.5 by Newton's method."""
+    re, n_prime = np.broadcast_arrays(np.asarray(re, float), np.asarray(n_prime, float))
+    a = 4.0 / n_prime ** 0.75
+    b = a * np.log10(re) - 0.395 / n_prime ** 1.2
+    c = a * (2.0 - n_prime) / np.log(10.0)
+    # start from the explicit fit f = 0.0791 Re^-0.25 / n'^0.5 (within ~20%)
+    x = np.sqrt(n_prime / 0.0791) * np.maximum(re, 1.0) ** 0.125
+    for _ in range(iterations):
+        g = x - b + c * np.log(np.maximum(x, 1e-12))
+        x = np.maximum(x - g / (1.0 + c / x), 0.5)
+    return x ** -2.0
+
+
+def _illinois(residual, lo, hi, r_lo, r_hi, active, iterations, tol=1e-10):
+    """Vectorised Illinois (regula falsi) root of residual(x) on [lo, hi],
+    where r_lo < 0 < r_hi elementwise; only active elements move."""
+    side = np.zeros(lo.shape)
+    x = lo.copy()
+    for _ in range(iterations):
+        x = np.where(active, (lo * r_hi - hi * r_lo) / (r_hi - r_lo), x)
+        r = residual(x)
+        upper = r > 0
+        hi, r_hi = np.where(active & upper, x, hi), np.where(active & upper, r, r_hi)
+        lo, r_lo = np.where(active & ~upper, x, lo), np.where(active & ~upper, r, r_lo)
+        # Illinois: halve the stale end's residual after two moves on one side
+        r_lo = np.where(active & upper & (side == 1), r_lo / 2, r_lo)
+        r_hi = np.where(active & ~upper & (side == -1), r_hi / 2, r_hi)
+        side = np.where(upper, 1, -1)
+        active = active & (hi - lo > tol * np.maximum(np.abs(hi), 1.0))
+        if not np.any(active):
+            break
+    return x
+
+
+def hb_annulus(rho, tau0, K, n, v, gap, iterations=40):
+    """Herschel-Bulkley flow in a concentric annulus modelled as a slot,
+    after Founargiotakis et al. (2008). gap is d_outer - d_inner [m], so the
+    slot of their eqs. 2-5 has h = gap / 2. Returns a dict of arrays:
+
+    tau_w     wall shear stress [Pa]
+    gradient  frictional pressure gradient 4 tau_w / gap = 2 f rho V^2 / gap [Pa/m] (eq. 17)
+    f         Fanning friction factor
+    re        generalised Reynolds number rho V^(2-n') gap^n' / (K' 12^(n'-1)) (eq. 13)
+    n_prime   local flow index (eq. 14); k_prime, K' (eq. 15)
+    re1, re2  start and end of transition, 3250 - 1150 n' and 4150 - 1150 n' (eqs. 18-19)
+    blend     0 below Re1, 1 above Re2, linear in Re between (eq. 21)
+    mu_a      Metzner-Reed apparent viscosity rho V gap / re
+    mu_w      wall viscosity tau_w / gamma_w, with the wall shear rate
+              gamma_w = ((tau_w - tau_0) / K)^(1/n) of the rheology at the wall stress
+    gamma_nw  Newtonian wall shear rate 12 V_lam(tau_w) / gap (eq. 9)
+
+    The laminar wall stress solves eq. 5 at the mean velocity. Where its
+    Reynolds number exceeds Re1 the flow is transitional or turbulent: for a
+    wall stress tau_w the laminar relation gives gamma_Nw, n' and K', the
+    friction factor is Dodge-Metzner (eq. 16) above Re2 or the linear
+    interpolation between 24/Re1 and the Dodge-Metzner value at Re2 (eqs.
+    20-21), and tau_w = f rho V^2 / 2, solved above the laminar stress on
+    ln tau_w (their fig. 2 bisects; here regula falsi, Illinois variant).
+
+    The friction factor is bounded below by the laminar 24/Re at the same
+    Re. In Dodge and Metzner's chart the transitional and turbulent curves
+    lie above the laminar line; their correlation falls below it only for
+    n' under about 0.4, outside their data (n' 0.36-1.0), which a yield
+    stress near the wall stress produces. With the bound the wall stress is
+    never below the laminar one, and a root always lies above it."""
+    rho, tau0, K, n, v, gap = np.broadcast_arrays(*(np.asarray(x, float) for x in (rho, tau0, K, n, v, gap)))
+    v = np.maximum(np.abs(v), 1e-9)
+    h = gap / 2.0
+
+    def state(tau_w):
+        v_lam = _slot_velocity(tau_w, tau0, K, n, h)
+        g_nw = np.maximum(12.0 * v_lam / gap, 1e-300)
+        xi = np.clip(tau0 / tau_w, 0.0, 1.0)
+        n_p = n * (1 - xi) * (n * xi + n + 1) / (1 + n + 2 * n * xi + 2 * n * n * xi * xi)
+        n_p = np.maximum(n_p, 1e-3)
+        k_p = tau_w / g_nw ** n_p
+        re = rho * v ** (2 - n_p) * gap ** n_p / (k_p * 12.0 ** (n_p - 1))
+        re1, re2 = 3250.0 - 1150.0 * n_p, 4150.0 - 1150.0 * n_p
+        blend = np.clip((re - re1) / (re2 - re1), 0.0, 1.0)
+        both = dodge_metzner(np.concatenate([re2.ravel(), np.maximum(re, re2).ravel()]),
+                             np.concatenate([n_p.ravel(), n_p.ravel()]))
+        f_t2, f_dm = both[:re.size].reshape(re.shape), both[re.size:].reshape(re.shape)
+        f_lam = 24.0 / np.maximum(re, 1e-300)
+        f = np.where(re <= re1, f_lam,
+                     np.where(re >= re2, f_dm, 24.0 / re1 + blend * (f_t2 - 24.0 / re1)))
+        f = np.maximum(f, f_lam)
+        return dict(f=f, re=re, n_prime=n_p, k_prime=k_p, re1=re1, re2=re2, blend=blend, gamma_nw=g_nw)
+
+    # laminar: ln tau_w with V_lam(tau_w) = V, monotonic in tau_w
+    def laminar(x):
+        return np.log(_slot_velocity(np.exp(x), tau0, K, n, h) / v)
+
+    lo = np.log(tau0 * (1 + 1e-9) + 1e-12)
+    hi = np.log(tau0 + 1.0)
+    r_hi = laminar(hi)
+    for _ in range(200):
+        short = r_hi <= 0
+        if not np.any(short):
+            break
+        hi = np.where(short, hi + np.log(10.0), hi)
+        r_hi = np.where(short, laminar(hi), r_hi)
+    r_lo = np.maximum(np.nan_to_num(laminar(lo), nan=-1e3, neginf=-1e3), -1e3)
+    r_lo = np.minimum(r_lo, -1e-300)
+    x = _illinois(laminar, lo, hi, r_lo, r_hi, np.ones(lo.shape, bool), iterations)
+    tau_w = np.exp(x)
+    st = state(tau_w)
+    moving = st['re'] > st['re1']
+    if np.any(moving):
+        def excess(x):
+            t = np.exp(x)
+            return 1.0 - state(t)['f'] * rho * v ** 2 / (2.0 * t)
+        lo = np.log(tau_w)
+        hi = np.log(np.maximum(10.0 * tau_w, rho * v ** 2))
+        r_lo, r_hi = excess(lo), excess(hi)
+        for _ in range(50):
+            low = moving & (r_hi <= 0)
+            if not np.any(low):
+                break
+            hi = np.where(low, hi + np.log(10.0), hi)
+            r_hi = np.where(low, excess(hi), r_hi)
+        # at the laminar stress the bounded friction gives excess <= 0
+        settled = moving & (r_lo >= 0)
+        active = moving & ~settled
+        x = _illinois(excess, lo, hi, np.minimum(r_lo, -1e-300), r_hi, active, iterations)
+        tau_w = np.where(active, np.exp(x), tau_w)
+        st = state(tau_w)
+    gamma_w = (np.maximum(tau_w - tau0, 1e-300) / K) ** (1.0 / n)
+    st.update(tau_w=tau_w, gradient=4.0 * tau_w / gap, mu_a=rho * v * gap / st['re'], mu_w=tau_w / gamma_w)
+    return st

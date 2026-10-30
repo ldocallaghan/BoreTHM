@@ -32,10 +32,12 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     rejects it. Heat released at the bit is part of Q_face.
     annulus_model 'v1.6.0' is the released annulus heat transfer and the
     apparent-viscosity criterion for laminar flow of a Bingham mud.
-    'bingham' is a development candidate: the Wilson-Thomas criterion,
-    shared with the pressure loss, Gnielinski's annulus correlation on the
-    wall apparent viscosity, and laminar annulus values for each wall.
-    v1.5.0 accepts only 'v1.6.0'.
+    'herschel-bulkley' is a development candidate: the Founargiotakis slot
+    model of a Herschel-Bulkley mud (fluid.rheology, a
+    fluids.HerschelBulkley) for the annulus pressure loss and flow regime,
+    and Gnielinski's annulus correlation on the wall viscosity and laminar
+    annulus values for each wall, blended over the same transition band. v1.5.0 accepts only
+    'v1.6.0'.
     The separate radial wall-temperature solver uses its supplied state
     durations, with fluid-temperature and film-coefficient boundaries from
     circulation. The exposure floors set no breakout formation delay.
