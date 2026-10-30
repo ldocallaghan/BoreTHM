@@ -258,3 +258,18 @@ def test_solve_with_the_erge_candidate():
     inherited = m1.hydraulics(40.0, entry7['geometry'], result=entry7, fluid=mud)
     explicit = m1.hydraulics(40.0, entry7['geometry'], result=entry7, fluid=mud, annulus_model='herschel-bulkley-erge')
     assert inherited['spp'] == explicit['spp']
+
+
+def test_power_law_path_matches_the_general_solver():
+    hb = fluids.HerschelBulkley.from_report(14.0, 11.5, 0.0)
+    v = np.linspace(0.05, 3.5, 300)
+    for band, kappa in (('founargiotakis', None), ('erge', 0.57)):
+        fast = fluids.hb_annulus(1080.0, 0.0, hb.K, hb.n, v, 0.0953, band=band, kappa=kappa)
+        general = fluids.hb_annulus(1080.0, 1e-300, hb.K, hb.n, v, 0.0953, band=band, kappa=kappa)
+        for key in ('tau_w', 're', 'f', 'mu_w', 'mu_a', 'gamma_nw'):
+            assert np.allclose(fast[key], general[key], rtol=1e-8)
+        assert np.allclose(fast['blend'], general['blend'], atol=1e-10)
+        # laminar: the power-law slot stress K ((2n + 1) / 3n 12 V / gap)^n
+        lam = fast['re'] <= fast['re1']
+        expected = hb.K * ((2 * hb.n + 1) / (3 * hb.n) * 12 * v / 0.0953) ** hb.n
+        assert np.allclose(fast['tau_w'][lam], expected[lam])

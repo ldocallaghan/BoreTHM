@@ -344,6 +344,36 @@ def transition_band(n_prime, band='founargiotakis', kappa=None, eccentricity=0.0
     return re1, re2
 
 
+def _power_law_annulus(rho, K, n, v, gap, band, kappa):
+    """hb_annulus with no yield stress, solved explicitly. For a power-law
+    fluid n' = n and K' = K ((2n + 1) / 3n)^n at every wall stress
+    (Founargiotakis et al. 2008, eqs. 14-15 with xi = 0), so the generalised
+    Reynolds number does not depend on the wall stress: Re = 12 rho V^2 /
+    tau_lam, with the laminar stress tau_lam = K ((2n + 1) / 3n 12 V / gap)^n
+    (eq. 5 with xi = 0). The friction factor then follows directly, and
+    tau_w = f rho V^2 / 2. hb_annulus's iterative solution gives the same
+    root, since there its residual has a single crossing."""
+    m = 1.0 / n
+    g_lam = (m + 2.0) / 3.0 * 12.0 * v / gap          # (2n+1)/(3n) x 12 V / gap
+    tau_lam = K * g_lam ** n
+    re = 12.0 * rho * v ** 2 / tau_lam
+    n_p = n
+    k_p = K * ((m + 2.0) / 3.0) ** n
+    re1, re2 = transition_band(n_p, band, kappa)
+    blend = np.clip((re - re1) / (re2 - re1), 0.0, 1.0)
+    both = dodge_metzner(np.concatenate([re2.ravel(), np.maximum(re, re2).ravel()]),
+                         np.concatenate([n_p.ravel(), n_p.ravel()]))
+    f_t2, f_dm = both[:re.size].reshape(re.shape), both[re.size:].reshape(re.shape)
+    f_lam = 24.0 / re
+    f = np.where(re <= re1, f_lam, np.where(re >= re2, f_dm, 24.0 / re1 + blend * (f_t2 - 24.0 / re1)))
+    f = np.maximum(f, f_lam)
+    tau_w = f * rho * v ** 2 / 2.0
+    gamma_w = (tau_w / K) ** m
+    gamma_nw = 3.0 / (m + 2.0) * gamma_w                # the laminar relation at this wall stress
+    return dict(f=f, re=re, n_prime=n_p, k_prime=k_p, re1=re1, re2=re2, blend=blend, gamma_nw=gamma_nw,
+                tau_w=tau_w, gradient=4.0 * tau_w / gap, mu_a=rho * v * gap / re, mu_w=tau_w / gamma_w)
+
+
 def hb_annulus(rho, tau0, K, n, v, gap, iterations=40, band='founargiotakis', kappa=None):
     """Herschel-Bulkley flow in a concentric annulus modelled as a slot,
     after Founargiotakis et al. (2008). gap is d_outer - d_inner [m], so the
@@ -400,6 +430,9 @@ def hb_annulus(rho, tau0, K, n, v, gap, iterations=40, band='founargiotakis', ka
                      np.where(re >= re2, f_dm, 24.0 / re1 + blend * (f_t2 - 24.0 / re1)))
         f = np.maximum(f, f_lam)
         return dict(f=f, re=re, n_prime=n_p, k_prime=k_p, re1=re1, re2=re2, blend=blend, gamma_nw=g_nw)
+
+    if not np.any(tau0):
+        return _power_law_annulus(rho, K, n, v, gap, band, kappa)
 
     # laminar: ln tau_w with V_lam(tau_w) = V, monotonic in tau_w
     def laminar(x):
