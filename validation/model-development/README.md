@@ -10,6 +10,6 @@ These archives compare declared changes with the frozen FORGE 16A and 16B develo
 | 3: cylindrical rock response | [Score beside the legacy and working calculations](entry-3/results/README.md) |
 | 4: rotary heat | [Inputs](entry-4/README.md) and [score](entry-4/results/README.md) |
 | 5: measured 16B mud rheology | [Score](entry-5/results/README.md) |
-| 6: Herschel–Bulkley annulus | Gel inputs, hypotheses and predictions in [entry-6](entry-6/) |
+| 6: Herschel–Bulkley annulus | [Score of three yield-stress hypotheses](entry-6/results/README.md) |
 
 The [original scoreboard and legacy baseline](../scoreboard/README.md) remain fixed. No held-out pressure target is included here. Source observations retain the attribution and CC BY 4.0 terms stated in the [16A](../forge16a/README.md) and [16B](../forge16b/README.md) archives.

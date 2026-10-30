@@ -60,7 +60,7 @@ This table includes work performed before this log existed. Earlier development 
 | Entry 4, rotary heat (M2) | Measured surface rotary power released as wall friction along the string and as work at the bit, split by a soft-string torque balance; warmer everywhere, most where the string rotates fast and deep | Every expected score change met within 0.25 °C. Deep 16A biases shrink to -2.1, -2.8 and -13.6 °C; 16B regular pipe -1.40 °C, with its deep runs now warm; trial bias +7.55 °C | Kept under its declared rule, 28 October 2026; upheld by independent review, 29 October 2026 |
 | Entry 5, measured 16B mud rheology (I1) | Measured PV and YP replace reference-mud fills on seven 16B assemblies; 16B standpipe pressure falls by 166–524 psi; EOW 11, 12, 16 and 17 warm by 4.8–10.9 °C | Every expected change met within 1.1 °C and 20 psi. 16B G1 biases fall to -435 to -546 psi; 16B regular pipe +2.40 °C, trial +9.08 °C | Kept under its declared rule, 29 October 2026 |
 | Bingham annulus candidate, Wilson–Thomas criterion on the report YP (`bec37fe`) | Shared laminar-turbulent criterion for annulus pressure and heat transfer, Gnielinski on the wall apparent viscosity | Never scored. Model-only checks found the 16A annulus laminar on the YP and turbulent with a low-shear yield stress | Removed before scoring, 30 October 2026; replaced by entry 6 |
-| Entry 6, Herschel–Bulkley annulus (A1), hypotheses no-yield, gel and gel-rising | Founargiotakis slot model for annulus pressure and regime; Gnielinski on the wall viscosity; all three cool 16A, by about 4–10, 7–34 and 14–34 °C at the bit | Declared 30 October 2026; score pending | Not adoptable under its rule until the downhole rheology is measured |
+| Entry 6, Herschel–Bulkley annulus (A1), hypotheses no-yield, gel and gel-rising | Founargiotakis slot model for annulus pressure and regime; Gnielinski on the wall viscosity; all three cool 16A, by about 4–10, 7–34 and 14–34 °C at the bit | Every expected change met. RMS of the nine 16A assembly bit biases 10.0, 19.7 and 24.6 °C against 5.6 °C for the working calculation; 16A pressure and 16B water-like runs nearly unchanged | Not adopted under its declared rule, 30 October 2026; the downhole rheology is unmeasured |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -1087,3 +1087,67 @@ The expected score changes follow from these, assuming each window represents it
 | G1, 16B BHA 12, 13, 15 and 16 | −435 to −546 psi | within 3 psi | the same | the same |
 
 All three hypotheses are expected to widen the 16A temperature gaps. If the score confirms it, then under every downhole yield stress the reports allow, the sourced annulus treatment leaves 16A colder than measured. Part of the agreement of the working calculation would then come from Dittus–Boelter on plastic viscosity, which has no basis for a yield-stress mud. Annulus effects still outside the model would also come into question: eccentricity, rotation and the flow disturbance at tool joints.
+
+## 30 October 2026: entry 6 score
+
+**Sources.** The [entry 6 archive](../../validation/model-development/entry-6/results/README.md): `summary.csv`, `comparison.csv` and `assembly-changes.csv`. The declaration is commit `492f1b8`, pushed before scoring.
+
+**Coverage.** Under every hypothesis, all 467 circulation cases and all nine originally available run-in events completed. The sample counts match both reference calculations, so every comparison below is paired. G4 equals the working calculation.
+
+**Run times.** The scoring runs took 2,076 s (no-yield), 1,837 s (gel) and 1,928 s (gel-rising).
+
+### Declared summary measures
+
+| Calculation | RMS of the nine 16A assembly bit biases | Mean of the nine | RMS of the 16A standpipe biases | 16A return bias (G5) |
+|---|---|---|---|---|
+| Legacy | 8.59 °C | −5.81 °C | 1,724 psi | −5.85 °C |
+| Working calculation | 5.62 °C | −0.75 °C | 1,190 psi | −4.70 °C |
+| no-yield | 10.04 °C | −7.73 °C | 1,213 psi | −4.35 °C |
+| gel | 19.69 °C | −17.95 °C | 1,193 psi | −3.96 °C |
+| gel-rising | 24.58 °C | −23.54 °C | 1,170 psi | −3.88 °C |
+
+The declaration expected RMS values of about 10, 20 and 25 °C, and return biases 0.3, 0.7 and 0.9 °C warmer than the working calculation. The scores are 10.0, 19.7 and 24.6 °C, and 0.35, 0.74 and 0.82 °C warmer.
+
+### 16A bit temperatures (G3)
+
+Biases in °C, model minus measured.
+
+| BHA | Legacy | Working calculation | no-yield | gel | gel-rising |
+|---|---|---|---|---|---|
+| 18 | −4.11 | −1.03 | −6.55 | −15.27 | −19.70 |
+| 23 | −0.19 | +2.77 | −1.19 | −4.23 | −12.55 |
+| 30 | +2.38 | +7.58 | +0.91 | −22.04 | −25.24 |
+| 34 | −0.75 | +3.56 | −4.70 | −31.94 | −31.95 |
+| 35r1 | −3.13 | +1.22 | −5.28 | −10.47 | −22.55 |
+| 35r2 | −8.91 | −2.36 | −9.79 | −16.57 | −33.34 |
+| 38 | −8.12 | −2.09 | −8.11 | −14.22 | −15.48 |
+| 39 | −9.68 | −2.78 | −12.83 | −18.37 | −19.58 |
+| 42 | −19.81 | −13.63 | −22.05 | −28.43 | −31.52 |
+
+The assembly mean changes differ from the window predictions by at most 5.6 °C. The largest differences are in BHA 34 under no-yield (−11.1 against −7.8 °C) and BHA 35r1 under gel-rising (−23.6 against −29.2 °C). There, an assembly's samples lie on both sides of the transition band.
+
+### Pressure and power (G1, G2)
+
+- **16A standpipe.** Changes from the working calculation are −89 to +11 psi under no-yield, −56 to +18 psi under gel and −40 to +69 psi under gel-rising. The 16A deficits stay between 545 and 1,892 psi. The annulus loss is a small part of the 16A standpipe pressure, so its treatment does not settle the 16A deficit.
+- **16B motorless runs.** These change by under 3 psi.
+- **G2.** The modelled 16A in-hole power changes by −10 to −1 kW, and 16B by under 1 kW.
+
+### 16B temperatures (G6)
+
+- **Water-like runs.** For EOW 11–38 the three hypotheses are identical, since τ0 is 0 there. Bit temperatures change by −0.5 to +1.7 °C. The independent regular-pipe bias moves from +2.40 to +2.55 °C, and the trial bias from +9.08 to +9.97 °C.
+- **EOW 3 and 4.** Under no-yield these cool by about 2 °C, to −4.54 and −23.76 °C. Under gel and gel-rising they cool by about 6 °C, to −8.7 and −28.0 °C.
+
+### Interpretation and decision
+
+Every expected change was met. The order of the hypotheses is as declared, and the RMS differences between them, 9.6 and 4.9 °C, are above the 2 °C threshold.
+
+On 16A, the lower the downhole yield stress, the closer the score. no-yield is closest, but it is still 7.7 °C colder than the measurements on average across the nine assemblies. It is also 4.4 °C worse in RMS than the working calculation. Under gel and gel-rising, BHA 30 and 34 are in transitional or laminar flow and are 22–32 °C too cold. The 16A data are therefore inconsistent with a transitional or laminar annulus at those runs. That conclusion would fail only if some effect outside the model raises the laminar heat transfer several times over. Drill-string rotation is the main candidate for that; eccentricity would act the other way. The working calculation's closer agreement comes from Dittus–Boelter on plastic viscosity, which has no basis for a yield-stress mud. So that agreement is not evidence for its physics.
+
+Two explanations fit the no-yield result.
+
+- **Missing annulus physics.** The downhole yield stress is close to zero, and some annulus effect still outside the model raises the turbulent film coefficient. The candidates are rotation, the flow disturbance at tool joints and the entrance effect after each joint.
+- **The wrong viscosity.** The wall-viscosity choice understates turbulent heat transfer for these muds. The 16A wall viscosities are 1.3–1.6 times PV. In the model-only check before the declaration, Gnielinski on PV gave 0.94–0.97 of the Dittus–Boelter film coefficient along BHA 38's annulus, and Gnielinski on the wall viscosity gave 0.75–0.84. So most of the no-yield cooling comes from the viscosity choice, which is still unsourced.
+
+The non-Newtonian heat-transfer source requested (Chhabra and Richardson, chapter 6), a quantified rotation term (Abdelhafiz 2023) and the 16A mud recap would separate these explanations.
+
+Under the rule declared before scoring, no hypothesis becomes the working calculation. Entries 1–5 with D5 remain the working calculation. The candidate stays in the package as `annulus_model='herschel-bulkley'`, unused by default. No 56-32, 58-32 or 78B-32 target was read.
