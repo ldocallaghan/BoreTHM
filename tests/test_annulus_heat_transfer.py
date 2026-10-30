@@ -187,3 +187,74 @@ def test_solve_selects_and_records_the_candidate():
         m1.solve(**base, annulus_model='herschel-bulkley', hydraulics_model='v1.5.0')
     with pytest.raises(ValueError, match='annulus_model'):
         m1.solve(**base, annulus_model='other')
+
+
+def test_erge_band_by_hand():
+    n, kappa = np.array([0.1, 0.3, 0.6, 1.0]), 0.57
+    re1, re2 = fluids.transition_band(n, 'erge', kappa)
+    expected1 = 2100 * n ** 0.331 * (1 + 1.402 * kappa - 0.977 * kappa ** 2)
+    assert np.allclose(re1, expected1)
+    assert np.allclose(re2, 2900 * np.clip(n, 0.15, 0.4) ** (-0.039 * expected1 ** 0.307))
+    assert np.all(re2 > re1)
+    # a Newtonian fluid in a pipe (kappa 0) starts transition at 2100
+    assert fluids.transition_band(1.0, 'erge', 0.0)[0] == pytest.approx(2100.0)
+    # eccentricity lowers the onset
+    assert fluids.transition_band(0.3, 'erge', kappa, eccentricity=1.0)[0] < re1[1]
+    assert np.allclose(fluids.transition_band(n)[0], 3250 - 1150 * n)
+    with pytest.raises(ValueError, match='kappa'):
+        fluids.transition_band(n, 'erge')
+    with pytest.raises(ValueError, match='band'):
+        fluids.transition_band(n, 'other')
+
+
+def test_slot_model_erge_band():
+    rho, gap = 1080.0, 0.0953
+    hb = fluids.HerschelBulkley.from_report(14.0, 11.5, 4.5)
+    v = np.linspace(0.2, 3.0, 300)
+    state = fluids.hb_annulus(rho, hb.tau0, hb.K * 0.5, hb.n, v, gap, band='erge', kappa=0.57)
+    re1, re2 = fluids.transition_band(state['n_prime'], 'erge', 0.57)
+    assert np.allclose(state['re1'], re1) and np.allclose(state['re2'], re2)
+    assert np.allclose(state['tau_w'], state['f'] * rho * v ** 2 / 2, rtol=1e-9)
+    # over the wide band the linearly interpolated friction factor can let the
+    # gradient dip a little with velocity; it rises outside the band
+    g = state['gradient']
+    assert np.max(1 - g / np.maximum.accumulate(g)) < 0.06
+    outside = (state['blend'] == 0) | (state['blend'] == 1)
+    rising = np.diff(g) > 0
+    assert np.all(rising[outside[:-1] & outside[1:]])
+    # the laminar solution does not depend on the band
+    slow = fluids.hb_annulus(rho, hb.tau0, hb.K, hb.n, 0.3, gap)
+    assert fluids.hb_annulus(rho, hb.tau0, hb.K, hb.n, 0.3, gap, band='erge', kappa=0.57)['tau_w'] == pytest.approx(slow['tau_w'])
+
+
+def test_film_coefficients_on_plastic_viscosity():
+    g = annulus(0.05555, 0.1111)
+    T, P = np.array([80.0]), np.array([2e7])
+    mud = fluids.Mud(1080.0, pv_ref=0.014, yield_point=5.5, pv_ref_T=26.7)
+    mud.rheology = fluids.HerschelBulkley.from_report(14.0, 11.5, 0.0)
+    rho, cp, mu, k = m1.fluid_props(T, P, mud)
+    dh = g['Dh_ann'][0]
+    m_dot = float(3.0 * rho[0] * g['A_ann'][0])
+    hi, ho = m1.annulus_films(m_dot, g, T, P, mud, 'erge', 'plastic')
+    state = fluids.hb_annulus(rho, *mud.rheology.at(T, mu, mud), 3.0, dh, band='erge', kappa=0.5)
+    assert state['blend'][0] == 1.0
+    re, pr = 3.0 * rho[0] * dh / mu[0], cp[0] * mu[0] / k[0]
+    assert hi[0] == pytest.approx(m1.gnielinski_annulus(re, pr, 0.5, 'inner') * k[0] / dh, rel=1e-6)
+    assert ho[0] == pytest.approx(m1.gnielinski_annulus(re, pr, 0.5, 'outer') * k[0] / dh, rel=1e-6)
+    wall = m1.annulus_films(m_dot, g, T, P, mud, 'erge', 'wall')[0]
+    assert wall[0] != pytest.approx(hi[0], rel=1e-3)
+    with pytest.raises(ValueError, match='viscosity'):
+        m1.annulus_films(m_dot, g, T, P, mud, 'erge', 'other')
+
+
+def test_solve_with_the_erge_candidate():
+    mud = fluids.Mud(1080.0, pv_ref=0.014, yield_point=5.5, pv_ref_T=26.7)
+    mud.rheology = fluids.HerschelBulkley.from_report(14.0, 11.5, 4.5)
+    base = dict(m_dot=40.0, pipe=wg.LEGACY_VACUUM, verbose=False, fluid=mud, friction_heat=True)
+    entry6 = m1.solve(**base, annulus_model='herschel-bulkley')
+    entry7 = m1.solve(**base, annulus_model='herschel-bulkley-erge')
+    assert entry7['success'] and entry7['annulus_model'] == 'herschel-bulkley-erge'
+    assert entry7['T_bottom_delivered'] != pytest.approx(entry6['T_bottom_delivered'], abs=1e-3)
+    inherited = m1.hydraulics(40.0, entry7['geometry'], result=entry7, fluid=mud)
+    explicit = m1.hydraulics(40.0, entry7['geometry'], result=entry7, fluid=mud, annulus_model='herschel-bulkley-erge')
+    assert inherited['spp'] == explicit['spp']

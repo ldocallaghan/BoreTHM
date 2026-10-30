@@ -66,6 +66,10 @@ Sources:
     annulus. Can. J. Chem. Eng. 86, 676-683.
   Alderman, N.J., Gavignet, A., Guillot, D. and Maitland, G.C. (1988).
     High-temperature, high-pressure rheology of water-based muds. SPE 18035.
+  Erge, O., Ozbayoglu, E.M., Miska, S.Z., Yu, M., Takach, N., Saasen, A.
+    and May, R. (2015). The effects of drillstring-eccentricity, -rotation,
+    and -buckling configurations on annular frictional pressure losses while
+    circulating yield-power-law fluids. SPE Drill. Complet. 30(3), 257-271.
   API Recommended Practice 13D (2010). Rheology and hydraulics of oil-well
     drilling fluids: a Fann dial degree is 1.0678 lbf/100 ft2, and 600 and
     300 rpm give 1022 and 511 1/s in the standard R1-B1 geometry.
@@ -96,6 +100,11 @@ RE_CRITICAL = 2100.0          # apparent-viscosity Reynolds number (Bourgoyne et
 # Reynolds number above (the original), or the Herschel-Bulkley slot model
 # of Founargiotakis et al. (2008) (hb_annulus).
 REGIMES = ('apparent-viscosity', 'herschel-bulkley')
+
+# Transition bands for hb_annulus (transition_band): Founargiotakis et al.
+# (2008) from the Dodge-Metzner chart, or Erge et al. (2015) with the
+# annulus diameter ratio.
+BANDS = ('founargiotakis', 'erge')
 
 DIAL_PA = 1.0678 * LBF_100FT2      # Pa per Fann dial degree (API RP 13D)
 RATE_600 = 1022.0                  # 1/s at 600 rpm (API RP 13D)
@@ -305,7 +314,37 @@ def _illinois(residual, lo, hi, r_lo, r_hi, active, iterations, tol=1e-10):
     return x
 
 
-def hb_annulus(rho, tau0, K, n, v, gap, iterations=40):
+def transition_band(n_prime, band='founargiotakis', kappa=None, eccentricity=0.0):
+    """Start and end of the laminar-turbulent transition, Re1 and Re2, on
+    the generalised Reynolds number 12 rho V^2 / tau_w of hb_annulus.
+
+    founargiotakis: Re1 = 3250 - 1150 n', Re2 = 4150 - 1150 n' (Founargiotakis
+    et al. 2008, eqs. 18-19, after Guillot from Dodge and Metzner's chart).
+
+    erge: Erge et al. (2015, eqs. 17-18), with the diameter ratio kappa =
+    d_inner / d_outer and eccentricity e = 2E / (d_outer - d_inner):
+
+        Re1 = 2100 [N^0.331 (1 + 1.402 kappa - 0.977 kappa^2) - 0.019 e N^-0.868 kappa]
+        Re2 = 2900 N^(-0.039 Re1^0.307)
+
+    with N = n'. Eq. 17 is stated for 0.1 < N < 1. Eq. 18 was fitted at
+    kappa = 0.5 for 0.15 < N < 0.4; outside that range it is evaluated at
+    the nearest end, which keeps Re2 above Re1 for every N up to 1."""
+    n_prime = np.asarray(n_prime, float)
+    if band == 'founargiotakis':
+        return 3250.0 - 1150.0 * n_prime, 4150.0 - 1150.0 * n_prime
+    if band != 'erge':
+        raise ValueError(f'band must be one of {BANDS}')
+    if kappa is None:
+        raise ValueError('the erge band needs the diameter ratio kappa')
+    kappa = np.asarray(kappa, float)
+    re1 = 2100.0 * (n_prime ** 0.331 * (1.0 + 1.402 * kappa - 0.977 * kappa ** 2)
+                    - 0.019 * eccentricity * n_prime ** -0.868 * kappa)
+    re2 = 2900.0 * np.clip(n_prime, 0.15, 0.4) ** (-0.039 * re1 ** 0.307)
+    return re1, re2
+
+
+def hb_annulus(rho, tau0, K, n, v, gap, iterations=40, band='founargiotakis', kappa=None):
     """Herschel-Bulkley flow in a concentric annulus modelled as a slot,
     after Founargiotakis et al. (2008). gap is d_outer - d_inner [m], so the
     slot of their eqs. 2-5 has h = gap / 2. Returns a dict of arrays:
@@ -315,7 +354,8 @@ def hb_annulus(rho, tau0, K, n, v, gap, iterations=40):
     f         Fanning friction factor
     re        generalised Reynolds number rho V^(2-n') gap^n' / (K' 12^(n'-1)) (eq. 13)
     n_prime   local flow index (eq. 14); k_prime, K' (eq. 15)
-    re1, re2  start and end of transition, 3250 - 1150 n' and 4150 - 1150 n' (eqs. 18-19)
+    re1, re2  start and end of transition (transition_band; by default 3250 - 1150 n'
+              and 4150 - 1150 n', eqs. 18-19; band 'erge' needs kappa = d_inner / d_outer)
     blend     0 below Re1, 1 above Re2, linear in Re between (eq. 21)
     mu_a      Metzner-Reed apparent viscosity rho V gap / re
     mu_w      wall viscosity tau_w / gamma_w, with the wall shear rate
@@ -337,6 +377,8 @@ def hb_annulus(rho, tau0, K, n, v, gap, iterations=40):
     stress near the wall stress produces. With the bound the wall stress is
     never below the laminar one, and a root always lies above it."""
     rho, tau0, K, n, v, gap = np.broadcast_arrays(*(np.asarray(x, float) for x in (rho, tau0, K, n, v, gap)))
+    if kappa is not None:
+        kappa = np.broadcast_to(np.asarray(kappa, float), rho.shape)
     v = np.maximum(np.abs(v), 1e-9)
     h = gap / 2.0
 
@@ -348,7 +390,7 @@ def hb_annulus(rho, tau0, K, n, v, gap, iterations=40):
         n_p = np.maximum(n_p, 1e-3)
         k_p = tau_w / g_nw ** n_p
         re = rho * v ** (2 - n_p) * gap ** n_p / (k_p * 12.0 ** (n_p - 1))
-        re1, re2 = 3250.0 - 1150.0 * n_p, 4150.0 - 1150.0 * n_p
+        re1, re2 = transition_band(n_p, band, kappa)
         blend = np.clip((re - re1) / (re2 - re1), 0.0, 1.0)
         both = dodge_metzner(np.concatenate([re2.ravel(), np.maximum(re, re2).ravel()]),
                              np.concatenate([n_p.ravel(), n_p.ravel()]))

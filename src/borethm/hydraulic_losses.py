@@ -139,7 +139,7 @@ class SurfaceLoss:
 
 
 def passage_gradient(rho, mu, yield_point, mass_rate, area, dh, annulus=False, friction='blasius',
-                     regime='apparent-viscosity', hb=None):
+                     regime='apparent-viscosity', hb=None, band='founargiotakis', kappa=None):
     """Positive friction gradient [Pa/m], Reynolds number and velocity [m/s].
 
     Takes already evaluated properties so frozen-point formula replays do
@@ -147,7 +147,9 @@ def passage_gradient(rho, mu, yield_point, mass_rate, area, dh, annulus=False, f
     regime 'herschel-bulkley' an annulus passage instead uses the slot model
     fluids.hb_annulus, with hb = (tau_0, K, n) at the passage's state (a
     fluid without a Herschel-Bulkley rheology is Newtonian there, tau_0 = 0,
-    K = mu, n = 1), and the Reynolds number is its generalised one.
+    K = mu, n = 1), and the Reynolds number is its generalised one. band and
+    kappa (the annulus diameter ratio) select its transition band
+    (fluids.transition_band).
     """
     from borethm import fluids, model1_coupled as m1
     velocity=mass_rate/(np.asarray(rho)*area)
@@ -155,7 +157,7 @@ def passage_gradient(rho, mu, yield_point, mass_rate, area, dh, annulus=False, f
         raise ValueError(f'regime must be one of {fluids.REGIMES}')
     if annulus and regime=='herschel-bulkley':
         tau0,K,n=(0.,mu,1.) if hb is None else hb
-        state=fluids.hb_annulus(rho,tau0,K,n,velocity,dh)
+        state=fluids.hb_annulus(rho,tau0,K,n,velocity,dh,band=band,kappa=kappa)
         return state['gradient'],state['re'],velocity
     if yield_point > 0:
         gradient,re=fluids.bingham_gradient(rho,mu,yield_point,velocity,dh,annulus)
@@ -180,17 +182,18 @@ def local_change(area_up, area_down, rho, mass_rate, mu, dh_small):
 def joint_increment(rho, mu, yield_point, mass_rate, body_area, body_dh,
                     joint_area, joint_dh, restriction_length, annulus=False,
                     transition='abrupt', friction='blasius', regime='apparent-viscosity', hb=None,
-                    body_gradient=None):
+                    body_gradient=None, band='founargiotakis', kappa_body=None, kappa_joint=None):
     """Replacement and entry/exit loss [Pa] for one connection.
 
     The body subtraction can give a negative increment. It replaces only
     the declared restriction length, with the remaining body retained.
     body_gradient, if given, is the body passage's gradient already
-    evaluated at the same state.
+    evaluated at the same state. band, kappa_body and kappa_joint select the
+    Herschel-Bulkley transition band of each passage.
     """
-    body=(passage_gradient(rho,mu,yield_point,mass_rate,body_area,body_dh,annulus,friction,regime,hb)[0]
+    body=(passage_gradient(rho,mu,yield_point,mass_rate,body_area,body_dh,annulus,friction,regime,hb,band,kappa_body)[0]
           if body_gradient is None else body_gradient)
-    joint=passage_gradient(rho,mu,yield_point,mass_rate,joint_area,joint_dh,annulus,friction,regime,hb)[0]
+    joint=passage_gradient(rho,mu,yield_point,mass_rate,joint_area,joint_dh,annulus,friction,regime,hb,band,kappa_joint)[0]
     local=0.
     if transition=='abrupt':
         # Both directions use the smaller passage's hydraulic diameter.
@@ -202,7 +205,8 @@ def joint_increment(rho, mu, yield_point, mass_rate, body_area, body_dh,
 class LossModel:
     """Prepared geometry-only loss placement, shared by pressure and heat."""
 
-    def __init__(self, geometry, friction='blasius', transitions='abrupt', regime='apparent-viscosity'):
+    def __init__(self, geometry, friction='blasius', transitions='abrupt', regime='apparent-viscosity',
+                 band='founargiotakis'):
         from borethm import fluids, model1_coupled as m1
         if transitions not in ('abrupt','gradual'):
             raise ValueError('transitions must be abrupt or gradual')
@@ -212,6 +216,9 @@ class LossModel:
         self.friction=friction
         self.transitions=transitions
         self.regime=regime
+        if band not in fluids.BANDS:
+            raise ValueError(f'band must be one of {fluids.BANDS}')
+        self.band=band
         self.top,self.bottom=m1._pieces(geometry)
         self.length=self.bottom-self.top
         self.replaced=np.zeros(len(geometry.string),bool)
@@ -286,7 +293,7 @@ class LossModel:
             body,re,velocity=passage_gradient(rho,mu,tau,mass_rate,area,dh,annulus,self.friction,self.regime)
         else:
             velocity=mass_rate/(rho*area)
-            state=fluids.hb_annulus(rho,*hb,velocity,dh)
+            state=fluids.hb_annulus(rho,*hb,velocity,dh,band=self.band,kappa=g['r_out']/g['r_wall'])
             body,re=state['gradient'],state['re']
         seg=self.geometry.segment_index(sample)
         piece=np.clip(np.searchsorted(self.bottom,sample,side='left'),0,len(self.bottom)-1)
@@ -310,7 +317,8 @@ class LossModel:
                     jd=joint.bore_diameter
                 inc,loc=joint_increment(rho[mask],mu[mask],tau,mass_rate,area[mask],dh[mask],ja,jd,joint.restriction_length,annulus,joint.transition,self.friction,self.regime,
                                         None if hb is None else tuple(x[mask] for x in hb),
-                                        None if hb is None else body[mask])
+                                        None if hb is None else body[mask],self.band,
+                                        (g['r_out']/g['r_wall'])[mask],joint.outer_diameter/diameter if annulus else None)
                 terms['joint_replacement'][mask]=inc/joint.spacing
                 terms['joint_local'][mask]=loc/joint.spacing
                 if joint.transition=='abrupt':
@@ -480,14 +488,16 @@ def energy_check(model,result,fluid,Q_face,tfa,P_surface):
 
 def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
                friction='blasius', bit=True, fluid=None, P_surface=1e5,
-               surface=None, transitions='abrupt', guard=True, regime='apparent-viscosity'):
+               surface=None, transitions='abrupt', guard=True, regime='apparent-viscosity',
+               band='founargiotakis'):
     """Standpipe budget using the same local gradients as circulation heat.
-    regime names the annulus flow treatment (fluids.REGIMES)."""
+    regime names the annulus flow treatment (fluids.REGIMES) and band its
+    transition band (fluids.BANDS)."""
     from borethm import model1_coupled as m1
     _finite(mass_rate,'mass flow',True)
     if surface is not None and not isinstance(surface,SurfaceLoss):
         raise TypeError('surface must be SurfaceLoss or None')
-    model=LossModel(geometry,friction,transitions,regime)
+    model=LossModel(geometry,friction,transitions,regime,band)
     top,bot=model.top,model.bottom
     mid,weights=model.integration_grid(result)
     if result is None:

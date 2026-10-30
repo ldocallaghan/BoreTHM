@@ -182,8 +182,13 @@ def exposure_seconds(z, t_years, exposure):
 
 # Annulus heat transfer. 'v1.6.0' is Dittus-Boelter on the plastic viscosity,
 # with a laminar floor Nu = 4.36 below Re 2300, on both walls.
-# 'herschel-bulkley' is the development candidate of entry 6 (annulus_films).
-ANNULUS_MODELS = ('v1.6.0', 'herschel-bulkley')
+# 'herschel-bulkley' is the development candidate of entry 6 and
+# 'herschel-bulkley-erge' that of entry 7 (annulus_films, _ANNULUS_SETTINGS).
+ANNULUS_MODELS = ('v1.6.0', 'herschel-bulkley', 'herschel-bulkley-erge')
+# Herschel-Bulkley candidates: transition band (fluids.BANDS) and the
+# viscosity of the turbulent film coefficient ('wall' or 'plastic').
+_ANNULUS_SETTINGS = {'herschel-bulkley': ('founargiotakis', 'wall'),
+                     'herschel-bulkley-erge': ('erge', 'plastic')}
 
 # Fully developed laminar flow in a concentric annulus, one wall at constant
 # heat flux and the other insulated: Nusselt numbers on the hydraulic
@@ -226,21 +231,26 @@ def gnielinski_annulus(Re, Pr, a, wall):
     raise ValueError('wall must be inner or outer')
 
 
-def annulus_films(m_dot, g, T_u, P, fluid=None):
+def annulus_films(m_dot, g, T_u, P, fluid=None, band='founargiotakis', viscosity='wall'):
     """Annulus film coefficients [W/m^2/K] at the drill-string wall and the
-    hole wall, for annulus_model 'herschel-bulkley' (development entry 6).
+    hole wall, for annulus_models 'herschel-bulkley' (development entry 6:
+    band 'founargiotakis', viscosity 'wall') and 'herschel-bulkley-erge'
+    (entry 7: band 'erge', viscosity 'plastic').
 
     - Flow regime: the Herschel-Bulkley slot model of Founargiotakis et al.
       (2008) (fluids.hb_annulus), which the annulus pressure loss then uses
       too, with the mud's rheology (fluids.HerschelBulkley) at the local
       temperature; a fluid without one is Newtonian (tau_0 = 0, K = mu,
       n = 1). Its generalised Reynolds number sets the position in the
-      transition band Re1 = 3250 - 1150 n' to Re2 = 4150 - 1150 n'.
+      transition band (fluids.transition_band at the local diameter ratio).
     - Turbulent: Gnielinski's annulus correlation (gnielinski_annulus) with
-      Re and Pr on the wall viscosity mu_w = tau_w / gamma_w, the
-      rheology's viscosity at the wall stress of the slot model; the
-      thermal resistance of turbulent flow lies in the viscous wall layer.
-      For a Newtonian fluid mu_w = mu.
+      Re and Pr on viscosity 'wall', the wall viscosity mu_w = tau_w /
+      gamma_w of the slot model, or 'plastic', the plastic viscosity. The
+      second follows the turbulent heat-transfer correlation for
+      particulate suspensions (0.42 <= n <= 0.89) in Chhabra and Richardson
+      (2008, eq. 6.55), on the Bingham plastic viscosity; for purely
+      viscous fluids they give Yoo's on the Metzner-Reed viscosity. For a
+      Newtonian fluid both are mu.
     - Laminar: the fully developed values of Lundberg, Reynolds and Kays
       (1963) for a heated inner and a heated outer wall at the local r*;
       Soares et al. (2003) found the inner-wall value insensitive to
@@ -248,8 +258,8 @@ def annulus_films(m_dot, g, T_u, P, fluid=None):
     - In the band: linear in the generalised Re from the laminar value at
       Re1 to the turbulent one at Re2, the weights the friction factor uses,
       as Gnielinski (2013) interpolates between Re 2300 and 4000 in tubes.
-      The turbulent value is taken at the local state, with Re on the wall
-      viscosity floored at 2300.
+      The turbulent value is taken at the local state, with its Reynolds
+      number floored at 2300.
     """
     from borethm import fluids
     rho, cp, mu, k = fluid_props(T_u, P, fluid)
@@ -261,8 +271,10 @@ def annulus_films(m_dot, g, T_u, P, fluid=None):
         tau0, K, n = 0.0, mu, 1.0
     else:
         tau0, K, n = rheology.at(T_u, mu, fluid)
-    state = fluids.hb_annulus(rho, tau0, K, n, v, dh)
-    blend, mu_w = state['blend'], state['mu_w']
+    state = fluids.hb_annulus(rho, tau0, K, n, v, dh, band=band, kappa=g["r_out"] / g["r_wall"])
+    if viscosity not in ('wall', 'plastic'):
+        raise ValueError('viscosity must be wall or plastic')
+    blend, mu_w = state['blend'], (state['mu_w'] if viscosity == 'wall' else mu)
     re_w = np.maximum(rho * v * dh / mu_w, 2300.0)
     pr_w = cp * mu_w / k
     out = []
@@ -282,14 +294,15 @@ def conductances(z, T_d, T_u, m_dot, t_years, k_rock, geometry, exposure=None,
     the same piece), so that nodes on a piece boundary take that piece's geometry.
     rock_response is 'logarithmic' (the original quasi-steady term) or
     'cylinder' (the exact wall-temperature step response; see rock_response).
-    annulus_model is one of ANNULUS_MODELS; 'herschel-bulkley' gives the
+    annulus_model is one of ANNULUS_MODELS; the Herschel-Bulkley ones give the
     string wall and the hole wall their own film coefficients (annulus_films)."""
     g = geometry.at(z if geom_z is None else geom_z)
     g["tvd"] = geometry.survey.tvd(z)
     P = P_of_z(g["tvd"], P_surface)
     h_d = h_dittus(m_dot, g["A_bore"], g["Dh_bore"], T_d, P, fluid=fluid)
-    if annulus_model == 'herschel-bulkley':
-        h_string, h_hole = annulus_films(m_dot, g, T_u, P, fluid)
+    if annulus_model in _ANNULUS_SETTINGS:
+        band, viscosity = _ANNULUS_SETTINGS[annulus_model]
+        h_string, h_hole = annulus_films(m_dot, g, T_u, P, fluid, band, viscosity)
         h_string, h_hole = film_mult * h_string, film_mult * h_hole
     elif annulus_model == 'v1.6.0':
         h_string = h_hole = film_mult * h_dittus(m_dot, g["A_ann"], g["Dh_ann"], T_u, P, fluid=fluid)
@@ -346,7 +359,9 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     # Founargiotakis slot model for the annulus pressure loss and flow regime,
     # with the fluid's Herschel-Bulkley rheology; Gnielinski's annulus
     # correlation on the wall viscosity and laminar annulus values, blended
-    # over the same band).
+    # over the same band) or 'herschel-bulkley-erge' (entry 7: the same with
+    # the transition band of Erge et al. 2015 and Gnielinski on the plastic
+    # viscosity).
     # v1.5.0 accepts only 'v1.6.0', which reproduces its calculation.
     # friction_heat: add the heat dissipated by friction in the bore and annulus,
     # and across the bit nozzles (total flow area tfa), to the fluid. Off by
@@ -382,12 +397,13 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
         raise ValueError(f'annulus_model must be one of {ANNULUS_MODELS}')
     if hydraulics_model == 'v1.5.0' and annulus_model != 'v1.6.0':
         raise ValueError('hydraulics_model v1.5.0 accepts only annulus_model v1.6.0')
-    regime = 'herschel-bulkley' if annulus_model == 'herschel-bulkley' else 'apparent-viscosity'
+    regime = 'herschel-bulkley' if annulus_model in _ANNULUS_SETTINGS else 'apparent-viscosity'
+    band = _ANNULUS_SETTINGS.get(annulus_model, ('founargiotakis',))[0]
     if hydraulics_model=='v1.5.0':
         hl.check_legacy(geometry,surface,transitions)
         loss_model=None
     else:
-        loss_model=hl.LossModel(geometry,transitions=transitions,regime=regime)
+        loss_model=hl.LossModel(geometry,transitions=transitions,regime=regime,band=band)
     T_tvd = geotherm if geotherm is not None else (lambda d: T_surf + G * d)
     Trock = lambda zz: T_tvd(geometry.survey.tvd(zz))
     z = np.linspace(0, L, n_nodes)
@@ -661,9 +677,10 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
         return _hydraulics_v150(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface)
     if mode!='v1.6.0':
         raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
-    regime='herschel-bulkley' if annulus_model=='herschel-bulkley' else 'apparent-viscosity'
+    regime='herschel-bulkley' if annulus_model in _ANNULUS_SETTINGS else 'apparent-viscosity'
+    band=_ANNULUS_SETTINGS.get(annulus_model,('founargiotakis',))[0]
     return hl.hydraulics(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface,surface,transitions,
-                         regime=regime)
+                         regime=regime,band=band)
 
 
 def pump_power(m_dot, L=None, T_avg=80.0, geometry=None):

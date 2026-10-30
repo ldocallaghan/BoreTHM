@@ -366,7 +366,9 @@ apparent-viscosity criterion for laminar flow of a Bingham mud.
 model of a Herschel-Bulkley mud (fluid.rheology, a
 fluids.HerschelBulkley) for the annulus pressure loss and flow regime,
 and Gnielinski's annulus correlation on the wall viscosity and laminar
-annulus values for each wall, blended over the same transition band. v1.5.0 accepts only
+annulus values for each wall, blended over the same transition band.
+'herschel-bulkley-erge' is the same with the transition band of Erge et
+al. (2015) and Gnielinski on the plastic viscosity. v1.5.0 accepts only
 'v1.6.0'.
 The separate radial wall-temperature solver uses its supplied state
 durations, with fluid-temperature and film-coefficient boundaries from
