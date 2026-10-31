@@ -16,9 +16,48 @@ def read(path):
 
 def write(name, rows):
     with (HERE/name).open('w', encoding='utf-8', newline='') as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
+        fields = list(dict.fromkeys(k for row in rows for k in row))
+        writer = csv.DictWriter(stream, fieldnames=fields, lineterminator='\n')
         writer.writeheader()
         writer.writerows(rows)
+
+
+def source_additions(inventory, references):
+    """Attach source findings without changing any physical input record."""
+    records = next(r for r in references if r['id']=='16b-motor-records')
+    for mapping in records['assembly_mappings']:
+        matches = [r for r in inventory if r['well']=='16B'
+                   and r['assembly']==mapping['assembly'] and 'motor' in r['component'].lower()]
+        if not matches:
+            row = dict(well='16B',assembly=mapping['assembly'],item='source mapping',
+                component='reported motor',source='',recorded_id_in='',
+                source_status='source identification only',tool_loss_status='',candidate_reference='')
+            inventory.append(row)
+            matches = [row]
+        for row in matches:
+            row.update(reference_ids='16b-motor-records;sdi-motor-handbook',
+                reference_locator=mapping['locator'],
+                establishes=mapping['finding'],does_not_establish=mapping['limits'],
+                equipment_match=mapping['match'],
+                tool_loss_status='installed off-bottom loss remains unknown',
+                candidate_reference=mapping['catalogue_configuration'])
+    for reference in references:
+        if not reference.get('inventory_component'):
+            continue
+        inventory.append(dict(well='16B',assembly='',item='source',
+            component=reference['inventory_component'],
+            source=reference['reference']+'; '+reference['url'],recorded_id_in='',
+            source_status='source evidence; no calculation input selected',
+            tool_loss_status='no installed operating loss established',candidate_reference=reference['id'],
+            reference_ids=reference['id'],reference_locator=reference['locator'],
+            establishes=reference['finding'],does_not_establish=reference['applicability'],equipment_match=''))
+    halo = next(r for r in references if r['id']=='halo-500')
+    for row in inventory:
+        if row['well']=='16B' and any(k in row['component'].lower() for k in ['halo','rss']):
+            row.update(reference_ids='halo;halo-500;16b-motor-records',
+                reference_locator=halo['locator'],establishes=halo['finding'],
+                does_not_establish=halo['applicability'])
+    return inventory
 
 
 def friction(reynolds, roughness, diameter):
@@ -68,6 +107,8 @@ def main():
                 source='GDR 1516 End of Well Report, page '+run['eow_page'],recorded_id_in='',
                 source_status='drawing identified; full passage and tool mapping unresolved',
                 tool_loss_status='unknown',candidate_reference=''))
+    references=json.loads((HERE/'references.json').read_text(encoding='utf-8'))
+    inventory=source_additions(inventory,references)
     write('tool-source-inventory.csv',inventory)
     scales = []
     for label,reynolds,diameter in [('mud-reference',40000,4.276*.0254),('water-reference',500000,4.670*.0254)]:
@@ -79,7 +120,6 @@ def main():
                 friction_change_percent=100*(colebrook/blasius-1),
                 basis='illustrative circular pipe; no well pressure or temperature target used'))
     write('candidate-scales.csv',scales)
-    references=json.loads((HERE/'references.json').read_text(encoding='utf-8'))
     known={r['id'] for r in references}
     if not {'halo','epa-roughness','colebrook','nc50-supplier','nov-connections'} <= known:
         raise ValueError('Missing source reference')

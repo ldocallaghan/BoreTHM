@@ -31,7 +31,8 @@
     "locator": "Standard GPDS Configurations and Standard EIS Configurations, S135 5.500-inch 24.70-lb/ft rows",
     "sha256": "1be72b5fe4cac76440428f63457be81683898f2a33c299a0781d3d1ac8d8b01f",
     "finding": "GPDS55 joint OD/ID 7.250/3.500 inches; EIS joint OD/ID 7.000/4.000 inches",
-    "applicability": "Declared compatible catalogue scenarios; no source identifies either as the installed machining"
+    "applicability": "Declared compatible catalogue scenarios; no source identifies either as the installed machining",
+    "inventory_component": "NOV regular-pipe connection catalogue scenarios"
   },
   {
     "id": "halo",
@@ -48,7 +49,8 @@
     "url": "https://gdr.openei.org/submissions/1295",
     "locator": "56-32 drill bit BHA data.zip; GeoGuidance Proposed Motor and Tool Specification Sheets UU139143280.pdf, page 2",
     "finding": "The 6.75-inch 7/8-lobe 5.7-stage sheet lists a 300-to-600-gpm range and 100 psi off-bottom pressure; its application to a different reported motor configuration needs an explicit transfer assumption",
-    "applicability": "Input sheet only; no 56-32 temperature channel is accessed; no newly selected motor coefficient"
+    "applicability": "Different make and 7/8-lobe 5.7-stage configuration from the 16B 6/7-lobe 7.1-stage candidate. Input sheet only; no 56-32 target channel is accessed. It can inform a later declared uncertainty scenario but is not an installed 16B loss or a selected coefficient.",
+    "inventory_component": "different-model motor no-load analogue"
   },
   {
     "id": "driltech-example",
@@ -91,5 +93,178 @@
     "locator": "Section 7.3, equation 60 and table 4; section 7.6.2, equation 103",
     "finding": "Surface equipment scenarios and vendor-coefficient tool-loss method already documented in the motorless pressure-accounting protocol",
     "applicability": "Inherited source verification from validation/forge16b/comparison_protocol_s2b.md; no fresh copy was available for reinspection; no surface layout or tap location has been identified"
+  },
+  {
+    "id": "eavor-idp",
+    "reference": "Eavor (23 June 2023), FORGE Insulated Drill Pipe Trial Results",
+    "url": "https://doi.org/10.15121/1998591",
+    "locator": "GDR 1516 archive; Eavor FORGE Insulated Drill Pipe Trial Results - 23 June 2023 (003).pdf; PDF p5, IDP Trial Operational Summary and Table 1; p6, Table 1 continuation; p11, IDP Mechanical Wear. Cross-check: End of Well Report p266, daily report 39.",
+    "finding": "Eavor BHA 11 and 12 are EOW 18 and 19. Regular pipe is below insulated pipe on the partial trial. An internal coating is present as well as external insulation: coating debris was reported near 8400 ft and a few joints showed internal delamination, with negligible external wear. The daily report independently confirms the order.",
+    "applicability": "No quantitative coating thickness, coated bore or hydraulic roughness is supplied. Regular-pipe internal condition is unrecorded. Coating offers a physical explanation for a lower friction factor if the bore is smoother, but neither friction reduction nor an installed pressure loss is measured by this report.",
+    "inventory_component": "insulated-pipe order and internal coating",
+    "sha256": "b392f98198f3b661d916ba3438953812b6c7579b60d9bff7fdac09cb9567a379"
+  },
+  {
+    "id": "sdi-motor-handbook",
+    "reference": "Scientific Drilling International, Drilling Motor Handbook, version 2.02.5",
+    "url": "https://scientificdrilling.com/assets/uploads/2021/04/Scientific-Drilling-Motor-Handbook-V2.02.5.pdf",
+    "locator": "Printed pp38-39, Motor Specifications Summary Table (PDF p20); printed p96, TiTAN22 7.15 in 6/7 7.1 detail (PDF p49); printed p24, Pressure Drop (PDF p13).",
+    "finding": "The 7.15 in 6/7-lobe 7.1-stage TiTAN22 has speed ratio 0.23 rev/gal and maximum differential 1670 psi. The summary lists 500-750 gpm; the detail sheet lists 350-750 gpm. Its configuration can be compared with the source records in 16b-motor-records.",
+    "applicability": "No numerical off-bottom/no-load loss is specified for this model. Loaded differential and maximum bit pressure-drop ratings are not motor no-load loss. The flow-range discrepancy is unresolved. No test-flow reference or loss coefficient is selected. Some source drawings have differing dimensions or torque ratings; configuration agreement is not exact agreement of all specifications.",
+    "inventory_component": "16B motor catalogue identification and missing no-load loss",
+    "sha256": "e4a84ca4b90bbf144d496705e1a5fad3eef3229490242383c1c1bfe545e92e9a"
+  },
+  {
+    "id": "16b-motor-records",
+    "reference": "University of Utah, End of Well Report-16B78-32-May_2024.pdf (May 2024), GDR 1516",
+    "url": "https://doi.org/10.15121/1998591",
+    "locator": "Motor assembly locators and mapping qualifications below; scope is all ten motor assemblies in validation/forge16b/run_definitions.csv. Five other study assemblies (12-16) are motorless.",
+    "finding": "Source-based identification distinguishes the 9.15 in model on EOW 3 from the 7.15 in configuration on later drilling runs. Direct maker labels are present on EOW 3 and 20; EOW 17 names TiTAN22. Configuration-only or transferred matches are labelled separately.",
+    "applicability": "No operating pressure residual is used for mapping. No installed no-load loss is established. Matching a catalogue configuration does not remove drawing conflicts or identify an unrecorded curve.",
+    "inventory_component": "16B motor assembly identification",
+    "assembly_mappings": [
+      {
+        "assembly": "3",
+        "locator": "EOW p38, Figure 25, Motor Data; p185, Appendix B",
+        "match": "different model identified",
+        "catalogue_configuration": "SDI TiTAN22 9.15 in 7/8 5.7; not the 7.15 in 6/7 7.1 candidate",
+        "finding": "Drawing names Scientific Drilling/TiTAN22, 9.15 motor, 7/8 lobes and 5.7 stages; its OD field is 9.500 in. Report speed ratio is 0.130 rev/gal.",
+        "limits": "The handbook summary p39 lists 0.12 rev/gal for its 9.15 in 7/8 5.7 model. Configuration family is identified with a speed-ratio discrepancy. No installed no-load loss is supplied."
+      },
+      {
+        "assembly": "4",
+        "locator": "EOW p185, Appendix B; archived dimensions borrowed from p38, BHA 3",
+        "match": "unresolved",
+        "catalogue_configuration": "none established",
+        "finding": "Appendix B gives a mud motor length of 37.96 ft. The geometry archive borrows BHA 3 dimensions.",
+        "limits": "Borrowed geometry does not identify the actual motor make or power section. No match to the 7.15 in configuration and no installed no-load loss established."
+      },
+      {
+        "assembly": "11",
+        "locator": "EOW p71, Figure 60, comments and caption; p403, MWD Run 4 - HALO 781",
+        "match": "configuration match",
+        "catalogue_configuration": "SDI TiTAN22 7.15 in 6/7 7.1",
+        "finding": "Figure 60 maps contractor BHA 4 to EOW 11 and names a 7.15 motor; comments give 6/7, 7.1 stages, 500-750 gpm and 0.23 rev/gal. The SDI review p403 independently gives the configuration.",
+        "limits": "The drawing OD field is 7.188 in and comments give maximum torque 18680 ft-lb, against handbook 7.15 in and 18230 ft-lb. No installed off-bottom curve is given; maximum differential 1670 psi is a loaded rating."
+      },
+      {
+        "assembly": "17",
+        "locator": "EOW p102, Figure 90, Motor Data; p261, daily report 37, operations",
+        "match": "configuration match with dimensional conflict",
+        "catalogue_configuration": "SDI TiTAN22 7.15 in 6/7 7.1",
+        "finding": "Figure 90 names TiTAN22 with 6/7 lobes, 7.1 stages, 0.23 rev/gal, 500-750 gpm and maximum differential 1670 psi; the daily report names a 7.15 motor.",
+        "limits": "The drawing reports a 6.750 in OD and 35-ft component length; Appendix B p189 gives 41.87 ft. These differ from the handbook 7.15 in and 42.5 ft. No geometry is corrected here and no no-load loss is given."
+      },
+      {
+        "assembly": "18",
+        "locator": "Eavor report p5, BHA 11 - Full IDP String; EOW p189, Appendix B; p261, daily report 37",
+        "match": "configuration inferred from reuse; not independently confirmed",
+        "catalogue_configuration": "possible SDI TiTAN22 7.15 in 6/7 7.1; transfer only",
+        "finding": "Eavor reports reuse of the previous BHA with a new motor. The daily operation names a 7.15 motor and Appendix B gives 41.92 ft.",
+        "limits": "The daily operation labels its BHA as 17 while its bit/assembly record is EOW 18. Reuse and length do not independently establish the replacement motor power section or no-load loss."
+      },
+      {
+        "assembly": "19",
+        "locator": "EOW p115, Figure 102, comments and caption; p266, daily report 39",
+        "match": "configuration match; maker not explicit on this drawing",
+        "catalogue_configuration": "compatible with SDI TiTAN22 7.15 in 6/7 7.1",
+        "finding": "Figure 102 names 7.15 motor and gives 6/7 lobes, 7.1 stages, 0.23 rev/gal, 500-750 gpm and maximum differential 1670 psi. It maps SDI BHA 12 to EOW 19.",
+        "limits": "The catalogue is configuration-compatible; this sheet does not independently name the motor maker. Maximum torque 18680 ft-lb and OD 7.188 in differ from the handbook. No installed no-load loss is established."
+      },
+      {
+        "assembly": "20",
+        "locator": "EOW p129, Figure 116, Motor Data and comments; p271, daily report 41",
+        "match": "configuration match",
+        "catalogue_configuration": "SDI TiTAN22 7.15 in 6/7 7.1",
+        "finding": "The Motor Data panel explicitly names Scientific Drilling/TiTAN22 and records 6/7 lobes, 7.1 stages and 0.23 rev/gal. The daily report names a 7.15 motor.",
+        "limits": "Drawing OD is 7.188 in, length 41.92 ft and maximum torque 18680 ft-lb, differing from handbook nominal values. No numerical off-bottom loss is supplied."
+      },
+      {
+        "assembly": "26",
+        "locator": "EOW p191, Appendix B, BHA 26",
+        "match": "unresolved",
+        "catalogue_configuration": "none established",
+        "finding": "The appendix lists a 40.15-ft mud motor on the reaming assembly. This is the study interval excluded for possible stale temperature channels.",
+        "limits": "No maker or power-section configuration is identified here. No 7.15-model assignment or no-load loss is supplied. Existing observation exclusion is unchanged."
+      },
+      {
+        "assembly": "27",
+        "locator": "EOW p191, Appendix B, BHA 27; archived dimensions borrowed from p160, BHA 38",
+        "match": "unresolved; borrowed geometry only",
+        "catalogue_configuration": "none established",
+        "finding": "The appendix lists a 41.92-ft motor. The archived geometry borrows dimensions from EOW 38.",
+        "limits": "Shared length and transferred dimensions do not establish its maker or power-section configuration. No installed loss curve is identified."
+      },
+      {
+        "assembly": "38",
+        "locator": "EOW p160, Figure 144, component table and comments; p194, Appendix B",
+        "match": "configuration match; maker not explicit on this drawing",
+        "catalogue_configuration": "compatible with SDI TiTAN22 7.15 in 6/7 7.1",
+        "finding": "The drawing names a 7.15 motor and comments give 6/7 lobes, 7.1 stages, 0.23 rev/gal, 500-750 gpm and maximum differential 1670 psi.",
+        "limits": "Maker is not independently named on this drawing. OD 7.188 in and maximum torque 18680 ft-lb differ from handbook nominal values. No installed no-load loss is supplied."
+      }
+    ],
+    "sha256": "b35f25eda60fcec90a82a688c46ab4b4f30548876cc3cb0113a7cdb966f18f5d"
+  },
+  {
+    "id": "sniper-analogue",
+    "reference": "Sniper Drilling Motors, 6-3/4 in 6/7 Lobes 5.0 Stages, revision June 2016",
+    "url": "https://cdn.b12.io/client_media/R8rVslJ4/6ace5e0f-f560-11f0-b20a-0242ac110002-675-67-5.0_spec_sheet.pdf",
+    "locator": "PDF p1, branded Sniper Drilling Motors; Power Section Performance Specifications, Off Bottom Press row",
+    "finding": "Published off-bottom pressure 110 psi and rated flow 300-600 gpm for a 6.75 in 6/7-lobe 5.0-stage model.",
+    "applicability": "Different model and stage count from the 16B candidate. The 110-psi value has no associated flow, density or test-temperature basis stated. It can inform a later declared analogue uncertainty scenario; it is not the installed value and is not assigned a curve here.",
+    "inventory_component": "different-model motor no-load analogue",
+    "sha256": "8f9a66ba0cc28806887bd100b0af4411ad9d1039f730417f9f42048057bf3915"
+  },
+  {
+    "id": "halo-500",
+    "reference": "Scientific Drilling International (2021), HALO 5.00 in Technical Data Sheet, SDI-B002_10_21",
+    "url": "https://scientificdrilling.com/assets/uploads/2021/10/HALO-5.00_Product-Spec-Sheet-SDI-B002_10_21-English.pdf",
+    "locator": "PDF p1, system description; p2, Operating Specifications and Limits, Annular Pressure and tool diagram",
+    "finding": "A 5-in HALO integrates steering and mud-pulse telemetry. Its rated flow is 300-425 gpm. Pressure-sensor range and hydrostatic rating are specified; no operating pressure drop is given. Scientific Drilling also publishes the matching motor family, so one manufacturer enquiry could cover both missing losses.",
+    "applicability": "The 16B drawing p71 records a 6.75-in HALO, so the 5-in sheet flow range is not transferred to it. Instrument pressure rating is not a pressure loss. Neither the installed HALO loss nor a second independent pulser loss is established. No manufacturer contact is made.",
+    "inventory_component": "HALO manufacturer and size-specific specifications",
+    "sha256": "10c79938ef2328a37d188119372df7b2e8cde290d5139a940533c84bb6ca4e26"
+  },
+  {
+    "id": "odfjell-fh",
+    "reference": "Odfjell Technology, DP-5.5-04 technical specifications, document 1056819, revision 11 December 2014",
+    "url": "https://www.odfjelltechnology.com/wp-content/uploads/2024/01/docs-1056819-v4-dp-5-5-04-spec-sheet.pdf",
+    "locator": "PDF p1, Tube Data and Connection Data, New column",
+    "finding": "A 5.5-in 21.90-lb/ft G105 string with 5.5 FH double-shoulder connections has a 7.000-in joint OD and 3.500-in joint bore; tube bore is 4.778 in and an internal plastic coating is named.",
+    "applicability": "Different grade and weight from the recorded 24.7-lb/ft S135 pipe. This is a catalogue example of FH machining, not the installed string or an instruction to select a bore.",
+    "inventory_component": "FH double-shoulder connection example",
+    "sha256": "9967b249c3dc3d122cf0219645ab096de041acbb6acb165cd44cff50a76b864c"
+  },
+  {
+    "id": "morris-fh",
+    "reference": "Morris Industries / Morris Valves, API 5DP Drill Pipe and API 7-1 Heavy Weight Drill Pipe catalogue",
+    "url": "https://www.morrisup.com/wp-content/uploads/2019/09/API_5DP_7.1_HW_DRILLP-webAg19.pdf",
+    "locator": "Printed/PDF p6, Drill Pipe Specifications, 5.5-in 24.70-lb/ft S135 IEU, 0.415-in wall row",
+    "finding": "This published conventional FH table gives a 4.670-in tube bore and 7.500-in joint OD with 3.000-in joint bore for the specified size, weight and grade.",
+    "applicability": "Published product dimensions do not establish the installed machining. They do not prove that API requires one bore for every FH connection. No licensed API RP 7G table is asserted here; this is the published drill-pipe data-table route.",
+    "inventory_component": "conventional S135 FH drill-pipe table",
+    "sha256": "162a1834d63a69c54b5ad88070705a919ff63728d8d719270e19ee66ea59ac69"
+  },
+  {
+    "id": "vam-fh",
+    "reference": "VAM Drilling / Vallourec Group, product catalogue (undated)",
+    "url": "https://totalsteel110.com/wp-content/uploads/2025/03/catalog.pdf",
+    "locator": "PDF p32, printed pp34-35, Drill Pipe and Tool Joint Data - 5-1/2 to 5-7/8; conventional FH row for 5.5 in 24.70 lb/ft S135",
+    "finding": "The manufacturer-authored table independently gives a 4.670-in tube bore and 7.500 by 3.000-in conventional FH joint. It lists proprietary alternatives separately.",
+    "applicability": "Retrieved from a supplier-hosted copy. This corroborates a published conventional configuration, with no proof of installed pipe machining or current API conformity. No bore is selected.",
+    "inventory_component": "conventional S135 FH corroborating table",
+    "sha256": "d9877dad4957a85ec80478eef61ed06b03b7ab7a283baafc082587be15a87c8a"
+  },
+  {
+    "id": "frontier-rig16",
+    "reference": "Frontier Drilling, Rig 16 inventory (undated public specification)",
+    "url": "https://www.frontierdrilling.com/rig-16",
+    "locator": "Public Rig Inventory page and its linked two-page Rig 16 PDF; GDR 1516 EOW pp199-200 identify Frontier Drilling Rig 16, and p225 pipe inventory records 365 joints of 5.5-in 24.7-lb/ft S135 with 5.5FH threads.",
+    "finding": "The contractor is Frontier Drilling and the rig is 16. The public specification identifies rig equipment, but omits the drill-pipe and joint-bore schedule.",
+    "applicability": "The public sheet is undated and does not establish the 2023 string. The likely next source is the contractor's detailed rig specification and pipe schedule for that campaign, with tally and inspection records. No installed bore is identified or selected.",
+    "inventory_component": "rig contractor and source needed for installed pipe",
+    "pdf_url": "https://www.frontierdrilling.com/_files/ugd/ba0541_d9d7048fe3194ab5a48c6aaae2baf840.pdf",
+    "sha256": "458a656b417572cb9b8e1f74ebed8f67513f3520d9979d513e8746bc8630661e"
   }
 ]
