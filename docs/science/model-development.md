@@ -1600,7 +1600,7 @@ The corrected 16A comparison uses recorded nominal surface mud density, whose pa
 
 On the 16A drilling dates, the recorded conversion is about 4.183 US gallons per stroke, against 4.186 for the recorded six-inch liner, twelve-inch stroke and nominal 95% efficiency. The late-October value of about 2.898 is numerically compatible with a five-inch liner's 2.907 under the same stroke and efficiency assumptions; that compatibility does not document its installation. The 16B value of 3.519 is consistent with the recorded change to 5.5-inch liners. Its twelve-inch stroke and 95% efficiency remain declared assumptions. `flow-conversion.csv` preserves daily channel ratios beside all three reference displacements.
 
-Conditional on those displacement and stroke-count assumptions, efficiency cannot exceed 100%. The true flow can therefore be at most 5.26% above the nominal 95%-efficiency conversion. A quadratic pressure term can be at most 10.80% higher, equivalent to 9.75% of its true value. Lower efficiency reduces the true flow and increases the pressure shortfall. These bounds are in `flow-bound.csv`. They cannot explain shallow measured/modelled pressure ratios of about seven.
+Conditional on those displacement and stroke-count assumptions, efficiency cannot exceed 100%. The true flow can therefore be at most 5.26% above the nominal 95%-efficiency conversion. A quadratic pressure term can be at most 10.80% higher, equivalent to 9.75% of its true value. Lower efficiency reduces the true flow and increases the pressure shortfall. These bounds are in `flow-bound.csv`. The primary shallow pressure ratios range from 1.61 on EOW 11 at 572.7 gpm to 7.16 on EOW 20 at 216.0 gpm, approximately 1.6 near 572 gpm to 7.2 near 220 gpm. EOW 12 is 1.68 near 572 gpm. The flow bound cannot explain that range (`results/additions/shallow-ratio-extrema.csv`; individual EOW 12 rows remain in `near-surface.csv`).
 
 ### Interpretation
 
@@ -1612,7 +1612,97 @@ Each statement below is an inference from development observations. It does not 
 | Surface plumbing and pressure tap | Undetermined contribution. It can contribute to shallow deficits; the assembly differences prevent identifying a common surface term | Motor no-load loss or another assembly restriction | An installed surface-line inventory and simultaneous pressures across it |
 | Connection bore | Undetermined. Several per-length slopes exceed the model; no source establishes the installed machining | Pipe friction or roughness can have the same length signature | Inspection or contractor connection dimensions for the actual string |
 | Turbulent friction and roughness | Undetermined. The length signature is compatible on several regular-pipe groups, but the partial-insulated control does not support one universal multiplier | Different connection geometry or changing fluid state | Source the pipe coating/roughness and connection machining independently before comparing sourced options |
+| Regular and insulated pipe | Added after the original result: shared friction-factor form, rheology, temperature shortcut or flow errors would affect both pipe types similarly at comparable conditions. EOW 19's 1.06 slope ratio against regular-pipe groups' 1.54–2.23 points to a property of the regular pipe, its connection bore or its internal condition. This inference rests on one partial-insulated run | Different thermal history or input transfer could produce different errors between trips despite identical modelled hydraulic dimensions | Obtain the actual pipe and connection dimensions and internal-condition records; compare repeated regular and insulated trips at matched flow and fluid state |
 | Flow-rate error | Contradicted as the sole explanation under the documented displacement and nominal-efficiency assumptions | Unrecorded displacement or stroke-channel error could invalidate that bound | Verify the remaining pump specification and compare delivered volume independently |
 | Downhole mud rheology | Contradicted as the common sole cause of the shallow and water-like 16B deficits. Its contribution to 16A remains undetermined because the controlled-flow depth comparison lacks coverage | Pipe friction or equipment loss can also explain a pressure deficit | Obtain 16A trip coverage at repeated flow and depth with contemporaneous temperature and mud records |
 
 No installed loss coefficient is inferred from a measured shallow residual. The next correction declaration remains separate from this diagnosis.
+
+### 31 October 2026: additions declared after the pressure results
+
+These additions were declared at 15:44 CET, after the entry 9 results at `ee1dec1` had been seen and before the following reductions were computed. They do not change the declared comparison or the physical calculation. Their result tables are separate from the original archive.
+
+**Pipe identity and hydraulic inputs.** The incoming EOW 19 operation will be checked against the daily reports, with its page recorded. For every trip with a reported slope, the archive will list the model's pipe-body bore and joint dimensions, with the input mud and temperature range. The prediction is that the model assigns identical hydraulic dimensions to regular and insulated pipe. If the report places regular pipe in the length added during the EOW 19 comparison, its interpretation as an insulated-pipe contrast will be withdrawn. EOW 18 groups with two depth stages will be reported as secondary endpoint differences, with no regression uncertainty and no change to the primary three-stage rule. Groups with one stage cannot give a depth difference. A pipe-associated explanation predicts different excesses for regular and insulated lengths; a shared friction or fluid-state explanation predicts similar effects at comparable inputs.
+
+**Shallow excess against flow.** The existing near-surface table will be grouped separately by role, assembly and excursion, with a maximum total depth span of 5 ft. The existing 25-gpm flow centres will define distinct levels. Each pair of levels at least 25 gpm apart will give the exponent `b = ln(E_high/E_low) / ln(Q_high/Q_low)`, where `E` is measured minus modelled pressure and level means have equal weight. Non-positive excess cannot define this logarithm and will be flagged. Every contributing window will be retained in the addition table. The prediction from the accepted EOW 38 observations is an exponent near 0.85, below the exponent of two in a density-times-flow-squared tool curve. Small flow differences within a single level do not constitute a separate test.
+
+**Nozzle-floor sensitivity.** A separate sensitivity will remove a window if its recorded standpipe pressure is below `rho_nominal * (Q/A)^2 / 2`, in SI units, where `Q` is recorded surface flow and `A` is the recorded period nozzle area transferred by the original `input_sample_id`. This is the ideal nozzle equation with discharge coefficient one. It is deliberately less restrictive than the calculation's coefficient 0.95. It uses no other model pressure term or temperature correction. The equation follows the kinetic-energy term in [NASA Glenn's Bernoulli equation](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/bernoullis-equation/); the drilling-nozzle discharge-coefficient convention and its uncertainty are discussed by [Ashena et al. (2021), Discharge coefficient subsection](https://doi.org/10.1007/s13202-021-01203-4). The check assumes intact recorded nozzles, single-phase circulation and the recorded nominal density. A violation is an inconsistency under those inputs; it cannot identify which channel or equipment record is wrong. The prediction is removal of the near-zero pressure levels and possible loss of three-level flow fits. All slope and flow-step rules will then be reapplied unchanged, with original and filtered results beside each other and removals counted by assembly. Primary, secondary and exploratory roles remain separate. The declared result remains primary.
+
+**Shortcut direction.** The accepted measured inlet/return shortcut raises pressure against the full solve at every checked scoreboard sample. The prediction is an upward pressure-scale bias in the modelled depth slopes, which would make the measured/modelled slope ratios understate the excess. This direction is conditional on the pressure error increasing with depth; a positive pressure offset alone does not establish its slope. No trip full solve is added, and this distinction will be stated with the result.
+
+**Shallow ratio range.** The minimum and maximum ratio in the primary near-surface rows will be recomputed directly, retaining assembly and flow. The prediction from the accepted table is about 1.6 near 572 gpm on EOW 11/12 to about 7.2 near 220 gpm on EOW 20. This replaces the approximate description without altering an archived value.
+
+#### 31 October 2026: pipe identity and inputs, added results
+
+The report confirms the model's order. Daily report 39, for 06:00 on 25 May, in the 16B End of Well Report, page 266, records 25 stands totalling 2,378 ft of non-insulated S135 above the assembly, followed by insulated pipe after the crossover at 3,369 ft of run-in depth. The model retains 2,378.5 ft of regular pipe below the insulated section. Its order agrees with the report, with a 0.5-ft length difference from the rounded report value. The primary slope stages span 5,940.79–8,495 ft, so added length across those stages is insulated pipe. The recorded coating damage on this page does not quantify an installed hydraulic restriction. `results/additions/pipe-source-check.json` gives the source and its hash.
+
+The model gives both ordinary pipe types a 5.5-in body outside diameter and a 4.67-in bore. Both use EIS joints with 7-in outside diameter, 4-in bore, 29-in restriction length and 31.7067-ft pitch, with abrupt area changes. There is no roughness input. The inherited smooth passage-friction calculation is common. These are the declared dimensions, with no claim that they establish the actual connection machining. The period fluid uses PV 1 cP and YP 1 lbf/100 ft² at a 26.7 °C PV reference, with entry 6's no-yield rheology. The model retains temperature-dependent fluid properties.
+
+| Primary trip | Flow centre, gpm | Ordinary pipe added with depth | Nominal density, ppg | Shortcut temperature range, °C |
+|---|---:|---|---:|---:|
+| EOW 17 | 500 | regular | 8.4000 | 17.15–23.53 |
+| EOW 19 | 600 | insulated; regular lower length constant | 8.4000 | 24.50–38.58 |
+| EOW 20 | 600 | regular | 8.4475 | 20.12–35.40 |
+| EOW 27 | 400 | regular | 8.4000 | 19.53–27.19 |
+| EOW 27 | 600 | regular | 8.4000 | 24.80–41.52 |
+| EOW 38 | 600 | regular | 8.4000 | 20.11–34.44 |
+
+Source: `results/additions/pipe-inputs.csv`, `role`, `assembly`, `excursion`, `flow_centre_gpm`, geometry columns, `density_ppg`, `pv_cP`, `yp_lbf_100ft2`, `pv_ref_T_C` and `temperature_C`. It also lists every exploratory slope window and the heavy-weight pipe dimensions. The pipe-associated inference and its alternative are in the interpretation table above.
+
+EOW 18 supplies two raw-data groups with two stages, shown only as secondary endpoint differences. At a 350-gpm centre, nine windows span 1,938.51 ft: measured pressure decreases by 84.8 psi per 1,000 ft while modelled pressure increases by 20.0. At 700 gpm, seven windows span 506.23 ft: measured and modelled differences are −232.2 and −41.1 psi per 1,000 ft. The separate exploratory 700-gpm group gives −317.8 and −41.5 over 506.05 ft. These are negative observed depth trends with two stages, not primary friction estimates; they do not establish the full-insulated per-length loss. No uncertainty interval can be estimated from two stage means. `eow18-descriptive.csv` lists the windows and endpoint arithmetic.
+
+#### 31 October 2026: shallow excess against flow, added results
+
+Only EOW 38 supplies separated shallow flow levels at the same depth, 346.35 ft, in one primary excursion. It carries a motor. No motorless assembly has shallow coverage at two separated flow levels under this rule. All other primary shallow assemblies have one level; the exploratory shallow rows do not add a second separated level.
+
+| EOW 38 flow, gpm | Measured pressure, psi | Modelled pressure, psi | Excess, psi | Exponent to 423.30 gpm |
+|---:|---:|---:|---:|---:|
+| 236.98 | 293.14 | 43.79 | 249.35 | 0.832 |
+| 237.54 | 289.01 | 43.98 | 245.03 | 0.866 |
+| 423.30 | 538.65 | 134.51 | 404.13 | reference level |
+
+Sources: `results/additions/shallow-flow-levels.csv`, flow and pressure columns, and `shallow-flow-exponents.csv`, `exponent_b`. The two low-flow observations straddle a rounding boundary; their observed separation is below 25 gpm, so they are not compared to each other. A density-times-flow-squared `ReferenceToolLoss` cannot reproduce both ends of this EOW 38 excess with one coefficient at fixed density. This does not identify the responsible component or establish a transferable exponent from one excursion.
+
+#### 31 October 2026: nozzle-floor sensitivity, added results
+
+The ideal nozzle floor removes 30 raw-data physical windows: two on 16A and 28 on 16B. Both temperature predictions are removed for each affected 16A window. Six further windows are removed from the separate exploratory reduction, all on EOW 4. The counts apply to windows with an evaluated pressure and a period nozzle definition. Original exclusions remain excluded. `nozzle-floor.csv` records every floor and its inputs; `floor-removals.csv` includes the zero-removal assemblies.
+
+| Role and well | Assembly | Removed physical windows |
+|---|---|---:|
+| primary 16A | 35r2 | 1 |
+| primary 16A | 39 | 1 |
+| primary 16B | 4 | 6 |
+| primary 16B | 11 | 1 |
+| primary 16B | 12 | 2 |
+| primary 16B | 13 | 2 |
+| primary 16B | 15 | 5 |
+| primary 16B | 16 | 2 |
+| primary 16B | 19 | 3 |
+| primary 16B | 20 | 3 |
+| primary 16B | 27 | 4 |
+| exploratory 16B | 4 | 6 |
+
+All six primary slopes and all six exploratory slopes are unchanged, including every regression value. No 16A slope becomes eligible. The primary comparison is beside the sensitivity below; the full precision and uncertainty columns remain in `slope-comparison.csv`.
+
+| Primary assembly | Flow centre, gpm | Declared measured/modelled slopes, psi per 1,000 ft | Filtered measured/modelled slopes | Declared ratio | Filtered ratio |
+|---|---:|---:|---:|---:|---:|
+| 17 | 500 | 84.2 / 54.5 | 84.2 / 54.5 | 1.54 | 1.54 |
+| 19 | 600 | 47.4 / 44.6 | 47.4 / 44.6 | 1.06 | 1.06 |
+| 20 | 600 | 74.5 / 44.1 | 74.5 / 44.1 | 1.69 | 1.69 |
+| 27 | 400 | 40.6 / 21.3 | 40.6 / 21.3 | 1.91 | 1.91 |
+| 27 | 600 | 114.0 / 51.1 | 114.0 / 51.1 | 2.23 | 2.23 |
+| 38 | 600 | 100.3 / 50.1 | 100.3 / 50.1 | 2.00 | 2.00 |
+
+| Primary flow-step group | Declared windows | Filtered windows in fit | Declared linear / quadratic R² | Filtered linear / quadratic R² |
+|---|---:|---:|---:|---:|
+| EOW 12, excursion 21 | 9 | no eligible three-level fit | 0.99997 / 0.99683 | unavailable |
+| EOW 13, excursion 23 | 54 | 52 | 0.89980 / 0.96307 | 0.99464 / 0.99679 |
+| EOW 20, excursion 31 | no eligible fit | 6 | unavailable | 0.99579 / 0.99980 |
+
+Source: `flow-step-comparison.csv`, the `declared_` and `filtered_` columns. R² describes overlap with the fitted level means and does not validate a loss law. On EOW 12 the near-zero level is removed and only two levels remain. EOW 13 retains three levels after two non-positive-pressure windows are removed. On EOW 20, removing low-pressure observations also removes a close flow level that had prevented the original minimum 25-gpm separation, allowing a new three-level sensitivity fit. The exploratory EOW 13 and 15 flow fits are unchanged. None of these sensitivity results replaces the declared flow fits.
+
+#### 31 October 2026: shortcut direction and ratio wording, added results
+
+The measured inlet/return shortcut raises modelled pressure by 0.47–9.19% in the saved full-solve comparison. Its direction suggests that the modelled slopes are, if anything, too high and the measured/modelled ratios understate the excess. That slope statement requires the shortcut error to increase with depth: a positive pressure offset alone does not prove it. The checked samples are circulating scoreboard states, not full solves of the trip windows, so this archive does not establish or quantify that slope bias. No numerical slope correction is made.
+
+The exact primary shallow endpoints are 1.610497 on EOW 11 at 572.6525 gpm and 7.163717 on EOW 20 at 216.0092 gpm. The flow-conversion paragraph now gives that range and names the EOW 12 comparison separately. The original near-surface pressures and ratios are unchanged.

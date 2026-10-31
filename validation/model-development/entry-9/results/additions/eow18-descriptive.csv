@@ -1,0 +1,4 @@
+well,role,assembly,variant,excursion,flow_centre_gpm,addition_role,stages,windows,depth_min_ft,depth_max_ft,depth_span_ft,window_ids,measured_slope,modelled_slope,slope_ratio
+16B,exploratory,18,inlet_return,17,700,secondary descriptive endpoint difference,2,4,8009.0,8515.05,506.0499999999993,explore-00533;explore-00534;explore-00535;explore-00537,-317.8089560759266,-41.49776848046812,7.6584589416057565
+16B,primary,18,inlet_return,28,350,secondary descriptive endpoint difference,2,9,6636.270000000001,8574.78,1938.5099999999993,16B-01112;16B-01113;16B-01114;16B-01115;16B-01116;16B-01117;16B-01271;16B-01272;16B-01273,-84.78727075033,19.977301949147815,-4.244180268494506
+16B,primary,18,inlet_return,28,700,secondary descriptive endpoint difference,2,7,8008.824583333333,8515.05,506.2254166666662,16B-01126;16B-01123;16B-01124;16B-01125;16B-01129;16B-01130;16B-01131,-232.21635179540957,-41.06351381765373,5.655053116656977

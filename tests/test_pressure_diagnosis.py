@@ -87,3 +87,31 @@ def test_16a_temperature_bracket_preserves_recorded_nominal_mass_flow():
     assert all({r['variant'] for r in pair}=={'measured_low','measured_high'}
                and len({r['mass_rate_kg_s'] for r in pair})==1 for pair in by_window.values())
     assert all(len({r['surface_psi'] for r in pair})==1 for pair in by_window.values())
+
+
+def test_nozzle_floor_uses_nominal_inputs_only():
+    additions = module('additions')
+    # 1000 kg/m3 at 10 m/s has a kinetic head of 50 kPa.
+    density_ppg = 1000/additions.PPG
+    q_gpm = .01/additions.GPM
+    expected = 50000/additions.PSI
+    assert additions.nozzle_floor(q_gpm,density_ppg,.001)==pytest.approx(expected)
+    assert additions.nozzle_floor(2*q_gpm,density_ppg,.001)==pytest.approx(4*expected)
+    assert additions.nozzle_floor(q_gpm,2*density_ppg,.001)==pytest.approx(2*expected)
+    with pytest.raises(ValueError):additions.nozzle_floor(q_gpm,density_ppg,0.)
+
+
+def test_shallow_exponent_keeps_depth_and_assignment_groups_separate():
+    additions = module('additions')
+    rows = []
+    for q in [300.,500.,700.]:
+        row = observation(300.,100.+3*q**.85,q=q)
+        row['modelled_spp_psi'] = 100.
+        rows.append(row)
+    _,pairs = additions.shallow_excess(rows)
+    assert len(pairs)==3
+    assert all(p['exponent_b']==pytest.approx(.85) for p in pairs)
+    rows[-1]['bit_depth_ft']+=6.
+    assert len(additions.shallow_excess(rows)[1])==1
+    rows[1]['role']='secondary'
+    assert additions.shallow_excess(rows)[1]==[]

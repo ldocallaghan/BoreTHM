@@ -1,0 +1,14 @@
+{
+  "well": "16B",
+  "assembly": "19",
+  "source": "University of Utah, End of Well Report-16B78-32-May_2024.pdf, GDR 1516",
+  "url": "https://doi.org/10.15121/1998591",
+  "sha256": "b35f25eda60fcec90a82a688c46ab4b4f30548876cc3cb0113a7cdb966f18f5d",
+  "page": 266,
+  "daily_report": "39, report for 06:00 on 25 May 2023",
+  "operation": "24 May 19:30 to 25 May 02:30; trip in from 930 to 8585 ft",
+  "recorded_order_from_bit_up": "BHA; 25 stands totalling 2378 ft of non-insulated S135 pipe; insulated pipe above the crossover at 3369 ft of run-in depth",
+  "model_order_from_bit_up": "BHA and HWDP; 2378.5 ft regular pipe; insulated pipe to surface",
+  "comparison": "Order confirmed; the retained model regular length differs by 0.5 ft from the rounded report value. No geometry or pressure is changed.",
+  "slope_consequence": "The primary EOW 19 slope spans mean depth stages from 5940.79 to 8495 ft. This is above the 3369-ft crossover in run-in depth, so the added upper-string length is insulated pipe. The regular lower length is constant."
+}
