@@ -1,0 +1,16 @@
+well,role,assembly,status,reason,windows
+16A,primary,10,excluded,assembly absent from frozen geometry and mud plan,2
+16A,primary,14,excluded,assembly absent from frozen geometry and mud plan,6
+16A,primary,18,excluded,missing measured temperature-bracket channel,17
+16A,primary,21,excluded,assembly absent from frozen geometry and mud plan,12
+16A,primary,22,excluded,assembly absent from frozen geometry and mud plan,46
+16A,primary,23,excluded,missing measured temperature-bracket channel,2
+16A,primary,30,excluded,missing measured temperature-bracket channel,15
+16A,primary,35r1,excluded,missing measured temperature-bracket channel,2
+16A,primary,42,excluded,missing measured temperature-bracket channel,178
+16A,primary,9,excluded,assembly absent from frozen geometry and mud plan,37
+16B,exploratory,14,excluded,assembly absent from frozen geometry and mud plan,10
+16B,exploratory,16,calculation_error,Requested depth is outside the constructed string,1
+16B,primary,,excluded,assembly unassigned,5427
+16B,primary,14,excluded,assembly absent from frozen geometry and mud plan,31
+16B,secondary,14,excluded,assembly absent from frozen geometry and mud plan,1

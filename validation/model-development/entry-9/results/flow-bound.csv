@@ -1,0 +1,2 @@
+assumed_efficiency,maximum_efficiency,maximum_true_recorded_flow_ratio,maximum_true_recorded_quadratic_pressure_ratio,maximum_missing_fraction_of_true_quadratic_pressure,condition
+0.95,1.0,1.0526315789473684,1.10803324099723,0.09750000000000003,"correct liner, stroke, stroke count and a nominal 95-percent flow conversion"

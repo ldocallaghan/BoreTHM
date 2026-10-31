@@ -63,7 +63,7 @@ This table includes work performed before this log existed. Earlier development 
 | Entry 6, Herschel–Bulkley annulus (A1), hypotheses no-yield, gel and gel-rising | Founargiotakis slot model for annulus pressure and regime; Gnielinski on the wall viscosity; all three cool 16A, by about 4–10, 7–34 and 14–34 °C at the bit | Every expected change met. RMS of the nine 16A assembly bit biases 10.0, 19.7 and 24.6 °C against 5.6 °C for the working calculation; 16A pressure and 16B water-like runs nearly unchanged | Not adopted under its declared rule, 30 October 2026; the downhole rheology is unmeasured |
 | Entry 7, plastic-viscosity heat transfer and the Erge band (A2), the same three hypotheses | Gnielinski on PV (Chhabra and Richardson eq. 6.55 class) and the transition band of Erge et al. (2015); 16A bit about −1 to −2, −1 to −19 and −4 to −26 °C from the working calculation | Every expected change met. RMS of the nine 16A assembly bit biases 6.0, 9.9 and 16.5 °C against 5.6 °C for the working calculation; 16B within 0.5 °C except EOW 3 and 4 under the gel | Not adopted under its declared rule, 30 October 2026; no-yield matches the working calculation within the 2 °C threshold |
 | Entry 8, one regime criterion for annulus pressure and heat transfer (A3) | Entry 7's treatment with no yield stress as the working calculation; the score expected to equal entry 7 no-yield within 0.01 °C and 1 psi per sample, with a film band of 0.85–1.05 | The score equals entry 7 no-yield within 0.004 °C and 0.01 psi at every sample. RMS of the nine 16A assembly bit biases 6.02 °C, 8.12 °C at film 0.85 and 5.56 °C at 1.05 | Kept under its declared rule, 31 October 2026; the package default is unchanged until the stage 2 score |
-| Entry 9, pressure diagnosis | Separate equipment-associated pressure from the part that increases with pipe length; test flow dependence using independently selected observations | An exploratory 16B comparison was seen before this declaration. Input coverage and source information are archived; no new well-pressure comparison has been run | Declared, 31 October 2026; no model change or keep decision |
+| Entry 9, pressure diagnosis | Separate equipment-associated pressure from the part that increases with pipe length; test flow dependence using independently selected observations | Shallow 16B deficits of 188–483 psi; per-length slope ratios 1.54–2.23 on five groups and 1.06 on partial-insulated EOW 19. No 16A slope meets the declared coverage rule | Diagnosis only, 31 October 2026; installed equipment losses and connection machining remain unresolved |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -1554,4 +1554,65 @@ The shallow-string calculation also needs a source-based truncation when the bit
 
 ### Status
 
-Only observation extraction and reference-scale arithmetic have been performed. No well-pressure diagnosis, six-gap score or correction has been run for entry 9. The annulus treatment is unchanged. The rock calculation and transient treatment are unchanged. No new fitted parameter or default is introduced.
+At the declaration, only observation extraction and reference-scale arithmetic had been performed. No well-pressure diagnosis, six-gap score or correction had been run for entry 9. The annulus treatment is unchanged. The rock calculation and transient treatment are unchanged. No new fitted parameter or default is introduced.
+
+
+## 31 October 2026: entry 9, pressure diagnosis results
+
+The [result archive](../../validation/model-development/entry-9/results/README.md) contains the calculation scripts and every selected observation, including exclusions. The declaration was committed and published as `38c352c45b94e3276ec80bc5c747468c5c37b561` before these comparisons. No physical calculation or default changed.
+
+### Observations and calculated pressures
+
+The raw-data comparison evaluates 172 16A windows at both measured temperature limits and 1,109 16B windows. One 16B window has an inferred assembly assignment and is secondary. The original observation extracts are unchanged. `results/windows.csv`, columns `well`, `window_id`, `variant`, `role` and `status`, supplies these counts.
+
+The ten primary near-surface 16B windows show modelled pressure below the measurement by 188–483 psi. For example, motorless EOW 12 at about 572 gpm and 309 ft records 593–594 psi against 353 psi modelled. These are raw off-bottom standpipe measurements; no raw motor differential is subtracted. The source is `results/near-surface.csv`, columns `role`, `assembly`, `flow_gpm`, `bit_depth_ft`, `measured_spp_psi` and `modelled_spp_psi`. The inferred EOW 15 observation is reported separately.
+
+The per-length groups give the following descriptive slopes. A depth stage combines repeated windows within 100 ft. Each stage has equal weight. The intervals describe scatter between stages within one excursion; they omit equipment uncertainty and possible serial dependence.
+
+| 16B assembly | Flow centre, gpm | Depth stages | Measured slope, psi per 1,000 ft, with 95% interval half-width | Modelled slope | Measured/modelled slope |
+|---|---:|---:|---:|---:|---:|
+| 17 | 500 | 3 | 84.2 ± 28.2 | 54.5 | 1.54 |
+| 19 | 600 | 7 | 47.4 ± 16.9 | 44.6 | 1.06 |
+| 20 | 600 | 10 | 74.5 ± 12.6 | 44.1 | 1.69 |
+| 27 | 400 | 7 | 40.6 ± 6.4 | 21.3 | 1.91 |
+| 27 | 600 | 4 | 114.0 ± 87.5 | 51.1 | 2.23 |
+| 38 | 600 | 8 | 100.3 ± 12.8 | 50.1 | 2.00 |
+
+Source: `results/slopes.csv`, columns `assembly`, `flow_centre_gpm`, `stages`, `measured_slope`, `measured_ci95_half`, `modelled_slope` and `slope_ratio`. `depth-stages.csv` lists the contributing windows. EOW 19 retains its recorded partial-insulated string. Its measured slope is about 6% above the model, with the model inside the stated scatter interval. This differs from EOW 20 and 38, whose measured slopes are about 69% and 100% above their modelled slopes.
+
+No 16A group meets the declared three-stage, 1,000-ft-span rule at controlled flow. No 16A fixed-depth group has three flow levels separated by at least 25 gpm. Both temperature-limit predictions remain archived by window, so the missing slope and flow-step results are coverage limits. `slope-exclusions.csv` gives each inadequate depth group. The two primary fixed-depth flow groups are on 16B EOW 12 and 13; each has three flow levels. EOW 12 includes a recorded pressure of about 3 psi at 319 gpm, and EOW 13 includes two non-positive-pressure windows. These values remain in the fits. The limited coverage and unresolved channel behaviour prevent identifying a unique physical flow exponent (`flow-steps.csv`, including `level_measured_spp_psi` and `non_positive_pressure_windows`).
+
+The pressure-ratio plots do not show a common scale factor across depth and assembly. Nineteen evaluated 16B windows record non-positive pressure during selected circulation. They remain in the tables and plots and are flagged in `pressure-flags.csv`. A flagged recorded zero cannot establish that the model overpredicts a physical pressure.
+
+### Temperature shortcut and reproduction
+
+All 467 frozen scoreboard samples converge again. The maximum changes from the archived entry 8 values are below 0.001 psi in pressure and 0.001 °C in either temperature. Using mean inlet/return from the solved state increases predicted pressure by 0.8–8.8%; mean bit/return increases it by 0.014–2.40%. Using the measured inlet/return temperatures, as in the trip comparison, changes pressure by +0.47 to +9.19%. The latter maximum exceeds the earlier exploratory description's 1.5% figure. The source is `shortcut-check.csv`, columns `archive_difference_psi`, the paired temperature columns and the three `error_percent` columns. `shortcut-summary.csv` reports the errors for each assembly.
+
+The earlier one-minute reduction yields 747 eligible windows, of which 736 can be evaluated with the frozen inputs. Its numerical slopes do not all reproduce the preliminary description. The original executable is unavailable; the archive records operational choices and retains these exploratory assignments separately. The raw ten-second result is the primary comparison. This difference is relevant to EOW 19, whose exploratory slope is below the model while the report-constrained raw slope is about 6% above it. No selection rule was adjusted to reproduce a preliminary number.
+
+### Diagnosis harness correction: 16A mass-flow reference
+
+The first harness implementation used each downhole temperature limit to convert surface volume flow to mass flow at atmospheric pressure. That could select vapour properties above boiling. A model-only check at 110 °C gave about 0.63 kg/m³ at 0.1 MPa and 1,019 kg/m³ at the existing 5-MPa hydraulic property floor for the same recorded mud. The discrepancy identified a phase/reference error in the harness, with no change required in the package. `results/phase-reference.csv` records the reference temperatures, pressures and densities.
+
+The corrected 16A comparison uses recorded nominal surface mud density, whose package reference is 20 °C, for volume-to-mass conversion at both temperature limits. The prediction was that this would preserve liquid mass flow and remove the artificial warm-limit mass reduction. All trip calculations were then repeated. No pressure residual selected this correction. The missing inlet temperature remains an uncertainty in the mass conversion. The 16B conversion retains its measured inlet temperature. The same surface-loss object is evaluated at the recorded surface flow and the inlet/reference density, replacing the uniform-temperature helper's surface term. This also prevents a hot downhole hypothesis from selecting vapour properties in the surface line. The prediction was that the surface term would be equal at both 16A limits. All isothermal predictions were repeated. Pressure properties within the well continue to use each temperature hypothesis and the unchanged property guard.
+
+### Flow conversion and source limits
+
+On the 16A drilling dates, the recorded conversion is about 4.183 US gallons per stroke, against 4.186 for the recorded six-inch liner, twelve-inch stroke and nominal 95% efficiency. The late-October value of about 2.898 is numerically compatible with a five-inch liner's 2.907 under the same stroke and efficiency assumptions; that compatibility does not document its installation. The 16B value of 3.519 is consistent with the recorded change to 5.5-inch liners. Its twelve-inch stroke and 95% efficiency remain declared assumptions. `flow-conversion.csv` preserves daily channel ratios beside all three reference displacements.
+
+Conditional on those displacement and stroke-count assumptions, efficiency cannot exceed 100%. The true flow can therefore be at most 5.26% above the nominal 95%-efficiency conversion. A quadratic pressure term can be at most 10.80% higher, equivalent to 9.75% of its true value. Lower efficiency reduces the true flow and increases the pressure shortfall. These bounds are in `flow-bound.csv`. They cannot explain shallow measured/modelled pressure ratios of about seven.
+
+### Interpretation
+
+Each statement below is an inference from development observations. It does not select a correction.
+
+| Candidate | Status and evidence | Alternative explanation | Separating check |
+|---|---|---|---|
+| Assembly tool losses | Supported as a possible equipment-associated component: a deficit is present with little pipe in the hole, including motorless EOW 12. No installed tool curve is identified | Surface-line losses can also remain at shallow depth | Identify the installed tool and its operating curve, together with the pressure-tap location |
+| Surface plumbing and pressure tap | Undetermined contribution. It can contribute to shallow deficits; the assembly differences prevent identifying a common surface term | Motor no-load loss or another assembly restriction | An installed surface-line inventory and simultaneous pressures across it |
+| Connection bore | Undetermined. Several per-length slopes exceed the model; no source establishes the installed machining | Pipe friction or roughness can have the same length signature | Inspection or contractor connection dimensions for the actual string |
+| Turbulent friction and roughness | Undetermined. The length signature is compatible on several regular-pipe groups, but the partial-insulated control does not support one universal multiplier | Different connection geometry or changing fluid state | Source the pipe coating/roughness and connection machining independently before comparing sourced options |
+| Flow-rate error | Contradicted as the sole explanation under the documented displacement and nominal-efficiency assumptions | Unrecorded displacement or stroke-channel error could invalidate that bound | Verify the remaining pump specification and compare delivered volume independently |
+| Downhole mud rheology | Contradicted as the common sole cause of the shallow and water-like 16B deficits. Its contribution to 16A remains undetermined because the controlled-flow depth comparison lacks coverage | Pipe friction or equipment loss can also explain a pressure deficit | Obtain 16A trip coverage at repeated flow and depth with contemporaneous temperature and mud records |
+
+No installed loss coefficient is inferred from a measured shallow residual. The next correction declaration remains separate from this diagnosis.
