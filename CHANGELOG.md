@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+The circulation solver accepts Colebrook pipe friction with an optional absolute roughness. Its pressure budget inherits these settings and uses the same friction as the distributed heat sources. Blasius and zero roughness remain the defaults; the Herschel-Bulkley annulus treatment is unchanged. Equipment scenarios and their evidence are recorded in [development entry 10](docs/science/model-development.md#31-october-2026-entry-10-sourced-pressure-options).
+
 ## v1.6.0 (29 October 2026)
 
 The circulation model calculates pressure losses component by component:

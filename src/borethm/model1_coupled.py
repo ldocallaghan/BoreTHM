@@ -41,6 +41,7 @@ from scipy.integrate import solve_bvp
 from borethm import geo_constants as C
 from borethm import rock_response as _rock
 from borethm import water_table as wt
+from borethm import fluids as fm
 from borethm import well_geometry as wg
 from borethm.well_geometry import WellGeometry
 
@@ -342,7 +343,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
           fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
           tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF,
           hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
-          rock_response=None, annulus_heat=None, annulus_model='v1.6.0'):
+          rock_response=None, annulus_heat=None, annulus_model='v1.6.0',
+          friction='blasius', roughness=0.):
     # P_surface: pressure at the wellhead. Atmospheric by default; a closed,
     # pressurized loop (P_OP) keeps a return above 100 C liquid.
     # init: a previous solve() result whose profiles seed this one (continuation).
@@ -363,6 +365,10 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     # the transition band of Erge et al. 2015 and Gnielinski on the plastic
     # viscosity).
     # v1.5.0 accepts only 'v1.6.0', which reproduces its calculation.
+    # friction: Blasius (default) or Colebrook for pipe passages and the
+    # original Bingham annulus. roughness is absolute roughness [m], accepted
+    # only with Colebrook. The Herschel-Bulkley annulus is unchanged. Pressure
+    # budgets inherit both settings from this result. Legacy heat stays Blasius.
     # friction_heat: add the heat dissipated by friction in the bore and annulus,
     # and across the bit nozzles (total flow area tfa), to the fluid. Off by
     # default, which is how the model was first calibrated.
@@ -399,11 +405,14 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
         raise ValueError('hydraulics_model v1.5.0 accepts only annulus_model v1.6.0')
     regime = 'herschel-bulkley' if annulus_model in _ANNULUS_SETTINGS else 'apparent-viscosity'
     band = _ANNULUS_SETTINGS.get(annulus_model, ('founargiotakis',))[0]
+    fm.check_friction(friction,roughness)
     if hydraulics_model=='v1.5.0':
+        if friction != 'blasius' or roughness != 0:
+            raise ValueError('hydraulics_model v1.5.0 heat accepts only blasius with zero roughness')
         hl.check_legacy(geometry,surface,transitions)
         loss_model=None
     else:
-        loss_model=hl.LossModel(geometry,transitions=transitions,regime=regime,band=band)
+        loss_model=hl.LossModel(geometry,friction=friction,transitions=transitions,regime=regime,band=band,roughness=roughness)
     T_tvd = geotherm if geotherm is not None else (lambda d: T_surf + G * d)
     Trock = lambda zz: T_tvd(geometry.survey.tvd(zz))
     z = np.linspace(0, L, n_nodes)
@@ -517,7 +526,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                # a solution outside the water table's range (above 480 C) is spurious
                success=bool(sol.success and max(Td.max(), Tu.max()) < 480.0),
                P_bottom=P_L,hydraulics_model=hydraulics_model,rock_response=rock_response,
-               annulus_model=annulus_model,
+               annulus_model=annulus_model,friction=friction,roughness=roughness,
                annulus_heat_W=(None if annulus_heat is None else _source_integral(annulus_heat, L)),
                surface=surface,transitions=transitions)
     if loss_model is not None:
@@ -543,11 +552,13 @@ def colebrook_smooth(Re, n_iter=30):
     return f
 
 
-def friction_factor(Re, model="blasius"):
-    """Darcy friction factor: 64/Re below Re 2300, else Blasius (or smooth
-    Colebrook as a check)."""
+def friction_factor(Re, model="blasius", relative_roughness=0.):
+    """Darcy factor: 64/Re below 2300, else Blasius or Colebrook.
+
+    relative_roughness is epsilon/D and is used only by Colebrook.
+    """
     Re = np.asarray(Re, float)
-    turb = colebrook_smooth(np.maximum(Re, 2300.0)) if model == "colebrook" \
+    turb = fm.colebrook(np.maximum(Re, 2300.0), relative_roughness) if model == "colebrook" \
         else 0.316 * np.maximum(Re, 1.0) ** -0.25
     return np.where(Re < 2300.0, 64.0 / np.maximum(Re, 1e-12), turb)
 
@@ -651,19 +662,28 @@ def _hydraulics_v150(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAU
 
 
 def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
-               friction='blasius', bit=True, fluid=None, P_surface=P_SURF,
-               hydraulics_model=None, surface=None, transitions=None, annulus_model=None):
+               friction=None, bit=True, fluid=None, P_surface=P_SURF,
+               hydraulics_model=None, surface=None, transitions=None, annulus_model=None, roughness=None):
     """Pressure budget [Pa] with named pressure/heat loss terms.
 
     Existing arguments retain their order and units. New calls use
     v1.6.0; a supplied circulation result supplies its mode and surface
-    settings unless overridden. Use hydraulics_model='v1.5.0' for the
+    and friction settings unless overridden. Use hydraulics_model='v1.5.0' for the
     exact legacy midpoint calculation, which rejects new loss inputs.
     surface is a SurfaceLoss or None; an explicit coefficient of zero
     disables an inherited surface allowance. transitions is abrupt or
-    gradual (zero geometric-local loss). See hydraulic_losses for sources.
+    gradual (zero geometric-local loss). friction=None and roughness=None
+    inherit the circulation result's values, or Blasius and zero when no result
+    is supplied. Explicit values override inheritance; non-zero roughness
+    requires Colebrook. An override gives a pressure diagnostic at the supplied
+    temperature profile, which was solved with its recorded options. See
+    [entry 10](science/model-development.md#31-october-2026-entry-10-sourced-pressure-options)
+    for the friction sources and equipment uncertainties.
     """
     from borethm import hydraulic_losses as hl
+    friction=friction if friction is not None else (result or {}).get('friction','blasius')
+    roughness=roughness if roughness is not None else (result or {}).get('roughness',0.)
+    fm.check_friction(friction,roughness)
     mode=hydraulics_model or (result or {}).get('hydraulics_model','v1.6.0')
     surface=surface if surface is not None else (result or {}).get('surface')
     transitions=transitions or (result or {}).get('transitions','abrupt')
@@ -671,6 +691,8 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     if annulus_model not in ANNULUS_MODELS:
         raise ValueError(f'annulus_model must be one of {ANNULUS_MODELS}')
     if mode=='v1.5.0':
+        if roughness != 0:
+            raise ValueError('hydraulics_model v1.5.0 accepts no roughness input')
         hl.check_legacy(geometry,surface,transitions)
         if annulus_model!='v1.6.0':
             raise ValueError('hydraulics_model v1.5.0 accepts only annulus_model v1.6.0')
@@ -680,7 +702,7 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     regime='herschel-bulkley' if annulus_model in _ANNULUS_SETTINGS else 'apparent-viscosity'
     band=_ANNULUS_SETTINGS.get(annulus_model,('founargiotakis',))[0]
     return hl.hydraulics(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface,surface,transitions,
-                         regime=regime,band=band)
+                         regime=regime,band=band,roughness=roughness)
 
 
 def pump_power(m_dot, L=None, T_avg=80.0, geometry=None):

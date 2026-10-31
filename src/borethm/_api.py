@@ -12,7 +12,8 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
                             tfa=_model.BIT_TFA_DEFAULT, film_mult=1.0, breaks=(),
                             init=None, P_surface=_model.P_SURF,
                             hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
-                            rock_response=None, annulus_heat=None, annulus_model='v1.6.0'):
+                            rock_response=None, annulus_heat=None, annulus_model='v1.6.0',
+                            friction='blasius', roughness=0.):
     """Compute circulating bore and annulus temperatures along a well.
 
     Supply either a PipeType or a WellGeometry. Mass flow m_dot is kg/s;
@@ -58,6 +59,15 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     downhole heat. transitions is abrupt or the zero-local-loss gradual
     idealisation. New geometry fields supply connection and tool losses.
     energy_check reports assigned and applied heat in W when enabled.
+    friction selects Blasius (default) or Colebrook for internal passages and
+    for the original Bingham annulus. roughness is absolute wall roughness [m],
+    zero by default, and requires friction='colebrook' when non-zero. The
+    Herschel-Bulkley annulus retains its own friction relation. The Bingham
+    transition and laminar equations are unchanged; applying Colebrook to its
+    turbulent branch uses plastic viscosity as a Newtonian approximation.
+    The same local loss determines dissipation into the fluid at that depth.
+    The circulation result records both options. The legacy circulation mode
+    accepts only Blasius and zero roughness.
     Residuals above 1 W or 0.1% of power, whichever is larger, are flagged.
     The diagnostic does not change solver success; an unavailable diagnostic is
     returned with its error and a flag.

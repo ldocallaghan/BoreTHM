@@ -340,7 +340,7 @@ Raises ValueError for an unknown or ambiguous name.
 ## circulating_temperatures
 
 ```python
-circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt', rock_response=None, annulus_heat=None, annulus_model='v1.6.0')
+circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt', rock_response=None, annulus_heat=None, annulus_model='v1.6.0', friction='blasius', roughness=0.0)
 ```
 
 Compute circulating bore and annulus temperatures along a well.
@@ -388,6 +388,15 @@ surface is a SurfaceLoss, included in standpipe pressure with no
 downhole heat. transitions is abrupt or the zero-local-loss gradual
 idealisation. New geometry fields supply connection and tool losses.
 energy_check reports assigned and applied heat in W when enabled.
+friction selects Blasius (default) or Colebrook for internal passages and
+for the original Bingham annulus. roughness is absolute wall roughness [m],
+zero by default, and requires friction='colebrook' when non-zero. The
+Herschel-Bulkley annulus retains its own friction relation. The Bingham
+transition and laminar equations are unchanged; applying Colebrook to its
+turbulent branch uses plastic viscosity as a Newtonian approximation.
+The same local loss determines dissipation into the fluid at that depth.
+The circulation result records both options. The legacy circulation mode
+accepts only Blasius and zero roughness.
 Residuals above 1 W or 0.1% of power, whichever is larger, are flagged.
 The diagnostic does not change solver success; an unavailable diagnostic is
 returned with its error and a flag.
@@ -403,18 +412,24 @@ verbose=False suppresses the solver's printed report by default.
 ## hydraulics
 
 ```python
-hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction='blasius', bit=True, fluid=None, P_surface=100000.0, hydraulics_model=None, surface=None, transitions=None, annulus_model=None)
+hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction=None, bit=True, fluid=None, P_surface=100000.0, hydraulics_model=None, surface=None, transitions=None, annulus_model=None, roughness=None)
 ```
 
 Pressure budget [Pa] with named pressure/heat loss terms.
 
 Existing arguments retain their order and units. New calls use
 v1.6.0; a supplied circulation result supplies its mode and surface
-settings unless overridden. Use hydraulics_model='v1.5.0' for the
+and friction settings unless overridden. Use hydraulics_model='v1.5.0' for the
 exact legacy midpoint calculation, which rejects new loss inputs.
 surface is a SurfaceLoss or None; an explicit coefficient of zero
 disables an inherited surface allowance. transitions is abrupt or
-gradual (zero geometric-local loss). See hydraulic_losses for sources.
+gradual (zero geometric-local loss). friction=None and roughness=None
+inherit the circulation result's values, or Blasius and zero when no result
+is supplied. Explicit values override inheritance; non-zero roughness
+requires Colebrook. An override gives a pressure diagnostic at the supplied
+temperature profile, which was solved with its recorded options. See
+[entry 10](science/model-development.md#31-october-2026-entry-10-sourced-pressure-options)
+for the friction sources and equipment uncertainties.
 
 ## mud_window
 

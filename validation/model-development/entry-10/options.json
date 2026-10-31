@@ -1,0 +1,145 @@
+{
+  "date": "2026-10-31",
+  "baseline": "entry 8, film 1.0, no-yield Herschel-Bulkley annulus with Erge transition band",
+  "primary": "smooth",
+  "package_defaults_changed": false,
+  "fixed": {
+    "pv_reference_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "surface_case": 5,
+    "16A_joint": "NC50 6.625 by 3.25 in",
+    "16B_joint": "EIS 7 by 4 in",
+    "joint_restriction_in": 29,
+    "16A_joint_pitch_ft": 31.5,
+    "16B_joint_pitch_ft": 31.706666666666667,
+    "new_installed_tool_losses": false,
+    "coating_thickness_selected": false
+  },
+  "variants": {
+    "baseline": {
+      "friction": "blasius",
+      "roughness_m": 0.0,
+      "joint": "retained NC50/EIS",
+      "purpose": "reproduce entry 8"
+    },
+    "smooth": {
+      "friction": "colebrook",
+      "roughness_m": 0.0,
+      "joint": "retained NC50/EIS",
+      "purpose": "isolate the turbulent pipe-friction relation without an unmeasured roughness"
+    },
+    "steel": {
+      "friction": "colebrook",
+      "roughness_m": 4.572e-05,
+      "joint": "retained NC50/EIS",
+      "purpose": "illustrative new-steel internal-wall scenario, transferred from EPA water-pipe table; no installed roughness identified"
+    },
+    "gpds": {
+      "friction": "colebrook",
+      "roughness_m": 0.0,
+      "16B_dp_joint_OD_in": 7.25,
+      "16B_dp_joint_ID_in": 3.5,
+      "purpose": "NOV GPDS55 catalogue geometry uncertainty, also transferred to insulated pipe; HWDP retained"
+    },
+    "fh": {
+      "friction": "colebrook",
+      "roughness_m": 0.0,
+      "16B_dp_joint_OD_in": 7.5,
+      "16B_dp_joint_ID_in": 3.0,
+      "purpose": "conventional FH catalogue geometry uncertainty, also transferred to insulated pipe; HWDP retained"
+    },
+    "gradual": {
+      "friction": "colebrook",
+      "roughness_m": 0.0,
+      "joint": "retained NC50/EIS, zero connection-local loss",
+      "purpose": "idealised zero-local-loss connection limit; other serial component transitions unchanged; not a measured taper"
+    }
+  },
+  "choice_rule": "The primary changes only the turbulent friction relation. No joint, roughness or tool coefficient is chosen from pressure or temperature agreement. Catalogue scenarios stay separate until installed equipment records identify a geometry.",
+  "tool_uncertainty": {
+    "installed_band_available": false,
+    "reason": "No finite published range for the installed HALO, filter, float or sensor loss has been established. Zero additional tool loss is retained and flagged; zero does not imply zero real loss. Different motor examples do not bound these tools.",
+    "motor_analogues": [
+      {
+        "source": "GeoGuidance, entry-9 references geoguidance",
+        "no_load_psi": 100,
+        "rated_gpm": [
+          300,
+          600
+        ]
+      },
+      {
+        "source": "Sniper, entry-9 references sniper-analogue",
+        "no_load_psi": 110,
+        "rated_gpm": [
+          300,
+          600
+        ]
+      }
+    ],
+    "analogue_use": "Context only; reference flow and fluid test conditions are unspecified. They are not installed-tool uncertainty endpoints and are not added to the calculation."
+  },
+  "comparison": "Score every gap before and after on the frozen samples, with variants separate. G4 is reported even though no transient model changes. The model-only preparation calculates no target residual.",
+  "decision_rule": "Recommend keeping smooth pipe friction only if its predicted pressure and heat effects are reproduced; G1 assembly-bias RMS worsens by at most 1 psi in either well; G2 absolute well-mean error worsens by at most 0.1 percent of measured mean power; each G3/G6 assembly or group absolute bias and pooled G5 absolute bias worsen by at most 2 C. Report G4 through the unchanged transient treatment. These are acceptance criteria, never parameter choices. Equipment scenarios require an independent installed-equipment source before adoption.",
+  "secondary_measures": {
+    "trip_slopes": {
+      "group_source": "validation/model-development/entry-9/results/slopes.csv, role=primary",
+      "groups": [
+        {
+          "assembly": "17",
+          "excursion": "27",
+          "flow_centre_gpm": "500"
+        },
+        {
+          "assembly": "19",
+          "excursion": "29",
+          "flow_centre_gpm": "600"
+        },
+        {
+          "assembly": "20",
+          "excursion": "31",
+          "flow_centre_gpm": "600"
+        },
+        {
+          "assembly": "27",
+          "excursion": "40",
+          "flow_centre_gpm": "400"
+        },
+        {
+          "assembly": "27",
+          "excursion": "40",
+          "flow_centre_gpm": "600"
+        },
+        {
+          "assembly": "38",
+          "excursion": "52",
+          "flow_centre_gpm": "600"
+        }
+      ],
+      "method_source": "validation/model-development/entry-9/analyse.py, slopes; same windows, flow and depth grouping, temperature treatment, mass-rate convention and reductions",
+      "variants": [
+        "baseline",
+        "smooth",
+        "steel",
+        "gpds",
+        "fh",
+        "gradual"
+      ],
+      "outputs": [
+        "modelled pressure slope in psi per 1000 ft",
+        "measured/modelled slope ratio"
+      ],
+      "eow19": "Report separately: the added upper length is insulated pipe. Its connection geometry remains the same declared catalogue transfer as regular pipe.",
+      "predictions": {
+        "baseline": "Reproduce entry 9 modelled slopes and ratios.",
+        "smooth": "Raise regular and insulated per-length slopes through the pipe-friction relation; it supplies no difference in connection identity.",
+        "steel": "Raise the slopes above smooth through the uniform internal roughness example on both regular and insulated pipe.",
+        "gpds": "Raise 16B slopes above smooth through smaller catalogue joint bores, including insulated-pipe connections.",
+        "fh": "Raise 16B slopes above smooth through smaller conventional FH joint bores, including insulated-pipe connections; expect a larger increment than GPDS55.",
+        "gradual": "Reduce the repeated-connection local contribution relative to smooth in regular and insulated pipe. The net sign relative to baseline includes the opposing smooth-friction change."
+      },
+      "selection": "Secondary reporting only. It does not enter the unchanged acceptance rule and cannot select any variant or equipment dimension."
+    }
+  }
+}

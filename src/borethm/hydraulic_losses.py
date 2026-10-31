@@ -139,7 +139,7 @@ class SurfaceLoss:
 
 
 def passage_gradient(rho, mu, yield_point, mass_rate, area, dh, annulus=False, friction='blasius',
-                     regime='apparent-viscosity', hb=None, band='founargiotakis', kappa=None):
+                     regime='apparent-viscosity', hb=None, band='founargiotakis', kappa=None, roughness=0.):
     """Positive friction gradient [Pa/m], Reynolds number and velocity [m/s].
 
     Takes already evaluated properties so frozen-point formula replays do
@@ -160,10 +160,10 @@ def passage_gradient(rho, mu, yield_point, mass_rate, area, dh, annulus=False, f
         state=fluids.hb_annulus(rho,tau0,K,n,velocity,dh,band=band,kappa=kappa)
         return state['gradient'],state['re'],velocity
     if yield_point > 0:
-        gradient,re=fluids.bingham_gradient(rho,mu,yield_point,velocity,dh,annulus)
+        gradient,re=fluids.bingham_gradient(rho,mu,yield_point,velocity,dh,annulus,friction,roughness)
     else:
         re=np.asarray(rho)*velocity*dh/mu
-        gradient=m1.friction_factor(re,friction)*np.asarray(rho)*velocity**2/(2*dh)
+        gradient=m1.friction_factor(re,friction,roughness/dh)*np.asarray(rho)*velocity**2/(2*dh)
     return gradient,re,velocity
 
 
@@ -182,7 +182,7 @@ def local_change(area_up, area_down, rho, mass_rate, mu, dh_small):
 def joint_increment(rho, mu, yield_point, mass_rate, body_area, body_dh,
                     joint_area, joint_dh, restriction_length, annulus=False,
                     transition='abrupt', friction='blasius', regime='apparent-viscosity', hb=None,
-                    body_gradient=None, band='founargiotakis', kappa_body=None, kappa_joint=None):
+                    body_gradient=None, band='founargiotakis', kappa_body=None, kappa_joint=None, roughness=0.):
     """Replacement and entry/exit loss [Pa] for one connection.
 
     The body subtraction can give a negative increment. It replaces only
@@ -191,9 +191,9 @@ def joint_increment(rho, mu, yield_point, mass_rate, body_area, body_dh,
     evaluated at the same state. band, kappa_body and kappa_joint select the
     Herschel-Bulkley transition band of each passage.
     """
-    body=(passage_gradient(rho,mu,yield_point,mass_rate,body_area,body_dh,annulus,friction,regime,hb,band,kappa_body)[0]
+    body=(passage_gradient(rho,mu,yield_point,mass_rate,body_area,body_dh,annulus,friction,regime,hb,band,kappa_body,roughness)[0]
           if body_gradient is None else body_gradient)
-    joint=passage_gradient(rho,mu,yield_point,mass_rate,joint_area,joint_dh,annulus,friction,regime,hb,band,kappa_joint)[0]
+    joint=passage_gradient(rho,mu,yield_point,mass_rate,joint_area,joint_dh,annulus,friction,regime,hb,band,kappa_joint,roughness)[0]
     local=0.
     if transition=='abrupt':
         # Both directions use the smaller passage's hydraulic diameter.
@@ -206,14 +206,16 @@ class LossModel:
     """Prepared geometry-only loss placement, shared by pressure and heat."""
 
     def __init__(self, geometry, friction='blasius', transitions='abrupt', regime='apparent-viscosity',
-                 band='founargiotakis'):
+                 band='founargiotakis', roughness=0.):
         from borethm import fluids, model1_coupled as m1
         if transitions not in ('abrupt','gradual'):
             raise ValueError('transitions must be abrupt or gradual')
         if regime not in fluids.REGIMES:
             raise ValueError(f'regime must be one of {fluids.REGIMES}')
+        fluids.check_friction(friction,roughness)
         self.geometry=geometry
         self.friction=friction
+        self.roughness=roughness
         self.transitions=transitions
         self.regime=regime
         if band not in fluids.BANDS:
@@ -290,7 +292,7 @@ class LossModel:
             hb=(np.zeros_like(zz),mu,np.ones_like(zz)) if rheology is None else \
                 tuple(np.broadcast_to(x,zz.shape) for x in rheology.at(temperature,mu,fluid))
         if hb is None:
-            body,re,velocity=passage_gradient(rho,mu,tau,mass_rate,area,dh,annulus,self.friction,self.regime)
+            body,re,velocity=passage_gradient(rho,mu,tau,mass_rate,area,dh,annulus,self.friction,self.regime,roughness=self.roughness)
         else:
             velocity=mass_rate/(rho*area)
             state=fluids.hb_annulus(rho,*hb,velocity,dh,band=self.band,kappa=g['r_out']/g['r_wall'])
@@ -318,7 +320,7 @@ class LossModel:
                 inc,loc=joint_increment(rho[mask],mu[mask],tau,mass_rate,area[mask],dh[mask],ja,jd,joint.restriction_length,annulus,joint.transition,self.friction,self.regime,
                                         None if hb is None else tuple(x[mask] for x in hb),
                                         None if hb is None else body[mask],self.band,
-                                        (g['r_out']/g['r_wall'])[mask],joint.outer_diameter/diameter if annulus else None)
+                                        (g['r_out']/g['r_wall'])[mask],joint.outer_diameter/diameter if annulus else None,self.roughness)
                 terms['joint_replacement'][mask]=inc/joint.spacing
                 terms['joint_local'][mask]=loc/joint.spacing
                 if joint.transition=='abrupt':
@@ -489,7 +491,7 @@ def energy_check(model,result,fluid,Q_face,tfa,P_surface):
 def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
                friction='blasius', bit=True, fluid=None, P_surface=1e5,
                surface=None, transitions='abrupt', guard=True, regime='apparent-viscosity',
-               band='founargiotakis'):
+               band='founargiotakis', roughness=0.):
     """Standpipe budget using the same local gradients as circulation heat.
     regime names the annulus flow treatment (fluids.REGIMES) and band its
     transition band (fluids.BANDS)."""
@@ -497,7 +499,7 @@ def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
     _finite(mass_rate,'mass flow',True)
     if surface is not None and not isinstance(surface,SurfaceLoss):
         raise TypeError('surface must be SurfaceLoss or None')
-    model=LossModel(geometry,friction,transitions,regime,band)
+    model=LossModel(geometry,friction,transitions,regime,band,roughness)
     top,bot=model.top,model.bottom
     mid,weights=model.integration_grid(result)
     if result is None:

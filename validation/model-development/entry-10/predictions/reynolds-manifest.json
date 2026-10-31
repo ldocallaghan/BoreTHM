@@ -1,0 +1,26 @@
+{
+  "python": "3.14.4",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "windows": 22,
+  "runtime_s": 31.711630199977662,
+  "source_variant": "baseline",
+  "sampling": "401 uniform MD stations plus every component midpoint; physical body bore, no joint restriction; solved bore temperatures interpolated as in the pressure budget; 5 MPa property floor",
+  "definition": "Re_PV = rho v D/mu_p; Re_apparent includes the retained pipe yield contribution. The turbulent factor uses Re_PV.",
+  "targets_compared": false,
+  "existing_model_only_csv_sha256": "c225af07f9b59cda6c73366a1fe10e1b2158d33c0dc435f6c8ae87b1470a8835",
+  "solver_or_reproduction_failures": 0,
+  "source_sha256": {
+    "validation/model-development/entry-10/passage_reynolds.py": "a915161bbb3f9b8785b9fdd35f5594e44c2489f787e6f066dec27f0a99f9ad83",
+    "validation/model-development/entry-10/predict.py": "ecceab37fd52b2fc872c508497be987c7eb3b61bca24f2ce9b5d3ba2585e46ce",
+    "validation/model-development/entry-9/diagnose.py": "2d6370bf82d0d13592c0cdd6383e3a7de8c0d63457a4fecedf31492044488940",
+    "validation/forge16b/s2/plan.json": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb",
+    "src/borethm/hydraulic_losses.py": "913ba82b760b17100549f85ac2f4ac71d3d9f72272389980a12729260bc1ed01",
+    "src/borethm/model1_coupled.py": "21dffcd4eab3df1236c973b997a94bc8c6a82cb3de8a689c9d6db926aceb30da",
+    "src/borethm/fluids.py": "10de76f50892d73295dd6cbc3fe8038bc097bd76f078c03f311310d9c18f8128"
+  },
+  "output_sha256": {
+    "body-reynolds.csv": "37f5b53520b9bc38c7feaca00c49e4afb957d4bcf128c35773c9d6d3a54448a3",
+    "reynolds-baseline-check.csv": "49a75091d6aa6000bbaadbdfb8ab8546b04a3c21d8a147aeed461076cc433a34"
+  }
+}

@@ -187,7 +187,33 @@ def bingham_turbulent(rho, mu_p, tau_y, v, D, annulus):
     return rho * v * D / mu_a > RE_CRITICAL
 
 
-def bingham_gradient(rho, mu_p, tau_y, v, D, annulus):
+def check_friction(friction, roughness=0.):
+    """Validate the pipe friction option and absolute roughness [m]."""
+    if friction not in ('blasius', 'colebrook'):
+        raise ValueError('friction must be blasius or colebrook')
+    if not np.isfinite(roughness) or roughness < 0:
+        raise ValueError('roughness must be non-negative and finite')
+    if friction == 'blasius' and roughness != 0:
+        raise ValueError('non-zero roughness requires colebrook friction')
+
+
+def colebrook(Re, relative_roughness=0., n_iter=30):
+    """Turbulent Darcy factor from the Colebrook equation.
+
+    1/sqrt(f) = -2 log10(epsilon/(3.7 D) + 2.51/(Re sqrt(f))).
+    epsilon/D is dimensionless; zero gives the smooth-pipe limit.
+    Source: Majumdar (2020), A Finite Volume Procedure for Thermofluid
+    System Analysis in a Flow Network, page 13, equation 13a (NASA).
+    The caller selects the flow regime before using this turbulent factor.
+    """
+    Re = np.asarray(Re, float)
+    f = .316 * Re ** -.25
+    for _ in range(n_iter):
+        f = (-2 * np.log10(np.asarray(relative_roughness)/3.7 + 2.51/(Re*np.sqrt(f)))) ** -2
+    return f
+
+
+def bingham_gradient(rho, mu_p, tau_y, v, D, annulus, friction='blasius', roughness=0.):
     """Frictional pressure gradient [Pa/m] of a Bingham plastic at mean
     velocity v in a pipe of diameter D, or an annulus of hydraulic diameter D
     (outer less inner diameter). Laminar, from the plug-flow limits of
@@ -200,7 +226,12 @@ def bingham_gradient(rho, mu_p, tau_y, v, D, annulus):
     mu_p v / (1000 (d2 - d1)^2) + tau_y / (200 (d2 - d1)), psi/ft). The flow
     is turbulent when the Reynolds number on the apparent viscosity, the
     Newtonian viscosity giving the same laminar loss, exceeds RE_CRITICAL;
-    then the Blasius friction factor on the plastic viscosity."""
+    then the selected Darcy factor on the plastic viscosity. The default
+    is Blasius. friction='colebrook' uses the smooth or rough Colebrook
+    relation with absolute roughness [m]. This Newtonian turbulent relation
+    on plastic viscosity is an approximation for mud; the laminar formula
+    and apparent-viscosity transition criterion are unchanged."""
+    check_friction(friction, roughness)
     rho, mu_p, v, D = (np.asarray(x, float) for x in (rho, mu_p, v, D))
     v = np.maximum(np.abs(v), 1e-9)
     if annulus:
@@ -210,7 +241,9 @@ def bingham_gradient(rho, mu_p, tau_y, v, D, annulus):
         lam = 32.0 * mu_p * v / D ** 2 + 16.0 * tau_y / (3.0 * D)
         mu_a = mu_p + tau_y * D / (6.0 * v)
     Re_a = rho * v * D / mu_a
-    turb = 0.316 * (rho * v * D / mu_p) ** -0.25 * rho * v ** 2 / (2.0 * D)
+    factor = (0.316 * (rho * v * D / mu_p) ** -0.25 if friction == 'blasius'
+              else colebrook(rho*v*D/mu_p, roughness/D))
+    turb = factor * rho * v ** 2 / (2.0 * D)
     return np.where(Re_a > RE_CRITICAL, turb, lam), Re_a
 
 
