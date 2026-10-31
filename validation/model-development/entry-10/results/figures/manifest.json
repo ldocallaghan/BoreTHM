@@ -1,0 +1,12 @@
+{
+  "matplotlib": "3.11.2",
+  "script_sha256": "aa75e3cdcde6c50106f071a0e6697c8381e414ecf15538f217e61918ca2ec8c7",
+  "figures_sha256": {
+    "pressure-assemblies.png": "d58503ae1683346166bc7364510bd87c166f7c2ea76b730785a0f4051f8924d2",
+    "primary-observations.png": "0d6a3329279e6540a3a688adc6475d50520ed496c6622c829c760cb4ed5b21c9",
+    "primary-pressure-residuals.png": "e475e485c53ce5a6113f72ee58ac89a4cec25753a24ff7feb2bdf7817fed1fa0",
+    "secondary-trip-slopes.png": "6a233e3420558d090c5cfa2baf8d6b2040bc2ac8cbfaa5d8112b62e07a27c0b1",
+    "six-gap-summary.png": "26b9360271513636d4020245009f27ea5dd745a5829620a1999baab11817fbbf",
+    "temperature-assemblies.png": "5103aba00c4e6f52fbfcce8d73220c5a1542fb5a3af3eb64f93e18407da8ed0f"
+  }
+}

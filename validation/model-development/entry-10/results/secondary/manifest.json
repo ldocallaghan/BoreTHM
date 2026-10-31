@@ -1,0 +1,33 @@
+{
+  "declaration_commit": "2d183acdfd6a8bf867a2d79220484fda157f6338",
+  "windows_per_variant": 186,
+  "groups_per_variant": 6,
+  "candidates": [
+    "baseline",
+    "smooth",
+    "steel",
+    "gpds",
+    "fh",
+    "gradual"
+  ],
+  "runtime_s": 54.20870879999711,
+  "acceptance_use": false,
+  "failures": [],
+  "exclusions": [],
+  "source_sha256": {
+    "validation/model-development/entry-10/trip_slopes.py": "ef42612875213db3803241e1bfd6648c82c6f04ba58e65985105125a2a882a79",
+    "validation/model-development/entry-10/predict.py": "ecceab37fd52b2fc872c508497be987c7eb3b61bca24f2ce9b5d3ba2585e46ce",
+    "validation/model-development/entry-10/options.json": "7d52cbc3efe40a7ed8554a8d3556f998ac0dbe57b50ab85dbd8d00289257fdf7",
+    "validation/model-development/entry-9/analyse.py": "ce68686b7371a6dcc79d9728e8654c23d12eb8717a1fc52067cfe0f170a9bdc0",
+    "validation/model-development/entry-9/diagnose.py": "2d6370bf82d0d13592c0cdd6383e3a7de8c0d63457a4fecedf31492044488940",
+    "validation/model-development/entry-9/results/windows.csv": "dcb9da507a72252766ae3e1273a9953c25fc1e91524524d518ea3a4a21b6ad35",
+    "validation/model-development/entry-9/results/depth-stages.csv": "58ff73072252445a3c2fb99af3a6482692d52b703e52201946f249607dbb48b3",
+    "validation/model-development/entry-9/results/slopes.csv": "ef84ecc0d74eb38638e5383ef7a2531239d9eb8ef8e02ee0cbbf4e4731c0cf2a"
+  },
+  "results_sha256": {
+    "baseline-check.csv": "7f32919580129f25d5066f73f3e9aa834277ee487b5b0fe52ed0d44d6601355c",
+    "depth-stages.csv": "c98c238cae1c6d4aaf0b3187bafd93883aad954703ea9b69953cbd6825f40b73",
+    "slopes.csv": "4aeb1728828b0ef3727dad35102c911d0eed2c0505050b97e0d0f3d3449ac1cc",
+    "windows.csv": "400cb713840f41f476b60970121310358efee77e5004c2259f19ac0cffb0a2f9"
+  }
+}

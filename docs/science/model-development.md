@@ -64,7 +64,7 @@ This table includes work performed before this log existed. Earlier development 
 | Entry 7, plastic-viscosity heat transfer and the Erge band (A2), the same three hypotheses | Gnielinski on PV (Chhabra and Richardson eq. 6.55 class) and the transition band of Erge et al. (2015); 16A bit about −1 to −2, −1 to −19 and −4 to −26 °C from the working calculation | Every expected change met. RMS of the nine 16A assembly bit biases 6.0, 9.9 and 16.5 °C against 5.6 °C for the working calculation; 16B within 0.5 °C except EOW 3 and 4 under the gel | Not adopted under its declared rule, 30 October 2026; no-yield matches the working calculation within the 2 °C threshold |
 | Entry 8, one regime criterion for annulus pressure and heat transfer (A3) | Entry 7's treatment with no yield stress as the working calculation; the score expected to equal entry 7 no-yield within 0.01 °C and 1 psi per sample, with a film band of 0.85–1.05 | The score equals entry 7 no-yield within 0.004 °C and 0.01 psi at every sample. RMS of the nine 16A assembly bit biases 6.02 °C, 8.12 °C at film 0.85 and 5.56 °C at 1.05 | Kept under its declared rule, 31 October 2026; the package default is unchanged until the stage 2 score |
 | Entry 9, pressure diagnosis | Separate equipment-associated pressure from the part that increases with pipe length; test flow dependence using independently selected observations | Shallow 16B deficits of 188–483 psi; per-length slope ratios 1.54–2.23 on five groups and 1.06 on partial-insulated EOW 19. No 16A slope meets the declared coverage rule | Diagnosis only, 31 October 2026; installed equipment losses and connection machining remain unresolved |
-| Entry 10, sourced pressure options | Smooth Colebrook pipe friction, with separate roughness and catalogue-connection scenarios; defaults retained | Model-only predictions on 22 operating windows; no new target comparison | Declared 31 October 2026; no acceptance score or adoption decision |
+| Entry 10, sourced pressure options | Smooth Colebrook pipe friction, with separate roughness and catalogue-connection scenarios; defaults retained | All six gaps scored; smooth Colebrook met the declared acceptance rule | Maintainer decision, 31 October 2026: retain Colebrook as an option; working calculation stays entry 8; default stays Blasius with zero roughness. The recommendation to adopt is retained below. |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -1872,3 +1872,141 @@ This is a secondary measure reported beside the six-gap score. It does not enter
 ### Acceptance criteria
 
 Recommend keeping the smooth-pipe candidate only if its predicted pressure and heat effects are reproduced and the full comparison meets these conditions: G1 assembly-bias RMS does not worsen by more than 1 psi in either well; the magnitude of G2's well-mean error does not worsen by more than 0.1% of measured mean power; no G3 or G6 assembly/group absolute bias worsens by more than 2 °C; and the absolute pooled G5 bias does not worsen by more than 2 °C. Report G4 without changing its initial-state convention. The coefficients remain fixed independently of these acceptance criteria. If a condition fails, retain the declaration and recommend against adoption pending a separate explanation. Any geometry, tool or roughness adoption still requires an independent equipment source. The acceptance decision is pending. No new score is reported here.
+
+### Scored development comparison, 31 October 2026
+
+The before calculation is entry 8 at film multiplier 1.0. It already includes the retained rotary sources and annulus treatment. Its biases differ from the original blind-test biases recorded at the beginning of this log. The declaration is commit `2d183ac`. No package default or equipment dimension is selected from this comparison.
+
+#### Calculated results
+
+The [summary archive](../../validation/model-development/entry-10/results/summary.csv) supplies every value in the following table. G1 is the root mean square (RMS) of assembly mean pressure biases, in `G1_16A_RMS_psi` and `G1_16B_RMS_psi`. G3 and G4 are RMS values of assembly mean biases and available event peak errors, respectively. G2, G5 and G6 are signed modelled-minus-measured biases. Their columns are `G2_*_bias_kW`, `G5_16A_return_bias_C` and `G6_*_bias_C`. G2 compares calculated in-hole hydraulic power with measured pump pressure times flow. The observations do not measure fluid heat uptake.
+
+| Calculation | G1 16A / 16B, psi | G2 16A / 16B, kW | G3, °C | G4, °C | G5, °C | G6 regular / trial, °C |
+| --- | --- | --- | --- | --- | --- | --- |
+| baseline | 1,222.5 / 478.8 | -285.9 / -240.4 | 6.0 | 34.9 | -4.6 | 2.7 / 9.1 |
+| smooth | 1,214.6 / 432.4 | -283.7 / -225.3 | 5.9 | 34.9 | -4.6 | 3.1 / 9.5 |
+| steel | 1,084.3 / 258.7 | -244.0 / -172.2 | 5.5 | 34.9 | -4.5 | 4.9 / 11.0 |
+| gradual | 1,605.6 / 504.8 | -395.8 / -256.6 | 7.3 | 34.9 | -5.2 | 2.6 / 8.9 |
+| gpds | 1,214.6 / 271.2 | -283.7 / -155.6 | 5.9 | 34.9 | -4.6 | 4.3 / 10.9 |
+| fh | 1,214.6 / 152.8 | -283.7 / 20.2 | 5.9 | 34.9 | -4.6 | 7.1 / 14.4 |
+
+For the primary comparison, the following assembly table comes from [comparison.csv](../../validation/model-development/entry-10/results/comparison.csv), `candidate=smooth`, `gap=G1`, columns `after_compared`, `before_bias`, `after_bias`, `before_percent` and `after_percent`. The percentage columns are means of sample percentage errors. The 16A target is measured standpipe minus raw motor differential. The 16B target is measured standpipe on the four motorless runs.
+
+| Well / assembly | Paired samples | Before bias, psi | Smooth bias, psi | Before / smooth, % |
+| --- | --- | --- | --- | --- |
+| 16A / 18 | 15 | -1,211.6 | -1,211.6 | -43.3 / -43.3 |
+| 16A / 23 | 13 | -1,473.7 | -1,478.4 | -45.2 / -45.3 |
+| 16A / 30 | 29 | -1,046.4 | -1,049.7 | -33.1 / -33.2 |
+| 16A / 34 | 9 | -1,079.7 | -1,081.1 | -33.5 / -33.6 |
+| 16A / 35r1 | 5 | -1,295.2 | -1,271.2 | -34.9 / -34.3 |
+| 16A / 35r2 | 4 | -1,193.7 | -1,169.6 | -33.9 / -33.2 |
+| 16A / 38 | 20 | -728.1 | -700.5 | -22.5 / -21.7 |
+| 16A / 39 | 25 | -583.2 | -571.5 | -17.7 / -17.3 |
+| 16A / 42 | 15 | -1,891.4 | -1,884.7 | -45.9 / -45.8 |
+| 16B / 12 | 12 | -482.0 | -441.6 | -41.0 / -37.6 |
+| 16B / 13 | 14 | -440.3 | -400.5 | -37.7 / -34.3 |
+| 16B / 15 | 4 | -436.4 | -394.0 | -36.6 / -33.1 |
+| 16B / 16 | 15 | -548.0 | -487.1 | -44.0 / -39.2 |
+
+G2 well means use `gap=G2` in the same file, columns `after_compared`, `measured_mean`, `before_model_mean`, `after_model_mean`, `before_bias` and `after_bias`. The comparison includes all paired pressure samples of each well.
+
+| Well | Paired samples | Measured, kW | Before model, kW | Smooth model, kW | Before / smooth bias, kW |
+| --- | --- | --- | --- | --- | --- |
+| 16A | 135 | 928.3 | 642.4 | 644.6 | -285.9 / -283.7 |
+| 16B | 109 | 526.5 | 286.2 | 301.3 | -240.4 / -225.3 |
+
+The temperature table uses the same file and candidate, `gap=G3`, `G5` or `G6`, and columns `after_compared`, `before_bias` and `after_bias`. The 16B comparison retains each frozen above-bit bore proxy. EOW 3 and 4 remain reported separately with their unresolved sensor position. Trial results retain the previously fitted insulation conductivity. All values are calculated biases against the archived observations.
+
+| Gap / well / assembly or group | Paired samples | Before bias, °C | Smooth bias, °C |
+| --- | --- | --- | --- |
+| G3 / 16A / 18 | 15 | -3.1 | -3.0 |
+| G3 / 16A / 23 | 13 | 1.4 | 1.4 |
+| G3 / 16A / 30 | 29 | 5.3 | 5.3 |
+| G3 / 16A / 34 | 9 | 0.9 | 0.9 |
+| G3 / 16A / 35r1 | 5 | 0.2 | 0.5 |
+| G3 / 16A / 35r2 | 4 | -3.4 | -3.2 |
+| G3 / 16A / 38 | 20 | -3.3 | -3.0 |
+| G3 / 16A / 39 | 25 | -4.8 | -4.6 |
+| G3 / 16A / 42 | 15 | -15.5 | -15.4 |
+| G5 / 16A / ALL | 358 | -4.6 | -4.6 |
+| G5 / 16A / Sanvean on-bottom | 135 | -4.8 | -4.8 |
+| G5 / 16A / rig inferred bit depth, return only | 223 | -4.5 | -4.5 |
+| G6 / 16B / independent regular pipe | 59 | 2.7 | 3.1 |
+| G6 / 16B / trial | 45 | 9.1 | 9.5 |
+| G6 / 16B / 3 | 3 | -2.5 | -2.4 |
+| G6 / 16B / 4 | 2 | -22.2 | -22.1 |
+| G6 / 16B / 11 | 4 | -5.6 | -5.3 |
+| G6 / 16B / 12 | 12 | -3.2 | -2.9 |
+| G6 / 16B / 13 | 14 | -2.3 | -1.9 |
+| G6 / 16B / 15 | 4 | 4.4 | 4.8 |
+| G6 / 16B / 16 | 15 | 10.4 | 11.0 |
+| G6 / 16B / 17 | 14 | 14.8 | 15.4 |
+| G6 / 16B / 18 | 10 | 4.2 | 4.5 |
+| G6 / 16B / 19 | 10 | 5.7 | 6.0 |
+| G6 / 16B / 20 | 11 | 9.3 | 9.9 |
+| G6 / 16B / 27 | 5 | 5.5 | 6.2 |
+| G6 / 16B / 38 | 5 | 9.8 | 10.5 |
+
+The run-in table uses `gap=G4` in that file, with `before_bias` and `after_bias` as modelled-minus-measured peak errors. Two events were unavailable in the original archive and remain unavailable. The successful event identifiers are identical. Conditioning circulation receives the candidate friction option; the transient equations and approximate initial-state convention remain unchanged.
+
+| Event | Before peak error, °C | Smooth peak error, °C |
+| --- | --- | --- |
+| 23-off004 | -28.8 | -28.8 |
+| 23-off005 | -13.9 | -13.9 |
+| 23-off006 | unavailable | unavailable |
+| 35r2-off001 | -6.5 | -6.5 |
+| 35r2-off006 | -42.0 | -42.0 |
+| 35r2-off008 | unavailable | unavailable |
+| 38-off009 | -9.8 | -9.8 |
+| 39-off004 | -10.1 | -10.1 |
+| 39-off007 | -48.4 | -48.4 |
+| 42-off004 | -49.0 | -49.0 |
+| 42-off013 | -56.2 | -56.2 |
+
+The [six-gap figure](../../validation/model-development/entry-10/results/figures/six-gap-summary.png) and the [assembly pressure figure](../../validation/model-development/entry-10/results/figures/pressure-assemblies.png) show the separate variants. The [temperature assembly figure](../../validation/model-development/entry-10/results/figures/temperature-assemblies.png) retains the group detail. The [primary observation figure](../../validation/model-development/entry-10/results/figures/primary-observations.png) compares measured and modelled values for every gap, and the [pressure residual figure](../../validation/model-development/entry-10/results/figures/primary-pressure-residuals.png) reports residual against flow, depth and assembly.
+
+#### Calculated secondary trip slopes
+
+These values come from [secondary/slopes.csv](../../validation/model-development/entry-10/results/secondary/slopes.csv), columns `assembly`, `flow_centre_gpm`, `measured_slope`, `modelled_slope` and `slope_ratio`, grouped by `candidate`. Slopes are in psi per 1,000 ft. Each candidate cell gives modelled slope / measured-to-modelled ratio. The measured slope and window membership are fixed across variants; measured slopes are regressions of the archived pressure observations.
+
+| EOW / gpm | Measured slope | baseline slope / ratio | smooth slope / ratio | steel slope / ratio | gpds slope / ratio | fh slope / ratio | gradual slope / ratio |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 17 / 500 | 84.2 | 54.5 / 1.543 | 58.2 / 1.447 | 69.4 / 1.212 | 84.9 / 0.992 | 152.0 / 0.554 | 45.8 / 1.839 |
+| 20 / 600 | 74.5 | 44.1 / 1.690 | 47.5 / 1.567 | 57.6 / 1.294 | 78.8 / 0.945 | 156.8 / 0.475 | 32.7 / 2.278 |
+| 27 / 400 | 40.6 | 21.3 / 1.906 | 22.3 / 1.818 | 25.6 / 1.587 | 36.2 / 1.121 | 70.7 / 0.574 | 15.9 / 2.555 |
+| 27 / 600 | 114.0 | 51.1 / 2.232 | 59.8 / 1.905 | 84.0 / 1.356 | 100.2 / 1.138 | 201.2 / 0.566 | 40.2 / 2.837 |
+| 38 / 600 | 100.3 | 50.1 / 2.004 | 54.1 / 1.855 | 65.7 / 1.526 | 87.5 / 1.146 | 170.9 / 0.587 | 38.3 / 2.620 |
+
+EOW 19 is separate because the added upper string length is insulated pipe. The catalogue scenarios transfer the same specified joints to its insulated pipe.
+
+| EOW / gpm | Measured slope | baseline slope / ratio | smooth slope / ratio | steel slope / ratio | gpds slope / ratio | fh slope / ratio | gradual slope / ratio |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 19 / 600 | 47.4 | 44.6 / 1.063 | 48.9 / 0.970 | 61.0 / 0.777 | 81.0 / 0.585 | 161.0 / 0.294 | 33.6 / 1.410 |
+
+The [secondary figure](../../validation/model-development/entry-10/results/figures/secondary-trip-slopes.png) shows these slopes and ratios. Every variant uses the same 186 windows and six groups. The baseline reproduces entry 9 within floating-point rounding; [baseline-check.csv](../../validation/model-development/entry-10/results/secondary/baseline-check.csv) records the differences. These secondary measures do not enter the acceptance decision.
+
+#### Coverage and acceptance
+
+Every candidate has 467 circulation rows. There are 1,619 new scoreboard circulation calculations across the candidates, with additional circulation conditioning for the rerun transient histories. The baseline reuses the archived entry 8 values after verifying all 53 scoreboard reductions. GPDS55 and conventional FH each reuse the 358 smooth-option 16A rows and the corresponding run-in results because neither changes 16A geometry or friction. The manifests identify reuse separately from new calculation. Every candidate retains nine available run-in comparisons and the two originally unavailable events `23-off006` and `35r2-off008`. No new solver failure or circulation energy flag occurred.
+
+All 318 before/after reduction rows have identical successful comparison identifiers and counts, recorded by `paired` in [comparison.csv](../../validation/model-development/entry-10/results/comparison.csv). The saved model-only effects pass 660 of 660 checks across the variants in [prediction-checks.csv](../../validation/model-development/entry-10/results/prediction-checks.csv), using 1 psi, 0.1 °C and 0.1% of baseline power as the respective tolerances. The primary passes 31 of 31 declared acceptance checks in [decision.json](../../validation/model-development/entry-10/results/decision.json). Installed tool-loss uncertainty remains unquantified in [pressure-uncertainty.csv](../../validation/model-development/entry-10/results/pressure-uncertainty.csv); blank endpoints do not mean zero physical loss.
+
+#### Interpretation and recommendation
+
+The smooth pipe-friction option meets the declared acceptance rule. Keeping it as the working pipe-friction option is recommended because the cited Blasius range is exceeded and the comparison meets every declared condition.
+
+**Maintainer decision, 31 October 2026:** Smooth Colebrook met the declared acceptance rule and is retained as an available package option. It is not adopted into the working calculation or the package default. The working calculation remains entry 8 with Blasius pipe friction. The package default remains Blasius with zero roughness. Later entries continue comparing against entry 8. The recommendation above remains part of the record. The archived `decision.json` preserves the numerical checks and recommendation at scoring; this paragraph records the subsequent decision.
+
+The calculated pressure improvement is limited: the primary leaves a 16A assembly-bias RMS of 1,214.6 psi and a 16B RMS of 432.4 psi. The calculated return and run-in errors remain.
+
+**Calculated slope pattern:** In [secondary/slopes.csv](../../validation/model-development/entry-10/results/secondary/slopes.csv), `slope_ratio` is measured slope divided by modelled slope. The five regular-pipe groups under GPDS55 (`candidate=gpds`, `added_pipe=regular`) have ratios of 0.95–1.15. EOW 19's insulated-increment ratio is 0.97 under smooth Colebrook with the EIS joints (`candidate=smooth`, `assembly=19`), and 0.59 under GPDS55 (`candidate=gpds`, `assembly=19`). The GPDS55 scenario applies its 3.5-in joint bore to the insulated pipe as well as regular pipe. This agreement is with scored development data, so it cannot identify the installed connections or select a variant. Installed dimensions for the regular and insulated pipe would test whether either catalogue geometry represents the equipment used.
+
+**Inferred, unresolved:** The following explanations can differ between pipe types. Each needs an independent check; none is established by these slope ratios.
+
+| Possible explanation | Difference it could produce | Separating check |
+|---|---|---|
+| Connection geometry differs between regular and insulated pipe | Different joint bores or internal tapers change the pressure added per unit length | Obtain installed connection drawings or inspection measurements for each pipe type, including bore and taper, and compare them with the declared catalogue dimensions. |
+| Internal coating or roughness differs between pipe types | Different internal wall conditions change the friction gradient | Obtain the coating specification and internal inspection or roughness measurements separately for regular and insulated pipe. |
+| Inputs transferred to each trip differ from its circulating state | Mud properties, nozzle configuration or temperature records assigned from another period can change a trip's calculated pressure slope | Check the transferred records and timestamps against contemporaneous mud measurements, the installed bit/nozzle records and trip inlet/return temperature channels for each excursion. |
+
+The calculated zero-local-loss limit reduces pressure and increases the deficit on these development samples. Its earlier model-only changes identify the connection local-loss assumption as the largest varied 16A pressure assumption. That result does not establish the real taper or its loss. An abrupt installed restriction is an alternative to a gradual taper; a connection drawing or inspection record distinguishes them. No additional tool coefficient or roughness is estimated from a residual.

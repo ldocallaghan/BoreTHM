@@ -1,0 +1,278 @@
+{
+  "declaration_commit": "2d183acdfd6a8bf867a2d79220484fda157f6338",
+  "rule": "Recommend keeping smooth pipe friction only if its predicted pressure and heat effects are reproduced; G1 assembly-bias RMS worsens by at most 1 psi in either well; G2 absolute well-mean error worsens by at most 0.1 percent of measured mean power; each G3/G6 assembly or group absolute bias and pooled G5 absolute bias worsen by at most 2 C. Report G4 through the unchanged transient treatment. These are acceptance criteria, never parameter choices. Equipment scenarios require an independent installed-equipment source before adoption.",
+  "checks": [
+    {
+      "criterion": "paired frozen coverage",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "passed": true
+    },
+    {
+      "criterion": "G1 16A assembly-bias RMS",
+      "before": 1222.496368172238,
+      "after": 1214.6053632391654,
+      "deterioration": -7.891004933072509,
+      "tolerance": 1.0,
+      "units": "psi",
+      "passed": true
+    },
+    {
+      "criterion": "G2 16A absolute well-mean error",
+      "before": -285.8589507202015,
+      "after": -283.65828912711333,
+      "deterioration": -2.2006615930881708,
+      "tolerance": 0.9282655106835633,
+      "units": "kW",
+      "passed": true
+    },
+    {
+      "criterion": "G1 16B assembly-bias RMS",
+      "before": 478.80569681539833,
+      "after": 432.4211578824282,
+      "deterioration": -46.384538932970145,
+      "tolerance": 1.0,
+      "units": "psi",
+      "passed": true
+    },
+    {
+      "criterion": "G2 16B absolute well-mean error",
+      "before": -240.36893064880056,
+      "after": -225.25144566761162,
+      "deterioration": -15.117484981188937,
+      "tolerance": 0.5265191716119572,
+      "units": "kW",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 18 absolute bias",
+      "before": -3.058693578590448,
+      "after": -3.045347401534582,
+      "deterioration": -0.013346177055865827,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 23 absolute bias",
+      "before": 1.3979593163393553,
+      "after": 1.3824355136023052,
+      "deterioration": -0.015523802737050119,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 30 absolute bias",
+      "before": 5.277480397115686,
+      "after": 5.277069170412687,
+      "deterioration": -0.00041122670299920117,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 34 absolute bias",
+      "before": 0.8985006377184656,
+      "after": 0.9140089633352394,
+      "deterioration": 0.015508325616773844,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 35r1 absolute bias",
+      "before": 0.21471624961513386,
+      "after": 0.4509699719149808,
+      "deterioration": 0.23625372229984692,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 35r2 absolute bias",
+      "before": -3.4481459656006486,
+      "after": -3.203047080817658,
+      "deterioration": -0.24509888478299047,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 38 absolute bias",
+      "before": -3.272336128133257,
+      "after": -2.9802338461260476,
+      "deterioration": -0.29210228200720945,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 39 absolute bias",
+      "before": -4.773958692380189,
+      "after": -4.616517338105743,
+      "deterioration": -0.15744135427444572,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G3 16A 42 absolute bias",
+      "before": -15.503600673088622,
+      "after": -15.402637703394625,
+      "deterioration": -0.1009629696939971,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G5 16A ALL absolute bias",
+      "before": -4.639672072074168,
+      "after": -4.633731051072184,
+      "deterioration": -0.005941021001984126,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B independent regular pipe absolute bias",
+      "before": 2.6712273078608058,
+      "after": 3.1425717162723874,
+      "deterioration": 0.47134440841158165,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B trial absolute bias",
+      "before": 9.093380203955562,
+      "after": 9.537054884640437,
+      "deterioration": 0.44367468068487526,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 3 absolute bias",
+      "before": -2.54010269440838,
+      "after": -2.4203814323340374,
+      "deterioration": -0.11972126207434286,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 4 absolute bias",
+      "before": -22.15832056829247,
+      "after": -22.07053117399045,
+      "deterioration": -0.08778939430202115,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 11 absolute bias",
+      "before": -5.6060095310329,
+      "after": -5.266813704697521,
+      "deterioration": -0.3391958263353789,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 12 absolute bias",
+      "before": -3.2430359732422467,
+      "after": -2.925311531629277,
+      "deterioration": -0.31772444161296987,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 13 absolute bias",
+      "before": -2.2612590166286064,
+      "after": -1.9277508559651946,
+      "deterioration": -0.3335081606634118,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 15 absolute bias",
+      "before": 4.41616164282113,
+      "after": 4.802064689718435,
+      "deterioration": 0.3859030468973046,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 16 absolute bias",
+      "before": 10.412554175741656,
+      "after": 11.038148592211162,
+      "deterioration": 0.6255944164695055,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 17 absolute bias",
+      "before": 14.829351496856818,
+      "after": 15.351932377803985,
+      "deterioration": 0.5225808809471673,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 18 absolute bias",
+      "before": 4.201255159030863,
+      "after": 4.478840281843189,
+      "deterioration": 0.27758512281232584,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 19 absolute bias",
+      "before": 5.696919115189021,
+      "after": 6.014667857579282,
+      "deterioration": 0.3177487423902603,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 20 absolute bias",
+      "before": 9.328131407255086,
+      "after": 9.936848647758104,
+      "deterioration": 0.6087172405030188,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 27 absolute bias",
+      "before": 5.539108393698314,
+      "after": 6.240658860417724,
+      "deterioration": 0.7015504667194108,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    },
+    {
+      "criterion": "G6 16B 38 absolute bias",
+      "before": 9.81040120474513,
+      "after": 10.517490899559041,
+      "deterioration": 0.7070896948139112,
+      "tolerance": 2.0,
+      "units": "C",
+      "passed": true
+    }
+  ],
+  "recommendation": "recommend keep smooth pipe friction",
+  "adoption": "pending user decision; package defaults unchanged",
+  "secondary_slopes_affect_decision": false
+}

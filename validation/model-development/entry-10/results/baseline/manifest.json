@@ -1,0 +1,194 @@
+{
+  "declaration_commit": "2d183acdfd6a8bf867a2d79220484fda157f6338",
+  "variant": "baseline",
+  "complete": true,
+  "python": "3.14.4",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "settings": {
+    "date": "2026-10-31",
+    "baseline": "entry 8, film 1.0, no-yield Herschel-Bulkley annulus with Erge transition band",
+    "primary": "smooth",
+    "package_defaults_changed": false,
+    "fixed": {
+      "pv_reference_C": 26.7,
+      "film_multiplier": 1.0,
+      "exposure": "cumulative",
+      "surface_case": 5,
+      "16A_joint": "NC50 6.625 by 3.25 in",
+      "16B_joint": "EIS 7 by 4 in",
+      "joint_restriction_in": 29,
+      "16A_joint_pitch_ft": 31.5,
+      "16B_joint_pitch_ft": 31.706666666666667,
+      "new_installed_tool_losses": false,
+      "coating_thickness_selected": false
+    },
+    "variants": {
+      "baseline": {
+        "friction": "blasius",
+        "roughness_m": 0.0,
+        "joint": "retained NC50/EIS",
+        "purpose": "reproduce entry 8"
+      },
+      "smooth": {
+        "friction": "colebrook",
+        "roughness_m": 0.0,
+        "joint": "retained NC50/EIS",
+        "purpose": "isolate the turbulent pipe-friction relation without an unmeasured roughness"
+      },
+      "steel": {
+        "friction": "colebrook",
+        "roughness_m": 4.572e-05,
+        "joint": "retained NC50/EIS",
+        "purpose": "illustrative new-steel internal-wall scenario, transferred from EPA water-pipe table; no installed roughness identified"
+      },
+      "gpds": {
+        "friction": "colebrook",
+        "roughness_m": 0.0,
+        "16B_dp_joint_OD_in": 7.25,
+        "16B_dp_joint_ID_in": 3.5,
+        "purpose": "NOV GPDS55 catalogue geometry uncertainty, also transferred to insulated pipe; HWDP retained"
+      },
+      "fh": {
+        "friction": "colebrook",
+        "roughness_m": 0.0,
+        "16B_dp_joint_OD_in": 7.5,
+        "16B_dp_joint_ID_in": 3.0,
+        "purpose": "conventional FH catalogue geometry uncertainty, also transferred to insulated pipe; HWDP retained"
+      },
+      "gradual": {
+        "friction": "colebrook",
+        "roughness_m": 0.0,
+        "joint": "retained NC50/EIS, zero connection-local loss",
+        "purpose": "idealised zero-local-loss connection limit; other serial component transitions unchanged; not a measured taper"
+      }
+    },
+    "choice_rule": "The primary changes only the turbulent friction relation. No joint, roughness or tool coefficient is chosen from pressure or temperature agreement. Catalogue scenarios stay separate until installed equipment records identify a geometry.",
+    "tool_uncertainty": {
+      "installed_band_available": false,
+      "reason": "No finite published range for the installed HALO, filter, float or sensor loss has been established. Zero additional tool loss is retained and flagged; zero does not imply zero real loss. Different motor examples do not bound these tools.",
+      "motor_analogues": [
+        {
+          "source": "GeoGuidance, entry-9 references geoguidance",
+          "no_load_psi": 100,
+          "rated_gpm": [
+            300,
+            600
+          ]
+        },
+        {
+          "source": "Sniper, entry-9 references sniper-analogue",
+          "no_load_psi": 110,
+          "rated_gpm": [
+            300,
+            600
+          ]
+        }
+      ],
+      "analogue_use": "Context only; reference flow and fluid test conditions are unspecified. They are not installed-tool uncertainty endpoints and are not added to the calculation."
+    },
+    "comparison": "Score every gap before and after on the frozen samples, with variants separate. G4 is reported even though no transient model changes. The model-only preparation calculates no target residual.",
+    "decision_rule": "Recommend keeping smooth pipe friction only if its predicted pressure and heat effects are reproduced; G1 assembly-bias RMS worsens by at most 1 psi in either well; G2 absolute well-mean error worsens by at most 0.1 percent of measured mean power; each G3/G6 assembly or group absolute bias and pooled G5 absolute bias worsen by at most 2 C. Report G4 through the unchanged transient treatment. These are acceptance criteria, never parameter choices. Equipment scenarios require an independent installed-equipment source before adoption.",
+    "secondary_measures": {
+      "trip_slopes": {
+        "group_source": "validation/model-development/entry-9/results/slopes.csv, role=primary",
+        "groups": [
+          {
+            "assembly": "17",
+            "excursion": "27",
+            "flow_centre_gpm": "500"
+          },
+          {
+            "assembly": "19",
+            "excursion": "29",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "20",
+            "excursion": "31",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "27",
+            "excursion": "40",
+            "flow_centre_gpm": "400"
+          },
+          {
+            "assembly": "27",
+            "excursion": "40",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "38",
+            "excursion": "52",
+            "flow_centre_gpm": "600"
+          }
+        ],
+        "method_source": "validation/model-development/entry-9/analyse.py, slopes; same windows, flow and depth grouping, temperature treatment, mass-rate convention and reductions",
+        "variants": [
+          "baseline",
+          "smooth",
+          "steel",
+          "gpds",
+          "fh",
+          "gradual"
+        ],
+        "outputs": [
+          "modelled pressure slope in psi per 1000 ft",
+          "measured/modelled slope ratio"
+        ],
+        "eow19": "Report separately: the added upper length is insulated pipe. Its connection geometry remains the same declared catalogue transfer as regular pipe.",
+        "predictions": {
+          "baseline": "Reproduce entry 9 modelled slopes and ratios.",
+          "smooth": "Raise regular and insulated per-length slopes through the pipe-friction relation; it supplies no difference in connection identity.",
+          "steel": "Raise the slopes above smooth through the uniform internal roughness example on both regular and insulated pipe.",
+          "gpds": "Raise 16B slopes above smooth through smaller catalogue joint bores, including insulated-pipe connections.",
+          "fh": "Raise 16B slopes above smooth through smaller conventional FH joint bores, including insulated-pipe connections; expect a larger increment than GPDS55.",
+          "gradual": "Reduce the repeated-connection local contribution relative to smooth in regular and insulated pipe. The net sign relative to baseline includes the opposing smooth-friction change."
+        },
+        "selection": "Secondary reporting only. It does not enter the unchanged acceptance rule and cannot select any variant or equipment dimension."
+      }
+    }
+  },
+  "circulation_rows": 467,
+  "new_circulation_calculations": 0,
+  "reused_16A_rows": 0,
+  "before_source": "validation/model-development/entry-8/results/film-1.00",
+  "baseline_reuse": true,
+  "run_in_basis": "entry 8 archive",
+  "circulation_failures": [],
+  "energy_flags": [],
+  "run_in_failures": [],
+  "run_in_originally_unavailable": [
+    "23-off006",
+    "35r2-off008"
+  ],
+  "installed_tool_uncertainty": "unquantified; no installed-tool loss band available; no additional tool source",
+  "source_sha256": {
+    "validation/model-development/entry-10/score.py": "5203d9859d17f668b4e9332633489bcb8749e91601b6f41e354e4228eb4521a7",
+    "validation/model-development/entry-10/predict.py": "ecceab37fd52b2fc872c508497be987c7eb3b61bca24f2ce9b5d3ba2585e46ce",
+    "validation/model-development/entry-10/options.json": "7d52cbc3efe40a7ed8554a8d3556f998ac0dbe57b50ab85dbd8d00289257fdf7",
+    "validation/model-development/entry-8/score.py": "c2c4bdc2e648a2d15c539f686086ad09f57fbeb8e75af8d5cdd51c79a3c79b38",
+    "validation/forge16b/s2/plan.json": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/scoreboard/transient-inputs.json": "ea1d6f211bfdd86fee8c69062aa714cf515f839215d1db37a21d348cae02e09b",
+    "validation/model-development/entry-4/rotary.py": "91e74399df2822a58541d1bd22e4c1a5f04e8b35e437012467dfdb3100b7e631",
+    "validation/model-development/entry-4/rotary_inputs.csv": "7c99cba192f10ff1132800f136ff882787886bcdabdf8084c555665820b21422",
+    "validation/model-development/entry-6/hypotheses.py": "096933f79a9cb53996401f0c06bab32f05abbab7ede7f4859774c17d7012c5dc"
+  },
+  "model_sha256": {
+    "model1_coupled.py": "21dffcd4eab3df1236c973b997a94bc8c6a82cb3de8a689c9d6db926aceb30da",
+    "hydraulic_losses.py": "913ba82b760b17100549f85ac2f4ac71d3d9f72272389980a12729260bc1ed01",
+    "fluids.py": "10de76f50892d73295dd6cbc3fe8038bc097bd76f078c03f311310d9c18f8128",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a",
+    "rotary_heat.py": "3715bed3cf60584fbe96192a1deff1a9429d8fbc62bab07e925988ae1f870d8d",
+    "studies/pressure_comparison.py": "eeb1f712dd9a409d419d7f8d12be3b43da4ef07917edb9bf8f4e98b566b70bb2"
+  },
+  "results_sha256": {
+    "circulation.csv": "43160a22c465afc8f518994c18ce465b5fb3f933995d29d4eccd0118d3d45e02",
+    "run-in.csv": "dcf8b9c2ee303bb70dbbb6234dbb9e2ce1cb59acfaca986092715232f1db365b",
+    "scoreboard.csv": "823e4f7755ea503d5651985bc35b607125f100adc7f45719761eb1f261139930"
+  },
+  "runtime_s": 0.04314719999092631
+}

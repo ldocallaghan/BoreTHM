@@ -1,0 +1,29 @@
+{
+  "declaration_commit": "2d183acdfd6a8bf867a2d79220484fda157f6338",
+  "comparison_script_sha256": "51034ab965f453bf5455e46e0f2e9c1ed371360c478b4409bb35a408924438f9",
+  "variants": [
+    "baseline",
+    "smooth",
+    "steel",
+    "gradual",
+    "gpds",
+    "fh"
+  ],
+  "source_manifests": {
+    "baseline": "258a03a610a7a75edcf64298ccdec702175a22f873a1ddd6e6b602999e3d3022",
+    "smooth": "42d338bc88ff043c3960e1d48ef401c699b3ee8adcfbf29ed424dffab154f724",
+    "steel": "0ecb605aee711be4ded67e597069d455c6b8b3c1277aed0175113c23cae74362",
+    "gradual": "e404c43c8e3cd648e99813e4c8de2a71f6a8987aef884aaad175adb1ecebf900",
+    "gpds": "191d83f34fcf04af55798e64f94c837b62b7d5f59b9c7ee3a52a0a3e7bac8c91",
+    "fh": "5f9ccca405b985fbee667c7c798113aec94ce7202961f68043bb521fd26c0820"
+  },
+  "results_sha256": {
+    "assembly-changes.csv": "de01bc8e66d7fa7f580eea61c68c6040cb80d5a9a9404477a209b594dbfc8dd8",
+    "comparison.csv": "838c5528d78677a297e1bdc76dba80a6ef4a333875f5f4194d301b121c33b12a",
+    "decision.json": "b812dbfc6146a74005d8756daa0011ed3f32b84eb293c414ad567191f9351870",
+    "prediction-checks.csv": "fe87d5371d98d182895445a5c9567498cf338786ea8ac6a1ad6bac9e4aca3389",
+    "pressure-uncertainty.csv": "af38d7b09c0f916003eccc64c66968efac7fa2132e2d0fdc86b702c027fc9705",
+    "sample-changes.csv": "ab7d82b4b8cc3b0613df5da2cecef99d85e2447ea255155ac4ae0efc3bd071bc",
+    "summary.csv": "6fc99e02d74c1f4bd671c110d0b66eec21138314b86d0b14e7f02b5f9bbc604a"
+  }
+}
