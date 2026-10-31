@@ -62,7 +62,7 @@ This table includes work performed before this log existed. Earlier development 
 | Bingham annulus candidate, Wilson–Thomas criterion on the report YP (`bec37fe`) | Shared laminar-turbulent criterion for annulus pressure and heat transfer, Gnielinski on the wall apparent viscosity | Never scored. Model-only checks found the 16A annulus laminar on the YP and turbulent with a low-shear yield stress | Removed before scoring, 30 October 2026; replaced by entry 6 |
 | Entry 6, Herschel–Bulkley annulus (A1), hypotheses no-yield, gel and gel-rising | Founargiotakis slot model for annulus pressure and regime; Gnielinski on the wall viscosity; all three cool 16A, by about 4–10, 7–34 and 14–34 °C at the bit | Every expected change met. RMS of the nine 16A assembly bit biases 10.0, 19.7 and 24.6 °C against 5.6 °C for the working calculation; 16A pressure and 16B water-like runs nearly unchanged | Not adopted under its declared rule, 30 October 2026; the downhole rheology is unmeasured |
 | Entry 7, plastic-viscosity heat transfer and the Erge band (A2), the same three hypotheses | Gnielinski on PV (Chhabra and Richardson eq. 6.55 class) and the transition band of Erge et al. (2015); 16A bit about −1 to −2, −1 to −19 and −4 to −26 °C from the working calculation | Every expected change met. RMS of the nine 16A assembly bit biases 6.0, 9.9 and 16.5 °C against 5.6 °C for the working calculation; 16B within 0.5 °C except EOW 3 and 4 under the gel | Not adopted under its declared rule, 30 October 2026; no-yield matches the working calculation within the 2 °C threshold |
-| Entry 8, one regime criterion for annulus pressure and heat transfer (A3) | Entry 7's treatment with no yield stress as the working calculation; the score expected to equal entry 7 no-yield within 0.01 °C and 1 psi per sample, with a film band of 0.85–1.05 | Declared 30 October 2026; score pending | Pending |
+| Entry 8, one regime criterion for annulus pressure and heat transfer (A3) | Entry 7's treatment with no yield stress as the working calculation; the score expected to equal entry 7 no-yield within 0.01 °C and 1 psi per sample, with a film band of 0.85–1.05 | The score equals entry 7 no-yield within 0.004 °C and 0.01 psi at every sample. RMS of the nine 16A assembly bit biases 6.02 °C, 8.12 °C at film 0.85 and 5.56 °C at 1.05 | Kept under its declared rule, 31 October 2026; the package default is unchanged until the stage 2 score |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -1427,3 +1427,71 @@ The expected score at the ends of the band follows from the window changes, assu
 | 16A BHA 42 | about −20.0 °C | −15.51 °C | about −14.2 °C |
 
 The return temperatures and standpipe pressures at the ends of the band were not predicted.
+
+## 31 October 2026: entry 8 score
+
+**Sources.** The [entry 8 archive](../../validation/model-development/entry-8/results/README.md): `summary.csv`, `comparison.csv`, `entry7-reproduction.csv` and `regime-summary.csv`. The declaration is commit `f3c39f8`, pushed before scoring.
+
+**Coverage.** At every film multiplier, all 467 circulation cases and all nine originally available run-in events completed, with the sample counts of the reference calculations. Every comparison is paired, and G4 equals the working calculation.
+
+**Run times.** The three scoring runs ran side by side on two processors and took 1,069 s (film 1.0), 1,106 s (0.85) and 1,127 s (1.05). Entry 7's no-yield run took 2,033 s alone.
+
+### Decision check
+
+At film multiplier 1.0, all 467 circulation samples are within the declared tolerance of entry 7's no-yield score. The largest differences are 0.0034 °C in bit temperature, 0.0002 °C in return temperature and 0.007 psi in standpipe pressure.
+
+### Declared summary measures
+
+| Calculation | RMS of the nine 16A assembly bit biases | Mean of the nine | RMS of the 16A standpipe biases | 16A return bias (G5) |
+|---|---|---|---|---|
+| Legacy | 8.59 °C | −5.81 °C | 1,724 psi | −5.85 °C |
+| Working calculation (entries 1–5 with D5) | 5.62 °C | −0.75 °C | 1,190 psi | −4.70 °C |
+| Entry 7 no-yield | 6.02 °C | −2.47 °C | 1,222 psi | −4.64 °C |
+| Entry 8, film 1.0 | 6.02 °C | −2.47 °C | 1,222 psi | −4.64 °C |
+| Entry 8, film 0.85 | 8.12 °C | −5.39 °C | 1,218 psi | −4.49 °C |
+| Entry 8, film 1.05 | 5.56 °C | −1.61 °C | 1,224 psi | −4.68 °C |
+
+The declaration expected about 8.2 °C and 5.6 °C for the RMS at the ends of the band, and about −5.4 °C and −1.6 °C for the mean.
+
+### 16A bit temperatures (G3)
+
+Biases in °C, model minus measured.
+
+| BHA | Working calculation | Entry 8, film 1.0 | Film 0.85 | Film 1.05 |
+|---|---|---|---|---|
+| 18 | −1.03 | −3.06 | −4.61 | −2.59 |
+| 23 | +2.77 | +1.40 | −0.67 | +2.01 |
+| 30 | +7.58 | +5.28 | +2.79 | +6.02 |
+| 34 | +3.56 | +0.90 | −1.83 | +1.71 |
+| 35r1 | +1.22 | +0.21 | −2.50 | +1.02 |
+| 35r2 | −2.36 | −3.45 | −6.54 | −2.54 |
+| 38 | −2.09 | −3.27 | −6.70 | −2.26 |
+| 39 | −2.78 | −4.77 | −8.58 | −3.65 |
+| 42 | −13.63 | −15.50 | −19.84 | −14.23 |
+
+### Pressure, power and 16B (G1, G2, G6)
+
+- **16A standpipe.** The biases are −583 to −1,891 psi at film 1.0. Across the band they change by under 13 psi.
+- **16B motorless runs.** They are within 3 psi of the working calculation at every film multiplier.
+- **G2.** The modelled in-hole power is about 11 kW lower than the working calculation on 16A and 1 kW lower on 16B, at every film multiplier.
+- **16B temperatures.**
+  - The regular-pipe bias is +2.67 °C at film 1.0, +0.31 °C at 0.85 and +3.35 °C at 1.05. The trial bias is +9.09, +7.12 and +9.65 °C.
+  - EOW 3 and 4 are −2.54 and −22.16 °C at film 1.0, and change by under 0.7 °C across the band.
+
+### Regime
+
+- Of the 467 circulation samples, 8 have any laminar drill-pipe annulus at the solved state, all on 16A BHA 18, 34 and 42. By assembly, the mean laminar share is 10% at BHA 18, 9% at BHA 34 and 3% at BHA 42.
+- The mean transitional share is 30% at BHA 18 and 8% at BHA 34; elsewhere it is 1% or less.
+- With a yield stress equal to the 10-s gel, the mean transitional share at the same states would be 84–100% at BHA 18, 23, 30, 34, 35r1 and 35r2 and at EOW 3 and 4, 45% at BHA 39 and 13% at BHA 42. BHA 38 and the water-like 16B runs would be unchanged. These shares are close to entry 7's gel predictions at the windows.
+
+### Interpretation and decision
+
+The score reproduced entry 7's no-yield score within the declared tolerance at every sample. Under the rule declared before scoring, entry 8 becomes the working calculation: entries 1–5 with D5 and the entry 8 annulus.
+
+**What the adoption changes.** The temperature and pressure scores are those of entry 7 no-yield. The RMS of the nine 16A bit biases is 0.4 °C above the previous working calculation's, under the 2 °C threshold, and the 16A standpipe RMS is 32 psi higher. The working calculation now decides the annulus flow regime once, for both the pressure loss and the heat transfer.
+
+**The film band.** Over the declared band of 0.85–1.05, the RMS of the nine 16A bit biases is 5.6–8.1 °C and their mean −5.4 to −1.6 °C. The 16B regular-pipe bias spans +0.3 to +3.4 °C. The 16A standpipe and return biases change by under 13 psi and 0.2 °C across it, so neither the pressure shortfall nor the return bias depends on the annulus film coefficient.
+
+**What the score cannot test.** The zero yield stress was chosen after entries 6 and 7, so these 16A and 16B scores do not test it. The first test is the 56-32 temperatures at stage 2. The regime flag shows where the choice matters on these wells: on six 16A assemblies and EOW 3 and 4, a yield stress at the 10-s gel would place most of the drill-pipe annulus in the transition band.
+
+The package default stays `annulus_model='v1.6.0'` until the stage 2 score. No 56-32, 58-32 or 78B-32 target was read.
