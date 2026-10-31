@@ -1,0 +1,11 @@
+archive,member,channel,data_rows,nonnull_rows,member_crc32
+1283.zip,16A(78)-32_time_data_10s_intervals_standard.csv,Bit Depth,608676,0,85f10e54
+1283.zip,16A(78)-32_time_data_10s_intervals_standard.csv,Measured while Drilling Tool Depth,608676,0,85f10e54
+1283.zip,16A(78)-32_time_data_10s_intervals_standard.csv,Depth Hole Total Vertical Depth,608676,597426,85f10e54
+1283.zip,16A(78)-32_time_data_10s_intervals_standard.csv,Pump Pressure,608676,596866,85f10e54
+1283.zip,16A(78)-32_time_data_10s_intervals_standard.csv,Mud Temperature,608676,597504,85f10e54
+1283.zip,16A(78)-32_time_data_1s_intervals_standard.csv,Bit Depth,5827030,0,2e782c0e
+1283.zip,16A(78)-32_time_data_1s_intervals_standard.csv,Measured while Drilling Tool Depth,5827030,0,2e782c0e
+1283.zip,16A(78)-32_time_data_1s_intervals_standard.csv,Depth Hole Total Vertical Depth,5827030,5794422,2e782c0e
+1283.zip,16A(78)-32_time_data_1s_intervals_standard.csv,Pump Pressure,5827030,5788828,2e782c0e
+1283.zip,16A(78)-32_time_data_1s_intervals_standard.csv,Mud Temperature,5827030,5794814,2e782c0e

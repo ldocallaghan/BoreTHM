@@ -1,0 +1,15 @@
+assembly,source,rows,rig_matched_rows,minimum_bit_ft,maximum_bit_ft,shallow_coverage,inlet_channel,return_channel
+10,sanvean_BHA10_10s.csv,4268,4268,3300.8977,5472.668,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+14,sanvean_BHA14_10s.csv,15745,15745,1304.05855,5847.2495,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+18,sanvean_BHA18_10s.csv,8085,7665,3201.3755,6360.453,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+21,sanvean_BHA21_10s.csv,5832,5832,3965.9739,6526.268,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+22,sanvean_BHA22_10s.csv,11419,11419,1773.1078999999997,6944.94028,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+23,sanvean_BHA23_10s.csv,10311,10299,2388.6511100000002,7394.729470000001,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+30,sanvean_BHA30_10s.csv,9308,9145,5307.08249,8024.3887,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+34,sanvean_BHA34_10s.csv,2983,2941,6029.548022222222,8241.282,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+35r1,sanvean_BHA35r1_10s.csv,2217,2217,7686.969319999999,8391.413,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+35r2,sanvean_BHA35r2_10s.csv,2938,2938,3390.2678,8540.7327,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+38,sanvean_BHA38_10s.csv,6373,6373,4693.1606,9064.383,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+39,sanvean_BHA39_10s.csv,10124,10124,2768.817075,9747.942,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+42,sanvean_BHA42_10s.csv,8689,8688,3036.941,10960.597,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive
+9,sanvean_BHA9_10s.csv,8299,8263,1301.9859000000001,5344.755,unavailable,unavailable,rig MUD TEMP; channel identity inferred in original archive

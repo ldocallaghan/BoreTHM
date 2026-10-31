@@ -1,0 +1,95 @@
+[
+  {
+    "id": "16a-reports",
+    "reference": "University of Utah, FORGE 16A daily drilling reports, GDR 1283",
+    "url": "https://gdr.openei.org/submissions/1283",
+    "locator": "Individual PDF member, page and SHA256 in tool-source-inventory.csv; 18 December 2020 report page 1, PUMPS table",
+    "finding": "Recorded components and pump table; the 18 December table gives 6-inch liners, 12-inch stroke and 95 percent efficiency",
+    "applicability": "Recorded inputs; the table does not establish the entire earlier pump configuration or pressure-tap location"
+  },
+  {
+    "id": "16b-reports",
+    "reference": "University of Utah, FORGE 16B daily drilling reports, GDR 1516",
+    "url": "https://doi.org/10.15121/1998591",
+    "locator": "20230504-DailyReport18DetailRpt_230504075441.pdf page 1; 20230505-DailyReport19DetailRpt_230505063805.pdf page 1; 20230508-DailyReport22DetailRpt_230508063413.pdf page 2",
+    "finding": "The reports dated 4 and 5 May record changing 6-inch liners to 5.5 inches; the 8 May pipe inventory gives 5.5-inch, 24.7-lb/ft S135 pipe with 5.5FH connections",
+    "applicability": "Recorded inputs; 12-inch pump stroke and 95 percent efficiency for 16B remain assumptions requiring an equipment record"
+  },
+  {
+    "id": "nc50-supplier",
+    "reference": "Patterson Services, 5-inch 19.50-lb/ft S135 R2 NC50 drill pipe data and performance sheet",
+    "url": "https://pattersonservices.com/wp-content/uploads/2023/06/5.000-BN-19.50-S-135-R2-NC50-4.5-IF-DP.pdf",
+    "locator": "PDF page 1, Tube Body Data and Connection Data",
+    "sha256": "811cc40bde918052b4e813461f78de6388d053782c71a913f2c17a08801c02bd",
+    "finding": "Body ID 4.276 inches; connection OD 6.625 inches and ID 3.250 inches",
+    "applicability": "Catalogue scenario; supplier warns that connection ID refers to pin ID when pin and box differ; installed machining is unverified"
+  },
+  {
+    "id": "nov-connections",
+    "reference": "NOV, GPDS and EIS Connections",
+    "url": "https://www.nov.com/products/gpds-and-eis-connections",
+    "locator": "Standard GPDS Configurations and Standard EIS Configurations, S135 5.500-inch 24.70-lb/ft rows",
+    "sha256": "1be72b5fe4cac76440428f63457be81683898f2a33c299a0781d3d1ac8d8b01f",
+    "finding": "GPDS55 joint OD/ID 7.250/3.500 inches; EIS joint OD/ID 7.000/4.000 inches",
+    "applicability": "Declared compatible catalogue scenarios; no source identifies either as the installed machining"
+  },
+  {
+    "id": "halo",
+    "reference": "Scientific Drilling International (2018), HALO High-Performance Rotary Steerable System, SCI-1000_09_18",
+    "url": "https://scientificdrilling.com/assets/uploads/sites/3/2018/09/SC_TDS_HALO_9.24v3.pdf",
+    "locator": "PDF pages 1 and 2; Operating Specifications and Limits and tool diagram",
+    "sha256": "283dfb27fb22ca771bfcdcf38650704f0da13be071121bb6af41b571d3860f99",
+    "finding": "Integrated steering, MWD and pulser; flow range 300 to 700 gpm; no operating pressure-loss curve is given",
+    "applicability": "Do not add a separate generic MWD pulser to HALO without evidence of a second installed tool; hydrostatic rating is not operating loss"
+  },
+  {
+    "id": "geoguidance",
+    "reference": "GeoGuidance, Proposed Motor and Tool Specification Sheets UU139143280, GDR 1295 input archive",
+    "url": "https://gdr.openei.org/submissions/1295",
+    "locator": "56-32 drill bit BHA data.zip; GeoGuidance Proposed Motor and Tool Specification Sheets UU139143280.pdf, page 2",
+    "finding": "The 6.75-inch 7/8-lobe 5.7-stage sheet lists a 300-to-600-gpm range and 100 psi off-bottom pressure; its application to a different reported motor configuration needs an explicit transfer assumption",
+    "applicability": "Input sheet only; no 56-32 temperature channel is accessed; no newly selected motor coefficient"
+  },
+  {
+    "id": "driltech-example",
+    "reference": "DrilTech, Measurement-While-Drilling, Operating Parameters",
+    "url": "https://www.driltech.net/measurement-while-drilling-mwd.php",
+    "locator": "Measurement-While-Drilling HTML page, Operating Parameters table, Pressure Drop row (unpaginated)",
+    "finding": "The source states a variable pressure drop of approximately 28 psi per 100 gpm; no density reference or quadratic scaling is supplied",
+    "applicability": "Illustrative equipment only; no installed 16A or 16B tool is identified as this product; this cannot define a universal uncertainty bound"
+  },
+  {
+    "id": "drillmax",
+    "reference": "Drillmax, Drill Pipe Float Valves specifications guide",
+    "url": "https://drillmax.com/wp-content/uploads/2019/01/Drillmax-DP-Float-Valve-brochure-1.pdf",
+    "sha256": "f6e964b5db0ef150f0d46ccd6974045721b2f9b565948543fdbb4cb01ae41401",
+    "locator": "Printed page 11, Float Valve Dimensional Data",
+    "finding": "Catalogue dimensions for multiple valve designs; no installed valve identification or usable loss curve established",
+    "applicability": "No curve is assigned from a nominal sub bore or a hydrostatic pressure rating"
+  },
+  {
+    "id": "epa-roughness",
+    "reference": "Rossman, Woo, Tryby, Shang, Janke and Haxton (2020), EPANET 2.2 User Manual, EPA/600/R-20/133",
+    "url": "https://19january2021snapshot.epa.gov/sites/static/files/2020-05/documents/epanet_userss_manual_2.2.0.pdf",
+    "locator": "Printed page 18, Table 3.2 (PDF page 32); printed page 111, Darcy-Weisbach friction treatment (PDF page 125)",
+    "sha256": "c3ce1c870298b812230e271049bc5b8f007b33e5ed071383cce27e5395eb44f0",
+    "finding": "New steel roughness 0.15 millifeet, equivalent to 45.72 micrometres",
+    "applicability": "A new water-pipe reference scenario; no as-built drill-pipe roughness or coating measurement has been found"
+  },
+  {
+    "id": "colebrook",
+    "reference": "Colebrook, C. F. (1939), Turbulent flow in pipes, with particular reference to the transition region between the smooth and rough pipe laws, Journal of the Institution of Civil Engineers 11(4), 133-156",
+    "url": "https://doi.org/10.1680/ijoti.1939.13150",
+    "locator": "Pages 133-156; author, title and publication details verified against the DOI registration",
+    "finding": "Smooth-to-rough turbulent pipe-friction relation",
+    "applicability": "Newtonian circular-pipe relation; its use for a yielded mud is an approximation that must be declared separately; original full text was not retrieved"
+  },
+  {
+    "id": "api-surface",
+    "reference": "API RP 13D (2009), sixth edition",
+    "url": "",
+    "locator": "Section 7.3, equation 60 and table 4; section 7.6.2, equation 103",
+    "finding": "Surface equipment scenarios and vendor-coefficient tool-loss method already documented in the motorless pressure-accounting protocol",
+    "applicability": "Inherited source verification from validation/forge16b/comparison_protocol_s2b.md; no fresh copy was available for reinspection; no surface layout or tap location has been identified"
+  }
+]

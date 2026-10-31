@@ -1,0 +1,5 @@
+case,Re,diameter_m,roughness_m,darcy_blasius,darcy_colebrook,friction_change_percent,basis
+mud-reference,40000,0.1086104,0.0,0.022372858556742363,0.021969985874361414,-1.8007206426446487,illustrative circular pipe; no well pressure or temperature target used
+mud-reference,40000,0.1086104,4.572e-05,0.022372858556742363,0.02324406966805375,3.89405363244848,illustrative circular pipe; no well pressure or temperature target used
+water-reference,500000,0.11861799999999999,0.0,0.01189854818652535,0.013157946657250194,10.584471743796975,illustrative circular pipe; no well pressure or temperature target used
+water-reference,500000,0.11861799999999999,4.572e-05,0.01189854818652535,0.01690721493645964,42.09477216393856,illustrative circular pipe; no well pressure or temperature target used

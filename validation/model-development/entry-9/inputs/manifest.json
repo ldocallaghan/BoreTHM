@@ -1,0 +1,78 @@
+{
+  "baseline": "a0819322610b772a259a2c48a8050495e6e43fd6",
+  "sources": {
+    "16A": {
+      "source_rows": 608676
+    },
+    "16B": {
+      "source_rows": 746904,
+      "invalid_depth_rows": 2
+    }
+  },
+  "excluded_bins": {
+    "16A": {
+      "incomplete two-minute bin": 328,
+      "outside circulation flow range": 1605,
+      "less than 30 seconds after flow start or step": 2360,
+      "less than ten feet off bottom": 3934,
+      "flow range above five percent": 34,
+      "bit moves more than five feet": 135,
+      "missing flow or depth": 52
+    },
+    "16B": {
+      "less than 30 seconds after flow start or step": 1432,
+      "less than ten feet off bottom": 8566,
+      "bit moves more than five feet": 2918,
+      "outside circulation flow range": 42481,
+      "flow range above five percent": 185,
+      "incomplete two-minute bin": 137,
+      "missing flow or depth": 24
+    }
+  },
+  "source_archives": {
+    "1283.zip": "077cf8862a6981b7afad241ab61825c1f3cd18afa6b75f9257a2fcba669ad9ec",
+    "1516.zip": "d73fc6432a4cfddb7d071263b7652784075d52be94dbe25b5821d4e759810294"
+  },
+  "build_sha256": "fb228e62bdd38409f461be89a2617e4fe44eccbdd21a9ad15e877f72799b4cbd",
+  "input_files_sha256": {
+    "validation/model-development/entry-9/16b-assembly-intervals.csv": "3941ab940c7b786a529fc6ce55154157ef1a012d240ed57bf4ca142288b9b296",
+    "validation/forge16b/run_definitions.csv": "8b11cf73b2c57157c11ad379126645944c8bed63eccaa739e8db00e988493aa9",
+    "validation/forge16b/source_manifest.json": "e67b249148258b47a1bb24866d3f4fb15b1bc04dc8981fe00729dd96f65176c9",
+    "validation/forge16a/bha_components.csv": "561c9613a125e445857b767f03fca5d0479dd36841b2d408af413c3896a7380e",
+    "validation/forge16a/run_inputs.csv": "b122e66f2f6a9f0a401e305c58d87309d86a7fecf8d8a1617ae9f97c5ab69e9f",
+    "validation/forge16a/sanvean_BHA10_10s.csv": "15dfcb505fedae7638f5b812c6270305c7e71a47c15c8a5b1c899d47e12917b9",
+    "validation/forge16a/sanvean_BHA14_10s.csv": "c29d1e5955dbd8c3704d3cd4dbfaf989ab6b1e8227c928b9745b8f79ad175d5e",
+    "validation/forge16a/sanvean_BHA18_10s.csv": "3e50b17081b95045856e1774971bae08d3a45155d6549521baaf5b5fc26fe93e",
+    "validation/forge16a/sanvean_BHA21_10s.csv": "43074003fcd0ee27c0f5f3ac5918c0b13faa6a5dfebe108467de632ae556632b",
+    "validation/forge16a/sanvean_BHA22_10s.csv": "96cfc62c9e50176f91ee366cf3fa326dc8363e0d732eec23850800fe322fdbbd",
+    "validation/forge16a/sanvean_BHA23_10s.csv": "873558f2d3c1eff4b121b2f67ec97d42213fcb6abd927590b3927a682935b363",
+    "validation/forge16a/sanvean_BHA30_10s.csv": "a887ce22e0f2f94c82a04e2a2bd054a8eb823b63182ee4b05196daa0bb3b5c21",
+    "validation/forge16a/sanvean_BHA34_10s.csv": "65dbcaf181a96d590b5786944665a481929eca8cdb0423d407a144a5c572589a",
+    "validation/forge16a/sanvean_BHA35r1_10s.csv": "e2cc297d8b7c3163e1f46e36a2cc379589ca70afb5c96d18b3353caaf7efe763",
+    "validation/forge16a/sanvean_BHA35r2_10s.csv": "29002d36eaee4ac63fa53765f34607db2e92fb06a28d40bdb6dd6ce1bbaa3475",
+    "validation/forge16a/sanvean_BHA38_10s.csv": "ccda8e2bdfce53b385b5e537be71e18a6057a37a4d70a0c41159a5ac2822970b",
+    "validation/forge16a/sanvean_BHA39_10s.csv": "c2e4257cfac99473152caa806a4d466093052723c24f016728c2cb175775c01b",
+    "validation/forge16a/sanvean_BHA42_10s.csv": "b02263357c4fc985d6544f831d45ec9ce743c50219497e40423ab9fb6c593d44",
+    "validation/forge16a/sanvean_BHA9_10s.csv": "98e0d1bf2e51c1e066cadd930ca40294d8c0588bb8b6ab184eaab282ebc940f9"
+  },
+  "files_sha256": {
+    "16a-channel-coverage.csv": "15e04ad33a5d1e60e5a1848dd5784ede4f8e774e4829619fd12ea08c17cae9ae",
+    "16a-observations.csv.gz": "82c8c62adadd049b8b92fe6cfeed1bc77b114c84fb2a487151c2cd6a2492e774",
+    "16a-pump-displacement.csv": "a91f91e220a1cd1684e63cfeb4d13667513292ac1fe4abe2c8f9e264ad6cee4a",
+    "16a-source-coverage.csv": "801260e2a64a4b8bf9fa13f550a8541ece1725e5dbc6406d930f4063be360404",
+    "16a-steady-windows.csv": "b56160bc7423a826968dbafedcaa5f62a6d55225dbe6b899c629d88dfabb0c19",
+    "16b-excursions.csv": "6e1545c9765ceeed8df6b344c41efd1da2fa6d367128323c8132ab57ce2c609d",
+    "16b-observations.csv.gz": "cd120a5f2bfded2efac365f9b0441f748260b06cd54ced5e8144bd795393cebc",
+    "16b-pump-displacement.csv": "f52a3f228dff42b2e52879065fac964eac5497b6108f5ab74d416022e30f4557",
+    "16b-steady-windows.csv": "f26d710fbd3186fef401a2af62324709e0399815b9c7e1ce25a9b9da70a18cc4",
+    "coverage.csv": "c04970ea6300a91288a9e26a66925c30219e6a18eb3649bcc856daa6e9cdd97d"
+  },
+  "limitations": [
+    "16A bit depth comes from recorded Sanvean periods only; shallow trips unavailable",
+    "16A inlet temperature unavailable; rig MUD TEMP carried as a return proxy",
+    "16A rig pressure and pump strokes have minute timestamps; joined by minute",
+    "16B excursions split at recorded visits to 1000 ft or shallower and reported incoming-assembly starts",
+    "16B assignment requires exactly one new-drilling-depth anchor assembly and cannot precede its reported incoming-equipment start",
+    "16B shallow windows require a cited report interval; mixed-operation inferences are labelled separately"
+  ]
+}
