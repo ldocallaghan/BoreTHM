@@ -1649,7 +1649,7 @@ The model gives both ordinary pipe types a 5.5-in body outside diameter and a 4.
 
 Source: `results/additions/pipe-inputs.csv`, `role`, `assembly`, `excursion`, `flow_centre_gpm`, geometry columns, `density_ppg`, `pv_cP`, `yp_lbf_100ft2`, `pv_ref_T_C` and `temperature_C`. It also lists every exploratory slope window and the heavy-weight pipe dimensions. The pipe-associated inference and its alternative are in the interpretation table above.
 
-EOW 18 supplies two raw-data groups with two stages, shown only as secondary endpoint differences. At a 350-gpm centre, nine windows span 1,938.51 ft: measured pressure decreases by 84.8 psi per 1,000 ft while modelled pressure increases by 20.0. At 700 gpm, seven windows span 506.23 ft: measured and modelled differences are −232.2 and −41.1 psi per 1,000 ft. The separate exploratory 700-gpm group gives −317.8 and −41.5 over 506.05 ft. These are negative observed depth trends with two stages, not primary friction estimates; they do not establish the full-insulated per-length loss. No uncertainty interval can be estimated from two stage means. `eow18-descriptive.csv` lists the windows and endpoint arithmetic.
+EOW 18 supplies two raw-data groups with two stages, shown only as secondary endpoint differences. At a 350-gpm centre, nine windows span 1,938.51 ft: measured pressure decreases by 84.8 psi per 1,000 ft while modelled pressure increases by 20.0. At 700 gpm, seven windows span 506.23 ft: measured and modelled differences are −232.2 and −41.1 psi per 1,000 ft. The separate exploratory 700-gpm group gives −317.8 and −41.5 over 506.05 ft. These negative observed depth trends have only two stages and cannot establish the full-insulated per-length friction loss. No uncertainty interval can be estimated from two stage means. `eow18-descriptive.csv` lists the windows and endpoint arithmetic.
 
 #### 31 October 2026: shallow excess against flow, added results
 
@@ -1703,7 +1703,7 @@ Source: `flow-step-comparison.csv`, the `declared_` and `filtered_` columns. R²
 
 #### 31 October 2026: shortcut direction and ratio wording, added results
 
-The measured inlet/return shortcut raises modelled pressure by 0.47–9.19% in the saved full-solve comparison. Its direction suggests that the modelled slopes are, if anything, too high and the measured/modelled ratios understate the excess. That slope statement requires the shortcut error to increase with depth: a positive pressure offset alone does not prove it. The checked samples are circulating scoreboard states, not full solves of the trip windows, so this archive does not establish or quantify that slope bias. No numerical slope correction is made.
+The measured inlet/return shortcut raises modelled pressure by 0.47–9.19% in the saved full-solve comparison. Its direction suggests that the modelled slopes are, if anything, too high and the measured/modelled ratios understate the excess. That slope statement requires the shortcut error to increase with depth: a positive pressure offset alone does not prove it. The checked samples describe circulating scoreboard states. Full temperature solves of the trip windows remain unavailable, so this archive does not establish or quantify that slope bias. No numerical slope correction is made.
 
 The exact primary shallow endpoints are 1.610497 on EOW 11 at 572.6525 gpm and 7.163717 on EOW 20 at 216.0092 gpm. The flow-conversion paragraph now gives that range and names the EOW 12 comparison separately. The original near-surface pressures and ratios are unchanged.
 
@@ -1749,3 +1749,20 @@ The [Sniper Drilling Motors sheet](https://cdn.b12.io/client_media/R8rVslJ4/6ace
 These published data tables answer the standard-dimension check without asserting a requirement from an uninspected API RP 7G edition. The conventional FH dimensions differ from both recorded NOV scenarios. They do not select the actual bore.
 
 The contractor was Frontier Drilling, using rig 16, identified in the End of Well Report pages 199–200 and the daily report headers. Its page 225 pipe inventory records 365 joints of 5.5-in, 24.7-lb/ft S135 with 5.5FH threads. The likely next source for actual machining is Frontier's detailed rig specification and pipe schedule for the 2023 campaign, with tally and inspection records. The [public Rig 16 inventory](https://www.frontierdrilling.com/rig-16) and its linked PDF omit drill-pipe bore dimensions and are undated. They cannot establish the installed string. No contact is made and no bore is selected.
+
+#### 31 October 2026: patent source and prior information
+
+Eavor Technologies' [US 12,140,028 B2, *Cooling for geothermal well drilling*](https://patents.google.com/patent/US12140028B2/en), granted 12 November 2024, describes possible coating systems. Its inventors are Matthew Toews, Michael Holmes, Ariel Torre, Aleksandr Vetsak and Mark Hodder. The granted PDF was inspected directly. The [source inventory](../../validation/model-development/entry-9/references.json), entry `eavor-idp-patent`, records these locators and the PDF hash.
+
+| Described feature | Granted-text locator | Extent of the evidence |
+|---|---|---|
+| Inner epoxy novolac, 400–1,270 µm; inner epoxy phenolic, 100–250 µm | Column 10, lines 51–60; PDF p25 | Coating options and ranges in the granted description |
+| Outer fibre-composite overwrap, about 2,540 µm | Column 10, lines 65–67, continuing in column 11, lines 1–5; PDF pp25–26 | An illustrative outer coating |
+| E-glass examples, about 5 mm and 2.5 mm | Column 11, lines 56–65; column 12, lines 4–10; PDF p26 | Separate illustrative coating arrangements |
+| Steel and titanium examples, 5.875-in pipe OD | Column 12, lines 54–64; column 13, lines 1–7; PDF pp26–27 | A different pipe size from the 5.5-in FORGE 16B string |
+
+There is a transcription discrepancy: the granted PDF gives 100–250 µm for the phenolic range, while Google's HTML gives 150–250 µm. This record uses the granted text. The patent establishes described options; it does not establish the installed FORGE coating, its hydraulic roughness, connection geometry or coated bore. For dimensional orientation only, twice the largest stated inner thickness is 0.100 in of diameter. No thickness is selected or used in a comparison with measured pressure.
+
+**Prior information.** An external comparison of three catalogue joint options with measured regular-pipe slopes was read on 31 October, before any further correction declaration. It compared the retained 7.000 × 4.000-in EIS joint with 7.250 × 3.500-in GPDS55 and 7.500 × 3.000-in conventional FH joints on the EOW 38 geometry at 600 gpm and 30 °C. Their modelled gradients were reported alongside the measured slope range. This overlap was therefore already known. It cannot provide an independent validation or a basis for selecting the installed bore. That external comparison has not been reproduced in this source preparation. A future declaration must disclose this prior comparison and identify its equipment assumptions independently of pressure agreement.
+
+**Open equipment records.** An enquiry to the FORGE team has been reported, covering joint dimensions and the insulated coating, with pressure-transducer location and an introduction to Scientific Drilling. Draft enquiries to Scientific Drilling and Eavor have also been reported. Replies may identify the installed equipment. Further correction work awaits that source information and explicit authorisation to proceed. This entry records source preparation only; the P2 declaration has not been written.

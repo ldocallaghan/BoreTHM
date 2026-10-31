@@ -266,5 +266,19 @@
     "inventory_component": "rig contractor and source needed for installed pipe",
     "pdf_url": "https://www.frontierdrilling.com/_files/ugd/ba0541_d9d7048fe3194ab5a48c6aaae2baf840.pdf",
     "sha256": "458a656b417572cb9b8e1f74ebed8f67513f3520d9979d513e8746bc8630661e"
+  },
+  {
+    "id": "eavor-idp-patent",
+    "reference": "Toews, Matthew; Holmes, Michael; Torre, Ariel; Vetsak, Aleksandr; Hodder, Mark (2024), Cooling for geothermal well drilling, US 12,140,028 B2; assignee Eavor Technologies Inc.; granted 12 November 2024",
+    "url": "https://patents.google.com/patent/US12140028B2/en",
+    "pdf_url": "https://patentimages.storage.googleapis.com/88/99/27/3dd5554ea17622/US12140028.pdf",
+    "locator": "Granted PDF: cover p1 (inventors, assignee and grant date); col10 lines51-60 (inner materials and ranges; PDF p25); col10 lines65-67 and col11 lines1-5 (2540-micrometre outer overwrap; PDF pp25-26); col11 lines56-65 (5-mm e-glass example; PDF p26); col12 lines4-10 (2.5-mm e-glass example; PDF p26); col12 lines54-64 and col13 lines1-7 (5.875-in OD steel and titanium examples; PDF pp26-27).",
+    "finding": "The granted description gives inner epoxy novolac thickness 400-1270 micrometres and epoxy phenolic thickness 100-250 micrometres. It describes an outer fibre-composite overwrap of about 2540 micrometres and e-glass examples of about 5 mm and 2.5 mm. Steel and titanium examples use 5.875-in OD pipe.",
+    "applicability": "Described coating systems and thickness ranges do not establish the as-built 5.5-in FORGE 16B string, its connection type or tool-joint dimensions, its coated bore, or coating hydraulic roughness. The cited pipe-size examples differ from FORGE 16B. No coating thickness is selected, and none enters a measured-pressure comparison.",
+    "inventory_component": "patent coating examples with no installed-string identification",
+    "sha256": "2c73ca7d6e30d114841ee71b0c30220417f00790d4aa30ddbb5f091c69d73ea2",
+    "sha256_object": "granted PDF at pdf_url",
+    "transcription_note": "Granted PDF col10 lines56-60 says epoxy phenolic 100-250 micrometres. Google Patents HTML says 150-250 micrometres. The granted PDF controls this source record; the discrepancy is preserved.",
+    "orientation_only": "Twice the maximum stated 1270-micrometre inner thickness is 0.100 in of diameter. This is dimensional orientation for a hypothetical bore, with no installed-bore inference or pressure calculation."
   }
 ]
