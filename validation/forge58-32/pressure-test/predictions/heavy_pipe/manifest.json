@@ -1,0 +1,59 @@
+{
+  "python": "3.14.4",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "runtime_s": 357.5943552000099,
+  "windows": 62,
+  "events": 7,
+  "calculations": 186,
+  "variants": [
+    "original",
+    "working_entry10",
+    "secondary_entry8"
+  ],
+  "scenario": "heavy_pipe",
+  "failures": [],
+  "energy_flags": 0,
+  "budget_flags": 0,
+  "original_reference": "v1.5.0 equations with D6 occupancy blend and D7 physical-boundary mesh clipping",
+  "starting_profile_checks": 62,
+  "starting_profile_failures": [],
+  "starting_profile_max_difference": {
+    "bit_C": 0.00032051586701697943,
+    "return_C": 1.9518603430412895e-05,
+    "spp_psi": 0.0014053941968086292
+  },
+  "targets_read": false,
+  "prior_report_pressure_exposure": true,
+  "source_sha256": {
+    "validation/forge58-32/pressure-test/predict_budget.py": "dd3572dabcf99dcf15a75a9001a0829d7677a38ec5c37dc7d3c69ebf4dece0a1",
+    "validation/forge58-32/pressure-test/protocol.json": "5a3b3c7181dd677e4ad347aa6d020dd9ffafe76d927604e9e4e0afadc02ee097",
+    "validation/forge58-32/pressure-test/protocol.md": "d84cc719b3a3f46f2969ca3760466243fb55fbb83d89587c81a0385885154831",
+    "validation/forge58-32/pressure-test/inputs/manifest.json": "cebb5a6a8cb9ec08733230580b66237bb28ca820e85137b1e1b390c39842e2da",
+    "validation/forge58-32/survey.csv": "29c8791b2caa83a5e6e6f251577dbdac86652dcbb53a107aebb0afb0c846b4cd",
+    "validation/forge16a/formation_temperature_216day.csv": "5af4cf699f4133ebdfb11b91df12551b9ace041a2306c2ecbfdb2b9f60715ae4",
+    "validation/forge58-32/pressure-test/inputs/circulation-clock.csv.gz": "7446d483c4264d8dc90a2c8afd8ea7c99002212d4508df4aa8903081258750a9",
+    "validation/forge58-32/pressure-test/inputs/components.csv": "18fc9f6c965c9f60aaed663f3113a1a32d237e881be5ad7b9b0d8d6db34dca28",
+    "validation/forge58-32/pressure-test/inputs/coverage.json": "ceb7ea4d913788d777ea9a4aae23888c7d2caee5fc6bc2a744120a2b16b0a404",
+    "validation/forge58-32/pressure-test/inputs/events.csv": "c3cd7293f2f451bbe70805717154ed8671f5ead72192a589595f01d01ade1f50",
+    "validation/forge58-32/pressure-test/inputs/geometry.json": "442835de01a671d27e1f6c7e0c1a35f3a39baa8466df6b21234797bd0b8726d3",
+    "validation/forge58-32/pressure-test/inputs/source-bins.csv": "6241c70045575f37f994f656412ce889435e0c51d65df66069c36a709ba11ee9",
+    "validation/forge58-32/pressure-test/inputs/windows.csv": "db549309633d9491901fe54f0f12ed1746d79d62ae5e83faf83691f19c549fe5"
+  },
+  "model_sha256": {
+    "model1_coupled.py": "88f03cb4e9a9ca77bdd93604bce8a9175b89a0520c0ef0ab4456320aaad2097a",
+    "hydraulic_losses.py": "913ba82b760b17100549f85ac2f4ac71d3d9f72272389980a12729260bc1ed01",
+    "fluids.py": "10de76f50892d73295dd6cbc3fe8038bc097bd76f078c03f311310d9c18f8128",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a",
+    "studies/validate_forge16a.py": "d65af33954b201a8721ed682f1b83c69dd63b706e25824d69c98c55049e9a669",
+    "studies/validate_forge16b.py": "ebe5e45a40a59cdf96655a161938f97bb36279582765c8b16b732446df85e93a"
+  },
+  "output_sha256": {
+    "component-budget.csv": "c1568431647c67dc9b0e26dd37d99c9087c67ca619dba364f4fdd317bb8a1c3e",
+    "event-budget.csv": "88f8933caa37ba1b8bf706c30c7cbc9234e2de38a273bede28a8744ce9ac107e",
+    "event-components.csv": "dd1ddd680fa18a732480a865f96e11ef9aa96454ce29ff7473ee0b796dc265cf",
+    "starting-profile.csv": "faf42de10c1249f7d3a5aae2af12caa3fc36f6de51856db548846433b30a930e",
+    "window-budget.csv": "fa7f9d45015b29f16926c85aeab7abe5dd6b4413b9a10844151b9a4bfd0348ac"
+  }
+}

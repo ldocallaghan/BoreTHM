@@ -41,6 +41,14 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def frozen_protocol_sha(settings):
+    """Allow only the dated access-status update in the frozen protocol."""
+    frozen = dict(settings)
+    frozen['window_pressure_targets_read'] = False
+    frozen.pop('window_pressure_target_access_date', None)
+    return hashlib.sha256((json.dumps(frozen, indent=2)+'\n').encode('utf-8')).hexdigest()
+
+
 def write(path, rows):
     keys = list(dict.fromkeys(k for row in rows for k in row))
     with path.open('w', encoding='utf-8', newline='') as stream:
@@ -94,11 +102,11 @@ def geometry(sample, components, settings, scenario, survey, original=False):
 
 
 def calculate(sample, variant, settings, components, survey, history, formation,
-              initial_profile=None, return_solution=False):
+              initial_profile=None, return_solution=False, scenario='primary'):
     config = settings['models'][variant]
     common = settings['common']
     original = variant == 'original'
-    g = geometry(sample, components, settings, settings['scenarios']['primary'], survey, original)
+    g = geometry(sample, components, settings, settings['scenarios'][scenario], survey, original)
     fluid = Mud(float(sample['density_ppg'])*PPG, pv_ref=float(sample['pv_cP'])*.001,
                 yield_point=float(sample['yp_lbf_100ft2'])*YP_PA, pv_ref_T=common['pv_ref_T_C'])
     if not original:
@@ -203,6 +211,8 @@ def aggregate(rows, pieces, samples, variants):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--scenario', choices=('primary', 'heavy_pipe', 'wide_joint', 'larger_pipe'),
+                        default='primary', help='Registered equipment scenario')
     parser.add_argument('--models', nargs='+', choices=('original','working_entry10','secondary_entry8'),
                         default=['original','working_entry10','secondary_entry8'],
                         help='Registered calculations; the original uses the D6/D7 numerical treatment')
@@ -213,7 +223,8 @@ def main():
     settings = json.loads((HERE/'protocol.json').read_text(encoding='utf-8'))
     manifest = json.loads((HERE/'inputs/manifest.json').read_text(encoding='utf-8'))
     for name, expected in manifest['source_sha256'].items():
-        if sha(HERE/name) != expected:
+        actual = frozen_protocol_sha(settings) if name == 'protocol.json' else sha(HERE/name)
+        if actual != expected:
             raise ValueError('Registered source has changed: '+name)
     for name, expected in manifest['output_sha256'].items():
         if sha(HERE/'inputs'/name) != expected:
@@ -248,7 +259,7 @@ def main():
             print(f'{i}/{len(samples)} {sample["window_id"]} {variant}: starting', flush=True)
             try:
                 row, parts, result = calculate(sample, variant, settings, components, survey,
-                    history, formation, return_solution=True)
+                    history, formation, return_solution=True, scenario=args.scenario)
                 solutions[variant] = result
             except Exception as error:
                 row, parts = dict(window_id=sample['window_id'], event_id=sample['event_id'],
@@ -268,7 +279,7 @@ def main():
             if working is not None and working['success']:
                 try:
                     warm, _ = calculate(sample, 'original', settings, components, survey,
-                        history, formation, initial_profile=working)
+                        history, formation, initial_profile=working, scenario=args.scenario)
                     check.update(initialised_success=warm['success'],
                         solver_status=warm['solver_status'], solver_message=warm['solver_message'])
                     if check['seeded_success'] and warm['success']:
@@ -297,7 +308,7 @@ def main():
     sources += [HERE/'inputs'/n for n in manifest['output_sha256']]
     summary = dict(python=platform.python_version(), numpy=np.__version__, scipy=scipy.__version__,
         runtime_s=time.perf_counter()-started, windows=len(samples), events=len(budgets)//len(variants),
-        calculations=len(rows), variants=list(variants), scenario='primary',
+        calculations=len(rows), variants=list(variants), scenario=args.scenario,
         failures=[{k:r.get(k) for k in ('window_id','variant','solver_status','solver_message')}
                   for r in rows if not r['success']],
         energy_flags=sum(bool(r.get('energy_flagged')) for r in rows),

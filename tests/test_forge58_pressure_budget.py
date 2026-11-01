@@ -49,3 +49,14 @@ def test_event_budget_uses_identical_successful_windows():
         assert row['spp_psi'] == 31.5
         assert row['median_spp_psi'] == 31.5
         assert row['sum_residual_psi'] == 0.
+
+
+def test_protocol_guard_allows_only_access_status():
+    settings = json.loads((SOURCE.parent/'protocol.json').read_text())
+    expected = json.loads((SOURCE.parent/'inputs/manifest.json').read_text())['source_sha256']['protocol.json']
+    assert budget.frozen_protocol_sha(settings) == expected
+    settings['window_pressure_targets_read'] = True
+    settings['window_pressure_target_access_date'] = '2026-11-01'
+    assert budget.frozen_protocol_sha(settings) == expected
+    settings['common']['pv_ref_T_C'] = 48.9
+    assert budget.frozen_protocol_sha(settings) != expected
