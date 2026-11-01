@@ -497,10 +497,9 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
 
     if len(changes):
         z = np.unique(np.concatenate([z, changes - 0.5 * BLEND, changes + 0.5 * BLEND]))
-        if loss_model is not None:
-            # A short final component can put a ramp endpoint below the bit.
-            # The boundary conditions must remain at the specified well ends.
-            z = z[(z >= 0.) & (z <= L)]
+        # Short end components can put ramp endpoints outside the well.
+        # Keep both boundary conditions at the specified physical ends.
+        z = z[(z >= 0.) & (z <= L)]
     y0 = np.vstack([np.interp(z, [0, L], [T_inj, T_inj + 30]),
                     np.interp(z, [0, L], [T_inj + 30, target_rock_T * 0.7])]) \
         if init is None else np.vstack([np.interp(z, init["z"], init["Td"]),
