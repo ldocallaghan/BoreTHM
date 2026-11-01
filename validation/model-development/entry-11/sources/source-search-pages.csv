@@ -1,0 +1,913 @@
+well,source_member,source_sha256,page,lines,pump_line_hits,nozzle_line_hits,string_line_hits,density_line_hits,status
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt10-20170805.pdf,019d78a0243a20eb2f11a27a874afb67c8869990cc3fbd22176679d48b6a489d,1,171,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt11-20170806.pdf,9261ee16be163e3790669c4693f8508a96ad3169e73615af014ed7656c12e588,1,171,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt12-20170807.pdf,72769cfa72b1b7c2a6ef30363590c9c98886648c0621b3ab1121ee939c2adcf6,1,178,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt13-20170808.pdf,fe5d8fbdaf0aeaa43ebef891bfb13905b5d576692e6095752c4ae1a520e3de08,1,173,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt14-20170809.pdf,0b62ffa517fc225d01f32ba5c64a63d031f2e4de12449afc46ce800062bd4b28,1,165,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt15-20170810.pdf,f4b1eeae934a8c2f2f58b2d139b86cff147833a7809412c34e889807d1a7140a,1,176,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt16-20170811.pdf,35a0a74298910c1aabea1371ece38ee3f6202a645691d4d98a9073c72d475ca8,1,172,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt17-20170812.pdf,6a6e0874dda36f88e6dc966970b764f2a5e4442e2d29725f5cc027c8c1c67b3b,1,168,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt18-20170813.pdf,d44ced5b877bdce0a734dc055eeca93160caa8f266d3ae74726086b357619075,1,167,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt19-20170814.pdf,360e0832f35c9d440d6be97ae066e9fa3c4372cf58c38390c8a3b0b4798086c2,1,174,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt20-20170815.pdf,6f94bcd2e30f0b546aec390cd3eb169cd801e6cd7e96c0978a0836193acd696a,1,172,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt21-20170816.pdf,676c672df200bb9a261dede786acd8f34c8d4c622c5454387ec16fb8a337127a,1,173,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt22-20170817.pdf,3062c59a83b5cad0d8ef70d49381cf579d2ea1af6690738ae2ab363a2e82f34b,1,167,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt23-20170818.pdf,891e66f7a471fcff7de7901ca319405a3bfec9ded0928382224ee63ef99f53be,1,172,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt24-20170819.pdf,2a51e27370cc5304648a29be261cf4ce0bfc40d0b19af949f998af6d979eee02,1,166,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt25-20170820.pdf,63c8970c205052b1bbfe40910b637a0a0f6b1cc14d457edf9848cbdc08538cc9,1,173,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt26-20170821.pdf,a3a86d8440e07ce91f38dc8821c806151e3211dcf4826ac0e929a1c72f3864fc,1,167,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt27-20170822.pdf,6d4522068b8d5ef58eef98b3d4c84501f80994082b760c17a19038dcbca68f55,1,167,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt28-20170823.pdf,987633eca0fa865880ec9b50862416c566d12d4f3c93d90e53e61146816090d3,1,167,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt29-20170824.pdf,6718575b96d43be7eddeea93a6b20cc316d3560e1c272de458f3ab9a6b29a92d,1,172,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt30-20170825.pdf,3d964c156bae3aee49b534199c064e03ef85d62e27629aafc58d6a5660162404,1,168,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt31-20170826.pdf,08baa12340ab932e635ecb189d681cbff417696d5d498c132cfc1c9b90eeeeb9,1,170,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt32-20170827.pdf,bb8be98fb963e982f7c4850c676a2d9455eb6d5ef8e70094e38e5a80e5a43b44,1,169,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt33-20170828.pdf,975838dfc5f8a84f082080f91e46f9ff4add26139290f39ada1a3d0273f7e197,1,173,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt34-20170829.pdf,a98373003efbe58a538ca89afde8e46cf56d18f675369af3ff518d8b0f4f7400,1,172,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt35-20170830.pdf,00b578191e342b4ce2e23dbbee56ba73d71f049723247d35acbc1c6832987cf7,1,172,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt36-20170831.pdf,c1f417ca63b3b2951e59ab8b029136ed543cc6c1abd22fd3a0f5cb0c7b8a0e5b,1,176,2,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt37-20170901.pdf,d112e5aa03900a185ef8978eec85c92095603c586e54ee70c94ccbe1f8f14431,1,178,2,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt38-20170902.pdf,c62002660eb0d639d7ce8a2cc575f2dc66e3fa3993e2583f00f8f85881df5be6,1,172,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt39-20170903.pdf,fc10337d3398bf8b087c8bbfc0000774eeb82034fe1abba2be7ed0de25337f2c,1,181,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt40-20170904.pdf,9f057bdae53633d4890bae3c9966073ba8fdc70684a5ba6bbd603f9ea06b7762,1,175,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt41-20170906.pdf,f2301017ca280f37f96f9328d1cfee4a88a498c7d213581f95fcb9a589c4f772,1,171,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt42-20170906.pdf,1271e9da17a66c683d7a12da627b8afc8522903c3e3d9d1166168d2a7c7180f0,1,172,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt43-20170907.pdf,c9db257db156861f9a337b3df38eea91d3a379deba1d02d5badb100c856370dc,1,170,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt44-20170908.pdf,33f0a6169ca3111ffd9fa88c3936db21dcd2eb7089b8ead4be9eed227b4773a7,1,173,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt45-20170909.pdf,63ba5bc1a4d2d2f32a9d2325e4a2fbd2087ea0bf0c80c33c0ec976f94c977528,1,174,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt46-20170910.pdf,b2f428703ef6fc5c110d927eaecb80241bc804985b0465c344fb0128d1fb10ba,1,182,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt47-20170911.pdf,3eb1f13ee27896b6771c16ab2a6a39af013efce27c9668ac2d6f390e505601ce,1,180,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt48-20170912.pdf,69f513c6d601155d94cb04cea349bbaf5a221a39f5f9a0cdd88e7bb477ab790f,1,179,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt49-20170913.pdf,96b4886b3972b2638407fed81dd2368058cd3c419ce52dd531897f326a6a00be,1,182,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt50-20170914.pdf,3f7c8a13424dde77c7fdaed28ded2efb227984773193f7e1f4cc9b90a24e2ea4,1,185,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt51-20170915.pdf,a9f0953333fbc45f1713d8c0f226f6ed56ff723be3326bcf9daf360fa628af95,1,178,1,0,3,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt52-20170916.pdf,90bec160186a8216b29de811ef8656f7c303eddcc8b010321d5332d80d5314f2,1,177,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt53-20170917.pdf,4c3f97d506c72c7388ca783f2dc35ce3da5d1bd7627923e4ee9c0563220c9240,1,177,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt54-20170918.pdf,f8dd5bbcf8f4e304fd3d7e13df1e2b004af28c11915b4651a5c00575c5d73eca,1,178,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt55-20170919.pdf,efe60d3464705ea291a1e2cff0cb0f9a307769ae20675b1eb49d0ff041f88f72,1,179,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt56-20170920.pdf,dab26c45e21c11492f6f351c6d715e1404e656aae3c0265862cddfd0cdeb3b4a,1,177,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt57-20170921.pdf,c5d5e4997c25fe865fcb9c0211ad44ce76ceee326506152f7dc87aa5c43d5930,1,180,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt58-20170922.pdf,17ec19b5ffe5a7f8e44a22cd9c1def3214a0799794b7570fafa054cc0f2a9a80,1,172,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt59-20170923.pdf,9d5ebf538e4294869f8bb62b79083196098758799f559a5d1514f7eda07e3765,1,173,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt5_20170731.pdf,bc6302a62561ee10991bdc48be69862cb8dcba8065215aebd9996d6cb6dc8249,1,167,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt6-20170801.pdf,b8958da15a622c5347fd91341d0a169f8fee8024cb259b7eec828cf50606cf61,1,181,1,0,0,2,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt60-20170924.pdf,1fbda256793d20c304b002e2ec1732ccd132fcd3cf612dc29194105ac5632bc2,1,175,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt61-20170925.pdf,33dc45ed0710c72a74de403fb880cbd270ab16f78ba9737b16589ec8f1754639,1,174,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt62-20170926.pdf,fcd0d1fb586db53c2845486d5df4677cc00d70040b521a375c5db8bb59a821e5,1,173,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt63-20170927.pdf,fb5974d435772430c227960e6f98e040899996fc8ba89980e67b9fc126283b51,1,171,2,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt7-20170802.pdf,8faedf3b8297640a0d35e06f4d1ac0f9702a0447fae5ab6a7e3a11a325047b2c,1,177,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt8-20170803.pdf,7330b1ff81923b2c3e1c23b2ef88b89aadbbb9245423ea7a31386d94856b0a85,1,162,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt9-20170804.pdf,3d69c6058e8b1fb11eb865098c4f947769a7ea31ef16f93285bac83f1736509d,1,186,2,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportGraphicalRpt_170816113708.pdf,722ad8965f765591375f83a988cdb11e94d0d0ff85d1ead3f16501e9971ef4a4,1,172,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt10-20170805.pdf,42bf2000abb6aad2658f438f24da7d15e39cdc0373374d309af40edda6226b8c,1,118,2,1,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt11-20170806.pdf,48eb8e5778ed5575aadfbf1a94fdacd545ee13c2deb564d435c184623df56a84,1,115,1,1,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt12-20170807.pdf,5cd9701ac64543002a20d3f4b532e183ee2366b2b597ed87c800b0630195d52a,1,98,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt13-20170808.pdf,47eaf1d1e3ce742e67a5ab1b0385c1990f2699068e94fbeb4b7190c0612e0aad,1,117,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt14-20170809.pdf,76dcaad462fc9894461d36cc94d36760e9308edb21ec6dbb6a36699450e3e1ae,1,114,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt15-20170810.pdf,6185f7fe6267fc684c1441ca988d8c841306fe2224194c9a63f116880825d2c8,1,120,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt16-20170811.pdf,3bc6aefc96b6ea197095c3cdcc37f808bbabcf42f6c7375cdffb06ecee0b7f07,1,127,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt17-201708012.pdf,ecb73c34bb2868420fb7caafef21d65595e850a9ba42c59d023b01c6f60a7586,1,122,1,0,4,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt18-20170813.pdf,6920d71559eec2ddc04771a182e31e9167fb8c54687e816c750e9c243ebf1609,1,112,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt19-20170814.pdf,9e9b23d77346b3ec41becfb051353244f03350749c9978289010c6fd34f75529,1,129,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt20-20170815.pdf,dfe7fb946553a000ae9104312eeea625b9584692f0d29eda2077281cc0f973cf,1,129,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt21-20170816.pdf,5483fea5b9f928dc2ed2ac594988400247057317c89e2365095de8592ad4ed76,1,127,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt22-20170817.pdf,bce09d28316a74124d00fa8924a26fcec5a129f907ff74a89eeac217e6609d26,1,114,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt23-20170818.pdf,2bf0cff7637f7d2a6c703018e91eaee9cedc582a3e99b8b6330a2576e4c3d0dc,1,132,1,0,4,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt24-20170819.pdf,4adce4ee396850e394f64285bb43c14a75d39165b1fd6d80367344e2f0bff248,1,119,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt25-20170820.pdf,b745e78a5592749d9a28e1d45501e6a2019e808c7ebaea4e5a3cef2b1aaf0bd1,1,132,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt26-20170821.pdf,ae40fd9567b21821e7ec31212c3f9160c0c87feb8fe1701c6dce63893fbd8dff,1,122,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt27-20170822.pdf,154bb44b2a6082f7ff6b1e51b510e6b0f279c02bd29fd3006f89f3bb7ea6e69d,1,122,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt28-20170823.pdf,c843d2708ce54ce98d5c7dbee5cf31343653df4dc088835f5e11d83221ea40fd,1,121,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt29-20170824.pdf,34c8c67987a32b91c9973a0ba0819316d26d78494531a179f28c9f7ac547c001,1,125,1,0,4,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt30-20170825.pdf,7a9bfa31cc0ff3f0971c2d46c131b4ece1313ce62015a8f0d13fff306527665b,1,113,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt31-20170826.pdf,acd8ad5a4fceffe42a27bbcf3083ccec03c41b40bc50d89672848bba9c6e9b31,1,119,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt32-20170827.pdf,e6619c3e52c4379f67c05e851435f34e7e72f671a460994a2d2233a0ac55be07,1,119,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt33-20170828.pdf,280c230380c9b18e9410f00a07a6f58d6fa1231686d6c6d948989a33060c4e46,1,117,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt34-20170829.pdf,283249b63c20d461bb6f0801b36407c18a2f2ecc6e139e2ccb227c16a9702c64,1,118,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt35-20170830.pdf,9d182ad60a746a760d328bd0f96bef256a942eac3cc98b6fe4c53a632a181f9a,1,116,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt36-20170831.pdf,30b80e38da4929d766a75d235696607824d6b6515d151f839cff4baac6e0136a,1,118,2,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt37-20170901.pdf,c159ed1ae651bcf60d671c94a43ebe1c3bd12fbb19b2933f6efba89666e9853c,1,127,2,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt38-20170902.pdf,aac46b69b9d0f7b690e3e72a7f513d19f897184877da58b2fa48d0fb6da57128,1,119,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt39-20170903.pdf,bba434ada25f3c4c8c586f1f5aab28fdbcc922a53144f0122d1e641e3defff4d,1,126,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt40-20170904.pdf,0ff1ce68c1b41c76a6ec39daba3605b72a5404431adef8bd6373a94d545e015c,1,118,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt41-20170906.pdf,770be531a5e9566780c6ed215a1420447c89f8553815ae4edce44646897f817e,1,114,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt42-20170906.pdf,f001e06ed7cd92f083e9f6270255f2e1d8e983d11dcc6cc280c8b69962a20525,1,124,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt43-20170907.pdf,9d8813756bc46e2539c528c55919ca4ce7eec855f44f8348982af67a52a24310,1,128,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt44-20170908.pdf,411d11326fb87c6b250a2ab148ff6d9ab67b80d8f9e04c34edef785e7a06bc32,1,121,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt45-20170909.pdf,0b1195871b170ac8cd8bb3007756adcbb96ac4cf642b5cf8f7d766ca206fe334,1,120,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt46-20170910.pdf,72fb13319e945bf6aa465dbcb6ff3ebb0a74ad4c03e6d6606ce3fb27a80e3b36,1,119,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt47-20170911.pdf,bc25e3b680d4d4ca2e80ad906019d4d120a126132c1eb1dd796eeeb426d842da,1,121,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt48-20170912.pdf,543f23ac6ba0673628e9481ae2306d5b38c9a7f3ac154d417eaadbdda414079b,1,111,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt49-20170913.pdf,9665d4f0fe42febf53034bcb4a54e894198e57ec486c2e401e2911e34e0c5fef,1,122,1,0,3,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt50-20170914.pdf,cb1d8aaece3ddf9e11689e2f28aaebb174583bc53c3441a8bc0bdd4626cc9d4f,1,120,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt51-20170915.pdf,d3545c969702067bb5727f0166b560f84ec7a490277cefc34b57ea993ee64f3b,1,102,1,0,1,1,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt52-20170916.pdf,8294a0a80912adedab9c89055312c9d3a989ea0a5a3bd89db426237ed32e84b6,1,98,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt53-20170917.pdf,09f29aa2927fe50b41da52dd605cb4c065c545a12d12f3237a07256e9b45c524,1,96,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt54-20170918.pdf,63cf1b88b2e9d2a7d2e2977b455a81b2fb8df2856aab84acc0392dfd3b822cc4,1,104,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt55-20170919.pdf,951889e79ce303f07f5c9b00768dca5311a089e1dc60c4fb46a61b71f32a833d,1,111,1,0,4,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt56-20170920.pdf,10758660bfc127e252d03c7fedd41d7ee98c48ea4d5afe728295c6a99b69942f,1,108,1,1,3,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt58-20170922.pdf,70a54243f9597fcee0026ab2393369bf52c781c4fc9d120950767d91f5ac3b70,1,91,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt59-20170923.pdf,12d9ef6d6698d01973aa0be28b07c398152c405a4f6f02a0a7eb22aaf5edf825,1,91,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt5_20170731.pdf,9f8399fe56bbc07a09dc58b1101764faffb6a096cac07032c71caccdb3906399,1,95,2,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt6-20170801.pdf,3120696bcaabfcb559557e1260dffd053d7054082f6861588434cb238103c2ff,1,103,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt60-20170924.pdf,e23a1b5d5f52114f4c3a5ac0688af25e3ebe6a1ea0e9f90c3561d154c541ce27,1,97,1,0,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt61-20170925.pdf,a368f20d2478ed6947361b6fc3816a86882f5148316ce27b478f97851731f07f,1,93,1,0,2,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt62-20170926.pdf,f5a6158185592a325ea7fb458aa5b4f4074926b255bd5621aaefb7e2ebd3465d,1,90,1,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt63-20170927.pdf,1e5266556f8a6be28478fc8565e23141bb97d6bbf88102e74822e12777d4ced5,1,91,2,0,0,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt7-20170802.pdf,18abb857d7d1b5b60be3a70db763bbbfdf96c74971a372a2a1b2fa9992f40d4d,1,98,1,0,1,2,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt8-20170803.pdf,d03bbec483ae7c5dceb98fa749946a6ddd7089506fbef7ac1ad22dcab107f718,1,103,1,1,3,1,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt9-20170804.pdf,17dbc8c1ef68f09a38dde7feac3d588363c83448eb1fe8fc1500c0bc97caf51d,1,109,1,1,1,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt_170816113724.pdf,880a9f98924c4c7fa809573f3d93150f19937c44b672ca997510c7d9412ae59e,1,124,1,0,3,0,searched
+58-32,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt_57-20170921.pdf,c01ecb2f26996a9e0826cf57323e80e7e5e059946a2de860fa0a2f5d01642843,1,107,1,0,7,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,1,24,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,2,47,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,3,35,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,4,12,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,5,40,0,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,6,37,0,0,2,2,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,7,45,2,1,0,2,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,8,44,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,9,22,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,10,5,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,11,43,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,12,11,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,13,65,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,14,3,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,15,28,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,16,11,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,17,3,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,18,3,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,19,19,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,20,7,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,21,18,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,22,13,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,23,30,0,1,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,24,10,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,25,17,0,0,0,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,26,24,0,0,0,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,27,9,0,1,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,28,31,0,1,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,29,4,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,30,13,0,0,0,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,31,14,0,0,0,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,32,9,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,33,26,0,0,0,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,34,5,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,35,54,0,1,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,36,7,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,37,10,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,38,16,0,0,0,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,39,13,0,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,40,4,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,41,3,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,42,18,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,43,39,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,44,18,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,45,4,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,46,13,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,47,21,1,0,0,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,48,18,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf,73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49,49,2,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/BitSummary.pdf,2035fd56c356a7b9eefb0c14942c048d343418c12500852482e7475f48eefad4,1,56,0,19,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/BitSummary.pdf,2035fd56c356a7b9eefb0c14942c048d343418c12500852482e7475f48eefad4,2,51,0,22,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/BitSummary.pdf,2035fd56c356a7b9eefb0c14942c048d343418c12500852482e7475f48eefad4,3,51,0,19,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/BitSummary.pdf,2035fd56c356a7b9eefb0c14942c048d343418c12500852482e7475f48eefad4,4,19,0,2,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,1,114,1,0,1,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,2,96,0,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,3,16,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,4,113,1,0,2,2,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,5,68,0,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,6,96,1,0,7,2,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,7,106,1,1,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,8,59,0,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,9,116,3,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,10,98,1,1,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,11,33,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,12,114,2,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,13,95,2,1,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,14,33,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,15,114,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,16,96,1,1,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,17,33,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,18,94,7,0,0,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,19,104,0,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,20,27,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,21,114,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,22,102,1,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,23,39,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,24,119,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,25,97,3,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,26,30,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,27,116,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,28,102,1,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,29,37,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,30,117,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,31,98,1,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,32,36,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,33,110,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,34,101,2,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,35,39,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,36,117,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,37,101,3,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,38,30,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,39,114,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,40,100,1,0,5,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,41,37,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,42,116,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,43,107,3,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,44,41,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,45,112,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,46,93,2,0,5,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,47,63,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,48,121,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,49,99,2,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,50,27,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,51,115,1,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,52,96,3,0,5,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,53,61,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,54,121,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,55,101,3,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,56,34,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,57,113,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,58,92,2,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,59,60,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,60,119,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,61,101,2,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,62,38,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,63,116,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,64,102,2,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,65,38,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,66,121,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,67,98,2,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,68,34,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,69,115,1,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,70,104,2,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,71,40,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,72,120,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,73,98,2,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,74,25,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,75,119,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,76,104,3,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,77,34,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,78,114,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,79,105,3,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,80,37,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,81,119,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,82,92,3,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,83,52,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,84,114,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,85,105,3,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,86,40,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,87,118,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,88,102,3,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,89,32,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,90,121,2,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,91,89,3,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,92,52,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,93,115,3,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,94,99,3,0,5,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,95,52,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,96,121,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,97,103,3,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,98,36,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,99,118,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,100,93,3,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,101,40,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,102,118,1,1,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,103,94,2,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,104,25,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,105,116,1,1,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,106,88,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,107,23,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,108,112,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,109,91,1,1,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,110,25,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,111,113,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,112,98,3,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,113,52,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,114,114,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,115,99,3,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,116,40,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,117,121,1,0,1,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,118,92,3,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,119,20,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,120,112,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,121,100,3,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,122,50,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,123,114,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,124,98,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,125,35,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,126,117,1,1,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,127,91,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,128,23,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,129,111,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,130,100,1,1,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,131,40,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,132,116,1,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,133,93,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,134,23,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,135,111,1,0,4,1,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,136,88,1,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,137,17,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,138,114,2,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,139,76,0,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,140,116,2,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,141,76,0,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,142,116,2,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,143,80,0,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,144,111,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,145,90,1,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,146,19,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,147,116,2,1,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,148,73,0,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,149,114,3,0,7,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,150,75,0,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,151,126,2,0,4,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,152,37,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,153,130,2,0,2,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,154,27,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,155,120,2,0,3,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,156,42,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,157,118,1,0,5,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,158,91,1,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf,be13e373c370c58d07d2dd277ffe12a459c849db58a5c7e42694c459034942a2,159,88,3,0,0,0,searched
+58-32,1006.zip!58-32_EOWR.zip!58-32_EOWR/FinalMudLog.pdf,4d12229370ed3de29a257d358dc4b0b850bd4890626e2596d2d5d3b95214888f,1,0,0,0,0,0,searched
+58-32,1006.zip!58-32_EOWR_DOE_22Feb_BinderComplete (1).pdf,cf469b1d0a1355f0cdc4f0e1cd2f2997907fa707f51596f29e65deba29c1f81b,1,3,0,0,0,0,searched
+58-32,1006.zip!Well_58-32_Final_Mud_Log.pdf,24777404f628f68d673879e67b6b1855fcca3885a6b659576b63ea0f5158e3e3,1,0,0,0,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01052021_01052021.pdf,cf7f7cfc3d3dd27b3d461083fe8f23728f2a7cca0262ad8aaff867b499857954,1,123,1,0,2,2,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01062021_01062021_1_tmp.pdf,b45a0047a0d8e82d087a7f538b15e2eec0f8f714562716da2a57243546c08dee,1,114,3,0,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01072021_01072021_13_reporttmp.pdf,a0a700b7d49029d84cbfc788a7e6ebd7fcbabfb19467f76c64074136e6320477,1,57,2,0,0,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01082021_01082021_17_reporttmp.pdf,4cf0cb62004b581343f5c6f305452ed6f049643e59da127935eddb6a99bb4ab9,1,52,5,0,3,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01092021_01092021_21_reporttmp.pdf,cfaf4e4d5a5fed37c9e5689eb696c74199c3eaf35554f89a78bcd1e435d579ba,1,49,1,0,1,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01102021_01102021_10_reporttmp.pdf,8056759ee5ec2cccaacfd13acf96b34b36ac38d89bcdfaed87c7342f953f463a,1,47,1,0,1,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01112021_01112021_16_reporttmp.pdf,8fd14f5200fa459da5b6bbfeb7dd6cd554fb42977adea286c4d9d7c2a9a9bc50,1,56,2,0,4,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01122021_01122021_3_reporttmp.pdf,ed47dd7a51579e654681476eadada8037c3b0d17d22c9d2943ecf0e07acef62a,1,53,2,0,1,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion_01042021_01042021_tmp.pdf,809c600fe21a41ae22e4e342febcbce5f60dd969d5b42b98ff97c92b44982aa5,1,83,1,0,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_01012021_01012021_15_reporttmp.pdf,e45694ad4d139fa666c2f5da0f95d55bd51d18ff006ac7ae1762e14ad9d72f5b,1,82,7,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_01022021_01022021_14_reporttmp.pdf,060d498868db0ba44a3f39fccb5a5636ab2120122676fe3f359a93ca161ef66a,1,73,5,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_01032021_01032021_15_1_reporttmp.pdf,845b3e7ce439b7c96680ac50284eef9b920a382b8afe660514e170cc5164cea1,1,70,4,1,0,2,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10222020_10222020_19_reporttmp.pdf,0cc09f0961f5b73250d826e5df84a28d00293742d1daf466f6e1520c6cefa75d,1,59,2,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10232020_10232020_26_reporttmp.pdf,ced8b188c2b6bd4dbd3108299efbfbedf0bf911b132c1d00d9ac518f1e895b6e,1,61,2,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10242020_10242020_17_reporttmp.pdf,38180708100a30e76067340894ae5791aea1ca83d2d625a41972b7abb0054c2a,1,60,2,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10252020_10252020_24_reporttmp.pdf,af20b80c3afda6185a9e968a7ec02c8426fc38f07b94bdab81dc433705e07400,1,58,2,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10262020_10262020_15_reporttmp.pdf,9a952b70e7b89d0425af16efede41425b33b4ce13686b3a1ee3836e7c0456ad1,1,60,4,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10272020_10272020_15_reporttmp.pdf,1f1163d1e0b0239dbaefa9e84166e9e396fbfbf5c0c71c73f6bf0e7eac6788c6,1,56,3,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10282020_10282020_3_reporttmp.pdf,548dd3bb1618dc68728e6ea1c67da2b80bc1c0151ca1dac901de08eef0e390ce,1,60,3,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10292020_10292020_15_reporttmp.pdf,06c0740b3ecb8eace8b330a37dc3c17a966c35f797f54cb3b2d806d26094f6e6,1,65,3,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10302020_10302020_3_reporttmp.pdf,c32e82b0b0475df1c06c9f98820b66938486be098258e11074d6b0f45ec86bc4,1,82,4,1,2,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10312020_10312020_19_1_reporttmp.pdf,06ad19f3a37583bb9008c86866e9a6fe1d31a72e72c15e5973c61afd6535d002,1,84,2,1,3,5,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11012020_11012020_21_reporttmp.pdf,55a7115e6d89d3142fc7581e80cea9114f9c075927b5fd1810fc3530410dd729,1,85,3,1,3,2,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11022020_11022020_21_reporttmp.pdf,88f7f0daa65e6fd7872cbccccc0fafbedd4ff361c0eb10f7e31c1fcc287e5b7e,1,70,2,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11032020_11032020_17_reporttmp.pdf,59a1b758ca1243c643046c9dc537bed104611ed57ef30e7a4fb3172adfd77508,1,72,2,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11042020_11042020_18_reporttmp.pdf,f7714edfd4cb9cb93e4cb954b6fdb9ca109df07f028a0eed7e329baabe2f78b7,1,96,3,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11052020_11052020_12_reporttmp.pdf,ae3372895977b907040f2c73d85c3909882936cd46e690eedc1794cadc51b81f,1,101,3,1,4,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11062020_11062020_19_reporttmp.pdf,b4cf115cc55e050cc5de6605a3b2a28418db2b7dcd6473984ba8f9e7d4b5ecb8,1,109,2,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11072020_11072020_24_reporttmp.pdf,8528f9e576ae9e1b1e19cc642c32ccc942774917793645d436d5994697602cee,1,105,2,1,2,2,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11082020_11082020_26_reporttmp.pdf,0ca79b5cee12985c648cf09bb17a5a5b877b90db51b52bc99cc89a0ceff0a40c,1,109,6,3,2,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11092020_11092020_11_reporttmp.pdf,0124a3b967f0bcee9d61f1101b0361be895ad819b37cb9d4f3cda423897f3100,1,114,2,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11102020_11102020_8_reporttmp.pdf,a626caa2a790307992a40a5ea93fda92435549a45725db71c52a1905af4fd795,1,89,8,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11112020_11112020_19_reporttmp.pdf,058bbae9a1509df9cb6706aaf82d77f5472b36a5adaf8b0ba45ae2e61102b28a,1,80,8,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11122020_11122020_18_reporttmp.pdf,565bc1bc72a9a4ab1b3a753bdf202336ec9ea81322a37f1cd4b257b49b7b1a8f,1,86,4,1,2,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11132020_11132020_18_reporttmp.pdf,0a37b017c0feebb904fd35496c73df11de03f27a62ee393aa97fda64342fb32f,1,78,4,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11142020_11142020_14_reporttmp.pdf,64b91c507fe266200acc84eff5618cb9eb40e0deeb889c5e3473211836fd571f,1,85,2,1,4,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11152020_11152020_13_reporttmp.pdf,8b8650f1a366f7671871954cc6b8e50cae24a7ba9f113ca6be0da55593b7ad00,1,104,2,1,3,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11162020_11162020_21_reporttmp.pdf,28392fa7141bffdffb0132325729ad46b30b2b070f9bc50bcc1b2120c9286277,1,92,4,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11172020_11172020_24_reporttmp.pdf,71b1aa40bfe2e74718857f9b3c5f2eac08392ca59416146d5f1253f2ae4fb1de,1,83,3,1,1,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11182020_11182020_16_reporttmp.pdf,5d728239764f17492fe4c03014b97da96592a5e8fe30c4d88052890891518a04,1,77,3,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11192020_11192020_9_reporttmp.pdf,0d1777da0e5ee2243e274086b87c2e00daf715cf870c88a1b0e5273e2ce22a10,1,74,3,1,1,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11202020_11202020_8_reporttmp.pdf,413d7ff12f3f74a721527d8749c46134c27a6f12a83859a2a8ab73184397d933,1,75,2,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11212020_11212020_15_reporttmp.pdf,9caa4accd638580ed8727ae777bbfb8c1454a5d12d65462be37f0c3d5485947c,1,72,2,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11222020_11222020_19_reporttmp.pdf,a281586851f055b1f1f5af239c6068314db85f0ad22936a106ee74ca750eff85,1,78,2,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11232020_11232020_16_reporttmp.pdf,36cc7d48253ce66f350ff62dfa64bbec2fc663a5225a1eca3bec1289b4e8a605,1,89,3,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11242020_11242020_9_1_reporttmp.pdf,f7d97e320f574d1d0c3656b3d526b9c171fe9e9bfc7ece2addd39beea22b6b0d,1,85,2,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11252020_11252020_15_reporttmp.pdf,6706f1065c29f91be53c63f57c2eed618c5a11215685ace7a3ee0d73c93ba4ba,1,67,2,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11262020_11262020_11_reporttmp.pdf,fb09fc86ae801aecc8c45de0da83d9fbe052ed6e835a36ca3ed2a4d7d7c3b16f,1,90,3,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11272020_11272020_9_reporttmp.pdf,8dda96e1879921986833642fb09d0f6cf88076e2fdb01b9b70b9c9076c31e9a9,1,87,3,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11282020_11282020_20_1_reporttmp.pdf,0f3fb797d51974f82aa3294972000048b8db4105d9979ce98a048fe0600a591c,1,74,5,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf,e36e224fbd6bd39218658b6bc94a55216de7d415532a2146260fb61f6cbfb5e0,1,76,2,1,1,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11302020_11302020_16_1_reporttmp.pdf,cf37df1dc84cf4d3994f3e38baa69e57805a2d7dd70cb5dd191df6d6ae097f2f,1,87,4,1,6,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12012020_12012020_18_reporttmp.pdf,3dfaa87315df9c4a4b57257a588eebe684bb5955819ddea4349cda60bf4ec1b2,1,76,4,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12022020_12022020_12_reporttmp.pdf,c75e0eb74c8891a26c808d22897fb7d7e79653619184d5d037d1e15aae2cdb7f,1,66,4,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12032020_12032020_7_reporttmp.pdf,be15c6d8d89c92bfca0c70c72a05d07828a1de30ffa0ca15c1051e106d51edff,1,65,4,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12042020_12042020_21_reporttmp.pdf,88b410ecee4673c717cf24d2bbe476a7d6203ae4fe87386ddaa9c8ed1e7a92b7,1,96,6,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12052020_12052020_10_reporttmp.pdf,f68a8f395474f760d7ae8b76f1dbe4e9d68565c99b960dbd309acebdfe73e6a2,1,73,2,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12062020_12062020_17_reporttmp.pdf,ecceb51f55125e443db870d3c6d382a1f568fccecc92cbf3faf93754d1ef405d,1,78,4,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12072020_12072020_3_reporttmp.pdf,2acf62b43eee61bf371d0e6272884bde2ffe6a5b407a8d8ad163cddb6da96e47,1,69,3,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12082020_12082020_10_reporttmp.pdf,407de3250b26edf223ec68bccfac0b90250c2e8e889b9a715c13a8f81939f913,1,80,3,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12092020_12092020_16_reporttmp.pdf,c8559729c09a3a3120204de2bf488d4ab56c26d08d4b3bc2bc6b52c03e761d8c,1,90,3,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12102020_12102020_22_reporttmp.pdf,b68aed9f4d06e9427e3c471aa6165c4faabdb4008a656f7203817c63e4ced257,1,83,3,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12112020_12112020_8_reporttmp.pdf,53fcf830460e4d0703b3181c6597cb83895c1c55db019549b9691bdcc298eb8b,1,88,6,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12122020_12122020_13_reporttmp.pdf,630a69c4c7bf9e031ae0e0f04fe6f8df84698467a09fcf7bdb35b4e75194f5cb,1,69,3,1,2,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12132020_12132020_11_reporttmp.pdf,83390cf187f48329cb58b9b765222ff074c1450f637e76576c655fccfa8e12f7,1,71,2,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12142020_12142020_15_reporttmp.pdf,91a77109f38f505dfed6d55475427985fdbe983e09a0d7a9f892d4a7c8db46b1,1,81,2,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12152020_12152020_3_reporttmp.pdf,812e638aa27df2a1f54c72bf7748df351805842e5659ede7a743aad56bac3fb8,1,77,3,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12162020_12162020_12_reporttmp.pdf,b6eb457f50e85776c744238573b2e89efe1314148b51b176b9c8845fd85bc671,1,71,5,1,3,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12172020_12172020_19_reporttmp.pdf,d6846267e129b5cb93f78e5e2cd8dc74e6c7121e2801d6c6b511183a9d113d73,1,85,3,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf,1c9d1349bceb8d55d1a43d4a7ebfc66878ad3d169d1b026e428e8d88fe82e298,1,74,3,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12192020_12192020_12_reporttmp.pdf,9a1048a6ef0893507143931c9deb39dfd5166982ff3a6095d33d976e85465746,1,84,4,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12202020_12202020_15_reporttmp.pdf,771d37cacfffa7c9742428029181b05fb731199ceb53d823f563dd09ffbe8f43,1,74,4,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12212020_12212020_14_reporttmp.pdf,13083b6f7a24e4b5c37ed353be2732105fc5efe11cffae2877886aebb12b3a5b,1,72,3,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12222020_12222020_8_reporttmp.pdf,63587d86a3ebbffb53632f3d95f2a259300172ab414b5b36bd869315d8120810,1,66,5,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12232020_12232020_20_reporttmp.pdf,d5e9bda451b72408ae494ef61967bed5ce5976368330b0e4158124e6edd33315,1,80,4,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12242020_12242020_3_reporttmp.pdf,00b6ac178520e0ff7674d7cb782c2e3365da931c55d7e399abde01ebfe0d416b,1,73,4,1,0,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12252020_12252020_13_reporttmp.pdf,4596dbc094556b30df8fbe87caca5e1b1bd23ebe218d0e60bb10c200fc1325f5,1,72,4,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12262020_12262020_7_reporttmp.pdf,21bf39324e504e175ab603479118ddc2b18b1e1cc49bb386ff17767eee434337,1,76,5,1,1,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12272020_12272020_3_reporttmp.pdf,bcf108c30b431e7514ad5c21d4a1df33585ca8799b6d318b35b009c20658e028,1,77,3,1,2,1,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12282020_12282020_13_reporttmp.pdf,e1c65a5336e5760aa0b24bf96d57a5043e04b8a89d72ff3ec4a12a22a54829a0,1,70,2,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12292020_12292020_7_reporttmp.pdf,2866ca3e7f807dafeba34a1f35aff0733afdee250b617029a2b1c899dc1c6bb1,1,75,3,1,5,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12302020_12302020_17_reporttmp.pdf,7af69214ede1f8bdfca0d23d6d89d124d3b25f5ca29817f6131f01eaab2ee408,1,83,7,1,3,0,searched
+16A,1283.zip!2021-well-16a78-32-daily-reports.zip!2021-well-16a78-32-daily-reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12312020_12312020_14_reporttmp.pdf,ea0aa5ed43b40d91e093a5ef1a30c1bb4d38e7426c4f4f56b16f3aca1d51112d,1,69,6,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01052021_01052021.pdf,cf7f7cfc3d3dd27b3d461083fe8f23728f2a7cca0262ad8aaff867b499857954,1,123,1,0,2,2,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01062021_01062021_1_tmp.pdf,b45a0047a0d8e82d087a7f538b15e2eec0f8f714562716da2a57243546c08dee,1,114,3,0,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01072021_01072021_13_reporttmp.pdf,a0a700b7d49029d84cbfc788a7e6ebd7fcbabfb19467f76c64074136e6320477,1,57,2,0,0,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01082021_01082021_17_reporttmp.pdf,4cf0cb62004b581343f5c6f305452ed6f049643e59da127935eddb6a99bb4ab9,1,52,5,0,3,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01092021_01092021_21_reporttmp.pdf,cfaf4e4d5a5fed37c9e5689eb696c74199c3eaf35554f89a78bcd1e435d579ba,1,49,1,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01102021_01102021_10_reporttmp.pdf,8056759ee5ec2cccaacfd13acf96b34b36ac38d89bcdfaed87c7342f953f463a,1,47,1,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01112021_01112021_16_reporttmp.pdf,8fd14f5200fa459da5b6bbfeb7dd6cd554fb42977adea286c4d9d7c2a9a9bc50,1,56,2,0,4,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion-C_01122021_01122021_3_reporttmp.pdf,ed47dd7a51579e654681476eadada8037c3b0d17d22c9d2943ecf0e07acef62a,1,53,2,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_(78)-32_Completion_01042021_01042021_tmp.pdf,809c600fe21a41ae22e4e342febcbce5f60dd969d5b42b98ff97c92b44982aa5,1,83,1,0,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11020211102021_10_reporttmp.pdf,8056759ee5ec2cccaacfd13acf96b34b36ac38d89bcdfaed87c7342f953f463a,1,47,1,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11020211102021_16_reporttmp.pdf,4e890edaff1dc5ec9cc07467025c9734b62b4421de7e1f80f158ac8e8ad67b80,1,47,1,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11120211112021_16_reporttmp.pdf,8fd14f5200fa459da5b6bbfeb7dd6cd554fb42977adea286c4d9d7c2a9a9bc50,1,56,2,0,4,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11120211112021_9_reporttmp.pdf,1c92eb18cc16c33e9f9d25567dab6f91b7ab91d1806228168cf5886afbd39fbf,1,56,2,0,4,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11220211122021_12_reporttmp.pdf,be3a570a6999ba60fd3764c0f2d0822c180b6b83000e386775f46f15603bb394,1,53,2,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_11220211122021_3_reporttmp.pdf,ed47dd7a51579e654681476eadada8037c3b0d17d22c9d2943ecf0e07acef62a,1,53,2,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_172021172021_13_reporttmp.pdf,a0a700b7d49029d84cbfc788a7e6ebd7fcbabfb19467f76c64074136e6320477,1,57,2,0,0,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_172021172021_19_reporttmp.pdf,6d0de2e7b3482eaf30bc076af40163bceea140e2e03ff499a1d8762781b2044b,1,57,2,0,0,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_182021182021_17_reporttmp.pdf,4cf0cb62004b581343f5c6f305452ed6f049643e59da127935eddb6a99bb4ab9,1,52,5,0,3,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_182021182021_18_reporttmp.pdf,2faeb082bf2c4c8f22bc964768c32d9c9a9081e79974d7ec6ae00aef174c6047,1,52,5,0,3,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_192021192021_19_reporttmp.pdf,f7a203bd9a30752e08a0bbf55e7d0aa48da92385242624dbb1a2821d34dd8ceb,1,49,1,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/completion/Utah_Forge_FORGE_16A_[78]-32_Completion-C_192021192021_21_reporttmp.pdf,cfaf4e4d5a5fed37c9e5689eb696c74199c3eaf35554f89a78bcd1e435d579ba,1,49,1,0,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/11_04_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11420201142020_25_reporttmp.pdf,739acd0e055bf419dcf48a04d739c794ab016180d16a883d0bb18661a1e31e56,1,96,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/11_13_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1113202011132020_18_reporttmp.pdf,2912a9ef4632ee9c22b40eea135db7fc32e44f6c89ffc02e108d772a212f8875,1,78,4,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/11_15_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1115202011152020_20_reporttmp.pdf,6d7ec547a0a2873a939692de44c31eaf342e7a4f31d719f0e3f195ef0ea4c8fe,1,104,2,1,3,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/11_17_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1117202011172020_24_reporttmp.pdf,71b1aa40bfe2e74718857f9b3c5f2eac08392ca59416146d5f1253f2ae4fb1de,1,83,3,1,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/11_19_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1119202011192020_19_reporttmp.pdf,ee41b95fd87d665df36db7c9d692db5397155fceae1375ccad14e5e4e7f6cdd9,1,74,3,1,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/11_22_2020_Utah_Forge_FORGE_16A_78-32_Drilling-C_1122202011222020_3_reporttmp.pdf,087fe1b8621cc3a5273fb01ddb0148f595529546a63a80b44b231eed5b0ee3c8,1,78,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/11_24_2020_Utah_Forge_FORGE_16A_78-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf,f7d97e320f574d1d0c3656b3d526b9c171fe9e9bfc7ece2addd39beea22b6b0d,1,85,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/11_30_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1130202011302020_16_reporttmp.pdf,db2c9e203448680b7db01a70dc2f95b5b9ab64ca02f14ee51d033be1ca499681,1,87,4,1,6,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/12_01_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12120201212020_11_reporttmp.pdf,5e039bd758d56a80a9f2a713bbf619dbdfd34ea6b6ad47173bcf09f5117e78af,1,76,4,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/12_14_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_19_reporttmp.pdf,0d7f548db0f0ed80d0e6d7584c5fc3a17771473d4c5b9768f2fb97352595fd09,1,81,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/12_21_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1221202012212020_14_reporttmp.pdf,c4e06340738598a9abb4c0a8204385790c47ec264b42b531ca4ab93a8736ccc4,1,72,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/12_2_2020_Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12220201222020_12_reporttmp.pdf,cf06c714bedefb80bdbeb26c64a5172ec731b9a795bf7829f585fe3970f388ab,1,66,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_01012021_01012021_15_reporttmp.pdf,e45694ad4d139fa666c2f5da0f95d55bd51d18ff006ac7ae1762e14ad9d72f5b,1,82,7,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_01022021_01022021_14_reporttmp.pdf,060d498868db0ba44a3f39fccb5a5636ab2120122676fe3f359a93ca161ef66a,1,73,5,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_01032021_01032021_15_1_reporttmp.pdf,845b3e7ce439b7c96680ac50284eef9b920a382b8afe660514e170cc5164cea1,1,70,4,1,0,2,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10222020_10222020_19_reporttmp.pdf,0cc09f0961f5b73250d826e5df84a28d00293742d1daf466f6e1520c6cefa75d,1,59,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10232020_10232020_26_reporttmp.pdf,ced8b188c2b6bd4dbd3108299efbfbedf0bf911b132c1d00d9ac518f1e895b6e,1,61,2,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10242020_10242020_17_reporttmp.pdf,38180708100a30e76067340894ae5791aea1ca83d2d625a41972b7abb0054c2a,1,60,2,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10252020_10252020_24_reporttmp.pdf,af20b80c3afda6185a9e968a7ec02c8426fc38f07b94bdab81dc433705e07400,1,58,2,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10262020_10262020_15_reporttmp.pdf,9a952b70e7b89d0425af16efede41425b33b4ce13686b3a1ee3836e7c0456ad1,1,60,4,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10272020_10272020_15_reporttmp.pdf,1f1163d1e0b0239dbaefa9e84166e9e396fbfbf5c0c71c73f6bf0e7eac6788c6,1,56,3,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10282020_10282020_3_reporttmp.pdf,548dd3bb1618dc68728e6ea1c67da2b80bc1c0151ca1dac901de08eef0e390ce,1,60,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10292020_10292020_15_reporttmp.pdf,06c0740b3ecb8eace8b330a37dc3c17a966c35f797f54cb3b2d806d26094f6e6,1,65,3,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10302020_10302020_3_reporttmp.pdf,c32e82b0b0475df1c06c9f98820b66938486be098258e11074d6b0f45ec86bc4,1,82,4,1,2,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_10312020_10312020_19_1_reporttmp.pdf,06ad19f3a37583bb9008c86866e9a6fe1d31a72e72c15e5973c61afd6535d002,1,84,2,1,3,5,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11012020_11012020_21_reporttmp.pdf,55a7115e6d89d3142fc7581e80cea9114f9c075927b5fd1810fc3530410dd729,1,85,3,1,3,2,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11022020_11022020_21_reporttmp.pdf,88f7f0daa65e6fd7872cbccccc0fafbedd4ff361c0eb10f7e31c1fcc287e5b7e,1,70,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11032020_11032020_17_reporttmp.pdf,59a1b758ca1243c643046c9dc537bed104611ed57ef30e7a4fb3172adfd77508,1,72,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11042020_11042020_18_reporttmp.pdf,f7714edfd4cb9cb93e4cb954b6fdb9ca109df07f028a0eed7e329baabe2f78b7,1,96,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11052020_11052020_12_reporttmp.pdf,ae3372895977b907040f2c73d85c3909882936cd46e690eedc1794cadc51b81f,1,101,3,1,4,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11062020_11062020_19_reporttmp.pdf,b4cf115cc55e050cc5de6605a3b2a28418db2b7dcd6473984ba8f9e7d4b5ecb8,1,109,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11072020_11072020_24_reporttmp.pdf,8528f9e576ae9e1b1e19cc642c32ccc942774917793645d436d5994697602cee,1,105,2,1,2,2,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11082020_11082020_26_reporttmp.pdf,0ca79b5cee12985c648cf09bb17a5a5b877b90db51b52bc99cc89a0ceff0a40c,1,109,6,3,2,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11092020_11092020_11_reporttmp.pdf,0124a3b967f0bcee9d61f1101b0361be895ad819b37cb9d4f3cda423897f3100,1,114,2,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11102020_11102020_8_reporttmp.pdf,a626caa2a790307992a40a5ea93fda92435549a45725db71c52a1905af4fd795,1,89,8,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11112020_11112020_19_reporttmp.pdf,058bbae9a1509df9cb6706aaf82d77f5472b36a5adaf8b0ba45ae2e61102b28a,1,80,8,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11122020_11122020_18_reporttmp.pdf,565bc1bc72a9a4ab1b3a753bdf202336ec9ea81322a37f1cd4b257b49b7b1a8f,1,86,4,1,2,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11132020_11132020_18_reporttmp.pdf,0a37b017c0feebb904fd35496c73df11de03f27a62ee393aa97fda64342fb32f,1,78,4,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11142020_11142020_14_reporttmp.pdf,64b91c507fe266200acc84eff5618cb9eb40e0deeb889c5e3473211836fd571f,1,85,2,1,4,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11152020_11152020_13_reporttmp.pdf,8b8650f1a366f7671871954cc6b8e50cae24a7ba9f113ca6be0da55593b7ad00,1,104,2,1,3,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11162020_11162020_21_reporttmp.pdf,28392fa7141bffdffb0132325729ad46b30b2b070f9bc50bcc1b2120c9286277,1,92,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11172020_11172020_24_reporttmp.pdf,71b1aa40bfe2e74718857f9b3c5f2eac08392ca59416146d5f1253f2ae4fb1de,1,83,3,1,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11182020_11182020_16_reporttmp.pdf,5d728239764f17492fe4c03014b97da96592a5e8fe30c4d88052890891518a04,1,77,3,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11192020_11192020_9_reporttmp.pdf,0d1777da0e5ee2243e274086b87c2e00daf715cf870c88a1b0e5273e2ce22a10,1,74,3,1,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11202020_11202020_8_reporttmp.pdf,413d7ff12f3f74a721527d8749c46134c27a6f12a83859a2a8ab73184397d933,1,75,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11212020_11212020_15_reporttmp.pdf,9caa4accd638580ed8727ae777bbfb8c1454a5d12d65462be37f0c3d5485947c,1,72,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11222020_11222020_19_reporttmp.pdf,a281586851f055b1f1f5af239c6068314db85f0ad22936a106ee74ca750eff85,1,78,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11232020_11232020_16_reporttmp.pdf,36cc7d48253ce66f350ff62dfa64bbec2fc663a5225a1eca3bec1289b4e8a605,1,89,3,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11242020_11242020_9_1_reporttmp.pdf,f7d97e320f574d1d0c3656b3d526b9c171fe9e9bfc7ece2addd39beea22b6b0d,1,85,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11252020_11252020_15_reporttmp.pdf,6706f1065c29f91be53c63f57c2eed618c5a11215685ace7a3ee0d73c93ba4ba,1,67,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11262020_11262020_11_reporttmp.pdf,fb09fc86ae801aecc8c45de0da83d9fbe052ed6e835a36ca3ed2a4d7d7c3b16f,1,90,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11272020_11272020_9_reporttmp.pdf,8dda96e1879921986833642fb09d0f6cf88076e2fdb01b9b70b9c9076c31e9a9,1,87,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11282020_11282020_20_1_reporttmp.pdf,0f3fb797d51974f82aa3294972000048b8db4105d9979ce98a048fe0600a591c,1,74,5,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf,e36e224fbd6bd39218658b6bc94a55216de7d415532a2146260fb61f6cbfb5e0,1,76,2,1,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11302020_11302020_16_1_reporttmp.pdf,cf37df1dc84cf4d3994f3e38baa69e57805a2d7dd70cb5dd191df6d6ae097f2f,1,87,4,1,6,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12012020_12012020_18_reporttmp.pdf,3dfaa87315df9c4a4b57257a588eebe684bb5955819ddea4349cda60bf4ec1b2,1,76,4,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12022020_12022020_12_reporttmp.pdf,c75e0eb74c8891a26c808d22897fb7d7e79653619184d5d037d1e15aae2cdb7f,1,66,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12032020_12032020_7_reporttmp.pdf,be15c6d8d89c92bfca0c70c72a05d07828a1de30ffa0ca15c1051e106d51edff,1,65,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12042020_12042020_21_reporttmp.pdf,88b410ecee4673c717cf24d2bbe476a7d6203ae4fe87386ddaa9c8ed1e7a92b7,1,96,6,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12052020_12052020_10_reporttmp.pdf,f68a8f395474f760d7ae8b76f1dbe4e9d68565c99b960dbd309acebdfe73e6a2,1,73,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12062020_12062020_17_reporttmp.pdf,ecceb51f55125e443db870d3c6d382a1f568fccecc92cbf3faf93754d1ef405d,1,78,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12072020_12072020_3_reporttmp.pdf,2acf62b43eee61bf371d0e6272884bde2ffe6a5b407a8d8ad163cddb6da96e47,1,69,3,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12082020_12082020_10_reporttmp.pdf,407de3250b26edf223ec68bccfac0b90250c2e8e889b9a715c13a8f81939f913,1,80,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12092020_12092020_16_reporttmp.pdf,c8559729c09a3a3120204de2bf488d4ab56c26d08d4b3bc2bc6b52c03e761d8c,1,90,3,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12102020_12102020_22_reporttmp.pdf,b68aed9f4d06e9427e3c471aa6165c4faabdb4008a656f7203817c63e4ced257,1,83,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12112020_12112020_8_reporttmp.pdf,53fcf830460e4d0703b3181c6597cb83895c1c55db019549b9691bdcc298eb8b,1,88,6,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12122020_12122020_13_reporttmp.pdf,630a69c4c7bf9e031ae0e0f04fe6f8df84698467a09fcf7bdb35b4e75194f5cb,1,69,3,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12132020_12132020_11_reporttmp.pdf,83390cf187f48329cb58b9b765222ff074c1450f637e76576c655fccfa8e12f7,1,71,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12142020_12142020_15_reporttmp.pdf,91a77109f38f505dfed6d55475427985fdbe983e09a0d7a9f892d4a7c8db46b1,1,81,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12152020_12152020_3_reporttmp.pdf,812e638aa27df2a1f54c72bf7748df351805842e5659ede7a743aad56bac3fb8,1,77,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12162020_12162020_12_reporttmp.pdf,b6eb457f50e85776c744238573b2e89efe1314148b51b176b9c8845fd85bc671,1,71,5,1,3,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12172020_12172020_19_reporttmp.pdf,d6846267e129b5cb93f78e5e2cd8dc74e6c7121e2801d6c6b511183a9d113d73,1,85,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf,1c9d1349bceb8d55d1a43d4a7ebfc66878ad3d169d1b026e428e8d88fe82e298,1,74,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12192020_12192020_12_reporttmp.pdf,9a1048a6ef0893507143931c9deb39dfd5166982ff3a6095d33d976e85465746,1,84,4,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12202020_12202020_15_reporttmp.pdf,771d37cacfffa7c9742428029181b05fb731199ceb53d823f563dd09ffbe8f43,1,74,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12212020_12212020_14_reporttmp.pdf,13083b6f7a24e4b5c37ed353be2732105fc5efe11cffae2877886aebb12b3a5b,1,72,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12222020_12222020_8_reporttmp.pdf,63587d86a3ebbffb53632f3d95f2a259300172ab414b5b36bd869315d8120810,1,66,5,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12232020_12232020_20_reporttmp.pdf,d5e9bda451b72408ae494ef61967bed5ce5976368330b0e4158124e6edd33315,1,80,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12242020_12242020_3_reporttmp.pdf,00b6ac178520e0ff7674d7cb782c2e3365da931c55d7e399abde01ebfe0d416b,1,73,4,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12252020_12252020_13_reporttmp.pdf,4596dbc094556b30df8fbe87caca5e1b1bd23ebe218d0e60bb10c200fc1325f5,1,72,4,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12262020_12262020_7_reporttmp.pdf,21bf39324e504e175ab603479118ddc2b18b1e1cc49bb386ff17767eee434337,1,76,5,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12272020_12272020_3_reporttmp.pdf,bcf108c30b431e7514ad5c21d4a1df33585ca8799b6d318b35b009c20658e028,1,77,3,1,2,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12282020_12282020_13_reporttmp.pdf,e1c65a5336e5760aa0b24bf96d57a5043e04b8a89d72ff3ec4a12a22a54829a0,1,70,2,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12292020_12292020_7_reporttmp.pdf,2866ca3e7f807dafeba34a1f35aff0733afdee250b617029a2b1c899dc1c6bb1,1,75,3,1,5,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12302020_12302020_17_reporttmp.pdf,7af69214ede1f8bdfca0d23d6d89d124d3b25f5ca29817f6131f01eaab2ee408,1,83,7,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12312020_12312020_14_reporttmp.pdf,ea0aa5ed43b40d91e093a5ef1a30c1bb4d38e7426c4f4f56b16f3aca1d51112d,1,69,6,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1021202010212020_78_reporttmp.pdf,60fd34bb6ac025d75e886d257d0afe80f5b572bf437db67c873bff6d63e9ae52,1,53,3,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1021202010212020_92_reporttmp.pdf,7427d6a5a92df1665e0730e4c3f4a4e9588280e34d99bf3a9345c4e1aaa13043,1,53,3,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1022202010222020_19_reporttmp.pdf,0cc09f0961f5b73250d826e5df84a28d00293742d1daf466f6e1520c6cefa75d,1,59,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1023202010232020_26_reporttmp.pdf,ced8b188c2b6bd4dbd3108299efbfbedf0bf911b132c1d00d9ac518f1e895b6e,1,61,2,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1024202010242020_17_reporttmp.pdf,38180708100a30e76067340894ae5791aea1ca83d2d625a41972b7abb0054c2a,1,60,2,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1025202010252020_24_reporttmp.pdf,af20b80c3afda6185a9e968a7ec02c8426fc38f07b94bdab81dc433705e07400,1,58,2,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1026202010262020_15_reporttmp.pdf,9a952b70e7b89d0425af16efede41425b33b4ce13686b3a1ee3836e7c0456ad1,1,60,4,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1027202010272020_15_reporttmp.pdf,1f1163d1e0b0239dbaefa9e84166e9e396fbfbf5c0c71c73f6bf0e7eac6788c6,1,56,3,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1028202010282020_3_reporttmp.pdf,548dd3bb1618dc68728e6ea1c67da2b80bc1c0151ca1dac901de08eef0e390ce,1,60,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1029202010292020_11_reporttmp.pdf,70e8414ae1279984316475ba1fea3d49b05c518de90107a639c52b08bb26495b,1,72,3,1,0,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1029202010292020_15_reporttmp.pdf,06c0740b3ecb8eace8b330a37dc3c17a966c35f797f54cb3b2d806d26094f6e6,1,65,3,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1030202010302020_3_reporttmp.pdf,c32e82b0b0475df1c06c9f98820b66938486be098258e11074d6b0f45ec86bc4,1,82,4,1,2,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1031202010312020_19_1_reporttmp.pdf,06ad19f3a37583bb9008c86866e9a6fe1d31a72e72c15e5973c61afd6535d002,1,84,2,1,3,5,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1110202011102020_8_reporttmp.pdf,e3c298cda2a6be20e59be46a6674989614ecfbb96d30a87a70d5ee7ee4939fd5,1,89,8,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1111202011112020_19_reporttmp.pdf,fc75aea70f2af3a64b5901034f52f6cbe657e38215244fd7179a69e1c06b0e0a,1,80,8,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11120201112020_21_reporttmp.pdf,55a7115e6d89d3142fc7581e80cea9114f9c075927b5fd1810fc3530410dd729,1,85,3,1,3,2,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1112202011122020_18_reporttmp.pdf,565bc1bc72a9a4ab1b3a753bdf202336ec9ea81322a37f1cd4b257b49b7b1a8f,1,86,4,1,2,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1113202011132020_18_reporttmp.pdf,0a37b017c0feebb904fd35496c73df11de03f27a62ee393aa97fda64342fb32f,1,78,4,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1114202011142020_14_reporttmp.pdf,64b91c507fe266200acc84eff5618cb9eb40e0deeb889c5e3473211836fd571f,1,85,2,1,4,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1115202011152020_13_reporttmp.pdf,8b8650f1a366f7671871954cc6b8e50cae24a7ba9f113ca6be0da55593b7ad00,1,104,2,1,3,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1116202011162020_21_reporttmp.pdf,936313cb264c0a6d80052da60611dce63bbc66fce721e925f35b41c1d916340a,1,92,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1117202011172020_24_reporttmp.pdf,71b1aa40bfe2e74718857f9b3c5f2eac08392ca59416146d5f1253f2ae4fb1de,1,83,3,1,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1118202011182020_16_reporttmp.pdf,f28f476bb5e667a26b77a894201904a86d7ecd2e27a94bfd5cf5b0f402ffc292,1,77,3,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1119202011192020_9_reporttmp.pdf,0d1777da0e5ee2243e274086b87c2e00daf715cf870c88a1b0e5273e2ce22a10,1,74,3,1,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1120202011202020_8_reporttmp.pdf,413d7ff12f3f74a721527d8749c46134c27a6f12a83859a2a8ab73184397d933,1,75,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_112021112021_15_reporttmp.pdf,e45694ad4d139fa666c2f5da0f95d55bd51d18ff006ac7ae1762e14ad9d72f5b,1,82,7,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1121202011212020_15_reporttmp.pdf,9caa4accd638580ed8727ae777bbfb8c1454a5d12d65462be37f0c3d5485947c,1,72,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11220201122020_21_reporttmp.pdf,88f7f0daa65e6fd7872cbccccc0fafbedd4ff361c0eb10f7e31c1fcc287e5b7e,1,70,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1122202011222020_19_reporttmp.pdf,a281586851f055b1f1f5af239c6068314db85f0ad22936a106ee74ca750eff85,1,78,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1123202011232020_16_reporttmp.pdf,36cc7d48253ce66f350ff62dfa64bbec2fc663a5225a1eca3bec1289b4e8a605,1,89,3,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf,f7d97e320f574d1d0c3656b3d526b9c171fe9e9bfc7ece2addd39beea22b6b0d,1,85,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1125202011252020_15_reporttmp.pdf,6706f1065c29f91be53c63f57c2eed618c5a11215685ace7a3ee0d73c93ba4ba,1,67,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1126202011262020_11_reporttmp.pdf,fb09fc86ae801aecc8c45de0da83d9fbe052ed6e835a36ca3ed2a4d7d7c3b16f,1,90,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1127202011272020_9_reporttmp.pdf,8dda96e1879921986833642fb09d0f6cf88076e2fdb01b9b70b9c9076c31e9a9,1,87,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1128202011282020_20_1_reporttmp.pdf,0f3fb797d51974f82aa3294972000048b8db4105d9979ce98a048fe0600a591c,1,74,5,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1129202011292020_25_reporttmp.pdf,e36e224fbd6bd39218658b6bc94a55216de7d415532a2146260fb61f6cbfb5e0,1,76,2,1,1,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1130202011302020_16_1_reporttmp.pdf,cf37df1dc84cf4d3994f3e38baa69e57805a2d7dd70cb5dd191df6d6ae097f2f,1,87,4,1,6,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11320201132020_17_reporttmp.pdf,59a1b758ca1243c643046c9dc537bed104611ed57ef30e7a4fb3172adfd77508,1,72,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11420201142020_18_reporttmp.pdf,f7714edfd4cb9cb93e4cb954b6fdb9ca109df07f028a0eed7e329baabe2f78b7,1,96,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11520201152020_12_reporttmp.pdf,5704073dc4e6d373a2da451fc55526225f414b51eb80cf999dfd3df9cdcdd6d3,1,101,3,1,4,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11620201162020_19_reporttmp.pdf,566010501a680e5744cebaba3d88088c62dfb7156da044541b9e5fb9c5fd701b,1,109,2,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11720201172020_24_reporttmp.pdf,87e369be8e2961fadcca05043eebe9d500c33f7da6b67deed98602283ff48ca6,1,105,2,1,2,2,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11820201182020_26_reporttmp.pdf,6c95ee541de0f805ec2902423ba3e8c985dbeb9e39f73356cb45f3c2f4b5822d,1,109,6,3,2,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_11920201192020_11_reporttmp.pdf,c4c9110a1de05533816c12f91a490086f64c442e617998a5cae4e9b7da770494,1,114,2,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1210202012102020_22_reporttmp.pdf,313ccb596fabb458eecebadb71fbe91d686f2fefa6039e33ed4fba59dcd20a30,1,83,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1211202012112020_8_reporttmp.pdf,75ec660dc80206a61abb96336cdecd4016dd1a58ca429ddff5ce9acde066cc6f,1,88,6,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12120201212020_18_reporttmp.pdf,3dfaa87315df9c4a4b57257a588eebe684bb5955819ddea4349cda60bf4ec1b2,1,76,4,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1212202012122020_13_reporttmp.pdf,d831be8813c29afce10d97deed32d3a23525af95d573c2d74b88d6fc83788ee5,1,69,3,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1213202012132020_11_reporttmp.pdf,ce1b17d4feb8114afcbbce2ebf9878ceb7fa27a01426d58ee6b407b3fe15813f,1,71,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_15_reporttmp.pdf,91a77109f38f505dfed6d55475427985fdbe983e09a0d7a9f892d4a7c8db46b1,1,81,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1215202012152020_3_reporttmp.pdf,812e638aa27df2a1f54c72bf7748df351805842e5659ede7a743aad56bac3fb8,1,77,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1216202012162020_12_reporttmp.pdf,b6eb457f50e85776c744238573b2e89efe1314148b51b176b9c8845fd85bc671,1,71,5,1,3,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1217202012172020_19_reporttmp.pdf,d6846267e129b5cb93f78e5e2cd8dc74e6c7121e2801d6c6b511183a9d113d73,1,85,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1218202012182020_14_reporttmp.pdf,1c9d1349bceb8d55d1a43d4a7ebfc66878ad3d169d1b026e428e8d88fe82e298,1,74,3,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1219202012192020_12_reporttmp.pdf,9a1048a6ef0893507143931c9deb39dfd5166982ff3a6095d33d976e85465746,1,84,4,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1220202012202020_15_reporttmp.pdf,771d37cacfffa7c9742428029181b05fb731199ceb53d823f563dd09ffbe8f43,1,74,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_122021122021_14_reporttmp.pdf,b8641fbece0b99117c2d5a283e4f8301686d886aac3576927a7768cf9324526d,1,73,5,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1221202012212020_14_reporttmp.pdf,13083b6f7a24e4b5c37ed353be2732105fc5efe11cffae2877886aebb12b3a5b,1,72,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12220201222020_12_reporttmp.pdf,c75e0eb74c8891a26c808d22897fb7d7e79653619184d5d037d1e15aae2cdb7f,1,66,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1222202012222020_8_reporttmp.pdf,63587d86a3ebbffb53632f3d95f2a259300172ab414b5b36bd869315d8120810,1,66,5,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1223202012232020_20_reporttmp.pdf,d5e9bda451b72408ae494ef61967bed5ce5976368330b0e4158124e6edd33315,1,80,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1224202012242020_3_reporttmp.pdf,00b6ac178520e0ff7674d7cb782c2e3365da931c55d7e399abde01ebfe0d416b,1,73,4,1,0,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1225202012252020_13_reporttmp.pdf,4596dbc094556b30df8fbe87caca5e1b1bd23ebe218d0e60bb10c200fc1325f5,1,72,4,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1226202012262020_7_reporttmp.pdf,21bf39324e504e175ab603479118ddc2b18b1e1cc49bb386ff17767eee434337,1,76,5,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1227202012272020_3_reporttmp.pdf,bcf108c30b431e7514ad5c21d4a1df33585ca8799b6d318b35b009c20658e028,1,77,3,1,2,1,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1228202012282020_13_reporttmp.pdf,e1c65a5336e5760aa0b24bf96d57a5043e04b8a89d72ff3ec4a12a22a54829a0,1,70,2,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1229202012292020_7_reporttmp.pdf,2866ca3e7f807dafeba34a1f35aff0733afdee250b617029a2b1c899dc1c6bb1,1,75,3,1,5,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1230202012302020_17_reporttmp.pdf,7af69214ede1f8bdfca0d23d6d89d124d3b25f5ca29817f6131f01eaab2ee408,1,83,7,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1231202012312020_14_reporttmp.pdf,ea0aa5ed43b40d91e093a5ef1a30c1bb4d38e7426c4f4f56b16f3aca1d51112d,1,69,6,1,3,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12320201232020_7_reporttmp.pdf,d7f820ed72b404010b5368ddda4b087a3cc34939b3cd2ee7751daeb4291874a3,1,65,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12420201242020_21_reporttmp.pdf,c4e7fb85b37579efd1d9804553b90cf96e714ebcd1828a7374c5a90af1a5aa79,1,96,6,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12520201252020_10_reporttmp.pdf,80c1d986fbaf6308ff57b9a589afcef9b543cb8c9cf04f622ffd4e2b1002491a,1,73,2,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12620201262020_17_reporttmp.pdf,a8261b81feb215157f955eccc76df8f26e7c6ed7b2b98d27986b0ff78502284e,1,78,4,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12720201272020_3_reporttmp.pdf,1fd513e5c8f02c0d50854ff09bc01f911d4e23b656729384a34becc1a63fe68a,1,69,3,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12820201282020_10_reporttmp.pdf,ca543ee29a03754b0a24efa1879656e966147e812f920c85b2f4f1547e40735f,1,80,3,1,1,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf,d9c3250c957df489488ba4edb2d2e8f520d1fe1b0d6b9eed5834761565700f33,1,90,3,1,2,0,searched
+16A,1283.zip!16A(78)-32_Daily_Reports.zip!16A(78)-32_Daily_Reports/drilling/Utah_Forge_FORGE_16A_[78]-32_Drilling-C_132021132021_15_1_reporttmp.pdf,845b3e7ce439b7c96680ac50284eef9b920a382b8afe660514e170cc5164cea1,1,70,4,1,0,2,searched
+16B,1516.zip!16B Daily Reports.zip!20230423-DailyReport07DetailRpt_230422195013.pdf,8b06e1b4d198c52afeea505539d5f42d563dc077b31550c181f79630e811e8c2,1,61,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230424-DailyReport08DetailRpt_230424060054.pdf,cd895f4cf92db7e77d87125486ad339513a2f3a61e3fed031ce9539a1ece72ab,1,56,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230425-DailyReport09DetailRpt_230425045900.pdf,469cbeb2ffa427e2acc493011ec5ba4219e885291c46bb5dfea4cb1e35307b5c,1,64,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230426-DailyReport10DetailRpt_230426060302.pdf,2d6361e33fb7623184f074fc70b030794b37119f373a87e31573ee4d98f92663,1,96,5,1,5,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230426-DailyReport10DetailRpt_230426060302.pdf,2d6361e33fb7623184f074fc70b030794b37119f373a87e31573ee4d98f92663,2,56,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230427-DailyReport11DetailRpt_230427053214.pdf,f5512f9b308035d16e5b212780ba73d5f6b775ea10667822d2156713625e2206,1,92,6,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230427-DailyReport11DetailRpt_230427053214.pdf,f5512f9b308035d16e5b212780ba73d5f6b775ea10667822d2156713625e2206,2,85,2,1,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230428-DailyReport12DetailRpt_230428052948.pdf,3f0652da7543d5ab0375db5eced848b67367acdea4de360c0aafb6785e300135,1,111,4,0,0,2,searched
+16B,1516.zip!16B Daily Reports.zip!20230428-DailyReport12DetailRpt_230428052948.pdf,3f0652da7543d5ab0375db5eced848b67367acdea4de360c0aafb6785e300135,2,60,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230429-DailyReport 13 DetailRpt_230429055018.pdf,de7645f2e082d9c8b9ae9db2f4d692fbd9f361347a26483abaa4eac9a38c28f5,1,105,0,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230429-DailyReport 13 DetailRpt_230429055018.pdf,de7645f2e082d9c8b9ae9db2f4d692fbd9f361347a26483abaa4eac9a38c28f5,2,80,0,1,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230430-DailyReport14DetailRpt_230430060919.pdf,4b2d12492bbca47a21a4530c5d1aee2132fd6917b71837e9ca027b2b001329bd,1,109,2,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230430-DailyReport14DetailRpt_230430060919.pdf,4b2d12492bbca47a21a4530c5d1aee2132fd6917b71837e9ca027b2b001329bd,2,93,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230501-DailyReport15DetailRpt_230501064742.pdf,e9047637cee16536f55a52813c089cec9b692ae7896e606b60a851037c5fa4bf,1,94,4,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230501-DailyReport15DetailRpt_230501064742.pdf,e9047637cee16536f55a52813c089cec9b692ae7896e606b60a851037c5fa4bf,2,115,3,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230501-DailyReport15DetailRpt_230501064742.pdf,e9047637cee16536f55a52813c089cec9b692ae7896e606b60a851037c5fa4bf,3,19,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230502-DailyReport16DetailRpt_230502065544.pdf,da5fa8ac55d3636935f83d91f117f7df4b9bb0bdbc7b513510f35b0a8a1c677f,1,108,0,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230502-DailyReport16DetailRpt_230502065544.pdf,da5fa8ac55d3636935f83d91f117f7df4b9bb0bdbc7b513510f35b0a8a1c677f,2,98,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230503-DailyReport17DetailRpt_230503103709.pdf,69554dfd7bd8024afb6f1b21bb3b4c48f889c762adf23ff4cacd39e972847d7f,1,110,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230503-DailyReport17DetailRpt_230503103709.pdf,69554dfd7bd8024afb6f1b21bb3b4c48f889c762adf23ff4cacd39e972847d7f,2,86,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230504-DailyReport18DetailRpt_230504075441.pdf,8830a026620f3f3e3ab34f836da24ec7b467506dccb6bebc90a74216efdf0e88,1,114,1,0,0,2,searched
+16B,1516.zip!16B Daily Reports.zip!20230504-DailyReport18DetailRpt_230504075441.pdf,8830a026620f3f3e3ab34f836da24ec7b467506dccb6bebc90a74216efdf0e88,2,59,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230505-DailyReport19DetailRpt_230505063805.pdf,4b19ba727c070e3a7735ce3eaa0399eee79cfc358def35b9a641249635466a25,1,113,3,0,0,4,searched
+16B,1516.zip!16B Daily Reports.zip!20230505-DailyReport19DetailRpt_230505063805.pdf,4b19ba727c070e3a7735ce3eaa0399eee79cfc358def35b9a641249635466a25,2,63,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230506-DailyReport20DetailRpt_230506063409.pdf,6236fe9ada70d57fbb9902fc89077e00300be0ef9b095ea1a856a7d7f564fb54,1,114,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230506-DailyReport20DetailRpt_230506063409.pdf,6236fe9ada70d57fbb9902fc89077e00300be0ef9b095ea1a856a7d7f564fb54,2,59,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230507-DailyReport21DetailRpt_230507063231.pdf,9d05d9aa4b92b7d6f0f17cdb01e61fa34d48cd862fa4d91933544a6de9bd1586,1,118,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230507-DailyReport21DetailRpt_230507063231.pdf,9d05d9aa4b92b7d6f0f17cdb01e61fa34d48cd862fa4d91933544a6de9bd1586,2,48,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!20230508-DailyReport22DetailRpt_230508063413.pdf,b2be2b3675d47777e2f408dbd091d474a49996a7ef82d4d582712c72c2c72f96,1,115,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!20230508-DailyReport22DetailRpt_230508063413.pdf,b2be2b3675d47777e2f408dbd091d474a49996a7ef82d4d582712c72c2c72f96,2,77,0,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#43DetailRpt_230529060954.pdf,3c393c8e27d93c8cb635105158ecf72e7fa06a3e5037b9113e159c8542b98d86,1,110,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#43DetailRpt_230529060954.pdf,3c393c8e27d93c8cb635105158ecf72e7fa06a3e5037b9113e159c8542b98d86,2,87,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#70DetailRpt_230625065833.pdf,80b821e22f738cbaa4d113a978f7bde3e71d82ee8e5f4590406f240169a51e51,1,110,0,0,10,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#70DetailRpt_230625065833.pdf,80b821e22f738cbaa4d113a978f7bde3e71d82ee8e5f4590406f240169a51e51,2,50,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#72DetailRpt_230627054928.pdf,951e977da9b9bcbff45b69175ec396b57eddc960bde8007c13fbb6f67bfb1cc7,1,117,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#72DetailRpt_230627054928.pdf,951e977da9b9bcbff45b69175ec396b57eddc960bde8007c13fbb6f67bfb1cc7,2,62,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#73DetailRpt_230628060220.pdf,7be4fefa44560c22a7ef2c1fcc1b5fbf11b72beb86b5dd27ac144f0731fdae53,1,115,0,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#73DetailRpt_230628060220.pdf,7be4fefa44560c22a7ef2c1fcc1b5fbf11b72beb86b5dd27ac144f0731fdae53,2,71,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#74DetailRpt_230629063544.pdf,27c704fbb27d1535d45103413e126b77acc95a79d5dfbe4a070f389803812f54,1,114,0,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#74DetailRpt_230629063544.pdf,27c704fbb27d1535d45103413e126b77acc95a79d5dfbe4a070f389803812f54,2,63,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#75DetailRpt_230630060337.pdf,198719a8924d2ff68d3536d4df9baf3f4cd18b2f7fbc640ce210764487941ca8,1,118,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#75DetailRpt_230630060337.pdf,198719a8924d2ff68d3536d4df9baf3f4cd18b2f7fbc640ce210764487941ca8,2,61,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#76DetailRpt_230701062002.pdf,f5ba2646bdb8c9739caa206196391f772b40de766260f6f87fc16c3e43ff08f3,1,113,0,0,5,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#76DetailRpt_230701062002.pdf,f5ba2646bdb8c9739caa206196391f772b40de766260f6f87fc16c3e43ff08f3,2,73,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#77DetailRpt_230702060222.pdf,198d1d18867c1244c8e89d49ea4d40089564bab5b9a1f49b893abd3376b11ae8,1,113,3,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#77DetailRpt_230702060222.pdf,198d1d18867c1244c8e89d49ea4d40089564bab5b9a1f49b893abd3376b11ae8,2,54,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#79DetailRpt_230704052452.pdf,5a23868ec9fe9c503ede76c0c193b0de288a64d33f66f81cebdcc347f048302e,1,109,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#79DetailRpt_230704052452.pdf,5a23868ec9fe9c503ede76c0c193b0de288a64d33f66f81cebdcc347f048302e,2,84,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#80DetailRpt_230705055834.pdf,612ba5d0669c888ca904356758912fa09e5b014ec9e4f94f689be0b33cf57296,1,115,3,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#80DetailRpt_230705055834.pdf,612ba5d0669c888ca904356758912fa09e5b014ec9e4f94f689be0b33cf57296,2,49,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#81DetailRpt_230706065212.pdf,e9da02cdc4613b7eb31df562b137b6dc09e02ff125ad54ccd0a99c5534fba76e,1,115,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#81DetailRpt_230706065212.pdf,e9da02cdc4613b7eb31df562b137b6dc09e02ff125ad54ccd0a99c5534fba76e,2,72,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#82DetailRpt_230707061126.pdf,20e8010e0c1237e7ccebfa352b558d51ca23e5e7b80f17f54d74c40e8edc7e65,1,113,1,0,6,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#82DetailRpt_230707061126.pdf,20e8010e0c1237e7ccebfa352b558d51ca23e5e7b80f17f54d74c40e8edc7e65,2,66,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#83DetailRpt_230708060816.pdf,9ef84714c61598bc54dc8b9d708735b03d2035481bf58a6ccd25a34f193a9110,1,113,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#83DetailRpt_230708060816.pdf,9ef84714c61598bc54dc8b9d708735b03d2035481bf58a6ccd25a34f193a9110,2,77,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#85DetailRpt_230710060755.pdf,e643b95b27be5915480d21b5f7e9a6fcac538343ad4e0dac9332fae309dfb7ed,1,109,0,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#85DetailRpt_230710060755.pdf,e643b95b27be5915480d21b5f7e9a6fcac538343ad4e0dac9332fae309dfb7ed,2,77,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#86DetailRpt_230711063150.pdf,d525859e21469b73e4ea8f466cc3b158f95ecacaf62107e32b9e932ec1b6b475,1,113,2,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#86DetailRpt_230711063150.pdf,d525859e21469b73e4ea8f466cc3b158f95ecacaf62107e32b9e932ec1b6b475,2,51,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#87DetailRpt_230712063952.pdf,d40e0b3fc405e302ce5b82816d3f3517e8254a0891c173e7ebcf702c807a84e0,1,112,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#87DetailRpt_230712063952.pdf,d40e0b3fc405e302ce5b82816d3f3517e8254a0891c173e7ebcf702c807a84e0,2,60,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#88DetailRpt_230713055640.pdf,70a16f34fb69a846bcf735077cb2b65b401b297835406d52904f3e0850b40455,1,115,2,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#88DetailRpt_230713055640.pdf,70a16f34fb69a846bcf735077cb2b65b401b297835406d52904f3e0850b40455,2,63,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#89DetailRpt_230714062930.pdf,e005d8d59ef419586f89f91109327904a569ca328f00becced3814be1cceb567,1,113,7,0,0,7,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#89DetailRpt_230714062930.pdf,e005d8d59ef419586f89f91109327904a569ca328f00becced3814be1cceb567,2,60,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#90DetailRpt_230715061816.pdf,b109db55b46e284417b0e4c4a162b18972b99051837afe78869608f9c488e921,1,112,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#90DetailRpt_230715061816.pdf,b109db55b46e284417b0e4c4a162b18972b99051837afe78869608f9c488e921,2,53,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#91DetailRpt_230716062037.pdf,88c161570c6f459b175ac01d3ac3c79adea7a9064693431eb31bbef2de0af257,1,115,2,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#91DetailRpt_230716062037.pdf,88c161570c6f459b175ac01d3ac3c79adea7a9064693431eb31bbef2de0af257,2,80,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#92DetailRpt_230717055645.pdf,aafbeb335327420c0e141feeee7e04e446eb99181337aa19aece6eab2ae1b7c2,1,110,3,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#92DetailRpt_230717055645.pdf,aafbeb335327420c0e141feeee7e04e446eb99181337aa19aece6eab2ae1b7c2,2,88,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#93DetailRpt_230718051919.pdf,e5a313dbfa691cc7985ad8afbb2363de5aafb3aa4994849bace95860155e8e4a,1,116,4,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#93DetailRpt_230718051919.pdf,e5a313dbfa691cc7985ad8afbb2363de5aafb3aa4994849bace95860155e8e4a,2,56,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#94DetailRpt_230719061746.pdf,470def528d0e9e36bf34b87cc0d491996be8540c3b4091738576c9faacfa3a95,1,115,4,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#94DetailRpt_230719061746.pdf,470def528d0e9e36bf34b87cc0d491996be8540c3b4091738576c9faacfa3a95,2,54,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#95DetailRpt_230720063801.pdf,d84bd572f915fa84a42e7887ccbcccad9bc85fbcc6a0e44bc7de908cf1e96094,1,115,2,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#95DetailRpt_230720063801.pdf,d84bd572f915fa84a42e7887ccbcccad9bc85fbcc6a0e44bc7de908cf1e96094,2,68,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#96DetailRpt_230721061944.pdf,9561e173734aa3237d09d47ad5fa708c93df5bd2c58a3a3232e546ba0fdfd252,1,111,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#96DetailRpt_230721061944.pdf,9561e173734aa3237d09d47ad5fa708c93df5bd2c58a3a3232e546ba0fdfd252,2,52,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport#97DetailRpt_230722063232.pdf,13fc57f7a1861c32aadbe563d082447f880c690da558c8b3ea83a5f3ab36649a,1,116,3,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport23DetailRpt_230509061452.pdf,d5ece7cf3d3ba859b99400f3ea2ed55c9519c43e09c27eda67688c42faae6d08,1,110,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport23DetailRpt_230509061452.pdf,d5ece7cf3d3ba859b99400f3ea2ed55c9519c43e09c27eda67688c42faae6d08,2,82,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport25DetailRpt_230511062556.pdf,b3e0a8532e7b73dd4ac4b5ef11143cd8ad54049babc13d0960a256253724194f,1,113,2,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport25DetailRpt_230511062556.pdf,b3e0a8532e7b73dd4ac4b5ef11143cd8ad54049babc13d0960a256253724194f,2,85,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport26DetailRpt_230512063715.pdf,1b1f7af6ccca36b44f77407f50edd59c9cd38f3ee215af8d87194d9172c2c6ab,1,106,4,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport26DetailRpt_230512063715.pdf,1b1f7af6ccca36b44f77407f50edd59c9cd38f3ee215af8d87194d9172c2c6ab,2,85,1,1,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport27DetailRpt_230513061903.pdf,3b036d7b1c7fee00abb96fb4d9f6cbef9034e83a6fb578457fcffdeb43e2eda4,1,112,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport27DetailRpt_230513061903.pdf,3b036d7b1c7fee00abb96fb4d9f6cbef9034e83a6fb578457fcffdeb43e2eda4,2,93,1,1,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport30DetailRpt_230516080552.pdf,3b971a3e8f4f8302dac8f51865a65b8d0224a7201174411d40fe0d77b46e5e12,1,110,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport30DetailRpt_230516080552.pdf,3b971a3e8f4f8302dac8f51865a65b8d0224a7201174411d40fe0d77b46e5e12,2,92,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport31DetailRpt_230517063926.pdf,15f54d203909206d1bc04f2970fe74829c7807a6285483a60a8f0e15bdca28f6,1,92,4,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport31DetailRpt_230517063926.pdf,15f54d203909206d1bc04f2970fe74829c7807a6285483a60a8f0e15bdca28f6,2,104,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport31DetailRpt_230517063926.pdf,15f54d203909206d1bc04f2970fe74829c7807a6285483a60a8f0e15bdca28f6,3,27,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport40DetailRpt_230526094342.pdf,62ac7da4ce3760988f7748e20a6c3edbbf6f910562d262b832e42acd074c6a40,1,113,0,0,5,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport40DetailRpt_230526094342.pdf,62ac7da4ce3760988f7748e20a6c3edbbf6f910562d262b832e42acd074c6a40,2,99,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport44DetailRpt_230530055905.pdf,b8558d0d5366b8d17f61874c193b5b6b9b489e01562c67797b020577c70279e8,1,108,3,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport44DetailRpt_230530055905.pdf,b8558d0d5366b8d17f61874c193b5b6b9b489e01562c67797b020577c70279e8,2,90,2,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport46DetailRpt_230601111529.pdf,fba604a7c14ea219b39cff1cca230db17762647063edd123b3f8d471d79f61f5,1,110,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport46DetailRpt_230601111529.pdf,fba604a7c14ea219b39cff1cca230db17762647063edd123b3f8d471d79f61f5,2,86,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport47DetailRpt_230602080800.pdf,de1edb6a3ec8b3f1beacada8e6157bb1127110a8f8c7763e8a8cbcb085797330,1,109,2,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport47DetailRpt_230602080800.pdf,de1edb6a3ec8b3f1beacada8e6157bb1127110a8f8c7763e8a8cbcb085797330,2,82,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport48DetailRpt_230603062858.pdf,00598bc2e704042aadecdb06ee62eb757ed32d116c40bf1c63e229e4e68b82f3,1,111,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport48DetailRpt_230603062858.pdf,00598bc2e704042aadecdb06ee62eb757ed32d116c40bf1c63e229e4e68b82f3,2,94,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport49DetailRpt_230604061931.pdf,71111ee5a196960dfc1a276b0d3460e4ee0f3a58fe62e1cb62946a587df46c51,1,93,0,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport49DetailRpt_230604061931.pdf,71111ee5a196960dfc1a276b0d3460e4ee0f3a58fe62e1cb62946a587df46c51,2,110,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport49DetailRpt_230604061931.pdf,71111ee5a196960dfc1a276b0d3460e4ee0f3a58fe62e1cb62946a587df46c51,3,31,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport50DetailRpt_230605061902.pdf,dd39536b12b96348d3055fe48a0a879001b51ce270d380ad9fa91adf66015c11,1,109,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport50DetailRpt_230605061902.pdf,dd39536b12b96348d3055fe48a0a879001b51ce270d380ad9fa91adf66015c11,2,101,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport51DetailRpt_230606063940.pdf,8240373c562855653e337595fc558a7a7171af4f7002187a509fa4eab7f004fe,1,109,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport51DetailRpt_230606063940.pdf,8240373c562855653e337595fc558a7a7171af4f7002187a509fa4eab7f004fe,2,87,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport52DetailRpt_230607061827.pdf,d77ec5e721821bee319da24024f2d04f916c2cf73a2a68a508df28f9351ce3e5,1,111,2,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport52DetailRpt_230607061827.pdf,d77ec5e721821bee319da24024f2d04f916c2cf73a2a68a508df28f9351ce3e5,2,96,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport53DetailRpt_230608060749.pdf,44888c63a75539d2107a8e6c9835098b656b6bbebad2a538e69a3d0e5eb69205,1,114,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport53DetailRpt_230608060749.pdf,44888c63a75539d2107a8e6c9835098b656b6bbebad2a538e69a3d0e5eb69205,2,90,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport54DetailRpt_230609062442.pdf,1151f7e5d9f7145087aa0affb9b025fd893e22e6816d37f609ef74e7ddfed5fd,1,113,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport54DetailRpt_230609062442.pdf,1151f7e5d9f7145087aa0affb9b025fd893e22e6816d37f609ef74e7ddfed5fd,2,80,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport55DetailRpt_230610061813.pdf,a394ac07db7046b0f77dfefa0a8a0db6779b85dc70156c7782377649c5efab5b,1,107,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport55DetailRpt_230610061813.pdf,a394ac07db7046b0f77dfefa0a8a0db6779b85dc70156c7782377649c5efab5b,2,85,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport56DetailRpt_230611061358.pdf,7dad4e7b550e9b9e9347920852d41ee023bbdcaaaaa00da1196133a202f0392b,1,108,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport56DetailRpt_230611061358.pdf,7dad4e7b550e9b9e9347920852d41ee023bbdcaaaaa00da1196133a202f0392b,2,86,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport57DetailRpt_230612062828.pdf,669e730f72f816c0625fdb57bc72366d3fe4589443d1c84e0f2691db1076e0e6,1,107,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport57DetailRpt_230612062828.pdf,669e730f72f816c0625fdb57bc72366d3fe4589443d1c84e0f2691db1076e0e6,2,91,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport57DetailRpt_230612062828.pdf,669e730f72f816c0625fdb57bc72366d3fe4589443d1c84e0f2691db1076e0e6,3,19,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport58DetailRpt_230613061359.pdf,acd5af9809099905d8fbcf6f7511aba6a39a29e7e7002f42f3990ea7be986820,1,109,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport58DetailRpt_230613061359.pdf,acd5af9809099905d8fbcf6f7511aba6a39a29e7e7002f42f3990ea7be986820,2,92,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport59DetailRpt_230614061516.pdf,236a92c45d74dcf7a9245a9903278083ac9d166fd251c6ca845cd1fcfbe1d1c1,1,113,1,2,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport59DetailRpt_230614061516.pdf,236a92c45d74dcf7a9245a9903278083ac9d166fd251c6ca845cd1fcfbe1d1c1,2,87,1,1,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport71DetailRpt_230626051434.pdf,e02796a866a65b3bb57195039dd6e23118bf2384bd754383001df066ac91edb4,1,110,0,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport71DetailRpt_230626051434.pdf,e02796a866a65b3bb57195039dd6e23118bf2384bd754383001df066ac91edb4,2,55,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport78DetailRpt_230703060819.pdf,0b70fc3a86247f4ffb5ddfede50fab78c9df989a6827b32bdbb57bc2eb9d7a26,1,109,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReport78DetailRpt_230703060819.pdf,0b70fc3a86247f4ffb5ddfede50fab78c9df989a6827b32bdbb57bc2eb9d7a26,2,68,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 33 _230519050545.pdf,38273768221fc572b7c9093600dbc1a5e1e568a56762beb8b5c250e0dea5048c,1,105,4,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 33 _230519050545.pdf,38273768221fc572b7c9093600dbc1a5e1e568a56762beb8b5c250e0dea5048c,2,100,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 34_230520052957.pdf,fa53b7f256dce0774eaa43cdca793d98130fc639b05c264a3237de1953bde946,1,106,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 34_230520052957.pdf,fa53b7f256dce0774eaa43cdca793d98130fc639b05c264a3237de1953bde946,2,80,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 35 _230521052958.pdf,bfacaa2c70b803ec5dc2ee06e9a0fe7f62575a3c2b9fb9b9f030f124999dfa7f,1,110,6,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 35 _230521052958.pdf,bfacaa2c70b803ec5dc2ee06e9a0fe7f62575a3c2b9fb9b9f030f124999dfa7f,2,98,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 36 230518060545.pdf,55be386810b6c49b18c5ad693a264c5ea237d51b0ac67c8f3a84b585f798679f,1,111,4,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 36 230518060545.pdf,55be386810b6c49b18c5ad693a264c5ea237d51b0ac67c8f3a84b585f798679f,2,90,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 36 230518060545.pdf,55be386810b6c49b18c5ad693a264c5ea237d51b0ac67c8f3a84b585f798679f,3,19,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 36 _230522054046.pdf,638f8bf3d54c2a776f22c21f23707096a355693f436212134662f0ec7f1b4558,1,112,3,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 36 _230522054046.pdf,638f8bf3d54c2a776f22c21f23707096a355693f436212134662f0ec7f1b4558,2,89,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 37 _230523052741.pdf,211a85807d9ea608d25925c578f790d3c1057226a82982ec22277530236cb8d4,1,93,3,0,10,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 37 _230523052741.pdf,211a85807d9ea608d25925c578f790d3c1057226a82982ec22277530236cb8d4,2,114,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 37 _230523052741.pdf,211a85807d9ea608d25925c578f790d3c1057226a82982ec22277530236cb8d4,3,20,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 38 _230524053033.pdf,a95fb0568e89102be6724d19537641010d338ae57caf06d48fb514cad0c0e918,1,106,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 38 _230524053033.pdf,a95fb0568e89102be6724d19537641010d338ae57caf06d48fb514cad0c0e918,2,99,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 42 _230528042704.pdf,137e02d8f9317a3484db7d60446bb21b92ef5cbe6a5cf072d5d9cbdb96c5a54e,1,111,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 42 _230528042704.pdf,137e02d8f9317a3484db7d60446bb21b92ef5cbe6a5cf072d5d9cbdb96c5a54e,2,94,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 62_230617045223.pdf,a8daed7b8cb69cf2fe9da60270389e11648edff3da668dfe8bc08bdb89d91418,1,113,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 62_230617045223.pdf,a8daed7b8cb69cf2fe9da60270389e11648edff3da668dfe8bc08bdb89d91418,2,86,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 63 _230618054755.pdf,d558b9423776b1e330cd12d978a56ea2201c7f3cd5911f17057d1135ee58c3c1,1,113,3,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 63 _230618054755.pdf,d558b9423776b1e330cd12d978a56ea2201c7f3cd5911f17057d1135ee58c3c1,2,101,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 65 230620054749.pdf,a8f20686137a912de729884f26408ce408c974fc31b0066031c00200db787eeb,1,116,0,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 65 230620054749.pdf,a8f20686137a912de729884f26408ce408c974fc31b0066031c00200db787eeb,2,67,0,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 68 230623051445.pdf,fac106ee41965a022ece466b6cd86e14c1a2186b369f55ffedc339f9ad54fdc9,1,110,1,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt # 68 230623051445.pdf,fac106ee41965a022ece466b6cd86e14c1a2186b369f55ffedc339f9ad54fdc9,2,64,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #41_230527052454.pdf,ea6092704dbc72cc49d9b01db8a19e3b95c848b7f2338d0cc88608048b110a66,1,88,0,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #41_230527052454.pdf,ea6092704dbc72cc49d9b01db8a19e3b95c848b7f2338d0cc88608048b110a66,2,92,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #41_230527052454.pdf,ea6092704dbc72cc49d9b01db8a19e3b95c848b7f2338d0cc88608048b110a66,3,60,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #60 _230615051233.pdf,613c325d2e5c3e964774cf369bbea38c0ea447204a120546cfa52801e169d648,1,114,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #60 _230615051233.pdf,613c325d2e5c3e964774cf369bbea38c0ea447204a120546cfa52801e169d648,2,94,1,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #66 230621051152.pdf,733412ea0451e096e4742f8d3e6329bc5869962e11cf154523ccdf26c7c4c45c,1,112,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #66 230621051152.pdf,733412ea0451e096e4742f8d3e6329bc5869962e11cf154523ccdf26c7c4c45c,2,63,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #67 230622050108.pdf,6750d0b01aac94f71e7950983b9333c58daeff45b898d62ae8d1adb7e91ced52,1,113,3,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt #67 230622050108.pdf,6750d0b01aac94f71e7950983b9333c58daeff45b898d62ae8d1adb7e91ced52,2,77,2,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt 61 _230616060124.pdf,3f8dbbf29d25fc1a7699862208e224413eac6f594c568a6b724172cd76052518,1,117,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt 61 _230616060124.pdf,3f8dbbf29d25fc1a7699862208e224413eac6f594c568a6b724172cd76052518,2,77,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt#69 _230624052343.pdf,0e834ba56a8e1fa7e00c08aaef5c06ffcac80fd13d75fa1775b3a82e82ce1e22,1,112,0,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt#69 _230624052343.pdf,0e834ba56a8e1fa7e00c08aaef5c06ffcac80fd13d75fa1775b3a82e82ce1e22,2,70,0,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt_ #64 230619051738.pdf,8032ec0183ba4a25249b1104c54b65d02eab99c4be59052f8d902daf6342b819,1,110,4,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt_ #64 230619051738.pdf,8032ec0183ba4a25249b1104c54b65d02eab99c4be59052f8d902daf6342b819,2,80,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt_#39 230525052909.pdf,1bdca2379a4a90ef73605188373b17fb384655113d630e2a65623538e59ad627,1,112,0,0,4,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt_#39 230525052909.pdf,1bdca2379a4a90ef73605188373b17fb384655113d630e2a65623538e59ad627,2,88,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt_230709064148.pdf,f40313995811cfd51c81b225bdfb8b58119957f9da25249a8f00097e2c33ed03,1,112,1,1,5,0,searched
+16B,1516.zip!16B Daily Reports.zip!DailyReportDetailRpt_230709064148.pdf,f40313995811cfd51c81b225bdfb8b58119957f9da25249a8f00097e2c33ed03,2,80,1,0,2,0,searched
+16B,1516.zip!16B Daily Reports.zip!Pre-spud-2023417-22-Reports01-06_well16B.pdf,1e035d5f903133a4d1fbb77efa687eb8049af91cbc91fac90503e66a4b0b0898,1,62,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!Pre-spud-2023417-22-Reports01-06_well16B.pdf,1e035d5f903133a4d1fbb77efa687eb8049af91cbc91fac90503e66a4b0b0898,2,65,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!Pre-spud-2023417-22-Reports01-06_well16B.pdf,1e035d5f903133a4d1fbb77efa687eb8049af91cbc91fac90503e66a4b0b0898,3,66,1,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!Pre-spud-2023417-22-Reports01-06_well16B.pdf,1e035d5f903133a4d1fbb77efa687eb8049af91cbc91fac90503e66a4b0b0898,4,69,0,0,0,0,searched
+16B,1516.zip!16B Daily Reports.zip!Pre-spud-2023417-22-Reports01-06_well16B.pdf,1e035d5f903133a4d1fbb77efa687eb8049af91cbc91fac90503e66a4b0b0898,5,62,0,0,1,0,searched
+16B,1516.zip!16B Daily Reports.zip!Pre-spud-2023417-22-Reports01-06_well16B.pdf,1e035d5f903133a4d1fbb77efa687eb8049af91cbc91fac90503e66a4b0b0898,6,60,1,0,3,0,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-15-23.pdf,3e0321e064943b3a5edbe93331931bbe085178a0a2dbf9c27c19331a09a7f5ce,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-16-23.pdf,1c9bf66d9899f2935b84ea55bdfe261531e08cf9856ca79bcd67c10aeb963ac5,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-17-23.pdf,c7a59b97867e45800eb365c56779fc88ceb81f994067f54215e66f39fb69161b,1,56,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-18-23.pdf,dda5aa21e7fbfe3297548a3ef436912a12047277ab8ac617f77f8f67ce52e758,1,49,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-19-23.pdf,833e5a536f595a4cf7aee684d89999d6cf82b0c4ca40f0c12af1be17a4829f78,1,50,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-20-23.pdf,1cc2bcb66a03ae2aabc501d17857381dac26cab16568513e83a6a0753e7b0ecb,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-21-23.pdf,ec7b7e23e573e7ffcd1b187ce3753814530fb5c72e685a6e24a063587e89cea2,1,59,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-22-23.pdf,a4e99f0606f7f53d14c80545fef4e64684f499567d754c5b1e963b989414bd68,1,45,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-23-23.pdf,eb6e88c403ac6d869d20601cdc4f2e2dd69b06bdc50fba51b42d97e7441c6dae,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-24-23.pdf,f00eb4a536ae8ccb4b58d8ed2ec65d4bd4b1eaeee31d6555489794f0e062ca9b,1,48,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-25-23.pdf,f03c412229b5f7dbfb13fa6a9098885d4c12806df572ed87d59df18b4b87a7e8,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-26-23.pdf,ee3a6d1cdb1423024e69b6f97a1998c1004b6082db835468e586a6eb50e94de0,1,49,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-27-23.pdf,b8087eee414d0f521313ec85328da3985bb7f8030b100008d30b3378aebf48f8,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-28-23.pdf,8b9d4b7304ff8f6d009a9bc43d6d2befccec94a06a33d1327c83e6625f9e4bdc,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-29-23.pdf,1f71001880f56dd5b2ca5b311cb5fcac66d507e8f82fff1443c4c476bb89b8e8,1,54,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-30-23.pdf,e82d0c0c4f6fd181d106b17f95a3c20d5f15e1768d7fa30bb97b7d48dfd4377a,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_5-31-23.pdf,f5ca8a5842c60380b83d1346656edd66f0ec335261894b199d577bc43107df00,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-01-23.pdf,5b4c3ee5a3532af647666df1fb63b6ac3f3bb393355da6868b08a2f1fe2f7277,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-02-23.pdf,842210fe3b75b725ffc5e7e9fbd3ea7e0da26780b9e6f176cf8dbf31974d7a0b,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-03-23.pdf,b9dd7358d1281bf98c87d3396255adb58e87c2443d2c489f1472439935436fb6,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-04-23.pdf,e710d9ef41ade384d15aae2a7ba5be536979226bb7a6c045856e224b4b0df026,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-05-23.pdf,0aabf07e28bdedc843d0221a5488c307d0cb18b466c9a536e4647632634d8718,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-06-23.pdf,b1639a5a6abc9bb64b5bf69542e6671444db026e774c8c9f45e67d8824c4aecb,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-07-23.pdf,172154b4514f87e55ac983dbec8596c22b16c8c6ce31951f09f23e194d19007b,1,58,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-08-23.pdf,16f4be2d9ca7ac3f0988efc665a85b24be4bda65de7b2d3aa5deaa79a1d9deef,1,48,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-09-23.pdf,7573259956dbbb14c4fbbd4fd1c2b687500d46e66ec522e719cbde25f7b7a76e,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-10-23.pdf,38cec70500611db5af6a812ff845fd4043880f79132810187f18787fb1d97738,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-11-23.pdf,495b3ada9ce85d626a5ca88169b249e223ea1c45ded937fd6e50fb984c978740,1,43,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-12-23.pdf,0679f4e97aa321bb7582f0cbd4607a425f7571d7012c095a24b317d1abb9ff8a,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-13-23.pdf,0da584b327267243682eaf06c19aaab9c706cb92bc7dce5099e67c1f3335e5b5,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-14-23.pdf,2dcc429d25b52eb7c1ffe10e9bb23cc48d9c1a1f7a8097be0b0645acc094cd83,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-15-23.pdf,2b732e45d03ea54790c347e53c2776547d26935ca25ad0ac4ca0809463c52e47,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-16-23.pdf,86df4b211bdc98b781d7d51096838d8c59ba3a073635a55a5e175c8a58a9594b,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-17-23.pdf,07c20d358692c33c448e4ba96482a52b4ff61e0b828625e6bdd1e6b76f0159c3,1,59,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-18-23.pdf,3f5b027303f0353dd9e6dc429cbe8f24eac9e5ae7434dae3ea84c854b1ee0cc8,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-19-23.pdf,df93729d728566908aa96313060d13132691a02ca55c9614fed12a0063123ed5,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-20-23.pdf,9497f495ca0b7c7040f39ef60139f082249d70b39884be4576f30103917936cb,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-21-23.pdf,fdcecbd4e42ba9c27bd675f541b037dbcd6fefd60fb91d6ece0e7799bb48fa9b,1,47,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-22-23.pdf,e6d41967052b75eac8781fbc5eb087c3ac2a3b011e898a5a5ba4f3b714087b92,1,48,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-23-23.pdf,15aa01cda1d554c2d357218cb5a5b9dd2aff32b0a60c3200fc431f9b301275fa,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-24-23.pdf,b1e766111300a6c9dd5b30e191cfec428be6083a449beb33d8d3fb1221284c18,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-25-23.pdf,72ca2b2ce133544433aaad57e5ecda5342ffa7f859a404bd1177392119c7e48a,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-26-23.pdf,027f7a7555bd74293d559eba9255592a4bac4f556531bd4818b0e606a6d46d5b,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-27-23.pdf,046382d00abca77b91943b74abccb591c1fd31c2278ef482088189db86ac8c27,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_6-30-23.pdf,1f2055eb2b3fb1772c23ead6164e20c364f990e928745dcd8b03959f82fbb338,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-1-23.pdf,242a88c258cfa4dcd49455699ad6ec60073c4cd742a4890df0650ab3dfac4474,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-10-23.pdf,9a52c33c87ef92994b3914d064aa16263b40480636ab195a245686b6b5d462bd,1,48,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-11-23.pdf,83bbaee5bf9c2110146acd08a75136a67607a010bf11ad8c21c6ac9c8efb7c35,1,47,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-12-23.pdf,2e8398d3fb0ba3951e0cda7414271e5c386963e9b3e900c6bd39f8b6bad7b71e,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-13-23.pdf,8c2822df0ef84a5b3b49b2de212b7fd7611bb9d8fb1e387f4adf3bf2d8acbd0c,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-14-23.pdf,aed7f644125165167e5e6d0ed91cd0f6705b3612d83f79259bfb85f5d5db0ae8,1,46,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-16-23.pdf,579046a32637eeb76bbb426abb40ef296bd0a385633b7b212a7ad7067d53cc9a,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-17-23.pdf,da218919ccf6907085f5b7e45612cd9dd782eb699067a2e34b50a06317c2f689,1,44,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-18-23.pdf,c246c5ef45c9273aa988dca3d7b275ce7101ea59fa08d782f2ea8a04f57f3089,1,46,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-2-23.pdf,25b5c1b63b6b66f597d4f3cd16a657f4116f03f12b86fd0187e100f9fa74a842,1,46,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-20-23.pdf,4981cb54b31c85271e1fc69559dfba6cc1dde20706ec74fd0e0840594ea834ae,1,45,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-3-23.pdf,26a0e45c60513c824e8be640e972d678d178317702c6a25b68fddc349f93f6f6,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-5-23.pdf,8ccb3a78a410ee36227c11197bd9fdbe0b5cb3a9dad323c6d23a78c8066fac03,1,46,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-6-23.pdf,db556df99ebab87bedc94f4f776f0712522445d4c6160fcd7f998b4dbc997c50,1,47,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOON REPORT_7-9-23.pdf,00842c13cd5e99c89aa02f6e5dc08753e9fd1aa19104efeb77225cf778f8eae0,1,48,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY AFTERNOOON REPORT_7-15-23.pdf,f8398ad7e3e4aa6272e2e4712d54d13f0bd6b2ca8a8c19ea008b3e08ee30d392,1,46,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-10-23.pdf,439ae626e3ddddf0b985e79ac8b11536ef21ecd8c9ec83f6123e0b1d58fff25b,1,54,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-11-23.pdf,13fa5e1d4d73034ddb86fef826f3b2c4ec097bf40761985b293fac78e93a567c,1,55,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-12-23.pdf,2c9353c864a408711e36e08ab28db4241a956234e421376a5955b6f14635a01c,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-13-23.pdf,a0a0c860a52b454665bc266564dc7262eae6f8678ce1ce54041afcb5915c1098,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-16-23.pdf,79cae64ffb05252a591a1bbaf63b8ca52f61d25058a66635ee4d901758c52353,1,59,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-17-23.pdf,59baa788bcc0146821e4f9b359718b53af32e74d519511cd72d98800fd902dd0,1,51,2,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-18-23.pdf,98f2be49834e8a6c76ed563149b1c16160aae397ae5af276d3303125c19970b6,1,55,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-19-23.pdf,30db4bd4bdda89fe6efc4271b434ac4f2f31b1337f2f96693da53ce4256aca3c,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-20-23.pdf,e562dfd6737c4684bd8d9b1ab48736772090ce27f936781559049c7c54ab3555,1,48,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-21-23.pdf,dba265f3e4314b7fb43c077d483f08df3ef7301c93a00c67d71ab6ebb0e5a103,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-22-23.pdf,9cc5b7a75fc25748094ad4eae69aeb83a7407f99cea39b9bd6fcd1a5412686df,1,59,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-23-23.pdf,0f004e5e316cb512b2f0cad248e72b5848653a3fd6da9cf20eb76e81e6c74f42,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-24-23.pdf,62333a10d41c6300cd514e984dd3eefab88c84eb99014bbdf30eff2174f79893,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-25-23.pdf,5e0cdefdc9cf78d47d46372266dbf9e5935783d572c9ca6d76f218e041a2a287,1,48,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-26-23.pdf,49c15b9062a6290f68319574dcc71f6f89b19855a1a91c0e9ee7422b4c22f2bb,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-27-23.pdf,2ceb90746d2a5f22235995a733ce40dfb15dfa347bf5e2340ab40c3450ef5c18,1,60,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-28-23.pdf,2c36e8f7d5c6da4ec81ec48ac454057dd1d39f6cbf15558f70eed19057998ff5,1,55,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-29-23.pdf,6bc4d6e6e8823fbeaa25020225fb2908fd73319f3613a7f79dfa1164a2b5c4f1,1,53,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-30-23.pdf,7b28e31ef560ff6a8d4a4b84a665022482fd0eefd2132494cdabfeca2cf0fc77,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-31-23.pdf,ad2f2ed84b7f6cf15dec398349fe7a26e89d342b39393f727d02e307c33fe99f,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_5-9-23.pdf,3ed2eceb77a882475106da3c129598522aec8ed8d320fa901b34789d443d6ee2,1,53,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-01-23.pdf,62f144001d672fea51eda8a29ca112a98476fd95c0ea08ae626b0885fa5e43c1,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-02-23.pdf,61b49229e8430e8b120bbec9ddf7dfb9272339e0b13190b7c33e0916ebc430ca,1,59,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-03-23.pdf,3a9f680d00bf22a632cc8aec19208d530b60d04d143dc597b1807f5bfb48ab01,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-04-23.pdf,d6d34132d167f822ceef3079e001cbbdc248e7c6a18f5dd1bc593b3224670eda,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-05-23.pdf,b154bb214e3104e36ac54f47867ba6052df3ea839d72622dcac926aedd333c7b,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-06-23.pdf,72fb8c0260a48a20a390209350c4bcee2604e0b69930b4074803b27c0bc29e31,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-07-23.pdf,b8600d6858b4c437908ded2d524bceeed23be9a7253c6f5b9d5348cde4f85ee4,1,58,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-08-23.pdf,265a3d987b460fbe43829db1a53780083f3df15184b8707d18ecce19067e3cd2,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-10-23.pdf,a7d3e0e20789b2b7900f338209a51a87cd07b3ca5cc46c1c73912cfeedf11cc7,1,55,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-11-23.pdf,e72abb0e8e7bd6abd7fd611b1193ac2435712d326086bbf8ca9f1a3046bf645f,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-12-23.pdf,48ec37b795a8d389504b75a79f80e6963b5f02427632daa4a8f2ef5c27ef3444,1,60,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-13-23.pdf,538805a8d07f3a58d0d08dc7b7f5b60db59d76720132bba5d0e7707eb073866f,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-14-23.pdf,1607c2c4703cc5f91e3193b840357dee76170d7db760952da806b4ff83cfb9b1,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-15-23.pdf,64ad3c477397d7ff6ca9fb1ccae4d8c4e9df857b688c96d3cc73b5c64ed075f4,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-16-23.pdf,02b58284db23882940fceb8f9f6ca6675d22ba8af0606f6dc555f8d18fd28aa6,1,56,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-17-23.pdf,65fa5eb7b62cc399b5974a96879449ab7339b3f98299c7f1038198fdf660bd08,1,57,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-18-23.pdf,9cacf26eee69696704cd9eaaea7d2ca39115c25b6cf5e8b963d87835792c12f9,1,58,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-21-23.pdf,b75dfab5f3094c8880a086697cbba0fe2234f511280f52fa4197f282f66c7c66,1,46,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-22-23.pdf,b4ace5d6fe117fe212f2e089de55ea0a1f6ec7dfccfbd67b8c473216f5c0cbe7,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-23-23.pdf,5c0b714e1e52aeb6b6705d5f3293700e5eef70ddf8686f8b135f34b1938fb7b1,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-24-23.pdf,17b55af0a8e69828eb2bfd6d82f8bc7148b831f3eb069b564207e03db7656bb3,1,46,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-25-23.pdf,7070e03d39583ef886cced670609eb603d411b7d9a2d20681cd9fd753ac8c3ea,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-27-23.pdf,04283b9dc235f752b12dc132170f8fa1bd9e81984575cfc430321e481cc49653,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-29-23.pdf,4dcce6f44341b657f470a1687aa0a661a73c095a69f9453389b00bbe9a708239,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_6-30-23.pdf,47200c1a644a62428a5ecfeded0bb1e7ce0d448de00e3fbec7bd863fa43b9dfb,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-10-23.pdf,a2d902d55dbfaff9e2fa8c0ee2261b1b674615b25d1f11a3a18050b34134293b,1,47,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-11-23.pdf,0635b11725005e2e687de016fd5ed2a93df805e7b36f66cdbf1b008dd9a61b26,1,47,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-12-23.pdf,1152cd2848a55047d851907af0adebe8f55b4886d17305f12074cf7e0f0d5fcb,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-13-23.pdf,7016a02aabcc92e17da8a876a9929db45e4e2b5037b37fff8f304c54b4ff8d79,1,49,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-14-23.pdf,e94689e1b91a496978f88c4f0ff794608d0ebf315728cdb3846e7086d13e2aae,1,46,2,0,0,4,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-16-23.pdf,95c053eda6af1f5212cfcfa6735a4313df2fa8624a636aa40997f7f07b6150c3,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-17-23.pdf,c23834d81b631893e1ad07459456cdfbda582a0eed1337ef287fa00ff3144257,1,46,2,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-18-23.pdf,92f7841d4a5c1d427276ce49ea600fedbc05891451dbede44b553d84a552a7b3,1,45,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-2-23.pdf,486f720260398a1c9217b86f76f11913ae1290d98e7545b6ac21cdb9dfbba000,1,46,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-3-23.pdf,6e27da29ae7cc8b888de8a0a39fc20fd7ad848e4a50230ff8fca0f8e5169d03e,1,46,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-4-23.pdf,fd6837c0ae023f0afe50c689bd01145b7b753354e93946ebc454546fa65da95d,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-6-23.pdf,630991b3e90bdc0cd6963fc9aa6ce4aa13d08d83498ee1cd6b00668df06a8c2c,1,46,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-7-23.pdf,6876180ae34d4fe9e6b2a8122c84dea39950ab2298431aa4e8c44067a0a30d45,1,46,1,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-8-23.pdf,53a49f291dddb4d41c9599d9c642839d6be919acd2afdfa081817b4165f1770d,1,47,1,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B(78)- 32 DAILY MORNING REPORT_7-9-23.pdf,745422eacd7e50f92c7081b119b3877f60b65ff4c51db7bcaad5e0aee04fe67d,1,48,0,0,1,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_ 16B78- 32 DAILY AFTERNOON REPORT_6-18-23.pdf,3f5b027303f0353dd9e6dc429cbe8f24eac9e5ae7434dae3ea84c854b1ee0cc8,1,47,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_16B(78)- 32 DAILY AFTERNOON REPORT_5-11-23.pdf,e4c45d4b24247e84ea42cb48a0ce3330c38086121ca308754d6152174b1243c7,1,55,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_16B(78)- 32 DAILY AFTERNOON REPORT_5-12-23.pdf,42ad28b109da39dc7584fcec5f5fdc43cfe99c72745a5d673b6faadb8d875588,1,55,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_16B(78)- 32 DAILY AFTERNOON REPORT_5-13-23.pdf,cf00cde3240624b8d9be92113bc0d06530ed85eb8733d23ed489c17d95fa5252,1,54,0,0,0,3,searched
+16B,1516.zip!16B Daily Reports.zip!Utah Forge_Frontier 16_16B(78)- 32 DAILY AFTERNOON REPORT_5-9-23.pdf,7d9e17ccd1ae9393dd746740e9305d5e9d078a2b2ddf5a8bc2a779618cbb20ef,1,54,0,0,0,3,searched

@@ -1,0 +1,2 @@
+classification,source_member,source_sha256,page,line_start,line_end,source_text,report_date,start,end,qualification
+measured source record,1006.zip!DailyDrillingReports_Well58-32.zip!DailyReportSummaryRpt9-20170804.pdf,17dbc8c1ef68f09a38dde7feac3d588363c83448eb1fe8fc1500c0bc97caf51d,1,64,64,"23:15 23:45 0.50 1,512 3-5-1 Pumped sweep and circulated for survey.",2017-08-04,2017-08-04 23:15:00,2017-08-04 23:45:00,Report calendar times; independent clock alignment not established

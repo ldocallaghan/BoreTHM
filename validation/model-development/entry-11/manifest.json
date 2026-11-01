@@ -1,0 +1,115 @@
+{
+  "declaration_commit": "ea5f8b5ec6fafc3f1303f38136f19939e0f0546b",
+  "comparison_base": "7bf08b1ef69aa713b07150db2c06687144a81fd3",
+  "method": "Source diagnosis only; source-recorded, calculated and inferred findings labelled; no new scored test or adopted correction",
+  "rebuildable_files": {
+    "results/16A-ratio-changes.csv.gz": {
+      "sha256": "1f01ed39f3a768c42e612dc4e8d7bf45d4e7ae3a3ddcf0952339cc6bb1b0c7ef",
+      "bytes": 24499881,
+      "rebuild_command": "python validation/model-development/entry-11/rebuild_bulk.py --raw58 1006.zip --raw16a 1283.zip --raw16b 1516.zip --output ../entry-11-bulk",
+      "runtime": "Python 3.12.14; pandas 3.0.1; NumPy 2.3.5; gzip mtime=0",
+      "disposition": "Rebuildable derived file; not committed; raw source filenames must remain unchanged"
+    },
+    "results/A2-native-comparisons.csv.gz": {
+      "sha256": "62871e0075dad4040361d792ced88c0dcd7e87adaa5f7f64939c22c1e39c10dd",
+      "bytes": 16261573,
+      "rebuild_command": "python validation/model-development/entry-11/rebuild_bulk.py --raw58 1006.zip --raw16a 1283.zip --raw16b 1516.zip --output ../entry-11-bulk",
+      "runtime": "Python 3.12.14; pandas 3.0.1; NumPy 2.3.5; gzip mtime=0",
+      "disposition": "Rebuildable derived file; not committed; raw source filenames must remain unchanged"
+    },
+    "results/58-32-ratio-changes.csv.gz": {
+      "sha256": "8d81e0ef8e326c961c30896adbf0c5b532e27874d6960d0595b416e2220751b3",
+      "bytes": 15000844,
+      "rebuild_command": "python validation/model-development/entry-11/rebuild_bulk.py --raw58 1006.zip --raw16a 1283.zip --raw16b 1516.zip --output ../entry-11-bulk",
+      "runtime": "Python 3.12.14; pandas 3.0.1; NumPy 2.3.5; gzip mtime=0",
+      "disposition": "Rebuildable derived file; not committed; raw source filenames must remain unchanged"
+    },
+    "results/58-32-pressure-inputs.csv.gz": {
+      "sha256": "fcb3202a2083fbe98b30134e8cf95474b350580bc8347e92e4c6c9c9e35105f9",
+      "bytes": 3958027,
+      "rebuild_command": "python validation/model-development/entry-11/rebuild_bulk.py --raw58 1006.zip --raw16a 1283.zip --raw16b 1516.zip --output ../entry-11-bulk",
+      "runtime": "Python 3.12.14; pandas 3.0.1; NumPy 2.3.5; gzip mtime=0",
+      "disposition": "Rebuildable derived file; not committed; raw source filenames must remain unchanged"
+    },
+    "results/16B-ratio-changes.csv.gz": {
+      "sha256": "d50b4a972ab80abae61eabebeb85ff7b1d744e6a96217772616f5d8b00ab645c",
+      "bytes": 1958679,
+      "rebuild_command": "python validation/model-development/entry-11/rebuild_bulk.py --raw58 1006.zip --raw16a 1283.zip --raw16b 1516.zip --output ../entry-11-bulk",
+      "runtime": "Python 3.12.14; pandas 3.0.1; NumPy 2.3.5; gzip mtime=0",
+      "disposition": "Rebuildable derived file; not committed; raw source filenames must remain unchanged"
+    },
+    "results/B2-ratio-change-source-comparison.csv": {
+      "sha256": "88f25462224f380e2fb973e6436ce9d3f1b7e9bbaf93ac056916c67286f10df5",
+      "bytes": 2225777,
+      "rebuild_command": "python validation/model-development/entry-11/rebuild_bulk.py --raw58 1006.zip --raw16a 1283.zip --raw16b 1516.zip --output ../entry-11-bulk",
+      "runtime": "Python 3.12.14; pandas 3.0.1; NumPy 2.3.5; gzip mtime=0",
+      "disposition": "Rebuildable derived file; not committed; raw source filenames must remain unchanged"
+    }
+  },
+  "code_sha256": {
+    "build_checks.py": "13b7709ef0265f77b0179144f9ebfa48dc81b12895dc53b827e5989963d20c59",
+    "build_evidence.py": "4b3f7e72a05e7e8b281e495e263a917d8e02e221f83669fd84fc24f68d49f31b",
+    "build_flow.py": "7a28c1aeeb53bf6e05cc9eb1b039ebce5eb9f939ab3fb94abe9d657dd6cd4d6f",
+    "build_report_tables.py": "aa3fc6b38eaede62df10f9c5671f558e22853da92d6b1e33cecf6e8c80d0d9c5",
+    "build_source_bounds.py": "2637b3cd18b75835e6bd8257c6daeb1f0b84e1e905bb41d6786d6dfde7b992b0",
+    "build_sources.py": "a151cdbcff8ce88407720d743f2d831093381ca89048e3fba7243ec353b812e6",
+    "diagnostic_rules.py": "7ce8bf9dc846a5401d2fdce0a97fe5d10954e5a6b4f7489e709300639068e362",
+    "finalise.py": "12bf202ad48f82f34f51cd345ad4e447cfa1f94af1e4a61f22611dd4dd5cb0d0",
+    "plot_ratios.py": "1e04b8ffe1619e9b22a3bda19fe4ee232bf11253b41d92b5dccfabb8c0d7ce17",
+    "rebuild_bulk.py": "de72701b78d5b3e3cb0b7f677e1c66cb0218a610d361b562b756d94f87ba58a8"
+  },
+  "inherited_input_sha256": {
+    "validation/forge58-32/pressure-test/inputs/windows.csv": "db549309633d9491901fe54f0f12ed1746d79d62ae5e83faf83691f19c549fe5",
+    "validation/forge58-32/pressure-test/inputs/source-bins.csv": "6241c70045575f37f994f656412ce889435e0c51d65df66069c36a709ba11ee9",
+    "validation/forge58-32/pressure-test/bha2-figure14.json": "4637db754e236aff39a5d6a4b3cd8854d9f615f89458653e67099a704e4c11f0",
+    "validation/forge58-32/pressure-test/results/events.csv": "842a62d90d61819a60bb8885116188a3a767a24e5c7bd81681fc8666f477f694",
+    "validation/forge58-32/pressure-test/results/event-budget.csv": "5ff2ba08bac96757de356d8d1f92000c7104bbc58ab6f725b919273e43d429a2",
+    "validation/forge58-32/pressure-test/protocol.json": "81bfa95a5315d5663ce733e9ef70865f4a938781fb20945a2b496c96ee2aecf6",
+    "validation/forge58-32/rig_inputs_10s.csv.gz": "ad487bab307b875c8c0d0daea7c805fabb62ae63e165cf8403b424ab46aab1ec",
+    "validation/forge58-32/mud_reports.csv": "e4fc5153d428c03d1baa45532e293615734aa099867606a8805edde5157b56c9"
+  },
+  "archive_sha256": {
+    "sources/16A-pason-job-identity.csv": "e0a33b6a2f5daa1bfa6e47c203a356737aff3cfadb4403cacfb9fd9f6d2265e2",
+    "sources/dated-pump-changes.csv": "bff64d6d841b10a9f2e8823a4fae28cd023f90c5741faf0fed774f83d65be911",
+    "sources/rig10-public-source.json": "00ca12b10c821e7550a6b3467667714b9f3a350a2b3085bf936a6cf2b7c44515",
+    "sources/source-documents.csv": "27bcb0fff486f49deb14f96e4b5d0d0e14ca91f9463969f312364cf6c7366277",
+    "sources/source-lines.csv": "caf6b0c3c7a747c9183ed225742a8d323bb962590bd966ce22ac2564cee99ef3",
+    "sources/source-search-manifest.json": "dd1d24d28125688392ec81e26aa0d3278599d8433df8ab83844c6a87097dc003",
+    "sources/source-search-pages.csv": "edeb20de82fe6804c6623d4a79208e38e9d4079d8196765fb602062fe1955459",
+    "sources/sweep-record.csv": "83dcfc6d7dd83a086c63f1aaa972f01fca173a9bab3de1efeecb37a73a21314d",
+    "sources/tables/16A-pump-records.csv": "c0a78775488c0457094f0c7a2bd447b78ee25a81842bdae0b6635a51f57a85a5",
+    "sources/tables/drilling-parameter-intervals.csv": "232d4b65f81846ecd78e2495fd60dbcb462159f1661deff4c5978e87ba6ce8a7",
+    "sources/tables/parameter-parse-audit.csv": "ada5d4adaf0e4d64ef8356ab5f0c4343e48e9128b3b99500a07cfa1788aaa100",
+    "sources/tables/report-table-manifest.json": "84be58a06272a78d668453e6e6c5330e6bbafafed13a0183de4afb683357e709",
+    "sources/verified-facts.csv": "8d2865e18ebf936666aca47b25e751dcab8602dc26313af91cd7acf17c7a1c9b",
+    "results/16A-flow-manifest.json": "846391decadd55637737740f8640c306dab3354359dceabdd8dc96518b16d917",
+    "results/16A-ratio-steps.csv.gz": "92f50fd98f6c75b7b3482a85530fc8ce3b038baabb2486d9358ccd01bd23742b",
+    "results/16A-ratios-by-day.csv": "b399bdbde9010c8c1128c16fbd4b1cea91a820a87a0fdb36dcf98818b86c7334",
+    "results/16B-flow-manifest.json": "07ce6883160b46be5b65ac4ac2153c61e4f7e174e476898be18fb788b1cb0ab2",
+    "results/16B-ratio-steps.csv.gz": "4bb3530670de7c85abdb59b064f3108a29e90be90da95f22eed0881e3647e3b0",
+    "results/16B-ratios-by-day.csv": "74331d0cd0a52a7d2136e93102c38ea77da729f2ae17e780e7fbf101493af8ed",
+    "results/58-32-flow-manifest.json": "f7b26fdaa92f57e9acba2fb336f03819166c5ba4820a9101dd1b3584f86b4478",
+    "results/58-32-ratio-steps.csv.gz": "173ba401a6261aafde4f37d735abf23c1c6fd7169f1fe2f708c1da9bdb801a26",
+    "results/58-32-ratios-by-day.csv": "984c2cdcfd824c68c900189a73028a94844276b6263b47cac7b91bd825a40349",
+    "results/A1-off-periods.csv": "1ae280da880c98c05f44737b5107240c5d6b4c73a2f33a8f81c81db1e61d0227",
+    "results/A1-offset-summary.csv": "f1399a72f5a7a9244778984afefb421664b0aa4e73a1bc3083dc5f5b194634a1",
+    "results/A2-depth-increments.csv": "765b8332a275a164f328c428c35ca5fd8630185775832867de62bb7f7d790a13",
+    "results/A2-report-comparison.csv": "c70e50a83193da8d81bc71fb2fbda901ec19361bae1c83a4e9e1f443cb240061",
+    "results/A3-slow-by-rate.csv": "8b1f4c3b235ebc00428706dbede723a0a3b00322069f7be8e3c1354857605a71",
+    "results/A3-slow-periods.csv": "18874b0a35201de062dc68c3660cc89b67007c928454c644add32f53bbfc4883",
+    "results/B2-daily-change-source-comparison.csv": "5f76f18034db0c32e8af6c799b74a95e61bad6d8fc7a5ec384a530dff6dba063",
+    "results/B4-published-specification-flows.csv": "df074189c3ab56570ab76b671c259887e4bdb860075cc062630c2738ae4b9578",
+    "results/check-status.csv": "8c7d52dade7627e6eaf1244d5a1ac0ac09a2d6e695c79386847cc0b9c8afbe86",
+    "results/daily-ratios.png": "4c8999d09a0f4a4dc1efdd675bfef947e53eded82805ca6bf5380ba67cbc6533",
+    "results/diagnostic-solves.csv": "7efc7f291e825ad4f6198de6cb6982ed13cb2eb4d7a5be3d1fbb5d69a460e500",
+    "results/E-density-bounds.csv": "82af2158fa2ddc086cceabcf6aef23c8598f858783ba4dd76401976faf23141a",
+    "results/enquiries.csv": "d1cdb34310e71f84b5cee1a6385832a3f58cdaf9364b752395963451b28e5873",
+    "results/flow-factor-bounds.csv": "58e9e863380c23e8faf51b0d7677e18a26964a239b5a6efff4e051d8a13bbcaf",
+    "results/flow-regimes.csv": "4503305b06d1bbd0394e7f78ae232e655292cf98925dbd5cef05cd0df38c2254",
+    "results/pressure-check-manifest.json": "3f31ba7a311f91cbfd0c8c84f2a211058aab417d47015bd2526aac4aec15ad18",
+    "results/pump-displacement-arithmetic.csv": "292baa40138d342579419cb10e00b79d576ab0c48ff392c98e1bda920b08119e",
+    "results/README.md": "7c672a28aad8b73894754cdb219301d2aceea246612f0c6ba7e193afdfe2dedb",
+    "results/source-arithmetic.csv": "2c461690efcda35ae717d1cfab52e7bb66cd647b60ef934e556b706121a0c75d",
+    "results/sweep-coincidence.csv": "23b33819b813e6d4f6e27dedd15a599a4a5beca8ef5c2c0baf8939ce88ea2dae"
+  }
+}

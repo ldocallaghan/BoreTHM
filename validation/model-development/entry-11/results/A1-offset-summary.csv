@@ -1,0 +1,12 @@
+scope,periods,native_rows,median_pressure_psi,status
+2017-08-03,26,45875,14.61,available
+2017-08-04,37,15211,26.04,available
+2017-08-05,20,14299,17.66,available
+2017-08-06,24,22935,18.42,available
+58-32-off0081,8,3431,23.76,available
+58-32-off0084,9,3557,23.76,available
+58-32-off0092,7,1334,27.95,available
+58-32-off0096,7,1441,31.38,available
+58-32-off0162,7,6153,16.89,available
+58-32-off0163,7,6573,16.89,available
+58-32-off0192,2,462,24.9,available

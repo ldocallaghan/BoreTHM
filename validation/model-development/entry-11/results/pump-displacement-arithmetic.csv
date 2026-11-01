@@ -1,0 +1,18 @@
+classification,quantity,value,unit,basis
+calculated,58-32_registered_regime,5.557503340932318,US gal/stroke,"58-32 daily medians, 3-11 August"
+calculated,58-32_later_regime,5.849995329582834,US gal/stroke,"58-32 daily medians, 12 August-2 September"
+calculated,58-32_regime_ratio,0.9500013295444163,ratio,Registered regime divided by later regime
+calculated,nominal_5.5575_over_5.85,0.9500000000000001,ratio,Rounded regime arithmetic only
+calculated,D2L_for_5.85,573.5307529259541,in3,Triplex at 100 percent efficiency
+calculated,liner_for_5.85_L10,7.573181319141606,in,Triplex at 100 percent efficiency; assumed published 10-in stroke
+calculated,published_D6.75_L10,4.64736413244107,US gal/stroke,Later published specification; 2017 applicability unverified
+calculated,D6_L12,4.406389695944125,US gal/stroke,Recorded six-inch liner with 12-in stroke
+calculated,D5.5_L12,3.702591341730828,US gal/stroke,Recorded 5.5-in liner with unconfirmed 12-in stroke
+calculated,16A_predominant_daily_regime,4.183200002522154,US gal/stroke,Median of all archived 16A daily total-stroke medians
+calculated,16A_efficiency_equivalent,0.949348625786002,ratio,Assumes 12-in stroke; 11-in source conflict remains
+calculated,16B_before_daily_regime,4.189540850395149,US gal/stroke,"Median of archived daily pump-combination medians, 26 April-3 May"
+calculated,16B_after_daily_regime,3.5192361208871747,US gal/stroke,"Median of archived daily pump-combination medians, 6 May-21 July"
+calculated,16B_before_efficiency_equivalent,0.9507876378368042,ratio,12-in stroke unconfirmed
+calculated,16B_after_efficiency_equivalent,0.950479217412651,ratio,12-in stroke unconfirmed
+calculated,16B_measured_regime_ratio,0.840005204998836,ratio,After/before source-summary ratio
+calculated,16B_liner_area_ratio,0.8402777777777777,ratio,Ratio of recorded liner areas

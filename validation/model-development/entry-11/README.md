@@ -77,3 +77,17 @@
 ## Outputs and decisions
 
 **Calculated archive plan.** Preserve source extracts and reproducible build scripts, the ratio-change tables and check reductions, with hashes of inputs and code. Record every departure from this declaration and its reason. Keep the P3 archives and interpretation byte-identical. Add the findings to the development log and disclosure table, with corrected-input candidates for later adoption and an enquiry list for the rig contractor, Pason or the FORGE team. No candidate is adopted in entry 11.
+
+## Findings
+
+**Calculated.** The [source extracts and check results](results/README.md) preserve every declared check, its coverage and source citations. [manifest.json](manifest.json) identifies the code and inherited inputs. The [enquiry list](results/enquiries.csv) distinguishes missing records from independently supported dimensions.
+
+**Inferred.** Flow behaves as a configured-displacement channel, but an installed 2017 correction is not established. Existing nozzle records agree with the registered area. No input is adopted and no comparison is rescored. The later public rig specification remains time-qualified.
+
+## Sources and attribution
+
+**Measured source records.** Source data are Nash and Moore (2018), *Utah FORGE: Logs and Data from Deep Well 58-32 (MU-ESW1)*, [GDR 1006](https://doi.org/10.15121/1452735); McLennan et al. (2021), *Utah FORGE: Well 16A(78)-32 Drilling Data*, [GDR 1283](https://doi.org/10.15121/1776602); and McLennan et al. (2023), *Utah FORGE: Well 16B(78)-32 Drilling Data*, [GDR 1516](https://doi.org/10.15121/1998591). These datasets are distributed under CC BY 4.0. The extracts select channels and report cells, preserve null handling and calculate the declared reductions. Original downloads are unchanged and are not included. Kenai Drilling's separate public equipment sheet is identified by URL and hash in the source inventory; only factual extracts are included here.
+
+**Calculated labelling convention.** A measured source record means a value printed or exported by its source. The label does not establish that a report entry was independently measured or calibrated. Calculated quantities and inferred explanations are distinguished in the findings.
+
+**Calculated storage.** Bulky native reductions are rebuildable external files, with sizes and SHA-256 hashes in `manifest.json`. Compact results and source extracts remain here. The results document also gives source-derived pump arithmetic, approximate pressure-scale bounds and a sweep qualification of the earlier depth comparison. These additions adopt no input and change no P3 file.

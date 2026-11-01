@@ -1,0 +1,4 @@
+classification,source_member,source_sha256,line_start,line_end,source_text,qualification
+measured source record,1283.zip!16A(78)-32_Pason_Data.zip!28044193.las,58ef9a6cbb687a7d25729c68534b1cf87cab0c4a8aaea063b1f1949523437a4a,2,2,#LAS - Log ASCII Standard         Report Generated:    2023-05-18 11:14:23MDT,Later stimulation job; not the 2020 drilling-period per-pump record
+measured source record,1283.zip!16A(78)-32_Pason_Data.zip!28044193.las,58ef9a6cbb687a7d25729c68534b1cf87cab0c4a8aaea063b1f1949523437a4a,14,14,WELL.                  16A(78)-32 Well Stimulation:    Well,Later stimulation job; not the 2020 drilling-period per-pump record
+measured source record,1283.zip!16A(78)-32_Pason_Data.zip!28044193.las,58ef9a6cbb687a7d25729c68534b1cf87cab0c4a8aaea063b1f1949523437a4a,23,23,RIG .                           Frontier (Utah) 28:    Rig,Later stimulation job; not the 2020 drilling-period per-pump record

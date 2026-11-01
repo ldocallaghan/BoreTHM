@@ -1,0 +1,2 @@
+classification,event_id,windows,first_window_start,last_window_end,report_start,report_end,contained_in_report_interval,source,qualification
+calculated,58-32-off0162,12,2017-08-04 23:26:40,2017-08-04 23:38:40,2017-08-04 23:15:00,2017-08-04 23:45:00,True,inputs/windows.csv and sources/sweep-record.csv,Calendar-clock coincidence; pressure effect not measured or quantified

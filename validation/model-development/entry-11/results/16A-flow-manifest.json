@@ -1,0 +1,33 @@
+{
+  "well": "16A",
+  "native_rows": 5827030,
+  "ineligible_rows": 2610088,
+  "exact_ratio_change_rows": 2293949,
+  "rounded_ratio_change_rows": 7687,
+  "first_time": "2020-10-25 12:38:20",
+  "last_time": "2021-01-07 11:01:21",
+  "daily_combinations": 74,
+  "runtime_s": 340.4619079999975,
+  "sources": [
+    {
+      "source_member": "1283.zip!16A(78)-32_time_data_1s_intervals.csv",
+      "sha256": "a5b3cd699eacd2b900ab1a1d96ce5c2d628fda613129b888fa81ccf3eea6ef8f",
+      "qualification": "2020 drilling export has SPM Total only; per-pump comparison unavailable"
+    }
+  ],
+  "pandas": "3.0.1",
+  "numpy": "2.3.5",
+  "code_sha256": "7a28c1aeeb53bf6e05cc9eb1b039ebce5eb9f939ab3fb94abe9d657dd6cd4d6f",
+  "output_sha256": {
+    "16A-ratio-steps.csv.gz": "92f50fd98f6c75b7b3482a85530fc8ce3b038baabb2486d9358ccd01bd23742b",
+    "16A-ratios-by-day.csv": "b399bdbde9010c8c1128c16fbd4b1cea91a820a87a0fdb36dcf98818b86c7334"
+  },
+  "omitted_empty_stream": {
+    "name": "16A-pressure-inputs.csv.gz",
+    "sha256": "471bca732c742e1b5e345b262c55c05c700029e1bd52440c7c5a9aefc5d3d518",
+    "reason": "No pressure projection requested for this well"
+  },
+  "rebuildable_output_sha256": {
+    "16A-ratio-changes.csv.gz": "1f01ed39f3a768c42e612dc4e8d7bf45d4e7ae3a3ddcf0952339cc6bb1b0c7ef"
+  }
+}

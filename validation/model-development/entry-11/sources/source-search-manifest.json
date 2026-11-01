@@ -1,0 +1,22 @@
+{
+  "method": "Declared all-page keyword searches; no model import or calculation",
+  "patterns": {
+    "pump": "\\bpumps?\\b|triplex|duplex|liner|\\bstrokes?\\b|displacement|efficien|pason|Kenai",
+    "nozzle": "nozzle|\\bjets?\\b|\\bTFA\\b|XR\\+|centre.?port|center.?port",
+    "string": "kelly|TSDS|TSD40|TSDS40|HWDP|heavy.?weight|drill.?pipe|3\\.?5FH|4FH",
+    "density": "mud.?weight|\\bdensity\\b|\\bppg\\b"
+  },
+  "documents": 608,
+  "searched_pages": 912,
+  "matched_lines": 3413,
+  "failures": [],
+  "code_sha256": "a151cdbcff8ce88407720d743f2d831093381ca89048e3fba7243ec353b812e6",
+  "output_sha256": {
+    "16A-pason-job-identity.csv": "e0a33b6a2f5daa1bfa6e47c203a356737aff3cfadb4403cacfb9fd9f6d2265e2",
+    "dated-pump-changes.csv": "bff64d6d841b10a9f2e8823a4fae28cd023f90c5741faf0fed774f83d65be911",
+    "source-documents.csv": "27bcb0fff486f49deb14f96e4b5d0d0e14ca91f9463969f312364cf6c7366277",
+    "source-lines.csv": "caf6b0c3c7a747c9183ed225742a8d323bb962590bd966ce22ac2564cee99ef3",
+    "source-search-pages.csv": "edeb20de82fe6804c6623d4a79208e38e9d4079d8196765fb602062fe1955459",
+    "verified-facts.csv": "8d2865e18ebf936666aca47b25e751dcab8602dc26313af91cd7acf17c7a1c9b"
+  }
+}

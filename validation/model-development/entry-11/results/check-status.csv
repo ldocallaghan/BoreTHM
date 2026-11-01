@@ -1,0 +1,12 @@
+classification,check,status,result
+calculated coverage,A1,complete,All daily and event scopes available; retained pump-off readings do not establish a dynamic correction
+calculated coverage,A2,complete,Every parsed daily drilling-parameter interval retained; unavailable native coverage explicit
+calculated coverage,A3,complete,"Every qualifying native slow-circulation period retained, including brief transitions"
+calculated coverage,B1,complete,"Native exact and rounded ratio records, day and pump-combination summaries"
+calculated coverage,B2,"complete, source gap",No dated 58-32 pump/liner/configuration record found to identify the ratio changes
+calculated coverage,B3,"complete, source gap","All supplied relevant PDF pages searched; published later rig specification found, 2017 applicability unresolved"
+calculated coverage,B4,qualified arithmetic,All registered windows calculated at the published specification displacement and 100% efficiency; no 2017 applicability established and no efficiency supplied
+calculated coverage,C,"complete, source gap",Three 22/32-in jets and printed TFA confirmed; additional-port installation evidence unavailable
+calculated coverage,D,"complete, source gap",Nominal inventory and kelly confirmed; installed connection bores and full surface layout unresolved
+calculated coverage,E,complete,Reported densities transcribed; density-equivalent bounds retained as bounds only
+calculated coverage,F,qualified completion,16A total-only drilling export; per-pump check unavailable. 16B third-pump combinations included. No earlier study changed

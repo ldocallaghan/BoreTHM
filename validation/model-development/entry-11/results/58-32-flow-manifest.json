@@ -1,0 +1,184 @@
+{
+  "well": "58-32",
+  "native_rows": 3397398,
+  "ineligible_rows": 1440577,
+  "exact_ratio_change_rows": 1675122,
+  "rounded_ratio_change_rows": 8055,
+  "first_time": "2017-07-31 10:07:57",
+  "last_time": "2017-09-13 23:59:57",
+  "daily_combinations": 96,
+  "runtime_s": 49.28356609999901,
+  "sources": [
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/7-31-17.csv",
+      "sha256": "5371f8213e55d6845e927544576a4ea7bf9d75f0a17d0b3a71b7753bf7aa548c"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-01-17.csv",
+      "sha256": "24ac85a0d503562477e834eeef6b15a4834a1def726a06ba449869c2bad497ac"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-02-17.csv",
+      "sha256": "487317c5123bae9b6234856b2b288a614136bd09ce746003e65733064b0ec740"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-03-17.csv",
+      "sha256": "81966caa1bf9315eca1bdc8ed553b0328a88eedb3b930cd53d3093aef9817ffa"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-04-17.csv",
+      "sha256": "99b5ed19fc5fb4686f5f204993f577b254e13a34bc5d637266e4013882eb3b83"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-05-17.csv",
+      "sha256": "c59bd9962da8b51c930f719184b8363c054e4ff15f0a31bf1900d206deeaf3a5"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-06-17.csv",
+      "sha256": "e2bf6184b1c3e668dab6932c9ffc45a2cac1e417d53224367cf219bc69dd6210"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-07-17.csv",
+      "sha256": "e5aff2700884f33043c96d2390131a7d71dbf596f869d8b1bd974904400618b8"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-08-17.csv",
+      "sha256": "93d5e8b9059a04f8f567c38ee422d82ee9c366208fdd47b346c1389a56b600f6"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-09-17.csv",
+      "sha256": "9df25fc2681bf46a2b06d6ffe593a04d2ca9c73889e9b64054a34ee283a7eb24"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-10-17.csv",
+      "sha256": "cdc12f4ceb5974cb939872d0c3ee62952ed819b18a1c6cf784568f85b62e832e"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-11-17.csv",
+      "sha256": "ea47cc1ffcd2162b84c05bebe37e1087c67a441fe8a188a3c137238284ff50c3"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-12-17.csv",
+      "sha256": "db79981ea60ef084ed5aa8460a78e480fa72e736f15765d2112d61e2eb728d2b"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-13-17.csv",
+      "sha256": "f051f26f04862d3c8f010da01c1670e501baeb09a4bb590db6ff22657950a159"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-14-17.csv",
+      "sha256": "cd51383247690bb582e88321613d0dc9855f0e2b20e23e085f5ab1573cb724d9"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-15-17.csv",
+      "sha256": "6fb3b5718ef6ee56bb747db314c88a6f39ca3f4605851e3d274c7e51025d8ecd"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-16-17.csv",
+      "sha256": "452d25c18e27c2ff50d393d87f1fc850a8602bbf652e5543beda589801afba61"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-17-17.csv",
+      "sha256": "3ca4bcd56e68924c2ca747194260d77790ffa21bc82bdb20ad6e226311ff4a64"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-18-17.csv",
+      "sha256": "66a1cf8559b1959870aaa228ea04c74fe0ef4cc3cdbc71245cc68f1df558a6c1"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-19-17.csv",
+      "sha256": "84d740e0b6d3b1f6e3928eb8e95cb441fbe154941ef863973d9901b012bb34df"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-20-17.csv",
+      "sha256": "fb64dd9afba4914bc41a1d34d50f0b91f4d1d6586c59b83698d560d6d5df81a8"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-21-17.csv",
+      "sha256": "96b3258718ec0565bf4581d5195c6fc358fd8aa57e53cb1be37f1b11fc034dd9"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-22-17.csv",
+      "sha256": "d74bd248905f975e09f9b17343419ce3b94c9208dfb03a248a65a52464b3ad56"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-23-17.csv",
+      "sha256": "1509ace4efb599535c16acd87809b9d3558ef3b7499897374d8a4f84e2dff5fa"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-24-17.csv",
+      "sha256": "dcf12475ad7e5460eeb0ea4ce4a12fa1213d9d8ff6779f43a2c7e434affe04c7"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-25-17.csv",
+      "sha256": "7c47337b588b3b70119ddd6f69475fd1d828cd8f894568a8b0da0caa1cc67f78"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-26-17.csv",
+      "sha256": "e4992143525713d94079ef04b04b0b2b5ef27cc1f6022d6dee4125d03358f9de"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-01-17.csv",
+      "sha256": "07568bac59dc6307281bf506e9df9bdf7436a402cd531c499f8bb20c05fa7753"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-02-17.csv",
+      "sha256": "078210c7dcaa633e8e2dc74538b898006fe2779fab73a8d5a8cc14476d5d539b"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-03-17.csv",
+      "sha256": "2b2f74a423d91503bbec9ce15839f7d594071592df57bb61fa6614ccc4c6220b"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-04-17.csv",
+      "sha256": "cc2516d1da9e1a038012c53374f13fa682cda0550b3730fcbb5ce8426cdbed37"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-05-17.csv",
+      "sha256": "b210a370f178ff4f330c2ec76420240dcdb7c0a6bc8a41fe2f9f932a0dd38d47"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-06-17.csv",
+      "sha256": "cd2de5f91f126ba318a6cfd88e75fc455f5b5ba785fc916224484be3fc6bd519"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-07-17.csv",
+      "sha256": "ac715124b728a02b1e908964db4c6944cda580fe2e99d437781e9fd8317061fa"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-08-17.csv",
+      "sha256": "617f3bdf18b6c854a0f83dc5e3b56024ae4d383003bb4955b344b0d91668b2f7"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-09-17.csv",
+      "sha256": "b8de8fe0e657a18c8d86c05df36fef3a2057b66efa2ed6607c964b35fdb997d7"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-10-17.csv",
+      "sha256": "bf88c9516701fdde3c9030f0af6814cc6b03062e12d7c5b8e8fb8ccfdd1114ac"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-11-17.csv",
+      "sha256": "ab4d179a8ef4a31c6aa4f30b0d9bcd5dd4c7f24c6ab658a84c1edd0bfd5ef79a"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-12-17.csv",
+      "sha256": "8e1efe0091011750491af251e277a4dc9ff44329e8190b51f24831b7f822313d"
+    },
+    {
+      "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/9-13-17.csv",
+      "sha256": "b35464f22039618efc8fa48810488146b96adafedf6a259b29a91c5d9bbc759c"
+    }
+  ],
+  "pandas": "3.0.1",
+  "numpy": "2.3.5",
+  "code_sha256": "7a28c1aeeb53bf6e05cc9eb1b039ebce5eb9f939ab3fb94abe9d657dd6cd4d6f",
+  "output_sha256": {
+    "58-32-ratio-steps.csv.gz": "173ba401a6261aafde4f37d735abf23c1c6fd7169f1fe2f708c1da9bdb801a26",
+    "58-32-ratios-by-day.csv": "984c2cdcfd824c68c900189a73028a94844276b6263b47cac7b91bd825a40349"
+  },
+  "rebuildable_output_sha256": {
+    "58-32-pressure-inputs.csv.gz": "fcb3202a2083fbe98b30134e8cf95474b350580bc8347e92e4c6c9c9e35105f9",
+    "58-32-ratio-changes.csv.gz": "8d81e0ef8e326c961c30896adbf0c5b532e27874d6960d0595b416e2220751b3"
+  }
+}

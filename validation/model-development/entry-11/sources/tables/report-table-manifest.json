@@ -1,0 +1,8 @@
+{
+  "code_sha256": "aa3fc6b38eaede62df10f9c5671f558e22853da92d6b1e33cecf6e8c80d0d9c5",
+  "output_sha256": {
+    "16A-pump-records.csv": "c0a78775488c0457094f0c7a2bd447b78ee25a81842bdae0b6635a51f57a85a5",
+    "drilling-parameter-intervals.csv": "232d4b65f81846ecd78e2495fd60dbcb462159f1661deff4c5978e87ba6ce8a7",
+    "parameter-parse-audit.csv": "ada5d4adaf0e4d64ef8356ab5f0c4343e48e9128b3b99500a07cfa1788aaa100"
+  }
+}

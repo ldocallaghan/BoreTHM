@@ -1,0 +1,6 @@
+classification,quantity,value,unit,basis
+calculated,three_22_32_nozzle_area,1.1136700520049756,in2,Bit run 2 recorded nozzle sizes; rounded printed TFA is 1.114 in2
+calculated,published_Rig10_displacement_100pct,4.64736413244107,US gal/stroke,Published later rig specification; not established for the registered 2017 period
+calculated,illustrative_D6.75_L12,5.576836958929284,US gal/stroke,Illustrative arithmetic only; no installed pump identification
+calculated,illustrative_D7_L11,5.497787143782138,US gal/stroke,Illustrative arithmetic only; no installed pump identification
+calculated,configured_equivalent_D2L,544.8541914536029,in3,Pason ratio; not a sourced liner or stroke

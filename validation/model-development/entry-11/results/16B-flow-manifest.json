@@ -1,0 +1,33 @@
+{
+  "well": "16B",
+  "native_rows": 746904,
+  "ineligible_rows": 471559,
+  "exact_ratio_change_rows": 157824,
+  "rounded_ratio_change_rows": 38180,
+  "first_time": "2023-04-26 02:30:00",
+  "last_time": "2023-07-21 18:00:00",
+  "daily_combinations": 252,
+  "runtime_s": 24.056599900010042,
+  "sources": [
+    {
+      "source_member": "1516.zip!16B_Pason.zip!10 Second Data.csv",
+      "sha256": "7764504c5b08c6be335732dcd4178cd8ed1de61d09d748cf91f30d512006f5ea",
+      "qualification": "Pump 3 rate retained where recorded; combinations identify every active recorded pump"
+    }
+  ],
+  "pandas": "3.0.1",
+  "numpy": "2.3.5",
+  "code_sha256": "7a28c1aeeb53bf6e05cc9eb1b039ebce5eb9f939ab3fb94abe9d657dd6cd4d6f",
+  "output_sha256": {
+    "16B-ratio-steps.csv.gz": "4bb3530670de7c85abdb59b064f3108a29e90be90da95f22eed0881e3647e3b0",
+    "16B-ratios-by-day.csv": "74331d0cd0a52a7d2136e93102c38ea77da729f2ae17e780e7fbf101493af8ed"
+  },
+  "omitted_empty_stream": {
+    "name": "16B-pressure-inputs.csv.gz",
+    "sha256": "471bca732c742e1b5e345b262c55c05c700029e1bd52440c7c5a9aefc5d3d518",
+    "reason": "No pressure projection requested for this well"
+  },
+  "rebuildable_output_sha256": {
+    "16B-ratio-changes.csv.gz": "d50b4a972ab80abae61eabebeb85ff7b1d744e6a96217772616f5d8b00ab645c"
+  }
+}
