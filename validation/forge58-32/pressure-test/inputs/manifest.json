@@ -1,0 +1,38 @@
+{
+  "python": "3.14.4",
+  "zlib": "1.3.1.zlib-ng",
+  "input_sha256": {
+    "rig_inputs_10s.csv.gz": "ad487bab307b875c8c0d0daea7c805fabb62ae63e165cf8403b424ab46aab1ec",
+    "rig-inputs.json": "290cd371fe083e4398489439856e8291dfc8f8e1d064a0db2d55153939c37fe5",
+    "off_bottom_windows.csv": "918fdb6a5cb683b123279cab3622f8c6e7609b15f768e2b203f500e361dd0a22",
+    "off_bottom_events.csv": "b76a7e911dddb7acb68942d70fc4cf507f663b19ca5f093c3a8bef95d1645b52",
+    "off_bottom_counts.csv": "b9b6b170a65f0d14fb9195c6977834b6362b4d312fd88b9866c660e2c260a7a1",
+    "off_bottom_summary.json": "308fed06d95614a70dfcab20c21f46da152e60c02ecf18f233164b7789cdaaa6",
+    "bha_components.csv": "e48259b84edb03e3da6b06e71bbc0fbb9f10d38ca3e672056d9afb385f60cb7f",
+    "bha_reports.csv": "70ccc860d8ed829c774a6e410be2ec73367c159424810aae6f6ee1e2202e973e",
+    "mud_reports.csv": "e4fc5153d428c03d1baa45532e293615734aa099867606a8805edde5157b56c9",
+    "bit_inputs.csv": "070a90975873fdf94182606e5c888f8c0f129bd35a05d4894feb622f43b834df",
+    "survey.csv": "29c8791b2caa83a5e6e6f251577dbdac86652dcbb53a107aebb0afb0c846b4cd",
+    "casing_records.csv": "b1e19116490424115769c577c1822cd222f4584790ac2e9362bc78e3b62028f9",
+    "operations.csv": "feb448bb300731b8e070797212412a90eaf0973e00bb1ca12bf7395826acf0e2"
+  },
+  "source_sha256": {
+    "build_inputs.py": "9795049bfee3b21ea12afb64b32dc4534fab04cb05375ac0b866a03dac2a338d",
+    "protocol.json": "5a3b3c7181dd677e4ad347aa6d020dd9ffafe76d927604e9e4e0afadc02ee097",
+    "protocol.md": "d84cc719b3a3f46f2969ca3760466243fb55fbb83d89587c81a0385885154831",
+    "bha2-figure14.json": "4637db754e236aff39a5d6a4b3cd8854d9f615f89458653e67099a704e4c11f0",
+    "references.json": "548f07e9ef57d37aeb20826a786681a66e673ecb72a64b2ce90fad24af3fc800"
+  },
+  "output_sha256": {
+    "circulation-clock.csv.gz": "7446d483c4264d8dc90a2c8afd8ea7c99002212d4508df4aa8903081258750a9",
+    "components.csv": "18fc9f6c965c9f60aaed663f3113a1a32d237e881be5ad7b9b0d8d6db34dca28",
+    "coverage.json": "ceb7ea4d913788d777ea9a4aae23888c7d2caee5fc6bc2a744120a2b16b0a404",
+    "events.csv": "c3cd7293f2f451bbe70805717154ed8671f5ead72192a589595f01d01ade1f50",
+    "geometry.json": "442835de01a671d27e1f6c7e0c1a35f3a39baa8466df6b21234797bd0b8726d3",
+    "source-bins.csv": "6241c70045575f37f994f656412ce889435e0c51d65df66069c36a709ba11ee9",
+    "windows.csv": "db549309633d9491901fe54f0f12ed1746d79d62ae5e83faf83691f19c549fe5"
+  },
+  "compressed_clock_unpacked_sha256": "46a25328b9e56f72b99a18619fbc22e1fd2861ceaf43cc183892838a033b135d",
+  "window_pressure_targets_read": false,
+  "prior_report_pressure_exposure": true
+}

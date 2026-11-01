@@ -1,0 +1,11 @@
+{
+  "reported_total_length_ft": 581.73,
+  "figure_rounded_sum_ft": 580,
+  "merged_source_length_ft": 580.94,
+  "modeled_nonbit_length_ft": 579.58,
+  "difference_from_reported_ft": 0.79,
+  "rescaled": false,
+  "HWDP_joints": 9,
+  "HWDP_total_length_ft": 272.0,
+  "HWDP_pitch_ft": 30.22222222222222
+}

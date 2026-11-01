@@ -1,0 +1,185 @@
+{
+  "source_member": "1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf",
+  "source_pdf_sha256": "73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49",
+  "source_page": 29,
+  "source_figure": 14,
+  "transcription": "Manual transcription of Figure 14; lengths rounded as printed. Items are ordered from bit upward.",
+  "bha_id": "2",
+  "date_in": "2017-08-03 05:00:00",
+  "date_out": "2017-08-06 00:00:00",
+  "depth_in_ft": 342,
+  "depth_out_ft": 2180,
+  "reported_assembly_length_ft": 581.73,
+  "components": [
+    {
+      "item": 1,
+      "component": "BIT",
+      "figure_length_ft": 1,
+      "reported_OD_in": 12.25,
+      "reported_ID_in": null,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "7.625REG"
+    },
+    {
+      "item": 2,
+      "component": "BS",
+      "figure_length_ft": 4,
+      "reported_OD_in": 8.125,
+      "reported_ID_in": 2.875,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 3,
+      "component": "DCM",
+      "figure_length_ft": 30,
+      "reported_OD_in": 8.125,
+      "reported_ID_in": 2.875,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 4,
+      "component": "STAB",
+      "figure_length_ft": 8,
+      "reported_OD_in": 8.25,
+      "reported_ID_in": 2.875,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 5,
+      "component": "SHOCK",
+      "figure_length_ft": 13,
+      "reported_OD_in": 8.125,
+      "reported_ID_in": 2.875,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 6,
+      "component": "DC",
+      "figure_length_ft": 30,
+      "reported_OD_in": 7.75,
+      "reported_ID_in": 2.938,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 7,
+      "component": "DC",
+      "figure_length_ft": 30,
+      "reported_OD_in": 8.125,
+      "reported_ID_in": 2.875,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 8,
+      "component": "STAB",
+      "figure_length_ft": 8,
+      "reported_OD_in": 8.25,
+      "reported_ID_in": 3.25,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 9,
+      "component": "DC",
+      "figure_length_ft": 30,
+      "reported_OD_in": 8,
+      "reported_ID_in": 2.938,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 10,
+      "component": "DC",
+      "figure_length_ft": 30,
+      "reported_OD_in": 7.875,
+      "reported_ID_in": 2.938,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 11,
+      "component": "JAR",
+      "figure_length_ft": 31,
+      "reported_OD_in": 8.125,
+      "reported_ID_in": 2.812,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 12,
+      "component": "DC",
+      "figure_length_ft": 30,
+      "reported_OD_in": 7.938,
+      "reported_ID_in": 2.938,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 13,
+      "component": "DC",
+      "figure_length_ft": 30,
+      "reported_OD_in": 7.75,
+      "reported_ID_in": 2.938,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 14,
+      "component": "DC",
+      "figure_length_ft": 30,
+      "reported_OD_in": 8,
+      "reported_ID_in": 2.875,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "6.625REG"
+    },
+    {
+      "item": 15,
+      "component": "XO",
+      "figure_length_ft": 2,
+      "reported_OD_in": 8,
+      "reported_ID_in": 2.875,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "4.5XH"
+    },
+    {
+      "item": 16,
+      "component": "XO",
+      "figure_length_ft": 1,
+      "reported_OD_in": 6.5,
+      "reported_ID_in": 2.75,
+      "quantity": 1,
+      "length_basis": "component total",
+      "reported_top_thread": "TSD40"
+    },
+    {
+      "item": 17,
+      "component": "HWDP",
+      "figure_length_ft": 272,
+      "reported_OD_in": 4,
+      "reported_ID_in": 2.5,
+      "quantity": 9,
+      "length_basis": "total for nine joints",
+      "reported_top_thread": "TSD40"
+    }
+  ]
+}

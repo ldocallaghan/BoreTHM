@@ -1,0 +1,15 @@
+# Model-only pressure budget
+
+These calculations use the primary geometry in the [registered protocol](../protocol.md). No measured window pressure has been read. The original reference is the v1.5.0 equations with D6's numerical treatment of overlapping thermal ramps and D7's mesh clipping at the physical well ends. The adopted calculation is entry 8 with smooth Colebrook and zero roughness. Entry 8 with Blasius is secondary. Package defaults are unchanged.
+
+`window-budget.csv` records every registered window and calculation, including the solver status and named pressure parts. `component-budget.csv` records each BHA component's bore loss, with zero for the bit body or a component above the modelled string. Joint and geometric-local terms are included in the owning segment's bore contribution and remain separate columns. Buoyancy is separate so the parts sum to standpipe pressure.
+
+`event-budget.csv` gives arithmetic mean pressure parts on identical successful windows in all three calculations. `median_spp_psi` is separate. These model-only windows are not the target-complete paired cohort needed for a skill score. `event-components.csv` gives each component's mean on the same event cohort. `reference-coverage.csv` lists the original calculation's completed windows by event.
+
+`starting-profile.csv` compares each independently seeded original result with a second original solve initialised from the converged working profile. Both use the original equations and geometry. The tolerances, declared before running, are 0.01 °C for bit and return temperature and 1 psi for standpipe pressure. The extra solve cannot replace a failed seeded result. Its solver message and differences remain in the file.
+
+The unmodified original path failed on the recorded assembly because sequential assignments over overlapping ramps made the derivative discontinuous. `legacy-status.json` preserves the local mesh-failure reproduction and the component-merging and shoe-only diagnostics. Those altered geometries are not used in this budget. D6 applies the existing occupancy formula to original thermal pieces without changing physical equations, inputs or solver settings. D7 also confines the original initial mesh to the actual well interval, as the current path already did. Its isolated diagnostic restored the surface boundary on a shallow window with a short top pipe segment. The original reference is explicitly qualified by both numerical corrections.
+
+No observed-pressure score is calculated here. Installed operating losses without sourced curves remain absent from all three calculations. The jar and shock-sub losses are unquantified. Catalogue pipe dimensions remain assumptions. Seven events from one motorless assembly provide limited evidence about model skill.
+
+`manifest.json` records calculation counts, failures and the largest starting-profile differences, with source hashes and runtime. `archive.json` checksums the complete archive. `event-budget.png` is rebuilt by `plot_budget.py`. The independent input rebuild preserves every original window and event identity.

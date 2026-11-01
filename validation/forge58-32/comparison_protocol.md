@@ -1,5 +1,7 @@
 # FORGE 58-32 pressure protocol
 
+The current numerical comparison is specified in the [registered pressure-test protocol](pressure-test/protocol.md). It records the later report-pressure exposure and the adopted entry 8 calculation with entry 10 smooth Colebrook, while preserving this archive's window identities and assignments. The earlier registration below documents the original sampling and input conventions; its numerical model variants and PV-reference convention are superseded by the current protocol.
+
 Registered before target access, as the second pressure well for v1.6.0. The [shared amendment](../forge56-32/protocol-amendment.md) defines settling, windows, event weighting and interval measures. Its safeguards and model/rheology variants apply here. The protocol was registered at `8bbfe2c44658dade8972a647970e3308047b6380` before implementation and target inspection or comparison.
 
 Use only the [documented input archive](README.md) to choose windows. The source column `Pump Pressure` is the later standpipe target, with psi as the DDR convention. Input `Flow In` is US gpm; depth is ft and inlet temperature follows the source Fahrenheit convention. These unit interpretations remain visible in numerical outputs. Do not inspect PT or thermal observations.

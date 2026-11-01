@@ -1,0 +1,168 @@
+{
+  "registration_date": "2026-10-31",
+  "working_source_commit": "29fe035551bee900d732b292bedc28daa0d39f6f",
+  "original_release_commit": "edc27007759de575baa7b3c6f4969139cea8d616",
+  "sampling_registration_commit": "8bbfe2c44658dade8972a647970e3308047b6380",
+  "prior_report_pressure_exposure": true,
+  "window_pressure_targets_read": false,
+  "input_sha256": {
+    "rig_inputs_10s.csv.gz": "ad487bab307b875c8c0d0daea7c805fabb62ae63e165cf8403b424ab46aab1ec",
+    "rig-inputs.json": "290cd371fe083e4398489439856e8291dfc8f8e1d064a0db2d55153939c37fe5",
+    "off_bottom_windows.csv": "918fdb6a5cb683b123279cab3622f8c6e7609b15f768e2b203f500e361dd0a22",
+    "off_bottom_events.csv": "b76a7e911dddb7acb68942d70fc4cf507f663b19ca5f093c3a8bef95d1645b52",
+    "off_bottom_counts.csv": "b9b6b170a65f0d14fb9195c6977834b6362b4d312fd88b9866c660e2c260a7a1",
+    "off_bottom_summary.json": "308fed06d95614a70dfcab20c21f46da152e60c02ecf18f233164b7789cdaaa6",
+    "bha_components.csv": "e48259b84edb03e3da6b06e71bbc0fbb9f10d38ca3e672056d9afb385f60cb7f",
+    "bha_reports.csv": "70ccc860d8ed829c774a6e410be2ec73367c159424810aae6f6ee1e2202e973e",
+    "mud_reports.csv": "e4fc5153d428c03d1baa45532e293615734aa099867606a8805edde5157b56c9",
+    "bit_inputs.csv": "070a90975873fdf94182606e5c888f8c0f129bd35a05d4894feb622f43b834df",
+    "survey.csv": "29c8791b2caa83a5e6e6f251577dbdac86652dcbb53a107aebb0afb0c846b4cd",
+    "casing_records.csv": "b1e19116490424115769c577c1822cd222f4584790ac2e9362bc78e3b62028f9",
+    "operations.csv": "feb448bb300731b8e070797212412a90eaf0973e00bb1ca12bf7395826acf0e2"
+  },
+  "selection": "Existing motorless_primary rows, with unchanged window, event and BHA identifiers",
+  "models": {
+    "original": {
+      "hydraulics_model": "v1.5.0",
+      "annulus_model": "v1.6.0",
+      "rock_response": "logarithmic",
+      "surface_case": null,
+      "joints": false,
+      "friction": "blasius",
+      "roughness_m": 0.0,
+      "numerical_treatment": "D6 occupancy-weighted original thermal pieces and D7 mesh confined to physical well ends; v1.5.0 equations"
+    },
+    "working_entry10": {
+      "hydraulics_model": "v1.6.0",
+      "annulus_model": "herschel-bulkley-erge",
+      "rheology": "no-yield power law through the reported 600/300 rpm readings",
+      "rock_response": "cylinder",
+      "surface_case": 5,
+      "joints": true,
+      "friction": "colebrook",
+      "roughness_m": 0.0
+    },
+    "secondary_entry8": {
+      "hydraulics_model": "v1.6.0",
+      "annulus_model": "herschel-bulkley-erge",
+      "rheology": "no-yield power law through the reported 600/300 rpm readings",
+      "rock_response": "cylinder",
+      "surface_case": 5,
+      "joints": true,
+      "friction": "blasius",
+      "roughness_m": 0.0
+    }
+  },
+  "common": {
+    "pv_ref_T_C": 26.7,
+    "film_multiplier": 1.0,
+    "roughness_m": 0.0,
+    "nozzle_Cd": 0.95,
+    "jet_count": 3,
+    "jet_diameter_32nds": 22,
+    "Q_face_W": 0.0,
+    "additional_rotary_heat_W": 0.0,
+    "joint_restriction_in": 29.0,
+    "joint_transition": "abrupt",
+    "casing_OD_in": 13.375,
+    "casing_ID_in": 12.615,
+    "casing_shoe_ft": 338.0,
+    "casing_shoe_source_exact_ft": 337.6,
+    "cased_original_hole_in": 17.5,
+    "open_hole_in": 12.25,
+    "fluid_reference_density_temperature_C": 20.0,
+    "k_rock_W_mK": 2.497333333333333,
+    "rhocp_rock_J_m3K": 2483147.3333333335,
+    "exposure_floor_s": 3600.0
+  },
+  "scenarios": {
+    "primary": {
+      "pipe_ID_in": 3.34,
+      "joint_ID_in": 2.563,
+      "reference": "pipe-primary",
+      "pipe_OD_in": 4.0
+    },
+    "heavy_pipe": {
+      "pipe_ID_in": 3.24,
+      "joint_ID_in": 2.563,
+      "reference": "pipe-heavy",
+      "pipe_OD_in": 4.0
+    },
+    "wide_joint": {
+      "pipe_ID_in": 3.34,
+      "joint_ID_in": 2.688,
+      "reference": "joint-wide",
+      "pipe_OD_in": 4.0
+    },
+    "larger_pipe": {
+      "pipe_OD_in": 4.5,
+      "pipe_ID_in": 3.826,
+      "joint_ID_in": 2.563,
+      "reference": "pipe-larger"
+    }
+  },
+  "joint_OD_in": 5.25,
+  "pipe_joint_pitch_ft": 31.5,
+  "HWDP_joint_ID_in": 2.5,
+  "HWDP_joint_pitch_ft": 30.22222222222222,
+  "surface_loss_uncertainty": "unquantified installed layout; API case 5 is a transferred scenario",
+  "tool_loss_uncertainty": "additional jar/shock operating losses unquantified; no numerical tool band",
+  "fluid_system": {
+    "id": "12.25in-polymer-design",
+    "start": "2017-08-03 05:00:00",
+    "end": "2017-08-06 00:00:00",
+    "basis": "Figure 14 BHA dates and section 6.3.5 planned polymer system; actual continuity is an assumption",
+    "mud_rule": "Nearest recorded density and paired PV/YP within these dates, in either direction; earlier breaks ties"
+  },
+  "target_reduction": {
+    "channel": "Pump Pressure",
+    "unit": "psi, DDR convention; raw header is a generic source unit",
+    "start_inclusive_end_exclusive": true,
+    "min_native_observations_per_10s_bin": 8,
+    "required_bins": 6,
+    "window_statistic": "Equal-weight mean of the six native-pressure bin means",
+    "missing_sentinel": -999.25,
+    "zeros_retained": true
+  },
+  "metric": {
+    "primary_unit": "event",
+    "event_statistic": "Median prediction and median observation on identical paired windows; subtract medians",
+    "skill": "1 - RMSE_working / RMSE_original",
+    "RMSE_weighting": "Equal event weights on the same jointly converged, target-complete cohort",
+    "window_RMSE": "Secondary, equal window weights",
+    "zero_original_RMSE": "Skill undefined; report both RMSEs"
+  },
+  "source_gaps": [
+    "Installed ordinary-pipe OD, weight, bore and connection machining are not confirmed; catalogue scenarios are assumptions.",
+    "Internal connection shape and effective restricted length remain unmeasured.",
+    "Nominal polymer-fluid continuity and density test temperature remain assumptions.",
+    "Unknown proprietary jar/shock and actual surface-line losses have no finite sourced band.",
+    "Rotary string heat is omitted because no independent off-bottom torque input has been supplied."
+  ],
+  "source_model_sha256": {
+    "model1_coupled.py": "88f03cb4e9a9ca77bdd93604bce8a9175b89a0520c0ef0ab4456320aaad2097a",
+    "hydraulic_losses.py": "913ba82b760b17100549f85ac2f4ac71d3d9f72272389980a12729260bc1ed01",
+    "fluids.py": "10de76f50892d73295dd6cbc3fe8038bc097bd76f078c03f311310d9c18f8128",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a",
+    "studies/validate_forge16a.py": "d65af33954b201a8721ed682f1b83c69dd63b706e25824d69c98c55049e9a669",
+    "studies/validate_forge16b.py": "ebe5e45a40a59cdf96655a161938f97bb36279582765c8b16b732446df85e93a"
+  },
+  "amendment_date": "2026-11-01",
+  "working_decision_commit": "41147f3",
+  "model_only_budget": {
+    "scenario": "primary",
+    "windows": "All 62 registered windows; every model solved independently",
+    "event_reduction": "Arithmetic mean of each pressure part and total across the same successful windows in all three models; median total also reported",
+    "skill_reduction_unchanged": "Event medians on identical target-complete jointly converged windows; equal event weights",
+    "missing_tool_losses": "No additional jar, shock-sub or other unsourced operating loss in any calculation"
+  },
+  "D6_numerical_commit": "c15984da8a8da745f26851ebe578d749e2b9c076",
+  "starting_profile_check": {
+    "declared_date": "2026-11-01",
+    "temperature_tolerance_C": 0.01,
+    "pressure_tolerance_psi": 1.0,
+    "method": "Original solve(init=converged working profile) against independently seeded original on every window; identical original equations and inputs"
+  },
+  "D7_numerical_commit": "29fe035551bee900d732b292bedc28daa0d39f6f"
+}

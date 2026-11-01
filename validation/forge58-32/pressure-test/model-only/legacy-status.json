@@ -1,0 +1,116 @@
+{
+  "unmodified_model_commit": "ecdab7ae7d4e8249b45104630a76b904bafe225a",
+  "D6_commit": "c15984d",
+  "unmodified_single_seed_diagnostics": {
+    "recorded": [
+      {
+        "case": "recorded",
+        "window_id": "58-32-20170804T005130",
+        "success": false,
+        "status": 1,
+        "message": "The maximum number of mesh nodes is exceeded.",
+        "nodes": 16785,
+        "runtime_s": 134.7793512000062,
+        "initial_nodes": 192,
+        "min_spacing_m": 0.004690415094358968,
+        "duplicate_nodes": 0,
+        "finite_rhs": true,
+        "largest_mask_edge_rhs_jump_K_m": 0.0011546438268716054
+      }
+    ],
+    "merged": [
+      {
+        "case": "merged",
+        "window_id": "58-32-20170804T005130",
+        "success": true,
+        "status": 0,
+        "message": "The algorithm converged to the desired accuracy.",
+        "nodes": 188,
+        "runtime_s": 1.2599513000168372,
+        "initial_nodes": 188,
+        "min_spacing_m": 0.004690415094358968,
+        "duplicate_nodes": 0,
+        "finite_rhs": true,
+        "largest_mask_edge_rhs_jump_K_m": 2.4587057595790076e-05
+      }
+    ],
+    "shoe": [
+      {
+        "case": "shoe",
+        "window_id": "58-32-20170804T005130",
+        "success": false,
+        "status": 1,
+        "message": "The maximum number of mesh nodes is exceeded.",
+        "nodes": 16029,
+        "runtime_s": 143.01967760000844,
+        "initial_nodes": 192,
+        "min_spacing_m": 0.004690415094358968,
+        "duplicate_nodes": 0,
+        "finite_rhs": true,
+        "largest_mask_edge_rhs_jump_K_m": 0.0011546438268716054
+      }
+    ]
+  },
+  "D6_probe_windows": [
+    {
+      "case": "fixed",
+      "window_id": "58-32-20170804T005130",
+      "success": true,
+      "status": 0,
+      "message": "The algorithm converged to the desired accuracy.",
+      "nodes": 192,
+      "runtime_s": 2.1310509000031743,
+      "initial_nodes": 192,
+      "min_spacing_m": 0.004690415094358968,
+      "duplicate_nodes": 0,
+      "finite_rhs": true,
+      "largest_mask_edge_rhs_jump_K_m": 3.7881550327134583e-11
+    },
+    {
+      "case": "fixed",
+      "window_id": "58-32-20170804T232710",
+      "success": true,
+      "status": 0,
+      "message": "The algorithm converged to the desired accuracy.",
+      "nodes": 194,
+      "runtime_s": 2.558076000015717,
+      "initial_nodes": 194,
+      "min_spacing_m": 0.08251984905660947,
+      "duplicate_nodes": 0,
+      "finite_rhs": true,
+      "largest_mask_edge_rhs_jump_K_m": 9.646041777833236e-11
+    },
+    {
+      "case": "fixed",
+      "window_id": "58-32-20170805T195930",
+      "success": true,
+      "status": 0,
+      "message": "The algorithm converged to the desired accuracy.",
+      "nodes": 194,
+      "runtime_s": 2.545803100016201,
+      "initial_nodes": 194,
+      "min_spacing_m": 0.050512015094398066,
+      "duplicate_nodes": 0,
+      "finite_rhs": true,
+      "largest_mask_edge_rhs_jump_K_m": 9.514385113096324e-11
+    }
+  ],
+  "physical_input_changes_in_registered_budget": false,
+  "targets_read": false,
+  "note": "Merged components and shifted shoe are diagnostics only; the registered budget retains the recorded geometry and the D6 numerical blend.",
+  "D7_commit": "29fe035551bee900d732b292bedc28daa0d39f6f",
+  "D7_boundary_probe": {
+    "window_id": "58-32-20170804T013010",
+    "success": true,
+    "status": 0,
+    "message": "The algorithm converged to the desired accuracy.",
+    "runtime_s": 1.5044470999855548,
+    "first_node_m": 0.0,
+    "last_node_m": 176.884584,
+    "bit_m": 176.884584,
+    "bit_C": 43.34443185109944,
+    "return_C": 43.87864068780206,
+    "targets_read": false,
+    "installed_package_changed": false
+  }
+}

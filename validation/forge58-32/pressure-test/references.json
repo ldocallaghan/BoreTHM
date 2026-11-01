@@ -1,0 +1,80 @@
+[
+  {
+    "id": "eowr",
+    "reference": "Geothermal Resource Group (2017), FORGE 58-32 end-of-well report, GDR 1006",
+    "url": "https://gdr.openei.org/submissions/1006",
+    "doi": "10.15121/1452735",
+    "source_member": "1006.zip!58-32_EOWR.zip!58-32_EOWR/58-32_EOWR_DOE.pdf",
+    "sha256": "73a7ce87e7dbed66bc2b38caacbe50b111a39d5c0c78c7be8c745ba1c1d60a49",
+    "locators": "PDF p25: casing; p29 Figure 14: BHA 2; p30 section 6.3.5: planned polymer fluid system",
+    "scope": "Recorded equipment facts and planned fluid section; no pressure programme or thermal observations extracted."
+  },
+  {
+    "id": "pipe-primary",
+    "reference": "TSC Drill Pipe, TSDS40 sheet, revision 9, 22 May 2025",
+    "url": "https://drillpipe.com/wp-content/uploads/2025/06/400IUx1400ppfxTSC95RBW_5250x2563xTSDS40_R2.pdf",
+    "locator": "PDF p1, pipe body, tool joint and assembly data",
+    "pipe_OD_in": 4.0,
+    "pipe_weight_lb_ft": 14.0,
+    "pipe_ID_in": 3.34,
+    "joint_OD_in": 5.25,
+    "joint_ID_in": 2.563,
+    "joint_pitch_ft": 31.5,
+    "scope": "Catalogue scenario; the reported TSD40 name does not establish installed TSDS40 machining, pipe weight or length."
+  },
+  {
+    "id": "joint-wide",
+    "reference": "TSC Drill Pipe, TSDS40 sheet, revision 9, 22 May 2025",
+    "url": "https://drillpipe.com/wp-content/uploads/2025/06/400IUx1400ppfxTSC95RBW_5250x2688xTSDS40_R2.pdf",
+    "locator": "PDF p1, pipe body, tool joint and assembly data",
+    "pipe_OD_in": 4.0,
+    "pipe_weight_lb_ft": 14.0,
+    "pipe_ID_in": 3.34,
+    "joint_OD_in": 5.25,
+    "joint_ID_in": 2.688,
+    "joint_pitch_ft": 31.5,
+    "scope": "Catalogue scenario; the reported TSD40 name does not establish installed TSDS40 machining, pipe weight or length."
+  },
+  {
+    "id": "pipe-heavy",
+    "reference": "TSC Drill Pipe, TSDS40 sheet, revision 9, 22 May 2025",
+    "url": "https://drillpipe.com/wp-content/uploads/2025/06/400IUx1570ppfxTSC95RBW_5250x2563xTSDS40_R2.pdf",
+    "locator": "PDF p1, pipe body, tool joint and assembly data",
+    "pipe_OD_in": 4.0,
+    "pipe_weight_lb_ft": 15.7,
+    "pipe_ID_in": 3.24,
+    "joint_OD_in": 5.25,
+    "joint_ID_in": 2.563,
+    "joint_pitch_ft": 31.5,
+    "scope": "Catalogue scenario; the reported TSD40 name does not establish installed TSDS40 machining, pipe weight or length."
+  },
+  {
+    "id": "pipe-larger",
+    "reference": "TSC Drill Pipe, TSDS40 sheet, revision 9, 22 May 2025",
+    "url": "https://drillpipe.com/wp-content/uploads/2025/06/450IEUx1660ppfxTSC95RBW_5250x2563xTSDS40_R2.pdf",
+    "locator": "PDF p1, pipe body, tool joint and assembly data",
+    "pipe_OD_in": 4.5,
+    "pipe_weight_lb_ft": 16.6,
+    "pipe_ID_in": 3.826,
+    "joint_OD_in": 5.25,
+    "joint_ID_in": 2.563,
+    "joint_pitch_ft": 31.5,
+    "scope": "Compatible catalogue alternative; a TSD40 label on the HWDP does not establish the ordinary-pipe OD."
+  },
+  {
+    "id": "casing",
+    "reference": "Cudd Well Control, Technical Data Book (2021)",
+    "url": "https://www.cuddwellcontrol.com/images/Pages/Tech_Data/PDF/CWC_020_TECH_DATA_BK_10671_2021_04_23_DIGITAL.pdf",
+    "locator": "Printed p48, PDF p50, Casing Capacity table",
+    "casing_OD_in": 13.375,
+    "weight_lb_ft": 54.5,
+    "casing_ID_in": 12.615,
+    "scope": "Nominal bore for the independently reported size and weight; no measured wear allowance."
+  },
+  {
+    "id": "surface",
+    "reference": "API RP 13D, sixth edition (2009)",
+    "locator": "Section 7.3, equation 60 and table 4, case 5",
+    "scope": "Existing surface-loss coefficient, transferred layout scenario; installed rig lines and pressure tap remain unknown."
+  }
+]

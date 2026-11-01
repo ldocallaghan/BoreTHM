@@ -1,0 +1,36 @@
+{
+  "calculated_models": [
+    "original",
+    "working_entry10",
+    "secondary_entry8"
+  ],
+  "original_reference_complete": true,
+  "original_reference": "v1.5.0 equations with D6 occupancy blend and D7 physical-boundary mesh clipping",
+  "targets_read": false,
+  "prior_report_pressure_exposure": true,
+  "runtime_s": 375.73931969999103,
+  "starting_profile_max_difference": {
+    "bit_C": 0.00016522548754238642,
+    "return_C": 1.1506562103136275e-06,
+    "spp_psi": 0.0006515638990549633
+  },
+  "source_sha256": {
+    "validation/forge58-32/pressure-test/predict_budget.py": "3676138016e669456b8225924c2e1e8f91a7f9c3ed3e5236dc8ddf1ba217b658",
+    "validation/forge58-32/pressure-test/plot_budget.py": "ab15df97d3a5d861d393c5a03a022c7ed2f82ad5ed2c324af53087753a810764",
+    "validation/forge58-32/pressure-test/protocol.md": "d84cc719b3a3f46f2969ca3760466243fb55fbb83d89587c81a0385885154831",
+    "validation/forge58-32/pressure-test/protocol.json": "5a3b3c7181dd677e4ad347aa6d020dd9ffafe76d927604e9e4e0afadc02ee097",
+    "validation/forge58-32/pressure-test/inputs/manifest.json": "cebb5a6a8cb9ec08733230580b66237bb28ca820e85137b1e1b390c39842e2da"
+  },
+  "output_sha256": {
+    "component-budget.csv": "bfa486047061deb28d7f2f298f45861d03159396262f5350e5983af6ca8c13bb",
+    "event-budget.csv": "df8005342274b108e2b0e4a6c1e2318afa17c4a3414275d5a29b78693d42cc98",
+    "event-budget.png": "b83e3bb0da07107f7a9fda7c88c2ea813bf64333331bb6107cbf26edd8534fb2",
+    "event-components.csv": "6c9290274acc373dd49e828145d680a8d554ffdd0890cb684806a6bea500faba",
+    "legacy-status.json": "27c6596bf8b177fd779eac5c5545bfe96fd3d639799484c7f83a8040f4888e88",
+    "manifest.json": "a351fb086953ffa7f8d003d2e3bb01c560210489eec0abd4f4f226d9ca9dcc4a",
+    "README.md": "5bb356016947659ff8c92cf06e33b96ee8f0c4ffc2e3c41e1e673b8f5a44a510",
+    "reference-coverage.csv": "7a5776e494322fdee7d6f411b502a3c6a516c1da9b26e20bb30d6cfa9f5ab782",
+    "starting-profile.csv": "7d4098a4b41a819bea3b2b955350500401c580c31449104f1a5d4cef8e6003fa",
+    "window-budget.csv": "e8232742f2facb399f8707ac48f504bce9bcb47c27ba0e587de0923626526175"
+  }
+}

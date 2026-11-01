@@ -1,0 +1,8 @@
+event_id,variant,planned_windows,attempted_windows,completed_windows,budget_available,outcome
+58-32-off0081,original,2,2,2,True,Converged with D6 and D7; v1.5.0 equations and recorded geometry
+58-32-off0084,original,6,6,6,True,Converged with D6 and D7; v1.5.0 equations and recorded geometry
+58-32-off0092,original,1,1,1,True,Converged with D6 and D7; v1.5.0 equations and recorded geometry
+58-32-off0096,original,1,1,1,True,Converged with D6 and D7; v1.5.0 equations and recorded geometry
+58-32-off0162,original,12,12,12,True,Converged with D6 and D7; v1.5.0 equations and recorded geometry
+58-32-off0163,original,5,5,5,True,Converged with D6 and D7; v1.5.0 equations and recorded geometry
+58-32-off0192,original,35,35,35,True,Converged with D6 and D7; v1.5.0 equations and recorded geometry

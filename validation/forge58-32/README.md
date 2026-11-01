@@ -1,12 +1,12 @@
 # FORGE 58-32 pressure-comparison inputs
 
-Input extracts for the second pressure well. The [protocol](comparison_protocol.md) applies the shared off-bottom sampling rules and fixes the BHA assignment before targets are read. Observations remain restricted to availability counts.
+Input extracts for the second pressure well. The [original protocol](comparison_protocol.md) registered the shared off-bottom sampling rules and BHA assignment. The [current numerical protocol](pressure-test/protocol.md) retains that sample list and records the later exposure to two report pressure readings. Pason window pressure targets remain unread. The [pressure-test input plan](pressure-test/README.md) adds the complete BHA 2 diagram dimensions and the declared equipment assumptions.
 
 ## Sources
 
 Nash and Moore (2018), *Utah FORGE: Logs and Data from Deep Well 58-32 (MU-ESW1)*, Energy and Geoscience Institute at the University of Utah. [GDR 1006](https://gdr.openei.org/submissions/1006), [DOI 10.15121/1452735](https://doi.org/10.15121/1452735), CC BY 4.0. Download `1006.zip`: 2,399,231,901 bytes, SHA-256 `43615d79d000104ae698de23dd5aee6a981bcaa9b9a72548690556eef5fb6caa`.
 
-The extractor opens only this archive. It streams the daily files in `Pason_Logs.zip`; pressure is counted for finite/missing availability only. Empty trailing CSV fields are discarded after checking that they are empty. Header/unit rows and unparseable time rows are counted separately. Source null -999.25 and non-finite values are missing; zero is retained. Flow outside 0â€“2,000 US gpm is unavailable input. Source row locators accompany every ten-second bin.
+The extractor opens only this archive. It streams the daily files in `Pason_Logs.zip`; pressure is counted for finite/missing availability only. Empty trailing CSV fields are discarded after checking that they are empty. Header/unit rows and unparseable time rows are counted separately. Source null -999.25 and non-finite values are missing; zero is retained. Flow outside 0–2,000 US gpm is unavailable input. Source row locators accompany every ten-second bin.
 
 ## Files and rebuild
 
@@ -14,7 +14,7 @@ The extractor opens only this archive. It streams the daily files in `Pason_Logs
 | --- | --- |
 | `rig_inputs_10s.csv.gz` | 340,028 input bins from 3,397,398 source records; depth/flow extrema, input means and counts |
 | `target_availability.json` | Per-file pressure finite/missing counts, with no values or ranges |
-| `bha_reports.csv`, `bha_components.csv` | Dated BHA identity, complete reported component lists and available component OD/lengths; passage IDs remain unreported |
+| `bha_reports.csv`, `bha_components.csv` | Dated BHA identity and printed component OD/lengths; some summaries omit component rows and give no passage IDs |
 | `mud_reports.csv` | Reported density, PV/YP and the explicit reference-temperature convention |
 | `bit_inputs.csv` | Whitelisted bit/jet cells from the input part of the DDR bit table |
 | `survey.csv` | 59 source MD/inclination/azimuth/TVD stations, in ft/degrees |

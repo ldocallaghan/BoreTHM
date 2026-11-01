@@ -1,0 +1,13 @@
+{
+  "planned_windows": 62,
+  "planned_events": 7,
+  "ready_with_declared_assumptions": 62,
+  "incomplete_inlet": 0,
+  "source_bins": 372,
+  "source_components": 17,
+  "pipe_geometry_measured": false,
+  "history_bins": 45210,
+  "history_gaps": 5,
+  "prior_report_pressure_exposure": true,
+  "window_pressure_targets_read": false
+}
