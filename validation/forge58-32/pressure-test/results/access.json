@@ -1,0 +1,38 @@
+{
+  "access_time_utc": "2026-11-01T18:56:20.349167+00:00",
+  "scoring_code_commit": "16d5dca01734a9c02f2a1c087bb023943f46936f",
+  "scoring_code_sha256": "9bcbb888d680581d890e5909a870badaf2e2153b6114b9bd493e4acdd980872c",
+  "protocol_sha256": "5a3b3c7181dd677e4ad347aa6d020dd9ffafe76d927604e9e4e0afadc02ee097",
+  "locators_sha256": "6241c70045575f37f994f656412ce889435e0c51d65df66069c36a709ba11ee9",
+  "members": {
+    "1006.zip!Pason_Logs.zip!Pason_Logs/8-04-17.csv": "99b5ed19fc5fb4686f5f204993f577b254e13a34bc5d637266e4013882eb3b83",
+    "1006.zip!Pason_Logs.zip!Pason_Logs/8-05-17.csv": "c59bd9962da8b51c930f719184b8363c054e4ff15f0a31bf1900d206deeaf3a5"
+  },
+  "status": "complete",
+  "prior_access_attempts": [
+    {
+      "access_time_utc": "2026-11-01T18:54:44.060862+00:00",
+      "scoring_code_commit": "41e7d979a98498f82b70d29f2107698e4ebc07da",
+      "scoring_code_sha256": "9413a035591caf4e96e195b987cebdd0a329600e0f4813c08ee191e17619a30e",
+      "protocol_sha256": "5a3b3c7181dd677e4ad347aa6d020dd9ffafe76d927604e9e4e0afadc02ee097",
+      "locators_sha256": "6241c70045575f37f994f656412ce889435e0c51d65df66069c36a709ba11ee9",
+      "members": {
+        "1006.zip!Pason_Logs.zip!Pason_Logs/8-04-17.csv": "99b5ed19fc5fb4686f5f204993f577b254e13a34bc5d637266e4013882eb3b83"
+      },
+      "status": "started",
+      "outcome": "Header check failed before conversion of any registered pressure value",
+      "correction": "Recognise the split 36-cell Pump / Press heading and empty padding; retain registered native column 8",
+      "header_inspection_exposure": {
+        "source_member": "1006.zip!Pason_Logs.zip!Pason_Logs/8-04-17.csv",
+        "native_row": 4,
+        "time": "2017-08-04 00:00:00",
+        "registered_window": false,
+        "used_in_reduction_or_input_choice": false
+      }
+    }
+  ],
+  "output_sha256": {
+    "target-bins.csv": "e7b0b017763773d5437f3315482f83cecc06defd5ca08634b75cc4613aa8aef6",
+    "targets.csv": "02fd7a2113dd628bba2d520f996cd3ebb7ea47b3a1aab13c59c34eb5c3de96b1"
+  }
+}

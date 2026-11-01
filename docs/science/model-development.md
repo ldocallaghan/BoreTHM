@@ -4,7 +4,7 @@ This log records changes to BoreTHM's physical calculations and their comparison
 
 ## Data statement
 
-FORGE 16A and 16B are development data. Their observations have already been examined and cannot provide an independent validation of changes motivated by their errors. FORGE 56-32 standpipe-pressure targets were opened on 28 October 2026 for the first pressure stage below and are now pressure-development data. Its temperature targets remain reserved. During later 58-32 input preparation, two daily-report slow-circulation pressure readings were viewed before the new numerical protocol. Its Pason window-pressure targets remain unread. The [58-32 pressure-test protocol](../../validation/forge58-32/pressure-test/protocol.md) discloses that prior exposure and preserves the original input-only window identities. FORGE 78B-32 targets remain unread and reserved for later validation.
+FORGE 16A and 16B are development data. Their observations have already been examined and cannot provide an independent validation of changes motivated by their errors. FORGE 56-32 standpipe-pressure targets were opened on 28 October 2026 for the first pressure stage below and are now pressure-development data. Its temperature targets remain reserved. During later 58-32 input preparation, two daily-report slow-circulation pressure readings were viewed before the new numerical protocol. Its Pason window-pressure targets were opened on 1 November 2026 and are now pressure-development data. Its thermal targets remain reserved. The [58-32 pressure-test protocol](../../validation/forge58-32/pressure-test/protocol.md) discloses that prior exposure and preserves the original input-only window identities. FORGE 78B-32 targets remain unread and reserved for later validation.
 
 No new parameter is fitted in the primary development comparison. The annulus film multiplier is 1.0. A film coefficient converts a fluid-to-wall temperature difference into heat transfer per unit area. `site_evaluation.FILM_MULT_FORGE = 0.75` is a fitted, retired sensitivity. The full site evaluator still calculates that historical sensitivity separately from its primary result; the scoreboard does not call it. The fitting routines in `studies.validate_forge16b` remain historical study functions and are excluded from the scoreboard.
 
@@ -2076,3 +2076,87 @@ All 62 extra original solves initialised from the working profile converge and m
 The first extraction attempt opened and hashed the 4 August Pason member, then stopped at the header check before converting a registered pressure value. Its heading uses 36 split cells, including `Pump` and `Press`, above 18 data columns with empty padding. The reader had expected a single `Pump Pressure` header cell. The correction recognises that split heading and the empty padding; it keeps pressure at the already registered native column 8. A synthetic example tests this layout. No input, coefficient, scenario, cohort rule or measure changes.
 
 During the header inspection, native row 4 of `Pason_Logs/8-04-17.csv`, at 00:00:00, was displayed inadvertently. That row is outside every registered window and is not used in the reduction or any calculation choice. This additional source exposure is disclosed alongside the failed extraction attempt. The original prior report-pressure disclosure remains unchanged. The corrected extraction records both attempts and its code commit; later builds use the saved reduction only.
+
+## 1 November 2026: FORGE 58-32 pressure comparison result
+
+### Observations and calculated comparison
+
+**Measured.** The saved [target reduction](../../validation/forge58-32/pressure-test/results/targets.csv) contains complete pressure observations for all 62 registered windows. All 372 bins meet the eight-finite-observation minimum. The registered psi convention is retained. The native source-member hashes and access times are in [access.json](../../validation/forge58-32/pressure-test/results/access.json).
+
+**Calculated.** [coverage.csv](../../validation/forge58-32/pressure-test/results/coverage.csv), columns `stage`, `windows` and `events`, reports 62 windows and seven events at every stage from planned to paired for the primary and each sensitivity. Every calculation converges. The common cohort across scenarios has the same 62 windows and seven events. All observations belong to BHA 2.
+
+**Calculated.** The primary event-weighted skill is **-0.3428**, and the secondary window-weighted skill is **-0.4158**. Skill is one minus the ratio of working to original root-mean-square error (RMSE). Negative skill means the working error is larger. These values come from [contrasts.csv](../../validation/forge58-32/pressure-test/results/contrasts.csv), column `skill`, for `primary`, `scenario`, `working_entry10` against `original`, with `event` and `window` weighting respectively.
+
+**Calculated, primary equal-event measures.** [summary.csv](../../validation/forge58-32/pressure-test/results/summary.csv), columns `bias_psi`, `MAE_psi`, `RMSE_psi`, `min_residual_psi` and `max_residual_psi`; scenario `primary`, cohort `scenario`, weighting `event`. Mean absolute error (MAE) equals bias here because every event residual is positive.
+
+| Calculation | Bias, psi | MAE, psi | RMSE, psi | Event residual range, psi |
+| --- | --- | --- | --- | --- |
+| original | 833.3 | 833.3 | 877.7 | +317.0 to +1201.2 |
+| working_entry10 | 1091.7 | 1091.7 | 1178.6 | +352.0 to +1738.3 |
+| secondary_entry8 | 1069.5 | 1069.5 | 1158.2 | +345.6 to +1718.8 |
+
+**Measured targets and calculated residuals.** Residual is prediction minus observation. [events.csv](../../validation/forge58-32/pressure-test/results/events.csv), columns `paired_windows`, `target_psi`, `residual_psi` and `residual_percent`; scenario `primary`, cohort `scenario`. Percentages divide each residual by its observed event median.
+
+| Event | Paired windows | Measured median, psi | Original residual | Working residual | Secondary residual |
+| --- | --- | --- | --- | --- | --- |
+| 58-32-off0081 | 2 | 205.3 | +317.0 (+154.4%) | +352.0 (+171.4%) | +345.6 (+168.3%) |
+| 58-32-off0084 | 6 | 470.6 | +707.7 (+150.4%) | +812.0 (+172.5%) | +783.2 (+166.4%) |
+| 58-32-off0092 | 1 | 510.3 | +713.8 (+139.9%) | +859.9 (+168.5%) | +827.2 (+162.1%) |
+| 58-32-off0096 | 1 | 513.6 | +786.6 (+153.1%) | +964.3 (+187.8%) | +927.9 (+180.7%) |
+| 58-32-off0162 | 12 | 624.7 | +1049.0 (+167.9%) | +1452.8 (+232.6%) | +1437.2 (+230.1%) |
+| 58-32-off0163 | 5 | 621.1 | +1058.2 (+170.4%) | +1462.4 (+235.5%) | +1446.6 (+232.9%) |
+| 58-32-off0192 | 35 | 633.6 | +1201.2 (+189.6%) | +1738.3 (+274.3%) | +1718.8 (+271.3%) |
+
+**Calculated sensitivities.** [contrasts.csv](../../validation/forge58-32/pressure-test/results/contrasts.csv), columns `reference_RMSE_psi`, `candidate_RMSE_psi` and `skill`, working against original. Scenario-specific cohorts and the common cohort are identical, so both give these values. No catalogue scenario is selected from this comparison.
+
+| Scenario | Paired windows / events | Original event RMSE, psi | Working event RMSE, psi | Event skill | Window skill |
+| --- | --- | --- | --- | --- | --- |
+| primary | 62 / 7 | 877.7 | 1178.6 | -0.3428 | -0.4158 |
+| heavy_pipe | 62 / 7 | 920.1 | 1201.3 | -0.3056 | -0.3593 |
+| wide_joint | 62 / 7 | 877.7 | 1110.6 | -0.2653 | -0.3097 |
+| larger_pipe | 62 / 7 | 753.1 | 1132.0 | -0.5031 | -0.6869 |
+
+**Calculated contrasts.** On the primary cohort, secondary entry 8 against original has event skill -0.3196 and window skill -0.3986. Working entry 10 against secondary entry 8 has event skill -0.0176 and window skill -0.0123. Every contrast uses the same window IDs. The full measures for each calculation, weighting and scenario remain in the linked summary and contrast tables.
+
+**Calculated output.** The [primary plots](../../validation/forge58-32/pressure-test/results/primary.png) show measured and modelled pressure by window, followed by residual against flow and measured depth. The BHA panel identifies the single assembly. Separate [heavy-pipe](../../validation/forge58-32/pressure-test/results/heavy_pipe.png), [wide-joint](../../validation/forge58-32/pressure-test/results/wide_joint.png) and [larger-pipe](../../validation/forge58-32/pressure-test/results/larger_pipe.png) plots preserve scenario separation. [event-budget.csv](../../validation/forge58-32/pressure-test/results/event-budget.csv) puts additive model-only mean pressure parts beside the observed event median; its `median_predicted_psi` remains separate from `mean_predicted_psi`.
+
+### Interpretation and limits
+
+**Calculated sign.** All three calculations overpredict every primary window and event. Event residuals are 139.9–274.3% of the measured event median, from `residual_percent` in [events.csv](../../validation/forge58-32/pressure-test/results/events.csv), with `scenario=primary` and `cohort=scenario`. All `residual_psi` values in the corresponding [window results](../../validation/forge58-32/pressure-test/results/windows.csv) are positive. The limit declared before access expected missing jar and shock-sub operating losses to make the calculations read low. The dominant error has the opposite sign and cannot be explained by adding those losses.
+
+**Calculated bit-nozzle comparison.** The measured event median is already at or close to the original calculation's bit-nozzle pressure loss alone in these events. Values come from [event-budget.csv](../../validation/forge58-32/pressure-test/results/event-budget.csv), columns `median_target_psi` and `bit_nozzles_psi`, for the primary scenario, scenario cohort and original calculation. The nozzle term is an event mean; the measured value is an event median, as registered.
+
+| Event | Measured median, psi | Calculated nozzles alone, psi |
+| --- | --- | --- |
+| 58-32-off0081 | 205.3 | 207.6 |
+| 58-32-off0084 | 470.6 | 485.7 |
+| 58-32-off0092 | 510.3 | 488.7 |
+| 58-32-off0096 | 513.6 | 510.9 |
+
+**Calculated consistency check.** The remaining frictional losses are non-negative, including positive BHA-bore and annular losses. An absent ordinary-pipe segment has zero loss, and the original calculation has no separate surface-line allowance. The small buoyancy contribution is negative, only -0.05 to -0.21 psi in these four original event budgets. It cannot offset the additional losses. With the recorded nozzles, Pason `Flow In` and reported mud weight, a hydraulic calculation must also account for flow through the recorded BHA and the return path. This fixed input set cannot match the measured pressure while retaining those positive losses. At least one of these inputs, the recorded passages or the pressure channel is inconsistent with the others.
+
+**Calculated depth increment.** From off0162 to off0192, the measured event median rises by 9.0 psi. The original calculation adds 161.1 psi and the working calculation adds 294.5 psi, from differences in `target_psi` and `predicted_psi` in [events.csv](../../validation/forge58-32/pressure-test/results/events.csv). Flow is similar: the event medians of `flow_gpm` in [inputs/windows.csv](../../validation/forge58-32/pressure-test/inputs/windows.csv) are 841.6 and 836.5 US gpm. These are shallow circulation events; the registered bit depths remain 552–1,884 ft with an approximately 581-ft BHA across the full comparison.
+
+**Calculated flow scaling.** Between off0081 and off0084, at nearly the same depth, the measured event median rises with flow to the power 1.949. This is `ln(P_84/P_81) / ln(Q_84/Q_81)`, using `target_psi` in [events.csv](../../validation/forge58-32/pressure-test/results/events.csv) and the event medians of `flow_gpm` in [inputs/windows.csv](../../validation/forge58-32/pressure-test/inputs/windows.csv): 205.3 to 470.6 psi and 572.34 to 875.90 US gpm. The event depth ranges are 552.4 ft and 571.3–580.3 ft. **Inferred.** The near-quadratic response is consistent with a circulating pressure. A constant-factor flow error preserves that exponent, so this response is also consistent with such an error; it does not establish one.
+
+**Inferred skill interpretation.** The registered negative skill remains the stage result. When every calculation reads high, a calculation that adds pressure scores worse regardless of the physical merit of those added terms. The working calculation includes API surface case 5, repeated joint losses and smooth Colebrook pipe friction, and predicts more pressure in every event. Its negative skill follows from that direction of change against these inconsistent inputs. This is the reverse of the registered check: if every calculation read low, added pressure could produce positive skill while every calculation still read low. Here the added pressure produces negative skill while every calculation reads high. The 58-32 result neither supports nor counts against the entry 8 and entry 10 changes until the input inconsistency is resolved. No tool-loss value is inferred from a residual and no correction is fitted.
+
+**Calculated input relationship.** Across the 62 registered windows, `Flow In` divided by summed pump strokes is 5.5574–5.5576 US gal per stroke, within the rounded 5.55–5.57 range. For each window, the ratio uses its six registered ten-second bin means of `flow_gpm`, `pump1_spm` and `pump2_spm` in the [input projection](../../validation/forge58-32/rig_inputs_10s.csv.gz), located by [source-bins.csv](../../validation/forge58-32/pressure-test/inputs/source-bins.csv). **Inferred.** Flow is probably derived from strokes multiplied by a configured displacement. That is unconfirmed. No candidate input is selected from this relationship.
+
+**Inferred candidate inputs and source checks.** Each remains unresolved. These are checks for later work; none is run here.
+
+| Candidate input | Check that would test it |
+| --- | --- |
+| Pason `Flow In` and its possible configured displacement | Rig pump liner and stroke records, including pump type and the configured volume per stroke |
+| Bit nozzle area | Bit record with the installed nozzle count and diameters |
+| Ordinary-pipe and heavy-weight drill-pipe (HWDP) bores | Installed string records with body and connection passages |
+| Mud density | Mud reports and the density measurements used for these periods |
+| Pressure channel | Daily-report pump pressures against the corresponding rig records |
+
+**Inferred scope and equipment limit.** One motorless assembly and seven shallow events give weak evidence about other assemblies or depths in either direction. Every calculation omits the same unquantified operating losses for the jar and shock sub, together with any other tool without a published curve. Agreement or disagreement cannot identify the installed pipe or select a catalogue scenario. No new scenario, coefficient or registered measure is introduced after access. The calculations and archived results remain unchanged. FORGE 58-32 pressure is now development data and cannot be treated as unseen in later entries.
+
+**Source disclosure, unchanged from registration.** Before this numerical protocol, two slow-circulation pressure readings were viewed in report 10 for 5 August 2017, in `1006.zip!58-32_EOWR.zip!58-32_EOWR/DailyDrillingReport.pdf`, PDF p13.
+
+**Access disclosure.** The first extraction stopped at its header check. The separately recorded reader correction changes no method. The additional off-window row exposed during that correction is described in the preceding subsection and in the access record. The successful registered reduction used code commit `16d5dca01734a9c02f2a1c087bb023943f46936f` at 18:56:20 UTC on 1 November 2026. Two clean builds from that saved reduction are byte-identical in every generated file. Registered window identities, events and the entire primary model-only archive remain unchanged. No package code changes.
+
+**Data status.** FORGE 58-32 pressure is development data from this comparison onward. A later entry cannot describe it as unseen. Its thermal targets and the reserved 78B-32 targets remain unopened. This comparison changes no working-calculation decision or package default.

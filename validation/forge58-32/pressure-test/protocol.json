@@ -4,7 +4,7 @@
   "original_release_commit": "edc27007759de575baa7b3c6f4969139cea8d616",
   "sampling_registration_commit": "8bbfe2c44658dade8972a647970e3308047b6380",
   "prior_report_pressure_exposure": true,
-  "window_pressure_targets_read": false,
+  "window_pressure_targets_read": true,
   "input_sha256": {
     "rig_inputs_10s.csv.gz": "ad487bab307b875c8c0d0daea7c805fabb62ae63e165cf8403b424ab46aab1ec",
     "rig-inputs.json": "290cd371fe083e4398489439856e8291dfc8f8e1d064a0db2d55153939c37fe5",
@@ -164,5 +164,6 @@
     "pressure_tolerance_psi": 1.0,
     "method": "Original solve(init=converged working profile) against independently seeded original on every window; identical original equations and inputs"
   },
-  "D7_numerical_commit": "29fe035551bee900d732b292bedc28daa0d39f6f"
+  "D7_numerical_commit": "29fe035551bee900d732b292bedc28daa0d39f6f",
+  "window_pressure_target_access_date": "2026-11-01"
 }
