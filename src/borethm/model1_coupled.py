@@ -446,12 +446,14 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     # collocation solve can't resolve. Across each change they are ramped
     # linearly over BLEND metres instead: within half of it either side, the
     # derivatives are blended between the geometry above and below.
-    top, _ = _pieces(geometry, breaks)
+    top, bottom = _pieces(geometry, breaks)
     changes = top[1:]
     # New serial assemblies can contain several components inside one ramp.
     # Sequential two-sided assignments are discontinuous where those ramps
     # overlap. Blend the same per-piece equations with occupancy weights there.
-    overlapping = loss_model is not None and len(changes)>1 and np.any(np.diff(changes)<BLEND)
+    overlapping = len(changes)>1 and np.any(np.diff(changes)<BLEND)
+    blend_top, blend_bottom = ((top, bottom) if loss_model is None else
+                               (loss_model.top, loss_model.bottom))
 
     def odes(zz, y):
         dTd, dTu = derivs(zz, y[0], y[1])
@@ -467,10 +469,10 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
         if overlapping:
             width=min(BLEND,L)
             near=np.zeros(zz.shape,bool)
-            for boundary in loss_model.top[1:]:
+            for boundary in blend_top[1:]:
                 near |= np.abs(zz-boundary)<width/2
             dTd[near]=0.;dTu[near]=0.
-            for lower,upper in zip(loss_model.top,loss_model.bottom):
+            for lower,upper in zip(blend_top,blend_bottom):
                 weight=np.zeros_like(zz)
                 for left,right in ((lower,upper),(-upper,-lower),(2*L-upper,2*L-lower)):
                     weight+=np.maximum(0.,np.minimum(zz+width/2,right)-np.maximum(zz-width/2,left))/width
