@@ -86,7 +86,7 @@ def clean_output(path):
     path.mkdir(parents=True, exist_ok=True)
 
 
-def extract(raw, output):
+def extract(raw, output, prior_access=None):
     """One source access, with only registered pressure values reduced."""
     clean_output(output)
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
@@ -106,6 +106,8 @@ def extract(raw, output):
         scoring_code_commit=commit, scoring_code_sha256=sha(Path(__file__)),
         protocol_sha256=sha(HERE/'protocol.json'), locators_sha256=sha(HERE/'inputs/source-bins.csv'),
         members={}, status='started')
+    if prior_access is not None:
+        access['prior_access_attempts'] = json.loads(prior_access.read_text())
     dump(output/'access.json', access)
     groups = defaultdict(list)
     for row in locators:
@@ -136,12 +138,20 @@ def extract(raw, output):
                             if names.index(rule['channel']) != 8:
                                 raise ValueError('Pressure column differs from registered rig layout')
                             header_checked = True
+                        elif (len(names) == 36 and names[:2] == ['Date','Time']
+                              and names[14:16] == ['Pump','Press']):
+                            # Pason's split 36-cell heading precedes 18 data
+                            # fields with 18 empty padding cells. The pressure
+                            # data column is the registered column 8.
+                            header_checked = True
                     if number not in selected:
                         continue
                     if not header_checked:
                         raise ValueError('Registered pressure header was not found before native rows')
                     loc = selected[number]
-                    if len(row) < 9:
+                    if len(row)>18 and not any(s.strip() for s in row[18:]):
+                        row=row[:18]
+                    if len(row) not in (9,18):
                         continue
                     try:
                         stamp = datetime.strptime(row[0].strip()+' '+row[1].strip(), '%m/%d/%Y %H:%M:%S')
@@ -346,12 +356,13 @@ def main():
     p = sub.add_parser('extract')
     p.add_argument('--raw',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--prior-access-record',type=Path)
     p = sub.add_parser('build')
     p.add_argument('--targets',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     args = parser.parse_args()
     if args.command == 'extract':
-        extract(args.raw,args.output)
+        extract(args.raw,args.output,args.prior_access_record)
     else:
         build(args.targets,args.output)
 

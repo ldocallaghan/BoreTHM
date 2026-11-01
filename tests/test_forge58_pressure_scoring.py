@@ -146,7 +146,8 @@ def test_no_paired_windows_has_no_metrics():
     assert all(r['skill'] is None for r in result['contrasts'])
 
 
-def test_extract_uses_only_registered_rows_and_records_access(tmp_path,monkeypatch):
+@pytest.mark.parametrize('split_header',[False,True])
+def test_extract_uses_only_registered_rows_and_records_access(tmp_path,monkeypatch,split_header):
     data=tmp_path/'study'
     inputs=data/'inputs'
     inputs.mkdir(parents=True)
@@ -158,11 +159,17 @@ def test_extract_uses_only_registered_rows_and_records_access(tmp_path,monkeypat
         source_member=member,first_source_row=2+i*10,last_source_row=11+i*10) for i in range(6)])
     text=io.StringIO(newline='')
     writer=csv.writer(text,lineterminator='\n')
-    writer.writerow(['Date','Time',*['input']*6,'Pump Pressure'])
+    if split_header:
+        heading=['Date','Time']+['input']*34
+        heading[14:16]=['Pump','Press']
+    else:
+        heading=['Date','Time',*['input']*6,'Pump Pressure']
+    writer.writerow(heading)
     for i in range(61):
         stamp=datetime(2017,8,4)+timedelta(seconds=i)
-        writer.writerow([stamp.strftime('%m/%d/%Y'),stamp.strftime('%H:%M:%S'),
-                         *['unused']*6,100. if i<60 else 'unregistered pressure'])
+        row=[stamp.strftime('%m/%d/%Y'),stamp.strftime('%H:%M:%S'),
+             *['unused']*6,100. if i<60 else 'unregistered pressure']
+        writer.writerow(row+['unused']*9+['']*18 if split_header else row)
     raw=text.getvalue().encode()
     nested=io.BytesIO()
     with zipfile.ZipFile(nested,'w') as archive:
