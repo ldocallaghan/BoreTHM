@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-04",
+  "base_commit": "55811f298e06845f98ae691e73d1302ad099c24f",
+  "targets_scored": false,
+  "entry_sha256": {
+    "compare.py": "1a1ecf173adcba2ae6f89f5ebabf95207a9b39e8a92e2e3ecd2a695407f4feb5",
+    "options.json": "eeb63569bb218f2c9e1f3ce839737ff917ae425cb7e454eec3ee93d4bac1bfce",
+    "predict.py": "0f0ab8816e296831342ac3a256aeea24ab0960b630c9e0389e8d29d8797081a3",
+    "predictions/geometry-audit.csv": "f3ec3ecb1f01edab98de7baa7005fc659f3210463637a8002b69f87d2bf465bc",
+    "predictions/manifest.json": "494de187e38223836114c2d6839b6a8be3cc65c8a66153eed0a83f5029c1d6fd",
+    "predictions/model-only.csv": "9ebb2285b001c99f0422714a93a9258a214816fb437d076edc871f356253539a",
+    "predictions/rough-effects.csv": "aea8825007d7fcddca5fd3a4a35075589de877a11bea388da49ccba202ff2dfb",
+    "predictions/trips/depth-stages.csv": "59561fc24d343a878f098350dba0f6d1a695530697c542170a30be5389c18512",
+    "predictions/trips/manifest.json": "533621470abfc3eb511f32c8fd79ababd63cbaba68b1605f902c8194dfc50351",
+    "predictions/trips/slopes.csv": "8247ee5d444c6ad4e43ed8c5253de805a59a3e3a49d4b3ec19f114c3fb144cc6",
+    "predictions/trips/windows.csv": "5c3d50ee059a8efbb2fcf4768e122933cf2cee68ce6c4f78a4915c3bb38af71b",
+    "predictions/working-replay-check.csv": "3548e7548b77006ac964512dacd3d58effa9c3a1028a6439406f7841b149fd05",
+    "README.md": "3a2cbe23b9307703c8eebe1b8d63d5177482201221a38e531a9ead43332210a0",
+    "references.json": "bacdbe3ddf2cd3f2ef293106539e5442f57c9cfd865a8814a9f2389c82f00a89",
+    "score.py": "8282115baa2d55430f850edb9d0ec784aa8c0ca67e5a820b915a35b3058f83f4",
+    "summarise_predictions.py": "2544c61e9c9f0b75879ecf8ac6afe5ed75bec1bcaf3e0c98c4c4c16e257830d7",
+    "trip_slopes.py": "5f30b01f65cdae687466ea2993684ffc250f7fcbef22f153bfd4ff6bf4b62cf3"
+  },
+  "inherited_sha256": {
+    "validation/model-development/entry-10/predict.py": "ecceab37fd52b2fc872c508497be987c7eb3b61bca24f2ce9b5d3ba2585e46ce",
+    "validation/model-development/entry-10/score.py": "5203d9859d17f668b4e9332633489bcb8749e91601b6f41e354e4228eb4521a7",
+    "validation/model-development/entry-10/trip_slopes.py": "ef42612875213db3803241e1bfd6648c82c6f04ba58e65985105125a2a882a79",
+    "validation/model-development/entry-10/compare.py": "51034ab965f453bf5455e46e0f2e9c1ed371360c478b4409bb35a408924438f9",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/forge16b/s2/plan.json": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb"
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "date": "2026-11-04",
+  "working": "entry 8 with entry 10 smooth Colebrook",
+  "package_defaults_changed": false,
+  "fixed": {
+    "pv_reference_C": 26.7,
+    "film_multiplier": 1.0,
+    "exposure": "cumulative",
+    "surface_case": 5,
+    "pitch_16A_ft": 31.5,
+    "pitch_16B_ft": 31.706666666666667,
+    "flow": "unchanged",
+    "insulated_joint": "EIS 7 by 4 in, 29-in restriction",
+    "thermal_geometry": "existing body and thermal-joint treatment unchanged",
+    "installed_tool_losses": "unchanged"
+  },
+  "installed_source": "Kevin England, personal communication via John McLennan, November 2026, from the drill pipe data sheets",
+  "installed": {
+    "16A": {
+      "body_OD_in": 5.0,
+      "body_ID_in": 4.276,
+      "weight_lb_ft": 19.5,
+      "grade": "S-135",
+      "connection": "4-1/2 IF (NC50)",
+      "joint_OD_in": 6.625,
+      "joint_ID_in": 2.75,
+      "pin_tong_in": 11.0,
+      "box_tong_in": 14.0,
+      "restriction_in": 25.0,
+      "coating": "none"
+    },
+    "16B": {
+      "body_OD_in": 5.5,
+      "body_ID_in": 4.67,
+      "weight_lb_ft": 24.7,
+      "grade": "S-135",
+      "connection": "5-1/2 FH",
+      "joint_OD_in": 7.25,
+      "joint_ID_in": 3.0,
+      "pin_tong_in": 10.0,
+      "box_tong_in": 12.0,
+      "restriction_in": 22.0,
+      "coating": "none"
+    }
+  },
+  "premium_16B": {
+    "joint_ID_in": 3.063,
+    "pin_tong_in": 4.0,
+    "box_tong_in": 6.0,
+    "restriction_in": 10.0,
+    "unchanged": "Body dimensions and joint OD remain the primary values; only ID and tong lengths change as declared"
+  },
+  "restriction_basis": "Pin plus box tong lengths; source-length approximation, not a measured made-up constant-bore length",
+  "transition_choice": "abrupt fallback: finished upset/weld/tool-joint bore profile is not established",
+  "source_choice_rule": "Choose transition from applicability of sourced geometry and coefficient before scores; no pressure or slope selects it",
+  "variants": {
+    "working": {
+      "friction": "colebrook",
+      "roughness_m": 0.0
+    },
+    "installed_primary": {
+      "friction": "colebrook",
+      "roughness_m": 0.0
+    },
+    "installed_abrupt": {
+      "friction": "colebrook",
+      "roughness_m": 0.0
+    },
+    "installed_no_local": {
+      "friction": "colebrook",
+      "roughness_m": 0.0
+    },
+    "installed_premium": {
+      "friction": "colebrook",
+      "roughness_m": 0.0
+    },
+    "installed_steel": {
+      "friction": "colebrook",
+      "roughness_m": 4.572e-05
+    }
+  },
+  "roughness_qualification": "No drill-pipe-specific value found; 45.72 micrometres is the entry 10 EPA new water-steel transfer, applied by the existing global option including insulated pipe as a sensitivity",
+  "no_local_scope": "Zero connection local losses on all joint-bearing segments, including retained HWDP and EIS insulated connections; dimensions unchanged",
+  "prediction_selection": "Entry 10: one lower-median-depth input window per assembly; per-window G1/G2 changes and G3/G5/G6 proxy changes. Full frozen coverage follows only after declaration.",
+  "prediction_tolerances": {
+    "spp_psi": 1.0,
+    "temperature_C": 0.1,
+    "hydraulic_power_fraction": 0.001
+  },
+  "recommendation_rule": "Recommend the installed geometry for the working calculation if paired coverage and the declared model-only pressure, temperature and heat changes are reproduced within entry 10 tolerances, regardless of score direction. Recommend the abrupt fallback only as a declared unresolved-profile approximation. Scores and trip slopes do not select geometry or transition. No adoption without maintainer decision.",
+  "prior_exposure": {
+    "entry10_fh_16B_G1_RMS_psi": 152.8,
+    "entry10_fh_regular_slope_ratio_range": [
+      0.47,
+      0.59
+    ],
+    "qualification": "Previously scored catalogue FH (7.5 by 3 in joints), abrupt; bore matches the subsequently sourced installed pipe; no treatment selected from these results"
+  },
+  "secondary_measures": {
+    "trip_slopes": {
+      "group_source": "validation/model-development/entry-9/results/slopes.csv, role=primary",
+      "groups": [
+        {
+          "assembly": "17",
+          "excursion": "27",
+          "flow_centre_gpm": "500"
+        },
+        {
+          "assembly": "19",
+          "excursion": "29",
+          "flow_centre_gpm": "600"
+        },
+        {
+          "assembly": "20",
+          "excursion": "31",
+          "flow_centre_gpm": "600"
+        },
+        {
+          "assembly": "27",
+          "excursion": "40",
+          "flow_centre_gpm": "400"
+        },
+        {
+          "assembly": "27",
+          "excursion": "40",
+          "flow_centre_gpm": "600"
+        },
+        {
+          "assembly": "38",
+          "excursion": "52",
+          "flow_centre_gpm": "600"
+        }
+      ],
+      "method_source": "validation/model-development/entry-9/analyse.py, slopes; same windows, flow and depth grouping, temperature treatment, mass-rate convention and reductions",
+      "variants": [
+        "working",
+        "installed_primary",
+        "installed_abrupt",
+        "installed_no_local",
+        "installed_premium",
+        "installed_steel"
+      ],
+      "outputs": [
+        "modelled pressure slope in psi per 1000 ft",
+        "measured/modelled slope ratio"
+      ],
+      "eow19": "Report separately: the added upper length is insulated pipe. Its connection geometry remains the same declared catalogue transfer as regular pipe.",
+      "predictions": {
+        "baseline": "Reproduce entry 9 modelled slopes and ratios.",
+        "smooth": "Raise regular and insulated per-length slopes through the pipe-friction relation; it supplies no difference in connection identity.",
+        "steel": "Raise the slopes above smooth through the uniform internal roughness example on both regular and insulated pipe.",
+        "gpds": "Raise 16B slopes above smooth through smaller catalogue joint bores, including insulated-pipe connections.",
+        "fh": "Raise 16B slopes above smooth through smaller conventional FH joint bores, including insulated-pipe connections; expect a larger increment than GPDS55.",
+        "gradual": "Reduce the repeated-connection local contribution relative to smooth in regular and insulated pipe. The net sign relative to baseline includes the opposing smooth-friction change."
+      },
+      "selection": "Secondary reporting only. It does not enter the unchanged acceptance rule and cannot select any variant or equipment dimension."
+    }
+  }
+}

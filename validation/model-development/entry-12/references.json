@@ -1,0 +1,81 @@
+[
+  {
+    "id": "installed-pipe",
+    "classification": "measured source record",
+    "reference": "Kevin England, personal communication via John McLennan, November 2026, from the drill pipe data sheets",
+    "locator": "16A table and 16B new/premium tables; coating and rig-floor manifold notes",
+    "finding": "Installed ordinary-pipe dimensions in options.json; no internal coating; approximate 31.5-ft joint length; transducer on rig-floor standpipe manifold",
+    "applicability": "Recorded ordinary pipe only; no finished taper or made-up constant-bore length supplied; email text not reproduced"
+  },
+  {
+    "id": "api-upset",
+    "classification": "measured source record",
+    "reference": "API Spec 5DP, first edition, August 2009, identical to ISO 11961:2008",
+    "url": "",
+    "locator": "Table C.14, printed p97 (PDF p105), IEU rows 5 in 19.50 and 5-1/2 in 24.70, columns 8-10 and note b; Figure B.6, printed p71 (PDF p79); printed p32 (PDF p40), note preceding section 7.13",
+    "source_sha256": "d21455030df1611a5849fd0b9a7d3bf923deb3ed5364c8375b27be29cf4ff0ad",
+    "finding": "Circulated copy gives nominal upset IDs 3.562 and 3.812 in, internal upset length 4.250 in and minimum internal taper 3.000 in; machining and particular joint bores can change the profile",
+    "applicability": "Inspected copy is committee-draft watermarked; not accepted as verified finished installed geometry. No number from it is used in a model variant; final standard and manufacturer drawing remain source gaps"
+  },
+  {
+    "id": "manufacturer-upset",
+    "classification": "measured source record",
+    "reference": "America West Drilling Supply, Drill Pipe, undated supplier catalogue",
+    "url": "https://americawestdrillingsupply.com/drill-pipe/",
+    "locator": "Internal-External Upset Drill Pipe table, 5 in 19.5 lb/ft row and 5.5 in 24.7 lb/ft row; column headings dou, Liu and Miu",
+    "finding": "Catalogue end bores 3.6875 and 4.000 in; internal upset length 2.25 in; minimum internal taper 2 in in both rows; no taper angle",
+    "applicability": "Different catalogue from the installed record; no manufactured-pipe identity or finished weld/tool-joint profile. Conflicting nominal catalogue dimensions are retained and not transferred into a taper"
+  },
+  {
+    "id": "joint-bore-length",
+    "classification": "inferred source gap",
+    "reference": "Installed source; API and manufacturer dimension search",
+    "url": "",
+    "locator": "Installed pin/box tong rows; API Spec 5DP first edition, Figure B.1 and section 6.2, require finished weld-neck and tool-joint dimensions without supplying the installed internal axial profile",
+    "finding": "No independent source establishes the axial length at installed joint bore. Use 11+14=25 in on 16A, 10+12=22 in on 16B and 4+6=10 in for 16B premium",
+    "applicability": "Source-length approximation; tong lengths describe external gripping lengths and do not measure the complete made-up hydraulic passage"
+  },
+  {
+    "id": "crane-conical",
+    "classification": "measured source record",
+    "reference": "Crane Co. (1988), Flow of Fluids Through Valves, Fittings, and Pipe, TP-410, A-26, as implemented in AFT Arrow 10 documentation",
+    "url": "https://docs.aft.com/arrow10/AreaChangeLossModel.html",
+    "locator": "Area Change Loss Model, equations 175 and 176; both images inspected",
+    "source_sha256": "f43467443301a1606996bdf842ce003cd26fe9eed8a9ee6a1eb8048d92cd3c0c",
+    "equations": {
+      "expansion": "K_up=2.6 sin(theta/2)(1-A_up/A_down)^2 for theta<45 degrees; (1-A_up/A_down)^2 for theta>45 degrees",
+      "contraction": "With r=A_down/A_up<1: K_up=0.8 sin(theta/2)(1-r)/r^2 for theta<45 degrees; 0.5(1-r)sqrt(sin(theta/2))/r^2 for theta>45 degrees"
+    },
+    "reference_velocity": "Upstream mean velocity on the AFT page; contraction K_small = K_up times r^2",
+    "angle_domain": "Two branches below/above 45 degrees, extending to the sudden 180-degree geometry; the accessible image does not specify equality at 45 degrees",
+    "Reynolds_domain": "No numerical Reynolds limit supplied by this accessible implementation page; turbulent Newtonian applicability is not validated for the study mud or annulus",
+    "applicability": "No coefficient adopted. Finished angle/profile and applicable Reynolds range remain unestablished. Crane contraction at 180 degrees differs from the retained Idelchik abrupt formula; no invented blend is introduced"
+  },
+  {
+    "id": "abrupt",
+    "classification": "measured source record",
+    "reference": "Modelica Standard Library 4.0.0, dp_suddenChange, documenting Idelchik (2006), third edition",
+    "url": "https://doc.modelica.org/Modelica%204.0.0/Resources/helpOM/Modelica.Fluid.Dissipation.Utilities.SharedDocumentation.PressureLoss.Orifice.dp_suddenChange.html",
+    "locator": "Restriction, Calculation and References; Idelchik printed p208 diagram 4-1 and pp216-217 diagram 4-9",
+    "finding": "K_exp=(1-r)^2 and K_con=0.5(1-r)^0.75, r=A_small/A_large; velocity at the small area; expansion Re>3300, contraction Re>10000; smooth turbulent single-phase flow",
+    "applicability": "Existing fallback only. Annulus and mud application remains the existing approximation; flags do not reject a solve"
+  },
+  {
+    "id": "epa-roughness",
+    "reference": "Rossman, Woo, Tryby, Shang, Janke and Haxton (2020), EPANET 2.2 User Manual, EPA/600/R-20/133",
+    "url": "https://19january2021snapshot.epa.gov/sites/static/files/2020-05/documents/epanet_userss_manual_2.2.0.pdf",
+    "locator": "Printed page 18, Table 3.2 (PDF page 32); printed page 111, Darcy-Weisbach friction treatment (PDF page 125)",
+    "sha256": "c3ce1c870298b812230e271049bc5b8f007b33e5ed071383cce27e5395eb44f0",
+    "finding": "New steel roughness 0.15 millifeet, equivalent to 45.72 micrometres",
+    "applicability": "A new water-pipe reference scenario; no as-built drill-pipe roughness or coating measurement has been found"
+  },
+  {
+    "id": "drill-pipe-roughness",
+    "classification": "inferred source gap",
+    "reference": "Manufacturer and drill-pipe-specific source search",
+    "url": "",
+    "locator": "No independently applicable numerical value found for these uncoated installed strings",
+    "finding": "Use the existing 45.72-micrometre transferred water-steel sensitivity, without claiming installed roughness",
+    "applicability": "Installed uncoated state does not measure absolute roughness; internally coated insulated pipe remains a further transfer qualification under the existing global roughness option"
+  }
+]
