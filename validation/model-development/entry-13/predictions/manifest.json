@@ -1,0 +1,53 @@
+{
+  "python": "3.14.4",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "runtime_s": 262.595318122,
+  "windows": 22,
+  "variants": [
+    "working",
+    "installed_primary",
+    "installed_no_local",
+    "tapered_primary",
+    "tapered_long",
+    "tapered_steep",
+    "tapered_pin_length"
+  ],
+  "calculations": 154,
+  "solver_failures": [],
+  "energy_flags": 0,
+  "targets_compared": false,
+  "power_definition": "model_hydraulic_kW equals the frozen G2 definition: distributed dissipation plus nozzles plus raw motor differential face power; surface power and rotary work are excluded.",
+  "sha256": {
+    "validation/model-development/entry-13/predict.py": "d49f43d6bb047e3240aee461ed5df60f18e13f54d52f5b3bfa4e2e341ee2b3b0",
+    "validation/model-development/entry-13/options.json": "4bc9b974d405103271b22660b441475142a256e44b23babd690b7d7eb2599096",
+    "validation/model-development/entry-9/diagnose.py": "2d6370bf82d0d13592c0cdd6383e3a7de8c0d63457a4fecedf31492044488940",
+    "validation/model-development/entry-8/score.py": "c2c4bdc2e648a2d15c539f686086ad09f57fbeb8e75af8d5cdd51c79a3c79b38",
+    "validation/forge16b/s2/plan.json": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "src/borethm/fluids.py": "10de76f50892d73295dd6cbc3fe8038bc097bd76f078c03f311310d9c18f8128",
+    "src/borethm/hydraulic_losses.py": "79103dcd348c0d04eaffebb17d087d6bbf83bf045db1705f7a5a31df28999af7",
+    "src/borethm/model1_coupled.py": "88f03cb4e9a9ca77bdd93604bce8a9175b89a0520c0ef0ab4456320aaad2097a",
+    "src/borethm/_api.py": "a930e6639e75b235e550a35ed935e7c3351d1643ba609184920aa4dc7d42f4f3",
+    "src/borethm/well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "src/borethm/studies/pressure_comparison.py": "eeb1f712dd9a409d419d7f8d12be3b43da4ef07917edb9bf8f4e98b566b70bb2",
+    "validation/model-development/entry-12/predict.py": "0f0ab8816e296831342ac3a256aeea24ab0960b630c9e0389e8d29d8797081a3",
+    "validation/model-development/entry-12/options.json": "1e3a50718ceb7fa875b6a6bbc9c79bcb9427ed1ea70f879d41b6eede178112d2",
+    "validation/model-development/entry-3/predict.py": "019b24064a3b052204113a56efa2351d9f50da0a0c784248c76980d49edf09c8",
+    "validation/model-development/entry-4/rotary.py": "91e74399df2822a58541d1bd22e4c1a5f04e8b35e437012467dfdb3100b7e631",
+    "validation/model-development/entry-4/rotary_inputs.csv": "7c99cba192f10ff1132800f136ff882787886bcdabdf8084c555665820b21422",
+    "validation/model-development/entry-6/hypotheses.py": "096933f79a9cb53996401f0c06bab32f05abbab7ede7f4859774c17d7012c5dc",
+    "validation/model-development/entry-13/references.json": "8cef25b039773168c5f481cf70a4c08f3e7aef6e74a58f51478ae2ad9ffc643f"
+  },
+  "model_only_csv_sha256": "2c3e188d755bd25128753a1fca0e6270178e38eccbbe0827e1893f956425db69",
+  "source_sha256_summaries": {
+    "validation/model-development/entry-13/summarise_predictions.py": "7ac056c15d8503b624fd7dce0bc893c8db216dae127e0407373df7c53ce410b3"
+  },
+  "derived_sha256": {
+    "rough-effects.csv": "962b64de979e49935fc0efbde02caae229935cf9d4c9f036990b8a784da26b0f",
+    "entry12-replay-check.csv": "58a075c3774d1d186c06607e33a71f36c38b93dae630fe979e48326292f8917e",
+    "geometry-audit.csv": "fd93df963b0b8d1adf4480a154963b5631fb7ff39d2e655718baa7c5b0165987",
+    "joint-fractions.csv": "74f080dd8ef35efbbe42f88fe1f8ca1e75297b2fee22922123df0caec02eb20f",
+    "joint-reynolds.csv": "7a8f850dc3cb8b9a4dcb983e697338acef70b045a73d4f7d9dc495f1153be279"
+  }
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "shawcor-patent",
+    "classification": "measured source record",
+    "reference": "Winship, T. E. (Shaw Industries / Shawcor Ltd), European patent EP0756682B1, Method for making upset ends on metal pipe and resulting product, granted 2 May 2001, priority 16 March 1994",
+    "url": "https://patents.google.com/patent/EP0756682B1/en",
+    "locator": "Description; Table I rows D1, D2, D5 and L8; the online text carries no page numbers",
+    "finding": "5-in OD pipe: D1 108.61 mm (4.276 in), D2 127.00 mm (5.000 in), D5 88.90 mm (3.500 in), L8 177.80 mm (7.000 in). D5 is the mandrel projection, stated to match the inner diameter of internal upset end section 22A apart from a small tolerance. The patent states the transition section has a concave curved surface of radius R2 (1608.58 mm, 63.33 in) over L8.",
+    "applicability": "The patent describes its own proposed upset and not the installed pipe. Its transition is curved. A cone over L8 is a chord approximation. The patent gives no tool-joint bore, weld-neck dimension or transition into the tool joint."
+  },
+  {
+    "id": "tsukano-1988",
+    "classification": "measured source record, as quoted",
+    "reference": "Tsukano, Y., Nishi, S., Miyoshi, H. and Sogo, Y. (1988), Appropriate Design of Drillpipe Internal Upset Geometry Focusing on Fatigue Property, IADC/SPE 17206, as quoted in EP0756682B1",
+    "url": "https://patents.google.com/patent/EP0756682B1/en",
+    "locator": "EP0756682B1 background, quoting Figure 9 of the paper",
+    "finding": "Internal-upset transition length Miu 97.50 mm (3.838 in), with radius R 297.53 mm (11.714 in) at the juncture with the pipe body, on 5-in, 19.5-lb/ft pipe",
+    "applicability": "The paper itself was not accessed, so its own upset ID is unknown. The angle combines the quoted Miu with the patent upset bore of 3.500 in. Figure 9 is described as a measurement of one geometry, and the paper concerns fatigue and not hydraulics."
+  },
+  {
+    "id": "crane-conical",
+    "classification": "measured source record, secondary statements",
+    "reference": "Crane Co. (1988), Flow of Fluids Through Valves, Fittings, and Pipe, Technical Paper 410, A-26, as documented by AFT Arrow 10; Crane Co. (2009), as implemented by the fluids library",
+    "url": "https://docs.aft.com/arrow10/AreaChangeLossModel.html",
+    "locator": "AFT Area Change Loss Model, equations 175 and 176; fluids library, fittings.py, contraction_conical_Crane and diffuser_conical_Crane, which label formulas 1 to 4",
+    "source_sha256": {
+      "aft_page": "f43467443301a1606996bdf842ce003cd26fe9eed8a9ee6a1eb8048d92cd3c0c",
+      "fluids_fittings": "4e2077df2dd29e01eb94a492ebefaa232c793f009440c24aa0ada5ba25cc771c"
+    },
+    "equations": {
+      "contraction_to_45": "K=0.8 sin(theta/2)(1-beta^2)",
+      "contraction_above_45": "K=0.5 sqrt(sin(theta/2))(1-beta^2)",
+      "expansion_to_45": "K=2.6 sin(theta/2)(1-beta^2)^2",
+      "expansion_above_45": "K=(1-beta^2)^2"
+    },
+    "reference_velocity": "Smaller-bore velocity, beta=d_small/d_large. Crane states K on the larger pipe with a further division by beta^4; AFT and the library convert it.",
+    "angle_domain": "0 to 180 degrees in two branches. The library places exactly 45 degrees in the upper branch. The package uses the lower branch to 45 degrees as prescribed. No declared variant is at 45 degrees.",
+    "Reynolds_domain": "No numerical Reynolds range is stated in any accessible statement",
+    "applicability": "Crane itself was not accessible. The two secondary statements agree with one another and with the expected form, with no difference in the formulas. Use with drilling mud is an approximation.",
+    "library_url": "https://github.com/CalebBell/fluids/blob/master/fluids/fittings.py"
+  },
+  {
+    "id": "crane-errata",
+    "classification": "measured source record",
+    "reference": "Crane Co., Errata, Flow of Fluids Through Valves, Fittings and Pipe, Technical Paper 410, U.S. version, dated 14 November 2013",
+    "url": "https://tp410.com/wp-content/uploads/2022/04/us-errata-document-11-14-13.pdf",
+    "locator": "Page 1, Text, Page 2-11, Eq. 2-16, correction printed 10/2010",
+    "source_sha256": "6c1ce99f468b9836661d3dcd37059bf08a9edc3ebe7fcad11aa62f93dc8f6ab6",
+    "finding": "Sudden contraction K1=0.5(1-d1^2/d2^2), the corrected form. This is the only Crane-issued statement of a contraction coefficient accessed; it equals the conical formula at 180 degrees.",
+    "applicability": "Applies to the 2009-format edition. The errata lists no correction to the gradual-change formulas in the sections read."
+  },
+  {
+    "id": "abrupt",
+    "classification": "measured source record",
+    "reference": "Modelica Standard Library 4.0.0, dp_suddenChange, documenting Idelchik (2006), third edition",
+    "url": "https://doc.modelica.org/Modelica%204.0.0/Resources/helpOM/Modelica.Fluid.Dissipation.Utilities.SharedDocumentation.PressureLoss.Orifice.dp_suddenChange.html",
+    "locator": "Idelchik printed p208 diagram 4-1 and pp216-217 diagram 4-9, as in entry 12",
+    "finding": "K_exp=(1-r)^2 and K_con=0.5(1-r)^0.75, r=A_small/A_large, on the small-area velocity; expansion Re>3300, contraction Re>10000",
+    "difference_from_crane_180": "Expansion identical. Contraction 0.5(1-r)^0.75 against Crane 0.5(1-r). At r=0.4136 (16A) these are 0.3351 and 0.2932; at r=0.4127 (16B) 0.3355 and 0.2937.",
+    "applicability": "Retained abrupt treatment, including the annulus side in every tapered variant"
+  },
+  {
+    "id": "pin-bore-note",
+    "classification": "inferred source gap",
+    "reference": "Spec-sheet note attributed to Quail Tools, that tool-joint ID means the pin bore where pin and box bores differ",
+    "url": "",
+    "locator": "Not located in this entry; a public search returned the same convention in other uploaded drill-pipe specification sheets, without an issuer that could be confirmed",
+    "finding": "Basis of tapered_pin_length only",
+    "applicability": "Unverified at source. It supports a sensitivity and supplies no number; the 11-in and 10-in lengths come from the installed record."
+  },
+  {
+    "id": "upset-to-joint",
+    "classification": "inferred source gap",
+    "reference": "Search of the sources above",
+    "url": "",
+    "locator": "None",
+    "finding": "No source gives the transition from upset bore to tool-joint bore inside the weld neck, or 5-1/2 in upset dimensions",
+    "applicability": "The single cone extends the published angle over 4.276 to 2.750 in on 16A and 4.670 to 3.000 in on 16B. The 16B angle is transferred from the 5-in pipe."
+  }
+]

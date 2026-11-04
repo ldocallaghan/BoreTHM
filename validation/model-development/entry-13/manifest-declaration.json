@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-04",
+  "base_commit": "c4df0cd74cd646efe4d4676b2f38f2aaf4b7fe2d",
+  "targets_scored": false,
+  "entry_sha256": {
+    "README.md": "843e42a9fb74bd9ce05d9476df8cf656ba974c84933b9220bd856e310ea42cbc",
+    "archive_results.py": "3454923ad65254fcf1ceb66de006a256d76cc7090123550458f078758440b565",
+    "compare.py": "cc23ff4c927d2a7978fca9486796af13e2201d3a7f82e09f1e551d0c5364c841",
+    "options.json": "4bc9b974d405103271b22660b441475142a256e44b23babd690b7d7eb2599096",
+    "predict.py": "d49f43d6bb047e3240aee461ed5df60f18e13f54d52f5b3bfa4e2e341ee2b3b0",
+    "predictions/entry12-replay-check.csv": "58a075c3774d1d186c06607e33a71f36c38b93dae630fe979e48326292f8917e",
+    "predictions/geometry-audit.csv": "fd93df963b0b8d1adf4480a154963b5631fb7ff39d2e655718baa7c5b0165987",
+    "predictions/joint-fractions.csv": "74f080dd8ef35efbbe42f88fe1f8ca1e75297b2fee22922123df0caec02eb20f",
+    "predictions/joint-reynolds.csv": "7a8f850dc3cb8b9a4dcb983e697338acef70b045a73d4f7d9dc495f1153be279",
+    "predictions/manifest.json": "2bae0314b43d70985e1b955db30ce8b84d70db5524165c43037f12e47c1df1b3",
+    "predictions/model-only.csv": "2c3e188d755bd25128753a1fca0e6270178e38eccbbe0827e1893f956425db69",
+    "predictions/rough-effects.csv": "962b64de979e49935fc0efbde02caae229935cf9d4c9f036990b8a784da26b0f",
+    "predictions/trips/depth-stages.csv": "596bf7ad089c5df7fad1384dd06a843e8bf77d8aaf9e4bff0bc6398949170c9a",
+    "predictions/trips/manifest.json": "e40534df7b39e718d25bbd1dbe99ec69edbe83fb7c130cb7f273fb736f58cb32",
+    "predictions/trips/slopes.csv": "d16592a7f75f0d74200410c50b0db3f906590c56c1b0d1779cf653680b6592f9",
+    "predictions/trips/windows.csv": "ffa399e8c35198b086f7ae0f88bae4438b41a90cce328eb35a52261fde9ec491",
+    "references.json": "8cef25b039773168c5f481cf70a4c08f3e7aef6e74a58f51478ae2ad9ffc643f",
+    "score.py": "c9e7cf78569b536f5bb134603a07dadc07651c87bdda93684eae6cc8f5afb927",
+    "shallow_check.py": "f4e1cd2920e083157fd82d5c5d59c65a212642fb44a5aa4f1ac2e940eeec65e3",
+    "summarise_predictions.py": "7ac056c15d8503b624fd7dce0bc893c8db216dae127e0407373df7c53ce410b3",
+    "trip_slopes.py": "fd876b80b509d4f200493fee22f079d30cddb3c77a5de256c9b1d8f63eba7078"
+  },
+  "inherited_sha256": {
+    "validation/model-development/entry-12/predict.py": "0f0ab8816e296831342ac3a256aeea24ab0960b630c9e0389e8d29d8797081a3",
+    "validation/model-development/entry-12/options.json": "1e3a50718ceb7fa875b6a6bbc9c79bcb9427ed1ea70f879d41b6eede178112d2",
+    "validation/model-development/entry-12/score.py": "8282115baa2d55430f850edb9d0ec784aa8c0ca67e5a820b915a35b3058f83f4",
+    "validation/model-development/entry-12/compare.py": "1a1ecf173adcba2ae6f89f5ebabf95207a9b39e8a92e2e3ecd2a695407f4feb5",
+    "validation/model-development/entry-12/trip_slopes.py": "5f30b01f65cdae687466ea2993684ffc250f7fcbef22f153bfd4ff6bf4b62cf3",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/forge16b/s2/plan.json": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb",
+    "src/borethm/hydraulic_losses.py": "79103dcd348c0d04eaffebb17d087d6bbf83bf045db1705f7a5a31df28999af7"
+  }
+}
