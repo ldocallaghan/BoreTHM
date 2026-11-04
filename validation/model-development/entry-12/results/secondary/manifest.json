@@ -1,0 +1,36 @@
+{
+  "declaration_commit": "a6df6468f4f0ca600d99bfda871c36d0c9debcff",
+  "model_only": false,
+  "targets_compared": true,
+  "runtime_s": 55.62784809997538,
+  "windows_per_variant": 186,
+  "groups_per_variant": 6,
+  "candidates": [
+    "working",
+    "installed_primary",
+    "installed_abrupt",
+    "installed_no_local",
+    "installed_premium",
+    "installed_steel"
+  ],
+  "acceptance_use": false,
+  "exclusions": [],
+  "source_sha256": {
+    "validation/model-development/entry-12/trip_slopes.py": "5f30b01f65cdae687466ea2993684ffc250f7fcbef22f153bfd4ff6bf4b62cf3",
+    "validation/model-development/entry-12/predict.py": "0f0ab8816e296831342ac3a256aeea24ab0960b630c9e0389e8d29d8797081a3",
+    "validation/model-development/entry-12/options.json": "eeb63569bb218f2c9e1f3ce839737ff917ae425cb7e454eec3ee93d4bac1bfce",
+    "validation/model-development/entry-9/analyse.py": "ce68686b7371a6dcc79d9728e8654c23d12eb8717a1fc52067cfe0f170a9bdc0",
+    "validation/model-development/entry-9/diagnose.py": "2d6370bf82d0d13592c0cdd6383e3a7de8c0d63457a4fecedf31492044488940",
+    "validation/model-development/entry-9/results/windows.csv": "dcb9da507a72252766ae3e1273a9953c25fc1e91524524d518ea3a4a21b6ad35",
+    "validation/model-development/entry-9/results/depth-stages.csv": "58ff73072252445a3c2fb99af3a6482692d52b703e52201946f249607dbb48b3"
+  },
+  "results_sha256": {
+    "depth-stages.csv": "2d50f4637dfe340ad0d38ef8fd714e2d4e87a000782f31bde48602226d5a343e",
+    "prediction-checks.csv": "c62212ca1f5221f1a55edc932f6d17eec5e64c3728a9455247cfbf40fcdbb7e7",
+    "slopes.csv": "016a785b062eaa55e230007880d7d0c2b517590c9cd67970620ec40c9afe1277"
+  },
+  "full_manifest_sha256": "e7bc306d1509df624aaebc453b1082627651b9fa08bc41ecb58e2ee872f98483",
+  "rebuildable_result_sha256": {
+    "windows.csv": "b94b74c02e56a10e422b0d4de1aa10f2e50095c77143142d7ee237eb63980fe3"
+  }
+}

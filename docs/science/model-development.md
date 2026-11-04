@@ -68,7 +68,7 @@ This table includes work performed before this log existed. Earlier development 
 | D6, original-path overlapping ramps | Apply the existing occupancy-weighted blend to original thermal pieces where ramps overlap; keep current-path pieces unchanged | All 62 original-reference windows converge with D6 and D7; frozen legacy results are unchanged | Numerical correction; equations, physical inputs and solver settings unchanged |
 | D7, original-path mesh boundaries | Apply the existing well-boundary clipping to the original initial mesh | The shallow original-reference window converges at its physical ends; all 2,614 legacy archive checks pass | Numerical correction; keep inlet and turnaround conditions at the physical well ends |
 | Entry 11, pressure-input consistency | Independent source checks should distinguish pressure-channel, flow, nozzle, passage and density inputs; no fitted correction | Configured regimes and approximate 95% settings found; flow-scale bounds 0.553–0.631; sweep qualifies depth increment; no 2017 installed displacement established | Diagnosis only; no corrected input adopted and P3 unchanged |
-| Entry 12, installed ordinary drill pipe | Sourced smaller connection bores increase pressure and hydraulic heat; transition choice fixed by source applicability | Model-only predictions declared; frozen comparisons pending | No input adopted; abrupt fallback declared because finished taper geometry is unresolved |
+| Entry 12, installed ordinary drill pipe | Sourced smaller connection bores increase pressure and hydraulic heat; transition choice fixed by source applicability | Frozen comparisons completed; see the six-gap and trip tables below | Source-based recommendation recorded; adoption pending; finished taper geometry remains unresolved |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -2228,3 +2228,94 @@ These are interval-median differences with flow and operating changes, not isola
 **Calculated declaration.** The [model-only archive](../../validation/model-development/entry-12/predictions/model-only.csv) gives per-window pressure and hydraulic-power changes on the same 22 representative inputs used in entry 10, with temperature effects at the bit, sensor position and return. No measured target enters these predictions. The [trip predictions](../../validation/model-development/entry-12/predictions/trips/slopes.csv) give each of the six groups' modelled slopes and multipliers of its archived working ratio; no new observation-based ratio is computed before scoring. EOW 19 adds insulated pipe. The working replay matches its archived model-only fields within the declared tolerances.
 
 **Inferred decision rule.** Recommend the source-corrected ordinary geometry if paired frozen coverage and the declared model-only effects are reproduced within 1 psi, 0.1 °C and 0.1% of hydraulic power, regardless of score direction. Transition treatment is selected from source applicability; the abrupt treatment is an unresolved-profile fallback. Scores and slopes are reported independently of that choice. Adoption requires a maintainer decision. No package default changes, and no 58-32 data is used.
+
+### Installed-pipe comparison results
+
+**Calculated.** [Entry 12 results](../../validation/model-development/entry-12/results/README.md) compare all six gaps on the unchanged frozen samples. Bias is model minus observation. G1 RMS gives equal weight to the assembly biases, with 16B restricted to its four motorless assemblies. The before result is entry 10 smooth; its historical FH result is a separate reference. Values below come from `summary.csv`; assembly and event detail is in `comparison.csv`.
+
+| Calculation | G1 16A RMS, psi | G1 16B RMS, psi | G2 16A bias, kW | G2 16B bias, kW |
+| --- | --- | --- | --- | --- |
+| working | 1214.61 | 432.42 | -283.66 | -225.25 |
+| installed_primary | 556.82 | 129.42 | -40.75 | -36.35 |
+| installed_abrupt | 556.82 | 129.42 | -40.75 | -36.35 |
+| installed_no_local | 1476.99 | 450.75 | -359.27 | -238.59 |
+| installed_premium | 556.82 | 51.98 | -40.75 | -72.73 |
+| installed_steel | 537.80 | 324.65 | 7.85 | 27.50 |
+| entry10_fh | 1214.61 | 152.85 | -283.66 | 20.18 |
+
+| Calculation | G3 16A bias RMS, °C | G4 peak-error RMS, °C | G5 return bias, °C | G6 regular bias, °C | G6 trial bias, °C |
+| --- | --- | --- | --- | --- | --- |
+| working | 5.94 | 34.86 | -4.63 | 3.14 | 9.54 |
+| installed_primary | 5.72 | 34.83 | -3.50 | 6.95 | 13.13 |
+| installed_abrupt | 5.72 | 34.83 | -3.50 | 6.95 | 13.13 |
+| installed_no_local | 6.79 | 34.87 | -4.99 | 2.97 | 9.20 |
+| installed_premium | 5.72 | 34.83 | -3.50 | 6.22 | 12.46 |
+| installed_steel | 6.53 | 34.82 | -3.29 | 8.94 | 14.84 |
+| entry10_fh | 5.94 | 34.86 | -4.63 | 7.12 | 14.37 |
+
+**Calculated direction of effects.** Primary lowers G1 assembly-bias RMS from 1214.61 to 556.82 psi on 16A and from 432.42 to 129.42 psi on 16B. The G2 well biases move from -283.66 to -40.75 kW and from -225.25 to -36.35 kW, respectively. G6 regular-pipe bias increases from +3.14 to +6.95 °C, and trial bias from +9.54 to +13.13 °C. G4 run-in error RMS remains about 34.8 °C. These changes come from the summary columns above. **Inferred limit.** Improved aggregate pressure and power errors leave substantial temperature errors. The residual temperature errors and finished transition profile remain unresolved; the joint-loss contrast below addresses the additional warming.
+
+**Calculated assembly detail.** The [G1 tables](../../validation/model-development/entry-12/results/README.md#g1-by-assembly) give every 16A and motorless 16B assembly bias beside working and FH. The full comparison retains every G3 assembly and G4 event, with before/after coverage. Pressure and heat changes are in `sample-changes.csv` and `assembly-changes.csv`.
+
+**Calculated secondary slopes.** `secondary/slopes.csv`, column `slope_ratio`, retains all six original groups. Primary and abrupt are identical; EOW 19 adds insulated pipe with EIS dimensions.
+
+| EOW / added pipe | Excursion | Flow, US gpm | Working | Entry 10 FH | Primary/abrupt | No local | Premium | Steel |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 17 / ordinary | 27 | 500 | 1.45 | 0.55 | 0.57 | 1.54 | 0.65 | 0.52 |
+| 19 / insulated | 29 | 600 | 0.97 | 0.29 | 0.95 | 1.42 | 0.95 | 0.76 |
+| 20 / ordinary | 31 | 600 | 1.57 | 0.48 | 0.49 | 1.76 | 0.57 | 0.45 |
+| 27 / ordinary | 40 | 400 | 1.82 | 0.57 | 0.60 | 1.97 | 0.69 | 0.56 |
+| 27 / ordinary | 40 | 600 | 1.91 | 0.57 | 0.58 | 2.30 | 0.67 | 0.50 |
+| 38 / ordinary | 52 | 600 | 1.86 | 0.59 | 0.61 | 2.07 | 0.70 | 0.55 |
+
+#### Pressure compensation and joint-loss bound
+
+**Calculated:** [Installed-primary scoreboard](../../validation/model-development/entry-12/results/installed_primary/scoreboard.csv) and [working scoreboard](../../validation/model-development/entry-12/results/working/scoreboard.csv), selected by `gap=G1`, `well=16B` and `group`, give the motorless assembly biases below. Bias is model minus measured pressure. Working biases span -487.15 to -394.02 psi; installed-primary biases span +15.10 to +179.88 psi.
+
+| 16B assembly | Working bias, psi | Installed-primary bias, psi |
+| --- | --- | --- |
+| 12 | -441.62 | +15.10 |
+| 13 | -400.45 | +120.59 |
+| 15 | -394.02 | +179.88 |
+| 16 | -487.15 | +140.98 |
+
+**Calculated:** The installed-primary 16A assembly biases span -896.08 to +609.96 psi in the same scoreboard, selected by `well=16A`. BHA 38 is +389.61 psi and BHA 39 is +609.96 psi.
+
+**Calculated:** [shallow-diagnostic.csv](../../validation/model-development/entry-12/results/shallow-diagnostic.csv), columns `bit_depth_ft`, `installed_primary_deficit_psi` and `pressure_change_psi`, gives ten shallow 16B windows at 35.34–370.38 ft. Their partial strings contain no ordinary pipe, and every installed correction is zero. The model still reads low by 187.75–480.67 psi, about 188–481 psi. The four full-depth motorless assembly means now read high by 15.10–179.88 psi.
+
+**Calculated:** In [secondary/slopes.csv](../../validation/model-development/entry-12/results/secondary/slopes.csv), regular-pipe measured/modelled slope ratios span 0.4942–0.6104 under `installed_primary`, about 0.49–0.61, and 1.5442–2.2971 under `installed_no_local`, about 1.54–2.30. Thus the abrupt modelled rise is 1.64–2.02 times the measured rise; the no-local rise is 0.44–0.65 times measured. The measured rise lies between them. All five flow groups across four assemblies are retained, including both EOW 27 flow groups.
+
+**Inferred:** The shallow pressure shortfall, positive full-depth biases and excessive per-length rise together indicate that the abrupt joint treatment with the installed 3.0-in bore overstates the loss added with ordinary pipe on 16B. This excess per-length pressure offsets missing near-surface tool and surface losses at full depth. The G1 RMS reduction from 432.42 to 129.42 psi therefore includes compensation between two errors. Improved full-depth G1 does not establish that the abrupt treatment is physically appropriate.
+
+**Calculated bound, never an input:** Approximate each modelled slope as a body-friction baseline plus joint local loss. Use the no-local slope `S_0` as that baseline, the abrupt slope `S_a`, and the unchanged measured slope `S_m`. The fraction `f = (S_m - S_0)/(S_a - S_0)` gives the joint-local-loss share that would match the measured slope under this approximation. All slope columns below are psi per 1000 ft.
+
+| EOW | Excursion | Flow group, US gpm | Measured slope | No-local slope | Abrupt slope | Joint-local-loss fraction |
+| --- | --- | --- | --- | --- | --- | --- |
+| 17 | 27 | 500 | 84.155 | 54.498 | 147.740 | 0.3181 |
+| 20 | 31 | 600 | 74.497 | 42.257 | 150.754 | 0.2972 |
+| 27 | 40 | 400 | 40.607 | 20.564 | 67.725 | 0.4250 |
+| 27 | 40 | 600 | 113.963 | 49.611 | 194.829 | 0.4431 |
+| 38 | 52 | 600 | 100.344 | 48.380 | 164.404 | 0.4479 |
+
+The fractions span 0.2972–0.4479, or 29.7–44.8% of the abrupt contribution. This assumes additive slopes and the same trip groups with their fixed temperature treatment. Other modelled contributions, including distributed restriction friction, are absorbed into the no-local baseline. It is a diagnostic bound, without a measured loss coefficient. It selects no treatment and supplies no model input.
+
+**Calculated:** [summary.csv](../../validation/model-development/entry-12/results/summary.csv), columns `G6_regular_bias_C` and `G6_trial_bias_C`, gives:
+
+| Calculation | G6 regular bias, °C | G6 trial bias, °C |
+| --- | --- | --- |
+| working | +3.14 | +9.54 |
+| installed_primary | +6.95 | +13.13 |
+| installed_no_local | +2.97 | +9.20 |
+
+Primary warms the regular and trial comparisons by 3.81 and 3.59 °C relative to working. Its contrast with the same installed geometry without joint local losses is 3.98 and 3.93 °C, respectively. The no-local biases remain close to working.
+
+**Inferred:** Nearly all of the extra G6 warming is associated with the joint-local-loss term and its dissipation in this calculation. If the abrupt joint loss is overstated, that additional warming is overstated with it. This concerns the increment from the connection treatment; the earlier temperature biases remain unresolved.
+
+**Inferred source gap:** A sourced transition treatment requires the installed pipe's internal upset diameter and taper length at the weld neck, and the bore length through the made-up tool joint, from the drill-pipe data sheets or manufacturer drawings. No taper angle or loss coefficient is selected from these bounds.
+
+
+**Calculated reproduction.** 660/660 representative field checks and 36/36 modelled slope checks pass their declared tolerances. The child manifests retain failures and original unavailable run-in events. These checks do not use the direction of score changes.
+
+**Calculated shallow diagnostic and inferred equipment limit.** The ten original primary shallow 16B identities were replayed at their frozen mass rate and mean inlet/return temperature. Every working/installed-primary partial-string geometry is identical and every pressure change is zero. `shallow-diagnostic.csv` records the current Colebrook deficit of 187.75–480.67 psi, about 188–481 psi, alongside the earlier entry 9 values. No circulation solve or coefficient fit is made. The ordinary-pipe correction therefore leaves the shallow surface/BHA-tool gap unresolved. A 16A shallow comparison remains unavailable; its G1 assembly changes are reported above.
+
+**Inferred recommendation.** Recommend installed ordinary-pipe geometry for the working calculation. This follows the source correction and the predeclared prediction/coverage rule, regardless of score direction. The abrupt treatment is the existing working treatment. The regular-pipe trip slopes show that it overstates loss at the installed 3.0-in bore, so it remains a source-gap fallback pending the finished internal profile and an applicable gradual-loss treatment. The premium and transferred-steel cases remain sensitivities. No geometry, roughness or coefficient is selected by agreement. The historical trial-insulation fit remains disclosed. Adoption, including whether to adopt before the transition treatment is sourced, remains Liam's decision as maintainer. Package defaults and goldens remain unchanged.

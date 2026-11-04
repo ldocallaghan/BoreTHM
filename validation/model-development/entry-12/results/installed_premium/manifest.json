@@ -1,0 +1,214 @@
+{
+  "declaration_commit": "a6df6468f4f0ca600d99bfda871c36d0c9debcff",
+  "variant": "installed_premium",
+  "complete": true,
+  "python": "3.14.4",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "settings": {
+    "date": "2026-11-04",
+    "working": "entry 8 with entry 10 smooth Colebrook",
+    "package_defaults_changed": false,
+    "fixed": {
+      "pv_reference_C": 26.7,
+      "film_multiplier": 1.0,
+      "exposure": "cumulative",
+      "surface_case": 5,
+      "pitch_16A_ft": 31.5,
+      "pitch_16B_ft": 31.706666666666667,
+      "flow": "unchanged",
+      "insulated_joint": "EIS 7 by 4 in, 29-in restriction",
+      "thermal_geometry": "existing body and thermal-joint treatment unchanged",
+      "installed_tool_losses": "unchanged"
+    },
+    "installed_source": "Kevin England, personal communication via John McLennan, November 2026, from the drill pipe data sheets",
+    "installed": {
+      "16A": {
+        "body_OD_in": 5.0,
+        "body_ID_in": 4.276,
+        "weight_lb_ft": 19.5,
+        "grade": "S-135",
+        "connection": "4-1/2 IF (NC50)",
+        "joint_OD_in": 6.625,
+        "joint_ID_in": 2.75,
+        "pin_tong_in": 11.0,
+        "box_tong_in": 14.0,
+        "restriction_in": 25.0,
+        "coating": "none"
+      },
+      "16B": {
+        "body_OD_in": 5.5,
+        "body_ID_in": 4.67,
+        "weight_lb_ft": 24.7,
+        "grade": "S-135",
+        "connection": "5-1/2 FH",
+        "joint_OD_in": 7.25,
+        "joint_ID_in": 3.0,
+        "pin_tong_in": 10.0,
+        "box_tong_in": 12.0,
+        "restriction_in": 22.0,
+        "coating": "none"
+      }
+    },
+    "premium_16B": {
+      "joint_ID_in": 3.063,
+      "pin_tong_in": 4.0,
+      "box_tong_in": 6.0,
+      "restriction_in": 10.0,
+      "unchanged": "Body dimensions and joint OD remain the primary values; only ID and tong lengths change as declared"
+    },
+    "restriction_basis": "Pin plus box tong lengths; source-length approximation, not a measured made-up constant-bore length",
+    "transition_choice": "abrupt fallback: finished upset/weld/tool-joint bore profile is not established",
+    "source_choice_rule": "Choose transition from applicability of sourced geometry and coefficient before scores; no pressure or slope selects it",
+    "variants": {
+      "working": {
+        "friction": "colebrook",
+        "roughness_m": 0.0
+      },
+      "installed_primary": {
+        "friction": "colebrook",
+        "roughness_m": 0.0
+      },
+      "installed_abrupt": {
+        "friction": "colebrook",
+        "roughness_m": 0.0
+      },
+      "installed_no_local": {
+        "friction": "colebrook",
+        "roughness_m": 0.0
+      },
+      "installed_premium": {
+        "friction": "colebrook",
+        "roughness_m": 0.0
+      },
+      "installed_steel": {
+        "friction": "colebrook",
+        "roughness_m": 4.572e-05
+      }
+    },
+    "roughness_qualification": "No drill-pipe-specific value found; 45.72 micrometres is the entry 10 EPA new water-steel transfer, applied by the existing global option including insulated pipe as a sensitivity",
+    "no_local_scope": "Zero connection local losses on all joint-bearing segments, including retained HWDP and EIS insulated connections; dimensions unchanged",
+    "prediction_selection": "Entry 10: one lower-median-depth input window per assembly; per-window G1/G2 changes and G3/G5/G6 proxy changes. Full frozen coverage follows only after declaration.",
+    "prediction_tolerances": {
+      "spp_psi": 1.0,
+      "temperature_C": 0.1,
+      "hydraulic_power_fraction": 0.001
+    },
+    "recommendation_rule": "Recommend the installed geometry for the working calculation if paired coverage and the declared model-only pressure, temperature and heat changes are reproduced within entry 10 tolerances, regardless of score direction. Recommend the abrupt fallback only as a declared unresolved-profile approximation. Scores and trip slopes do not select geometry or transition. No adoption without maintainer decision.",
+    "prior_exposure": {
+      "entry10_fh_16B_G1_RMS_psi": 152.8,
+      "entry10_fh_regular_slope_ratio_range": [
+        0.47,
+        0.59
+      ],
+      "qualification": "Previously scored catalogue FH (7.5 by 3 in joints), abrupt; bore matches the subsequently sourced installed pipe; no treatment selected from these results"
+    },
+    "secondary_measures": {
+      "trip_slopes": {
+        "group_source": "validation/model-development/entry-9/results/slopes.csv, role=primary",
+        "groups": [
+          {
+            "assembly": "17",
+            "excursion": "27",
+            "flow_centre_gpm": "500"
+          },
+          {
+            "assembly": "19",
+            "excursion": "29",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "20",
+            "excursion": "31",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "27",
+            "excursion": "40",
+            "flow_centre_gpm": "400"
+          },
+          {
+            "assembly": "27",
+            "excursion": "40",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "38",
+            "excursion": "52",
+            "flow_centre_gpm": "600"
+          }
+        ],
+        "method_source": "validation/model-development/entry-9/analyse.py, slopes; same windows, flow and depth grouping, temperature treatment, mass-rate convention and reductions",
+        "variants": [
+          "working",
+          "installed_primary",
+          "installed_abrupt",
+          "installed_no_local",
+          "installed_premium",
+          "installed_steel"
+        ],
+        "outputs": [
+          "modelled pressure slope in psi per 1000 ft",
+          "measured/modelled slope ratio"
+        ],
+        "eow19": "Report separately: the added upper length is insulated pipe. Its connection geometry remains the same declared catalogue transfer as regular pipe.",
+        "predictions": {
+          "baseline": "Reproduce entry 9 modelled slopes and ratios.",
+          "smooth": "Raise regular and insulated per-length slopes through the pipe-friction relation; it supplies no difference in connection identity.",
+          "steel": "Raise the slopes above smooth through the uniform internal roughness example on both regular and insulated pipe.",
+          "gpds": "Raise 16B slopes above smooth through smaller catalogue joint bores, including insulated-pipe connections.",
+          "fh": "Raise 16B slopes above smooth through smaller conventional FH joint bores, including insulated-pipe connections; expect a larger increment than GPDS55.",
+          "gradual": "Reduce the repeated-connection local contribution relative to smooth in regular and insulated pipe. The net sign relative to baseline includes the opposing smooth-friction change."
+        },
+        "selection": "Secondary reporting only. It does not enter the unchanged acceptance rule and cannot select any variant or equipment dimension."
+      }
+    }
+  },
+  "circulation_rows": 467,
+  "new_circulation_calculations": 109,
+  "reused_circulation_rows": 358,
+  "reused_16A_rows": 358,
+  "before_source": "validation/model-development/entry-10/results/smooth",
+  "baseline_reuse": false,
+  "run_in_basis": "identical installed-primary 16A conditioning and transients reused",
+  "circulation_failures": [],
+  "energy_flags": [],
+  "run_in_failures": [],
+  "run_in_originally_unavailable": [
+    "23-off006",
+    "35r2-off008"
+  ],
+  "installed_tool_uncertainty": "unquantified; no installed-tool loss band available; no additional tool source",
+  "source_sha256": {
+    "validation/model-development/entry-12/score.py": "8282115baa2d55430f850edb9d0ec784aa8c0ca67e5a820b915a35b3058f83f4",
+    "validation/model-development/entry-12/predict.py": "0f0ab8816e296831342ac3a256aeea24ab0960b630c9e0389e8d29d8797081a3",
+    "validation/model-development/entry-12/options.json": "eeb63569bb218f2c9e1f3ce839737ff917ae425cb7e454eec3ee93d4bac1bfce",
+    "validation/model-development/entry-8/score.py": "c2c4bdc2e648a2d15c539f686086ad09f57fbeb8e75af8d5cdd51c79a3c79b38",
+    "validation/forge16b/s2/plan.json": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/scoreboard/transient-inputs.json": "ea1d6f211bfdd86fee8c69062aa714cf515f839215d1db37a21d348cae02e09b",
+    "validation/model-development/entry-4/rotary.py": "91e74399df2822a58541d1bd22e4c1a5f04e8b35e437012467dfdb3100b7e631",
+    "validation/model-development/entry-4/rotary_inputs.csv": "7c99cba192f10ff1132800f136ff882787886bcdabdf8084c555665820b21422",
+    "validation/model-development/entry-6/hypotheses.py": "096933f79a9cb53996401f0c06bab32f05abbab7ede7f4859774c17d7012c5dc"
+  },
+  "model_sha256": {
+    "model1_coupled.py": "88f03cb4e9a9ca77bdd93604bce8a9175b89a0520c0ef0ab4456320aaad2097a",
+    "hydraulic_losses.py": "913ba82b760b17100549f85ac2f4ac71d3d9f72272389980a12729260bc1ed01",
+    "fluids.py": "10de76f50892d73295dd6cbc3fe8038bc097bd76f078c03f311310d9c18f8128",
+    "well_geometry.py": "d32d0fc276b0f8e846043bbf570f718eb054d7bd15414b3f148b404d7ef2f62c",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a",
+    "rotary_heat.py": "3715bed3cf60584fbe96192a1deff1a9429d8fbc62bab07e925988ae1f870d8d",
+    "studies/pressure_comparison.py": "eeb1f712dd9a409d419d7f8d12be3b43da4ef07917edb9bf8f4e98b566b70bb2"
+  },
+  "results_sha256": {
+    "run-in.csv": "cb2f223aa4c56a5c04faa368c1370bd81b17d45b56f8fa476aa9c39b93caf808",
+    "scoreboard.csv": "13151dd0a420c2b2e49c9a157d833c28af8d46b479cb07e43e9ad86f93672c5c"
+  },
+  "runtime_s": 113.01454069995089,
+  "full_manifest_sha256": "0c29ea59e4d2cf35af72167c7b1263dbf0a6b37dfeafe0a00fb56a752daf672f",
+  "descriptive_settings_qualification": "Execution snapshot retains inherited eow19/predictions prose; geometry code retained EIS on insulated pipe. Current options correct only those descriptive fields; all numerical settings and selections are unchanged.",
+  "rebuildable_result_sha256": {
+    "circulation.csv": "6774c3011a92a3798b70c5018cd41df549b3ab4eb25b5fe11ab40ee792a61aed",
+    "rotary-heat-applied.csv": "3ab0a50eb8c6ebdffb09c71dd5c5287b1ecde56964341ca8b44690ca5d061d37"
+  }
+}

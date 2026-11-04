@@ -1,0 +1,70 @@
+{
+  "declaration_commit": "a6df6468f4f0ca600d99bfda871c36d0c9debcff",
+  "rule": "Recommend the installed geometry for the working calculation if paired coverage and the declared model-only pressure, temperature and heat changes are reproduced within entry 10 tolerances, regardless of score direction. Recommend the abrupt fallback only as a declared unresolved-profile approximation. Scores and trip slopes do not select geometry or transition. No adoption without maintainer decision.",
+  "checks": [
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "working",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "working",
+      "passed": true
+    },
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "installed_primary",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "installed_primary",
+      "passed": true
+    },
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "installed_abrupt",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "installed_abrupt",
+      "passed": true
+    },
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "installed_no_local",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "installed_no_local",
+      "passed": true
+    },
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "installed_premium",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "installed_premium",
+      "passed": true
+    },
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "installed_steel",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "installed_steel",
+      "passed": true
+    }
+  ],
+  "recommendation": "recommend installed ordinary-pipe geometry for the working calculation",
+  "transition": "abrupt fallback retained because finished upset/weld/tool-joint profile is unresolved; no score selects it",
+  "adoption": "pending maintainer decision; package defaults unchanged",
+  "secondary_slopes_affect_decision": false
+}
