@@ -547,7 +547,7 @@ of 200e6 Pa at 25 degrees C.
 ## wall_temperatures
 
 ```python
-wall_temperatures(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growth=1.08, probe_r=None)
+wall_temperatures(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growth=1.08, probe_r=None, observe=None, radius_m=None, carry_static_node=False)
 ```
 
 Conduct heat through the history of states. T_rock: far-field and
@@ -559,11 +559,21 @@ J/(m3 K). T0, if supplied, is an initial temperature array on the grid.
 n sets grid size; dt0 is seconds; growth is dimensionless; probe_r is m.
 Returns a Result with t [s], r [m], T_wall, T_node and fields [degrees C],
 q_wall [W/m into rock], energy_in, energy_far and stored [J/m].
+observe receives copies of the state at each state boundary and accepted
+step. Changing those copies does not change integration or time stepping.
+radius_m reuses a stored radial grid whose coordinates differ from the
+declared logarithmic grid by at most eight units in the last place.
+A unit in the last place is the local floating-point spacing at a radius.
+With carry_static_node=True, a static state with no initial fluid-node
+temperature starts from the preceding static state's final fluid-node
+temperature. By default it starts from the last circulating fluid
+temperature, or the wall temperature when no circulation preceded it.
+Every default reproduces the previous results.
 
 ## tool_trip_in
 
 ```python
-tool_trip_in(lump, column, md_bottom, speed, T0, h_static_out, h_static_in, stages=(), stage_s=0.0, circulating=None, dt=30.0)
+tool_trip_in(lump, column, md_bottom, speed, T0, h_static_out, h_static_in, stages=(), stage_s=0.0, circulating=None, dt=30.0, retain_stage_samples=False, T_s0=None, T_f0=None)
 ```
 
 Run the string into the hole at speed [m/s] to md_bottom, through a
@@ -578,6 +588,11 @@ h_static_in are W/(m2 K). md_bottom and stages are measured depths [m];
 stage_s and dt are seconds. Returns (History, depths), with History.t [s],
 History.T_s and History.T_f [degrees C], and depths [m]. History.peak()
 returns (peak internal-fluid temperature [degrees C], time [s]).
+retain_stage_samples=True returns the already calculated intermediate
+times while the tool is stationary at a circulation depth. Its default
+returns the endpoints of each stationary period. T_s0 and T_f0 set the
+initial steel and internal-fluid temperatures separately; their defaults
+both use T0. Every default reproduces the previous results.
 
 ## water_properties
 

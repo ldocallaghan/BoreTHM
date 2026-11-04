@@ -67,10 +67,26 @@ class Grid:
     r_max: float
     n: int = 200
 
-    def build(self):
+    def build(self, radius_m=None):
         """Node radii (log-spaced, the first at the wall), face radii, and the
-        volume per unit length of each control volume."""
+        volume per unit length of each control volume.
+
+        radius_m reuses supplied radial coordinates when every coordinate
+        differs from the declared logarithmic grid by at most eight units
+        in the last place. A unit in the last place is the spacing between
+        adjacent floating-point numbers at that radius. Geometry and node
+        count must agree. The default reproduces the previous grid.
+        """
         r = self.a * (self.r_max / self.a) ** np.linspace(0.0, 1.0, self.n)
+        if radius_m is not None:
+            stored = np.asarray(radius_m, dtype=float)
+            # Preserve the authoritative archived grid. Only platform rounding
+            # of this same log grid is allowed, never remeshing or geometry edits.
+            if (stored.shape != r.shape or not np.all(np.isfinite(stored))
+                    or np.any(np.diff(stored) <= 0)
+                    or np.any(np.abs(stored-r) > 8*np.abs(np.spacing(r)))):
+                raise ValueError('Stored radius grid differs from the declared log grid by more than 8 ULP')
+            r = stored.copy()
         faces = np.concatenate([[r[0]], np.sqrt(r[:-1] * r[1:]), [r[-1]]])
         vol = np.pi * (faces[1:] ** 2 - faces[:-1] ** 2)
         return r, faces, vol
@@ -110,7 +126,7 @@ class Result:
 
 
 def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growth=1.08,
-        probe_r=None):
+        probe_r=None, observe=None, radius_m=None, carry_static_node=False):
     """Conduct heat through the history of states. T_rock: far-field and
     initial temperature (or T0, an initial field on the grid).
 
@@ -120,10 +136,20 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
     n sets grid size; dt0 is seconds; growth is dimensionless; probe_r is m.
     Returns a Result with t [s], r [m], T_wall, T_node and fields [degrees C],
     q_wall [W/m into rock], energy_in, energy_far and stored [J/m].
+    observe receives copies of the state at each state boundary and accepted
+    step. Changing those copies does not change integration or time stepping.
+    radius_m reuses a stored radial grid whose coordinates differ from the
+    declared logarithmic grid by at most eight units in the last place.
+    A unit in the last place is the local floating-point spacing at a radius.
+    With carry_static_node=True, a static state with no initial fluid-node
+    temperature starts from the preceding static state's final fluid-node
+    temperature. By default it starts from the last circulating fluid
+    temperature, or the wall temperature when no circulation preceded it.
+    Every default reproduces the previous results.
     """
     alpha = k / rhocp
     total = sum(s.duration for s in history)
-    r, faces, vol = Grid(a, r_max or r_max_for(a, alpha, total), n).build()
+    r, faces, vol = Grid(a, r_max or r_max_for(a, alpha, total), n).build(radius_m)
     T = np.full(n, float(T_rock)) if T0 is None else np.array(T0, float)
     T_start = T.copy()
     # conductance between neighbouring nodes per unit length
@@ -134,12 +160,23 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
     fields, ends, t = [], [], 0.0
     e_in = e_far = 0.0
     T_fluid_last = None
-    for s in history:
+    previous_kind, previous_node = None, None
+    def observed(state_index, kind, side, node, flux):
+        if observe is not None:
+            observe(dict(time_s=float(t), state_index=state_index, sample_kind=kind,
+                event_side=side, radius_m=r.copy(), temperature_C=T.copy(),
+                wall_temperature_C=float(T[0]), fluid_node_temperature_C=None if node is None else float(node),
+                wall_flux_W_m=None if flux is None else float(flux), energy_in_J_m=float(e_in),
+                energy_far_J_m=float(e_far), stored_J_m=float(np.sum(cap[:-1]*(T[:-1]-T_start[:-1])))))
+    for state_index, s in enumerate(history):
         T_node = None
         if s.kind == "static" and s.C > 0:
             T_node = s.T_node0 if s.T_node0 is not None else (
+                previous_node if carry_static_node and previous_kind == 'static' and previous_node is not None else
                 T_fluid_last if T_fluid_last is not None else T[0])
-        for dt in time_steps(s.duration, dt0, growth):
+        observed(state_index, 'initial' if state_index == 0 else 'event_boundary', 'right', T_node, None)
+        steps = time_steps(s.duration, dt0, growth)
+        for step_index, dt in enumerate(steps):
             m = n + (1 if T_node is not None else 0)
             ab = np.zeros((3, m))
             rhs = np.zeros(m)
@@ -197,8 +234,10 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
             if Tp is not None:
                 Tp.append(float(np.interp(probe_r, r, T)))
             Tn.append(T_node if T_node is not None else np.nan)
+            observed(state_index, 'accepted_step', 'left' if step_index == len(steps)-1 else 'interior', T_node, q_in)
         if s.kind == "circulating":
             T_fluid_last = s.T_fluid
+        previous_kind, previous_node = s.kind, T_node
         fields.append(T.copy())
         ends.append((t, float(T[0]), float(T_node) if T_node is not None else np.nan))
     stored = float(np.sum(cap[:-1] * (T[:-1] - T_start[:-1])))

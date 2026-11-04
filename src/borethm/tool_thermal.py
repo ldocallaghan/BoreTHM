@@ -126,7 +126,8 @@ def steady_steel(T_flow, T_out, h_in, h_out, lump):
 
 
 def trip_in(lump, column, md_bottom, speed, T0, h_static_out, h_static_in, stages=(),
-            stage_s=0.0, circulating=None, dt=30.0):
+            stage_s=0.0, circulating=None, dt=30.0, retain_stage_samples=False,
+            T_s0=None, T_f0=None):
     """Run the string into the hole at speed [m/s] to md_bottom, through a
     column whose temperature is column(md), from T0 at surface, holding for
     stage_s of circulation at each of the measured depths in stages;
@@ -139,9 +140,14 @@ def trip_in(lump, column, md_bottom, speed, T0, h_static_out, h_static_in, stage
     stage_s and dt are seconds. Returns (History, depths), with History.t [s],
     History.T_s and History.T_f [degrees C], and depths [m]. History.peak()
     returns (peak internal-fluid temperature [degrees C], time [s]).
+    retain_stage_samples=True returns the already calculated intermediate
+    times while the tool is stationary at a circulation depth. Its default
+    returns the endpoints of each stationary period. T_s0 and T_f0 set the
+    initial steel and internal-fluid temperatures separately; their defaults
+    both use T0. Every default reproduces the previous results.
     """
-    T_s, T_f = T0, T0
-    depth, t_all, Ts_all, Tf_all, labels = [0.0], [0.0], [T0], [T0], [""]
+    T_s, T_f = T0 if T_s0 is None else T_s0, T0 if T_f0 is None else T_f0
+    depth, t_all, Ts_all, Tf_all, labels = [0.0], [0.0], [T_s], [T_f], [""]
     stops = sorted(d for d in stages if 0.0 < d < md_bottom)
     md, t = 0.0, 0.0
     for target in stops + [md_bottom]:
@@ -159,6 +165,10 @@ def trip_in(lump, column, md_bottom, speed, T0, h_static_out, h_static_in, stage
             T_flow, h_in, h_out = circulating(md)
             hist = run(lump, [Segment(stage_s, T_flow, h_out, h_in, T_flow=T_flow)], T_s, T_f)
             T_s, T_f = float(hist.T_s[-1]), float(hist.T_f[-1])
+            if retain_stage_samples:
+                for j in range(1, len(hist.t)-1):
+                    depth.append(md); t_all.append(t+float(hist.t[j]))
+                    Ts_all.append(float(hist.T_s[j])); Tf_all.append(float(hist.T_f[j])); labels.append('staging')
             t += stage_s
             depth.append(md); t_all.append(t); Ts_all.append(T_s); Tf_all.append(T_f)
             labels.append("staging")

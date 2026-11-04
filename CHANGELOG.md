@@ -6,6 +6,17 @@ The circulation solver accepts Colebrook pipe friction with an optional absolute
 
 A drill-pipe connection in `HydraulicJoint` may instead specify conical bore transitions through `transition='tapered'` and an included angle `taper_angle_deg`. The coefficients follow Crane Technical Paper 410 on the smaller-bore velocity, and the annulus retains the abrupt treatment. The abrupt treatment remains the default.
 
+Wall-temperature calculations can return copies of the state at boundaries
+and accepted steps through `observe`. A supplied `radius_m` reuses a stored
+radial grid within eight local floating-point units of the declared grid.
+`carry_static_node=True` starts consecutive static periods from the previous
+fluid-node temperature when no initial temperature is specified.
+
+Tool calculations can return intermediate samples during stationary
+circulation through `retain_stage_samples`. Separate initial steel and
+fluid temperatures can be supplied through `T_s0` and `T_f0`. Every default
+reproduces the previous results.
+
 ## v1.6.0 (29 October 2026)
 
 The circulation model calculates pressure losses component by component:
