@@ -119,3 +119,7 @@ These secondary ratios do not select a geometry or enter the recommendation rule
 ## Scored comparison
 
 **Calculated.** The [results](results/README.md) report every gap and the secondary trip groups with paired coverage. The original source choices and model-only predictions above remain unchanged. Rebuildable bulk outputs are external and identified by hashes in [bulk-manifest.json](bulk-manifest.json).
+
+## Decision, 4 November 2026
+
+Liam, as maintainer, adopted the installed ordinary-pipe geometry into the working calculation together with [entry 13's tapered transitions](../entry-13/README.md). The abrupt primary was not adopted, and neither were `installed_no_local`, `installed_premium` and `installed_steel`. Package defaults are unchanged. The [development log](../../../docs/science/model-development.md#4-november-2026-entry-13-tapered-drill-pipe-joints) gives the decision and its limitations.

@@ -137,3 +137,7 @@
 ## Scored comparison
 
 **Calculated.** The [results](results/README.md) report every gap and the secondary trip groups with paired coverage. The source choices and model-only predictions above remain unchanged. Rebuildable bulk outputs are external and identified by hashes in [bulk-manifest.json](bulk-manifest.json).
+
+## Decision, 4 November 2026
+
+Liam, as maintainer, adopted `tapered_primary` into the working calculation, with [entry 12's installed geometry](../entry-12/README.md) and the annulus treatment abrupt. The 16B insulated pipe keeps its EIS joints and the abrupt treatment, and heavy-weight drill pipe and the BHA are unchanged. `tapered_long`, `tapered_steep` and `tapered_pin_length` are not adopted. Package defaults are unchanged. Later entries compare against [`results/tapered_primary/`](results/tapered_primary/scoreboard.csv). The [development log](../../../docs/science/model-development.md#4-november-2026-entry-13-tapered-drill-pipe-joints) gives the decision and its limitations.

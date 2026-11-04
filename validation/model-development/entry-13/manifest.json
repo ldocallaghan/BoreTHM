@@ -3,7 +3,7 @@
   "package_defaults_changed": false,
   "adopted": false,
   "files_sha256": {
-    "README.md": "47fb6eb83d5a7a9dbad5bd87cee8b009cdce5d241efb840e7d85e70be4106e73",
+    "README.md": "ce198d217fc92b32c3085040589b7da88ed551e9bb25ce25582a0eaf7974061a",
     "archive_results.py": "3454923ad65254fcf1ceb66de006a256d76cc7090123550458f078758440b565",
     "bulk-manifest.json": "77428571e3918f8a5702aa03d10e9cd9933e3459e632a9de8220633a45353a62",
     "compare.py": "cc23ff4c927d2a7978fca9486796af13e2201d3a7f82e09f1e551d0c5364c841",
