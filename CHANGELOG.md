@@ -1,21 +1,51 @@
 # Changelog
 
-## Unreleased
+## v1.7.0 (5 November 2026)
 
-The circulation solver accepts Colebrook pipe friction with an optional absolute roughness. Its pressure budget inherits these settings and uses the same friction as the distributed heat sources. Blasius and zero roughness remain the defaults; the Herschel-Bulkley annulus treatment is unchanged. Equipment scenarios and their evidence are recorded in [development entry 10](docs/science/model-development.md#31-october-2026-entry-10-sourced-pressure-options).
+Every new option is off by default. With the defaults, `evaluate`,
+`circulating_temperatures`, `hydraulics` and the commands reproduce their
+v1.6.0 results.
 
-A drill-pipe connection in `HydraulicJoint` may instead specify conical bore transitions through `transition='tapered'` and an included angle `taper_angle_deg`. The coefficients follow Crane Technical Paper 410 on the smaller-bore velocity, and the annulus retains the abrupt treatment. The abrupt treatment remains the default.
+**Annulus heat transfer and pressure.** `circulating_temperatures` and
+`hydraulics` accept `annulus_model`. The default `'v1.6.0'` is the existing
+treatment. `'herschel-bulkley'` uses the slot model of Founargiotakis et al.
+(2008) for the annulus pressure loss and flow regime, with Gnielinski's
+annulus correlation on the wall viscosity for heat transfer.
+`'herschel-bulkley-erge'` uses the transition band of Erge et al. (2015) and
+Gnielinski's correlation on the plastic viscosity. The mud's rheology is set
+through `fluid.rheology`, a `fluids.HerschelBulkley` object. A zero yield
+stress is solved directly as a power-law fluid.
 
-Wall-temperature calculations can return copies of the state at boundaries
-and accepted steps through `observe`. A supplied `radius_m` reuses a stored
-radial grid within eight local floating-point units of the declared grid.
-`carry_static_node=True` starts consecutive static periods from the previous
-fluid-node temperature when no initial temperature is specified.
+**Pipe friction.** `circulating_temperatures` accepts `friction='colebrook'`
+and an absolute wall roughness `roughness` in metres. The defaults remain
+Blasius and zero. `hydraulics` now defaults `friction`, `roughness` and
+`annulus_model` to `None`, which inherits the values of a supplied circulation
+result and otherwise uses the same defaults. Its results for existing calls
+are unchanged. The result of `circulating_temperatures` gains the
+entries `annulus_model`, `friction` and `roughness`, which record the settings
+used.
 
-Tool calculations can return intermediate samples during stationary
-circulation through `retain_stage_samples`. Separate initial steel and
-fluid temperatures can be supplied through `T_s0` and `T_f0`. Every default
-reproduces the previous results.
+**Joint transitions.** `HydraulicJoint(transition='tapered',
+taper_angle_deg=...)` applies conical bore changes at an included angle in
+degrees, with the coefficients of Crane Technical Paper 410. The annulus keeps
+the abrupt treatment. The default remains `transition='abrupt'`.
+
+**Solver corrections.** Two numerical corrections apply to the previous
+calculation, `hydraulics_model='v1.5.0'`. Overlapping thermal ramps are
+blended by occupancy, so assemblies with components shorter than 1 m now
+converge, and the initial mesh is clipped to the well interval. Cases that
+previously failed to converge gain a solution. A case that already converged
+with overlapping ramps, or with ramp ends outside the well, can change by a
+small amount: 0.0005 °C or less at the bit and return on synthetic geometries.
+Archived results and golden tables of that calculation are unchanged. The
+current calculation already had both treatments.
+
+**History observations.** `wall_temperatures` accepts `observe`, `radius_m`
+and `carry_static_node`. `tool_trip_in` accepts `retain_stage_samples`, `T_s0`
+and `T_f0`.
+
+The [v1.7.0 release record](docs/releases/v1.7.0.md) gives the details, and the
+[development log](docs/science/model-development.md) gives the evidence.
 
 ## v1.6.0 (29 October 2026)
 

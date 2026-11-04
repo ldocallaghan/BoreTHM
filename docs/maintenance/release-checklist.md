@@ -1,5 +1,27 @@
 # Release checklist
 
+## v1.7.0
+
+- [x] Merge the development and history-observation branches with a merge commit.
+- [x] Keep every package default as in v1.6.0, with each new behaviour as an option.
+- [x] Reproduce the five built-in site exports and the v1.6.0 site table against v1.6.0.
+- [x] Reproduce the UT Austin values and benchmark dataset 1.0.
+- [x] Compare public names and signatures with v1.6.0, allowing the documented additions.
+- [x] Build and check the wheel and source distribution.
+- [x] Check a fresh wheel installation outside the checkout.
+- [x] Confirm that the results archives under `validation/` are unchanged since they were committed.
+- [x] Pass the local fast suite, link checker and strict documentation build.
+- [x] Pass the full physical suite locally.
+- [ ] Pass the fast suite across Python 3.11 to 3.14 on Linux, Windows and macOS, the wheel installations and the strict documentation build on CI.
+- [ ] Pass the full physical suite on CI at the release candidate.
+- [ ] Review the complete diff and verified release checks before tagging.
+- [ ] Confirm the citation date against the actual tag date.
+- [ ] Tag v1.7.0 and publish the GitHub release.
+- [ ] Allow the release tag in the `github-pages` environment and verify deployment.
+- [ ] Verify the PyPI installation, documentation website and Zenodo archive.
+
+See the [v1.7.0 release record](../releases/v1.7.0.md) for the checks and publication status.
+
 ## v1.6.0
 
 - [x] Declare and score each model change in the development log, and record the independent review.
