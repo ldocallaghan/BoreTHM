@@ -1,0 +1,31 @@
+{
+  "declaration_commit": "334012de48ff6690e4d83e4b2168c1612b480ce2",
+  "comparison_script_sha256": "cc23ff4c927d2a7978fca9486796af13e2201d3a7f82e09f1e551d0c5364c841",
+  "variants": [
+    "working",
+    "tapered_primary",
+    "tapered_long",
+    "tapered_steep",
+    "tapered_pin_length"
+  ],
+  "archived_from_entry_12": [
+    "installed_primary",
+    "installed_no_local"
+  ],
+  "source_manifests": {
+    "working": "571aa3c3d4c5ae9a3b6f456423543f2133fe1694965b933ab60240b21c5aada6",
+    "tapered_primary": "e664cf5a6001d0c635a7e7e5cf588afebf69f31276e25aa691676baf0804e5df",
+    "tapered_long": "bbfec85583339d967d5ccd48ed15067da9c6870dfe1829fdcd4c4dd4da55fda4",
+    "tapered_steep": "10c520e89ddbf108465ea410a6dcde6d6359c175e804942053b9d6e7d318b3a1",
+    "tapered_pin_length": "b4a65f3f4ec554df50e0d25c5c8c2f8098ce012a5ad1b48c2305735d33265ad4"
+  },
+  "results_sha256": {
+    "decision.json": "048731b93bf6ab95c6b97bf38aa8c9c5ea52f49edd2b1f561af5a2c0e10ecbae",
+    "prediction-checks.csv": "5acedf33572ba119ddf6d23203d5bd8c7457b41dc09631854ddd8e3edbb0066d",
+    "assembly-changes.csv": "237c02c48f88dbde8567b21949d787e98f3aaae947520ce4d2c4b45ecb9d0b1d",
+    "sample-changes.csv": "0604e60b64ace07e10ab9505ee07b612e2f449882e9a1420dcc493503b48f362",
+    "summary.csv": "0edf77fcee0aaef974b299645ea793e78b9656613f54ec6af956a69a3d092b56",
+    "comparison.csv": "06d90372336671649614f90386ee9dedfb9f8c57a691849ea05972c314e49ba4"
+  },
+  "full_manifest_sha256": "fd314efa072302400c27b289ecaf1e45ddc46929c9e213aea25add1ab7b9d64a"
+}

@@ -1,0 +1,10 @@
+{
+  "method": "Existing primary shallow identities and frozen isothermal state",
+  "selection": "All ten primary near-surface windows from entry 9",
+  "new_circulation_solves": 0,
+  "input_sha256": {
+    "validation/model-development/entry-9/results/near-surface.csv": "e2fcad6d3429024ef936712f6eda4aeb394b328ebe82fa6e73956572ddc71bfe"
+  },
+  "code_sha256": "f4e1cd2920e083157fd82d5c5d59c65a212642fb44a5aa4f1ac2e940eeec65e3",
+  "output_sha256": "fe3544a90a371fd75e023833511b0333d6bb8b54cc3ed87f39365668d6e47a75"
+}

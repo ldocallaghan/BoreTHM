@@ -1,0 +1,37 @@
+{
+  "declaration_commit": "334012de48ff6690e4d83e4b2168c1612b480ce2",
+  "model_only": false,
+  "targets_compared": true,
+  "runtime_s": 48.21960125100031,
+  "windows_per_variant": 186,
+  "groups_per_variant": 6,
+  "candidates": [
+    "working",
+    "installed_primary",
+    "installed_no_local",
+    "tapered_primary",
+    "tapered_long",
+    "tapered_steep",
+    "tapered_pin_length"
+  ],
+  "acceptance_use": false,
+  "exclusions": [],
+  "source_sha256": {
+    "validation/model-development/entry-13/trip_slopes.py": "fd876b80b509d4f200493fee22f079d30cddb3c77a5de256c9b1d8f63eba7078",
+    "validation/model-development/entry-13/predict.py": "d49f43d6bb047e3240aee461ed5df60f18e13f54d52f5b3bfa4e2e341ee2b3b0",
+    "validation/model-development/entry-13/options.json": "4bc9b974d405103271b22660b441475142a256e44b23babd690b7d7eb2599096",
+    "validation/model-development/entry-9/analyse.py": "ce68686b7371a6dcc79d9728e8654c23d12eb8717a1fc52067cfe0f170a9bdc0",
+    "validation/model-development/entry-9/diagnose.py": "2d6370bf82d0d13592c0cdd6383e3a7de8c0d63457a4fecedf31492044488940",
+    "validation/model-development/entry-9/results/windows.csv": "dcb9da507a72252766ae3e1273a9953c25fc1e91524524d518ea3a4a21b6ad35",
+    "validation/model-development/entry-9/results/depth-stages.csv": "58ff73072252445a3c2fb99af3a6482692d52b703e52201946f249607dbb48b3"
+  },
+  "results_sha256": {
+    "prediction-checks.csv": "cbd4c4393855ed22011c84c018a9faff717caec10cf90ebf78fd3903f4dbe6b0",
+    "depth-stages.csv": "4eea6dfb28884769aac37d75eac878bb98973c1dc15fdf2deb5b5a18a6322927",
+    "slopes.csv": "a3be1a47cfd0fb8c1555c3ddfc1d0dbe9bc511c00bbb05b5de72d0dd8b7c9fc5"
+  },
+  "full_manifest_sha256": "0f474e8e11713dcfb82e24f342d11187de3af4d081bdc206391d9294af729860",
+  "rebuildable_result_sha256": {
+    "windows.csv": "a3bd1320ebb955add0c2452e167096bbd942bc92a7a0e5e63561b87f8f6e7b41"
+  }
+}

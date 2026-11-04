@@ -1,0 +1,55 @@
+{
+  "declaration_commit": "334012de48ff6690e4d83e4b2168c1612b480ce2",
+  "rule": "Recommend tapered_primary as the joint treatment for the working calculation if its scored changes reproduce the model-only predictions within 1 psi, 0.1 degrees C and 0.1% of power, paired coverage is retained, and the angle and coefficients are within the source stated range of application. This applies whatever the direction of the score change. Scores and slopes are reported and do not select the angle. Adoption of the entry 12 geometry and this treatment is a maintainer decision.",
+  "source_range_assessment": "Angle: within the formula branch to 45 degrees. Reynolds number: the accessible statements of the correlation give no numerical range, so none can be exceeded, and this is recorded as a limit of the check.",
+  "checks": [
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "tapered_primary",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "tapered_primary",
+      "passed": true
+    },
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "tapered_long",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "tapered_long",
+      "passed": true
+    },
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "tapered_steep",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "tapered_steep",
+      "passed": true
+    },
+    {
+      "criterion": "paired frozen coverage",
+      "candidate": "tapered_pin_length",
+      "passed": true
+    },
+    {
+      "criterion": "declared model-only effects reproduced",
+      "candidate": "tapered_pin_length",
+      "passed": true
+    },
+    {
+      "criterion": "angle within the formula branch to 45 degrees",
+      "candidate": "tapered_primary",
+      "passed": true
+    }
+  ],
+  "recommendation": "recommend tapered_primary as the joint treatment for the working calculation",
+  "adoption": "pending maintainer decision; package defaults unchanged",
+  "secondary_slopes_affect_decision": false
+}

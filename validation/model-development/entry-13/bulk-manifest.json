@@ -1,0 +1,211 @@
+{
+  "declaration_commit": "334012de48ff6690e4d83e4b2168c1612b480ce2",
+  "method": "Compact final results retained; full reproducible comparison outputs external",
+  "all_external_files": {
+    "assembly-changes.csv": {
+      "sha256": "237c02c48f88dbde8567b21949d787e98f3aaae947520ce4d2c4b45ecb9d0b1d",
+      "bytes": 28549
+    },
+    "comparison.csv": {
+      "sha256": "06d90372336671649614f90386ee9dedfb9f8c57a691849ea05972c314e49ba4",
+      "bytes": 61349
+    },
+    "decision.json": {
+      "sha256": "048731b93bf6ab95c6b97bf38aa8c9c5ea52f49edd2b1f561af5a2c0e10ecbae",
+      "bytes": 2184
+    },
+    "manifest.json": {
+      "sha256": "fd314efa072302400c27b289ecaf1e45ddc46929c9e213aea25add1ab7b9d64a",
+      "bytes": 1431
+    },
+    "prediction-checks.csv": {
+      "sha256": "5acedf33572ba119ddf6d23203d5bd8c7457b41dc09631854ddd8e3edbb0066d",
+      "bytes": 56984
+    },
+    "sample-changes.csv": {
+      "sha256": "0604e60b64ace07e10ab9505ee07b612e2f449882e9a1420dcc493503b48f362",
+      "bytes": 410022
+    },
+    "secondary/depth-stages.csv": {
+      "sha256": "4eea6dfb28884769aac37d75eac878bb98973c1dc15fdf2deb5b5a18a6322927",
+      "bytes": 45488
+    },
+    "secondary/manifest.json": {
+      "sha256": "0f474e8e11713dcfb82e24f342d11187de3af4d081bdc206391d9294af729860",
+      "bytes": 1745
+    },
+    "secondary/prediction-checks.csv": {
+      "sha256": "cbd4c4393855ed22011c84c018a9faff717caec10cf90ebf78fd3903f4dbe6b0",
+      "bytes": 4603
+    },
+    "secondary/slopes.csv": {
+      "sha256": "a3be1a47cfd0fb8c1555c3ddfc1d0dbe9bc511c00bbb05b5de72d0dd8b7c9fc5",
+      "bytes": 14405
+    },
+    "secondary/windows.csv": {
+      "sha256": "a3bd1320ebb955add0c2452e167096bbd942bc92a7a0e5e63561b87f8f6e7b41",
+      "bytes": 509338
+    },
+    "shallow-diagnostic.csv": {
+      "sha256": "fe3544a90a371fd75e023833511b0333d6bb8b54cc3ed87f39365668d6e47a75",
+      "bytes": 6953
+    },
+    "shallow-manifest.json": {
+      "sha256": "8f7cf4ee23a7bbf9e34d50b1c0af7de9b418c8de18595060f4e7a3f156376ac0",
+      "bytes": 514
+    },
+    "summary.csv": {
+      "sha256": "0edf77fcee0aaef974b299645ea793e78b9656613f54ec6af956a69a3d092b56",
+      "bytes": 1451
+    },
+    "tapered_long/circulation.csv": {
+      "sha256": "1eaec81a53501d4c37ae04f20b74ee50a20da0876dc6d8d46f06873736907ac8",
+      "bytes": 215709
+    },
+    "tapered_long/manifest.json": {
+      "sha256": "8ba75c162c8dd69c771c564e0e48c18b2f8bcbfa1bfafaecf8c264d8f694e159",
+      "bytes": 9943
+    },
+    "tapered_long/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142
+    },
+    "tapered_long/run-in.csv": {
+      "sha256": "6be28b11584c162ba712a50eae996d9ecf345b5c5646dcd46f3696b628adc5f0",
+      "bytes": 930
+    },
+    "tapered_long/scoreboard.csv": {
+      "sha256": "346cadbc18223e18827d332e8e3aaff9f65cc0bb15d19d666267df3b017f1f98",
+      "bytes": 5561
+    },
+    "tapered_pin_length/circulation.csv": {
+      "sha256": "4380ce199e5b0194f328c790ea5c32ad984d770a80e409db7f736357930787d3",
+      "bytes": 218595
+    },
+    "tapered_pin_length/manifest.json": {
+      "sha256": "db9b4b5382cd5b565420d8bd445e27e143d200b7edbaf73d191cd63495371b0c",
+      "bytes": 9950
+    },
+    "tapered_pin_length/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142
+    },
+    "tapered_pin_length/run-in.csv": {
+      "sha256": "558c62fd17da1a2e811c9a6d7c350c5ae443024816b143db686eace56248aefe",
+      "bytes": 929
+    },
+    "tapered_pin_length/scoreboard.csv": {
+      "sha256": "fc87a70fce962879e446ef5245c1806a3d9bf0b07f7f56ff82f7ba60b906596d",
+      "bytes": 5572
+    },
+    "tapered_primary/circulation.csv": {
+      "sha256": "9fb36089c55407aa8c23696d275e706efea5f241492bf29e06ca3c82a0210a64",
+      "bytes": 217236
+    },
+    "tapered_primary/manifest.json": {
+      "sha256": "27b51d456bd672b994a762ef1977adaead840b01b9561f6fdfadc61118a7d796",
+      "bytes": 9943
+    },
+    "tapered_primary/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142
+    },
+    "tapered_primary/run-in.csv": {
+      "sha256": "097135bb597e9fcb60cb8046681daa04f9f56c7fa38e5ae7d4e204d388a4861c",
+      "bytes": 929
+    },
+    "tapered_primary/scoreboard.csv": {
+      "sha256": "3c3bea65afbf44edcc49d8178689c08848d764f9262aab7587d2de2eee490ee5",
+      "bytes": 5575
+    },
+    "tapered_steep/circulation.csv": {
+      "sha256": "e6e03063bb33314f7d2d06744d969f72d76a7786153649d7de00d53a21620d3f",
+      "bytes": 216333
+    },
+    "tapered_steep/manifest.json": {
+      "sha256": "2a344a9cdaf8a61f0b6b1f2a656b6078018c58a18baf200b64842d5bd60a5ef3",
+      "bytes": 9944
+    },
+    "tapered_steep/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142
+    },
+    "tapered_steep/run-in.csv": {
+      "sha256": "c457f02acfba0d9ff10bac25f0fe69b8d2c9070fc025616ad6bfb9f989228aac",
+      "bytes": 931
+    },
+    "tapered_steep/scoreboard.csv": {
+      "sha256": "413c182db5cbf8f47575f75719b611b504710e909e740ce92bb518d2dab53c73",
+      "bytes": 5573
+    },
+    "working/circulation.csv": {
+      "sha256": "dbe91efbf22bd7184e04e0fb04f2f7d6f99dcb9a37bf3834837e80dc4c3f3e30",
+      "bytes": 213058
+    },
+    "working/manifest.json": {
+      "sha256": "6033e095b470af455153ecc8ea7b10fb8673c5fe98f635fc747a1cc3e8e8dae8",
+      "bytes": 9735
+    },
+    "working/run-in.csv": {
+      "sha256": "e982eb58069ee223d9ea738698792db495d50d9f315a9ed195ab9588725a6f34",
+      "bytes": 929
+    },
+    "working/scoreboard.csv": {
+      "sha256": "b3672746909e82932a0dd0caa079518ad6ba6006d8a2eae938d3c73eab48f630",
+      "bytes": 5572
+    }
+  },
+  "rebuildable_files": {
+    "secondary/windows.csv": {
+      "sha256": "a3bd1320ebb955add0c2452e167096bbd942bc92a7a0e5e63561b87f8f6e7b41",
+      "bytes": 509338,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "tapered_long/circulation.csv": {
+      "sha256": "1eaec81a53501d4c37ae04f20b74ee50a20da0876dc6d8d46f06873736907ac8",
+      "bytes": 215709,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "tapered_long/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "tapered_pin_length/circulation.csv": {
+      "sha256": "4380ce199e5b0194f328c790ea5c32ad984d770a80e409db7f736357930787d3",
+      "bytes": 218595,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "tapered_pin_length/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "tapered_primary/circulation.csv": {
+      "sha256": "9fb36089c55407aa8c23696d275e706efea5f241492bf29e06ca3c82a0210a64",
+      "bytes": 217236,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "tapered_primary/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "tapered_steep/circulation.csv": {
+      "sha256": "e6e03063bb33314f7d2d06744d969f72d76a7786153649d7de00d53a21620d3f",
+      "bytes": 216333,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "tapered_steep/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    },
+    "working/circulation.csv": {
+      "sha256": "dbe91efbf22bd7184e04e0fb04f2f7d6f99dcb9a37bf3834837e80dc4c3f3e30",
+      "bytes": 213058,
+      "rebuild_command": "python validation/model-development/entry-13/score.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk --scratch ../entry-13-scratch; python validation/model-development/entry-13/compare.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --results ../entry-13-bulk; python validation/model-development/entry-13/trip_slopes.py --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2 --output ../entry-13-bulk/secondary; python validation/model-development/entry-13/shallow_check.py --output ../entry-13-bulk"
+    }
+  },
+  "archive_command": "python validation/model-development/entry-13/archive_results.py --scores ../entry-13-bulk --bulk-output ../entry-13-final-bulk --declaration 334012de48ff6690e4d83e4b2168c1612b480ce2"
+}

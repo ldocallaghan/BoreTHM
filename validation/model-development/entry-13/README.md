@@ -133,3 +133,7 @@
 **Inferred assessment of the range criterion, fixed before scoring.** The angle criterion is met if the angle lies within the formula branch to 45°. No numerical Reynolds range is stated in the accessible sources, so none can be exceeded, and this is recorded as a limit of the check. The check rests on secondary statements of Crane, and the extension of the angle beyond the published bore span and the transfer to 16B are limits of the geometry, which the rule does not test.
 
 **Calculated archive method.** `predict.py` and `summarise_predictions.py` build the model-only archive. `trip_slopes.py --model-only` builds input-only trip predictions. `score.py` requires an external bulk output directory, `compare.py` records all gaps and prediction checks, and `shallow_check.py` repeats the shallow diagnostic. Compact results and checksums are retained here, with rebuildable bulk files external and identified by hash. The whole entry stays below 5 MB.
+
+## Scored comparison
+
+**Calculated.** The [results](results/README.md) report every gap and the secondary trip groups with paired coverage. The source choices and model-only predictions above remain unchanged. Rebuildable bulk outputs are external and identified by hashes in [bulk-manifest.json](bulk-manifest.json).
