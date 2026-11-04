@@ -4,6 +4,8 @@
 
 The circulation solver accepts Colebrook pipe friction with an optional absolute roughness. Its pressure budget inherits these settings and uses the same friction as the distributed heat sources. Blasius and zero roughness remain the defaults; the Herschel-Bulkley annulus treatment is unchanged. Equipment scenarios and their evidence are recorded in [development entry 10](docs/science/model-development.md#31-october-2026-entry-10-sourced-pressure-options).
 
+A drill-pipe connection in `HydraulicJoint` may instead specify conical bore transitions through `transition='tapered'` and an included angle `taper_angle_deg`. The coefficients follow Crane Technical Paper 410 on the smaller-bore velocity, and the annulus retains the abrupt treatment. The abrupt treatment remains the default.
+
 ## v1.6.0 (29 October 2026)
 
 The circulation model calculates pressure losses component by component:

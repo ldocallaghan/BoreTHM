@@ -39,14 +39,17 @@ receive no atmospheric offset.
 ## HydraulicJoint
 
 ```python
-HydraulicJoint(outer_diameter: float, bore_diameter: float, restriction_length: float, spacing: float, transition: str = 'abrupt', source: str = '') -> None
+HydraulicJoint(outer_diameter: float, bore_diameter: float, restriction_length: float, spacing: float, transition: str = 'abrupt', source: str = '', taper_angle_deg: float | None = None) -> None
 ```
 
 Repeated connection geometry [m], independent of thermal joints.
 
 restriction_length is the effective narrow-passage length; spacing is
-the connection pitch. transition is abrupt or the zero-local-loss
-gradual idealisation. source records the catalogue and assumptions.
+the connection pitch. transition is abrupt, the zero-local-loss gradual
+idealisation, or tapered, which applies conical bore changes at the
+included angle taper_angle_deg [degrees] and keeps the abrupt annulus
+treatment. The cones add no length and their wall friction is neglected.
+source records the catalogue and assumptions.
 
 ## LocalLoss
 

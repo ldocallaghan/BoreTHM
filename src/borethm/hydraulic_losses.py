@@ -3,6 +3,8 @@
 Surface cases: API RP 13D, sixth edition (2009), section 7.3,
 equation 60/table 4. Sudden changes: Idelchik, as documented by Modelica
 4.0.0, dp_suddenChange (expansion Re > 3300, contraction Re > 10000).
+Conical changes: Crane Technical Paper 410 (1988), A-26, as documented by
+AFT Arrow 10, Area Change Loss Model; no numerical Reynolds range is stated.
 Annular and Bingham use of the local correlations is an approximation.
 """
 from dataclasses import dataclass
@@ -27,8 +29,11 @@ class HydraulicJoint:
     """Repeated connection geometry [m], independent of thermal joints.
 
     restriction_length is the effective narrow-passage length; spacing is
-    the connection pitch. transition is abrupt or the zero-local-loss
-    gradual idealisation. source records the catalogue and assumptions.
+    the connection pitch. transition is abrupt, the zero-local-loss gradual
+    idealisation, or tapered, which applies conical bore changes at the
+    included angle taper_angle_deg [degrees] and keeps the abrupt annulus
+    treatment. The cones add no length and their wall friction is neglected.
+    source records the catalogue and assumptions.
     """
     outer_diameter: float
     bore_diameter: float
@@ -36,6 +41,7 @@ class HydraulicJoint:
     spacing: float
     transition: str = 'abrupt'
     source: str = ''
+    taper_angle_deg: float | None = None
 
     def __post_init__(self):
         for name in ('outer_diameter','bore_diameter','spacing'):
@@ -43,8 +49,16 @@ class HydraulicJoint:
         _finite(self.restriction_length,'restriction_length')
         if self.bore_diameter >= self.outer_diameter or self.restriction_length > self.spacing:
             raise ValueError('joint requires bore < OD and restriction length <= spacing')
-        if self.transition not in ('abrupt','gradual'):
-            raise ValueError('transition must be abrupt or gradual')
+        if self.transition not in ('abrupt','gradual','tapered'):
+            raise ValueError('transition must be abrupt, gradual or tapered')
+        if self.transition=='tapered':
+            if self.taper_angle_deg is None:
+                raise ValueError('a tapered transition requires taper_angle_deg')
+            _finite(self.taper_angle_deg,'taper_angle_deg',True)
+            if self.taper_angle_deg>180:
+                raise ValueError('taper_angle_deg must not exceed 180 degrees')
+        elif self.taper_angle_deg is not None:
+            raise ValueError('taper_angle_deg applies only to a tapered transition')
 
 
 @dataclass(frozen=True)
@@ -179,23 +193,48 @@ def local_change(area_up, area_down, rho, mass_rate, mu, dh_small):
     return k*.5*rho*velocity**2,k,re,valid
 
 
+def conical_change(area_up, area_down, rho, mass_rate, angle_deg):
+    """Conical-change loss [Pa] and K on the smaller-area velocity.
+
+    Crane TP-410 (1988), A-26, with r = A_small/A_large and included angle
+    theta. Expansion: 2.6 sin(theta/2) (1-r)^2 to 45 degrees, otherwise
+    (1-r)^2. Contraction: 0.8 sin(theta/2) (1-r) to 45 degrees, otherwise
+    0.5 sqrt(sin(theta/2)) (1-r). The contraction limit at 180 degrees differs
+    from the Idelchik sudden contraction in local_change; no blend is applied.
+    """
+    small=np.minimum(area_up,area_down)
+    ratio=small/np.maximum(area_up,area_down)
+    expansion=np.asarray(area_down)>area_up
+    half=math.sin(math.radians(angle_deg)/2)
+    if angle_deg<=45:
+        k=np.where(expansion,2.6*half*(1-ratio)**2,.8*half*(1-ratio))
+    else:
+        k=np.where(expansion,(1-ratio)**2,.5*math.sqrt(half)*(1-ratio))
+    velocity=mass_rate/(rho*small)
+    return k*.5*rho*velocity**2,k
+
+
 def joint_increment(rho, mu, yield_point, mass_rate, body_area, body_dh,
                     joint_area, joint_dh, restriction_length, annulus=False,
                     transition='abrupt', friction='blasius', regime='apparent-viscosity', hb=None,
-                    body_gradient=None, band='founargiotakis', kappa_body=None, kappa_joint=None, roughness=0.):
+                    body_gradient=None, band='founargiotakis', kappa_body=None, kappa_joint=None, roughness=0.,
+                    taper_angle_deg=None):
     """Replacement and entry/exit loss [Pa] for one connection.
 
     The body subtraction can give a negative increment. It replaces only
     the declared restriction length, with the remaining body retained.
     body_gradient, if given, is the body passage's gradient already
     evaluated at the same state. band, kappa_body and kappa_joint select the
-    Herschel-Bulkley transition band of each passage.
+    Herschel-Bulkley transition band of each passage. A tapered transition
+    uses conical_change in the bore; its annulus keeps the abrupt treatment.
     """
     body=(passage_gradient(rho,mu,yield_point,mass_rate,body_area,body_dh,annulus,friction,regime,hb,band,kappa_body,roughness)[0]
           if body_gradient is None else body_gradient)
     joint=passage_gradient(rho,mu,yield_point,mass_rate,joint_area,joint_dh,annulus,friction,regime,hb,band,kappa_joint,roughness)[0]
     local=0.
-    if transition=='abrupt':
+    if transition=='tapered' and not annulus:
+        local=conical_change(body_area,joint_area,rho,mass_rate,taper_angle_deg)[0]+conical_change(joint_area,body_area,rho,mass_rate,taper_angle_deg)[0]
+    elif transition in ('abrupt','tapered'):
         # Both directions use the smaller passage's hydraulic diameter.
         dh=np.where(np.asarray(body_area)<=joint_area,body_dh,joint_dh)
         local=local_change(body_area,joint_area,rho,mass_rate,mu,dh)[0]+local_change(joint_area,body_area,rho,mass_rate,mu,dh)[0]
@@ -320,10 +359,13 @@ class LossModel:
                 inc,loc=joint_increment(rho[mask],mu[mask],tau,mass_rate,area[mask],dh[mask],ja,jd,joint.restriction_length,annulus,joint.transition,self.friction,self.regime,
                                         None if hb is None else tuple(x[mask] for x in hb),
                                         None if hb is None else body[mask],self.band,
-                                        (g['r_out']/g['r_wall'])[mask],joint.outer_diameter/diameter if annulus else None,self.roughness)
+                                        (g['r_out']/g['r_wall'])[mask],joint.outer_diameter/diameter if annulus else None,self.roughness,
+                                        joint.taper_angle_deg)
                 terms['joint_replacement'][mask]=inc/joint.spacing
                 terms['joint_local'][mask]=loc/joint.spacing
-                if joint.transition=='abrupt':
+                if joint.transition=='tapered' and not annulus:
+                    flags.append('joint_taper_no_stated_Reynolds_range')
+                elif joint.transition in ('abrupt','tapered'):
                     small_dh=np.where(area[mask]<=ja,dh[mask],jd)
                     entry=local_change(area[mask],ja,rho[mask],mass_rate,mu[mask],small_dh)
                     exit_=local_change(ja,area[mask],rho[mask],mass_rate,mu[mask],small_dh)
