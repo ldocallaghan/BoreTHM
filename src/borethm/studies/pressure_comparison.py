@@ -105,11 +105,12 @@ def entry1_geometry(s,components,legacy,scenario):
             if pipe.name==b.HWDP.name:
                 joint=hl.HydraulicJoint((7. if scenario=='EIS' else 7.25)*INCH,
                     2*pipe.r_bore,29*INCH,b.HWDP_JOINT_FT*FT,
-                    source='S2b connection scenario; trial HWDP bore and recorded pitch')
+                    source='S2b connection scenario; trial HWDP bore and recorded pitch',kind='heavy-weight')
             elif pipe.name==b.DRILL_PIPE.name or pipe.name.startswith('IDP,'):
                 od,jid=(7.,4.) if scenario=='EIS' else (7.25,3.5)
                 joint=hl.HydraulicJoint(od*INCH,jid*INCH,29*INCH,(2378/75)*FT,
-                    source='S2b NOV connection scenario; original trial ordinary-pipe pitch')
+                    source='S2b NOV connection scenario; original trial ordinary-pipe pitch',
+                    kind='insulated' if pipe.name.startswith('IDP,') else 'ordinary')
             else:
                 segments.append(original)
                 continue
@@ -127,7 +128,7 @@ def entry1_geometry(s,components,legacy,scenario):
             joint_od=7. if scenario=='EIS' else 7.25 if scenario=='GPDS55' else 6.625
             joint=hl.HydraulicJoint(joint_od*INCH,inside*INCH,29*INCH,
                 component['length_ft']*FT/30 if s['well']=='16B' else 31.5*FT,
-                source='S2b 29-in effective restriction; recorded HWDP bore; catalogue connection scenario')
+                source='S2b 29-in effective restriction; recorded HWDP bore; catalogue connection scenario',kind='heavy-weight')
             pipe=replace(pipe,hydraulic_joint=joint)
         bottom.append(wg.StringSegment(component['length_ft']*FT,pipe))
     regular=legacy.md_bit-sum(c.length for c in bottom)
@@ -189,7 +190,7 @@ def serial_development_geometry(s,components,legacy,scenario):
             joint_od=7. if scenario=='EIS' else 7.25 if scenario=='GPDS55' else 6.625
             pipe=replace(pipe,hydraulic_joint=hl.HydraulicJoint(joint_od*INCH,inside*INCH,29*INCH,
                 row['length_ft']*FT/30 if s['well']=='16B' else 31.5*FT,
-                source='S2b declared connection scenario; recorded HWDP bore and pitch'))
+                source='S2b declared connection scenario; recorded HWDP bore and pitch',kind='heavy-weight'))
         tool=unknown_motor(row['source']) if row['motor'] else None
         if not row['motor'] and row['hydraulic_id_in'] is None:
             tool=hl.ReferenceToolLoss(0.,1.,1000.,basis='total_internal',

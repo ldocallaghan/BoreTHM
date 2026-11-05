@@ -696,6 +696,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Evaluate and compare the built-in sites.")
     parser.add_argument('--write-golden', action='store_true',
                         help='write the historical v1.3.3 golden table (source checkout only)')
+    parser.add_argument('--physics', choices=('v1.8.0', 'v1.7.0'), default=None,
+                        help='default physics: v1.8.0 (package default) or v1.7.0 (the previous defaults)')
     args = parser.parse_args(argv)
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -703,7 +705,7 @@ def main(argv=None):
         from borethm._paths import repository_path, require_path
         require_path(repository_path('tests/golden'), 'Writing regression goldens')
     mode = 'v1.3.3' if args.write_golden else 'v1.3.4'
-    results = [evaluate(s, circulation=mode) for s in SITES]
+    results = [evaluate(s, circulation=mode, physics=args.physics) for s in SITES]
     olds = [evaluate(s, circulation="v1.1") for s in SITES]
     if args.write_golden:
         # the v1.3.3 table; the v1.2 and v1.3 tables stay pinned as their

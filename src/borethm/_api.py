@@ -12,8 +12,8 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
                             tfa=_model.BIT_TFA_DEFAULT, film_mult=1.0, breaks=(),
                             init=None, P_surface=_model.P_SURF,
                             hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
-                            rock_response=None, annulus_heat=None, annulus_model='v1.6.0',
-                            friction='blasius', roughness=0.):
+                            rock_response=None, annulus_heat=None, annulus_model=None,
+                            friction=None, roughness=None, physics=None):
     """Compute circulating bore and annulus temperatures along a well.
 
     Supply either a PipeType or a WellGeometry. Mass flow m_dot is kg/s;
@@ -31,7 +31,17 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     returning heat [W/m] released into the annulus fluid at measured depth
     [m], for example rotary friction from rotary_heat.partition; v1.5.0
     rejects it. Heat released at the bit is part of Q_face.
-    annulus_model 'v1.6.0' is the released annulus heat transfer and the
+    physics selects the default physics: 'v1.8.0', which None also selects, or
+    'v1.7.0', which restores the previous defaults. An explicit annulus_model,
+    friction or roughness overrides that row of the preset. Under v1.8.0
+    annulus_model is 'herschel-bulkley-erge', friction is Colebrook with zero
+    roughness, ordinary drill-pipe joints are tapered at 11.5 degrees, tools
+    named on the string carry their allowances, and a mud reporting only PV and
+    YP takes fluids.no_yield_rheology. Under v1.7.0 annulus_model is 'v1.6.0',
+    friction is Blasius, joints are abrupt and named tools carry no default
+    loss. The result records physics and physics_settings, and tool_warnings
+    lists any named tool whose class has no published figure.
+    annulus_model 'v1.6.0' is the earlier annulus heat transfer and the
     apparent-viscosity criterion for laminar flow of a Bingham mud.
     'herschel-bulkley' is a development candidate: the Founargiotakis slot
     model of a Herschel-Bulkley mud (fluid.rheology, a
@@ -59,7 +69,7 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     downhole heat. transitions is abrupt or the zero-local-loss gradual
     idealisation. New geometry fields supply connection and tool losses.
     energy_check reports assigned and applied heat in W when enabled.
-    friction selects Blasius (default) or Colebrook for internal passages and
+    friction selects Blasius or Colebrook for internal passages and
     for the original Bingham annulus. roughness is absolute wall roughness [m],
     zero by default, and requires friction='colebrook' when non-zero. The
     Herschel-Bulkley annulus retains its own friction relation. The Bingham

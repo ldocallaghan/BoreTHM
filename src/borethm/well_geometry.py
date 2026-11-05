@@ -23,7 +23,7 @@ from dataclasses import dataclass, replace
 import numpy as np
 
 from borethm import geo_constants as C
-from borethm.hydraulic_losses import HydraulicJoint, LocalLoss, ReferenceToolLoss
+from borethm.hydraulic_losses import DownholeTool, HydraulicJoint, LocalLoss, ReferenceToolLoss
 
 K_STEEL = 45.0   # W/m/K, drill pipe and casing (Wu et al. 2025, Tables 3 to 5)
 K_CEMENT = 1.0   # W/m/K, cement sheath (Dufrene et al. 2025)
@@ -148,16 +148,21 @@ LEGACY_VACUUM = uniform_wall(0.02, name="legacy vacuum tubing, 0.02 W/m/K")
 class StringSegment:
     """A drill-string segment of length [m], using the supplied PipeType.
 
-    Construct in surface-to-bit order as an input to WellGeometry.
+    Construct in surface-to-bit order as an input to WellGeometry. tool_loss
+    is an explicit loss curve. tools is a tuple of DownholeTool, each a tool
+    named by class and collar size.
     """
     length: float
     pipe: PipeType
     local_loss: LocalLoss | None = None
     tool_loss: ReferenceToolLoss | None = None
+    tools: tuple = ()
 
     def __post_init__(self):
         if not np.isfinite(self.length) or self.length <= 0:
             raise ValueError('string segment length must be positive and finite')
+        if not all(isinstance(tool, DownholeTool) for tool in self.tools):
+            raise TypeError('tools must contain DownholeTool records')
 
 
 @dataclass(frozen=True)

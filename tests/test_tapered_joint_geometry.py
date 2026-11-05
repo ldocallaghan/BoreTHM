@@ -43,6 +43,6 @@ def test_pin_length_variant_changes_only_the_restriction(well,od,bore,length):
 
 def test_entry_12_variants_stay_abrupt_or_zero_local():
     old=geometry([pipe('ordinary',5.,4.276,7.,4.)])
-    assert prediction.apply_geometry(old,'16A','installed_primary').string[0].pipe.hydraulic_joint.transition=='abrupt'
+    assert prediction.apply_geometry(old,'16A','installed_primary').string[0].pipe.hydraulic_joint.resolved('v1.7.0').transition=='abrupt'
     assert prediction.apply_geometry(old,'16A','installed_no_local').string[0].pipe.hydraulic_joint.transition=='gradual'
     assert prediction.apply_geometry(old,'16A','working')==old

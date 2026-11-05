@@ -54,4 +54,4 @@ def test_installed_16a_and_abrupt_alias_preserve_thermal_geometry():
     joint=primary.string[0].pipe.hydraulic_joint
     assert joint.bore_diameter/INCH==pytest.approx(2.75)
     assert joint.restriction_length/INCH==pytest.approx(25.)
-    assert joint.transition=='abrupt'
+    assert joint.resolved('v1.7.0').transition=='abrupt'

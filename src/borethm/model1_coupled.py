@@ -42,6 +42,7 @@ from borethm import geo_constants as C
 from borethm import rock_response as _rock
 from borethm import water_table as wt
 from borethm import fluids as fm
+from borethm import physics as _physics
 from borethm import well_geometry as wg
 from borethm.well_geometry import WellGeometry
 
@@ -343,8 +344,11 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
           fluid=None, rhocp_rock=C.RHO_ROCK * C.CP_ROCK, friction_heat=False,
           tfa=BIT_TFA_DEFAULT, film_mult=1.0, breaks=(), init=None, P_surface=P_SURF,
           hydraulics_model='v1.6.0', surface=None, transitions='abrupt',
-          rock_response=None, annulus_heat=None, annulus_model='v1.6.0',
-          friction='blasius', roughness=0.):
+          rock_response=None, annulus_heat=None, annulus_model=None,
+          friction=None, roughness=None, physics=None):
+    # physics: 'v1.8.0' (the default, also selected by None) or 'v1.7.0', the
+    # defaults of annulus_model, friction, roughness, ordinary joints and tools
+    # (physics.PRESETS). An explicit keyword overrides its row of the preset.
     # P_surface: pressure at the wellhead. Atmospheric by default; a closed,
     # pressurized loop (P_OP) keeps a return above 100 C liquid.
     # init: a previous solve() result whose profiles seed this one (continuation).
@@ -391,6 +395,10 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
     from borethm import hydraulic_losses as hl
     if hydraulics_model not in ('v1.5.0','v1.6.0'):
         raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
+    settings = _physics.resolve(physics, annulus_model, friction, roughness, hydraulics_model)
+    physics, annulus_model, friction, roughness = (settings[k] for k in ('physics', 'annulus_model', 'friction', 'roughness'))
+    if settings['rheology_from_pv_yp'] and annulus_model in _ANNULUS_SETTINGS:
+        fluid = fm.with_default_rheology(fluid)
     if rock_response is None:
         rock_response = 'logarithmic' if hydraulics_model == 'v1.5.0' else 'cylinder'
     if rock_response not in _rock.RESPONSES:
@@ -412,7 +420,7 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
         hl.check_legacy(geometry,surface,transitions)
         loss_model=None
     else:
-        loss_model=hl.LossModel(geometry,friction=friction,transitions=transitions,regime=regime,band=band,roughness=roughness)
+        loss_model=hl.LossModel(geometry,friction=friction,transitions=transitions,regime=regime,band=band,roughness=roughness,physics=physics)
     T_tvd = geotherm if geotherm is not None else (lambda d: T_surf + G * d)
     Trock = lambda zz: T_tvd(geometry.survey.tvd(zz))
     z = np.linspace(0, L, n_nodes)
@@ -529,7 +537,8 @@ def solve(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT, T_surf=C.SURFACE_TEMP,
                P_bottom=P_L,hydraulics_model=hydraulics_model,rock_response=rock_response,
                annulus_model=annulus_model,friction=friction,roughness=roughness,
                annulus_heat_W=(None if annulus_heat is None else _source_integral(annulus_heat, L)),
-               surface=surface,transitions=transitions)
+               surface=surface,transitions=transitions,physics=physics,physics_settings=settings,
+               tool_warnings=[] if loss_model is None else [f for f in loss_model.tool_flags if f.startswith('tool_default_')])
     if loss_model is not None:
         if friction_heat:
             try:
@@ -664,7 +673,8 @@ def _hydraulics_v150(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAU
 
 def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
                friction=None, bit=True, fluid=None, P_surface=P_SURF,
-               hydraulics_model=None, surface=None, transitions=None, annulus_model=None, roughness=None):
+               hydraulics_model=None, surface=None, transitions=None, annulus_model=None, roughness=None,
+               physics=None):
     """Pressure budget [Pa] with named pressure/heat loss terms.
 
     Existing arguments retain their order and units. New calls use
@@ -675,20 +685,25 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     disables an inherited surface allowance. transitions is abrupt or
     gradual (zero geometric-local loss). friction=None and roughness=None
     inherit the circulation result's values, or Blasius and zero when no result
-    is supplied. Explicit values override inheritance; non-zero roughness
+    is supplied, under physics v1.7.0. Under the default physics v1.8.0 they
+    are Colebrook and zero. A result's physics is inherited as well.
+    Explicit values override inheritance; non-zero roughness
     requires Colebrook. An override gives a pressure diagnostic at the supplied
     temperature profile, which was solved with its recorded options. See
     [entry 10](science/model-development.md#31-october-2026-entry-10-sourced-pressure-options)
     for the friction sources and equipment uncertainties.
     """
     from borethm import hydraulic_losses as hl
-    friction=friction if friction is not None else (result or {}).get('friction','blasius')
-    roughness=roughness if roughness is not None else (result or {}).get('roughness',0.)
-    fm.check_friction(friction,roughness)
     mode=hydraulics_model or (result or {}).get('hydraulics_model','v1.6.0')
+    settings=_physics.resolve(physics if physics is not None else (result or {}).get('physics'),
+                              hydraulics_model=mode)
+    physics=settings['physics']
+    friction=friction if friction is not None else (result or {}).get('friction',settings['friction'])
+    roughness=roughness if roughness is not None else (result or {}).get('roughness',settings['roughness'])
+    fm.check_friction(friction,roughness)
     surface=surface if surface is not None else (result or {}).get('surface')
     transitions=transitions or (result or {}).get('transitions','abrupt')
-    annulus_model=annulus_model or (result or {}).get('annulus_model','v1.6.0')
+    annulus_model=annulus_model or (result or {}).get('annulus_model',settings['annulus_model'])
     if annulus_model not in ANNULUS_MODELS:
         raise ValueError(f'annulus_model must be one of {ANNULUS_MODELS}')
     if mode=='v1.5.0':
@@ -702,8 +717,10 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
         raise ValueError('hydraulics_model must be v1.5.0 or v1.6.0')
     regime='herschel-bulkley' if annulus_model in _ANNULUS_SETTINGS else 'apparent-viscosity'
     band=_ANNULUS_SETTINGS.get(annulus_model,('founargiotakis',))[0]
+    if settings['rheology_from_pv_yp'] and annulus_model in _ANNULUS_SETTINGS:
+        fluid=fm.with_default_rheology(fluid)
     return hl.hydraulics(m_dot,geometry,result,T_avg,tfa,friction,bit,fluid,P_surface,surface,transitions,
-                         regime=regime,band=band,roughness=roughness)
+                         regime=regime,band=band,roughness=roughness,physics=physics)
 
 
 def pump_power(m_dot, L=None, T_avg=80.0, geometry=None):

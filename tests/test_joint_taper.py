@@ -87,14 +87,14 @@ def test_hydraulics_applies_the_cones_to_the_bore_and_keeps_the_abrupt_annulus()
 def test_option_unset_is_identical_and_defaults_to_abrupt():
     implicit=HydraulicJoint(.12,.06,.6,10.)
     explicit=HydraulicJoint(.12,.06,.6,10.,'abrupt','',None)
-    assert implicit==explicit and implicit.transition=='abrupt' and implicit.taper_angle_deg is None
+    assert implicit.resolved('v1.7.0')==replace(explicit,kind='ordinary') and implicit.resolved('v1.7.0').transition=='abrupt' and implicit.taper_angle_deg is None
     a,b=(hydraulics(.2,string(j),fluid=WATER,bit=False) for j in (implicit,explicit))
     assert a['spp']==b['spp'] and a['terms']==b['terms'] and a['flags']==b['flags']
 
 
 @pytest.mark.parametrize('settings',[dict(transition='tapered'),
     dict(transition='tapered',taper_angle_deg=0.),dict(transition='tapered',taper_angle_deg=181.),
-    dict(transition='tapered',taper_angle_deg=float('nan')),dict(taper_angle_deg=11.5),
+    dict(transition='tapered',taper_angle_deg=float('nan')),
     dict(transition='gradual',taper_angle_deg=11.5)])
 def test_invalid_taper_settings_are_rejected(settings):
     with pytest.raises(ValueError):

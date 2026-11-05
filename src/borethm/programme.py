@@ -3,7 +3,8 @@ from dataclasses import dataclass, fields, replace
 import math
 
 from borethm import well_geometry as wg
-from borethm.hydraulic_losses import HydraulicJoint, LocalLoss, ReferenceToolLoss, SurfaceLoss, PSI, GPM, PPG
+from borethm.hydraulic_losses import DownholeTool, HydraulicJoint, LocalLoss, ReferenceToolLoss, SurfaceLoss, PSI, GPM, PPG
+from borethm import physics as _physics
 
 REFERENCE = 'wu2025-with-hydraulic-allowances'
 _DEFAULT = object()
@@ -17,6 +18,12 @@ class HydraulicProgramme:
     selects the documented built-in allowances, including surface case 5.
     A custom string must explicitly supply its own tool curves. Optional
     hole intervals otherwise retain the reference well's casing scenario.
+
+    physics is 'v1.8.0' (which None also selects) or 'v1.7.0'. annulus_model,
+    friction, roughness and joint_transition override its rows. transitions
+    names the changes between sections; 'gradual' applies to joints as well.
+    Under v1.8.0 the reference programme declares a 6.75-in MWD pulser
+    allowance; bha_tools adds or replaces named tools in its collar section.
     """
     hydraulics_model: str = 'v1.6.0'
     reference: str | None = REFERENCE
@@ -28,6 +35,13 @@ class HydraulicProgramme:
     tools: bool = True
     joint_restriction_length: float = 29*wg.INCH
     hwdp_restriction_length: float = 48*wg.INCH
+    physics: str | None = None
+    annulus_model: str | None = None
+    friction: str | None = None
+    roughness: float | None = None
+    joint_transition: str | None = None
+    taper_angle_deg: float | None = None
+    bha_tools: tuple = ()
 
     def __post_init__(self):
         for name in ('joints','tools'):
@@ -37,6 +51,10 @@ class HydraulicProgramme:
             raise TypeError('programme segments and hole must contain typed geometry records')
         if self.hydraulics_model not in ('v1.5.0','v1.6.0'):
             raise ValueError('programme.hydraulics_model must be v1.5.0 or v1.6.0')
+        if self.physics is not None:
+            _physics.check(self.physics)
+        if not all(isinstance(t,DownholeTool) for t in self.bha_tools):
+            raise TypeError('programme.bha_tools must contain DownholeTool records')
         if self.reference not in (None,REFERENCE):
             raise ValueError('unknown programme.reference')
         if bool(self.segments)==bool(self.reference):
@@ -73,16 +91,22 @@ class HydraulicProgramme:
             return wg.WellGeometry(self.segments,self.hole or reference_hole(),survey)
         if self.hydraulics_model=='v1.5.0':
             return wg.wu2025_well(depth,pipe,survey,shoes)
+        settings=_physics.resolve(self.physics,hydraulics_model=self.hydraulics_model)
+        modern=settings['tool_defaults']
         if self.joints:
             transferred=pipe.name in (wg.DUAL_WALL.name,wg.VACUUM_INSULATED.name)
+            # Under v1.8.0 the joint default follows its kind. 'gradual' and
+            # joint_transition are explicit choices.
+            ordinary=self.joint_transition or (None if modern and self.transitions!='gradual' else self.transitions)
             joint=HydraulicJoint(7*wg.INCH,2*pipe.r_bore if transferred else 4*wg.INCH,
-                self.joint_restriction_length,2378*0.3048/75,self.transitions,
+                self.joint_restriction_length,2378*0.3048/75,ordinary,
                 'NOV GPDS/EIS catalogue; 29-in effective length and 16B tally pitch assumed; '+
-                ('external envelope transferred; joint bore equals body bore' if transferred else 'reference connection scenario'))
+                ('external envelope transferred; joint bore equals body bore' if transferred else 'reference connection scenario'),
+                self.taper_angle_deg,'insulated' if transferred else 'ordinary')
             pipe=replace(pipe,hydraulic_joint=joint)
             hw=replace(wg.WU_HWDP,hydraulic_joint=HydraulicJoint(7.25*wg.INCH,3.25*wg.INCH,
-                self.hwdp_restriction_length,31*.3048,self.transitions,
-                'Workstrings 91005000020000, 1 Aug 2025; 48-in effective length assumed'))
+                self.hwdp_restriction_length,31*.3048,self.transitions if not modern or self.transitions=='gradual' else None,
+                'Workstrings 91005000020000, 1 Aug 2025; 48-in effective length assumed',None,'heavy-weight'))
         else:
             hw=wg.WU_HWDP
         lower=wg.WU_L_HWDP+wg.WU_L_COLLAR+wg.WU_L_BIT
@@ -94,10 +118,16 @@ class HydraulicProgramme:
                            source='xBolt G2-L Rev 7, p2')
         tool=ReferenceToolLoss((1000/PPG)*500**2/30000*PSI,500*GPM,1000.,'total_internal',2,
             'xBolt G2-L Rev 7 p2, 6.75-in mud-pulse allowance; not verified field hardware',
-            (0.,750*GPM),165.) if self.tools else None
+            (0.,750*GPM),165.) if self.tools and not modern else None
+        named=()
+        extra=tuple(t for t in self.bha_tools if t.tool_class!='mwd_pulser' or not modern or not self.tools)
+        if self.tools and modern:
+            supplied=[t for t in self.bha_tools if t.tool_class=='mwd_pulser']
+            base=supplied[0] if supplied else DownholeTool('mwd_pulser',6.75)
+            named=(replace(base,basis='total_internal',span_segments=2),)
         string=(wg.StringSegment(depth-lower,pipe),wg.StringSegment(wg.WU_L_HWDP,hw),
-                wg.StringSegment(132.075968,wg.WU_COLLAR),wg.StringSegment(1.780032,pulser,tool_loss=tool),
-                wg.StringSegment(9.144,collar),wg.StringSegment(wg.WU_L_BIT,wg.WU_COLLAR))
+                wg.StringSegment(132.075968,wg.WU_COLLAR),wg.StringSegment(1.780032,pulser,tool_loss=tool,tools=named),
+                wg.StringSegment(9.144,collar,tools=extra),wg.StringSegment(wg.WU_L_BIT,wg.WU_COLLAR))
         return wg.WellGeometry(string,self.hole or reference_hole(),survey)
 
 
@@ -111,16 +141,35 @@ def _keys(value,allowed,key):
 
 def _record(cls,value,key):
     _keys(value,{f.name for f in fields(cls)},key)
-    numeric={f.name for f in fields(cls)}-{'source','transition','basis','flow_range'}
+    numeric={f.name for f in fields(cls)}-{'source','transition','basis','flow_range','kind','tool_class'}
     for name,item in value.items():
         if name in numeric and (isinstance(item,bool) or not isinstance(item,(int,float)) or not math.isfinite(item)):
             raise ValueError(f'{key}.{name}: expected a finite number')
-        if name in ('source','transition','basis') and not isinstance(item,str):
+        if name in ('source','transition','basis','kind','tool_class') and not isinstance(item,str):
             raise ValueError(f'{key}.{name}: expected text')
     try:
         return cls(**value)
     except (TypeError,ValueError) as error:
         raise ValueError(f'{key}: {error}') from None
+
+
+def _tools(value,key):
+    """Named tools from TOML: figures in psi, US gal/min and lbm/galUS, as a sheet prints them."""
+    if not isinstance(value,list):
+        raise ValueError(f'{key}: expected an array of tables')
+    tools=[]
+    for i,item in enumerate(value):
+        name=f'{key}[{i}]'
+        _keys(item,{'tool_class','collar_in','dp_ref_psi','flow_ref_gpm','density_ref_ppg','exponent','differential_psi','source'},name)
+        record={k:item[k] for k in ('tool_class','collar_in','exponent','source') if k in item}
+        for source,target,scale in (('dp_ref_psi','dp_ref',PSI),('flow_ref_gpm','flow_ref',GPM),
+                                    ('density_ref_ppg','density_ref',PPG),('differential_psi','differential',PSI)):
+            if source in item:
+                if isinstance(item[source],bool) or not isinstance(item[source],(int,float)) or not math.isfinite(item[source]):
+                    raise ValueError(f'{name}.{source}: expected a finite number')
+                record[target]=item[source]*scale
+        tools.append(_record(DownholeTool,record,name))
+    return tuple(tools)
 
 
 def programme_from_dict(value):
@@ -144,6 +193,14 @@ def programme_from_dict(value):
     for name in ('joints','tools'):
         if name in values and type(values[name]) is not bool:
             raise ValueError(f'programme.{name}: expected a boolean')
+    for name in ('physics','annulus_model','friction','joint_transition'):
+        if name in values and not isinstance(values[name],str):
+            raise ValueError(f'programme.{name}: expected text')
+    for name in ('roughness','taper_angle_deg'):
+        if name in values and (isinstance(values[name],bool) or not isinstance(values[name],(int,float)) or not math.isfinite(values[name])):
+            raise ValueError(f'programme.{name}: expected a finite number')
+    if 'bha_tools' in values:
+        values['bha_tools']=_tools(values['bha_tools'],'programme.bha_tools')
     if 'segments' in values:
         if 'reference' in values:
             raise ValueError('programme: reference and segments are mutually exclusive')
@@ -153,7 +210,7 @@ def programme_from_dict(value):
         for i,s in enumerate(values['segments']):
             key=f'programme.segments[{i}]'
             _keys(s,{'length','name','bore_diameter','outer_diameter','conductivity','source','joint_fraction',
-                     'hydraulic_joint','local_loss','tool_loss'},key)
+                     'hydraulic_joint','local_loss','tool_loss','tools'},key)
             try:
                 for name in ('length','bore_diameter','outer_diameter','conductivity','joint_fraction'):
                     if name in s and (isinstance(s[name],bool) or not isinstance(s[name],(float,int)) or not math.isfinite(s[name])):
@@ -169,7 +226,8 @@ def programme_from_dict(value):
                     raise ValueError('require 0 < bore < OD and positive conductivity')
                 segments.append(wg.StringSegment(s['length'],pipe,
                     _record(LocalLoss,s['local_loss'],key+'.local_loss') if 'local_loss' in s else None,
-                    _record(ReferenceToolLoss,s['tool_loss'],key+'.tool_loss') if 'tool_loss' in s else None))
+                    _record(ReferenceToolLoss,s['tool_loss'],key+'.tool_loss') if 'tool_loss' in s else None,
+                    _tools(s.get('tools',[]),key+'.tools')))
             except (KeyError,TypeError,ValueError) as error:
                 raise ValueError(f'{key}: {error}') from None
         values.update(reference=None,segments=tuple(segments))

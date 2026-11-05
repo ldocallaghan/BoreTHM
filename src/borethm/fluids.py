@@ -74,6 +74,8 @@ Sources:
     drilling fluids: a Fann dial degree is 1.0678 lbf/100 ft2, and 600 and
     300 rpm give 1022 and 511 1/s in the standard R1-B1 geometry.
 """
+import copy
+
 import numpy as np
 
 from borethm import water_table as wt
@@ -145,6 +147,8 @@ class Mud:
         self.pv_ref = mu_w_ref * self.mu_ratio
         # optional Herschel-Bulkley rheology for annulus_model 'herschel-bulkley'
         self.rheology = None
+        # the mud reports a PV or a YP; water() does neither
+        self.reports_rheology = pv_ref is not None or self.yield_point > 0
 
     @property
     def sg(self):
@@ -297,6 +301,26 @@ class HerschelBulkley:
             T_K = np.clip(T_C, 1.0, 480.0) + 273.15
             tau0 = tau0 * np.exp(e_h * np.maximum(1.0 / t_star - 1.0 / T_K, 0.0))
         return tau0, self.K * mu / mud.pv_ref, self.n
+
+
+def no_yield_rheology(fluid):
+    """The power law through a mud's 600 and 300 rpm readings, with no yield
+    stress: R600 = 2 PV + YP and R300 = PV + YP, from its reference plastic
+    viscosity and yield point. This is entry 6's no-yield hypothesis, adopted
+    in entry 8. It keeps the zero yield stress of those entries, which 16A and
+    16B do not test."""
+    return HerschelBulkley.from_report(fluid.pv_ref*1e3, fluid.yield_point/LBF_100FT2, 0.0)
+
+
+def with_default_rheology(fluid):
+    """The fluid the default annulus uses. A rheology already attached is used
+    as given. A mud reporting PV or YP gets no_yield_rheology on a copy. Water,
+    a property dictionary or no fluid stay as they are, and are Newtonian."""
+    if getattr(fluid, 'rheology', 0) is not None or not getattr(fluid, 'reports_rheology', False):
+        return fluid
+    converted = copy.copy(fluid)
+    converted.rheology = no_yield_rheology(fluid)
+    return converted
 
 
 def _slot_velocity(tau_w, tau0, K, n, h):

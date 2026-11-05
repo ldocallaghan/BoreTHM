@@ -7,10 +7,13 @@ Conical changes: Crane Technical Paper 410 (1988), A-26, as documented by
 AFT Arrow 10, Area Change Loss Model; no numerical Reynolds range is stated.
 Annular and Bingham use of the local correlations is an approximation.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import math
 
 import numpy as np
+
+from borethm import physics as _physics
+from borethm import tool_losses as _tool_losses
 
 PROPERTY_FLOOR = 5e6
 PSI = 6894.757
@@ -24,6 +27,9 @@ def _finite(value, name, positive=False):
         raise ValueError(f'{name} must be finite and '+('positive' if positive else 'non-negative'))
 
 
+JOINT_KINDS = ('ordinary','insulated','heavy-weight','bha')
+
+
 @dataclass(frozen=True)
 class HydraulicJoint:
     """Repeated connection geometry [m], independent of thermal joints.
@@ -34,14 +40,20 @@ class HydraulicJoint:
     included angle taper_angle_deg [degrees] and keeps the abrupt annulus
     treatment. The cones add no length and their wall friction is neglected.
     source records the catalogue and assumptions.
+
+    transition None takes the default of the selected physics, using kind:
+    'ordinary' drill-pipe joints are tapered at 11.5 degrees with physics
+    v1.8.0 and abrupt with v1.7.0; 'insulated', 'heavy-weight' and 'bha' joints
+    are abrupt with both. A supplied transition or taper_angle_deg overrides it.
     """
     outer_diameter: float
     bore_diameter: float
     restriction_length: float
     spacing: float
-    transition: str = 'abrupt'
+    transition: str | None = None
     source: str = ''
     taper_angle_deg: float | None = None
+    kind: str = 'ordinary'
 
     def __post_init__(self):
         for name in ('outer_diameter','bore_diameter','spacing'):
@@ -49,16 +61,29 @@ class HydraulicJoint:
         _finite(self.restriction_length,'restriction_length')
         if self.bore_diameter >= self.outer_diameter or self.restriction_length > self.spacing:
             raise ValueError('joint requires bore < OD and restriction length <= spacing')
-        if self.transition not in ('abrupt','gradual','tapered'):
+        if self.transition not in (None,'abrupt','gradual','tapered'):
             raise ValueError('transition must be abrupt, gradual or tapered')
-        if self.transition=='tapered':
-            if self.taper_angle_deg is None:
-                raise ValueError('a tapered transition requires taper_angle_deg')
+        if self.kind not in JOINT_KINDS:
+            raise ValueError(f'joint kind must be one of {JOINT_KINDS}')
+        if self.transition=='tapered' and self.taper_angle_deg is None:
+            raise ValueError('a tapered transition requires taper_angle_deg')
+        if self.taper_angle_deg is not None:
+            if self.transition not in (None,'tapered'):
+                raise ValueError('taper_angle_deg applies only to a tapered transition')
             _finite(self.taper_angle_deg,'taper_angle_deg',True)
             if self.taper_angle_deg>180:
                 raise ValueError('taper_angle_deg must not exceed 180 degrees')
-        elif self.taper_angle_deg is not None:
-            raise ValueError('taper_angle_deg applies only to a tapered transition')
+
+    def resolved(self, physics=None):
+        """This joint with its transition settled under the selected physics."""
+        if self.transition is not None:
+            return self
+        if self.taper_angle_deg is not None:
+            return replace(self,transition='tapered')
+        preset=_physics.resolve(physics)
+        if self.kind=='ordinary' and preset['ordinary_joint_transition']=='tapered':
+            return replace(self,transition='tapered',taper_angle_deg=preset['taper_angle_deg'])
+        return replace(self,transition='abrupt')
 
 
 @dataclass(frozen=True)
@@ -86,7 +111,8 @@ class LocalLoss:
 class ReferenceToolLoss:
     """Tool pressure loss [Pa] at reference flow [m3/s] and density [kg/m3].
 
-    Scales as density times flow squared. total_internal replaces internal
+    Scales as (density/density_ref) (flow/flow_ref)^exponent, plus any constant
+    differential [Pa], such as a motor's loaded differential. total_internal replaces internal
     passage losses over span_segments contiguous segments, including the
     segment carrying this input; additional supplies an extra restriction.
     Optional flow_range is m3/s and temperature_max_C is a qualification.
@@ -104,11 +130,15 @@ class ReferenceToolLoss:
     temperature_max_C: float | None = None
     include_boundary_changes: bool = True
     unresolved: bool = False
+    exponent: float = 2.
+    differential: float = 0.
 
     def __post_init__(self):
         _finite(self.dp_ref,'dp_ref')
         _finite(self.flow_ref,'flow_ref',True)
         _finite(self.density_ref,'density_ref',True)
+        _finite(self.exponent,'exponent',True)
+        _finite(self.differential,'differential')
         if type(self.include_boundary_changes) is not bool or type(self.unresolved) is not bool:
             raise ValueError('tool boundary and unresolved qualifiers must be boolean')
         if self.unresolved and self.dp_ref != 0:
@@ -124,7 +154,72 @@ class ReferenceToolLoss:
             raise ValueError('temperature_max_C must be finite')
 
     def pressure(self, density, flow):
-        return self.dp_ref*(np.asarray(density)/self.density_ref)*(np.asarray(flow)/self.flow_ref)**2
+        return self.dp_ref*(np.asarray(density)/self.density_ref)*(np.asarray(flow)/self.flow_ref)**self.exponent+self.differential
+
+
+@dataclass(frozen=True)
+class DownholeTool:
+    """A tool on a string segment, by class and collar size [in].
+
+    tool_class is one of tool_losses.TOOL_CLASSES. With no figure, physics
+    v1.8.0 applies the generic allowance of the class and size band and v1.7.0
+    applies no loss. A figure gives dp_ref [Pa] at flow_ref [m3/s] and
+    density_ref [kg/m3], with an optional exponent (default 2), and applies
+    with both. The loss is dp_ref (density/density_ref) (flow/flow_ref)^exponent
+    and its heat enters the fluid at the tool's depth. differential [Pa] is a
+    motor's loaded differential: zero off bottom, and added to its no-load
+    drop on bottom. basis and span_segments are as for ReferenceToolLoss.
+    """
+    tool_class: str
+    collar_in: float
+    dp_ref: float | None = None
+    flow_ref: float | None = None
+    density_ref: float | None = None
+    exponent: float | None = None
+    differential: float = 0.
+    basis: str = 'additional'
+    span_segments: int = 1
+    source: str = ''
+
+    def __post_init__(self):
+        if self.tool_class not in _tool_losses.TOOL_CLASSES:
+            raise ValueError(f'tool_class must be one of {_tool_losses.TOOL_CLASSES}')
+        _tool_losses.band_of(self.collar_in)
+        figure=(self.dp_ref,self.flow_ref,self.density_ref)
+        if any(x is not None for x in figure) and any(x is None for x in figure):
+            raise ValueError('a tool figure requires dp_ref, flow_ref and density_ref')
+        if self.exponent is not None and self.dp_ref is None:
+            raise ValueError('an exponent applies only to a supplied tool figure')
+        _finite(self.differential,'differential')
+        if self.differential and self.tool_class!='mud_motor':
+            raise ValueError('only a mud_motor has a differential')
+
+    def resolved(self, physics=None):
+        """The ReferenceToolLoss applied under the selected physics, or None."""
+        preset=_physics.resolve(physics)
+        if self.dp_ref is None and not preset['tool_defaults']:
+            return None
+        common=dict(basis=self.basis,span_segments=self.span_segments,
+                    differential=self.differential if preset['motor_no_load'] else 0.)
+        if self.dp_ref is not None:
+            return ReferenceToolLoss(self.dp_ref,self.flow_ref,self.density_ref,exponent=2. if self.exponent is None else self.exponent,
+                                     source=self.source or f'supplied {self.tool_class} figure',**common)
+        default=_tool_losses.default_for(self.tool_class,self.collar_in)
+        return ReferenceToolLoss(default.dp_ref_psi*PSI,default.flow_ref_gpm*GPM,_tool_losses.WATER_PPG*PPG,
+                                 exponent=default.exponent,
+                                 source=f'generic {self.tool_class} allowance, {default.band_in} in band, {default.status}',**common)
+
+    def warning(self, physics=None):
+        """A flag name when the applied value is a generic allowance with a limit."""
+        preset=_physics.resolve(physics)
+        if self.dp_ref is not None or not preset['tool_defaults']:
+            return None
+        default=_tool_losses.default_for(self.tool_class,self.collar_in)
+        if not default.sources:
+            return f'tool_default_zero_no_source:{self.tool_class}:{default.band_in}'
+        if len(default.sources)==1:
+            return f'tool_default_single_source:{self.tool_class}:{default.band_in}'
+        return None
 
 
 @dataclass(frozen=True)
@@ -245,7 +340,7 @@ class LossModel:
     """Prepared geometry-only loss placement, shared by pressure and heat."""
 
     def __init__(self, geometry, friction='blasius', transitions='abrupt', regime='apparent-viscosity',
-                 band='founargiotakis', roughness=0.):
+                 band='founargiotakis', roughness=0., physics=None):
         from borethm import fluids, model1_coupled as m1
         if transitions not in ('abrupt','gradual'):
             raise ValueError('transitions must be abrupt or gradual')
@@ -253,6 +348,9 @@ class LossModel:
             raise ValueError(f'regime must be one of {fluids.REGIMES}')
         fluids.check_friction(friction,roughness)
         self.geometry=geometry
+        self.physics=_physics.current(physics)
+        self.joints=[None if s.pipe.hydraulic_joint is None else s.pipe.hydraulic_joint.resolved(self.physics)
+                     for s in geometry.string]
         self.friction=friction
         self.roughness=roughness
         self.transitions=transitions
@@ -276,6 +374,29 @@ class LossModel:
             if tool.basis=='total_internal':
                 self.replaced[i:stop]=True
             self.tools.append((i,stop,tool,sum(s.length for s in geometry.string[i:stop])))
+        # Tools named by class. Their additional losses may share a segment.
+        self.tool_flags=[]
+        self.tool_sources=[]
+        for i,segment in enumerate(geometry.string):
+            for named in segment.tools:
+                tool=named.resolved(self.physics)
+                warning=named.warning(self.physics)
+                if warning:
+                    self.tool_flags.append(warning)
+                if tool is None:
+                    continue
+                self.tool_sources.append(tool.source)
+                self.tool_flags.append('tool_allowance_supplied_figure' if named.dp_ref is not None else 'tool_allowance_generic')
+                stop=i+tool.span_segments
+                if stop>len(geometry.string):
+                    raise ValueError('tool spans must be contiguous, within the string and non-overlapping')
+                if tool.basis=='total_internal':
+                    if np.any(self.tool_owner[i:stop]>=0):
+                        raise ValueError('tool spans must be contiguous, within the string and non-overlapping')
+                    self.tool_owner[i:stop]=len(self.tools)
+                    self.replaced[i:stop]=True
+                self.tools.append((i,stop,tool,sum(s.length for s in geometry.string[i:stop])))
+        self.tool_flags=sorted(set(self.tool_flags))
         # Boundary local losses are assigned over the downstream bore piece,
         # or the upward annulus piece. Internal boundaries of a replaced tool
         # are excluded. Hole changes are included on the upward return path.
@@ -301,7 +422,7 @@ class LossModel:
                 owner=j-1 if annulus else j
                 self.boundaries.append((annulus,owner,a,b,small_dh,float(boundary)))
         for i,segment in enumerate(geometry.string):
-            joint=segment.pipe.hydraulic_joint
+            joint=self.joints[i]
             if joint is not None:
                 for h in geometry.hole:
                     # Check the actual intersecting intervals below as well as
@@ -347,7 +468,7 @@ class LossModel:
             mask=seg==i
             if not np.any(mask):
                 continue
-            joint=s.pipe.hydraulic_joint
+            joint=self.joints[i]
             if joint is not None and (annulus or not self.replaced[i]):
                 if annulus:
                     diameter=2*g['r_wall'][mask]
@@ -394,7 +515,7 @@ class LossModel:
             for i,stop,tool,length in self.tools:
                 mask=(seg>=i)&(seg<stop)
                 flow=mass_rate/rho[mask]
-                terms['tool'][mask]=tool.pressure(rho[mask],flow)/length
+                terms['tool'][mask]+=tool.pressure(rho[mask],flow)/length
                 if np.any(mask):
                     flags.append('supplied_tool_loss_treated_as_dissipation')
                     if tool.unresolved:
@@ -475,7 +596,7 @@ class LossModel:
 
 
 def check_legacy(geometry,surface,transitions):
-    if surface is not None or transitions!='abrupt' or any(s.pipe.hydraulic_joint is not None or s.local_loss is not None or s.tool_loss is not None for s in geometry.string):
+    if surface is not None or transitions!='abrupt' or any(s.pipe.hydraulic_joint is not None or s.local_loss is not None or s.tool_loss is not None or s.tools for s in geometry.string):
         raise ValueError('v1.5.0 mode rejects new hydraulic loss settings')
 
 
@@ -533,7 +654,7 @@ def energy_check(model,result,fluid,Q_face,tfa,P_surface):
 def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
                friction='blasius', bit=True, fluid=None, P_surface=1e5,
                surface=None, transitions='abrupt', guard=True, regime='apparent-viscosity',
-               band='founargiotakis', roughness=0.):
+               band='founargiotakis', roughness=0., physics=None):
     """Standpipe budget using the same local gradients as circulation heat.
     regime names the annulus flow treatment (fluids.REGIMES) and band its
     transition band (fluids.BANDS)."""
@@ -541,7 +662,7 @@ def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
     _finite(mass_rate,'mass flow',True)
     if surface is not None and not isinstance(surface,SurfaceLoss):
         raise TypeError('surface must be SurfaceLoss or None')
-    model=LossModel(geometry,friction,transitions,regime,band,roughness)
+    model=LossModel(geometry,friction,transitions,regime,band,roughness,physics)
     top,bot=model.top,model.bottom
     mid,weights=model.integration_grid(result)
     if result is None:
@@ -593,11 +714,11 @@ def hydraulics(mass_rate, geometry, result=None, T_avg=80., tfa=7.759e-4,
         dp_surface=dp_surface,spp=spp,over_pump_limit=spp>m1.PUMP_LIMIT,v_ann_min=float(ann['velocity'].min()),
         cleans_hole=float(ann['velocity'].min())>=m1.HOLE_CLEANING_V,pump_power=spp*mass_rate/rho_in,
         terms=totals,hydraulics_model='v1.6.0',property_guard_Pa=PROPERTY_FLOOR if guard else None,
-        flags=sorted(set(bore['flags']+ann['flags'])),
+        flags=sorted(set(bore['flags']+ann['flags']+model.tool_flags)),
         annulus_profile=dict(md=cumulative_z,dp=cumulative_dp),geometry_blend_m=m1.BLEND,
         local_events=[dict(conduit='annulus' if ann else 'bore',depth_m=depth,
             support_top_m=float(model.top[owner]),support_bottom_m=float(model.bottom[owner]),area_up_m2=a,area_down_m2=b,
             source='Idelchik sudden-change geometry estimate; numerical blend applied') for ann,owner,a,b,dh,depth in model.boundaries],
         sources=[s.pipe.source for s in geometry.string]+[s.local_loss.source for s in geometry.string if s.local_loss is not None]+
-            [s.pipe.hydraulic_joint.source for s in geometry.string if s.pipe.hydraulic_joint is not None]+
-            [s.tool_loss.source for s in geometry.string if s.tool_loss is not None]+([surface.source] if surface else []))
+            [joint.source for joint in model.joints if joint is not None]+
+            [s.tool_loss.source for s in geometry.string if s.tool_loss is not None]+model.tool_sources+([surface.source] if surface else []))

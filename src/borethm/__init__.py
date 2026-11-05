@@ -10,6 +10,8 @@ __version__ = version('borethm')
 
 _EXPORTS = {
     'HydraulicJoint': ('hydraulic_losses','HydraulicJoint'),
+    'DownholeTool': ('hydraulic_losses','DownholeTool'),
+    'HerschelBulkley': ('fluids','HerschelBulkley'),
     'LocalLoss': ('hydraulic_losses','LocalLoss'),
     'ReferenceToolLoss': ('hydraulic_losses','ReferenceToolLoss'),
     'SurfaceLoss': ('hydraulic_losses','SurfaceLoss'),

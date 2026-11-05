@@ -1,0 +1,21 @@
+tool_class,band_in,flow_ref_gpm,dp_ref_psi_in_water,exponent,low_psi,high_psi,status,sources
+filter_sub,4.75,250.0,0.0,2.0,,,no source,
+filter_sub,6.75,600.0,0.0,2.0,,,no source,
+filter_sub,8.0,800.0,0.0,2.0,,,no source,
+filter_sub,9.5,1000.0,0.0,2.0,,,no source,
+float_sub,4.75,250.0,0.0,2.0,,,no source,
+float_sub,6.75,600.0,0.0,2.0,,,no source,
+float_sub,8.0,800.0,0.0,2.0,,,no source,
+float_sub,9.5,1000.0,0.0,2.0,,,no source,
+mud_motor,4.75,250.0,0.0,2.0,,,no source,
+mud_motor,6.75,600.0,0.0,2.0,,,no source,
+mud_motor,8.0,800.0,0.0,2.0,,,no source,
+mud_motor,9.5,1000.0,0.0,2.0,,,no source,
+mwd_pulser,4.75,250.0,149.932,1.6138,107.607,208.5,multiple sources,gordon-gt-mwd;telepacer;xbolt-g2-l;xbolt-g2-r
+mwd_pulser,6.75,600.0,187.729,2.0,86.977,293.945,multiple sources,ap400p;gordon-gt-mwd;kambi;phx-p360;telepacer;telescope;xbolt-g2-l;xbolt-g2-r
+mwd_pulser,8.0,800.0,184.978,1.8235,94.272,309.178,multiple sources,gordon-gt-mwd;telepacer;xbolt-g2-l;xbolt-g2-r
+mwd_pulser,9.5,1000.0,100.0,1.0,100.0,100.0,single source,telepacer
+rotary_steerable,4.75,250.0,68.995,2.0,35.948,102.041,multiple sources,aps-rss475;powerdrive-orbit
+rotary_steerable,6.75,600.0,91.807,2.0,53.614,130.0,multiple sources,aps-rsm675;powerdrive-orbit
+rotary_steerable,8.0,800.0,0.0,2.0,,,no source,
+rotary_steerable,9.5,1000.0,32.201,2.0,32.201,32.201,single source,powerdrive-orbit

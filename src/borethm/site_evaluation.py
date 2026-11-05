@@ -22,6 +22,7 @@ import os
 import sys
 from dataclasses import dataclass, field, replace, asdict
 from borethm.programme import HydraulicProgramme
+from borethm import physics as _physics
 import numpy as np
 from borethm import geo_constants as C
 from borethm import model1_coupled as m1
@@ -758,7 +759,9 @@ def circulate(site, z, geotherm, pipe, m_dot, exposure=None, film_mult=1.0,
                   geometry=g, target_rock_T=float(geotherm(z)), Q_face=Q_FACE_SITE,
                   friction_heat=True, film_mult=film_mult, P_surface=P_s, verbose=False,
                   fluid=fluid,hydraulics_model=programme.hydraulics_model,
-                  surface=programme.surface,transitions=programme.transitions)
+                  surface=programme.surface,transitions=programme.transitions,
+                  physics=programme.physics,annulus_model=programme.annulus_model,
+                  friction=programme.friction,roughness=programme.roughness)
         old = m1.solve(**kw, t_years=1.0)
         if exposure is None:
             r = old
@@ -921,7 +924,7 @@ def _hydraulics_model(site):
 
 
 def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", coupled=None, programme=None,
-             hydraulics_model=None, surface=None):
+             hydraulics_model=None, surface=None, physics=None):
     """Evaluate a SiteProfile through circulation, connections and trips.
 
     Site inputs use m, Pa, degrees C and SI thermal properties. Validate the
@@ -963,6 +966,10 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
     optionally overrides its SurfaceLoss. An explicit zero coefficient
     disables an allowance. Unspecified settings use the effective
     programme. The input SiteProfile is unchanged.
+
+    physics is 'v1.8.0' or 'v1.7.0', which restores the previous defaults. None
+    uses the programme's physics, and then the package default, v1.8.0. The
+    v1.5.0 legacy calculation always uses v1.7.0. The result records physics.
     """
     from borethm.programme import HydraulicProgramme
     if programme is not None:
@@ -977,7 +984,18 @@ def evaluate(site: SiteProfile, v10=False, thermal=True, circulation="v1.3.4", c
         effective=replace(effective,hydraulics_model=hydraulics_model)
     if surface is not None:
         effective=replace(effective,surface=surface)
+    settings=_physics.resolve(physics if physics is not None else effective.physics,
+                              effective.annulus_model,effective.friction,effective.roughness,effective.hydraulics_model)
+    if physics is not None and effective.physics is not None:
+        effective=replace(effective,physics=physics)
     site=replace(site,programme=effective)
+    with _physics.using(settings['physics']):
+        out=_evaluate(site,v10,thermal,circulation,coupled)
+    out['physics']=settings
+    return out
+
+
+def _evaluate(site,v10,thermal,circulation,coupled):
     input_warnings = validate_site(site)
     # coupled: on by default with the pressure budget; on with "v1.3" alone
     # shows what the coupling moves in the v1.3.2 table
@@ -2808,6 +2826,24 @@ def _site_file_record(site_file):
     return dict(path=os.fspath(site_file), sha256=hashlib.sha256(Path(site_file).read_bytes()).hexdigest())
 
 
+def _configuration_record(configuration, physics):
+    """The programme as a record. Under physics v1.7.0 it omits the fields
+    added for v1.8.0, which then have no effect, so that record is unchanged."""
+    record = asdict(configuration)
+    if physics == 'v1.7.0':
+        for name in ('physics', 'annulus_model', 'friction', 'roughness', 'joint_transition', 'taper_angle_deg', 'bha_tools'):
+            record.pop(name, None)
+        for segment in record.get('segments', ()):
+            segment.pop('tools', None)
+            if segment.get('tool_loss'):
+                segment['tool_loss'].pop('exponent', None)
+                segment['tool_loss'].pop('differential', None)
+            joint = segment['pipe'].get('hydraulic_joint')
+            if joint:
+                joint.pop('kind', None)
+    return record
+
+
 def result_dict(o, *, site_file=None):
     """Convert an evaluate result into a JSON-compatible dictionary.
 
@@ -2851,7 +2887,7 @@ def result_dict(o, *, site_file=None):
             conflict=c["conflict"])
         if 'terms' in c['hyd']:
             configuration=s.programme or HydraulicProgramme.reference_programme()
-            d['programme'].update(hydraulic_configuration=asdict(configuration),
+            d['programme'].update(hydraulic_configuration=_configuration_record(configuration, o.get('physics', {}).get('physics', 'v1.7.0')),
                 hydraulic_terms_Pa=c['hyd']['terms'],surface_loss_Pa=c['hyd']['dp_surface'],
                 hydraulic_flags=c['hyd']['flags'],hydraulic_sources=c['hyd']['sources'],
                 energy_check=o.get('m1',{}).get('energy_check'))
@@ -2884,6 +2920,8 @@ def result_dict(o, *, site_file=None):
             d[k] = o[k]
     if 'components' in o and 'status' in o:
         d['reading'] = reading(o)
+    if 'physics' in o:
+        d['physics'] = o['physics']
     d["versions"] = versions()
     d['input_warnings'] = o.get('input_warnings', [])
     if site_file is not None:
@@ -2942,6 +2980,8 @@ def main(argv=None):
     ap.add_argument('--check', action='store_true', help='validate inputs without evaluating')
     ap.add_argument("--json", help="also write the result to this JSON file")
     ap.add_argument('--circulation', choices=('v1.3.3', 'v1.3.4'), default='v1.3.4')
+    ap.add_argument('--physics', choices=tuple(_physics.PRESETS), default=None,
+                    help='default physics: v1.8.0 (package default) or v1.7.0 (the previous defaults)')
     a = ap.parse_args(argv)
     site_file = None
     try:
@@ -2963,7 +3003,7 @@ def main(argv=None):
         if a.check:
             print(f'{site.name}: inputs valid; {site.tier}')
             return
-        o = evaluate(site, circulation=a.circulation)
+        o = evaluate(site, circulation=a.circulation, physics=a.physics)
     except ValueError as error:
         ap.error(str(error))
     report(o)

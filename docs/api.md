@@ -39,7 +39,7 @@ receive no atmospheric offset.
 ## HydraulicJoint
 
 ```python
-HydraulicJoint(outer_diameter: float, bore_diameter: float, restriction_length: float, spacing: float, transition: str = 'abrupt', source: str = '', taper_angle_deg: float | None = None) -> None
+HydraulicJoint(outer_diameter: float, bore_diameter: float, restriction_length: float, spacing: float, transition: str | None = None, source: str = '', taper_angle_deg: float | None = None, kind: str = 'ordinary') -> None
 ```
 
 Repeated connection geometry [m], independent of thermal joints.
@@ -50,6 +50,51 @@ idealisation, or tapered, which applies conical bore changes at the
 included angle taper_angle_deg [degrees] and keeps the abrupt annulus
 treatment. The cones add no length and their wall friction is neglected.
 source records the catalogue and assumptions.
+
+transition None takes the default of the selected physics, using kind:
+'ordinary' drill-pipe joints are tapered at 11.5 degrees with physics
+v1.8.0 and abrupt with v1.7.0; 'insulated', 'heavy-weight' and 'bha' joints
+are abrupt with both. A supplied transition or taper_angle_deg overrides it.
+
+## DownholeTool
+
+```python
+DownholeTool(tool_class: str, collar_in: float, dp_ref: float | None = None, flow_ref: float | None = None, density_ref: float | None = None, exponent: float | None = None, differential: float = 0.0, basis: str = 'additional', span_segments: int = 1, source: str = '') -> None
+```
+
+A tool on a string segment, by class and collar size [in].
+
+tool_class is one of tool_losses.TOOL_CLASSES. With no figure, physics
+v1.8.0 applies the generic allowance of the class and size band and v1.7.0
+applies no loss. A figure gives dp_ref [Pa] at flow_ref [m3/s] and
+density_ref [kg/m3], with an optional exponent (default 2), and applies
+with both. The loss is dp_ref (density/density_ref) (flow/flow_ref)^exponent
+and its heat enters the fluid at the tool's depth. differential [Pa] is a
+motor's loaded differential: zero off bottom, and added to its no-load
+drop on bottom. basis and span_segments are as for ReferenceToolLoss.
+
+## HerschelBulkley
+
+```python
+HerschelBulkley(tau0, n, K, rise=None)
+```
+
+Herschel-Bulkley rheology, tau = tau_0 + K gamma^n, of a mud report.
+
+from_report takes the plastic viscosity PV [cP], yield point YP and a
+low-shear yield stress tau_0 [both lbf/100 ft2, i.e. Fann dial degrees]
+and uses the dial readings they imply, R600 = 2 PV + YP and
+R300 = PV + YP:
+
+    n = ln((R600 - tau_0) / (R300 - tau_0)) / ln(1022 / 511)
+    K = (R300 - tau_0) DIAL_PA / 511^n
+
+K is taken at the mud's reference state and scales with its plastic
+viscosity, K(T, P) = K mu_p(T, P) / mu_p,ref. tau_0 is constant, or with
+rise = (T_star [K], E_H [K]) follows Alderman et al. (1988, eqs. 8-9):
+
+    tau_0(T) = tau_0                                 T <= T*
+    tau_0(T) = tau_0 exp(E_H (1/T* - 1/T))           T >  T*
 
 ## LocalLoss
 
@@ -65,12 +110,13 @@ must exclude geometric transitions already represented automatically.
 ## ReferenceToolLoss
 
 ```python
-ReferenceToolLoss(dp_ref: float, flow_ref: float, density_ref: float, basis: str = 'additional', span_segments: int = 1, source: str = '', flow_range: tuple | None = None, temperature_max_C: float | None = None, include_boundary_changes: bool = True, unresolved: bool = False) -> None
+ReferenceToolLoss(dp_ref: float, flow_ref: float, density_ref: float, basis: str = 'additional', span_segments: int = 1, source: str = '', flow_range: tuple | None = None, temperature_max_C: float | None = None, include_boundary_changes: bool = True, unresolved: bool = False, exponent: float = 2.0, differential: float = 0.0) -> None
 ```
 
 Tool pressure loss [Pa] at reference flow [m3/s] and density [kg/m3].
 
-Scales as density times flow squared. total_internal replaces internal
+Scales as (density/density_ref) (flow/flow_ref)^exponent, plus any constant
+differential [Pa], such as a motor's loaded differential. total_internal replaces internal
 passage losses over span_segments contiguous segments, including the
 segment carrying this input; additional supplies an extra restriction.
 Optional flow_range is m3/s and temperature_max_C is a qualification.
@@ -89,7 +135,7 @@ API surface-layout coefficient, in the psi/ppg/US-gpm convention.
 ## HydraulicProgramme
 
 ```python
-HydraulicProgramme(hydraulics_model: str = 'v1.6.0', reference: str | None = 'wu2025-with-hydraulic-allowances', segments: tuple = (), hole: tuple = (), surface: borethm.hydraulic_losses.SurfaceLoss | None = None, transitions: str = 'abrupt', joints: bool = True, tools: bool = True, joint_restriction_length: float = 0.7365999999999999, hwdp_restriction_length: float = 1.2191999999999998) -> None
+HydraulicProgramme(hydraulics_model: str = 'v1.6.0', reference: str | None = 'wu2025-with-hydraulic-allowances', segments: tuple = (), hole: tuple = (), surface: borethm.hydraulic_losses.SurfaceLoss | None = None, transitions: str = 'abrupt', joints: bool = True, tools: bool = True, joint_restriction_length: float = 0.7365999999999999, hwdp_restriction_length: float = 1.2191999999999998, physics: str | None = None, annulus_model: str | None = None, friction: str | None = None, roughness: float | None = None, joint_transition: str | None = None, taper_angle_deg: float | None = None, bha_tools: tuple = ()) -> None
 ```
 
 Hydraulic mode, surface layout and reference or custom string.
@@ -99,10 +145,16 @@ selects the documented built-in allowances, including surface case 5.
 A custom string must explicitly supply its own tool curves. Optional
 hole intervals otherwise retain the reference well's casing scenario.
 
+physics is 'v1.8.0' (which None also selects) or 'v1.7.0'. annulus_model,
+friction, roughness and joint_transition override its rows. transitions
+names the changes between sections; 'gradual' applies to joints as well.
+Under v1.8.0 the reference programme declares a 6.75-in MWD pulser
+allowance; bha_tools adds or replaces named tools in its collar section.
+
 ## evaluate
 
 ```python
-evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupled=None, programme=None, hydraulics_model=None, surface=None)
+evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupled=None, programme=None, hydraulics_model=None, surface=None, physics=None)
 ```
 
 Evaluate a SiteProfile through circulation, connections and trips.
@@ -146,6 +198,10 @@ releases they belong to; circulation='v1.3.4' uses v1.6.0. surface
 optionally overrides its SurfaceLoss. An explicit zero coefficient
 disables an allowance. Unspecified settings use the effective
 programme. The input SiteProfile is unchanged.
+
+physics is 'v1.8.0' or 'v1.7.0', which restores the previous defaults. None
+uses the programme's physics, and then the package default, v1.8.0. The
+v1.5.0 legacy calculation always uses v1.7.0. The result records physics.
 
 ## result_dict
 
@@ -343,7 +399,7 @@ Raises ValueError for an unknown or ambiguous name.
 ## circulating_temperatures
 
 ```python
-circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt', rock_response=None, annulus_heat=None, annulus_model='v1.6.0', friction='blasius', roughness=0.0)
+circulating_temperatures(m_dot=2.0, T_inj=40.0, G=0.035, T_surf=15.0, target_rock_T=450.0, Q_face=28000.0, t_years=1.0, pipe=None, k_rock=2.5, n_nodes=160, verbose=False, geotherm=None, target_depth=None, geometry=None, exposure=None, fluid=None, rhocp_rock=2700000.0, friction_heat=False, tfa=0.0007759, film_mult=1.0, breaks=(), init=None, P_surface=100000.0, hydraulics_model='v1.6.0', surface=None, transitions='abrupt', rock_response=None, annulus_heat=None, annulus_model=None, friction=None, roughness=None, physics=None)
 ```
 
 Compute circulating bore and annulus temperatures along a well.
@@ -363,7 +419,17 @@ accepts only the logarithmic term. annulus_heat is an optional callable
 returning heat [W/m] released into the annulus fluid at measured depth
 [m], for example rotary friction from rotary_heat.partition; v1.5.0
 rejects it. Heat released at the bit is part of Q_face.
-annulus_model 'v1.6.0' is the released annulus heat transfer and the
+physics selects the default physics: 'v1.8.0', which None also selects, or
+'v1.7.0', which restores the previous defaults. An explicit annulus_model,
+friction or roughness overrides that row of the preset. Under v1.8.0
+annulus_model is 'herschel-bulkley-erge', friction is Colebrook with zero
+roughness, ordinary drill-pipe joints are tapered at 11.5 degrees, tools
+named on the string carry their allowances, and a mud reporting only PV and
+YP takes fluids.no_yield_rheology. Under v1.7.0 annulus_model is 'v1.6.0',
+friction is Blasius, joints are abrupt and named tools carry no default
+loss. The result records physics and physics_settings, and tool_warnings
+lists any named tool whose class has no published figure.
+annulus_model 'v1.6.0' is the earlier annulus heat transfer and the
 apparent-viscosity criterion for laminar flow of a Bingham mud.
 'herschel-bulkley' is a development candidate: the Founargiotakis slot
 model of a Herschel-Bulkley mud (fluid.rheology, a
@@ -391,7 +457,7 @@ surface is a SurfaceLoss, included in standpipe pressure with no
 downhole heat. transitions is abrupt or the zero-local-loss gradual
 idealisation. New geometry fields supply connection and tool losses.
 energy_check reports assigned and applied heat in W when enabled.
-friction selects Blasius (default) or Colebrook for internal passages and
+friction selects Blasius or Colebrook for internal passages and
 for the original Bingham annulus. roughness is absolute wall roughness [m],
 zero by default, and requires friction='colebrook' when non-zero. The
 Herschel-Bulkley annulus retains its own friction relation. The Bingham
@@ -415,7 +481,7 @@ verbose=False suppresses the solver's printed report by default.
 ## hydraulics
 
 ```python
-hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction=None, bit=True, fluid=None, P_surface=100000.0, hydraulics_model=None, surface=None, transitions=None, annulus_model=None, roughness=None)
+hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=0.0007759, friction=None, bit=True, fluid=None, P_surface=100000.0, hydraulics_model=None, surface=None, transitions=None, annulus_model=None, roughness=None, physics=None)
 ```
 
 Pressure budget [Pa] with named pressure/heat loss terms.
@@ -428,7 +494,9 @@ surface is a SurfaceLoss or None; an explicit coefficient of zero
 disables an inherited surface allowance. transitions is abrupt or
 gradual (zero geometric-local loss). friction=None and roughness=None
 inherit the circulation result's values, or Blasius and zero when no result
-is supplied. Explicit values override inheritance; non-zero roughness
+is supplied, under physics v1.7.0. Under the default physics v1.8.0 they
+are Colebrook and zero. A result's physics is inherited as well.
+Explicit values override inheritance; non-zero roughness
 requires Colebrook. An override gives a pressure diagnostic at the supplied
 temperature profile, which was solved with its recorded options. See
 [entry 10](science/model-development.md#31-october-2026-entry-10-sourced-pressure-options)
@@ -681,12 +749,14 @@ Construct from r_in, r_out, k. resistance() returns K m/W.
 ## StringSegment
 
 ```python
-StringSegment(length: float, pipe: borethm.well_geometry.PipeType, local_loss: borethm.hydraulic_losses.LocalLoss | None = None, tool_loss: borethm.hydraulic_losses.ReferenceToolLoss | None = None) -> None
+StringSegment(length: float, pipe: borethm.well_geometry.PipeType, local_loss: borethm.hydraulic_losses.LocalLoss | None = None, tool_loss: borethm.hydraulic_losses.ReferenceToolLoss | None = None, tools: tuple = ()) -> None
 ```
 
 A drill-string segment of length [m], using the supplied PipeType.
 
-Construct in surface-to-bit order as an input to WellGeometry.
+Construct in surface-to-bit order as an input to WellGeometry. tool_loss
+is an explicit loss curve. tools is a tuple of DownholeTool, each a tool
+named by class and collar size.
 
 ## HoleInterval
 

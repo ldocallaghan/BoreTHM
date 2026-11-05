@@ -40,3 +40,13 @@ def evaluated():
         return cache[key]
 
     return get
+
+
+@pytest.fixture(autouse=True)
+def _default_physics(request):
+    """The suite that predates v1.8.0 tests the previous defaults, so it runs
+    under physics v1.7.0. Tests of the current defaults are marked default_physics."""
+    from borethm import physics
+    selected = None if request.node.get_closest_marker('default_physics') else 'v1.7.0'
+    with physics.using(selected or physics.DEFAULT):
+        yield
