@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-05",
+  "reference_archive": "validation/model-development/entry-13/results/tapered_primary",
+  "configuration": "entry 13 tapered_primary inputs with the v1.8.0 tool and motor defaults for the tools in each assembly",
+  "tool_rules": [
+    {"names_containing": ["Mud motor", "7.15 mud motor", "trial motor", "Motor-", "Motor;"], "tool_class": "mud_motor", "basis": "motor named in the assembly record"},
+    {"names_containing": ["HALO"], "tool_class": "rotary_steerable", "basis": "HALO integrates steering, MWD and pulser, so no separate pulser is added (entry 9, references.json, halo)"},
+    {"names_containing": ["Pulser sub", "Hangoff sub", "with MWD", "w/ MWD", "MWD Tool"], "exclude": ["UBHO", "PUK"], "tool_class": "mwd_pulser", "basis": "MWD or pulser carrier named in the assembly record"},
+    {"names_containing": ["Filter sub"], "tool_class": "filter_sub", "basis": "named in the assembly record"},
+    {"names_containing": ["Float sub"], "tool_class": "float_sub", "basis": "named in the assembly record"}
+  ],
+  "trial_compact_bha": {"name": "trial non-motor compact BHA", "tools": ["mwd_pulser", "filter_sub"], "collar_in": 6.75, "basis": "EOW 17 to 20 record a 6 3/4 pulser sub and a 6 3/4 filter sub inside the aggregated assembly"},
+  "tolerances": {"pressure_psi": 1.0, "temperature_C": 0.1, "power_fraction": 0.001},
+  "scientific_drilling_figures": "not available and not used"
+}

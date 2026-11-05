@@ -2404,3 +2404,43 @@ Primary warms the regular and trial comparisons by 3.81 and 3.59 °C relative to
 **Calculated limitations of the adopted treatment.** The score changes are mixed. Against `installed_primary`, G1, G2, G3 and G5 are worse and G6 is better. Against the previous working calculation, G1 and G2 are better on 16B, G1 and G2 are slightly worse on 16A, and G6 is slightly worse. On the regular-pipe groups of 16B the modelled per-length rise is 72–90% of the measured rise. The remaining 16B deficit of 285–375 psi at full depth and the near-surface gap of 188–481 psi are unresolved. 16A remains at about 1,228 psi G1 RMS, close to the 1,215 psi of the previous working calculation.
 
 **Inferred limitations of the adopted treatment.** The reproduction criterion tests the implementation and not an independent forecast. The source-range criterion is thin: no Reynolds range is stated, the Crane formulas were checked through secondary statements, the Tsukano et al. taper length is combined with a bore from a separate patent design, the 5 in angle is transferred to 16B, and a cone approximates a curved profile.
+
+
+## 5 November 2026: entry 14, tool-loss allowances on the adopted calculation
+
+**Calculated change.** Generic pressure-loss allowances for downhole tools, taken from published specification sheets, are added to entry 13's `tapered_primary`, and a motor's no-load drop is added to its differential on bottom and released as heat with it. [Entry 14](../../validation/model-development/entry-14/README.md) gives the source table, the rule, the FORGE configuration and the predictions. The allowances and the settings adopted in entries 8, 10 and 13 become package defaults, with `physics='v1.7.0'` restoring the previous behaviour.
+
+**Measured prior exposure.** The entry 9 shallow excess of 188–481 psi and its flow dependence were known. On 5 November 2026, before this entry, published analogue figures were compared informally with the 16B shallow gap: at about 600 gpm they gave about 170–390 psi against 222–241 psi measured, and at about 230 gpm they gave about 25–60 psi against about 190–250 psi measured. The zero yield stress of entry 8 was chosen after entries 6 and 7, so 16A and 16B do not test it. No value, rule or exponent was chosen from agreement with G1–G6, the trip slopes or the shallow windows.
+
+**Calculated rule and defaults.** Each usable published figure is converted to water at the band's reference flow, using its own exponent where it gives one and 2 otherwise. Variants of one tool family in one band reduce to their median, and the default is the median across sources.
+
+| Class | Band, in | Reference flow, US gal/min | Default in water, psi | Exponent | Range of sources, psi | Status | Sources |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| MWD pulser | 4.75 | 250 | 149.9 | 1.61 | 107.6–208.5 | multiple sources | gordon-gt-mwd, telepacer, xbolt-g2-l, xbolt-g2-r |
+| MWD pulser | 6.75 | 600 | 187.7 | 2.00 | 87.0–293.9 | multiple sources | ap400p, gordon-gt-mwd, kambi, phx-p360, telepacer, telescope, xbolt-g2-l, xbolt-g2-r |
+| MWD pulser | 8.0 | 800 | 185.0 | 1.82 | 94.3–309.2 | multiple sources | gordon-gt-mwd, telepacer, xbolt-g2-l, xbolt-g2-r |
+| MWD pulser | 9.5 | 1,000 | 100.0 | 1.00 | 100.0 | single source | telepacer |
+| Rotary steerable | 4.75 | 250 | 69.0 | 2.00 | 35.9–102.0 | multiple sources | aps-rss475, powerdrive-orbit |
+| Rotary steerable | 6.75 | 600 | 91.8 | 2.00 | 53.6–130.0 | multiple sources | aps-rsm675, powerdrive-orbit |
+| Rotary steerable | 8.0 | 800 | 0.0 | 2.00 | none | no source | none |
+| Rotary steerable | 9.5 | 1,000 | 32.2 | 2.00 | 32.2 | single source | powerdrive-orbit |
+| Mud motor, no load | 4.75 | 250 | 0.0 | 2.00 | none | no source | none |
+| Mud motor, no load | 6.75 | 600 | 0.0 | 2.00 | none | no source | none |
+| Mud motor, no load | 8.0 | 800 | 0.0 | 2.00 | none | no source | none |
+| Mud motor, no load | 9.5 | 1,000 | 0.0 | 2.00 | none | no source | none |
+| Filter sub | 4.75 | 250 | 0.0 | 2.00 | none | no source | none |
+| Filter sub | 6.75 | 600 | 0.0 | 2.00 | none | no source | none |
+| Filter sub | 8.0 | 800 | 0.0 | 2.00 | none | no source | none |
+| Filter sub | 9.5 | 1,000 | 0.0 | 2.00 | none | no source | none |
+| Float sub | 4.75 | 250 | 0.0 | 2.00 | none | no source | none |
+| Float sub | 6.75 | 600 | 0.0 | 2.00 | none | no source | none |
+| Float sub | 8.0 | 800 | 0.0 | 2.00 | none | no source | none |
+| Float sub | 9.5 | 1,000 | 0.0 | 2.00 | none | no source | none |
+
+**Measured gaps.** No published motor no-load figure with a stated flow was found, so the motor default is zero with a warning. The same applies to filter subs, to float subs and to rotary steerable tools in the 8-in band. The 9.5-in pulser and rotary steerable rows each have a single source. Scientific Drilling figures are not public and are not used.
+
+**Calculated predictions.** Against `tapered_primary`, the model-only changes on the 467 samples are +56 to +267 psi on 16A and +76 to +277 psi on 16B. G1 assembly-bias RMS is expected to fall from 1228.4 to 1030.4 psi on 16A and from 331.6 to 240.2 psi on 16B. G2 well biases are expected to change by +57.6 and +47.4 kW. G3 RMS is expected to fall from 6.00 to 5.11 °C, with every assembly warmer. The G5 bias is expected to change by +0.24 °C, and the G6 biases by +1.42 °C on regular pipe and +2.39 °C on trial pipe, so the warm 16B biases grow. The ten shallow windows are expected to rise by 83–127 psi at 423–573 gpm and by 25–30 psi at 216–238 gpm.
+
+**Calculated trip slopes.** The expectation was no change, since the added terms do not depend on pipe length. The ratios change by multipliers of 0.919–1.024, because flow differs among the depth stages of each group and the allowance depends on flow. The stage flows alone account for each slope change to within 0.14 psi per 1000 ft.
+
+**What counts as reproduced.** The scored changes must match the predictions within entry 12's tolerances of 1 psi, 0.1 °C and 0.1% of power. As in entries 12 and 13, this tests the implementation. The unseen wells are the test of the defaults.

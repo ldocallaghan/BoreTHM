@@ -1,0 +1,58 @@
+well,assembly,segment,tool_class,collar_in,band_in,default_psi,flow_ref_gpm,exponent,status
+16B,3,Hangoff sub,mwd_pulser,9.5,9.5,100.0,1000.0,1.0,single source
+16B,3,Mud motor; motor loss unknown,mud_motor,9.5,9.5,0.0,1000.0,2.0,no source
+16B,4,Hangoff sub,mwd_pulser,9.5,9.5,100.0,1000.0,1.0,single source
+16B,4,Mud motor; motor loss unknown,mud_motor,9.5,9.5,0.0,1000.0,2.0,no source
+16B,11,Filter sub,filter_sub,6.688,6.75,0.0,600.0,2.0,no source
+16B,11,Mud motor; motor loss unknown,mud_motor,7.188,6.75,0.0,600.0,2.0,no source
+16B,11,HALO RSS,rotary_steerable,6.75,6.75,91.80714285714285,600.0,2.0,multiple sources
+16B,12,Filter sub,filter_sub,6.688,6.75,0.0,600.0,2.0,no source
+16B,12,Float sub,float_sub,6.375,6.75,0.0,600.0,2.0,no source
+16B,12,HALO RSS,rotary_steerable,6.75,6.75,91.80714285714285,600.0,2.0,multiple sources
+16B,13,Filter sub,filter_sub,6.688,6.75,0.0,600.0,2.0,no source
+16B,13,Float sub,float_sub,6.375,6.75,0.0,600.0,2.0,no source
+16B,13,HALO RSS,rotary_steerable,6.75,6.75,91.80714285714285,600.0,2.0,multiple sources
+16B,15,Float sub,float_sub,6.375,6.75,0.0,600.0,2.0,no source
+16B,15,Filter sub,filter_sub,6.688,6.75,0.0,600.0,2.0,no source
+16B,15,HALO RSS,rotary_steerable,6.75,6.75,91.80714285714285,600.0,2.0,multiple sources
+16B,16,Float sub,float_sub,6.375,6.75,0.0,600.0,2.0,no source
+16B,16,Filter sub,filter_sub,6.688,6.75,0.0,600.0,2.0,no source
+16B,16,HALO RSS,rotary_steerable,6.75,6.75,91.80714285714285,600.0,2.0,multiple sources
+16B,17,trial non-motor compact BHA,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16B,17,trial non-motor compact BHA,filter_sub,6.75,6.75,0.0,600.0,2.0,no source
+16B,17,trial motor; motor loss unknown,mud_motor,6.75,6.75,0.0,600.0,2.0,no source
+16B,18,trial non-motor compact BHA,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16B,18,trial non-motor compact BHA,filter_sub,6.75,6.75,0.0,600.0,2.0,no source
+16B,18,trial motor; motor loss unknown,mud_motor,6.75,6.75,0.0,600.0,2.0,no source
+16B,19,trial non-motor compact BHA,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16B,19,trial non-motor compact BHA,filter_sub,6.75,6.75,0.0,600.0,2.0,no source
+16B,19,trial motor; motor loss unknown,mud_motor,6.75,6.75,0.0,600.0,2.0,no source
+16B,20,trial non-motor compact BHA,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16B,20,trial non-motor compact BHA,filter_sub,6.75,6.75,0.0,600.0,2.0,no source
+16B,20,trial motor; motor loss unknown,mud_motor,6.75,6.75,0.0,600.0,2.0,no source
+16B,27,Float sub,float_sub,6.375,6.75,0.0,600.0,2.0,no source
+16B,27,Filter sub,filter_sub,6.688,6.75,0.0,600.0,2.0,no source
+16B,27,Pulser sub,mwd_pulser,6.5,6.75,187.7289379642674,600.0,2.0,multiple sources
+16B,27,Mud motor; motor loss unknown,mud_motor,7.188,6.75,0.0,600.0,2.0,no source
+16B,38,Float sub,float_sub,6.375,6.75,0.0,600.0,2.0,no source
+16B,38,Filter sub,filter_sub,6.688,6.75,0.0,600.0,2.0,no source
+16B,38,Pulser sub,mwd_pulser,6.5,6.75,187.7289379642674,600.0,2.0,multiple sources
+16B,38,Mud motor; motor loss unknown,mud_motor,7.188,6.75,0.0,600.0,2.0,no source
+16A,18,MWD Tool-NMDC w/ MWD,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,18,"Motor-6 1/2"" 7/8 5.7 w/ 1.5° fixed bend; motor loss unknown",mud_motor,6.5,6.75,0.0,600.0,2.0,no source
+16A,23,MWD Tool,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,23,Motor; motor loss unknown,mud_motor,6.5,6.75,0.0,600.0,2.0,no source
+16A,30,Monel Collar-6 3/4'' NMDC with MWD,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,30,"Motor-6 1/2'' Motor 7/8 5.7, Fixed(cid:0)1.25,; motor loss unknown",mud_motor,6.5,6.75,0.0,600.0,2.0,no source
+16A,34,Monel Collar-6 3/4'' NMDC with MWD,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,34,"Motor-6 1/2'' Motor 7/8 5.7, Fixed 1.25, 8; motor loss unknown",mud_motor,6.5,6.75,0.0,600.0,2.0,no source
+16A,35r1,Monel Collar-6 3/4'' NMDC with MWD,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,35r1,"Motor-6 1/2'' Motor 7/8 5.7, Fixed 1.25, 8; motor loss unknown",mud_motor,6.5,6.75,0.0,600.0,2.0,no source
+16A,35r2,Monel Collar-6 3/4'' NMDC with MWD,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,35r2,"Motor-6 1/2'' Motor 7/8 5.7, Fixed 1.25, 8; motor loss unknown",mud_motor,6.5,6.75,0.0,600.0,2.0,no source
+16A,38,Monel Collar-6 3/4'' NMDC with MWD,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,38,"Motor-6 1/2'' Motor 7/8 5.7, Fixed1.25, d; motor loss unknown",mud_motor,6.5,6.75,0.0,600.0,2.0,no source
+16A,39,Monel Collar-6 3/4'' NMDC with MWD,mwd_pulser,6.75,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,39,"Motor-6 1/2'' Motor 7/8 5.7, Fixed1.25, d; motor loss unknown",mud_motor,6.5,6.75,0.0,600.0,2.0,no source
+16A,42,Monel Collar-6 3/4'' NMDC with MWD,mwd_pulser,6.63,6.75,187.7289379642674,600.0,2.0,multiple sources
+16A,42,"Motor-6 1/2'' Motor 7/8 5.7, Fixed 1.25, 8; motor loss unknown",mud_motor,6.5,6.75,0.0,600.0,2.0,no source
