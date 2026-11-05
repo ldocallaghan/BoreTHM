@@ -561,7 +561,7 @@ Returns a Result with t [s], r [m], T_wall, T_node and fields [degrees C],
 q_wall [W/m into rock], energy_in, energy_far and stored [J/m].
 observe receives copies of the state at each state boundary and accepted
 step. Changing those copies does not change integration or time stepping.
-radius_m reuses a stored radial grid whose coordinates differ from the
+radius_m [m] reuses a stored radial grid whose coordinates differ from the
 declared logarithmic grid by at most eight units in the last place.
 A unit in the last place is the local floating-point spacing at a radius.
 With carry_static_node=True, a static state with no initial fluid-node
@@ -591,8 +591,8 @@ returns (peak internal-fluid temperature [degrees C], time [s]).
 retain_stage_samples=True returns the already calculated intermediate
 times while the tool is stationary at a circulation depth. Its default
 returns the endpoints of each stationary period. T_s0 and T_f0 set the
-initial steel and internal-fluid temperatures separately; their defaults
-both use T0. Every default reproduces the previous results.
+initial steel and internal-fluid temperatures [degrees C] separately; their
+defaults both use T0. Every default reproduces the previous results.
 
 ## water_properties
 

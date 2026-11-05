@@ -143,8 +143,8 @@ def trip_in(lump, column, md_bottom, speed, T0, h_static_out, h_static_in, stage
     retain_stage_samples=True returns the already calculated intermediate
     times while the tool is stationary at a circulation depth. Its default
     returns the endpoints of each stationary period. T_s0 and T_f0 set the
-    initial steel and internal-fluid temperatures separately; their defaults
-    both use T0. Every default reproduces the previous results.
+    initial steel and internal-fluid temperatures [degrees C] separately; their
+    defaults both use T0. Every default reproduces the previous results.
     """
     T_s, T_f = T0 if T_s0 is None else T_s0, T0 if T_f0 is None else T_f0
     depth, t_all, Ts_all, Tf_all, labels = [0.0], [0.0], [T_s], [T_f], [""]

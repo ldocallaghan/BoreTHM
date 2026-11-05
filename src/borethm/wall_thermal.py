@@ -138,7 +138,7 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
     q_wall [W/m into rock], energy_in, energy_far and stored [J/m].
     observe receives copies of the state at each state boundary and accepted
     step. Changing those copies does not change integration or time stepping.
-    radius_m reuses a stored radial grid whose coordinates differ from the
+    radius_m [m] reuses a stored radial grid whose coordinates differ from the
     declared logarithmic grid by at most eight units in the last place.
     A unit in the last place is the local floating-point spacing at a radius.
     With carry_static_node=True, a static state with no initial fluid-node
