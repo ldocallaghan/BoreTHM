@@ -12,8 +12,8 @@
 - [x] Confirm that the results archives under `validation/` are unchanged since they were committed.
 - [x] Pass the local fast suite, link checker and strict documentation build.
 - [x] Pass the full physical suite locally.
-- [ ] Pass the fast suite across Python 3.11 to 3.14 on Linux, Windows and macOS, the wheel installations and the strict documentation build on CI.
-- [ ] Pass the full physical suite on CI at the release candidate.
+- [x] Pass the fast suite across Python 3.11 to 3.14 on Linux, Windows and macOS, the wheel installations and the strict documentation build on CI.
+- [x] Pass the full physical suite on CI at the release candidate.
 - [ ] Review the complete diff and verified release checks before tagging.
 - [ ] Confirm the citation date against the actual tag date.
 - [ ] Tag v1.7.0 and publish the GitHub release.
