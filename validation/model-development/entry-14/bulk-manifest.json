@@ -1,0 +1,70 @@
+{
+  "declaration_commit": "b75e9abd35211779bf64d9db722ab9c551225b06",
+  "method": "Compact results retained; the per-sample score tables are external",
+  "all_external_files": {
+    "assembly-changes.csv": {
+      "sha256": "f88eb0ee6b1db362f310d872af9b54d6b5b38f27b8e370fc866525ad6057787a",
+      "bytes": 2416
+    },
+    "comparison.csv": {
+      "sha256": "cc67f8b95939239e6ce2957b8dd4e33aed046f0b03307a5f6a1e46175c8a9956",
+      "bytes": 8287
+    },
+    "entry14/circulation.csv": {
+      "sha256": "0b79a8251e03d80c143f0966b4244e773370ebc3643f14f9eaab599877ea3356",
+      "bytes": 217347
+    },
+    "entry14/manifest.json": {
+      "sha256": "fa19ae09c82a51a5090fa8ab66dbe99ed48a2aa1c37442d2a59615471abfd67f",
+      "bytes": 9946
+    },
+    "entry14/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142
+    },
+    "entry14/run-in.csv": {
+      "sha256": "b11a113668fcbf1b7973261a92c5d65350843db6d0341b2a8fad360736774d6f",
+      "bytes": 927
+    },
+    "entry14/scoreboard.csv": {
+      "sha256": "00237e01479335f3407785bacda23046d5c2ab62b91620da3f564a0f9ba2a031",
+      "bytes": 5566
+    },
+    "manifest.json": {
+      "sha256": "ed587430034773d664f5372ca907a0a74b2b5f2b27906d10e87cc6d01975fc84",
+      "bytes": 1182
+    },
+    "prediction-checks.csv": {
+      "sha256": "127b1b28a68c07cef8e338a974dcdd5ac7b1b8dd1d82210429518ffe5c31711a",
+      "bytes": 188679
+    },
+    "sample-changes.csv": {
+      "sha256": "7f1695f79012dd5f47e035944d97e83b6102c4e9752dbbb8dcc26dc8b4cfe2ba",
+      "bytes": 51874
+    },
+    "shallow-windows.csv": {
+      "sha256": "9ce7188b11b32dfc7e17df874c599c9e0553e31bf7f3d5638932c3537c008866",
+      "bytes": 2449
+    },
+    "summary.csv": {
+      "sha256": "bc9e4ecb8a9bb4b554d369a98de639f2d65cae55b3ba7f3def20f51741cee3cc",
+      "bytes": 522
+    },
+    "trip-slopes.csv": {
+      "sha256": "a199ce183542f78ae84a2f84da93dd2c82733f5fa42ff06d46519fd9055b7486",
+      "bytes": 1042
+    }
+  },
+  "rebuildable_files": {
+    "entry14/circulation.csv": {
+      "sha256": "0b79a8251e03d80c143f0966b4244e773370ebc3643f14f9eaab599877ea3356",
+      "bytes": 217347,
+      "rebuild_command": "python validation/model-development/entry-14/score.py --declaration b75e9abd35211779bf64d9db722ab9c551225b06 --output <bulk> --scratch <scratch>; python validation/model-development/entry-14/compare.py --declaration b75e9abd35211779bf64d9db722ab9c551225b06 --results <bulk> --reference <entry 13 bulk>/tapered_primary"
+    },
+    "entry14/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142,
+      "rebuild_command": "python validation/model-development/entry-14/score.py --declaration b75e9abd35211779bf64d9db722ab9c551225b06 --output <bulk> --scratch <scratch>; python validation/model-development/entry-14/compare.py --declaration b75e9abd35211779bf64d9db722ab9c551225b06 --results <bulk> --reference <entry 13 bulk>/tapered_primary"
+    }
+  }
+}

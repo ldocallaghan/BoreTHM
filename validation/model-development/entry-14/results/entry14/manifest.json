@@ -1,0 +1,214 @@
+{
+  "declaration_commit": "b75e9abd35211779bf64d9db722ab9c551225b06",
+  "variant": "tapered_primary",
+  "complete": true,
+  "python": "3.14.4",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "settings": {
+    "date": "2026-11-04",
+    "working": "entry 8 with entry 10 smooth Colebrook",
+    "package_defaults_changed": false,
+    "fixed": {
+      "pv_reference_C": 26.7,
+      "film_multiplier": 1.0,
+      "exposure": "cumulative",
+      "surface_case": 5,
+      "pitch_16A_ft": 31.5,
+      "pitch_16B_ft": 31.706666666666667,
+      "flow": "unchanged",
+      "insulated_joint": "EIS 7 by 4 in, 29-in restriction",
+      "thermal_geometry": "existing body and thermal-joint treatment unchanged",
+      "installed_tool_losses": "unchanged"
+    },
+    "installed_source": "Kevin England, personal communication via John McLennan, November 2026, from the drill pipe data sheets",
+    "installed": {
+      "16A": {
+        "body_OD_in": 5.0,
+        "body_ID_in": 4.276,
+        "weight_lb_ft": 19.5,
+        "grade": "S-135",
+        "connection": "4-1/2 IF (NC50)",
+        "joint_OD_in": 6.625,
+        "joint_ID_in": 2.75,
+        "pin_tong_in": 11.0,
+        "box_tong_in": 14.0,
+        "restriction_in": 25.0,
+        "coating": "none"
+      },
+      "16B": {
+        "body_OD_in": 5.5,
+        "body_ID_in": 4.67,
+        "weight_lb_ft": 24.7,
+        "grade": "S-135",
+        "connection": "5-1/2 FH",
+        "joint_OD_in": 7.25,
+        "joint_ID_in": 3.0,
+        "pin_tong_in": 10.0,
+        "box_tong_in": 12.0,
+        "restriction_in": 22.0,
+        "coating": "none"
+      }
+    },
+    "variants": {
+      "working": {
+        "friction": "colebrook",
+        "roughness_m": 0.0
+      },
+      "installed_primary": {
+        "friction": "colebrook",
+        "roughness_m": 0.0
+      },
+      "installed_no_local": {
+        "friction": "colebrook",
+        "roughness_m": 0.0
+      },
+      "tapered_primary": {
+        "friction": "colebrook",
+        "roughness_m": 0.0,
+        "taper_angle_deg": 11.5,
+        "restriction": "restriction_in",
+        "basis": "cone 11.5 degrees from Miu 3.838 in and upset bore 3.500 in; pin plus box tong source-length approximation"
+      },
+      "tapered_long": {
+        "friction": "colebrook",
+        "roughness_m": 0.0,
+        "taper_angle_deg": 6.3,
+        "restriction": "restriction_in",
+        "basis": "cone 6.3 degrees from the 7.0-in patent transition and upset bore 3.500 in; pin plus box tong source-length approximation"
+      },
+      "tapered_steep": {
+        "friction": "colebrook",
+        "roughness_m": 0.0,
+        "taper_angle_deg": 30.0,
+        "restriction": "restriction_in",
+        "basis": "cone 30 degrees, sensitivity bound without a source; pin plus box tong source-length approximation"
+      },
+      "tapered_pin_length": {
+        "friction": "colebrook",
+        "roughness_m": 0.0,
+        "taper_angle_deg": 11.5,
+        "restriction": "pin_tong_in",
+        "basis": "cone 11.5 degrees; pin tong length only, from the note that tool-joint ID refers to the pin bore"
+      }
+    },
+    "taper_source": {
+      "body_ID_in": 4.276,
+      "upset_bore_in": 3.5,
+      "Miu_in": 3.838,
+      "patent_transition_in": 7.0,
+      "computed_angle_Miu_deg": 11.545,
+      "computed_angle_patent_deg": 6.345,
+      "declared_angles_rounded": true,
+      "transfer_16B": "5-in angle transferred to 16B; no 5-1/2 in upset dimensions found",
+      "extrapolation": "The published taper spans 4.276 to 3.500 in; the single cone extends the angle to the tool-joint bore"
+    },
+    "scope": "Tapered treatment on ordinary-pipe joints, bore side. Annulus, HWDP and EIS insulated joints keep the abrupt treatment; cone wall friction neglected, cone length added to neither body nor restriction.",
+    "prediction_selection": "Entry 10: one lower-median-depth input window per assembly; per-window G1/G2 changes and G3/G5/G6 proxy changes. Full frozen coverage follows only after declaration.",
+    "prediction_tolerances": {
+      "spp_psi": 1.0,
+      "temperature_C": 0.1,
+      "hydraulic_power_fraction": 0.001
+    },
+    "recommendation_rule": "Recommend tapered_primary as the joint treatment for the working calculation if its scored changes reproduce the model-only predictions within 1 psi, 0.1 degrees C and 0.1% of power, paired coverage is retained, and the angle and coefficients are within the source stated range of application. This applies whatever the direction of the score change. Scores and slopes are reported and do not select the angle. Adoption of the entry 12 geometry and this treatment is a maintainer decision.",
+    "source_range_assessment": "Angle: within the formula branch to 45 degrees. Reynolds number: the accessible statements of the correlation give no numerical range, so none can be exceeded, and this is recorded as a limit of the check.",
+    "secondary_measures": {
+      "trip_slopes": {
+        "group_source": "validation/model-development/entry-9/results/slopes.csv, role=primary",
+        "groups": [
+          {
+            "assembly": "17",
+            "excursion": "27",
+            "flow_centre_gpm": "500"
+          },
+          {
+            "assembly": "19",
+            "excursion": "29",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "20",
+            "excursion": "31",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "27",
+            "excursion": "40",
+            "flow_centre_gpm": "400"
+          },
+          {
+            "assembly": "27",
+            "excursion": "40",
+            "flow_centre_gpm": "600"
+          },
+          {
+            "assembly": "38",
+            "excursion": "52",
+            "flow_centre_gpm": "600"
+          }
+        ],
+        "method_source": "validation/model-development/entry-9/analyse.py, slopes; same windows, flow and depth grouping, temperature treatment, mass-rate convention and reductions",
+        "variants": [
+          "working",
+          "installed_primary",
+          "installed_no_local",
+          "tapered_primary",
+          "tapered_long",
+          "tapered_steep",
+          "tapered_pin_length"
+        ],
+        "outputs": [
+          "modelled pressure slope in psi per 1000 ft",
+          "measured/modelled slope ratio"
+        ],
+        "eow19": "Added insulated pipe keeps EIS dimensions and the abrupt treatment. Only its ordinary-pipe sections receive the taper.",
+        "predictions": "Modelled slopes and ratio multipliers are frozen in predictions/trips/slopes.csv.",
+        "selection": "Secondary reporting only. It does not enter the unchanged acceptance rule and cannot select any variant or equipment dimension."
+      }
+    }
+  },
+  "circulation_rows": 467,
+  "new_circulation_calculations": 467,
+  "reused_circulation_rows": 0,
+  "before_source": "validation/model-development/entry-10/results/smooth",
+  "baseline_reuse": false,
+  "run_in_basis": "existing transient calculation with candidate conditioning friction; original initial-state convention and Dittus-Boelter films",
+  "circulation_failures": [],
+  "energy_flags": [],
+  "run_in_failures": [],
+  "run_in_originally_unavailable": [
+    "23-off006",
+    "35r2-off008"
+  ],
+  "installed_tool_uncertainty": "unquantified; no installed-tool loss band available; no additional tool source",
+  "source_sha256": {
+    "validation/model-development/entry-13/score.py": "c9e7cf78569b536f5bb134603a07dadc07651c87bdda93684eae6cc8f5afb927",
+    "validation/model-development/entry-13/predict.py": "d49f43d6bb047e3240aee461ed5df60f18e13f54d52f5b3bfa4e2e341ee2b3b0",
+    "validation/model-development/entry-13/options.json": "4bc9b974d405103271b22660b441475142a256e44b23babd690b7d7eb2599096",
+    "validation/model-development/entry-12/predict.py": "0f0ab8816e296831342ac3a256aeea24ab0960b630c9e0389e8d29d8797081a3",
+    "validation/model-development/entry-12/options.json": "1e3a50718ceb7fa875b6a6bbc9c79bcb9427ed1ea70f879d41b6eede178112d2",
+    "validation/model-development/entry-8/score.py": "c2c4bdc2e648a2d15c539f686086ad09f57fbeb8e75af8d5cdd51c79a3c79b38",
+    "validation/forge16b/s2/plan.json": "bdf8e5911b9b702e0e4c2da1c398dc91d91a35953c12b32f8018a31556948fcb",
+    "validation/scoreboard/scoreboard.py": "aa3a199840e6ddcd8bf063a3cc2011a5aa442cfe4cfdbf5bd1b94dfad9bed478",
+    "validation/scoreboard/transient-inputs.json": "ea1d6f211bfdd86fee8c69062aa714cf515f839215d1db37a21d348cae02e09b",
+    "validation/model-development/entry-4/rotary.py": "91e74399df2822a58541d1bd22e4c1a5f04e8b35e437012467dfdb3100b7e631",
+    "validation/model-development/entry-4/rotary_inputs.csv": "7c99cba192f10ff1132800f136ff882787886bcdabdf8084c555665820b21422",
+    "validation/model-development/entry-6/hypotheses.py": "096933f79a9cb53996401f0c06bab32f05abbab7ede7f4859774c17d7012c5dc"
+  },
+  "model_sha256": {
+    "model1_coupled.py": "9218e613642aaaa2b1f11517eff13acf0efb3556f636d8a5968fbd68a118cdaf",
+    "hydraulic_losses.py": "2f279af4aa69884f21942bb9ae83d61efffeb684462331d744f4e346d4d9f071",
+    "fluids.py": "e8a11ca7a7cb86374b3247618b9efada67a28720eacbac5481a5753b364b010a",
+    "well_geometry.py": "0146a746074ea0033bf797746474a94135023eae4751a91dd4838b446be80873",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a",
+    "rotary_heat.py": "3715bed3cf60584fbe96192a1deff1a9429d8fbc62bab07e925988ae1f870d8d",
+    "studies/pressure_comparison.py": "72c1733e4cb3cfdebd0cb265cfa5017f72e8d4cba6edcd478812a14824104560"
+  },
+  "results_sha256": {
+    "rotary-heat-applied.csv": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+    "circulation.csv": "0b79a8251e03d80c143f0966b4244e773370ebc3643f14f9eaab599877ea3356",
+    "scoreboard.csv": "00237e01479335f3407785bacda23046d5c2ab62b91620da3f564a0f9ba2a031",
+    "run-in.csv": "b11a113668fcbf1b7973261a92c5d65350843db6d0341b2a8fad360736774d6f"
+  },
+  "runtime_s": 988.2799474670028
+}

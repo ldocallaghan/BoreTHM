@@ -12,7 +12,8 @@ from pathlib import Path
 import statistics as st
 
 from forge_tools import ENTRY13, HERE, OPTIONS, load
-from summarise_predictions import comparing, frozen, read, typed, write
+reduction = load('entry14_summarise', HERE/'summarise_predictions.py')
+comparing, frozen, read, typed, write = reduction.comparing, reduction.frozen, reduction.read, reduction.typed, reduction.write
 
 FIELDS = (('bit_C', 'bit_C', 1.), ('return_C', 'return_C', 1.), ('spp_psi', 'spp_psi', 1.), ('model_hydraulic_kW', 'model_hydraulic_W', 1000.))
 TOL = OPTIONS['tolerances']
@@ -63,7 +64,7 @@ def main():
         before = table[row['sample_id']]
         entry = dict(sample_id=row['sample_id'], well=row['well'], assembly=row['bha'], paired=bool(row['success'] and before['success']))
         for name, field, scale in FIELDS:
-            entry[name+'_change'] = (row[field]-before[field])/scale
+            entry[name+'_change'] = None if row[field] is None or before[field] is None else (row[field]-before[field])/scale
         entry['sensor_bore_C_change'] = row[proxy(row)]-before[proxy(row)]
         changes.append(entry)
     write(results/'sample-changes.csv', changes)
@@ -71,14 +72,17 @@ def main():
     for row in changes:
         grouped[row['well'], row['assembly']].append(row)
     write(results/'assembly-changes.csv', [dict(well=k[0], assembly=k[1], samples=len(v),
-        **{f+'_change_mean': st.mean(r[f+'_change'] for r in v) for f in ('bit_C', 'sensor_bore_C', 'return_C', 'spp_psi', 'model_hydraulic_kW')})
+        **{f+'_change_mean': st.mean(r[f+'_change'] for r in v if r[f+'_change'] is not None) if any(r[f+'_change'] is not None for r in v) else None for f in ('bit_C', 'sensor_bore_C', 'return_C', 'spp_psi', 'model_hydraulic_kW')})
         for k, v in sorted(grouped.items())])
 
     scored = {r['sample_id']: r for r in changes}
-    checks = []
+    checks, skipped = [], defaultdict(int)
     for row in read(HERE/'predictions/model-only.csv'):
         for name in ('bit_C', 'sensor_bore_C', 'return_C', 'spp_psi', 'model_hydraulic_kW'):
             declared, value = float(row[name+'_change']), scored[row['sample_id']][name+'_change']
+            if value is None:
+                skipped[name] += 1
+                continue
             tolerance = TOL['pressure_psi'] if name == 'spp_psi' else TOL['power_fraction']*max(abs(float(row['model_hydraulic_kW_after'])), 1.) if name == 'model_hydraulic_kW' else TOL['temperature_C']
             checks.append(dict(sample_id=row['sample_id'], well=row['well'], field=name+'_change', declared=declared, scored=value,
                 difference=value-declared, tolerance=tolerance, passed=abs(value-declared) <= tolerance))
@@ -110,7 +114,7 @@ def main():
     derived = [p for p in results.glob('*.csv')]
     frozen.write_json(results/'manifest.json', dict(declaration_commit=args.declaration, comparison_script_sha256=sha(Path(__file__)),
         reference='entry 13 tapered_primary', source_manifest_sha256=sha(results/'entry14/manifest.json'),
-        checks=len(checks), checks_failed=fails, largest_fraction_of_tolerance=max(abs(r['difference'])/r['tolerance'] for r in checks),
+        checks=len(checks), checks_failed=fails, not_recorded_by_the_scoreboard=dict(skipped), largest_fraction_of_tolerance=max(abs(r['difference'])/r['tolerance'] for r in checks),
         paired_coverage=all(r['paired'] for r in comparison), results_sha256={p.name: sha(p) for p in derived}))
     print('checks', len(checks), 'failed', fails, 'paired', all(r['paired'] for r in comparison))
     print(json.dumps(read(results/'summary.csv'), indent=1))

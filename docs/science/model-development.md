@@ -70,6 +70,7 @@ This table includes work performed before this log existed. Earlier development 
 | Entry 11, pressure-input consistency | Independent source checks should distinguish pressure-channel, flow, nozzle, passage and density inputs; no fitted correction | Configured regimes and approximate 95% settings found; flow-scale bounds 0.553–0.631; sweep qualifies depth increment; no 2017 installed displacement established | Diagnosis only; no corrected input adopted and P3 unchanged |
 | Entry 12, installed ordinary drill pipe | Sourced smaller connection bores increase pressure and hydraulic heat; transition choice fixed by source applicability | Frozen comparisons completed; see the six-gap and trip tables below | Maintainer decision, 4 November 2026: installed geometry adopted into the working calculation with entry 13's tapered transitions. The abrupt primary, `installed_no_local`, `installed_premium` and `installed_steel` are not adopted. Package defaults unchanged. |
 | Entry 13, tapered drill-pipe joints | Conical bore transitions at a published upset angle reduce the abrupt bore loss to 20.1% of its value, below the 29.7–44.8% bound of entry 12 | Frozen comparisons completed; declared predictions reproduced, and full-depth pressure and power errors increase against the abrupt treatment | Maintainer decision, 4 November 2026: `tapered_primary` adopted into the working calculation with entry 12's geometry. `tapered_long`, `tapered_steep` and `tapered_pin_length` are not adopted. Package defaults unchanged. |
+| Entry 14, tool-loss allowances and motor no-load drop | Published generic allowances added to `tapered_primary`; 16A and 16B pump pressure rise by 56–277 psi, bit temperatures by 0.1–4.6 °C, shallow windows by 25–127 psi | Declared changes reproduced in all 2,112 checks. G1 RMS 1030.36 and 240.17 psi, G2 biases -229.95 and -143.27 kW, G3 RMS 5.11 °C, G6 regular and trial biases +5.25 and +12.55 °C. Low-flow shallow gap 163–220 psi remains | Maintainer decision, 5 November 2026: package defaults in v1.8.0 with the adopted physics; unexplained shallow gap stays open |
 | Historical annulus film multiplier 0.75 | Earlier fitted heat-transfer sensitivity | Fitted on 16B and evaluated separately | Retired sensitivity; excluded from primary scoring |
 | Historical insulated-pipe conductivity fit | Reproduce the 16B trial insulation result | Used by the archived trial geometry | Baseline reproduction only; calibration explicitly disclosed |
 
@@ -2444,3 +2445,59 @@ Primary warms the regular and trial comparisons by 3.81 and 3.59 °C relative to
 **Calculated trip slopes.** The expectation was no change, since the added terms do not depend on pipe length. The ratios change by multipliers of 0.919–1.024, because flow differs among the depth stages of each group and the allowance depends on flow. The stage flows alone account for each slope change to within 0.14 psi per 1000 ft.
 
 **What counts as reproduced.** The scored changes must match the predictions within entry 12's tolerances of 1 psi, 0.1 °C and 0.1% of power. As in entries 12 and 13, this tests the implementation. The unseen wells are the test of the defaults.
+
+**Calculated score.** [Entry 14 results](../../validation/model-development/entry-14/results/README.md) use the unchanged frozen samples. Bias is model minus observation.
+
+| Measure | `tapered_primary` | Expected | Entry 14 | Direction |
+| --- | --- | --- | --- | --- |
+| G1 16A RMS, psi | 1228.41 | 1030.36 | 1030.36 | lower error |
+| G1 16B RMS, psi | 331.56 | 240.17 | 240.17 | lower error |
+| G2 16A bias, kW | -287.53 | -229.95 | -229.95 | smaller deficit |
+| G2 16B bias, kW | -190.66 | -143.27 | -143.27 | smaller deficit |
+| G3 16A RMS, °C | 6.00 | 5.11 | 5.11 | lower error |
+| G4 RMS, °C | 34.86 | within 0.1 of 34.86 | 34.83 | unchanged within 0.03 °C |
+| G5 return bias, °C | -4.65 | -4.41 | -4.41 | smaller cold bias |
+| G6 regular bias, °C | 3.82 | +5.25 | 5.25 | larger warm bias |
+| G6 trial bias, °C | 10.17 | +12.55 | 12.55 | larger warm bias |
+
+**Calculated direction.** The direction is mixed. G1, G2, G3 RMS and G5 move toward the measurements. On 16A, the five assemblies with cold bit biases come closer to the measurements, and the four with warm bit biases move further from them. The 16B regular-pipe and trial biases, already warm, grow by 1.42 and 2.39 °C. The 16A assemblies still read low in pump pressure by 355–1,673 psi, and the motorless 16B assemblies by 194–282 psi.
+
+**Calculated reproduction, and what it tests.** All 2,112 per-sample checks pass within 1 psi, 0.1 °C and 0.1% of power. The model-only calculation and the score use the same solver on the same inputs, so this tests the implementation. The unseen wells are the test of the defaults.
+
+**Calculated shallow windows.** Before and after are entry 13's `tapered_primary` and this entry.
+
+| Window | Assembly | Flow, US gal/min | Measured, psi | Before, psi | After, psi | Gap before, psi | Accounted, psi | Gap after, psi | Part accounted |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 16B-01342 | 20 | 216 | 218.2 | 30.5 | 55.1 | 187.8 | 24.7 | 163.1 | 13% |
+| 16B-01343 | 20 | 222 | 224.8 | 32.1 | 58.1 | 192.7 | 26.0 | 166.7 | 13% |
+| 16B-03263 | 38 | 237 | 293.1 | 44.1 | 73.6 | 249.0 | 29.5 | 219.6 | 12% |
+| 16B-03262 | 38 | 238 | 289.0 | 44.3 | 73.9 | 244.7 | 29.6 | 215.1 | 12% |
+| 16B-03261 | 38 | 423 | 538.6 | 136.2 | 230.2 | 402.5 | 94.0 | 308.5 | 23% |
+| 16B-01812 | 27 | 492 | 668.8 | 188.1 | 315.4 | 480.7 | 127.3 | 353.4 | 26% |
+| 16B-00464 | 12 | 572 | 592.7 | 365.8 | 448.4 | 226.9 | 82.6 | 144.2 | 36% |
+| 16B-00456 | 11 | 572 | 649.4 | 416.0 | 499.7 | 233.5 | 83.7 | 149.7 | 36% |
+| 16B-00465 | 12 | 572 | 594.0 | 365.8 | 448.6 | 228.2 | 82.8 | 145.4 | 36% |
+| 16B-00457 | 11 | 573 | 649.4 | 416.8 | 500.8 | 232.6 | 84.0 | 148.6 | 36% |
+
+**Calculated low-flow result.** At 216–238 US gal/min, in four windows of EOW 20 and 38, the measured excess over the model was 188–249 psi. The defaults account for 25–30 psi of it, which is 12–13%, and 163–220 psi remains. Most of the low-flow gap is unexplained.
+
+**Calculated higher-flow result.** At 423–573 US gal/min, in six windows of EOW 11, 12, 27 and 38, the excess was 227–481 psi. The defaults account for 83–127 psi, which is 23–36%, and 144–353 psi remains.
+
+**Inferred.** The allowances scale close to the square of the flow, so they are small at low flow, and the remaining gap changes much less with flow than the allowances do: on EOW 38 the allowance rises by a factor of 3.2 from 237 to 423 US gal/min, and the remaining gap by a factor of 1.4. A loss that varies little with flow would look like this, and the recorded motor sheets print no-load figures of about 100–300 psi that are not used because no flow is stated. This does not identify the source. EOW 12 has no motor and still has 144–145 psi remaining, so a motor loss cannot be the whole gap. No term is added for it, and it stays open.
+
+**Calculated trip slopes.** Slopes are in psi per 1000 ft. EOW 19 adds insulated pipe.
+
+| Group | Measured slope ± 95% | Modelled before | Modelled after | Ratio before | Ratio after |
+| --- | --- | --- | --- | --- | --- |
+| EOW 17, 500 gpm | 84.2 ± 28.2 | 74.8 | 81.3 | 1.13 | 1.03 |
+| EOW 19, 600 gpm (insulated) | 47.4 ± 16.9 | 49.5 | 50.1 | 0.96 | 0.95 |
+| EOW 20, 600 gpm | 74.5 ± 12.6 | 66.7 | 65.9 | 1.12 | 1.13 |
+| EOW 27, 400 gpm | 40.6 ± 6.4 | 31.2 | 30.5 | 1.30 | 1.33 |
+| EOW 27, 600 gpm | 114.0 ± 87.5 | 82.1 | 88.7 | 1.39 | 1.29 |
+| EOW 38, 600 gpm | 100.3 ± 12.8 | 74.5 | 76.0 | 1.35 | 1.32 |
+
+**Measured limits of the defaults.** The figures come from marketing and technical data sheets, whose test conditions are mostly not stated. Filter subs, float subs and motors contribute nothing here, because no figure with a stated flow was found. HALO is represented by other makers' rotary steerable sheets, whose range at 600 US gal/min is 53.6–130 psi in water. The 16B tool assignment for the aggregated trial assembly is inferred from the end-of-well records.
+
+**Open item.** The part of the shallow gap that the defaults do not account for, 144–353 psi at 423–573 US gal/min and 163–220 psi at 216–238 US gal/min, is unexplained. No term is added for it.
+
+**Decision, 5 November 2026.** Liam, as maintainer, decided that the adopted physics and the published tool-loss allowances become the package defaults in the release that follows this entry. The decision was made before this score and does not rest on it. FORGE 16A and 16B do not test the defaults independently.

@@ -1,0 +1,22 @@
+{
+  "declaration_commit": "b75e9abd35211779bf64d9db722ab9c551225b06",
+  "comparison_script_sha256": "ce4e101a475acf1da2567208cd1f2a0e35b6e3f91202366ebe3903702f658b35",
+  "reference": "entry 13 tapered_primary",
+  "source_manifest_sha256": "fa19ae09c82a51a5090fa8ab66dbe99ed48a2aa1c37442d2a59615471abfd67f",
+  "checks": 2112,
+  "checks_failed": 0,
+  "not_recorded_by_the_scoreboard": {
+    "model_hydraulic_kW": 223
+  },
+  "largest_fraction_of_tolerance": 2.764225875040278e-13,
+  "paired_coverage": true,
+  "results_sha256": {
+    "summary.csv": "bc9e4ecb8a9bb4b554d369a98de639f2d65cae55b3ba7f3def20f51741cee3cc",
+    "sample-changes.csv": "7f1695f79012dd5f47e035944d97e83b6102c4e9752dbbb8dcc26dc8b4cfe2ba",
+    "shallow-windows.csv": "9ce7188b11b32dfc7e17df874c599c9e0553e31bf7f3d5638932c3537c008866",
+    "prediction-checks.csv": "127b1b28a68c07cef8e338a974dcdd5ac7b1b8dd1d82210429518ffe5c31711a",
+    "trip-slopes.csv": "a199ce183542f78ae84a2f84da93dd2c82733f5fa42ff06d46519fd9055b7486",
+    "comparison.csv": "cc67f8b95939239e6ce2957b8dd4e33aed046f0b03307a5f6a1e46175c8a9956",
+    "assembly-changes.csv": "f88eb0ee6b1db362f310d872af9b54d6b5b38f27b8e370fc866525ad6057787a"
+  }
+}
