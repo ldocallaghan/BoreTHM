@@ -1,0 +1,60 @@
+{
+  "declaration_commit": "facf5897aba844e0858a4da01f2feaf270969aae",
+  "options_sha256": "5a6f536c338dec00ad982789ae3483a22d02e127f8f46b6c64b5035157a0d9af",
+  "script_sha256": "18b7a86f6e6d78f1ef9590735c8ffa455e6163efef533bd420a2aae2af4bd162",
+  "method": "Compact results retained; the per-sample score tables are external",
+  "all_external_files": {
+    "assembly-changes.csv": {
+      "sha256": "0b5c0e3b858cef14f5ebfa87613570c21f88725771ba651af6eccc0a2b25ee6d",
+      "bytes": 2412
+    },
+    "comparison.csv": {
+      "sha256": "eef5507005eaed2b548fceb50145fa6cff3a4f62b3b920478e211315636d9e6a",
+      "bytes": 8289
+    },
+    "entry14/circulation.csv": {
+      "sha256": "3800660e70519cf479d7ad26cfdfa1108d9a5b5726bbaced031fe56919792046",
+      "bytes": 217324
+    },
+    "entry14/manifest.json": {
+      "sha256": "adc7d7aad9c596ef170f4be3f259485634942bf8835830552d0841b58b86a866",
+      "bytes": 9947
+    },
+    "entry14/rotary-heat-applied.csv": {
+      "sha256": "f09b8fe2ee5d40637948d887ea6b4ec8f4eaabb81e3681d6453d23e1dd25676b",
+      "bytes": 37142
+    },
+    "entry14/run-in.csv": {
+      "sha256": "b11a113668fcbf1b7973261a92c5d65350843db6d0341b2a8fad360736774d6f",
+      "bytes": 927
+    },
+    "entry14/scoreboard.csv": {
+      "sha256": "880dd1e44e2b64958280157c0371a786645c43a3745229eb5dbe0417b8a82543",
+      "bytes": 5566
+    },
+    "manifest.json": {
+      "sha256": "7b55a9780073ecc1951090511c2bf0c942e5af2d9a841d243d6b0a11cf99345a",
+      "bytes": 1183
+    },
+    "prediction-checks.csv": {
+      "sha256": "1bf717d334a4cb92b9076a83818b5252b3ff12ff56310e60e1efd68ca9d9e651",
+      "bytes": 188425
+    },
+    "sample-changes.csv": {
+      "sha256": "d15eb1d27edc7d2689436b260f3b7a230d9b9a6f93c45269b94f2e0a8a23cc93",
+      "bytes": 51814
+    },
+    "shallow-windows.csv": {
+      "sha256": "a87909d3c28b4ad607761a8dbb7b70c663a955378b5adfc9ea92a37b7598209e",
+      "bytes": 2519
+    },
+    "summary.csv": {
+      "sha256": "f2969dbcf2bfa572f47e18711e1ea160a12ad6606a9b9ed39e91ed31b5ed18d5",
+      "bytes": 522
+    },
+    "trip-slopes.csv": {
+      "sha256": "a199ce183542f78ae84a2f84da93dd2c82733f5fa42ff06d46519fd9055b7486",
+      "bytes": 1042
+    }
+  }
+}

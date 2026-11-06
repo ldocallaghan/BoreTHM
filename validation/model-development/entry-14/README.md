@@ -311,3 +311,7 @@ python validation/model-development/entry-14/amended.py score --declaration <com
 python validation/model-development/entry-14/amended.py compare --declaration <commit> --results <bulk> --reference <entry 13 bulk>/tapered_primary
 python validation/model-development/entry-14/amended.py archive --declaration <commit> --scores <bulk>
 ```
+
+### Amendment score
+
+**Calculated.** [Amended results](results/entry14-amended/README.md) reproduce every prediction above within the tolerances: all 2,112 per-sample checks pass, G1 16B RMS is 60.1 psi and the G6 regular bias is +6.82 °C. 163–220 psi of the shallow gap remains at 216–238 US gal/min and 308–353 psi at 423–492 US gal/min, and the source is unknown. At 572–573 US gal/min, on EOW 11 and 12, the model reads 22–25 psi above the measurement.

@@ -20,6 +20,6 @@ The scripts of entries 1 to 13 predate the v1.8.0 default physics. They reproduc
 | 11: pressure-input consistency | [Declaration](entry-11/README.md) and [results](entry-11/results/README.md). Diagnosis only |
 | 12: installed ordinary drill pipe | [Declaration](entry-12/README.md) and [score](entry-12/results/README.md). Geometry adopted with entry 13 |
 | 13: tapered drill-pipe joints | [Declaration](entry-13/README.md) and [score](entry-13/results/README.md). Adopted |
-| 14: tool-loss allowances | [Declaration](entry-14/README.md) and [score](entry-14/results/README.md). Package defaults in v1.8.0 |
+| 14: tool-loss allowances | [Declaration and amendment](entry-14/README.md), [score](entry-14/results/README.md) and [amended score](entry-14/results/entry14-amended/README.md). Package defaults in v1.8.0 |
 
 The [original scoreboard and legacy baseline](../scoreboard/README.md) remain fixed. No held-out pressure target is included here. Source observations retain the attribution and CC BY 4.0 terms stated in the [16A](../forge16a/README.md) and [16B](../forge16b/README.md) archives.
