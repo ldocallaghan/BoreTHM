@@ -14,7 +14,7 @@
 - [x] Run the link checker and the strict documentation build from a clean export.
 - [x] Confirm that the results archives under `validation/` are unchanged since they were committed, the original entry 14 archive included.
 - [ ] Confirm the citation date against the actual tag date.
-- [ ] Record the fast matrix and slow job from CI.
+- [x] Record the fast matrix and slow job from CI.
 - [ ] Tag v1.8.0 and publish the GitHub release.
 - [ ] Check PyPI, the website and the Zenodo version DOI, and record publication.
 
