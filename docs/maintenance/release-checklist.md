@@ -3,6 +3,7 @@
 ## v1.8.0
 
 - [x] Declare and score entry 14 before the release commit.
+- [x] Correct the entry 14 tool assignment by a declared amendment, rescore it and update the release record.
 - [x] Make the v1.8.0 physics the package default, with `physics='v1.7.0'` restoring the previous defaults.
 - [x] Add the v1.8.0 site table and UT Austin values, and keep the v1.7.0 goldens tested under `physics='v1.7.0'`.
 - [x] Reproduce the v1.7.0 goldens, site exports and benchmark values under `physics='v1.7.0'`.
@@ -11,7 +12,8 @@
 - [x] Build and check the wheel and source distribution, with the tool table in the wheel.
 - [x] Check a fresh wheel installation outside the checkout.
 - [x] Run the link checker and the strict documentation build from a clean export.
-- [x] Confirm that the results archives under `validation/` are unchanged since they were committed.
+- [x] Confirm that the results archives under `validation/` are unchanged since they were committed, the original entry 14 archive included.
+- [ ] Confirm the citation date against the actual tag date.
 - [ ] Record the fast matrix and slow job from CI.
 - [ ] Tag v1.8.0 and publish the GitHub release.
 - [ ] Check PyPI, the website and the Zenodo version DOI, and record publication.

@@ -18,7 +18,7 @@ accept `physics`, and `borethm-evaluate` and `borethm-sites` accept
 | Pipe friction | Colebrook on a smooth wall | Blasius |
 | Ordinary drill-pipe joint transitions | Conical at 11.5° in the bore | Abrupt |
 | Downhole tool losses | Generic allowances for named tools | Zero unless entered |
-| Motor pressure drop | No-load drop plus differential | Differential only |
+| Motor pressure drop | No-load drop plus differential; the default no-load figure is zero, with a warning, until a figure is entered | Differential only |
 
 A setting given explicitly overrides its row. `hydraulics_model='v1.5.0'`
 always uses the v1.7.0 values.
@@ -40,11 +40,22 @@ bit temperatures fall by 0.3 to 3.0 °C. Benchmark dataset 1.0 is unchanged. The
 [release record](docs/releases/v1.8.0.md) gives the values and the setting
 behind each change.
 
+**FORGE scores.** Entry 14 scored the allowances against the frozen FORGE record.
+Its assignment gave the HALO assemblies of 16B no MWD pulser, although their BHA
+sheets print one. A declared amendment corrected this from those sheets, after
+the first scores had been seen. The tool table, the rule and the defaults did not
+change. The motorless 16B assembly pressure bias RMS is 60 psi, from 332 psi
+before the allowances. The 16A figure is 1,030 psi, from 1,228 psi. The 16B
+regular-pipe temperature bias grows from +3.82 to +6.82 °C and the trial bias from
++10.17 to +12.55 °C.
+
 **Limitations.** The model still reads low in all nine FORGE 16A assemblies, by
-355 to 1,673 psi. Part of the shallow 16B gap remains unexplained, including at
-low flow. The flow regime depends on the yield stress, which FORGE 16A and 16B
-do not test. The FORGE scores moved in mixed directions, and unseen-well thermal
-tests come next.
+355 to 1,673 psi. In the shallow 16B windows, 163 to 220 psi of the gap remains at
+216 to 238 US gal/min and 308 to 353 psi at 423 to 492 US gal/min, all on
+assemblies with a motor, and the source is unknown. At 572 to 573 US gal/min, on
+two HALO assemblies, the generic allowances exceed the gap by 22 to 25 psi. The
+flow regime depends on the yield stress, which FORGE 16A and 16B do not test. The
+FORGE scores moved in mixed directions, and unseen-well thermal tests come next.
 
 ## v1.7.0 (5 November 2026)
 
