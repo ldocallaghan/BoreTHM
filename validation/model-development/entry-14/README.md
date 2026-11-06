@@ -212,3 +212,102 @@ python validation/model-development/entry-14/summarise_predictions.py --referenc
 python validation/model-development/entry-14/score.py --declaration <commit> --output <bulk> --scratch <scratch>
 python validation/model-development/entry-14/compare.py --declaration <commit> --results <bulk> --reference <entry 13 bulk>/tapered_primary
 ```
+
+## Amendment: tool assignment
+
+**Date and status.** 6 November 2026. This amendment corrects the tool assignment of entry 14. It was committed before any rescoring. The tool table, the rule and the package defaults do not change, and the original declaration, predictions and archive stay as committed.
+
+**Measured error.** Entry 14 gave each HALO assembly the rotary steerable default and no MWD (measurement while drilling) pulser, on the ground that HALO integrates steering, measurement and pulser. The 16B end-of-well report prints a pulser serial number in the comments of every HALO sheet, beside the HALO, Eye, gamma and battery. The steering figures in the tool table cover the steering unit only, so a HALO assembly carries both allowances.
+
+| BHA | Report page | Printed |
+| --- | --- | --- |
+| 11 | 71 | Halo 7600-0781; Pulser 128-481 |
+| 12 | 75 | Halo 7600-1125; Pulser 128-474 |
+| 13 | 80 | Halo 7600-1125; Pulser 128-474 |
+| 14 | 85 | Halo 7600-0233; Pulser 213-006 |
+| 15 | 93 | Halo 7600-1711; Pulser 122-1243F |
+| 16 | 97 | Halo 7600-0406; Pulser 213-004F |
+
+BHA 14 has no sample in the scoreboard.
+
+**Disclosure.**
+
+- The error was found in review after the entry 14 scores had been seen.
+- The review estimated that the pulser adds about 170 psi at EOW 12's flow, against the 144–145 psi remainder reported.
+- The correction comes from the printed BHA sheets, and the scores do not choose it.
+
+**Measured tool audit.** [`predictions/assembly-tools-audit.csv`](predictions/assembly-tools-audit.csv) records the MWD pulser, rotary steerable, motor, filter sub and float sub of each scoreboard assembly, with the source page of each, and [`amended/build_audit.py`](amended/build_audit.py) writes it. The differences from the declared assignment are:
+
+| Assemblies | Printed | Declared | Correction | Effect |
+| --- | --- | --- | --- | --- |
+| 16B EOW 11, 12, 13, 15 and 16 | Pulser serial number in the sheet comments | No pulser | 6¾-in MWD pulser allowance added | 187.7 psi in water at 600 US gal/min |
+| 16B EOW 18, 19 and 20 | 6¾ float sub, sheet row 11 and Appendix B page 189 | No float sub | Added to the record | None, because the float sub default is zero |
+
+The motor, filter sub, rotary steerable and other float sub rows agree with the declared assignment on all 22 assemblies.
+
+**Measured limits of the audit.** On 16B EOW 3 and 4 the word "pulser" is not printed. The daily reports name MWD on these runs and the sheets list a hangoff sub, so the declared 9.5-in pulser stays. On 16A the component tables name MWD and do not print the word "pulser", so the declared 6¾-in pulser stays. The 16A rows use the component table already audited in entry 9, which gives each report member, page and hash. The sheet for EOW 13 repeats the comment of EOW 12, while its own row 2 and Appendix E name HALO 0233, so that sheet's pulser serial number is uncertain, though a pulser is printed. The daily reports of 23–25 May 2023 record that the pulser failed at 8,585 ft, the end of EOW 18. The reports do not say when it failed or what happened to its pressure loss, so EOW 18 keeps its allowance.
+
+**Inferred position.** The sheets do not print the pulser's position in a HALO assembly. They print the Eye at 22 ft and gamma at 17 ft from the bit, inside the HALO row's first 36 ft, so the allowance is placed on the HALO segment. The position does not alter the pressure loss. It sets where the heat enters.
+
+**Calculated predictions.** [`amended.py`](amended.py) runs the entry 14 scripts with [`amended/options.json`](amended/options.json), and its outputs are in [`amended/predictions`](amended/predictions). All 467 sample pairs solved with no measured target, no solver failures and no energy flags. The 49 samples of the five HALO assemblies change. The other 418 samples are identical to the original predictions, within 1e-9 in every field. The default-route check again gives zero difference on its five samples. Changes in this section are from the original entry 14 predictions.
+
+| Assembly | Samples | Flow, US gal/min | Pressure, psi | Hydraulic power, kW | Bit, °C | Sensor proxy, °C | Return, °C |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 11 | 4 | 544–651 | +204.1 | +56.4 | +1.80 | +1.59 | +0.27 |
+| 12 | 12 | 597–611 | +189.4 | +50.3 | +1.83 | +1.63 | +0.23 |
+| 13 | 14 | 591–604 | +187.2 | +49.4 | +1.93 | +1.74 | +0.21 |
+| 15 | 4 | 594–604 | +187.5 | +49.7 | +2.12 | +1.93 | +0.21 |
+| 16 | 15 | 596–603 | +190.5 | +51.0 | +2.52 | +2.32 | +0.19 |
+
+**G1, pump pressure.** The expected assembly-bias RMS on the motorless 16B assemblies is 60.1 psi, from 240.2 psi in the original entry 14 and 331.6 psi in `tapered_primary`. 16A does not change.
+
+| Assembly | `tapered_primary` bias, psi | Original entry 14 bias, psi | Predicted change, psi | Expected bias, psi |
+| --- | --- | --- | --- | --- |
+| 12 | -356.0 | -263.5 | +189.4 | -74.1 |
+| 13 | -301.7 | -210.3 | +187.2 | -23.1 |
+| 15 | -285.2 | -193.6 | +187.5 | -6.1 |
+| 16 | -375.1 | -282.1 | +190.5 | -91.6 |
+
+**G2, hydraulic power.** The 16B well bias is expected to change by +22.8 kW, to -120.5 kW. 16A does not change.
+
+**G3, G4 and G5.** These measures use only 16A, so the expected change in each is zero, and their values stay at 5.11 °C, 34.83 °C and −4.41 °C.
+
+**G6, 16B sensor proxies.** Every HALO assembly warms by 1.6–2.3 °C. EOW 11, 12 and 13 move toward zero or through it, and EOW 15 and 16, already warm, grow. The trial bias does not change.
+
+| Measure | Samples | `tapered_primary` bias, °C | Original entry 14 bias, °C | Predicted change, °C | Expected bias, °C |
+| --- | --- | --- | --- | --- | --- |
+| G6, 16B independent regular pipe | 59 | +3.82 | +5.25 | +1.57 | +6.82 |
+| G6, EOW 11 | 4 | -4.92 | -4.15 | +1.59 | -2.56 |
+| G6, EOW 12 | 12 | -2.53 | -1.73 | +1.63 | -0.11 |
+| G6, EOW 13 | 14 | -1.44 | -0.60 | +1.74 | +1.14 |
+| G6, EOW 15 | 4 | +5.38 | +6.31 | +1.93 | +8.24 |
+| G6, EOW 16 | 15 | +11.70 | +12.83 | +2.32 | +15.14 |
+
+**Shallow windows.** Only the EOW 11 and 12 windows change. The measured values are the archived values of entry 13, which were known before this amendment. At about 572 US gal/min the model is expected to read 22–25 psi above the measurement on these four windows, where the original entry 14 read 144–150 psi below it. The other six windows, on EOW 20, 27 and 38, do not change, including all four at 216–238 US gal/min.
+
+| Window | Assembly | Flow, US gal/min | Original entry 14, psi | Predicted, psi | Change, psi | Archived measured, psi | Expected gap, psi |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 16B-01342 | 20 | 216 | 55.1 | 55.1 | +0.0 | 218.2 | 163.1 |
+| 16B-01343 | 20 | 222 | 58.1 | 58.1 | +0.0 | 224.8 | 166.7 |
+| 16B-03263 | 38 | 237 | 73.6 | 73.6 | +0.0 | 293.1 | 219.6 |
+| 16B-03262 | 38 | 238 | 73.9 | 73.9 | +0.0 | 289.0 | 215.1 |
+| 16B-03261 | 38 | 423 | 230.2 | 230.2 | +0.0 | 538.6 | 308.5 |
+| 16B-01812 | 27 | 492 | 315.4 | 315.4 | +0.0 | 668.8 | 353.4 |
+| 16B-00464 | 12 | 572 | 448.4 | 617.4 | +169.0 | 592.7 | -24.7 |
+| 16B-00456 | 11 | 572 | 499.7 | 671.0 | +171.2 | 649.4 | -21.5 |
+| 16B-00465 | 12 | 572 | 448.6 | 617.9 | +169.3 | 594.0 | -23.9 |
+| 16B-00457 | 11 | 573 | 500.8 | 672.5 | +171.8 | 649.4 | -23.1 |
+
+**Trip slopes.** The six groups use EOW 17, 19, 20, 27 and 38, none of which changes, so every slope and ratio is expected to stay at its original entry 14 value.
+
+**What counts as reproduced.** As in the original declaration, the scored changes must match these predictions within 1 psi, 0.1 °C and 0.1% of power. This tests the implementation. The unseen wells are the test of the defaults.
+
+```
+python validation/model-development/entry-14/amended/build_audit.py
+python validation/model-development/entry-14/amended.py predict
+python validation/model-development/entry-14/amended.py route
+python validation/model-development/entry-14/amended.py summarise --reference <entry 13 bulk>/tapered_primary
+python validation/model-development/entry-14/amended.py score --declaration <commit> --output <bulk> --scratch <scratch>
+python validation/model-development/entry-14/amended.py compare --declaration <commit> --results <bulk> --reference <entry 13 bulk>/tapered_primary
+python validation/model-development/entry-14/amended.py archive --declaration <commit> --scores <bulk>
+```

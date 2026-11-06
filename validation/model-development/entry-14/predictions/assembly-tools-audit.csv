@@ -1,0 +1,116 @@
+well,assembly,tool_class,printed,present,source,in_declared_assignment,difference
+16A,18,mwd_pulser,MWD Tool-NMDC w/ MWD,True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf; page 1,True,none
+16A,18,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf; page 1,False,none
+16A,18,mud_motor,"Motor-6 1/2"" 7/8 5.7 w/ 1.5° fixed bend",True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf; page 1,True,none
+16A,18,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf; page 1,False,none
+16A,18,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1124202011242020_9_1_reporttmp.pdf; page 1,False,none
+16A,23,mwd_pulser,MWD Tool,True,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf; page 1,True,none
+16A,23,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf; page 1,False,none
+16A,23,mud_motor,Motor,True,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf; page 1,True,none
+16A,23,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf; page 1,False,none
+16A,23,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_11292020_11292020_25_reporttmp.pdf; page 1,False,none
+16A,30,mwd_pulser,Monel Collar-6 3/4'' NMDC with MWD,True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12420201242020_21_reporttmp.pdf; page 1,True,none
+16A,30,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12420201242020_21_reporttmp.pdf; page 1,False,none
+16A,30,mud_motor,"Motor-6 1/2'' Motor 7/8 5.7, Fixed(cid:0)1.25,",True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12420201242020_21_reporttmp.pdf; page 1,True,none
+16A,30,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12420201242020_21_reporttmp.pdf; page 1,False,none
+16A,30,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12420201242020_21_reporttmp.pdf; page 1,False,none
+16A,34,mwd_pulser,Monel Collar-6 3/4'' NMDC with MWD,True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12820201282020_10_reporttmp.pdf; page 1,True,none
+16A,34,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12820201282020_10_reporttmp.pdf; page 1,False,none
+16A,34,mud_motor,"Motor-6 1/2'' Motor 7/8 5.7, Fixed 1.25, 8",True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12820201282020_10_reporttmp.pdf; page 1,True,none
+16A,34,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12820201282020_10_reporttmp.pdf; page 1,False,none
+16A,34,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12820201282020_10_reporttmp.pdf; page 1,False,none
+16A,35r1,mwd_pulser,Monel Collar-6 3/4'' NMDC with MWD,True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,True,none
+16A,35r1,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,False,none
+16A,35r1,mud_motor,"Motor-6 1/2'' Motor 7/8 5.7, Fixed 1.25, 8",True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,True,none
+16A,35r1,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,False,none
+16A,35r1,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,False,none
+16A,35r2,mwd_pulser,Monel Collar-6 3/4'' NMDC with MWD,True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,True,none
+16A,35r2,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,False,none
+16A,35r2,mud_motor,"Motor-6 1/2'' Motor 7/8 5.7, Fixed 1.25, 8",True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,True,none
+16A,35r2,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,False,none
+16A,35r2,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_12920201292020_16_reporttmp.pdf; page 1,False,none
+16A,38,mwd_pulser,Monel Collar-6 3/4'' NMDC with MWD,True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1213202012132020_11_reporttmp.pdf; page 1,True,none
+16A,38,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1213202012132020_11_reporttmp.pdf; page 1,False,none
+16A,38,mud_motor,"Motor-6 1/2'' Motor 7/8 5.7, Fixed1.25, d",True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1213202012132020_11_reporttmp.pdf; page 1,True,none
+16A,38,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1213202012132020_11_reporttmp.pdf; page 1,False,none
+16A,38,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1213202012132020_11_reporttmp.pdf; page 1,False,none
+16A,39,mwd_pulser,Monel Collar-6 3/4'' NMDC with MWD,True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_15_reporttmp.pdf; page 1,True,none
+16A,39,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_15_reporttmp.pdf; page 1,False,none
+16A,39,mud_motor,"Motor-6 1/2'' Motor 7/8 5.7, Fixed1.25, d",True,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_15_reporttmp.pdf; page 1,True,none
+16A,39,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_15_reporttmp.pdf; page 1,False,none
+16A,39,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_[78]-32_Drilling-C_1214202012142020_15_reporttmp.pdf; page 1,False,none
+16A,42,mwd_pulser,Monel Collar-6 3/4'' NMDC with MWD,True,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf; page 1,True,none
+16A,42,rotary_steerable,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf; page 1,False,none
+16A,42,mud_motor,"Motor-6 1/2'' Motor 7/8 5.7, Fixed 1.25, 8",True,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf; page 1,True,none
+16A,42,filter_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf; page 1,False,none
+16A,42,float_sub,not printed,False,GDR 1283; Utah_Forge_FORGE_16A_(78)-32_Drilling-C_12182020_12182020_14_reporttmp.pdf; page 1,False,none
+16B,3,mwd_pulser,"Hangoff sub, 9.500 in; the word pulser is not printed; MWD batteries named in the operations plan",True,"EOWR p38, row 6; p185; DailyReport15 p1",True,none
+16B,3,rotary_steerable,not printed,False,"EOWR p38, p185",False,none
+16B,3,mud_motor,"9.15 mud motor, row 2",True,"EOWR p38, p185",True,none
+16B,3,filter_sub,not printed,False,"EOWR p38, p185",False,none
+16B,3,float_sub,not printed,False,"EOWR p38, p185",False,none
+16B,4,mwd_pulser,Hangoff sub; the word pulser is not printed; MWD named at pick-up,True,EOWR p185; DailyReport16 p1,True,none
+16B,4,rotary_steerable,not printed,False,EOWR p185,False,none
+16B,4,mud_motor,Mud motor,True,EOWR p185,True,none
+16B,4,filter_sub,not printed,False,EOWR p185,False,none
+16B,4,float_sub,not printed,False,EOWR p185,False,none
+16B,11,mwd_pulser,Pulser 128-481,True,"EOWR p71, p187",False,pulser added: sheet prints it; figure 187.7 psi at 600 US gal/min
+16B,11,rotary_steerable,"HALO RSS w/HFTO, row 2",True,"EOWR p71, p187",True,none
+16B,11,mud_motor,"7.15 mud motor, row 9",True,"EOWR p71, p187",True,none
+16B,11,filter_sub,"6 3/4 filter sub, row 10",True,"EOWR p71, p187",True,none
+16B,11,float_sub,not printed,False,"EOWR p71, p187",False,none
+16B,12,mwd_pulser,Pulser 128-474,True,"EOWR p75, p187",False,pulser added: sheet prints it; figure 187.7 psi at 600 US gal/min
+16B,12,rotary_steerable,"HALO RSS w/HFTO, row 2",True,"EOWR p75, p187",True,none
+16B,12,mud_motor,NO MOTOR ASSIST,False,"EOWR p75, p187",False,none
+16B,12,filter_sub,"6 3/4 filter sub, row 9",True,"EOWR p75, p187",True,none
+16B,12,float_sub,"6 3/4 float sub, row 8",True,"EOWR p75, p187",True,none
+16B,13,mwd_pulser,Pulser 128-474,True,"EOWR p80, p188",False,pulser added: sheet prints it; figure 187.7 psi at 600 US gal/min
+16B,13,rotary_steerable,"HALO RSS w/HFTO, row 2",True,"EOWR p80, p188",True,none
+16B,13,mud_motor,NO MOTOR ASSIST,False,"EOWR p80, p188",False,none
+16B,13,filter_sub,"6 3/4 filter sub, row 8",True,"EOWR p80, p188",True,none
+16B,13,float_sub,"6 3/4 float sub, row 7",True,"EOWR p80, p188",True,none
+16B,14,mwd_pulser,Pulser 213-006,True,"EOWR p85, p188",False,not scored
+16B,14,rotary_steerable,HALO RSS w/HFTO,True,"EOWR p85, p188",False,not scored
+16B,14,mud_motor,NO MOTOR ASSIST,False,"EOWR p85, p188",False,not scored
+16B,14,filter_sub,6 3/4 filter sub,True,"EOWR p85, p188",False,not scored
+16B,14,float_sub,6 3/4 float sub,True,"EOWR p85, p188",False,not scored
+16B,15,mwd_pulser,Pulser 122-1243F,True,"EOWR p93, p188",False,pulser added: sheet prints it; figure 187.7 psi at 600 US gal/min
+16B,15,rotary_steerable,HALO RSS w/HFTO,True,"EOWR p93, p188",True,none
+16B,15,mud_motor,NO MOTOR ASSIST,False,"EOWR p93, p188",False,none
+16B,15,filter_sub,6 3/4 filter sub,True,"EOWR p93, p188",True,none
+16B,15,float_sub,6 3/4 float sub,True,"EOWR p93, p188",True,none
+16B,16,mwd_pulser,Pulser 213-004F,True,"EOWR p97, p188",False,pulser added: sheet prints it; figure 187.7 psi at 600 US gal/min
+16B,16,rotary_steerable,HALO RSS w/HFTO,True,"EOWR p97, p188",True,none
+16B,16,mud_motor,NO MOTOR ASSIST,False,"EOWR p97, p188",False,none
+16B,16,filter_sub,6 3/4 filter sub,True,"EOWR p97, p188",True,none
+16B,16,float_sub,6 3/4 float sub,True,"EOWR p97, p188",True,none
+16B,17,mwd_pulser,"6 3/4 pulser sub, row 6",True,"EOWR p102, p189",True,none
+16B,17,rotary_steerable,not printed,False,"EOWR p102, p189",False,none
+16B,17,mud_motor,"7.15 mud motor, row 2",True,"EOWR p102, p189",True,none
+16B,17,filter_sub,"6 3/4 filter sub, row 10",True,"EOWR p102, p189",True,none
+16B,17,float_sub,not printed,False,"EOWR p102, p189",False,none
+16B,18,mwd_pulser,"6 3/4 pulser sub, row 6",True,"EOWR p111, p189",True,none
+16B,18,rotary_steerable,not printed,False,"EOWR p111, p189",False,none
+16B,18,mud_motor,"7.15 mud motor, row 2",True,"EOWR p111, p189",True,none
+16B,18,filter_sub,"6 3/4 filter sub, row 10",True,"EOWR p111, p189",True,none
+16B,18,float_sub,"6 3/4 float sub, row 11",True,"EOWR p111, p189",False,"added to the record: default zero, no change in any result"
+16B,19,mwd_pulser,"6 3/4 pulser sub, row 6",True,"EOWR p115, p189",True,none
+16B,19,rotary_steerable,not printed,False,"EOWR p115, p189",False,none
+16B,19,mud_motor,"7.15 mud motor, row 2",True,"EOWR p115, p189",True,none
+16B,19,filter_sub,"6 3/4 filter sub, row 10",True,"EOWR p115, p189",True,none
+16B,19,float_sub,"6 3/4 float sub, row 11",True,"EOWR p115, p189",False,"added to the record: default zero, no change in any result"
+16B,20,mwd_pulser,"6 3/4 pulser sub, row 6",True,"EOWR p129, p189",True,none
+16B,20,rotary_steerable,not printed,False,"EOWR p129, p189",False,none
+16B,20,mud_motor,"7.15 mud motor, row 2",True,"EOWR p129, p189",True,none
+16B,20,filter_sub,"6 3/4 filter sub, row 10",True,"EOWR p129, p189",True,none
+16B,20,float_sub,"6 3/4 float sub, row 11",True,"EOWR p129, p189",False,"added to the record: default zero, no change in any result"
+16B,27,mwd_pulser,Pulser sub,True,EOWR p191,True,none
+16B,27,rotary_steerable,not printed,False,EOWR p191,False,none
+16B,27,mud_motor,Mud motor,True,EOWR p191,True,none
+16B,27,filter_sub,Filter sub,True,EOWR p191,True,none
+16B,27,float_sub,Float sub,True,EOWR p191,True,none
+16B,38,mwd_pulser,"6 3/4 pulser sub, row 6",True,"EOWR p160, p194",True,none
+16B,38,rotary_steerable,not printed,False,"EOWR p160, p194",False,none
+16B,38,mud_motor,"7.15 mud motor, row 2",True,"EOWR p160, p194",True,none
+16B,38,filter_sub,"6 3/4 filter sub, row 11",True,"EOWR p160, p194",True,none
+16B,38,float_sub,"6 3/4 float sub, row 12",True,"EOWR p160, p194",True,none

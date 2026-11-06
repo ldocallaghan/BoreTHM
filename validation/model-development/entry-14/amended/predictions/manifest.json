@@ -1,0 +1,41 @@
+{
+  "python": "3.14.4",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "targets_compared": false,
+  "runtime_s": 2010.2146301049797,
+  "samples": 467,
+  "solver_failures": [],
+  "energy_flags": [],
+  "shallow_windows": 10,
+  "trip_groups": 6,
+  "tool_classes": {
+    "mwd_pulser": 22,
+    "mud_motor": 18,
+    "filter_sub": 11,
+    "rotary_steerable": 5,
+    "float_sub": 6
+  },
+  "sha256": {
+    "validation/model-development/entry-14/predict.py": "c5c2a15a6c86cbc63fe2a5547711eadcf66e0dae5d9a4dbf4a102906afa67821",
+    "validation/model-development/entry-14/forge_tools.py": "db76a47cbbd77d540d7db3bb106ed3127f0fadd8e2dcd75deb5a2ab54a9cc8c2",
+    "validation/model-development/entry-14/options.json": "c61b5a66091e570d4b9431f1c77d1ea14a488dd693d0094cc836a721a0015566",
+    "src/borethm/data/tool_losses.csv": "fb5762b453318687d8a6e6e3f1fce2dad0b26b1fc50b840fa4b739c2f3d42d53",
+    "src/borethm/tool_losses.py": "355969b79040cbba3628f104c38ce16f959037509b1e4187b969e49b1be4ccae",
+    "src/borethm/hydraulic_losses.py": "2f279af4aa69884f21942bb9ae83d61efffeb684462331d744f4e346d4d9f071",
+    "src/borethm/model1_coupled.py": "9218e613642aaaa2b1f11517eff13acf0efb3556f636d8a5968fbd68a118cdaf"
+  },
+  "outputs_sha256": {
+    "shallow-windows.csv": "3dac62fc530c9f3f62d88d670b6eaf904e7287481dd10d41e6d0c5f6f68ab000",
+    "trip-slopes.csv": "64c1d413b89ace38c8ebbc2bc19eb0a9d6c14d77a6fd1cd5ad1fea195cb8e994",
+    "assembly-tools.csv": "3386830189046c46eeb1a47e22a15bdf02246c5e15b8bcedb1b5b466209184d2",
+    "model-only.csv": "34cf598072402df1c4cd803450b821dbb777ead9300850640c8904f9c236bcb0"
+  },
+  "reference_circulation_sha256": "9fb36089c55407aa8c23696d275e706efea5f241492bf29e06ca3c82a0210a64",
+  "derived_sha256": {
+    "expected-gaps.csv": "4a845ad0748d1ff38750fc03939404bfde50ccf28f9fe8d6057de8ee9014db5a",
+    "assembly-changes.csv": "a1f9ac704f8ac1fa79a52d1d1f579e1d95a3210cc1a47a384f20c6d14658dc26",
+    "trip-slope-drift.csv": "f1b347a2f5ba986ba0419a70946a529e7dfc74393ef316a8f0248df9feb2dc48",
+    "default-route-check.csv": "7b7b823c8f161923cb6215abd6f7fdcc39ad405507769086d0248ad69716bce5"
+  }
+}
