@@ -40,6 +40,17 @@ Model 1 was first compared with the transient simulator of Wu et al. (2025), wit
 | Horizontal, conventional | 206 °C | 208 °C | 208 °C |
 | Horizontal, dual-wall | 65 °C | 67 °C | 66 °C |
 
+The table gives the values with `physics='v1.7.0'`, which reproduces the recorded comparison. With the v1.8.0 default physics, Model 1 gives the values below. Benchmark dataset 1.0 is unchanged.
+
+| Base case, 600 gal/min, 24 °C/km | Wu et al. | Model 1, v1.8.0 | Model 1, whole-wall reading, v1.8.0 |
+|---|---|---|---|
+| Vertical, conventional | 179 °C | 170 °C | 170 °C |
+| Vertical, internally coated | 76 °C | 127 °C | 67 °C |
+| Vertical, externally coated | 121 °C | 152 °C | 92 °C |
+| Vertical, dual-wall | 59 °C | 61 °C | 60 °C |
+| Horizontal, conventional | 206 °C | 205 °C | 205 °C |
+| Horizontal, dual-wall | 65 °C | 67 °C | 66 °C |
+
 ### FORGE 16B
 
 The field comparison uses the trial of Eavor's insulated drill pipe in Utah FORGE well 16B in May 2023 (`validate_forge16b.py`). Four bits were run in 9.5-inch hole at 60 to 70° inclination: two on regular pipe, one on a full string of insulated pipe and one with about 70% insulated pipe above regular pipe. The well's survey, casing, string, rock properties and drilling record come from the public FORGE dataset, the flow and inlet temperature minute by minute from the rig's records, and the measured MWD temperatures from Eavor's trial report. The model is run at half-hourly intervals while each bit was drilling and compared with the fluid temperature in the pipe at the MWD sensor. Without fitting, the model overestimated the temperature on the runs with regular pipe by 4 to 12 °F. A multiplier of 0.75 on the annulus heat-transfer coefficient, fitted to those runs, brings them within 5 °F. One effective conductivity for Eavor's pipe, fitted on the full insulated run, gives 4.9 W/m·K across the pipe wall, which is within about 15% of the wall resistance of a 1 mm coating at 0.47 W/m·K on steel, the coating Eavor has described (Vetsak et al., 2024). The run with partial insulation was then predicted with no further fitting.

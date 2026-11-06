@@ -1,5 +1,23 @@
 # Release checklist
 
+## v1.8.0
+
+- [x] Declare and score entry 14 before the release commit.
+- [x] Make the v1.8.0 physics the package default, with `physics='v1.7.0'` restoring the previous defaults.
+- [x] Add the v1.8.0 site table and UT Austin values, and keep the v1.7.0 goldens tested under `physics='v1.7.0'`.
+- [x] Reproduce the v1.7.0 goldens, site exports and benchmark values under `physics='v1.7.0'`.
+- [x] Compare public names and signatures with v1.7.0, listing additions and changed defaults.
+- [x] Run the fast suite and the full slow suite locally.
+- [x] Build and check the wheel and source distribution, with the tool table in the wheel.
+- [x] Check a fresh wheel installation outside the checkout.
+- [x] Run the link checker and the strict documentation build from a clean export.
+- [x] Confirm that the results archives under `validation/` are unchanged since they were committed.
+- [ ] Record the fast matrix and slow job from CI.
+- [ ] Tag v1.8.0 and publish the GitHub release.
+- [ ] Check PyPI, the website and the Zenodo version DOI, and record publication.
+
+See the [v1.8.0 release record](../releases/v1.8.0.md) for the checks and publication status.
+
 ## v1.7.0
 
 - [x] Merge the development and history-observation branches with a merge commit.

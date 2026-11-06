@@ -1,5 +1,51 @@
 # Changelog
 
+## v1.8.0 (6 November 2026)
+
+Every result calculated with the package defaults changes. `physics='v1.7.0'`
+restores every previous default, and with it the v1.7.0 golden tables, site
+exports and benchmark values reproduce.
+
+**Default physics.** `evaluate`, `circulating_temperatures` and `hydraulics`
+accept `physics`, and `borethm-evaluate` and `borethm-sites` accept
+`--physics`. The default, `'v1.8.0'`, uses:
+
+| Setting | v1.8.0 default | v1.7.0 value |
+|---|---|---|
+| Annulus pressure and flow regime | Herschel-Bulkley slot model with the Erge transition band | Bingham plastic with the apparent-viscosity criterion |
+| Annulus heat transfer | Gnielinski on the plastic viscosity, laminar values in laminar flow | Dittus-Boelter on the plastic viscosity |
+| Mud with only plastic viscosity and yield point | Power law with zero yield stress | Bingham plastic |
+| Pipe friction | Colebrook on a smooth wall | Blasius |
+| Ordinary drill-pipe joint transitions | Conical at 11.5° in the bore | Abrupt |
+| Downhole tool losses | Generic allowances for named tools | Zero unless entered |
+| Motor pressure drop | No-load drop plus differential | Differential only |
+
+A setting given explicitly overrides its row. `hydraulics_model='v1.5.0'`
+always uses the v1.7.0 values.
+
+**Tool-loss allowances.** `DownholeTool` declares a tool by class and collar
+size, on `StringSegment.tools` or in a site file under
+`[[programme.bha_tools]]`. A tool with no entered figure takes a generic
+allowance derived from published specification sheets, in
+`data/tool_loss_defaults.csv`. These describe no particular tool, so a maker's
+figure should be entered when available. Mud motors at no load, filter subs,
+float subs and 8-in rotary steerable tools have no usable published figure.
+They default to zero, with a warning. The reference programmes now declare a
+6¾-in MWD pulser allowance, larger than the published curve they used before.
+
+**Changes to results.** The status of all five built-in sites is unchanged. Pump
+pressure changes by -13% to +9% and bit temperature by -22.5 to +0.2 °C, the
+largest change being at Larderello, where the annulus is laminar. The UT Austin
+bit temperatures fall by 0.3 to 3.0 °C. Benchmark dataset 1.0 is unchanged. The
+[release record](docs/releases/v1.8.0.md) gives the values and the setting
+behind each change.
+
+**Limitations.** The model still reads low in all nine FORGE 16A assemblies, by
+355 to 1,673 psi. Part of the shallow 16B gap remains unexplained, including at
+low flow. The flow regime depends on the yield stress, which FORGE 16A and 16B
+do not test. The FORGE scores moved in mixed directions, and unseen-well thermal
+tests come next.
+
 ## v1.7.0 (5 November 2026)
 
 Every new option is off by default. With the defaults, `evaluate`,

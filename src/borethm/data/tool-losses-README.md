@@ -1,6 +1,6 @@
 # Downhole tool-loss table
 
-`tool_losses.csv` has one row per published figure for a downhole tool. `tool_loss_defaults.csv` holds the defaults derived from it, written by `tools/build_tool_losses.py` with the rule in `borethm/tool_losses.py`. These defaults are generic allowances. A maker's figure for the actual tool should be entered when it is available.
+`tool_losses.csv` has one row per published figure for a downhole tool. `tool_loss_defaults.csv` gives the defaults derived from it, written by `tools/build_tool_losses.py` with the rule in `borethm/tool_losses.py`. These defaults are generic allowances. A maker's figure for the actual tool should be entered when it is available.
 
 ## Columns
 

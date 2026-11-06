@@ -2,6 +2,8 @@
 
 These archives compare declared changes with the frozen FORGE 16A and 16B development observations. They do not provide independent validation of changes motivated by those observations. Declarations and decisions are recorded in the [development log](../../docs/science/model-development.md).
 
+The scripts of entries 1 to 13 predate the v1.8.0 default physics. They reproduce from the `v1.7.0` tag, or inside `physics.using('v1.7.0')`, and the archives record the configuration that produced them.
+
 | Entry | Archive |
 |---|---|
 | 1: hydraulic losses and heat placement | [Six-gap before/after comparison](entry-1/README.md) |

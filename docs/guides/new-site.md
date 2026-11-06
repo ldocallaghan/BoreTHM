@@ -244,6 +244,53 @@ well geometry, pipe, flow and drilling cycle through its reference rules.
 | Specify a circulation, stability, wall-temperature or tool calculation | Public component functions in the [Python API](../api.md) |
 | Reproduce documented design interventions | Internal [study modules](../science/design-comparisons.md#evidence-and-reproduction), which provide no stable programme-configuration interface |
 
+## Default physics and downhole tools
+
+The optional `[programme]` table of a site file sets how the circulation is calculated. By default a result uses the v1.8.0 physics:
+
+| Setting | v1.8.0 default | v1.7.0 value |
+|---|---|---|
+| Annulus pressure, flow regime and heat transfer | Herschel-Bulkley slot model with the Erge transition band, `annulus_model = "herschel-bulkley-erge"` | Bingham pressure with Dittus-Boelter heat transfer, `"v1.6.0"` |
+| Pipe friction | `friction = "colebrook"` on a smooth wall, `roughness = 0.0` | `"blasius"` |
+| Ordinary drill-pipe joint transitions | Tapered at 11.5°, from the published internal-upset taper of entry 13 | Abrupt |
+| Tool pressure losses | Generic allowances for the tools named on the string | Zero unless entered |
+| Motor pressure drop | No-load drop plus differential | Differential only |
+
+`physics = "v1.7.0"` in the table, `--physics v1.7.0` on `borethm-evaluate` and `borethm-sites`, or `physics='v1.7.0'` in Python restores the previous values of all of these. A setting given explicitly overrides its row, so `friction = "blasius"` under the default keeps the other v1.8.0 settings.
+
+### Mud rheology from PV and YP
+
+Plastic viscosity (PV) and yield point (YP) are the usual field readings of a drilling mud. When a fluid gives only these, the default annulus converts them to a power law through the 600 and 300 rpm viscometer readings, θ600 = 2 PV + YP and θ300 = PV + YP, with zero yield stress. This is the no-yield conversion of [entry 8](../science/model-development.md#31-october-2026-entry-8-score). A fluid with a `fluids.HerschelBulkley` rheology uses it as given, and a fluid with neither is treated as Newtonian.
+
+The zero yield stress was chosen after two comparisons with FORGE 16A and 16B, so those wells do not test it. The yield stress can matter: in entry 7, a yield stress at the 10-second gel made the 16A bit temperature 4–19 °C colder. If you have low-shear readings for your mud, enter them through `fluids.HerschelBulkley`.
+
+### Tools on the string
+
+The reference programme of every built-in site and of a new site file declares one MWD (measurement while drilling) mud pulser at the 6¾-in size of its collar. The loss is a generic allowance taken from published specification sheets. It describes no particular tool in that well.
+
+The allowances are in [`tool_losses.csv`](../../src/borethm/data/tool_losses.csv), and its [README](../../src/borethm/data/tool-losses-README.md) gives each source. A tool's loss is ΔP_ref × (ρ/ρ_ref) × (Q/Q_ref)^n, and the heat enters the fluid at the tool's depth. **Enter the maker's figure for the actual tool when you have it.** A tool with no figure takes the allowance for its class and the size band nearest to its collar:
+
+```toml
+[programme]
+
+[[programme.bha_tools]]
+tool_class = "mwd_pulser"
+collar_in = 6.75
+dp_ref_psi = 130.0
+flow_ref_gpm = 600.0
+density_ref_ppg = 8.34
+exponent = 1.8  # optional; 2 if omitted
+source = "Maker's sheet, edition, page"
+
+[[programme.bha_tools]]
+tool_class = "rotary_steerable"
+collar_in = 6.75
+```
+
+The classes are `mwd_pulser`, `rotary_steerable`, `mud_motor`, `filter_sub` and `float_sub`. A segment of a custom `programme.segments` list accepts the same entries under `tools`, and a motor's `differential_psi` gives its on-bottom differential.
+
+No published no-load figure with a stated flow was found for a mud motor, and no figure was found for filter or float subs. These classes default to zero, and the result carries a warning. The 9.5-in pulser and rotary steerable allowances each come from one source, and rotary steerable tools have no allowance at 8 in.
+
 ## Python route
 
 `load_site` returns a `SiteProfile`. Use it with the public validation,
