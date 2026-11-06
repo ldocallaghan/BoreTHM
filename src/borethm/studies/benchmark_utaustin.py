@@ -43,6 +43,7 @@ import sys
 import numpy as np
 
 from borethm import model1_coupled as m1
+from borethm import physics as _physics
 from borethm import well_geometry as wg
 
 MUD = dict(rho=1078.0, cp=3750.0, mu=0.014, k=0.75)
@@ -219,13 +220,19 @@ def figure(out, path):
 
 from borethm._paths import repository_path, require_path
 
-# The original calculation, copied into benchmark dataset 1.0, and the current one.
+# The original calculation, copied into benchmark dataset 1.0, the calculation of
+# v1.6.0 and v1.7.0, and the current one.
 GOLDEN = repository_path("tests/golden/benchmark_utaustin.json")
-GOLDEN_CURRENT = repository_path("tests/golden/benchmark_utaustin_v160.json")
+GOLDEN_V160 = repository_path("tests/golden/benchmark_utaustin_v160.json")
+GOLDEN_CURRENT = repository_path("tests/golden/benchmark_utaustin_v180.json")
 
 
-def golden_rows(hydraulics_model='v1.6.0'):
-    """The base-case comparison and standpipe pressures, as pinned by the tests."""
+def golden_rows(hydraulics_model='v1.6.0', physics=None):
+    """The base-case comparison and standpipe pressures, as pinned by the tests.
+    physics selects the default physics, and None uses the package default."""
+    if physics is not None:
+        with _physics.using(physics):
+            return golden_rows(hydraulics_model)
     rows = {}
     kw = dict(hydraulics_model=hydraulics_model)
     for orient in ("vertical", "horizontal"):

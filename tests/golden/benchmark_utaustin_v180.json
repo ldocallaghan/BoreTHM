@@ -1,0 +1,54 @@
+{
+ "vertical/conventional": {
+  "wu": 179,
+  "mud": 169.76327483877515,
+  "whole_wall": 169.76327483877515
+ },
+ "vertical/internal": {
+  "wu": 76,
+  "mud": 126.84336074811226,
+  "whole_wall": 66.5724446870248
+ },
+ "vertical/external": {
+  "wu": 121,
+  "mud": 152.32762225647855,
+  "whole_wall": 91.51383079914174
+ },
+ "vertical/dual-wall": {
+  "wu": 59,
+  "mud": 61.072921464910465,
+  "whole_wall": 60.5277199829746
+ },
+ "horizontal/conventional": {
+  "wu": 206,
+  "mud": 205.06749899606274,
+  "whole_wall": 205.06749899606274
+ },
+ "horizontal/internal": {
+  "wu": 100,
+  "mud": 161.68760693857,
+  "whole_wall": 81.7682024135612
+ },
+ "horizontal/external": {
+  "wu": 153,
+  "mud": 188.59144197247534,
+  "whole_wall": 118.09132298410496
+ },
+ "horizontal/dual-wall": {
+  "wu": 65,
+  "mud": 66.94880558708412,
+  "whole_wall": 66.01622589637412
+ },
+ "spp/conventional": {
+  "spp_MPa": 19.04221305085535
+ },
+ "spp/internal": {
+  "spp_MPa": 19.79502295194918
+ },
+ "spp/external": {
+  "spp_MPa": 19.364032182174324
+ },
+ "spp/dual-wall": {
+  "spp_MPa": 76.73010752185533
+ }
+}

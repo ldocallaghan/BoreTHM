@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "sites": {
+    "soultz": {
+      "status": "NO-GO",
+      "target_m": 10700.0,
+      "pipe": "TK-Drakon coated",
+      "flow": 45,
+      "flow_unit": "L/s",
+      "bit_C": 194.04968507238618,
+      "weights_SG": {
+        "drilling_simulated_rho_surface": 1.3776924586502843,
+        "drilling_prescribed_rho_surface": 1.3777973985106327,
+        "trip_simulated_rho_surface": 1.443867016112716,
+        "trip_prescribed_rho_surface": 1.4439485804355223
+      },
+      "windows": {
+        "drilling_fluid": {
+          "open": false,
+          "lower_SG": 1.3777973985106327,
+          "upper_SG": 1.2449800311818102,
+          "lower_by": {
+            "state": "connection",
+            "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+            "md": 10700.0
+          },
+          "upper_by": {
+            "state": "drilling",
+            "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+            "md": 4000.0
+          }
+        },
+        "trip_fluid": {
+          "open": false,
+          "lower_SG": 1.4439485804355223,
+          "upper_SG": 1.3662075707708545,
+          "lower_by": {
+            "state": "trip",
+            "case": "SHmax upper bound (1.05 Sv), lab UCS 100",
+            "md": 10700.0
+          },
+          "upper_by": {
+            "state": "trip",
+            "case": "SHmax lower bound (0.90 Sv), lab UCS 100",
+            "md": 4000.0
+          }
+        }
+      },
+      "fluid_converged": true,
+      "solver_ok": true,
+      "refinement_converged": true,
+      "tool_ok": true,
+      "coating": "INDETERMINATE",
+      "pumps_ok": true,
+      "rig_ok": true
+    },
+    "united-downs": {
+      "status": "NO-GO",
+      "target_m": 12857.142857142857,
+      "pipe": "TK-Drakon coated",
+      "flow": 45,
+      "flow_unit": "L/s",
+      "bit_C": 226.3740587722223,
+      "weights_SG": {
+        "drilling_simulated_rho_surface": 1.3453598111726284,
+        "drilling_prescribed_rho_surface": 1.3457226214310143,
+        "trip_simulated_rho_surface": 1.4086025670919453,
+        "trip_prescribed_rho_surface": 1.4088303735455603
+      },
+      "windows": {
+        "drilling_fluid": {
+          "open": false,
+          "lower_SG": 1.3457226214310143,
+          "upper_SG": 1.2637266662275575,
+          "lower_by": {
+            "state": "connection",
+            "case": "Reinecker et al. (2021), weak zones, 40 K",
+            "md": 12857.142857142857
+          },
+          "upper_by": {
+            "state": "drilling",
+            "case": "Reinecker et al. (2021), intact, 0 K",
+            "md": 12857.142857142857
+          }
+        },
+        "trip_fluid": {
+          "open": false,
+          "lower_SG": 1.4088303735455603,
+          "upper_SG": 1.377260440205903,
+          "lower_by": {
+            "state": "trip",
+            "case": "Reinecker et al. (2021), weak zones, 40 K",
+            "md": 12857.142857142857
+          },
+          "upper_by": {
+            "state": "trip",
+            "case": "Reinecker et al. (2021), intact, 0 K",
+            "md": 12857.142857142857
+          }
+        }
+      },
+      "fluid_converged": true,
+      "solver_ok": true,
+      "refinement_converged": true,
+      "tool_ok": false,
+      "coating": "INDETERMINATE",
+      "pumps_ok": true,
+      "rig_ok": true
+    },
+    "larderello": {
+      "status": "CONDITIONAL",
+      "target_m": 2400.0,
+      "pipe": "TK-Drakon coated",
+      "flow": 30,
+      "flow_unit": "L/s",
+      "bit_C": 46.1715850957953,
+      "weights_SG": {
+        "drilling_simulated_rho_surface": 1.0324476319621148,
+        "drilling_prescribed_rho_surface": 1.032431394983341,
+        "trip_simulated_rho_surface": 1.087178615647637,
+        "trip_prescribed_rho_surface": 1.0871164199837502
+      },
+      "windows": {
+        "drilling_fluid": {
+          "open": true,
+          "lower_SG": 1.032431394983341,
+          "upper_SG": 1.2575499736503737,
+          "lower_by": {
+            "state": "connection",
+            "case": "Shmin 0% of floor-to-Sv",
+            "md": 1200.0
+          },
+          "upper_by": {
+            "state": "drilling",
+            "case": "Shmin 0% of floor-to-Sv",
+            "md": 2400.0
+          }
+        },
+        "trip_fluid": {
+          "open": true,
+          "lower_SG": 1.0871164199837502,
+          "upper_SG": 1.323682873873268,
+          "lower_by": {
+            "state": "trip",
+            "case": "Shmin 0% of floor-to-Sv",
+            "md": 2400.0
+          },
+          "upper_by": {
+            "state": "trip",
+            "case": "Shmin 0% of floor-to-Sv",
+            "md": 2400.0
+          }
+        }
+      },
+      "fluid_converged": true,
+      "solver_ok": true,
+      "refinement_converged": true,
+      "tool_ok": true,
+      "coating": "within rating",
+      "pumps_ok": true,
+      "rig_ok": true
+    },
+    "pannonian": {
+      "status": "NO-GO",
+      "target_m": 9714.0,
+      "pipe": "TK-Drakon coated",
+      "flow": 40,
+      "flow_unit": "L/s",
+      "bit_C": 193.57827907081736,
+      "weights_SG": {
+        "drilling_simulated_rho_surface": 1.468494383290704,
+        "drilling_prescribed_rho_surface": 1.4685711664418564,
+        "trip_simulated_rho_surface": 1.5497622919712841,
+        "trip_prescribed_rho_surface": 1.5498279732946891
+      },
+      "windows": {
+        "drilling_fluid": {
+          "open": false,
+          "lower_SG": 1.4685711664418564,
+          "upper_SG": 1.2501777496102406,
+          "lower_by": {
+            "state": "connection",
+            "case": "Shmin 100% of floor-to-Sv",
+            "md": 9714.0
+          },
+          "upper_by": {
+            "state": "drilling",
+            "case": "Shmin 0% of floor-to-Sv",
+            "md": 4000.0
+          }
+        },
+        "trip_fluid": {
+          "open": false,
+          "lower_SG": 1.5498279732946891,
+          "upper_SG": 1.3518468148900364,
+          "lower_by": {
+            "state": "trip",
+            "case": "Shmin 100% of floor-to-Sv",
+            "md": 9714.0
+          },
+          "upper_by": {
+            "state": "trip",
+            "case": "Shmin 0% of floor-to-Sv",
+            "md": 4000.0
+          }
+        }
+      },
+      "fluid_converged": true,
+      "solver_ok": true,
+      "refinement_converged": true,
+      "tool_ok": true,
+      "coating": "INDETERMINATE",
+      "pumps_ok": true,
+      "rig_ok": true
+    },
+    "newberry": {
+      "status": "GO",
+      "target_m": 3629.54044732043,
+      "pipe": "TK-Drakon coated",
+      "flow": 30,
+      "flow_unit": "kg/s",
+      "bit_C": 92.31315069036633,
+      "weights_SG": {
+        "drilling_simulated_rho_surface": 0.9982012723757281,
+        "drilling_prescribed_rho_surface": 0.9982012723757281,
+        "trip_simulated_rho_surface": 0.9982012723757281,
+        "trip_prescribed_rho_surface": 0.9982012723757281
+      },
+      "windows": {
+        "drilling_fluid": {
+          "open": true,
+          "lower_SG": 0.9982012723757281,
+          "upper_SG": 1.218760835767223,
+          "lower_by": {
+            "state": "drilling",
+            "case": "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10",
+            "md": null
+          },
+          "upper_by": {
+            "state": "drilling",
+            "case": "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10",
+            "md": 3629.54044732043
+          }
+        },
+        "trip_fluid": {
+          "open": true,
+          "lower_SG": 0.9982012723757281,
+          "upper_SG": 1.2353804244957036,
+          "lower_by": {
+            "state": "trip",
+            "case": "Davatzes & Hickman (2011), mu 0.55, log-derived granodiorite p10",
+            "md": null
+          },
+          "upper_by": {
+            "state": "trip",
+            "case": "Davatzes & Hickman (2011), mu 0.7, log-derived granodiorite p10",
+            "md": 3629.54044732043
+          }
+        }
+      },
+      "fluid_converged": true,
+      "solver_ok": true,
+      "refinement_converged": true,
+      "tool_ok": true,
+      "coating": "within rating",
+      "pumps_ok": true,
+      "rig_ok": true
+    }
+  },
+  "versions": {
+    "commit": "5b8648eda4ac139c87a183932b51d1a9662964c9",
+    "dirty": true,
+    "python": "3.14.4",
+    "packages": {
+      "borethm": "1.8.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  }
+}

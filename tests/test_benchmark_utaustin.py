@@ -9,14 +9,15 @@ from borethm.studies import benchmark_utaustin as b
 pytestmark = pytest.mark.slow
 
 
-@pytest.mark.parametrize('path, hydraulics_model', [
-    (b.GOLDEN, 'v1.5.0'),             # the original calculation, in benchmark dataset 1.0
-    (b.GOLDEN_CURRENT, 'v1.6.0'),
+@pytest.mark.parametrize('path, hydraulics_model, physics', [
+    (b.GOLDEN, 'v1.5.0', None),             # the original calculation, in benchmark dataset 1.0
+    (b.GOLDEN_V160, 'v1.6.0', 'v1.7.0'),
+    (b.GOLDEN_CURRENT, 'v1.6.0', 'v1.8.0'),
 ])
-def test_benchmark_table_is_unchanged(path, hydraulics_model):
+def test_benchmark_table_is_unchanged(path, hydraulics_model, physics):
     with open(path) as fh:
         golden = json.load(fh)
-    now = b.golden_rows(hydraulics_model)
+    now = b.golden_rows(hydraulics_model, physics)
     assert now.keys() == golden.keys()
     for key, row in golden.items():
         for col, val in row.items():
