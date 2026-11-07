@@ -19,7 +19,8 @@ def rayleigh(fluid, temperature, wall, pressure, radius, inner, height, properti
     if properties is not None:
         density, cp, viscosity, conductivity = (np.full(3, value) for value in properties)
     gap = radius-inner
-    return dict(fluid_C=temperature, wall_C=wall, gap_m=gap, height_m=height,
+    buoyancy = density[1]*9.80665*expansion*abs(wall-temperature)*gap
+    return dict(buoyancy_stress_Pa=buoyancy, fluid_C=temperature, wall_C=wall, gap_m=gap, height_m=height,
                 aspect_ratio=None if height is None else height/gap,
                 rayleigh=gap_rayleigh(gap, wall-temperature, density[1], cp[1],
                                       viscosity[1], conductivity[1], expansion),
@@ -42,8 +43,11 @@ def forge16a():
             radius = study.static(run, depth, bit, fluid)[2]
             inner = float(study.geometry(run, bit).at(np.array([depth]))["r_out"][0])
             pressure = model.P_of_z(study.path.tvd(depth))
-            yield base | rayleigh(fluid, state["T"][-1], state["wall"][-1],
-                                  pressure, radius, inner, depth) | {"status": "calculated"}
+            values = rayleigh(fluid, state["T"][-1], state["wall"][-1],
+                              pressure, radius, inner, depth)
+            stress = values["buoyancy_stress_Pa"]
+            yield base | values | dict(yield_to_buoyancy=fluid.yield_point/stress if stress > 0 else None,
+                                       status="calculated")
         except (ValueError, IndexError) as error:
             yield base | {"status": str(error)}
 

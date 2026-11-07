@@ -31,3 +31,12 @@ static column height is specified for these local calculations, so the
 aspect ratio is left blank. Rayleigh numbers span 0.64 million to
 731 million across the Well 4 geometries and 0.40 million to 7.11 million
 for Khaled.
+
+The 16A table also reports the buoyancy stress across the gap,
+ρ g β |ΔT| multiplied by the gap, and the ratio of recorded yield
+point to that stress. The ratio spans 0.66–3.44. It uses local mud
+density and thermal expansion from the same calculation as the
+Rayleigh number. The recorded yield point describes surface mud.
+The ratio has no validated onset threshold for this annulus, and
+some 16A legs could convect. The slow primary and the two limits
+remain the declared assumptions.

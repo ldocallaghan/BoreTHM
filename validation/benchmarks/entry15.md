@@ -7,3 +7,18 @@ The conduction-floor result exceeds the ±0.05 recovery fraction tolerance for b
 The [Khaled calculation](entry15_khaled.py) treats the pipe as present in the static annulus and prescribes a 114 °C wall for the reported 3.5 h exposure. These assumptions initialise the rock and fluid for a conditional comparison. The [results](entry15-khaled.csv) give 114.7 °C at five minutes and 207.7 °C at 24 hours, compared with 119 °C and 220 °C in Table 3. The case has no pass tolerance.
 
 The [Brown pump-off case](README.md#brown-et-al-pump-off-connection) was reclassified before calculating a recovery result. The source gives a plotted history and omits the initial fluid and rock profiles and the fitted Fourier number for the effective formation radius. An independently reproducible pump-off threshold cannot be calculated from those inputs.
+
+## Published pump-off state
+
+The [revised Khaled comparison](entry15-khaled-published-start.csv)
+uses a 43.0 W/(m² K) circulating film inferred from the published
+114 °C fluid and 153 °C near-wall formation temperatures after
+3.5 h of circulation. The fit uses only the initial state. At 30 min
+the slow and fast limits give fluid temperatures of 128.6 °C and
+145.9 °C against 141 °C in Table 3. At 60 min they give 140.1 °C and
+157.6 °C against 162 °C. The corresponding wall temperatures are
+159.8 °C and 145.9 °C at 30 min, and 164.8 °C and 157.6 °C at 60 min.
+The published wall temperatures are 176 °C and 191 °C. At the fast
+limit the wall and fluid share a temperature after pump-off. The
+earlier cold-start results remain in the archive.
+[SPE-212550-PA, Table 3](https://doi.org/10.2118/212550-PA)
