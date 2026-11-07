@@ -615,7 +615,7 @@ of 200e6 Pa at 25 degrees C.
 ## wall_temperatures
 
 ```python
-wall_temperatures(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growth=1.08, probe_r=None, observe=None, radius_m=None, carry_static_node=False)
+wall_temperatures(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growth=1.08, probe_r=None, observe=None, radius_m=None, carry_static_node=False, dt_max=None)
 ```
 
 Conduct heat through the history of states. T_rock: far-field and
@@ -636,7 +636,8 @@ With carry_static_node=True, a static state with no initial fluid-node
 temperature starts from the preceding static state's final fluid-node
 temperature. By default it starts from the last circulating fluid
 temperature, or the wall temperature when no circulation preceded it.
-Every default reproduces the previous results.
+dt_max sets a maximum radial time step in seconds. By default the cap
+is one fiftieth of each state's duration.
 
 ## tool_trip_in
 

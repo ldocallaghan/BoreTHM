@@ -148,7 +148,8 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
     temperature starts from the preceding static state's final fluid-node
     temperature. By default it starts from the last circulating fluid
     temperature, or the wall temperature when no circulation preceded it.
-    Every default reproduces the previous results.
+    dt_max sets a maximum radial time step in seconds. By default the cap
+    is one fiftieth of each state's duration.
     """
     alpha = k / rhocp
     total = sum(s.duration for s in history)
