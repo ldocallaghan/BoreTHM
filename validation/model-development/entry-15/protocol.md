@@ -121,3 +121,20 @@ and 27. The case keys use an 84 ft MWD proxy pending confirmation
 of the instrument that supplied the published values. Stage matching
 and the temperature observations remain sealed for the held-out
 comparison.
+
+### Run 17 restart throughput
+
+The [run 17 throughput table](run17-flush.csv) uses the recorded
+Pason pump output and the string geometry at the end of each
+trip stage or connection. The flush volume is the bore volume
+plus the annulus volume alongside the lower assembly, including
+heavy-weight drill pipe. A zero-flow row resets the restart
+counter. The [builder](run17_flush.py) locates the boundary inside
+the recorded time bin without rounding to the next pump sample.
+
+Four trip stages reach the handover volume during their following
+circulation, 944–998 s after the recorded circulation start. The
+other four and all sixteen five-minute connection restart windows
+stay in transient circulation. The table identifies the switch
+times. The quasi-steady temperature solve at that boundary remains
+to be connected to the column history.

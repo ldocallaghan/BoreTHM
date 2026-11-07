@@ -31,3 +31,16 @@ def test_descent_pause_and_restart_share_bore_inventory(float_valve):
     assert output[-1].sensors_C[0][0] == column.bore_temperature[1]
     assert max(abs(step.energy_residual_J) for step in output) < 1e-4
     np.testing.assert_allclose(column.bore_volume, [.2, 1.] if float_valve else [1., .2])
+
+
+def test_restart_throughput_splits_a_recorded_step_and_resets_after_pause():
+    from borethm.column_replay import circulation_phases
+
+    steps = [ColumnStep(10., (0.,), flow=2., inlet_C=20.),
+             ColumnStep(20., (0.,), flow=3., inlet_C=21.),
+             ColumnStep(10., (0.,)),
+             ColumnStep(2., (0.,), flow=4., inlet_C=21.)]
+    phases = list(circulation_phases(steps, flush_volume=35.))
+    assert [(kind, step.duration) for kind, step in phases] == [
+        ("restart", 10.), ("restart", 5.), ("steady", 15.),
+        ("static", 10.), ("restart", 2.)]

@@ -1,5 +1,5 @@
 """Replay prescribed motion, recovery and circulation on the same column."""
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 import numpy as np
 
@@ -95,3 +95,33 @@ def replay(column: MovingColumn, steps):
         residual = stored_energy(column, step.contacts)-initial-supplied+returned+rock
         yield StepResult(elapsed, tuple(c.tool.sensor_temperatures() for c in step.contacts),
                          supplied, returned, rock, residual)
+
+
+def circulation_phases(steps, flush_volume):
+    """Split recorded pump steps at the exact restart throughput.
+
+    The throughput is one bore volume plus the annulus volume alongside
+    the BHA. The caller supplies that volume from the current geometry.
+    Each row is tagged with the calculation to use for its duration.
+    """
+    if not np.isfinite(flush_volume) or flush_volume <= 0:
+        raise ValueError("flush volume must be finite and positive")
+    remaining = flush_volume
+    for step in steps:
+        if step.flow <= 0.:
+            remaining = flush_volume
+            yield "static", step
+            continue
+        if remaining <= 0.:
+            yield "steady", step
+            continue
+        pumped = step.flow*step.duration
+        if pumped <= remaining:
+            remaining -= pumped
+            yield "restart", step
+            continue
+        transient_time = remaining/step.flow
+        yield "restart", replace(step, duration=transient_time)
+        yield "steady", replace(step, duration=step.duration-transient_time,
+                                annulus_volume=None, added_bore_volume=0.)
+        remaining = 0.
