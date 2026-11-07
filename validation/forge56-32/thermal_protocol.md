@@ -93,3 +93,7 @@ The conventional assembly assignment required by the Phase 0 protocol is
 unavailable here. The interval cannot form a separate measure under those
 rules. The [availability builder](mwd_availability.py) uses the finite
 flag and the recorded operating inputs.
+
+The 23 February MWD window is excluded because the mud hammer and
+subsequent pull-out are outside the conventional assembly model.
+The 56-32 thermal test therefore uses return temperature only.

@@ -35,3 +35,15 @@ The combined release calculation shifts the bit by −38.65 K and +6.61 K.
 These effects do not add linearly. The annulus is laminar throughout Holmes
 and Swift and turbulent throughout Khaled under the release regime criterion.
 The table gives the Reynolds number ranges.
+
+## Fluid property audit, 7 November 2026
+
+The historical fixed-film run replaced the published constant fluid
+properties with a water-barite mud. For Holmes and Swift, the published
+specific heat is 1,675 J/(kg K) and viscosity is 0.04547 Pa s. The
+substituted mud gives 3,361 J/(kg K) and 0.04848 Pa s at the inlet
+and 3,299 J/(kg K) and 0.02218 Pa s at the bit in the fixed-film run.
+The −22.25 K shift therefore includes a change in the fluid inputs.
+Passing the published properties through to both solvers gives a bit
+difference of −0.00000017 K at fixed films and −0.00000023 K with
+live films. See the [property audit](kabir-property-audit.csv).

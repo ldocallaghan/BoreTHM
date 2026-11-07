@@ -2790,3 +2790,12 @@ The published case leaves static capacity and film unspecified. The
 of those assumptions. The candidate stopped at this verification step
 before an integrated event forecast or comparison. The default run-in
 calculation remains in use.
+
+### Entry 15 benchmark correction, 7 November 2026
+
+The [wall recovery comparison](../../validation/benchmarks/entry15-wall.md)
+uses zero fluid capacity and an insulated wall during shut-in. The
+maximum errors are 0.152 and 0.091 in recovery fraction for the two
+circulation durations, exceeding the ±0.05 tolerance. The earlier
+fluid-node results describe sensitivity to static coupling. Event
+calculations and scoring remain pending at this benchmark checkpoint.
