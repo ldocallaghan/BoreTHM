@@ -138,3 +138,26 @@ other four and all sixteen five-minute connection restart windows
 stay in transient circulation. The table identifies the switch
 times. The quasi-steady temperature solve at that boundary remains
 to be connected to the column history.
+
+### Run 17 stage-03 descent check
+
+The [stage-03 replay](run17-descent-pilot.csv) follows the recorded
+Pason depth changes with a 1.25 s step cap. It integrates the occupied
+bore and annulus volumes on a fixed depth grid and changes the bore
+cell boundaries without averaging away parcel fronts. The two
+coupling limits and both float-valve assumptions use the recorded
+tool lengths. The [replay builder](run17_descent.py) keeps the deepest
+depth reached so far, omitting 1.08 ft of cumulative backtracking
+from this pilot.
+
+The pilot uses the lumped earlier circulation at the last boundary
+that reached the final depth. It holds the earlier drill string out
+of the hole during preconditioning shut-in and uses a fixed water
+volumetric heat capacity. It uses the inlet temperature for the
+surface fill with a float. The recorded bit gauge equals the open-hole
+diameter, so the outside displacement-film equation cannot be applied
+to that geometry. The bit uses the static limit during motion.
+No event convergence claim follows from the single grid in this
+check. The summed absolute energy residual is under 0.024 J in
+each configuration. This check covers descent and does not include
+the following circulation.

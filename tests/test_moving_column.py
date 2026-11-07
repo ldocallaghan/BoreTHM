@@ -89,3 +89,14 @@ def test_explicit_radial_step_matches_original_static_equations():
     eliminated = run(states, 120., .1, 2.5, 2.5e6, n=32, dt_max=duration/50)
     np.testing.assert_allclose(eliminated.T_wall, original.T_wall, atol=1e-9, rtol=0.)
     np.testing.assert_allclose(eliminated.T_node, original.T_node, atol=1e-9, rtol=0.)
+
+
+def test_bore_regrid_moves_no_heat_and_retains_original_front():
+    column = make_column()
+    column.restart_step(1., .3, 15., [0., 0., 0.])
+    before = inventory(column)
+    column.regrid_bore([.6, .4])
+    np.testing.assert_allclose(column.bore_temperature, [22.5, 30.])
+    column.regrid_bore([.3, .7])
+    np.testing.assert_allclose(column.bore_temperature, [15., 30.])
+    assert inventory(column) == pytest.approx(before)

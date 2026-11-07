@@ -95,6 +95,18 @@ class MovingColumn:
         self._read_parcels()
         return max(0., exit_volume), self.fluid_heat_capacity*returned.inventory
 
+    def regrid_bore(self, volumes):
+        """Change bore cell boundaries without mixing the retained parcels."""
+        volumes = np.asarray(volumes, dtype=float)
+        if (volumes.ndim != 1 or not len(volumes) or not np.all(np.isfinite(volumes))
+                or np.any(volumes <= 0.)
+                or not np.isclose(np.sum(volumes), np.sum(self.bore_volume), rtol=1e-12, atol=1e-12)):
+            raise ValueError("new bore grid must preserve volume")
+        self._sync_parcels()
+        temperature = self._bore.averages(volumes)
+        self.bore_volume = volumes.copy()
+        self.bore_temperature = temperature
+
     def recover(self, duration, films):
         """Advance each wall and liquid state and return heat into the rock."""
         capacity = self.fluid_heat_capacity*self.annulus_volume/self.cell_length

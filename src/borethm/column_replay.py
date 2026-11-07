@@ -29,6 +29,7 @@ class ColumnStep:
     flow: float = 0.
     inlet_C: float | None = None
     active_cells: int | None = None
+    bore_volume: np.ndarray | None = None
 
 
 @dataclass(frozen=True)
@@ -78,6 +79,8 @@ def replay(column: MovingColumn, steps):
                                          fill_temperature=step.fill_C)
             if step.float_valve and step.added_bore_volume:
                 supplied += step.added_bore_volume*step.fill_C*column.fluid_heat_capacity
+        if step.bore_volume is not None:
+            column.regrid_bore(step.bore_volume)
         if step.flow:
             outlet, rock = column.restart_step(
                 step.duration, step.flow, step.inlet_C, step.wall_films,
@@ -123,5 +126,5 @@ def circulation_phases(steps, flush_volume):
         transient_time = remaining/step.flow
         yield "restart", replace(step, duration=transient_time)
         yield "steady", replace(step, duration=step.duration-transient_time,
-                                annulus_volume=None, added_bore_volume=0.)
+                                annulus_volume=None, added_bore_volume=0., bore_volume=None)
         remaining = 0.
