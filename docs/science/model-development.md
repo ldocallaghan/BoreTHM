@@ -2778,3 +2778,15 @@ MWD observations in the selected intervals. The
 [58-32 availability inventory](../../validation/forge58-32/thermal-inventory/README.md)
 identifies which of its pressure-temperature logs can be paired
 with nearby circulation records.
+
+### Entry 15. Run-in column and restart, 7 November 2026
+
+The [declaration](../../validation/model-development/entry-15/declaration.md)
+and [comparison protocol](../../validation/model-development/entry-15/protocol.md)
+record the candidate and the measures. A radial column with a static liquid
+node missed the Well 4 recovery tolerance under conduction-floor coupling.
+The published case leaves static capacity and film unspecified. The
+[verification](../../validation/benchmarks/entry15.md) reports the effect
+of those assumptions. The candidate stopped at this verification step
+before an integrated event forecast or comparison. The default run-in
+calculation remains in use.
