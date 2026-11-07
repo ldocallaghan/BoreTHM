@@ -1,6 +1,7 @@
 """Model-only run 17 connection replay with a lumped conditioning history."""
 import argparse
 import importlib
+from pathlib import Path
 
 import numpy as np
 
@@ -9,6 +10,7 @@ from borethm.layered_tool import LayeredTool
 from borethm.moving_column import MovingColumn
 from borethm.run_in_column import RadialColumn
 from borethm.wall_thermal import NU_LAMINAR
+from borethm.studies.pressure_comparison import assembly_audit
 from validation.benchmarks.run_circulation import write_csv
 
 audit = importlib.import_module(f"{__package__}.run17_rayleigh")
@@ -17,15 +19,28 @@ model = audit.model
 b = audit.forge16b
 
 
-def run(event, operating, *, cells, radial, step_s, well_mixed):
+def run(event, operating, *, cells, radial, step_s, well_mixed, recorded_contact=True):
     plan = audit.read_json(audit.PLAN)
     form = audit.forge16a.formation("216", audit.forge16a.survey())[0]
     _, *clocks = audit.whole.clock(audit.FORGE)
     defs = {int(r["eow_bha"]): r for r in audit.rows(audit.FORGE/"run_definitions.csv")}
     g, solved, m_dot, exposure, stamp, _ = audit.conditioning(event, plan, form, clocks, defs)
-    faces = np.unique(np.r_[np.linspace(0., g.md_bit, cells+1),
-                            np.cumsum([seg.length for seg in g.string])[:-1],
-                            [h.md_top for h in g.hole if 0. < h.md_top < g.md_bit]])
+    carrier = next(r for r in audit.rows(inputs.HERE/"sanvean_sensor_geometry.csv")
+                   if r["eow_bha"] == "17")
+    bit = next(r for r in assembly_audit()
+               if r["well"] == "16B" and r["bha"] == "17" and r["bit"])
+    bit_span = (0., bit["length_ft"])
+    box_span = (float(carrier["black_box_bottom_ft"]), float(carrier["black_box_top_ft"]))
+    contacts = (("bit", bit_span, bit["reported_od_in"], bit["reported_id_in"]),
+                ("black_box", box_span, float(carrier["black_box_od_in"]),
+                 float(carrier["black_box_bore_in"])))
+    faces = np.r_[np.linspace(0., g.md_bit, cells+1),
+                  np.cumsum([seg.length for seg in g.string])[:-1],
+                  [h.md_top for h in g.hole if 0. < h.md_top < g.md_bit]]
+    for _, (lower, upper), _, _ in contacts:
+        start, end = g.md_bit-upper*b.FT, g.md_bit-lower*b.FT
+        faces = np.r_[faces[(faces < start) | (faces > end)], start, end]
+    faces = np.unique(faces)
     lengths = np.diff(faces)
     md = (faces[1:]+faces[:-1])/2
     dim = g.at(md)
@@ -42,14 +57,16 @@ def run(event, operating, *, cells, radial, step_s, well_mixed):
                             b.RHOCP_ROCK, duration+3600., radial_nodes=radial,
                             casing_resistance=dim["R_hole"][i])
         node.circulate(duration, tu[i], h[i])
+        node.max_radial_step_s = 1.
         rock.append(node)
     column = MovingColumn(rock, lengths, dim["A_ann"]*lengths, capacity,
                           dim["A_bore"]*lengths, td.copy())
     sensors = []
-    for label, offset, od, bore in (("bit", 0., 9.5, 2.75), ("black_box", 110.955, 6.75, 2.25)):
-        index = min(np.searchsorted(faces, g.md_bit-offset*b.FT)-1, len(md)-1)
+    for label, (lower, upper), od, bore in contacts:
+        midpoint = g.md_bit-(lower+upper)/2*b.FT
+        index = np.searchsorted(faces, midpoint)-1
         tool = LayeredTool(bore*b.INCH/2, od*b.INCH/2, capacity, td[index])
-        length = min(0.25, lengths[index])
+        length = lengths[index] if recorded_contact else 0.25
         sensors.append((label, index, tool, length))
 
     def steps():
@@ -68,7 +85,8 @@ def run(event, operating, *, cells, radial, step_s, well_mixed):
         restart = inputs.timestamp(event["end_pason"])-stamp
         after = [v for row, v in zip(series, readings, strict=True) if row.elapsed > restart]
         yield dict(event=event["event"], cells=len(md), radial_nodes=radial,
-                   max_step_s=step_s, coupling="mixed" if well_mixed else "slow",
+                   max_step_s=step_s, contact="recorded" if recorded_contact else "0.25 m",
+                   coupling="mixed" if well_mixed else "slow",
                    sensor=label, peak_restart_C=max(after),
                    max_step_energy_error_J=max(abs(row.energy_residual_J) for row in series),
                    total_abs_rock_heat_J=sum(abs(row.into_rock_J) for row in series))
@@ -78,6 +96,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--time-fine", action="store_true")
     args = parser.parse_args()
     event = next(r for r in audit.rows(audit.HERE/"run17-boundaries.csv")
                  if r["event"] == "pause-02")
@@ -93,10 +112,32 @@ def main():
             operating.append((left, right, max(flow, 0.)*b.GPM, (inlet-32)*5/9))
     if sum(end-begin for begin, end, *_ in operating) != stop-start:
         raise ValueError("recorded operating history does not cover the replay")
-    write_csv(args.output, (row for cells, radial, step in ((40, 40, 10.), (80, 80, 5.))
-                            for mixed in (False, True)
-                            for row in run(event, operating, cells=cells, radial=radial,
-                                           step_s=step, well_mixed=mixed)))
+    settings = {
+        "axial": ((40, 80, 5.), (80, 80, 5.), (160, 80, 5.)),
+        "radial": ((80, 40, 5.), (80, 80, 5.), (80, 160, 5.)),
+        "time": ((80, 80, 10.), (80, 80, 5.), (80, 80, 2.5)),
+    }
+    if args.time_fine:
+        settings = {"time": ((80, 80, 2.5), (80, 80, 1.25), (80, 80, .625))}
+    results = {}
+    for axis, variants in settings.items():
+        for cells, radial, step in variants:
+            for mixed in (False, True):
+                key = (cells, radial, step, mixed)
+                if key not in results:
+                    results[key] = list(run(event, operating, cells=cells, radial=radial,
+                                            step_s=step, well_mixed=mixed))
+    rows = [dict(axis=axis, level=level) | row
+            for axis, variants in settings.items()
+            for level, (cells, radial, step) in enumerate(variants, 1)
+            for mixed in (False, True)
+            for row in results[cells, radial, step, mixed]]
+    if not args.time_fine:
+        rows.extend(dict(axis="contact", level=1) | row
+                for mixed in (False, True)
+                for row in run(event, operating, cells=80, radial=80, step_s=5.,
+                               well_mixed=mixed, recorded_contact=False))
+    write_csv(args.output, rows)
 
 
 if __name__ == "__main__":

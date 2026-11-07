@@ -62,3 +62,38 @@ limit and 0.351 °C at the fast limit. The Black Box exceeds the
 does not isolate the responsible discretisation. The maximum
 single-step energy residual is 0.000043 J. Event forecasts remain
 pending.
+
+### Parcel transport and recorded carrier lengths
+
+The [parcel refinement runs](run17-parcel-refinement.csv) retain
+temperature fronts through descent and restart. Rock and tool heat
+exchange adds a uniform temperature increment to the parcels in each
+thermal cell. Transport shifts those parcels without resetting them
+to cell averages. The carrier faces are fixed across the axial grids.
+The recorded bit contact is 1.25 ft (EOWR p. 102, Fig. 90). The Black
+Box spans 107.97–113.94 ft above the bit in the geometry archive.
+
+The axial grids have 49, 89 and 169 cells. The radial grids have 40,
+80 and 160 nodes. The time-step sequence starts at 10, 5 and 2.5 s.
+The fast-limit Black Box difference of 0.115 K between 5 and 2.5 s
+required a [finer time sequence](run17-parcel-time-fine.csv) at 2.5,
+1.25 and 0.625 s.
+
+| Restart peak | Axial difference, K | Radial difference, K | Time difference, K | Axial order | Radial order | Time order |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Bit, slow | <0.00001 | <0.00001 | <0.00001 | unresolved | 1.18 | unresolved |
+| Bit, fast | <0.00001 | 0.00002 | 0.00021 | unresolved | 1.93 | unresolved |
+| Black Box, slow | 0.00309 | 0.06166 | 0.01423 | unresolved | 1.47 | 1.64 |
+| Black Box, fast | 0.00075 | 0.00200 | 0.01915 | unresolved | 4.13 | 1.75 |
+
+Differences are absolute changes over the finest pair on each axis.
+Order is log base 2 of the ratio of successive absolute differences
+when the signed changes agree. Reversals leave the order unresolved.
+All finest-pair differences are below 0.1 K for this connection
+pilot. The largest single-step energy residual is 0.00076 J.
+
+Changing from 0.25 m to the recorded carrier length moves the fast
+Black Box peak by 0.339 K and the slow peak by 0.026 K. The bit
+changes by less than 0.001 K. The pilot uses the recorded lengths.
+Full event history, motion and the quasi-steady handover remain to be
+verified.
