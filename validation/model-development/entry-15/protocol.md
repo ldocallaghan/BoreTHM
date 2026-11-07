@@ -19,3 +19,24 @@ The [event index](event-index.csv) records the D1 through D4 and H1
 through H2 event and sensor keys. It is generated from recorded timing
 and availability flags. This index contains neither target temperatures
 nor predictions.
+
+## Run 17 circulation boundary inputs
+
+The [run 17 boundary ledger](run17-boundaries.csv) identifies the
+last contiguous Pason circulation above 100 US gal/min that reached
+the final bit depth of each event and had a recorded inlet temperature.
+It covers eight trip stages and sixteen connections. The event times
+use the archived seven-second shift from Sanvean to Pason. At a partial
+ten-second bin, the calculation clips the duration at the event start
+and weights the input averages by the observed interval lengths.
+
+The ledger describes the last observed boundary inputs at one depth per
+event. The earlier circulation periods and the movement through the
+well are needed to initialise the radial rock field. The short windows
+on the outgoing trip can contribute to that history without resetting
+the entire rock or liquid column.
+
+The [extractor](run17_boundaries.py) reads only time, depths, pump output
+and inlet temperature from the 10 Second Data member of GDR 1516's
+16B Pason archive. The nested archive SHA-256 is
+`858a6eaf56c2cb3cbf45b59f431e59f82fc0ef2502ced244608d4d7b76ac54a2`.
