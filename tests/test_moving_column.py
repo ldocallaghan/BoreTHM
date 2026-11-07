@@ -100,3 +100,17 @@ def test_bore_regrid_moves_no_heat_and_retains_original_front():
     column.regrid_bore([.3, .7])
     np.testing.assert_allclose(column.bore_temperature, [15., 30.])
     assert inventory(column) == pytest.approx(before)
+
+
+def test_tool_footprint_exchange_preserves_total_energy_across_cell_boundary():
+    from borethm.column_replay import ColumnStep, ToolContact, replay
+    from borethm.layered_tool import LayeredTool
+
+    column = make_column()
+    tool = LayeredTool(.025, .08, column.fluid_heat_capacity, 20.)
+    contact = ToolContact(tool, 2., 0, 0, 50., 400., ((1.5, 2.5), (.2, .6)))
+    result, = replay(column, [ColumnStep(20., (0., 0., 0.), (contact,))])
+    assert abs(result.energy_residual_J) < 1e-4
+    assert column.annulus_temperature[0] < 40.
+    assert column.annulus_temperature[1] < 60.
+    assert column.annulus_temperature[2] == pytest.approx(80.)

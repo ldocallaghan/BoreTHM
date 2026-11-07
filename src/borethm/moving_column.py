@@ -166,3 +166,24 @@ class MovingColumn:
         node.temperature_C -= heat/outside_capacity
         self.bore_temperature[bore_index] = tool.temperature_C[0]
         return heat*tool_length
+
+    def exchange_tool_footprint(self, tool, duration, inside_film, outside_film, *,
+                                tool_length, annulus_interval, bore_interval):
+        """Exchange heat with the liquid over the carrier span in both conduits."""
+        self._sync_parcels()
+        annulus = self._annulus.slice(*annulus_interval)
+        bore = self._bore.slice(*bore_interval)
+        if min(annulus.size, bore.size, tool_length) <= 0:
+            raise ValueError("tool footprint requires positive volume in both conduits")
+        outside = annulus.inventory/annulus.size
+        inside = bore.inventory/bore.size
+        outside_capacity = self.fluid_heat_capacity*annulus.size/tool_length
+        bore_capacity = self.fluid_heat_capacity*bore.size/tool_length
+        tool.temperature_C[0] = inside
+        heat = tool.step(duration, outside, inside_film, outside_film,
+                         outside_capacity=outside_capacity, bore_capacity=bore_capacity)
+        self._annulus = self._annulus.heat_interval(
+            *annulus_interval, -heat/outside_capacity)
+        self._bore = self._bore.heat_interval(*bore_interval, tool.temperature_C[0]-inside)
+        self._read_parcels()
+        return heat*tool_length

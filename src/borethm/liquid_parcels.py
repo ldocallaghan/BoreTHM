@@ -54,3 +54,9 @@ class Parcels:
         cell_index = np.minimum(np.searchsorted(cell_faces, mid, side="right")-1,
                                 len(cells)-1)
         return Parcels(np.diff(faces), self.temperature[parcel_index]+increment[cell_index])
+
+    def heat_interval(self, first, last, change):
+        """Add a temperature increment over a parcel interval."""
+        portion = self.slice(first, last)
+        heated = Parcels(portion.volume, portion.temperature+change)
+        return self.slice(0., first).join(heated).join(self.slice(last, self.size))

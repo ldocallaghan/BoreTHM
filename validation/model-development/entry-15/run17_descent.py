@@ -1,6 +1,7 @@
 """Exercise the moving-column replay on run 17 stage 03 inputs."""
 import argparse
 import importlib
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -31,6 +32,22 @@ def volumes(faces, full_annulus_volume, geometry):
     return bore[bore > 0.], full_annulus_volume-displaced
 
 
+def carrier_volumes(faces, geometry):
+    """Cumulative conduit volumes at carrier edges, independent of cell size."""
+    pipe = np.r_[0., np.cumsum([section.length for section in geometry.string])]
+    hole = np.r_[0., [section.md_top for section in geometry.hole
+                      if 0. < section.md_top < pipe[-1]], pipe[-1]]
+    def cumulative(edges, area):
+        covered = np.clip(faces[:, None]-edges[:-1], 0., np.diff(edges))
+        return covered @ area
+
+    dimensions = geometry.at((pipe[:-1]+pipe[1:])/2)
+    bore = cumulative(pipe, dimensions["A_bore"])
+    displaced = cumulative(pipe, np.pi*dimensions["r_out"]**2)
+    wall = geometry.at((hole[:-1]+hole[1:])/2)["r_wall"]
+    return cumulative(hole, np.pi*wall**2)-displaced, bore
+
+
 def prepare(event):
     plan = audit.read_json(audit.PLAN)
     form = audit.forge16a.formation("216", audit.forge16a.survey())[0]
@@ -38,11 +55,16 @@ def prepare(event):
     defs = {int(r["eow_bha"]): r for r in audit.rows(audit.FORGE/"run_definitions.csv")}
     previous, solved, mass_flow, exposure, stamp, _ = audit.conditioning(
         event, plan, form, clocks, defs)
-    return plan, form, previous, solved, mass_flow, exposure, stamp
+    @lru_cache(maxsize=32768)
+    def dimensions(z):
+        return audit.geometry(dict(well="16B", run="17", eow_bha=17, bit_ft=z/b.FT),
+                              plan, "current")
+
+    return form, previous, solved, mass_flow, exposure, stamp, dimensions
 
 
-def calculate(event, data, *, cell_count, radial_nodes, cap, mixed, float_valve):
-    plan, form, old, solved, mass_flow, exposure, stamp = prepare(event)
+def calculate(event, data, conditioning, *, cell_count, radial_nodes, cap, mixed, float_valve, footprint=False):
+    form, old, solved, mass_flow, exposure, stamp, dimensions = conditioning
     times, bit_ft, _, _, inlet_F = data.T
     # The 1.08 ft of cumulative backtracking in this stage is omitted
     # from this model-only descent pilot.
@@ -72,10 +94,6 @@ def calculate(event, data, *, cell_count, radial_nodes, cap, mixed, float_valve)
         node.max_radial_step_s = 1.
         rock.append(node)
 
-    def dimensions(z):
-        return audit.geometry(dict(well="16B", run="17", eow_bha=17, bit_ft=z/b.FT),
-                              plan, "current")
-
     bore, annulus = volumes(faces, full_volume, dimensions(depth[0]))
     column = MovingColumn(rock, lengths, annulus, CAPACITY, bore, bore_C[:len(bore)].copy())
     tools = [LayeredTool(bore_in*b.INCH/2, od*b.INCH/2, CAPACITY, bore_C[len(bore)-1])
@@ -92,20 +110,26 @@ def calculate(event, data, *, cell_count, radial_nodes, cap, mixed, float_valve)
             for sub in range(count):
                 z = depth[j]+(depth[j+1]-depth[j])*(sub+1)/count
                 moved = z > previous_depth+1e-9
-                bore_grid, annulus_grid = volumes(faces, full_volume, dimensions(z))
+                geometry = dimensions(z)
+                bore_grid, annulus_grid = volumes(faces, full_volume, geometry)
                 films = (np.full(len(md), np.inf) if mixed else
                          NU_LAMINAR*k/(2*(dims["r_wall"]-np.sqrt(
                              (full_volume-annulus_grid)/(np.pi*lengths)))))
                 contacts = []
                 for tool, offset, length in zip(tools, offsets, contact_lengths, strict=True):
                     i = min(int(np.searchsorted(faces, z-offset)-1), len(bore_grid)-1)
-                    if i < 0 or lengths[i] < length:
+                    if i < 0 or (not footprint and lengths[i] < length):
                         raise ValueError("tool carrier must fit in the replay grid")
                     outer = (displacement_film(tool.outer_radius, dims["r_wall"][i],
                                                speed, rho[i], cp[i], mu[i], k[i])
                              if speed and tool.outer_radius < dims["r_wall"][i] else films[i])
+                    contact = None
+                    if footprint:
+                        centre = z-offset
+                        edges = np.array([centre-length/2, centre+length/2])
+                        contact = tuple(tuple(values) for values in carrier_volumes(edges, geometry))
                     contacts.append(ToolContact(tool, length, i, i,
-                                                3.66*k[i]/(2*tool.bore_radius), outer))
+                                                3.66*k[i]/(2*tool.bore_radius), outer, contact))
                 new_total = np.sum(bore_grid)
                 yield ColumnStep(duration/count, tuple(films), tuple(contacts),
                                  annulus_volume=annulus_grid if moved else None,
@@ -129,6 +153,8 @@ def main():
     parser.add_argument("archive", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--refinement", action="store_true")
+    parser.add_argument("--footprint", action="store_true")
+    parser.add_argument("--axis", choices=("axial", "radial", "time"))
     args = parser.parse_args()
     event = next(r for r in audit.rows(audit.HERE/"run17-boundaries.csv")
                  if r["event"] == "stage-03")
@@ -144,6 +170,9 @@ def main():
         }
     else:
         axes = {"pilot": ((40, 40, 1.25),)}
+    if args.axis:
+        axes = {args.axis: axes[args.axis]}
+    conditioning = prepare(event)
     results = {}
     rows = []
     for axis, configurations in axes.items():
@@ -152,9 +181,9 @@ def main():
                 for float_valve in (False, True):
                     key = (cells, radial, cap, mixed, float_valve)
                     if key not in results:
-                        results[key] = calculate(event, data, cell_count=cells,
+                        results[key] = calculate(event, data, conditioning, cell_count=cells,
                                                  radial_nodes=radial, cap=cap,
-                                                 mixed=mixed, float_valve=float_valve)
+                                                 mixed=mixed, float_valve=float_valve, footprint=args.footprint)
                     rows.append(dict(axis=axis, level=level) | results[key])
             write_csv(args.output, rows)
 

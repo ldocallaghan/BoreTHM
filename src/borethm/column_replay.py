@@ -15,6 +15,7 @@ class ToolContact:
     bore_index: int
     inside_film: float
     outside_film: float
+    footprint: tuple[tuple[float, float], tuple[float, float]] | None = None
 
 
 @dataclass(frozen=True)
@@ -90,10 +91,16 @@ def replay(column: MovingColumn, steps):
         else:
             rock = column.recover(step.duration, step.wall_films)
         for contact in step.contacts:
-            column.exchange_string_tool_heat(
-                contact.annulus_index, contact.bore_index, contact.tool,
-                step.duration, contact.inside_film, contact.outside_film,
-                tool_length=contact.length)
+            if contact.footprint is None:
+                column.exchange_string_tool_heat(
+                    contact.annulus_index, contact.bore_index, contact.tool,
+                    step.duration, contact.inside_film, contact.outside_film,
+                    tool_length=contact.length)
+            else:
+                annulus, bore = contact.footprint
+                column.exchange_tool_footprint(
+                    contact.tool, step.duration, contact.inside_film, contact.outside_film,
+                    tool_length=contact.length, annulus_interval=annulus, bore_interval=bore)
         elapsed += step.duration
         residual = stored_energy(column, step.contacts)-initial-supplied+returned+rock
         yield StepResult(elapsed, tuple(c.tool.sensor_temperatures() for c in step.contacts),
