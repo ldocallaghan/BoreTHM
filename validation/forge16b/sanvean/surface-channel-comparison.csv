@@ -8,14 +8,14 @@ eow_bha,channel,paired,equal,mean_absolute_difference,max_absolute_difference
 11,rotary_rpm,26097,14317,0.23799595585699512,63.632
 12,hole_depth_ft,120102,120102,0.0,0.0
 12,bit_depth_ft,120102,120102,0.0,0.0
-12,flow_gpm,120102,0,266.2281792291552,671.97
+12,flow_gpm,120102,120102,0.0,0.0
 12,spp_psi,120102,120102,0.0,0.0
 12,hook_load_klbs,120102,120102,0.0,0.0
 12,block_height_ft,120102,120102,0.0,0.0
 12,rotary_rpm,120102,120102,0.0,0.0
 13,hole_depth_ft,90852,90852,0.0,0.0
 13,bit_depth_ft,90852,90852,0.0,0.0
-13,flow_gpm,90852,0,423.4232116143839,719.58
+13,flow_gpm,90852,90852,0.0,0.0
 13,spp_psi,90852,90852,0.0,0.0
 13,hook_load_klbs,90852,90852,0.0,0.0
 13,block_height_ft,90852,90852,0.0,0.0

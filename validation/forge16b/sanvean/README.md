@@ -10,9 +10,9 @@ Pason data supply inlet and return temperature for EOWR run 17.
 
 ## Channel and sample definitions
 
-The inputs are taken from the export's Surface group. Use Surface Flow
-when it exists, or Surface Total Pump Output when the first channel
-is unavailable in that file. The Black Box copies are cross-checked on
+The inputs are taken from the export's Surface group. Use Surface Total Pump
+Output when it exists. Surface Flow is the fallback if Total Pump
+Output is absent. The Black Box copies are cross-checked on
 paired rows; units labelled arbitrary are compared numerically as
 stored. Source rows at the same second use the last row in export
 order. Missing seconds remain missing. Availability means a finite
@@ -85,6 +85,12 @@ counts individual readings after duplicate resolution.
 
 The [surface cross-check](surface-channel-comparison.csv) gives paired
 counts and numeric differences between the Surface and Black Box copies.
+For runs 12 and 13, Surface Total Pump Output agrees with the Black Box
+on every paired row and correlates with Pason flow at 0.998 and 0.993.
+Surface Flow differs from the Black Box by mean absolute values of
+266 and 423 US gal/min, with lower Pason correlations of 0.951 and
+0.862. The Total Pump Output channel supplies the event flow in both
+runs.
 Pason minus Sanvean offsets in [the clock table](clock-alignment.csv)
 maximise the mean of the bit-depth and flow correlations on a common
 overlap. Run 17 Pason temperatures use the nearest aligned 10-second

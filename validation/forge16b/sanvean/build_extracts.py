@@ -28,7 +28,7 @@ EXPORTS = (
 SURFACE = {
     "hole_depth_ft": ("Hole Depth", "MD"),
     "bit_depth_ft": ("Bit Depth", "BitDepth"),
-    "flow_gpm": ("Flow", "Flow"),
+    "flow_gpm": ("Total Pump Output", "Flow"),
     "spp_psi": ("Standpipe Pressure", "SPP"),
     "hook_load_klbs": ("Hook Load", "Hookload"),
     "block_height_ft": ("Block Height", "BlockPosition"),
@@ -90,7 +90,7 @@ def read_export(path):
         surfaces = [index(rf"Surface_{name}\([^)]*\)") for name, _ in SURFACE.values()]
         flow_index = list(SURFACE).index("flow_gpm")
         if surfaces[flow_index] is None:
-            surfaces[flow_index] = index(r"Surface_Total Pump Output\(GPM\)")
+            surfaces[flow_index] = index(r"Surface_Flow\(GPM\)")
         copies = [index(rf"Black Box_{name}\([^)]*\)") for _, name in SURFACE.values()]
         memory = index(r"SN\d+_Memory Index\(counts\)")
         loss = index(r"SN\d+_Data Loss\(%\)")

@@ -3,11 +3,11 @@ eow_bha,event_class,candidates,sanvean_C_eligible,bb_mean_C_eligible,bb_min_C_el
 11,connection,2,2,2,2,2,0,2
 11,stop,0,0,0,0,0,0,0
 11,long_stop,0,0,0,0,0,0,0
-12,trip_stage,1,0,1,1,1,0,0
-12,connection,0,0,0,0,0,0,0
+12,trip_stage,2,0,2,2,2,0,0
+12,connection,1,1,1,1,1,0,1
 12,stop,0,0,0,0,0,0,0
 12,long_stop,0,0,0,0,0,0,0
-13,trip_stage,1,0,1,1,1,0,0
+13,trip_stage,2,0,2,2,2,1,0
 13,connection,0,0,0,0,0,0,0
 13,stop,0,0,0,0,0,0,0
 13,long_stop,0,0,0,0,0,0,0
