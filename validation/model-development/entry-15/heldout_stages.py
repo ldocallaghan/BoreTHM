@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from validation.benchmarks.run_circulation import write_csv
+from validation.forge16b.sanvean.depth_reference import corrected_depth
 from validation.forge16b.sanvean.events import History
 
 rig = importlib.import_module(f"{__package__}.run17_boundaries")
@@ -68,7 +69,7 @@ def index(history, definitions, frozen, incoming):
                               start=rig.iso(history.time[start]), end=rig.iso(history.time[end]),
                               pump_on=rig.iso(history.time[pump_on]),
                               circulation_end=rig.iso(history.time[pump_stop-1]+history.step),
-                              bit_at_pump_on_ft=history.bit[pump_on],
+                              bit_at_pump_on_ft=corrected_depth(history.time[pump_on], history.bit[pump_on], assembly=run),
                               mwd_offsets_ft=offsets,
                               status="candidate" if offsets else "no documented MWD",
                               timing_basis=("archived trip" if run in frozen else
@@ -81,7 +82,7 @@ def main():
     parser.add_argument("archive", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
-    records = np.array(list(rig.rig_inputs(args.archive, 0, np.inf)))
+    records = np.array(list(rig.rig_inputs(args.archive, 0, np.inf, correct_depth=False)))
     time, bit, hole, flow, _ = records.T
     history = History(time, bit, hole, flow, np.zeros_like(flow), 10)
     frozen = {r["eow_bha"]: r for r in rig.rows(rig.HERE/"trip-history.csv")

@@ -1,0 +1,14 @@
+assembly,status,reset_time,drop_ft,before_ft,after_ft,flow_before_gpm,flow_after_gpm,hook_before_klbs,hook_after_klbs,slips_threshold_klbs,block_before_ft,block_after_ft,correction_ft
+3,no candidate,,,,,,,,,,,,
+4,no candidate,,,,,,,,,,,,
+11,no candidate,,,,,,,,,,,,
+12,no candidate,,,,,,,,,,,,
+13,candidate,2023-05-15 17:59:10,472.9,5052.9,4580.0,0.0,0.0,38.9,38.9,52.0,-146.56,-146.56,472.90
+14,no candidate,,,,,,,,,,,,
+15,no candidate,,,,,,,,,,,,
+16,no candidate,,,,,,,,,,,,
+17,candidate,2023-05-21 06:19:20,488.28,3180.28,2692.0,0.0,0.0,33.7,36.5,52.0,-251.77,-250.57,488.28
+19,no candidate,,,,,,,,,,,,
+20,candidate,2023-05-26 20:42:50,193.4,6190.4,5997.0,0.0,0.0,41.0,41.0,52.0,-757.2,-757.2,193.40
+27,no candidate,,,,,,,,,,,,
+38,no candidate,,,,,,,,,,,,

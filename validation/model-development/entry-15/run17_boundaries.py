@@ -12,6 +12,7 @@ from pathlib import Path
 import numpy as np
 
 from validation.forge16b.sanvean.build_extracts import HERE, iso, number, records, timestamp
+from validation.forge16b.sanvean.depth_reference import corrected_depth
 from validation.forge16b.sanvean.events import History
 from validation.forge16b.sanvean.trip_history import rows
 
@@ -19,7 +20,7 @@ CHANNELS = ("Bit Depth (feet)", "Hole Depth (feet)",
             "Total Pump Output (gal_per_min)", "TEMP IN MANIFOLD (DEGREES)")
 
 
-def rig_inputs(archive, first, last):
+def rig_inputs(archive, first, last, *, correct_depth=True):
     with zipfile.ZipFile(archive) as source, source.open("10 Second Data.csv") as raw:
         data = csv.reader(io.TextIOWrapper(raw, encoding="utf-8-sig", newline=""))
         header = next(data)
@@ -29,8 +30,11 @@ def rig_inputs(archive, first, last):
             if stamp >= last:
                 break
             if stamp >= first:
-                yield (stamp, *(number(row[i]) if row[i] != "-999.25" else np.nan
-                                for i in indices))
+                bit, hole, flow, inlet = (
+                    number(row[i]) if row[i] != "-999.25" else np.nan for i in indices)
+                if correct_depth:
+                    bit = corrected_depth(stamp, bit)
+                yield stamp, bit, hole, flow, inlet
 
 
 def boundary_rows(events, rig, offset):

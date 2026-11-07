@@ -147,3 +147,52 @@ excludes the Sanvean temperature and its duplicate. The Black Box and MWD
 retain their own coverage checks. The amendment uses input and availability
 columns. See the [amended counts](events-2026-11-07/event-counts.csv) and
 [builder](amend_events.py). The original archive records the Phase 0 rule.
+
+## Depth reference correction, 7 November 2026
+
+The [dated correction table](depth-reference-corrections.csv) applies
+constant offsets to the derived bit depths of three incoming trips.
+The source archives retain their original readings. The screen looks
+for a drop greater than 50 ft within 30 s, with flow below 50 US gal/min
+and hook load at or below the recorded Pason slips threshold throughout.
+Overlapping windows are counted once. The [audit builder](depth_reference_audit.py)
+screens the archived run 11–17 trip bounds and the H3 candidate trips
+using operating channels only.
+
+| Assembly | Pason reset | Sanvean reset | Subtract before reset, ft | Pason hook load across reset, klbs | Pason block height across reset, ft | Pason bit and hole at arrival, ft |
+| --- | --- | --- | ---: | --- | --- | --- |
+| 13 | 15 May 17:59:10 | 15 May 17:58:53 | 472.90 | 38.9 to 38.9 | −146.56 to −146.56 | 5,960.26 and 5,960.26 |
+| 17 | 21 May 06:19:20 | 21 May 06:19:10 | 488.28 | 33.7 to 36.5 | −251.77 to −250.57 | 7,579.20 and 7,583.98 |
+| 20 | 26 May 20:42:50 | unavailable | 193.40 | 41.0 to 41.0 | −757.20 to −757.20 | 9,251.43 and 9,255.40 |
+
+Pason flow is zero across all three resets and its slips threshold
+is 52 klbs. Run 17's one-second Sanvean input shows a flat block
+height of −251.77 ft and 33.7 klbs hook load at the reset. This
+compares with approximately 140 klbs when the string hangs. The
+recorded depth afterwards follows the descent to the hole bottom.
+The correction applies to the incoming trip before the reset in
+each clock. Stage selection uses the archived timing and the depth
+at each selected pump-on uses the corrected input.
+
+The [independent stand check](run17-stand-check.csv) counts complete
+positive block-height returns of 50–120 ft in the slips. The mean
+loaded downward travel is 89.01 ft over 61 complete loaded cycles in
+the one-second Sanvean input. The check anchors to the last bit
+reading of 7,578.47 ft. Sanvean's first finite bit and block row
+at 05:58:10 has 61 subsequent complete slip cycles and an implied
+start of 2,149.11 ft, compared with 2,291.29 ft recorded and
+1,803.01 ft corrected. Adding four earlier complete Pason cycles
+gives 65 stands and an implied Pason start of 1,793.09 ft. The
+first Pason value is 1,792.80 ft recorded and 1,304.52 ft corrected.
+The stand count does not corroborate the subtraction. It counts
+complete visible cycles only and provides no independent basis for
+recovering the roughly 5.5 additional stand lengths implied by the
+corrected Pason start. The correction follows the local reset
+evidence and the subsequent match at bottom.
+
+The [Pason screen](depth-reference-screen.csv) reports the three
+candidates and the other trips checked. The [one-second Sanvean
+screen](depth-reference-screen-sanvean.csv) independently identifies
+the run 13 and run 17 candidates and finds none on runs 11, 12 or
+14–16. It uses Pason's recorded slips threshold at the aligned time.
+Run 20 is outside the Sanvean exports.
