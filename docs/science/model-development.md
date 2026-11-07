@@ -2799,3 +2799,18 @@ maximum errors are 0.152 and 0.091 in recovery fraction for the two
 circulation durations, exceeding the ±0.05 tolerance. The earlier
 fluid-node results describe sensitivity to static coupling. Event
 calculations and scoring remain pending at this benchmark checkpoint.
+
+### Entry 15 recovery verification
+
+Well 4 is a comparison with an adjusted-time line-source calculation.
+The [filled-hole and wall comparisons](../../validation/benchmarks/entry15-wall.md)
+retain the published and calculated fractions. An independent radial
+solver verifies the insulated-wall recovery at the ten tabulated times
+for both durations within 0.005 in recovery fraction.
+
+The revised adoption criterion requires this independent reference
+test and the existing Carslaw and Jaeger and Jaeger (1956) exact-solution
+tests. The primary configuration must reduce RMSE on D1 and D3
+compared with v1.8.0 on the same samples. The original steady
+circulation criterion remains in force, with the formation remapping
+reported separately. Band coverage is reported as a diagnostic.
