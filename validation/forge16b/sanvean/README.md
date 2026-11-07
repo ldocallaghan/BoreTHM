@@ -203,3 +203,90 @@ three H3 pump-on depths are 4,785.49 ft. The report does not give
 an independent depth reference for those early readings. The
 correction follows the stationary-block reset and the later
 bottom agreement. [GDR 1516 daily reports](https://gdr.openei.org/submissions/1516)
+
+## Depth rebuild from rig motion, 7 November 2026
+
+This section supersedes the depth reference correction above. The
+constant subtractions in `depth-reference-corrections.csv` are kept so
+the earlier archive can be rebuilt, and no replay input uses them.
+[`depth_rebuild.py`](depth_rebuild.py) writes the outputs in
+[`depth-rebuild-2026-11-07/`](depth-rebuild-2026-11-07/), and
+`depth_reference.rebuilt_depth` applies them. The script reads only
+bit depth, hole depth, block height, hook load and the Pason hookload
+threshold. It reads no temperature channel.
+
+**Method.** The rig bit-depth channel contains tally resets: steps in
+the recorded depth with no matching string motion. The rebuilt depth is
+the recorded depth plus a piecewise-constant offset. Drilling samples
+anchor the offset. A drilling sample advances the hole depth by more
+than 0.1 ft with the bit within 5 ft of the hole depth, and its offset
+is hole depth minus bit depth. Between two anchors the offset follows
+the recorded increments with the resets removed. The trip out takes its
+offset forward from the earlier anchor and the trip in takes its offset
+backward from the later anchor, split at the shallowest recorded depth.
+A gap in which the bit never rises 500 ft above the hole depth is a
+connection or stop and keeps the recorded depth. After the last anchor
+only the trip out is rebuilt.
+
+**Reset rules.** A reset is a bit step larger than 20 ft that also
+satisfies one of these conditions:
+
+- one-second sampling: the step exceeds the block travel bound of
+  20 ft/s, or the block is still (within 5 ft) and the hook stays on
+  the same side of the slips threshold;
+- ten-second sampling: the step is faster than 12 ft/s downward or
+  6 ft/s upward;
+- either sampling: the string is in the slips and the block is still.
+
+A step that moves the hole depth by more than half the bit step
+re-references both channels and is left to the anchors. The slips
+threshold is the Pason Hookload Threshold, 52 klbs from 26 April 2023
+12:46. At one second, the block travel during a reset step is removed
+from the reset size while the string hangs. At ten seconds the whole
+step is taken as the reset, because the Pason block channel does not
+resolve strokes. Block encoder resets faster than 20 ft/s are skipped
+in the block-travel check.
+
+**Pason and Sanvean.** The Sanvean one-second offsets are rebuilt per
+run (11 to 17). Over each Sanvean trip the Pason offset is taken from
+the one-second sample within 15 s of the clock-aligned time whose
+recorded depth matches. The Pason rebuild then propagates from those
+fixed samples and its own anchors.
+
+**Checks.**
+
+| Check | Result |
+|---|---|
+| Block-travel rebuild against the rebuilt depth, runs 11 to 17 ([sanvean-block-check.csv](depth-rebuild-2026-11-07/sanvean-block-check.csv)) | maximum difference 2.2 to 29.0 ft per trip |
+| Run 17 start | rebuilt 2,094.13 ft, block travel 2,123.10 ft, recorded 2,291.29 ft; the stand count gives 2,149.11 ft |
+| Pason-only rebuild against the one-second rebuild ([pason-only-check.csv](depth-rebuild-2026-11-07/pason-only-check.csv)) | p95 0 to 0.2 ft on runs 11, 12, 14 and 16; 0 ft on run 13; 149.1 ft on run 15; 75.7 ft on run 17 |
+| Synthetic records (`tests/test_depth_rebuild.py`) | resets in slips and while hanging, coarse sampling, trip out, connections, the trip after the last anchor and a reset undone at bottom |
+
+The block check differs by up to 29 ft on run 17 over a 4.8 h trip
+with six resets. The block rebuild counts travel while the hook is
+above the threshold at either end of a step. Counting only steps with
+the hook above the threshold at both ends gives 11.9 ft on run 17 and
+up to 22.2 ft on the other runs.
+
+The Pason-only errors on runs 15 and 17 come from resets under 150 ft
+taken while the string hung. Ten-second sampling cannot separate these
+from string motion. Where only Pason data exist (assemblies 3, 4, 19,
+20, 27 and 38 in the entry 15 stage index), the rebuilt depth carries
+this uncertainty, up to about 150 ft. On run 19 a single ten-second
+sample reads 495 ft shallow at bottom on 25 May 02:21:50 and the next
+returns to bottom as drilling resumes. The pair cancels to within the
+7.5 ft the string moved in the restoring step.
+
+**Scope.** The offsets were checked through the drilling assemblies
+used in entry 15, to 17 June 2023. Pason segments after the last
+anchor on 8 July 2023, and the casing and completion strings run in
+late June and July, are unchecked and are not replay inputs.
+
+**Effect on entry 15.** [`rebuild_events.py`](rebuild_events.py)
+rebuilds the amended event archive in `events-2026-11-07-depth/` with
+the same rules and the rebuilt depths. Event counts and eligibility
+are unchanged from the 7 November amendment. Pump-on depths in the H3
+stage index change on assemblies 12, 15, 16, 19, 20 and 27. The
+largest change is on assembly 19, where two mid-trip tally corrections
+(+286.39 ft at 24 May 21:19:50 and +201.01 ft at 25 May 00:14:30) move
+the early stages 495 ft deeper than recorded.

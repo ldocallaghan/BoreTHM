@@ -1,0 +1,8 @@
+clock,assembly,status,first_drilling,recorded_start_ft,rebuilt_start_ft,block_start_ft,max_abs_block_minus_rebuilt_ft,tally_resets,block_encoder_resets,max_abs_offset_ft,slips_threshold_klbs
+sanvean,11,checked,2023-05-13 08:07:53,4015.35,4015.35,4010.79,15.23,0,1,0.0,52.0
+sanvean,12,checked,2023-05-13 22:51:16,4233.79,4054.41,4062.66,8.68,1,0,179.38,52.0
+sanvean,13,checked,2023-05-15 18:36:29,3759.98,3453.67,3456.02,10.28,2,0,472.9,52.0
+sanvean,14,checked,2023-05-17 13:48:29,6536.44,6536.44,6535.05,2.22,0,0,0.0,52.0
+sanvean,15,checked,2023-05-18 00:09:24,4832.14,4981.24,4985.2,8.98,2,0,149.1,52.0
+sanvean,16,checked,2023-05-20 07:53:45,5962.23,6096.23,6098.56,3.01,1,0,134.0,52.0
+sanvean,17,checked,2023-05-21 10:44:55,2291.29,2094.13,2123.1,28.97,6,2,291.12,52.0

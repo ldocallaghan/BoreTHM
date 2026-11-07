@@ -66,7 +66,7 @@ def main():
     parser.add_argument("archive", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
-    events = rig.rows(rig.HERE/"events-2026-11-07/bha-17-events.csv")
+    events = rig.rows(rig.HERE/"events-2026-11-07-depth/bha-17-events.csv")
     alignment = next(row for row in rig.rows(rig.HERE/"clock-alignment.csv")
                      if row["eow_bha"] == "17")
     offset = int(alignment["pason_minus_sanvean_s"])

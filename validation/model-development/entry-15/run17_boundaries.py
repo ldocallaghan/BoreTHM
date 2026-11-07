@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 
 from validation.forge16b.sanvean.build_extracts import HERE, iso, number, records, timestamp
-from validation.forge16b.sanvean.depth_reference import corrected_depth
+from validation.forge16b.sanvean.depth_reference import rebuilt_depth
 from validation.forge16b.sanvean.events import History
 from validation.forge16b.sanvean.trip_history import rows
 
@@ -33,7 +33,7 @@ def rig_inputs(archive, first, last, *, correct_depth=True):
                 bit, hole, flow, inlet = (
                     number(row[i]) if row[i] != "-999.25" else np.nan for i in indices)
                 if correct_depth:
-                    bit = corrected_depth(stamp, bit)
+                    bit = rebuilt_depth(stamp, bit)
                 yield stamp, bit, hole, flow, inlet
 
 
@@ -72,7 +72,7 @@ def main():
     parser.add_argument("archive", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
-    event = rows(HERE/"events-2026-11-07/bha-17-events.csv")
+    event = rows(HERE/"events-2026-11-07-depth/bha-17-events.csv")
     alignment = next(r for r in rows(HERE/"clock-alignment.csv") if r["eow_bha"] == "17")
     offset = int(alignment["pason_minus_sanvean_s"])
     first = min(timestamp(r["start"]) for r in event) + offset - 172800

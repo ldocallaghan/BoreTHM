@@ -4,7 +4,7 @@ from pathlib import Path
 from validation.scoreboard.scoreboard import ROOT, read_csv, write_csv
 
 HERE = Path(__file__).parent
-EVENTS = ROOT/"validation/forge16b/sanvean/events-2026-11-07"
+EVENTS = ROOT/"validation/forge16b/sanvean/events-2026-11-07-depth"
 
 
 def rows():

@@ -2814,3 +2814,20 @@ tests. The primary configuration must reduce RMSE on D1 and D3
 compared with v1.8.0 on the same samples. The original steady
 circulation criterion remains in force, with the formation remapping
 reported separately. Band coverage is reported as a diagnostic.
+
+### Entry 15 bit depth rebuild, 7 November 2026
+
+The constant depth subtractions of the first screen are withdrawn. A
+stand count on run 17 did not support them. The
+[depth rebuild](../../validation/forge16b/sanvean/README.md#depth-rebuild-from-rig-motion-7-november-2026)
+removes rig tally resets and anchors each trip at the drilling bottom.
+It uses rig depth, block height and hook load only. A block-travel
+rebuild agrees within 29 ft on the one-second trips of runs 11 to 17.
+Where only ten-second Pason data exist, resets taken while the string
+hangs leave an uncertainty of up to about 150 ft.
+
+The amended event archive keeps its event counts and eligibility. The
+H3 stage pump-on depths change on six assemblies. Run 17 starts at
+2,094 ft against 2,291 ft recorded. The run 17 descent and connection
+pilot tables predate the rebuild and are to be regenerated before any
+event calculation uses them.
