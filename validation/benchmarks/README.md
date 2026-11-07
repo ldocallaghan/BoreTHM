@@ -122,3 +122,10 @@ and 119, 124, 129, 141, 162, 185, 201, 213, 219 and 220 °C at
 This is a model comparison with no tolerance. Casing, bottom-hole
 assembly and pumps-off film treatment are unspecified. Use the
 table values because the fitted Eq. 5 does not reproduce them.
+
+## Classification amendment, 7 November 2026
+
+The [circulation comparison amendment](phase1/README.md) records why
+the Brown, Holmes, Zatonski and Toews (2023) Table 5 circulation and
+pump-off cases are treated as comparisons. The original numerical
+results and tolerances remain in the archive.

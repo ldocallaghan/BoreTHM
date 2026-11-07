@@ -176,7 +176,7 @@ def temperatures(raw):
     return output
 
 
-def event_records(history, available, loss):
+def event_records(history, available, loss, *, amended=False):
     for stage, (left, right, c0, c1) in enumerate(history.trip_stages(), 1):
         start, end = history.bounds(left, right)
         circulation = (None, None) if c0 is None else history.bounds(c0, c1)
@@ -191,8 +191,10 @@ def event_records(history, available, loss):
             "circ_duration_s": "" if c0 is None else circulation[1]-circulation[0],
             "circ_mean_gpm": "" if c0 is None else np.mean(history.flow[c0:c1]),
         }
-        yield row | event_flags(history, available, loss, start, end, None, False)
-    for event, (left, right, lead) in enumerate(history.drilling_pauses(), 1):
+        yield row | event_flags(history, available, loss, start, end, circulation[0] if amended else None, False, amended=amended)
+    pauses = (history.ramped_pauses() if amended else
+              ((left, right, lead, left, None) for left, right, lead in history.drilling_pauses()))
+    for event, (left, right, lead, lead_end, pump) in enumerate(pauses, 1):
         start, end = history.bounds(left, right)
         bit = history.bit[left:right]
         movement = np.ptp(bit[np.isfinite(bit)]) if np.isfinite(bit).any() else math.nan
@@ -202,21 +204,29 @@ def event_records(history, available, loss):
             "end": iso(end), "duration_s": end-start, "bit_start_ft": bit[0], "bit_end_ft": bit[-1],
             "hole_start_ft": history.hole[left], "movement_ft": movement,
             "mean_rpm": np.mean(rotation[np.isfinite(rotation)]) if np.isfinite(rotation).any() else math.nan,
-            "preceding_duration_s": history.duration(lead, left),
-            "preceding_mean_gpm": np.mean(history.flow[lead:left]),
+            "preceding_duration_s": history.duration(lead, lead_end),
+            "preceding_mean_gpm": np.mean(history.flow[lead:lead_end]),
         }
         next_pumping = np.flatnonzero((history.time >= end) & (history.flow > 100))
         restart = int(history.time[next_pumping[0]]) if len(next_pumping) else None
+        if amended:
+            restart = int(history.time[pump])
         row["pump_on"] = iso(restart) if restart is not None else ""
-        yield row | event_flags(history, available, loss, start, end, restart, movement > 100)
+        yield row | event_flags(history, available, loss, start, end, restart, movement > 100, amended=amended)
 
 
-def event_flags(history, masks, loss, start, end, restart, moved):
+def event_flags(history, masks, loss, start, end, restart, moved, *, amended=False):
     observed = (history.time >= start) & (history.time < end)
     if restart is not None:
         observed |= (history.time >= restart) & (history.time < restart+300)
     high_loss = bool(np.any(loss[observed] > 1))
+    if amended:
+        valid_loss = loss[observed & np.isfinite(loss)]
+        mean_loss = float(valid_loss.mean()) if len(valid_loss) else math.nan
+        high_loss = mean_loss > 1
     flags = {"bit_moved_over_100ft": moved, "sanvean_data_loss_over_1pct": high_loss}
+    if amended:
+        flags["sanvean_mean_data_loss_pct"] = mean_loss
     for key, mask in zip(TEMPS, masks):
         fraction, gap = availability(history, mask, start, end)
         post_fraction, post_gap = (availability(history, mask, restart, restart+300)
@@ -224,7 +234,7 @@ def event_flags(history, masks, loss, start, end, restart, moved):
         flags[f"{key}_fraction"] = fraction
         flags[f"{key}_post_fraction"] = post_fraction
         flags[f"{key}_gap_s"] = max(gap, post_gap)
-        flags[f"{key}_eligible"] = max(gap, post_gap) <= 10 and not high_loss and not moved
+        flags[f"{key}_eligible"] = max(gap, post_gap) <= 10 and not moved and not (high_loss and (not amended or key in ("sanvean_C", "custom2_C")))
     return flags
 
 

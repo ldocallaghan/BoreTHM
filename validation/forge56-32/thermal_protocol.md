@@ -76,3 +76,20 @@ The undisturbed formation comparator is also recorded at run-in sensor
 depth. Persistence requires a target reading and becomes available only
 after unsealing. Each missing input or unsuccessful calculation has an
 explicit reason.
+
+## MWD availability audit, 7 November 2026
+
+The [availability interval](mwd-availability-intervals.csv) covers
+16:10:06 through 17:24:58 on 23 February 2021, local rig time.
+Bit depth spans 7,185 to 7,667 ft and hole depth spans 7,666 to 7,667 ft.
+The pump rate spans 0 to 581 US gal/min. Of 4,493 seconds, 2,339 are
+pumping and 2,026 meet the raw depth and flow screens before the
+penetration-rate and assembly checks.
+
+The 23 February daily report, p. 1, records the mud hammer assembly in
+hole for this interval and the start of its withdrawal at 17:00.
+It precedes the dated entry for BHA 10 in the [assembly crosswalk](bha_crosswalk.csv).
+The conventional assembly assignment required by the Phase 0 protocol is
+unavailable here. The interval cannot form a separate measure under those
+rules. The [availability builder](mwd_availability.py) uses the finite
+flag and the recorded operating inputs.

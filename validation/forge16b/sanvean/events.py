@@ -64,6 +64,34 @@ class History:
                     yield left, right, lead[left]
 
 
+    def ramped_pauses(self):
+        """Find pauses bracketed by pumping, allowing two minutes for each ramp."""
+        reached = self._bottom_rows()
+        if not len(reached):
+            return
+        pumping = list(self.spells(self.flow > 100))
+        starts = np.array([self.time[a] for a, _ in pumping])
+        ends = np.array([self.time[b-1]+self.step for _, b in pumping])
+        for left, right in self.spells((self.flow >= 0) & (self.flow < 50),
+                                       int(reached[0])+1, int(reached[-1])+1):
+            start, end = self.bounds(left, right)
+            if end-start < 60:
+                continue
+            prev = np.searchsorted(ends, start, side="right")-1
+            following = np.searchsorted(starts, end)
+            if prev < 0 or following == len(starts):
+                continue
+            if (ends[prev]-starts[prev] >= 600 and start-ends[prev] <= 120
+                    and starts[following]-end <= 120):
+                a, b = pumping[prev]
+                c, _ = pumping[following]
+                # An observed ramp is distinct from missing samples.
+                interval = slice(b-1, c+1)
+                if (np.all(np.diff(self.time[interval]) == self.step)
+                        and np.all(np.isfinite(self.flow[interval]))):
+                    yield left, right, a, b, c
+
+
 def pause_class(seconds):
     if seconds <= 600:
         return "connection"

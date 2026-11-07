@@ -132,3 +132,18 @@ These are rig-history timings and do not measure thermal recovery.
 The [run 17 observations](bha-17-development.csv) describe the two
 sensors by stage and pause. The [EYE update table](bha-17-eye-updates.csv)
 separates availability from changes in the recorded value.
+
+## Event amendment, 7 November 2026
+
+For Phase 1, a drilling pause follows at least 600 s of circulation above
+100 US gal/min. That circulation may end up to 120 s before the pause.
+The next circulation must start within 120 s after the pause. The recorded
+ramp may separate the two flow thresholds. Missing records do not count
+as a ramp.
+
+The per-record Sanvean loss values are averaged over the observed event and
+the first five minutes of the following circulation. A mean above 1%
+excludes the Sanvean temperature and its duplicate. The Black Box and MWD
+retain their own coverage checks. The amendment uses input and availability
+columns. See the [amended counts](events-2026-11-07/event-counts.csv) and
+[builder](amend_events.py). The original archive records the Phase 0 rule.
