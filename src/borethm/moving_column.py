@@ -42,7 +42,7 @@ class MovingColumn:
                 fill_temperature=None):
         """Displace fluid above the entering bit and extend the bore column.
 
-        With a float valve the new bore inventory is supplied by the caller.
+        With a float valve, new pipe and its fill enter from the surface.
         Without it, new bore volume is taken at the deepest displaced cell.
         Return the surface exit volume and sensible-heat inventory (joules
         relative to 0 °C).
@@ -68,9 +68,12 @@ class MovingColumn:
         self._set_annulus_temperature(temperature)
         self.annulus_volume = new_volume.copy()
         if added_bore_volume:
-            entered = fill_temperature if float_valve else intake/added_bore_volume
-            self.bore_volume = np.r_[self.bore_volume, added_bore_volume]
-            self.bore_temperature = np.r_[self.bore_temperature, entered]
+            if float_valve:
+                self.bore_volume = np.r_[added_bore_volume, self.bore_volume]
+                self.bore_temperature = np.r_[fill_temperature, self.bore_temperature]
+            else:
+                self.bore_volume = np.r_[self.bore_volume, added_bore_volume]
+                self.bore_temperature = np.r_[self.bore_temperature, intake/added_bore_volume]
         return exit_volume, self.fluid_heat_capacity*exit_inventory
 
     def recover(self, duration, films):
@@ -80,18 +83,23 @@ class MovingColumn:
                    for length, node, cap, film in zip(
                        self.cell_length, self.rock, capacity, films, strict=True))
 
-    def restart_step(self, duration, flow, inlet_C, films):
+    def restart_step(self, duration, flow, inlet_C, films, *, active_cells=None):
         """Advect the connected bore and annulus, then advance wall exchange.
 
-        The grid must end at the bit during circulation. Return the surface
+        Cells below the bit recover without through-flow. Return the surface
         exit inventory and the wall heat in joules.
         """
+        active = len(self.rock) if active_cells is None else active_cells
+        if not 0 < active <= len(self.rock) or not len(self.bore_volume):
+            raise ValueError("circulation needs a bore and a connected annulus")
         count = len(self.bore_volume)
-        volumes = np.r_[self.bore_volume, self.annulus_volume[::-1]]
-        values = np.r_[self.bore_temperature, self.annulus_temperature[::-1]]
+        temperatures = self.annulus_temperature
+        volumes = np.r_[self.bore_volume, self.annulus_volume[:active][::-1]]
+        values = np.r_[self.bore_temperature, temperatures[:active][::-1]]
         advected, returned = pump_on_step(volumes, values, duration*flow, inlet_C)
         self.bore_temperature = advected[:count]
-        self._set_annulus_temperature(advected[count:][::-1])
+        temperatures[:active] = advected[count:][::-1]
+        self._set_annulus_temperature(temperatures)
         return returned*self.fluid_heat_capacity, self.recover(duration, films)
 
 
@@ -104,4 +112,19 @@ class MovingColumn:
         heat = tool.step(duration, node.temperature_C, inside_film, outside_film,
                          outside_capacity=capacity)
         node.temperature_C -= heat/capacity
+        return heat*tool_length
+
+    def exchange_string_tool_heat(self, annulus_index, bore_index, tool, duration,
+                                  inside_film, outside_film, *, tool_length):
+        """Use the advected bore cell as the layered tool's liquid node."""
+        if not 0 < tool_length <= self.cell_length[annulus_index]:
+            raise ValueError("tool length must fit within the selected cell")
+        node = self.rock[annulus_index]
+        outside_capacity = self.fluid_heat_capacity*self.annulus_volume[annulus_index]/tool_length
+        bore_capacity = self.fluid_heat_capacity*self.bore_volume[bore_index]/tool_length
+        tool.temperature_C[0] = self.bore_temperature[bore_index]
+        heat = tool.step(duration, node.temperature_C, inside_film, outside_film,
+                         outside_capacity=outside_capacity, bore_capacity=bore_capacity)
+        node.temperature_C -= heat/outside_capacity
+        self.bore_temperature[bore_index] = tool.temperature_C[0]
         return heat*tool_length

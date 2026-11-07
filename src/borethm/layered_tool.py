@@ -49,7 +49,7 @@ class LayeredTool:
         self.temperature_C = np.full(self.layers + 1, self.initial_C, dtype=float)
         self.inside_surface_C = self.outside_surface_C = self.initial_C
 
-    def step(self, duration, outside_C, inside_film, outside_film, *, outside_capacity=np.inf):
+    def step(self, duration, outside_C, inside_film, outside_film, *, outside_capacity=np.inf, bore_capacity=None):
         """Return heat from the exterior per metre over an implicit step."""
         if duration <= 0 or min(inside_film, outside_film) < 0 or outside_capacity <= 0:
             raise ValueError("positive duration and non-negative films required")
@@ -63,6 +63,10 @@ class LayeredTool:
                  if outside_film else 0.)
         outer = outer/(1+outer*duration/outside_capacity)
         diagonal = self.capacity/duration
+        if bore_capacity is not None:
+            if not np.isfinite(bore_capacity) or bore_capacity <= 0:
+                raise ValueError("bore capacity must be finite and positive")
+            diagonal[0] = bore_capacity/duration
         rhs = diagonal*self.temperature_C
         diagonal[:-1] += conductance
         diagonal[1:] += conductance
