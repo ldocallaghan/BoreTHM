@@ -196,3 +196,10 @@ screen](depth-reference-screen-sanvean.csv) independently identifies
 the run 13 and run 17 candidates and finds none on runs 11, 12 or
 14–16. It uses Pason's recorded slips threshold at the aligned time.
 Run 20 is outside the Sanvean exports.
+
+Daily report 41 records the MWD test at about 4,978 ft on run 20,
+close to the uncorrected early Pason depth. The corrected first
+three H3 pump-on depths are 4,785.49 ft. The report does not give
+an independent depth reference for those early readings. The
+correction follows the stationary-block reset and the later
+bottom agreement. [GDR 1516 daily reports](https://gdr.openei.org/submissions/1516)

@@ -128,6 +128,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--refinement", action="store_true")
     args = parser.parse_args()
     event = next(r for r in audit.rows(audit.HERE/"run17-boundaries.csv")
                  if r["event"] == "stage-03")
@@ -135,9 +136,27 @@ def main():
     data = np.array(list(rig.rig_inputs(args.archive, first, last)))
     if not np.all(np.isfinite(data[:, [1, 4]])) or np.any(np.diff(data[:, 0]) != 10):
         raise ValueError("incomplete stage input")
-    write_csv(args.output, (calculate(event, data, cell_count=40, radial_nodes=40, cap=1.25,
-                                      mixed=mixed, float_valve=float_valve)
-                            for mixed in (False, True) for float_valve in (False, True)))
+    if args.refinement:
+        axes = {
+            "axial": ((40, 80, 1.25), (80, 80, 1.25), (160, 80, 1.25)),
+            "radial": ((80, 40, 1.25), (80, 80, 1.25), (80, 160, 1.25)),
+            "time": ((80, 80, 1.25), (80, 80, .625), (80, 80, .3125)),
+        }
+    else:
+        axes = {"pilot": ((40, 40, 1.25),)}
+    results = {}
+    rows = []
+    for axis, configurations in axes.items():
+        for level, (cells, radial, cap) in enumerate(configurations, 1):
+            for mixed in (False, True):
+                for float_valve in (False, True):
+                    key = (cells, radial, cap, mixed, float_valve)
+                    if key not in results:
+                        results[key] = calculate(event, data, cell_count=cells,
+                                                 radial_nodes=radial, cap=cap,
+                                                 mixed=mixed, float_valve=float_valve)
+                    rows.append(dict(axis=axis, level=level) | results[key])
+            write_csv(args.output, rows)
 
 
 if __name__ == "__main__":
