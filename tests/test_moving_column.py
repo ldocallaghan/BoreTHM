@@ -53,3 +53,39 @@ def test_tool_exchange_conserves_fluid_and_tool_energy():
     assert initial_fluid - inventory(column) == pytest.approx(heat)
     assert 2.*(np.dot(tool.capacity, tool.temperature_C)
                                   - initial_tool) == pytest.approx(heat)
+
+
+def test_partial_pump_steps_preserve_front_through_turnaround():
+    small_steps = make_column()
+    single_step = make_column()
+    repeated_return = sum(small_steps.restart_step(1., .5, 15., [0., 0., 0.])[0]
+                          for _ in range(5))
+    direct_return, _ = single_step.restart_step(5., .5, 15., [0., 0., 0.])
+    np.testing.assert_allclose(small_steps.bore_temperature, single_step.bore_temperature)
+    np.testing.assert_allclose(small_steps.annulus_temperature, single_step.annulus_temperature)
+    assert repeated_return == pytest.approx(direct_return)
+    assert single_step.annulus_temperature[-1] == pytest.approx(18.75)
+
+
+def test_repeated_displacement_preserves_temperature_front():
+    small_steps = make_column()
+    single_step = make_column()
+    repeat_heat = 0.
+    for change in (.25, .5, .75, 1.):
+        _, heat = small_steps.descend([2., 2.-change, 2.], 0., float_valve=True)
+        repeat_heat += heat
+    _, direct_heat = single_step.descend([2., 1., 2.], 0., float_valve=True)
+    np.testing.assert_allclose(small_steps.annulus_temperature, [50., 60., 80.])
+    np.testing.assert_allclose(small_steps.annulus_temperature, single_step.annulus_temperature)
+    assert repeat_heat == pytest.approx(direct_heat)
+
+
+def test_explicit_radial_step_matches_original_static_equations():
+    from borethm.wall_thermal import State, run
+
+    duration = 100.
+    states = [State("static", duration, C=1e5, h=50., T_node0=35.)]
+    original = run(states, 120., .1, 2.5, 2.5e6, n=32)
+    eliminated = run(states, 120., .1, 2.5, 2.5e6, n=32, dt_max=duration/50)
+    np.testing.assert_allclose(eliminated.T_wall, original.T_wall, atol=1e-9, rtol=0.)
+    np.testing.assert_allclose(eliminated.T_node, original.T_node, atol=1e-9, rtol=0.)

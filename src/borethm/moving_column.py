@@ -3,7 +3,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .run_in_column import RadialColumn, displace_annulus, pump_on_step
+from .liquid_parcels import Parcels
+from .run_in_column import RadialColumn
 
 
 @dataclass
@@ -29,6 +30,17 @@ class MovingColumn:
                 or min(self.fluid_heat_capacity, *self.cell_length, *self.annulus_volume,
                        *self.bore_volume) <= 0):
             raise ValueError("inconsistent column volumes or heat capacity")
+
+        self._annulus = Parcels(self.annulus_volume.copy(), self.annulus_temperature)
+        self._bore = Parcels(self.bore_volume.copy(), self.bore_temperature.copy())
+
+    def _sync_parcels(self):
+        self._annulus = self._annulus.with_cell_heat(self.annulus_volume, self.annulus_temperature)
+        self._bore = self._bore.with_cell_heat(self.bore_volume, self.bore_temperature)
+
+    def _read_parcels(self):
+        self._set_annulus_temperature(self._annulus.averages(self.annulus_volume))
+        self.bore_temperature = self._bore.averages(self.bore_volume)
 
     @property
     def annulus_temperature(self):
@@ -56,25 +68,32 @@ class MovingColumn:
                 raise ValueError("bore extension requires annulus displacement")
             return 0., 0.
         stop = changed[-1] + 1
-        affected = slice(stop-1, None, -1)
-        temperature = self.annulus_temperature
         intake_volume = 0. if float_valve else added_bore_volume
-        if float_valve and added_bore_volume and fill_temperature is None:
-            raise ValueError("float-valve bore extension requires a fill temperature")
-        updated, intake, exit_volume, exit_inventory = displace_annulus(
-            self.annulus_volume[affected], temperature[affected],
-            new_volume[affected], bore_intake=intake_volume)
-        temperature[affected] = updated
-        self._set_annulus_temperature(temperature)
+        if float_valve and added_bore_volume and not np.isfinite(
+                fill_temperature if fill_temperature is not None else np.nan):
+            raise ValueError("float-valve bore extension requires a finite fill temperature")
+        old_end = float(np.sum(self.annulus_volume[:stop]))
+        new_end = float(np.sum(new_volume[:stop]))
+        exit_volume = old_end-new_end-intake_volume
+        if not np.all(np.isfinite(new_volume)) or np.any(new_volume <= 0) or exit_volume < -1e-12:
+            raise ValueError("invalid displacement inventory")
+        self._sync_parcels()
+        affected = self._annulus.slice(0., old_end).reversed()
+        unchanged = self._annulus.slice(old_end, self._annulus.size)
+        retained = affected.slice(intake_volume, intake_volume+new_end)
+        returned = affected.slice(intake_volume+new_end, affected.size)
+        self._annulus = retained.reversed().join(unchanged)
         self.annulus_volume = new_volume.copy()
         if added_bore_volume:
             if float_valve:
+                entered = Parcels(np.array([added_bore_volume]), np.array([fill_temperature]))
+                self._bore = entered.join(self._bore)
                 self.bore_volume = np.r_[added_bore_volume, self.bore_volume]
-                self.bore_temperature = np.r_[fill_temperature, self.bore_temperature]
             else:
+                self._bore = self._bore.join(affected.slice(0., intake_volume))
                 self.bore_volume = np.r_[self.bore_volume, added_bore_volume]
-                self.bore_temperature = np.r_[self.bore_temperature, intake/added_bore_volume]
-        return exit_volume, self.fluid_heat_capacity*exit_inventory
+        self._read_parcels()
+        return max(0., exit_volume), self.fluid_heat_capacity*returned.inventory
 
     def recover(self, duration, films):
         """Advance each wall and liquid state and return heat into the rock."""
@@ -92,16 +111,23 @@ class MovingColumn:
         active = len(self.rock) if active_cells is None else active_cells
         if not 0 < active <= len(self.rock) or not len(self.bore_volume):
             raise ValueError("circulation needs a bore and a connected annulus")
-        count = len(self.bore_volume)
-        temperatures = self.annulus_temperature
-        volumes = np.r_[self.bore_volume, self.annulus_volume[:active][::-1]]
-        values = np.r_[self.bore_temperature, temperatures[:active][::-1]]
-        advected, returned = pump_on_step(volumes, values, duration*flow, inlet_C)
-        self.bore_temperature = advected[:count]
-        temperatures[:active] = advected[count:][::-1]
-        self._set_annulus_temperature(temperatures)
-        return returned*self.fluid_heat_capacity, self.recover(duration, films)
-
+        pumped = duration*flow
+        if not np.isfinite(pumped) or pumped < 0 or not np.isfinite(inlet_C):
+            raise ValueError("invalid pumped volume or inlet temperature")
+        if not pumped:
+            return 0., self.recover(duration, films)
+        self._sync_parcels()
+        bore_end = float(np.sum(self.bore_volume))
+        annulus_end = float(np.sum(self.annulus_volume[:active]))
+        total = bore_end+annulus_end
+        stagnant = self._annulus.slice(annulus_end, self._annulus.size)
+        inlet = Parcels(np.array([pumped]), np.array([inlet_C]))
+        circuit = inlet.join(self._bore).join(self._annulus.slice(0., annulus_end).reversed())
+        self._bore = circuit.slice(0., bore_end)
+        self._annulus = circuit.slice(bore_end, total).reversed().join(stagnant)
+        self._read_parcels()
+        returned = circuit.slice(total, circuit.size).inventory*self.fluid_heat_capacity
+        return returned, self.recover(duration, films)
 
     def exchange_tool_heat(self, index, tool, duration, inside_film, outside_film, *, tool_length):
         """Exchange heat with a tool at the chosen depth without losing energy."""

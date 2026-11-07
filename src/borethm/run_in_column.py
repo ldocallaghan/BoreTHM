@@ -29,6 +29,7 @@ class RadialColumn:
     radial_nodes: int = 200
     casing_resistance: float = 0.
     temperature_C: float | None = None
+    max_radial_step_s: float | None = None
     rock: np.ndarray | None = field(default=None, init=False, repr=False)
 
     def __post_init__(self):
@@ -53,7 +54,8 @@ class RadialColumn:
             self.radius, self.conductivity/self.rock_heat_capacity, self.history_horizon_s)
         result = wall_thermal.run([state], self.formation_C, self.radius,
                                   self.conductivity, self.rock_heat_capacity,
-                                  n=self.radial_nodes, r_max=radius, T0=self.rock)
+                                  n=self.radial_nodes, r_max=radius, T0=self.rock,
+                                  dt_max=self.max_radial_step_s)
         self.rock = result.fields[-1]
         return result
 
