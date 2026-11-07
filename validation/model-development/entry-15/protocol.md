@@ -97,3 +97,27 @@ Black Box peak by 0.339 K and the slow peak by 0.026 K. The bit
 changes by less than 0.001 K. The pilot uses the recorded lengths.
 Full event history, motion and the quasi-steady handover remain to be
 verified.
+
+### Input-only held-out stage keys
+
+The [H3 stage index](h3-stage-index.csv) uses Pason time, depth and
+flow, the archived trip timings for runs 11–16, and the documented
+assembly makeup end for runs 20, 27 and 38. For other runs, a start
+requires a rig row within 100 ft of surface and within 10 ft of the
+reported incoming hole depth before the first circulation on bottom
+inside the assembly's drilled interval. Stages follow the Phase 0
+flow rule, including a circulation beginning on the first bottom row.
+The [builder](heldout_stages.py) reads no temperature targets.
+
+The index has 72 candidate stages across the configured EOW
+assemblies. Run 13 has no qualifying circulation stage, run 18 has
+an unresolved trip start, and run 26 has no documented MWD. The
+run 3 and run 4 offsets remain bracketed. Run 17 is development
+data and is outside H3.
+
+The [H4 case keys](h4-case-index.csv) associate the published 9,255 ft
+and 9,863 ft trips with the Pason stage candidates for assemblies 20
+and 27. The case keys use an 84 ft MWD proxy pending confirmation
+of the instrument that supplied the published values. Stage matching
+and the temperature observations remain sealed for the held-out
+comparison.
