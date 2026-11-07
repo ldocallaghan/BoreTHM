@@ -50,7 +50,7 @@ Largest bit movement is the difference between maximum and minimum
 bit depth during the pause. Rotation is averaged over the pause.
 
 Report sensor availability separately for each event, including
-the first five minutes after the end of a pause. Eligibility is
+the first five minutes after pump-on following a pause. Eligibility is
 evaluated per sensor: a gap over 10 s, including at the edges of
 the observation window, excludes that channel. Recorded Sanvean
 data loss above 1% or bit movement above 100 ft excludes the whole
@@ -65,3 +65,64 @@ description is the portion after the first five minutes of a
 stage's circulation. EYE update behaviour is assessed from changed
 finite readings, and from coverage while flow is above 100 or below
 50 US gal/min. No interpolation is applied to downhole temperatures.
+
+
+## Extract integrity and source cross-checks
+
+The [extract manifest](extracts.csv) gives the source export and input
+hashes and the counts of duplicate seconds. The following SHA-256
+checksums identify the reserved gzip files. The aggregate range check
+counts individual readings after duplicate resolution.
+
+| EOWR run | Rows | Outside range | Sealed SHA-256 |
+| ---: | ---: | ---: | --- |
+| 11 | 26136 | 0 | `4e678a73e30d53ebcfd09103ab411108ffba0ab8c57148160b5efd6af5c78535` |
+| 12 | 120471 | 0 | `86fd55a3b2bcecad38765410505b596531e2a09c98ecd1134a17c04d46e72775` |
+| 13 | 91289 | 0 | `055d3005ef8a008a2f3ef9fdafb2c5a494032da9381a7a82e7ac58eb7619d2f4` |
+| 14 | 30861 | 0 | `a793535cc83d48ef3261620a0aaba46722585d9a8bbdc1202cd4dc89c4e488f0` |
+| 15 | 107860 | 0 | `b5ed83f5d83acddd8bd977eee047519dc94eda35ab0736dd7da2a6df8f6f97af` |
+| 16 | 65538 | 0 | `745388013f91a6ebcf1e5d5210239502930561392a4e76cb9534530e1d43ae39` |
+
+The [surface cross-check](surface-channel-comparison.csv) gives paired
+counts and numeric differences between the Surface and Black Box copies.
+Pason minus Sanvean offsets in [the clock table](clock-alignment.csv)
+maximise the mean of the bit-depth and flow correlations on a common
+overlap. Run 17 Pason temperatures use the nearest aligned 10-second
+record within five seconds. The selected Pason CSV can be rebuilt with
+the column selector in [the GDR 1516 build script](../build_extracts.py).
+
+## Sensor positions and trip history
+
+The [geometry table](sanvean_sensor_geometry.csv) gives carrier
+dimensions and the supporting drawing pages. The Sanvean deck calls
+the bit instrument a "centerline mounted sensor" (p. 8). The GDR
+fileset names also say "CNTRLN". The radial position within either
+instrument's carrier wall is unknown. The Black Box distance is the
+interval occupied by its carrier, with its midpoint used in the
+depth-by-depth timing calculation. The EOWR comments distinguish the
+22 ft Eye location from the survey and gamma offsets. For run 17 the
+84 ft assumption is within the pulser's span in Figure 90. Appendix B
+gives a longer motor and pulser, so the geometric offset remains
+uncertain. EOWR Figure 60 reports 9.5 in bit gauge and a separate
+6.375 in body OD. Run 11's listed filter sub does not establish a float.
+
+The deck and EOWR agree on the seven assembly numbers and their
+contractor counterparts. The source labels for runs 12 and 15–16
+include different bit serials from the EOWR drawings. The run 14–16
+exports select SN2232, while the GDR fileset titles for EOWR 15–16
+also name SN5104. These are source differences. The temperature
+channels here come from the seven specified viewer exports, and the
+geometry comes from the EOWR figures.
+
+The [trip history](trip-history.csv) uses the last recorded bottom
+pass before the incoming export and reports incomplete near-surface
+coverage. The [static time table](static-time-by-depth.csv) follows
+the bit and the Black Box carrier midpoint on the Pason clock in
+25 ft depth increments. A depth's clock starts at the last recorded
+circulation above 100 US gal/min with the bit at least that deep.
+An incoming circulation stage can reset the clock at depths it reaches.
+These are rig-history timings and do not measure thermal recovery.
+
+The [run 17 observations](bha-17-development.csv) describe the two
+sensors by stage and pause. The [EYE update table](bha-17-eye-updates.csv)
+separates availability from changes in the recorded value.

@@ -43,3 +43,16 @@ python validation/forge16b/read_mud_logs.py --archive "SCRATCH/16B mud temp logs
 ```
 
 The first command streams the source's 412 columns and stores only selected columns in scratch. A provenance sidecar verifies the input archive and selected-file hashes before cache reuse. The scratch PDF and mud-log ZIP are the corresponding members of `1516.zip`; copying them does not require unpacking the large Pason CSV. `--output` selects a separate destination for a rebuild, with `run_definitions.csv` supplied there. None of these commands imports or runs the BoreTHM model. Source extracts remain outside `src/borethm/` and are not runtime package data.
+
+
+## Sanvean sensor and event extracts
+
+The [Sanvean extracts](sanvean/README.md) add the GameChanger export names
+and run numbers for end-of-well report assemblies 11–17. Zhang et al.
+(2026) and the Eavor trial report use contractor assembly numbers.
+Their BHA 10 is end-of-well report BHA 17 and their BHA 11 is BHA 18.
+Sanvean's deck uses both numbering systems. The export crosswalk also
+records filename and drawing differences. The two new columns extend
+the live run definitions. For exact reproduction of the historical
+source hashes, use that table from the corresponding study commit.
+[Zhang et al. (2026)](https://doi.org/10.1016/j.geothermics.2026.103598)
