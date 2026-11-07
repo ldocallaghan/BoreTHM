@@ -40,3 +40,21 @@ Rayleigh number. The recorded yield point describes surface mud.
 The ratio has no validated onset threshold for this annulus, and
 some 16A legs could convect. The slow primary and the two limits
 remain the declared assumptions.
+
+## Run 17 static-coupling screen
+
+The [run 17 screen](run17-rayleigh.csv) covers eight trip stages and
+sixteen connections. It uses water properties and the transferred
+formation profile on survey TVD. It models the final bit depth of each
+event. The prior circulation profile comes from the recorded flow,
+bit depth and inlet temperature in the boundary ledger. Conditioning
+uses BHA 16 for the preceding trip-out windows and BHA 17 for the
+connection windows. The diagnostic uses zero motor face heat.
+Earlier circulating exposure is lumped at that boundary, and the
+following static interval is represented at the final string
+geometry. The [runner](run17_rayleigh.py) reproduces the screen.
+
+The gap Rayleigh numbers span 5.84 million to 185 million under those
+assumptions. They exceed the reported Keyhani range. These are local
+diagnostics. They do not represent the temperature history of a
+moving fluid column and are not used as event forecasts.

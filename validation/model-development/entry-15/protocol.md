@@ -40,3 +40,25 @@ The [extractor](run17_boundaries.py) reads only time, depths, pump output
 and inlet temperature from the 10 Second Data member of GDR 1516's
 16B Pason archive. The nested archive SHA-256 is
 `858a6eaf56c2cb3cbf45b59f431e59f82fc0ef2502ced244608d4d7b76ac54a2`.
+
+## Run 17 connection replay check
+
+The [pause-02 replay](run17-connection-pilot.csv) uses the Pason
+restart flow and inlet temperature for the first five minutes and
+carries the fluid, rock and layered tools through the pause and
+restart. The pilot holds the geometry at the preceding circulation
+depth, lumps earlier exposure into the last circulation and uses a
+fixed volumetric heat capacity. It uses the midpoint of the recorded
+Black Box axial span and a 0.25 m tool contact length or the cell
+length if shorter. The pilot applies recorded flow through the
+five-minute window. It has no quasi-steady handover.
+
+The [replay calculation](run17_connection.py) refines the axial grid
+from 46 to 86 cells, the radial grid from 40 to 80 nodes and the
+maximum step from 10 to 5 seconds together. The bit peak moves by
+about 0.014 °C. The Black Box peak moves by 0.156 °C at the slow
+limit and 0.351 °C at the fast limit. The Black Box exceeds the
+0.1 K convergence requirement in this pilot. The joint refinement
+does not isolate the responsible discretisation. The maximum
+single-step energy residual is 0.000043 J. Event forecasts remain
+pending.
