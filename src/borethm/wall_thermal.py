@@ -177,7 +177,8 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
         observed(state_index, 'initial' if state_index == 0 else 'event_boundary', 'right', T_node, None)
         steps = time_steps(s.duration, dt0, growth)
         for step_index, dt in enumerate(steps):
-            m = n + (1 if T_node is not None else 0)
+            mixed_wall = T_node is not None and np.isinf(s.h)
+            m = n + (1 if T_node is not None and not mixed_wall else 0)
             ab = np.zeros((3, m))
             rhs = np.zeros(m)
             # rock nodes: cap/dt (T - T_old) = sum G (T_j - T_i)
@@ -200,14 +201,19 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
                 rhs[0] += s.q
             elif s.kind == "fixed":
                 ab[1, 0], ab[0, 1], rhs[0] = 1.0, 0.0, s.T_wall
+            elif mixed_wall:
+                # With zero film resistance the fluid and first rock node share
+                # their new temperature. Sum the two energy equations.
+                ab[1, 0] += s.C / dt
+                rhs[0] += s.C / dt * T_node
             elif s.kind == "static" and T_node is not None:
                 hA = s.h * A_w
                 ab[1, 0] += hA
                 ab[0, n] = 0.0
                 # couple the wall (0) and the node (n): only adjacent in a full
                 # matrix, so solve this case densely below
-            T_old_wall = T[0]
-            if s.kind == "static" and T_node is not None:
+
+            if s.kind == "static" and T_node is not None and not mixed_wall:
                 A = np.zeros((m, m))
                 for i in range(n):
                     A[i, i] = ab[1, i]
@@ -222,6 +228,8 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
                 T_new, T_node = sol[:n], sol[n]
             else:
                 T_new = solve_banded((1, 1), ab[:, :n], rhs[:n])
+                if mixed_wall:
+                    T_node = T_new[0]
             # heat into the rock at the wall over the step, from the wall
             # node's balance: cap0 dT0/dt = q_in + G0 (T1 - T0)
             q_in = cap[0] * (T_new[0] - T[0]) / dt - G[0] * (T_new[1] - T_new[0])
