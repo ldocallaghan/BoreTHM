@@ -1,3 +1,3 @@
-measure,published_case_depth_ft,assembly,pason_trip_index,primary_proxy,proxy_offset_ft,proxy_basis
-H4,9255,20,H3 assembly 20,MWD,84,EOWR assembly drawing comments; published instrument identity unresolved
-H4,9863,27,H3 assembly 27,MWD,84,Transferred MWD offset; published instrument identity unresolved
+measure,published_case_depth_ft,assembly,pason_trip_index,primary_proxy,proxy_offset_ft,proxy_basis,float_record
+H4,9255,20,H3 assembly 20,MWD,84,"GDR 1516 daily report 41 pp. 1–2 identifies MWD installation and tool cooling; instrument of published table inferred",unresolved in checked report
+H4,9863,27,H3 assembly 27,MWD,84,"GDR 1516 daily report 49 p. 1 lists MWD test and Black Box; temperature attribution unresolved",float sub recorded

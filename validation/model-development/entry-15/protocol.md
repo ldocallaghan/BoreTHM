@@ -161,3 +161,14 @@ No event convergence claim follows from the single grid in this
 check. The summed absolute energy residual is under 0.024 J in
 each configuration. This check covers descent and does not include
 the following circulation.
+
+The daily reports for the two H4 trips were checked with temperature
+values masked. Daily report 41, pp. 1–2, records installing and
+testing the MWD on assembly 20 and describes cooling it during the
+staged descent. The MWD proxy is consistent with the report. Daily
+report 49, p. 1, lists both an MWD test and a Black Box for assembly
+27. The staged readings are unattributed, so that case retains the
+84 ft MWD proxy as an assumption. The report also lists a float
+sub for assembly 27. The daily reports do not identify the exact
+channel exported into the published table.
+[FORGE 16B daily reports, GDR 1516](https://gdr.openei.org/submissions/1516)
