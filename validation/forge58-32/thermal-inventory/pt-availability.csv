@@ -1,0 +1,10 @@
+source,kind,header_log_date,records,temperature_available,depth_start_ft,depth_end_ft,last_above_100gpm_bin,seconds_since_last_pumped_bin,prior_24h_input_bins,prior_24h_flow_bins,prior_24h_bit_bins,prior_24h_inlet_bins,coverage,elapsed_start_s,elapsed_end_s,logger_depth_ft
+PT/MU-ESW1_RUN1_PT.las,PT depth log,2017-09-03 06:49:50,41584,41570,-2.296,6817.316,2017-09-03 06:44:00,350,8638,8638,8638,8638,near-continuous from last pumped bin,,,
+PT/MU-ESW1_RUN2_PT.las,PT depth log,2017-09-03 10:56:38,41546,41529,-0.82,6812.56,2017-09-03 07:04:10,13948,8638,8638,8638,8638,near-continuous from last pumped bin,,,
+PT/MU-ESW1_RUN3_PT.las,PT depth log,2017-09-03 16:30:49,41473,41459,7.216,6808.624,2017-09-03 07:04:10,33999,8640,8640,8640,8640,near-continuous from last pumped bin,,,
+PT/MU-ESW1_RUN4_PT.las,PT depth log,2017-09-03 22:33:56,41548,41528,-3.444,6810.264,2017-09-03 22:26:20,456,8640,8640,8640,8640,near-continuous from last pumped bin,,,
+PT/MU-ESW1_TIME1_PT.las,PT time series,2017-09-03 08:48:19,2119,2081,,,2017-09-03 07:04:10,6249,8638,8638,8638,8638,near-continuous from last pumped bin,0.0,211.8,6798
+PT/MU-ESW1_TIME2_PT.las,PT time series,2017-09-03 12:54:53,4031,3982,,,2017-09-03 07:04:10,21043,8638,8638,8638,8638,near-continuous from last pumped bin,0.0,403.0,6798
+PT/MU-ESW1_TIME3_PT.las,PT time series,2017-09-03 18:27:33,3649,3611,,,2017-09-03 07:04:10,41003,8640,8640,8640,8640,near-continuous from last pumped bin,0.0,364.8,6798
+PT/MU-ESW1_TIME4_PT.las,PT time series,2017-09-04 00:34:18,5511,5476,,,2017-09-03 23:46:20,2878,8640,8640,8640,8640,near-continuous from last pumped bin,0.0,551.0,
+PT/Nov 2 PT survey.xlsx,PT depth log,2017-11-02,45947,45947,13.94,7549.084,,,,,,,outside dated Pason coverage,,,
