@@ -7,7 +7,6 @@ from unittest.mock import patch
 import numpy as np
 
 from borethm import model1_coupled as model, rock_response, well_geometry as wg
-from borethm.fluids import Mud
 from validation.benchmarks.kabir1996 import Case, hasan_kabir_td
 
 IN = .0254
@@ -91,8 +90,7 @@ def comparisons(name, kw):
     case = Case.from_properties(kw["geometry"].md_bit, kw["T_inj"], kw["T_surf"], kw["G"],
                                 mass_cp, kw["k_rock"], r, ua, rt, ut, td)
     grid = np.linspace(0, case.length, 2001)
-    default = model.solve(**(kw | {"fluid": Mud(kw["fluid"]["rho"], pv_ref=kw["fluid"]["mu"],
-                                               yield_point=0.)}))
+    default = model.solve(**kw)
     for reverse in (False, True):
         analytical = case.closed_form(grid, reverse)
         numerical = case.numerical(reverse)

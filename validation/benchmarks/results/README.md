@@ -54,3 +54,7 @@ BoreTHM uses a constant-wall-temperature cylinder solution and an
 explicit annulus film. These differences limit reproduction of the
 published maxima. Their separate contributions to the errors have not
 been established. See [the results table](brown-comparison.csv).
+
+The current rebuild passes the stated fluid properties through to the
+analytical and native calculations. The archived output above records
+the earlier mud substitution. See the [input audit](../phase1/README.md#fluid-property-audit-7-november-2026).

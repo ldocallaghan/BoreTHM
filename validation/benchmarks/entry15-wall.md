@@ -17,3 +17,20 @@ The [full table](entry15-wall.csv) gives the signed errors. The BoreTHM
 boundary-value calculation and the paper's adjusted-time approximation
 differ even with the fluid capacity removed. This check does not isolate
 the cause of that difference.
+
+## Classification amendment, 7 November 2026
+
+Well 4 is a comparison. The published adjusted-time calculation uses a
+line-source approximation with formation properties inside the borehole.
+The insulated-wall problem in the earlier check has zero capacity
+inside the borehole. An independent fine-grid calculation agrees with
+BoreTHM for that boundary condition. The exact reference check uses a
+tolerance of 0.005 in recovery fraction.
+
+The [filled-hole calculation](entry15-filled.csv) retains the circulating
+wall initialisation and then conducts through the full radius with the
+formation conductivity and volumetric heat capacity. After two hours
+its recovery fractions are 0.256 and 0.152, against 0.202 and 0.119 in
+Table 1. The residual is consistent with error in the line-source
+approximation at early times. All earlier fluid and wall results and
+their original tolerance are retained as historical comparisons.

@@ -71,12 +71,13 @@ class RadialColumn:
     def shut_in(self, duration, capacity, film):
         """Advance recovery and carry the liquid and rock states forward."""
         h = self._film(film)
-        if capacity <= 0 or not np.isfinite(capacity) or not np.isfinite(h):
-            raise ValueError("static capacity must be positive and the film finite")
+        if capacity < 0 or not np.isfinite(capacity) or not np.isfinite(h):
+            raise ValueError("static capacity must be non-negative and the film finite")
         state = wall_thermal.State("static", duration, h=h, C=capacity,
                                    T_node0=self.temperature_C)
         result = self._advance(duration, state)
-        self.temperature_C = float(result.T_node[-1])
+        if capacity > 0:
+            self.temperature_C = float(result.T_node[-1])
         return result
 
 
