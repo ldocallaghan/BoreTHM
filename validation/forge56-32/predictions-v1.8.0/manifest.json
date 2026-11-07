@@ -1,0 +1,27 @@
+{
+  "package_version": "1.8.0",
+  "input_sha256": {
+    "validation/forge56-32/predictions-v1.8.0/conditions.csv": "af2431a11f4d1e578d7e685ddcef9e21ea79ef2a4d8d875264f321c3470ae73d",
+    "validation/forge56-32/predictions-v1.8.0/availability-by-pump.csv": "b4ae96337ed652d54b80f11efd483cdabc3e0b19cf3d461e00dd246b78e2122d",
+    "validation/forge56-32/predictions-v1.8.0/source-availability.json": "c26034e4f38b1b82bcd13e02af4123635d680615eb0d2b533336595cf8498d77",
+    "validation/forge56-32/predict_thermal.py": "ab3e54af0b97d01ea00de432cdbcc630e5bc2ab010792ccaaee827b093056b11",
+    "validation/forge56-32/prepare_thermal.py": "0db1a02c462e3e04a75a34a15ef073309c368286a0e88bbd980f83b7bf786c50",
+    "validation/forge56-32/thermal_protocol.md": "a8061cbbe43ddb390ddbc07321fa9240e2855e165855096805fc4569023b339e",
+    "validation/forge56-32/rig_inputs_10s.csv.gz": "95ca1cffca7474b509547decc949e5938a850b905ab41611202f34bbca1e5c23",
+    "validation/forge56-32/mud_reports.csv": "a82af661643f76c396a99f389386cdef35932ab0a68a26c1593d118194e8cf7b",
+    "validation/forge56-32/bha_crosswalk.csv": "777cc4fae1871b72b96d9b8d43569a6236200309f646c6ba9ebe1b8301f7ba54",
+    "validation/forge56-32/bha_components.csv": "f4a7af5c409517f8f2a9d07c8509588250e10f47371df4bd8aab6bf91260fd61",
+    "validation/forge56-32/bha_runs.csv": "187dd058b12234cfac14f8b26e4b656547a3f53cb3251a053a250f9f22558f63",
+    "validation/forge56-32/bit_records.csv": "7e053b96e416f3295c046fec3847502c1cf111527b5e5571ac9f624043148dc5",
+    "validation/forge56-32/survey.csv": "4d53608ec368e75fff742ae51bf17a454074f6b44dc8d1667d988cf54290c680",
+    "validation/forge16a/formation_temperature_216day.csv": "5af4cf699f4133ebdfb11b91df12551b9ace041a2306c2ecbfdb2b9f60715ae4"
+  },
+  "model_sha256": {
+    "model1_coupled.py": "9218e613642aaaa2b1f11517eff13acf0efb3556f636d8a5968fbd68a118cdaf",
+    "physics.py": "c0c9f279b337c6d053bab79c3238147fe137c0bed3c3fdea7732694a1ae79fe0",
+    "well_geometry.py": "0146a746074ea0033bf797746474a94135023eae4751a91dd4838b446be80873",
+    "tool_thermal.py": "9b828c8ac7c8e723314d66cba8f5a119258d73ba94b69341a3f2174c3de633b6",
+    "wall_thermal.py": "8ec4cca7d1ce5bbc8f012331ced3fcb2f1150798b8df222e86f2e26d1c11bf39"
+  },
+  "predictions_sha256": "cff0ab3939becbaf1dc802a7cdc94b878a868ae1822e837caf0b8ec1cf72ea08"
+}
