@@ -332,3 +332,83 @@ motion events are pulls on 16 and 17 June just over the 6 ft/s ascent
 limit. Seven typed entries on runs 12 and 13 set the hole depth with the
 bit (14 May 21:10, 15 May 18:45, 20:12, 20:43 and 23:28 on the clocks
 where each appears).
+
+## Bit depth from tally entries, 8 November 2026
+
+This section supersedes the depth rebuild from rig motion of 7 November.
+That rebuild removed the driller's tally entries as resets and so put the
+block encoder's drift back into the depth. Its outputs in
+`depth-rebuild-2026-11-07/` and the archive in `events-2026-11-07-depth/`
+are kept and are not replay inputs. [`depth_entries.py`](depth_entries.py)
+writes [`depth-entries-2026-11-08/`](depth-entries-2026-11-08/), and
+`depth_reference.entry_depth` applies it. The script reads time, bit
+depth, hole depth, block height, hook load and the slips threshold only.
+
+**Method.** The steps classified above are the depth reference. A typed
+entry fixes the depth at its sample. A pick-up entry does too, with the
+block travel in its sample as its uncertainty. A zero reset fixes 0 ft.
+A glitch and its restore are removed. Ten Sanvean entries that the
+ten-second record takes as motion enter the Pason record on the Pason
+step that contains them. Each Sanvean record starts inside a trip, so
+its first sample takes the Pason depth, matched on recorded depth within
+15 s.
+
+The record is cut into runs at each turnaround, the shallowest sample of
+a trip bracketed by drilling. Depth propagates only within a run.
+Between two anchors the depth is the earlier anchor plus the rig
+increments since it times
+s = (later value − earlier value) / (rig increments between them).
+Before the first anchor and after the last the run median scale applies.
+
+| Rule | Value |
+|---|---|
+| Short interval | net rig increments under 190 ft; run median used, misclosure reported |
+| Out and back | rig travel over twice the net increments; run median used, misclosure reported |
+| Implausible scale | outside 0.85 to 1.15; run median used, misclosure reported |
+| Run without a fitted scale | one-second record: 95.12 ft (S-135) or 119 ft (insulated) over the mean complete loaded stroke of 50 to 130 ft, from 10 strokes or more; otherwise the nearest run in time with a fitted scale, to 17 June |
+| Gap or unresolved entry | an unknown jump; each side from its own anchors, with the implied jump reported |
+| Run with no anchor | the first drilling sample anchors it, and each use is reported |
+| Span with no anchor and no drilling sample | the recorded depth, with no stated uncertainty |
+
+At ten seconds the slips transitions fall between samples and the loaded
+stroke is undercounted. On the Pason trips with a fitted scale the
+ten-second stroke scale exceeds it by 0.12 to 0.53, so the stroke is used
+on the one-second record only.
+
+**Uncertainty.** The uncertainty at a sample is the largest of the anchor
+uncertainty, the interval misclosure scaled by the share of rig travel
+from the earlier anchor, a rate times the rig travel to the nearest
+anchor, and ±35 ft on run 17 from 03:30 to the 06:19:20 entry on 21 May.
+The rate is half the run's spread of fitted scales, the largest in-scope
+spread where a run has one fitted scale, or half the spread between runs
+(0.073) where the scale is borrowed. On insulated pipe it is at least
+1 ft per 119 ft stand.
+
+**Checks.** None of these chooses a value.
+
+| Check | File | Result to 17 June |
+|---|---|---|
+| Bit minus hole at the first drilling sample of each trip | [bottom-misclosure.csv](depth-entries-2026-11-08/bottom-misclosure.csv) | Sanvean runs 11 to 17: −29 to +10 ft. Pason: within 50 ft on 19 of 31 trips; over 95 ft on 12: +125 ft (8 to 11 May), +193 ft (run 18), +114 ft (run 19) and nine June trips from −477 to +244 ft |
+| Bit minus hole over each run's drilling | [drilling-check.csv](depth-entries-2026-11-08/drilling-check.csv) | Sanvean runs 11 to 17: up to 43 ft. Pason: up to 58 ft on runs 10 to 17 and 84 ft on run 20; over 95 ft on runs 0, 3 and 7 (to 11 May), 18 (222 ft), 19 (164 ft) and the June runs |
+| Pason against Sanvean, matched on recorded depth | [pason-against-sanvean.csv](depth-entries-2026-11-08/pason-against-sanvean.csv) | median 0 to 1 ft on runs 13, 14, 15 and 17; 10 to 35 ft on runs 11, 12 and 16, where the two records take their scale from different runs or methods |
+| Stands between slips entries, one-second record | [stand-counts.csv](depth-entries-2026-11-08/stand-counts.csv) | run 17, 06:19 to 07:49: 34 stands, 3,232 ft entered, 95.06 ft per stand |
+| Scale per run | [run-scales.csv](depth-entries-2026-11-08/run-scales.csv) | run medians 0.930 to 1.076 on the ten runs with a fitted scale; fitted intervals 0.930 to 0.945 on runs 20 and 21 and 1.05 to 1.10 on runs 16 to 19 |
+
+The encoder scale changes between runs. It is near 1.07 on runs 16 to 19
+and near 0.93 on runs 20 and 21, so a borrowed scale is weak.
+The bit-minus-hole check grows through drilling because the run scale
+carries into drilled footage while the hole depth is recorded. On run 13
+the Pason depth tracking was repaired from 15:30 to 17:30 on 15 May
+(daily report 30), and the block height drifts to −560 ft in the
+following hour. The interval between the 17:47 and 17:59 entries fits a
+scale of 0.53 and is flagged.
+
+**Effect on entry 15.** [`rebuild_events.py`](rebuild_events.py) writes
+`events-2026-11-08-entries/`. The event rules find the bottom where the
+hole and bit depths agree within 5 ft. The hole depth there takes the
+same offset as the bit, so the rig's own geometry decides the bottom.
+Event counts, ids and eligibility are unchanged from the 7 November
+amendment; only depth fields change. Compared with the recorded hole
+depth, the rebuilt bit would drop one run 11 stage and five run 13
+connections. The pump-on depths are in
+[`pump-on-depths.csv`](../../model-development/entry-15/pump-on-depths.csv).

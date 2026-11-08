@@ -2831,3 +2831,30 @@ H3 stage pump-on depths change on six assemblies. Run 17 starts at
 2,094 ft against 2,291 ft recorded. The run 17 descent and connection
 pilot tables predate the rebuild and are to be regenerated before any
 event calculation uses them.
+
+### Entry 15 bit depth from tally entries, 8 November 2026
+
+The 7 November depth rebuild is withdrawn as an input. Most steps it
+removed are depths the driller typed from the pipe tally: they land on a
+whole foot or the hole depth with the block still, and on runs 17 and 20
+successive entries are whole stands of 95.12 ft apart. The block encoder
+drifts by several feet per stand between them, and the block-travel
+check shared that scale. The
+[tally-entry depth](../../validation/forge16b/sanvean/README.md#bit-depth-from-tally-entries-8-november-2026)
+takes the entries as anchors and fits a scale to the rig increments
+between them within each run. It reads rig depth, block height and hook
+load only.
+
+The event archive keeps its counts, ids and eligibility. Run 17 starts
+at about 1,739 ft, against 2,094 ft from the 7 November rebuild and
+2,291 ft recorded, with ±35 ft carried from an offset the reported
+string does not explain. The early run 20 stages are at 4,861 ft. The
+[pump-on depth table](../../validation/model-development/entry-15/pump-on-depths.csv)
+gives every H3 and run 17 stage under each depth reference with its
+uncertainty. Assemblies 27 and 38 carry 180 to 530 ft because each
+trip has one entry and borrows its scale. Through drilling the run scale
+carries the bit up to 58 ft from the recorded hole depth on runs 10 to
+17 and further on runs 18 and 19 and in June; this is reported and not
+corrected. The run 17 descent pilot is regenerated with the new depths.
+The run 17 connection table is regenerated from the current replay
+script, which now runs the axial, radial, time and contact refinements.
