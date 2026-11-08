@@ -5,10 +5,8 @@ depth differs: depth_reference.entry_depth takes the driller's tally
 entries as the depth reference and scales the rig increments between
 them. A typed entry otherwise appears as bit movement inside a pause.
 
-The event rules find the bottom where the hole and bit depths agree within
-5 ft. The rebuilt bit depth is compared with the hole depth shifted by the
-same offset, so the rig's own hole-minus-bit geometry decides the bottom
-and the scale between entries does not move it.
+While drilling the rebuilt bit depth is the recorded hole depth, so the
+event rules compare it with the recorded hole depth.
 """
 import numpy as np
 
@@ -27,12 +25,9 @@ def main():
             return np.array([build.number(row[key]) for row in rows])
 
         time = np.array([build.timestamp(row["time"]) for row in rows])
-        recorded = field("bit_depth_ft")
-        bit = np.array([entry_depth(t, b, clock="sanvean", assembly=run)
-                        for t, b in zip(time, recorded)])
-        offset = bit - recorded
         hole = field("hole_depth_ft")
-        hole = np.where(np.isfinite(offset), hole + offset, hole)
+        bit = np.array([entry_depth(t, b, clock="sanvean", assembly=run, hole=h)
+                        for t, b, h in zip(time, field("bit_depth_ft"), hole)])
         history = build.History(time, bit, hole,
                                 field("flow_gpm"), field("rotary_rpm"), 1)
         available = np.array([field(f"{k}_available") == 1 for k in build.TEMPS])

@@ -73,6 +73,17 @@ def test_setting_the_bit_to_the_hole_depth_is_an_entry():
     assert [(r["class"], r["landing"]) for r in rows] == [("typed_entry", "hole")]
 
 
+def test_small_entries_land_on_a_whole_foot_with_the_block_still():
+    time, bit, hole, block, hook, thr = still(step=10.)
+    hook[:] = 150.
+    bit[10:] = 1003.00                    # 2.63 ft, block still, flat after
+    bit[20:] = 1007.40                    # a tenth landing below the candidates
+    bit[30:] = 1010.00
+    block[30:] += .6                      # the block moves over the step
+    rows = s.classified(time, bit, hole, block, hook, thr)
+    assert [(r["class"], r["after_ft"]) for r in rows] == [("typed_entry_small", 1003.0)]
+
+
 def test_a_split_entry_is_merged_before_testing():
     time, bit, hole, block, hook, thr = still()
     bit[10] = 1031.75                     # interpolated midpoint

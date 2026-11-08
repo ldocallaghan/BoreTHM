@@ -8,13 +8,13 @@ STAND = 95.
 ENCODER = 89.          # the encoder reads this much per true stand
 
 
-def trip_in(start=1000., stands=40, speed=5., wait=20):
+def trip_in(start=1000., stands=40, speed=5., wait=20, encoder=ENCODER):
     """One-second trip in: true depth, encoder-recorded depth, block, hook.
 
     The block travel and the recorded increments follow the encoder, which
-    reads ENCODER per true STAND.
+    reads `encoder` per true STAND.
     """
-    k = ENCODER / STAND
+    k = encoder / STAND
     t, true, rec, block, hook = [], [], [], [], []
     now, z, r, b = 0., start, start, 0.
     for _ in range(stands):
@@ -159,7 +159,7 @@ def test_runs_are_cut_at_the_turnaround_and_spans_stay_inside_them():
     bit = np.r_[drill1, out, back, drill2]
     hole = np.r_[drill1, np.full(len(out) + len(back), 3005.), drill2]
     time = np.arange(len(bit)) * 10.
-    run_of = e.runs(bit, hole)
+    run_of = e.runs(time, bit, hole)
     cut = len(drill1) + int(np.argmin(out))
     assert run_of[cut - 1] == 0 and run_of[cut] == 1 and set(run_of) == {0, 1}
     block = np.full(len(bit), 50.)
@@ -169,5 +169,82 @@ def test_runs_are_cut_at_the_turnaround_and_spans_stay_inside_them():
     assert sorted(scales) == [0, 1]
     for iv in intervals:
         assert run_of[iv["a"]] == run_of[iv["b"]]
-        assert "drilling anchor" in iv["flag"]
+        assert any(m is not None and m.get("cls") == "drilling" for m in (iv["left"], iv["right"]))
     np.testing.assert_allclose(depth, bit)
+
+
+def drill(t0, true0, rec0, block0, n=12, rate=.2):
+    """One-second drilling: hole and true depth advance; the record follows
+    the encoder and stays within a few feet of the hole."""
+    k = np.arange(1, n + 1)
+    true = true0 + rate * k
+    return (t0 + k, true, rec0 + rate * k * .99, block0 - rate * k, np.full(n, 150.), true)
+
+
+def round_trip(entries_in, encoder=94.5):
+    """Drill, trip out to surface, trip in with entries, drill again.
+
+    Returns time, true, recorded, block, hook, hole and the trip-in entry
+    samples. The encoder drifts by STAND - encoder ft per stand.
+    """
+    t1, true1, rec1, block1, hook1 = trip_in(start=200., stands=30, encoder=encoder)
+    top = true1[-1]
+    d1 = drill(-13., top - 12 * .2, top - 12 * .2, 0.)
+    out = slice(None, None, -1)
+    t_out = d1[0][-1] + t1
+    rec_out = top - (rec1[-1] - rec1[out])
+    t_in = t_out[-1] + t1
+    rec_in = rec_out[-1] + (rec1 - rec1[0]) + (rec1[0] - 200.)
+    d2 = drill(t_in[-1], true1[-1], rec_in[-1], block1[-1])
+    time = np.r_[d1[0], t_out, t_in, d2[0]]
+    true = np.r_[d1[1], true1[out], true1, d2[1]]
+    rec = np.r_[d1[2], rec_out, rec_in, d2[2]]
+    block = np.r_[d1[3], block1[out], block1, d2[3]]
+    hook = np.r_[d1[4], hook1[out], hook1, d2[4]]
+    hole = np.r_[d1[5], np.full(len(t_out) + len(t_in), top), d2[5]]
+    offset = len(d1[0]) + len(t_out)
+    slips = hook < SLIPS
+    ends = np.flatnonzero(~slips[:-1] & slips[1:]) + 1     # first slips sample of each spell
+    ends = ends[(ends > offset) & (ends < offset + len(t_in))]
+    at = ends[entries_in]
+    for k in at:
+        rec = enter(true, rec, k)
+    rec[offset + len(t_in):] = d2[2] - d2[2][0] + rec[offset + len(t_in) - 1] + .2 * .99
+    return time, true, rec, block, hook, hole, at, offset + len(t_in)
+
+
+def test_drilled_footage_follows_the_hole_and_the_trip_closes_on_it():
+    time, true, rec, block, hook, hole, at, bottom = round_trip([5, 15, 25])
+    (depth, error, intervals, scales), events = run(time, rec, hole, block, hook)
+    assert all(ev["final_class"] == "typed_entry_small" for ev in events)
+    drilling = e.drilling(time, rec, hole)
+    assert drilling[bottom:].any()
+    np.testing.assert_allclose(depth[drilling], hole[drilling])
+    np.testing.assert_allclose(error[drilling], 0.)
+    trip_in_part = slice(at[0], bottom)
+    np.testing.assert_allclose(depth[trip_in_part], true[trip_in_part], atol=1e-2)
+    closing = [iv for iv in intervals if iv.get("closing")]
+    assert len(closing) == 1 and closing[0]["basis"] == "fitted"
+    rows = list(e.closing_rows(time, intervals))
+    assert abs(rows[0]["misclosure_ft"]) < 1e-6
+    assert not list(e.bound_breaches(time, rec, hole, depth))
+
+
+def test_the_bound_reports_a_bit_below_the_hole():
+    time = np.arange(10.)
+    hole = np.full(10, 5000.)
+    depth = hole - 50.
+    depth[4:6] = hole[4:6] + 12.
+    rows = list(e.bound_breaches(time, depth, hole, depth))
+    assert len(rows) == 1 and rows[0]["samples"] == 2 and rows[0]["max_below_hole_ft"] == 12.
+
+
+def test_a_run_borrows_only_from_a_run_with_two_fits():
+    time, true, rec, block, hook, hole, at, bottom = round_trip([5, 15, 25])
+    (_, _, _, scales), _ = run(time, rec, hole, block, hook)
+    assert scales[1]["fitted"] >= 2
+    assert scales[0]["basis"] == "borrowed from run 1"
+    time, true, rec, block, hook, hole, at, bottom = round_trip([25])
+    (_, _, _, scales), _ = run(time, rec, hole, block, hook)
+    assert scales[1]["fitted"] == 1
+    assert not scales[0]["basis"].startswith("borrowed")

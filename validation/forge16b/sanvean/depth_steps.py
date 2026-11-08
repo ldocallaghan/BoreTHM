@@ -26,6 +26,7 @@ The thresholds below were set from the rig channels only.
 | Pick-up entry | the hook goes from the slips to hanging within the event, with under 5 ft of block travel; the value is uncertain by that travel |
 | Motion | coarser than 2 s, hanging at both ends, more than 5 ft of block travel in the direction of the bit step; not a step |
 | Unresolved entry | any other candidate; an entry of unknown value |
+| Small entry | any other step of 1 ft or more that lands on a whole foot, moves the block under 0.5 ft and holds flat for the next three samples |
 | Clock match | a Pason event inside a Sanvean trip takes the Sanvean class and value when exactly one Sanvean event lies within 15 s of the aligned time |
 
 The classes are tested in the order of the table. Merging comes first
@@ -33,7 +34,8 @@ because the one-second Sanvean export sometimes splits a typed entry over
 two samples with an interpolated midpoint. Block travel in the direction
 of the bit step means the block falls as the bit deepens and rises as it
 comes up. A tenth-of-a-foot landing occurs by chance about once in ten
-steps, so it needs the flat sample as well.
+steps, so it needs the flat sample as well. Tenth-of-a-foot landings
+outside the candidates are not entries for the same reason.
 """
 import argparse
 import csv
@@ -50,6 +52,9 @@ GLITCH_WINDOW_S = 180.       # a restore must follow within this time
 RESTORE_TOLERANCE_FT = 20.   # residual allowed beyond string motion
 STILL_BLOCK_FT = rebuild.STILL_BLOCK_FT
 MATCH_WINDOW_S = rebuild.MATCH_WINDOW_S
+SMALL_STEP_FT = 1.           # a smaller step is not tested as a small entry
+SMALL_BLOCK_FT = .5          # block movement over the step below this
+SMALL_FLAT = 3               # samples the landing value must hold
 
 
 def grid(value):
@@ -70,11 +75,49 @@ def candidates(time, bit, block, hook, threshold):
     return rebuild.tally_resets(time, bit, block, hook, threshold) | gap
 
 
+def describe(first, last, time, bit, hole, block, hook, threshold):
+    """One event row for the step from sample first to sample last."""
+    dblock = np.diff(block[first:last + 1])
+    return dict(
+        first=first, last=last,
+        start=time[first], end=time[last], span_s=time[last] - time[first],
+        samples=last - first, longest_step_s=float(np.max(np.diff(time[first:last + 1]))),
+        before_ft=bit[first], after_ft=bit[last], step_ft=bit[last] - bit[first],
+        block_travel_ft=float(np.abs(dblock).sum()),
+        block_change_ft=float(block[last] - block[first]),
+        holds_flat=bool(last + 1 < len(bit) and bit[last + 1] == bit[last]),
+        block_speed_ft_per_s=float(np.max(np.abs(dblock) / np.diff(time[first:last + 1]))),
+        hook_before=hook[first], hook_after=hook[last],
+        hanging_before=bool(hook[first] > threshold[first]),
+        hanging_after=bool(hook[last] > threshold[last]),
+        hole_step_ft=hole[last] - hole[first], hole_ft=hole[last],
+        landing=grid(bit[last]), small=False)
+
+
+def small_entries(time, bit, block, mask):
+    """Sample steps outside the candidates that are typed entries of any size.
+
+    The step is at least SMALL_STEP_FT, lands on a whole foot, moves the
+    block less than SMALL_BLOCK_FT and holds flat for SMALL_FLAT samples.
+    """
+    step = np.diff(bit)
+    n = len(step)
+    whole = np.abs(bit[1:] - np.round(bit[1:])) < .005
+    still = np.abs(np.diff(block)) < SMALL_BLOCK_FT
+    flat = np.ones(n, dtype=bool)
+    for k in range(1, SMALL_FLAT + 1):
+        later = np.full(n, np.nan)
+        later[:n - k] = bit[1 + k:]
+        flat &= later == bit[1:]
+    return (~mask & np.isfinite(step) & (np.abs(step) >= SMALL_STEP_FT) & whole & still & flat)
+
+
 def events(time, bit, hole, block, hook, threshold):
     """Merge consecutive candidate steps and describe each event.
 
     An event runs from sample `first` to sample `last`, so its step is
-    bit[last] - bit[first].
+    bit[last] - bit[first]. Small typed entries outside the candidates are
+    single-step events marked small.
     """
     time, bit, hole, block, hook = (np.asarray(x, dtype=float)
                                     for x in (time, bit, hole, block, hook))
@@ -88,24 +131,11 @@ def events(time, bit, hole, block, hook, threshold):
         j = i
         while j + 1 < len(mask) and mask[j + 1] and np.sign(bit[j + 2] - bit[j + 1]) == np.sign(bit[i + 1] - bit[i]):
             j += 1
-        first, last = i, j + 1
-        dblock = np.diff(block[first:last + 1])
-        rows.append(dict(
-            first=first, last=last,
-            start=time[first], end=time[last], span_s=time[last] - time[first],
-            samples=last - first, longest_step_s=float(np.max(np.diff(time[first:last + 1]))),
-            before_ft=bit[first], after_ft=bit[last], step_ft=bit[last] - bit[first],
-            block_travel_ft=float(np.abs(dblock).sum()),
-            block_change_ft=float(block[last] - block[first]),
-            holds_flat=bool(last + 1 < len(bit) and bit[last + 1] == bit[last]),
-            block_speed_ft_per_s=float(np.max(np.abs(dblock) / np.diff(time[first:last + 1]))),
-            hook_before=hook[first], hook_after=hook[last],
-            hanging_before=bool(hook[first] > threshold[first]),
-            hanging_after=bool(hook[last] > threshold[last]),
-            hole_step_ft=hole[last] - hole[first], hole_ft=hole[last],
-            landing=grid(bit[last])))
+        rows.append(describe(i, j + 1, time, bit, hole, block, hook, threshold))
         i = j + 1
-    return rows
+    for k in np.flatnonzero(small_entries(time, bit, block, mask)):
+        rows.append(describe(k, k + 1, time, bit, hole, block, hook, threshold) | dict(small=True))
+    return sorted(rows, key=lambda row: row["first"])
 
 
 def classify(rows, time, bit, block):
@@ -115,7 +145,9 @@ def classify(rows, time, bit, block):
         row["merged"] = row["samples"] > 1
         row["hole_moved"] = abs(row["hole_step_ft"]) >= rebuild.HOLE_SHARE * abs(row["step_ft"])
         row["pair"] = ""
-        if row["longest_step_s"] > GAP_S:
+        if row["small"]:
+            row["class"] = "zero_reset" if row["after_ft"] == 0 else "typed_entry_small"
+        elif row["longest_step_s"] > GAP_S:
             row["class"] = "gap"
         elif row["block_speed_ft_per_s"] > rebuild.BLOCK_RESET_FT_PER_S:
             row["class"] = "encoder_reset"
@@ -186,7 +218,7 @@ def match_sanvean(pason_rows, sanvean_rows, align):
     return pason_rows
 
 
-FIELDS = ("clock", "assembly", "start", "end", "span_s", "longest_step_s", "samples", "merged",
+FIELDS = ("clock", "assembly", "start", "end", "span_s", "longest_step_s", "samples", "merged", "small",
           "before_ft", "after_ft", "step_ft", "landing", "holds_flat", "block_travel_ft",
           "block_change_ft",
           "block_speed_ft_per_s", "hook_before", "hook_after", "hanging_before",

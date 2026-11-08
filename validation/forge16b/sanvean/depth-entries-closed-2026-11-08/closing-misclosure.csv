@@ -1,0 +1,68 @@
+clock,assembly,run,last_entry,bottom,entry,entry_ft,rig_ft,check_scale,check_basis,predicted_ft,hole_ft,misclosure_ft,closing_scale,closing_basis,flag
+pason,,0,2023-04-26 06:05:00,2023-04-26 06:29:10,typed_entry_small,567.0,3.67,1.0055,borrowed from run 4,570.69,570.67,0.02,1.0055,borrowed from run 4,short
+pason,,0,2023-04-26 06:46:50,2023-04-26 07:06:10,typed_entry_small,658.0,3.36,1.0055,borrowed from run 4,661.38,661.36,0.02,1.0055,borrowed from run 4,short
+pason,,0,2023-04-26 07:21:50,2023-04-26 08:25:40,typed_entry_small,750.0,3.34,1.0055,borrowed from run 4,753.36,753.34,0.02,1.0055,borrowed from run 4,short
+pason,,0,2023-04-26 09:11:00,2023-04-26 09:23:20,typed_entry_small,840.0,3.72,1.0055,borrowed from run 4,843.74,843.72,0.02,1.0055,borrowed from run 4,short
+pason,,0,2023-04-26 09:54:40,2023-04-26 10:12:00,typed_entry_small,935.0,4.15,1.0055,borrowed from run 4,939.17,939.15,0.02,1.0055,borrowed from run 4,short
+pason,,0,2023-04-26 11:44:30,2023-04-26 11:49:10,typed_entry_small,1030.0,3.25,1.0055,borrowed from run 4,1033.27,1033.25,0.02,1.0055,borrowed from run 4,short
+pason,,0,2023-04-26 12:27:40,2023-04-26 12:52:10,typed_entry_small,1125.0,3.21,1.0055,borrowed from run 4,1128.23,1128.21,0.02,1.0055,borrowed from run 4,short
+pason,,1,2023-04-27 02:15:50,2023-04-28 01:25:30,typed_entry,466.0,680.26,1.0,run median,1146.26,1146.26,0.0,1.0,fitted,
+pason,,5,2023-05-03 14:45:20,2023-05-05 02:31:50,typed_entry,4839.0,6.12,1.0055,borrowed from run 4,4845.15,4845.14,0.01,1.0055,borrowed from run 4,short
+pason,,7,2023-05-10 04:08:20,2023-05-11 03:35:20,typed_entry_tenth,1356.3,3522.57,1.0355,other fits,5003.82,4878.87,124.95,1.0,fitted,
+pason,,9,2023-05-12 19:58:30,2023-05-12 20:49:10,typed_entry_small,4908.0,70.87,1.0177,borrowed from run 7,4980.13,4978.87,1.26,1.0177,borrowed from run 7,short
+pason,,10,2023-05-13 06:41:00,2023-05-13 07:02:30,typed_entry_small,4969.0,11.58,1.0024,other fits,4980.61,4980.58,0.03,1.0024,run median,short
+pason,,11,2023-05-13 21:52:30,2023-05-13 22:31:20,typed_entry_small,5197.0,73.15,1.0063,other fits,5270.61,5270.15,0.46,1.0063,run median,short
+pason,,12,2023-05-14 17:51:10,2023-05-14 18:11:30,typed_entry,5482.0,55.58,1.0172,borrowed from run 14,5538.54,5537.58,0.96,1.0172,borrowed from run 14,short
+pason,,12,2023-05-14 21:29:40,2023-05-14 21:30:40,typed_entry,5669.0,3.18,1.0172,borrowed from run 14,5672.23,5672.18,0.05,1.0172,borrowed from run 14,short
+pason,,13,2023-05-15 17:59:10,2023-05-15 18:36:30,typed_entry,4580.0,1380.26,1.0,run median,5960.26,5960.26,0.0,1.0,fitted,
+pason,,13,2023-05-15 18:45:50,2023-05-15 19:12:20,typed_entry_small,5948.0,9.17,1.0,other fits,5957.17,5957.17,0.0,1.0,run median,short
+pason,,13,2023-05-15 20:12:30,2023-05-15 20:19:50,typed_entry,6011.0,0.37,1.0,other fits,6011.37,6011.37,0.0,1.0,run median,short
+pason,,13,2023-05-15 20:55:10,2023-05-15 21:50:30,typed_entry,6040.0,3.21,1.0,other fits,6043.21,6043.21,-0.0,1.0,run median,short
+pason,,13,2023-05-15 22:54:20,2023-05-15 23:02:20,typed_entry_small,6202.0,0.25,1.0,other fits,6202.25,6202.25,-0.0,1.0,run median,short
+pason,,13,2023-05-15 23:28:20,2023-05-15 23:56:10,typed_entry,6138.0,0.2,1.0,other fits,6138.2,6138.2,0.0,1.0,run median,short
+pason,,13,2023-05-16 03:20:40,2023-05-16 03:28:20,typed_entry_small,6297.0,0.6,1.0,other fits,6297.6,6297.6,0.0,1.0,run median,short
+pason,,14,2023-05-17 12:59:40,2023-05-17 13:04:30,typed_entry_small,6539.0,7.09,1.0172,other fits,6546.21,6546.09,0.12,1.0172,run median,short
+pason,,15,2023-05-17 23:27:00,2023-05-18 00:09:30,typed_entry,6539.0,71.18,1.04,other fits,6613.02,6610.18,2.84,1.04,run median,short
+pason,,15,2023-05-18 00:23:50,2023-05-18 00:46:50,typed_entry_small,6609.0,1.71,1.04,other fits,6610.78,6610.71,0.07,1.04,run median,short
+pason,,15,2023-05-18 15:16:30,2023-05-18 17:46:00,typed_entry_small,6729.0,48.76,1.04,other fits,6779.71,6777.76,1.95,1.04,run median,short
+pason,,16,2023-05-20 06:29:40,2023-05-20 07:01:00,typed_entry,6824.0,126.28,1.0761,other fits,6959.89,6950.28,9.61,1.0761,run median,short
+pason,,17,2023-05-21 10:41:10,2023-05-21 10:44:40,typed_entry_small,7573.0,11.34,1.0725,other fits,7585.16,7584.34,0.82,1.0725,run median,short
+pason,,18,2023-05-22 23:46:30,2023-05-22 23:49:20,typed_entry_small,8083.0,2.19,1.051,other fits,8085.3,8085.19,0.11,1.051,run median,short
+pason,,18,2023-05-23 05:26:40,2023-05-23 05:32:40,typed_entry_small,8354.0,3.21,1.051,other fits,8357.37,8357.21,0.16,1.051,run median,short
+pason,,18,2023-05-23 09:35:00,2023-05-23 10:02:00,typed_entry_small,8547.0,0.82,1.051,other fits,8547.86,8547.82,0.04,1.051,run median,short
+pason,,19,2023-05-25 02:09:20,2023-05-25 02:23:00,typed_entry_small,8495.0,95.55,1.0597,other fits,8596.25,8590.55,5.7,1.0597,run median,short
+pason,,20,2023-05-27 00:11:00,2023-05-27 01:18:30,typed_entry_small,8945.0,310.64,0.9371,other fits,9236.11,9255.64,-19.53,1.0,fitted,
+pason,,21,2023-05-29 03:05:30,2023-05-29 09:25:50,typed_entry_small,6043.0,3757.11,0.9304,other fits,9538.8,9800.11,-261.31,1.0,fitted,
+pason,,23,2023-06-03 01:15:10,2023-06-03 06:13:30,typed_entry_small,6020.0,3809.66,1.0022,other fits,9837.97,9829.66,8.31,1.0,fitted,
+pason,,24,2023-06-03 22:12:10,2023-06-04 03:07:30,typed_entry_small,5535.0,4328.24,1.0033,other fits,9877.57,9863.24,14.33,1.0,fitted,
+pason,,25,2023-06-04 19:20:40,2023-06-05 07:19:10,typed_entry_small,2999.0,7251.11,1.006,other fits,10293.8,10250.11,43.69,1.0,fitted,
+pason,,25,2023-06-06 02:19:50,2023-06-06 07:29:20,typed_entry,3019.0,7237.78,1.006,other fits,10300.39,10256.78,43.61,1.0,fitted,
+pason,,26,2023-06-08 13:29:20,2023-06-10 03:12:20,typed_entry,4899.0,5375.65,1.0013,other fits,10281.65,10274.65,7.0,1.0,fitted,
+pason,,27,2023-06-11 20:29:50,2023-06-11 20:42:50,typed_entry_small,10214.0,90.37,1.0,other fits,10304.37,10304.37,0.0,1.0,run median,short
+pason,,28,2023-06-14 02:20:00,2023-06-14 06:39:10,typed_entry,4828.0,5632.15,1.0022,other fits,10472.28,10460.15,12.13,1.0,fitted,
+pason,,29,2023-06-14 17:31:20,2023-06-14 22:42:10,pickup_entry,4441.27,6021.07,1.0,run median,10462.34,10462.34,0.0,1.0,fitted,
+pason,,30,2023-06-16 14:18:30,2023-06-16 16:36:20,typed_entry_small,10210.0,283.27,0.9998,other fits,10493.21,10493.27,-0.06,1.0,fitted,
+pason,,31,2023-06-17 02:32:30,2023-06-17 09:05:50,typed_entry,4880.0,5623.11,1.0027,other fits,10518.23,10503.11,15.12,1.0,fitted,
+pason,,33,2023-06-20 10:37:50,2023-06-20 10:44:00,typed_entry_small,5266.0,71.9,1.005,other fits,5338.26,5337.9,0.36,1.005,run median,short
+pason,,33,2023-06-20 23:46:20,2023-06-20 23:51:50,typed_entry_small,8106.0,3.67,1.005,other fits,8109.69,8109.67,0.02,1.005,run median,short
+pason,,33,2023-06-21 02:53:20,2023-06-21 02:59:50,typed_entry_small,8782.0,3.7,1.005,other fits,8785.72,8785.7,0.02,1.005,run median,short
+pason,,34,2023-07-07 22:42:20,2023-07-08 17:27:00,typed_entry_small,5827.0,5120.31,1.0194,other fits,11046.39,10947.31,99.08,1.0194,run median,out and back
+sanvean,11,0,2023-05-13 06:40:56,2023-05-13 07:02:29,typed_entry_small,4969.0,11.56,1.0016,other fits,4980.58,4980.56,0.02,1.0016,run median,short
+sanvean,12,0,2023-05-13 21:52:26,2023-05-13 22:31:17,typed_entry_small,5197.0,72.97,1.0063,other fits,5270.43,5269.97,0.46,1.0063,run median,short
+sanvean,12,1,2023-05-14 17:50:55,2023-05-14 18:11:24,typed_entry,5482.0,55.45,1.0164,stand length over mean stroke (37 strokes),5538.36,5537.45,0.91,1.0164,stand length over mean stroke (37 strokes),short
+sanvean,12,1,2023-05-14 21:29:31,2023-05-14 21:30:40,typed_entry,5669.0,3.18,1.0164,stand length over mean stroke (37 strokes),5672.23,5672.18,0.05,1.0164,stand length over mean stroke (37 strokes),short
+sanvean,13,0,2023-05-15 17:58:53,2023-05-15 18:36:29,typed_entry,4580.0,1377.58,1.0,run median,5957.58,5957.58,0.0,1.0,fitted,
+sanvean,13,0,2023-05-15 18:45:37,2023-05-15 19:12:20,typed_entry_small,5948.0,9.17,1.0,other fits,5957.17,5957.17,0.0,1.0,run median,short
+sanvean,13,0,2023-05-15 19:39:15,2023-05-15 19:47:11,typed_entry_small,5983.0,0.35,1.0,other fits,5983.35,5983.35,0.0,1.0,run median,short
+sanvean,13,0,2023-05-15 20:12:21,2023-05-15 20:19:49,typed_entry,6011.0,0.37,1.0,other fits,6011.37,6011.37,0.0,1.0,run median,short
+sanvean,13,0,2023-05-15 20:55:10,2023-05-15 21:50:30,typed_entry,6040.0,3.21,1.0,other fits,6043.21,6043.21,0.0,1.0,run median,short
+sanvean,13,0,2023-05-15 22:27:12,2023-05-15 22:27:13,typed_entry,6170.03,0.1,1.0,other fits,6170.13,6170.13,0.0,1.0,run median,short
+sanvean,13,0,2023-05-15 22:54:05,2023-05-15 23:02:18,typed_entry_small,6202.0,0.1,1.0,other fits,6202.1,6202.1,0.0,1.0,run median,short
+sanvean,13,0,2023-05-15 23:28:04,2023-05-15 23:56:07,typed_entry,6138.0,0.13,1.0,other fits,6138.13,6138.13,0.0,1.0,run median,short
+sanvean,13,0,2023-05-16 03:20:34,2023-05-16 03:28:14,typed_entry_small,6297.0,0.18,1.0,other fits,6297.18,6297.18,0.0,1.0,run median,short
+sanvean,14,0,2023-05-17 12:59:25,2023-05-17 13:04:28,typed_entry_small,6539.0,6.98,1.0,scale 1,6545.98,6545.98,0.0,1.0,scale 1,short
+sanvean,15,0,2023-05-17 23:27:00,2023-05-18 00:09:24,typed_entry,6539.0,71.12,1.04,other fits,6612.96,6610.12,2.84,1.04,run median,short
+sanvean,15,0,2023-05-18 00:23:35,2023-05-18 00:46:45,typed_entry_small,6609.0,1.17,1.04,other fits,6610.22,6610.17,0.05,1.04,run median,short
+sanvean,15,0,2023-05-18 15:16:17,2023-05-18 17:45:59,typed_entry_small,6729.0,48.76,1.04,other fits,6779.71,6777.76,1.95,1.04,run median,short
+sanvean,16,0,2023-05-20 06:29:40,2023-05-20 07:00:59,typed_entry,6824.0,126.26,1.055,other fits,6957.2,6950.26,6.94,1.055,run median,short
+sanvean,17,0,2023-05-21 10:41:09,2023-05-21 10:44:34,typed_entry_small,7573.0,11.09,1.0711,other fits,7584.88,7584.09,0.79,1.0711,run median,short

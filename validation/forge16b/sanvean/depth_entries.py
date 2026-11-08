@@ -3,18 +3,27 @@
 The rig integrates block travel into bit depth, and the block encoder
 drifts by several feet per stand. The driller corrects the drift by typing
 depths from the pipe tally. depth_steps.py classifies those entries. This
-module takes them as the depth reference.
+module takes them as the depth reference off bottom, and the recorded hole
+depth on bottom.
 
-Anchors. A typed entry fixes the depth at its sample to its entered value.
-A Pason entry inside a one-second Sanvean trip is classified by its
-Sanvean match. A Sanvean entry with no Pason step, taken as motion at ten
-seconds, enters the Pason record at the next Pason sample with the
-Sanvean recorded depth there. Each Sanvean record starts inside a trip,
-so its first sample takes the Pason rebuilt depth, matched on recorded
-depth within MATCH_WINDOW_S, as an anchor. A pick-up entry is an anchor whose value is uncertain by
-the block travel in its sample. A zero reset fixes the depth at 0 ft. A
-glitch and its restore are removed and the interval between them is
-continuous.
+Drilling. A drilling sample has the hole advancing by more than 0.1 ft
+over the preceding DRILL_WINDOW_S with the bit within 5 ft of it. Its depth
+is the recorded hole depth, with no scale on drilled footage. The first
+and last samples of each drilling spell are anchors at the hole depth, so
+each trip in closes on the bottom and each trip out starts from it. An
+entry or unknown jump that lands on a drilling sample gives way to the
+hole depth.
+
+Anchors. A typed entry, of any size, fixes the depth at its sample to its
+entered value. A Pason entry inside a one-second Sanvean trip is
+classified by its Sanvean match. A Sanvean entry with no Pason step,
+taken as motion at ten seconds, enters the Pason record on the Pason step
+that contains it. Each Sanvean record starts inside a trip, so its first
+sample takes the Pason rebuilt depth, matched on recorded depth within
+MATCH_WINDOW_S, as an anchor. A pick-up entry is an anchor whose value is
+uncertain by the block travel in its sample. A zero reset fixes the depth
+at 0 ft. A glitch and its restore are removed and the interval between
+them is continuous.
 
 Runs. The record is cut at each turnaround, the shallowest recorded
 sample of a trip. A run is the span between two turnarounds: the trip in
@@ -34,28 +43,33 @@ misclosure at the later anchor reported, when the net increments are under
 SHORT_FT, when the rig travels more than ROUND_TRIP times the net
 increments (an out-and-back between the anchors), or when s falls outside
 SCALE_RANGE. Before the first anchor and after the last in a run, the run
-median scale applies.
+median scale applies. Intervals between two drilling anchors do not set
+the run median. Before the closing anchor sets it, the last entry of each
+trip in is carried to the hole depth on the median of the run's other
+fitted intervals; that closing misclosure is the check on the scale.
 
-A run with no fitted scale uses, on the one-second record, the sourced
-stand length over the rig's mean complete loaded stroke in that run. At
-ten seconds the slips transitions fall between samples and the stroke is
-undercounted, so the ten-second record does not use it. A run with
-neither borrows the median of the nearest run in time that has a fitted
-scale.
+A run with no fitted scale borrows the median of the nearest run in time
+with the same pipe and at least MIN_DONOR_FITS fitted intervals. Without
+one it uses, on the one-second record, the sourced stand length over the
+rig's mean complete loaded stroke in the run; at ten seconds the slips
+transitions fall between samples and the stroke is undercounted, so the
+ten-second record does not. Failing both, the scale is 1.
 
 Gaps and unresolved entries are unknown jumps. The spans on each side are
-taken from their own anchors, and the implied jump is reported. Drilling
-samples are a check. They anchor the depth only in a run with no other
-anchor, and every such use is reported.
+taken from their own anchors, and the implied jump is reported.
 
 Uncertainty at a sample is the largest of: the anchor value uncertainty;
 the misclosure of its interval scaled by the share of rig travel from the
-earlier anchor; half the run's spread of fitted scales times the rig
-travel to the nearest anchor (the largest spread in the record where a
-run has fewer than two fitted scales); for insulated pipe, 1 ft per 119
-ft stand over the same travel; and a fixed term where declared. A span
-with no anchor and no drilling reference keeps the recorded depth and has
-no stated uncertainty.
+earlier anchor; a rate times the rig travel to the nearest anchor; for
+insulated pipe, 1 ft per 119 ft stand over the same travel; and a fixed
+term where declared. The rate is half the run's spread of fitted scales
+with two or more fits, the largest such spread with one fit, and half the
+spread between run medians otherwise. A span with no anchor keeps the
+recorded depth; its uncertainty is the rate times the rig travel to the
+nearest anchor plus the offset across a bounding unknown jump.
+
+The rebuilt bit is checked against the recorded hole depth plus 5 ft at
+every sample, and breaches are reported, not clipped.
 
 It reads time, bit depth, hole depth, block height, hook load and the
 slips threshold only.
@@ -70,7 +84,7 @@ from validation.forge16b.sanvean import depth_rebuild as rebuild
 from validation.forge16b.sanvean import depth_steps as steps
 from validation.forge16b.sanvean.build_extracts import HERE, iso, timestamp
 
-OUT = HERE / "depth-entries-2026-11-08"
+OUT = HERE / "depth-entries-closed-2026-11-08"
 SHORT_FT = 190.              # two stands: a shorter interval does not fit a scale
 ROUND_TRIP = 2.              # travel over net increments that marks an out-and-back
 SCALE_RANGE = (.85, 1.15)    # a fitted scale outside this flags the interval
@@ -80,6 +94,8 @@ INSULATED_STAND_FT = 119.    # 10 stands from 9,255 ft to 8,065 ft (daily report
 INSULATED_STAND_ERROR_FT = 1.
 STROKE_RANGE_FT = (50., 130.)  # a complete loaded stroke of one stand
 MIN_STROKES = 10             # fewer strokes do not give a mean
+MIN_DONOR_FITS = 2           # a run lends its scale only with this many fitted intervals
+DRILL_WINDOW_S = 10.         # the hole advance that marks drilling is taken over this time
 # Insulated drill pipe was in the string on assemblies 18 and 19, from the
 # trip in on 22 May to the lay-down on 25 May 2023 (daily reports 37 to 40).
 INSULATED = (timestamp("2023-05-22 15:00:00"), timestamp("2023-05-25 21:30:00"))
@@ -91,7 +107,7 @@ FIXED = ((timestamp("2023-05-21 03:30:00"), timestamp("2023-05-21 06:19:20"), 35
 # casing, completion and 3.5 in pipe runs neither lend a scale nor set the
 # record's spread.
 SCOPE_END = timestamp("2023-06-18 00:00:00")
-ANCHORS = ("typed_entry", "typed_entry_tenth", "pickup_entry", "zero_reset")
+ANCHORS = ("typed_entry", "typed_entry_tenth", "typed_entry_small", "pickup_entry", "zero_reset")
 UNKNOWN = ("gap", "unresolved_entry", "encoder_reset", "unmatched_in_sanvean")
 
 
@@ -127,11 +143,26 @@ def breakpoints(events):
     return sorted(marks, key=lambda m: m["last"])
 
 
-def trip_windows(bit, hole):
+def drilling(time, bit, hole):
+    """Boolean mask over samples: the hole advancing with the bit on bottom.
+
+    The hole must advance more than depth_rebuild.HOLE_ADVANCE_FT over the
+    preceding DRILL_WINDOW_S, so the test does not depend on the sampling
+    interval, and the bit must be within DRILLING_GAP_FT of the hole.
+    """
+    time, bit, hole = (np.asarray(x, dtype=float) for x in (time, bit, hole))
+    back = np.searchsorted(time, time - DRILL_WINDOW_S)
+    back = np.minimum(back, np.arange(len(time)) - 1).clip(0)
+    advance = hole - hole[back]
+    advance[0] = 0.
+    return (advance > rebuild.HOLE_ADVANCE_FT) & (np.abs(hole - bit) <= rebuild.DRILLING_GAP_FT)
+
+
+def trip_windows(time, bit, hole):
     """(start, end) sample pairs bracketing each excursion off bottom."""
     bit, hole = np.asarray(bit, dtype=float), np.asarray(hole, dtype=float)
     off = np.nan_to_num(hole - bit) > TRIP_FT
-    drill = np.flatnonzero(rebuild.drilling(bit, hole))
+    drill = np.flatnonzero(drilling(time, bit, hole))
     windows, i = [], 0
     while i < len(off):
         if not off[i]:
@@ -148,15 +179,15 @@ def trip_windows(bit, hole):
     return windows
 
 
-def runs(bit, hole):
+def runs(time, bit, hole):
     """Run number per sample: the record cut at each trip's shallowest sample."""
     bit = np.asarray(bit, dtype=float)
-    drilling = rebuild.drilling(bit, hole)
+    on = drilling(time, bit, hole)
     cuts = []
-    for start, end in trip_windows(bit, hole):
+    for start, end in trip_windows(time, bit, hole):
         # A record that starts or ends inside a trip has no drilling on
         # that side, and its shallowest sample is no turnaround.
-        if drilling[start] and drilling[end]:
+        if on[start] and on[end]:
             cuts.append(start + int(np.nanargmin(bit[start:end + 1])))
     run = np.zeros(len(bit), dtype=int)
     for k, cut in enumerate(cuts, 1):
@@ -189,27 +220,53 @@ def fine(time):
     return float(np.median(np.diff(time))) <= rebuild.FINE_SAMPLE_S
 
 
-def entry_depth(time, bit, hole, block, hook, threshold, events, start=None):
+def drilling_spells(drilling):
+    """(first, last) sample pairs of each contiguous run of drilling samples."""
+    idx = np.flatnonzero(drilling)
+    if not len(idx):
+        return []
+    return [(int(g[0]), int(g[-1])) for g in np.split(idx, np.flatnonzero(np.diff(idx) != 1) + 1)]
+
+
+def pipe(moment):
+    return "insulated" if INSULATED[0] <= moment <= INSULATED[1] else "S-135"
+
+
+def entry_depth(time, bit, hole, block, hook, threshold, events, start=None, rates=None):
     """Depth per sample, its uncertainty, the intervals and the run scales.
 
     start, if given, is (value, error): an anchor at the first sample, for
     a record that begins inside a trip after an entry it does not contain.
+    rates, if given, is (within, between): the largest in-scope spread of
+    fitted scales within a run and half the spread between run medians,
+    from a record with more runs, used where this record has none.
     """
     time, bit, hole = (np.asarray(x, dtype=float) for x in (time, bit, hole))
     n = len(bit)
     inc = increments(bit, events)
     cum = np.r_[0., np.cumsum(inc)]
     travel = np.r_[0., np.cumsum(np.abs(inc))]
-    run = runs(bit, hole)
-    drilling = rebuild.drilling(bit, hole)
+    run = runs(time, bit, hole)
+    on_bottom = drilling(time, bit, hole)
+
+    # While drilling the bit is the recorded hole depth. Entries and
+    # unknown jumps that land on a drilling sample give way to it, and
+    # each drilling spell's first and last samples are anchors.
     marks = breakpoints(events)
-    if start is not None and not (marks and marks[0]["first"] == 0):
-        marks.insert(0, dict(first=0, last=0, kind="anchor", cls="pason_start",
-                             value=float(start[0]), error=float(start[1]), event=None))
+    yielded = [m for m in marks if on_bottom[m["last"]]]
+    marks = [m for m in marks if not on_bottom[m["last"]]]
+    for first, last in drilling_spells(on_bottom):
+        for k in sorted({first, last}):
+            marks.append(dict(first=k, last=k, kind="anchor", cls="drilling",
+                              value=float(hole[k]), error=0., event=None))
+    if start is not None and not on_bottom[0] and not any(m["last"] == 0 for m in marks):
+        marks.append(dict(first=0, last=0, kind="anchor", cls="pason_start",
+                          value=float(start[0]), error=float(start[1]), event=None))
 
     # Spans between consecutive breakpoints, also cut at run boundaries.
-    # A span runs from the sample after its left breakpoint's step to the
-    # sample before its right breakpoint's step.
+    # A span runs from its left breakpoint's anchor sample to the sample
+    # before its right breakpoint's step; a drilling anchor has no step, so
+    # neighbouring spans share its sample.
     cuts = [dict(first=k, last=k, kind="run start") for k in np.flatnonzero(np.diff(run)) + 1]
     edges = [None] + sorted(marks + cuts, key=lambda m: (m["last"], m["kind"] != "run start")) + [None]
     intervals = []
@@ -227,8 +284,12 @@ def entry_depth(time, bit, hole, block, hook, threshold, events, start=None):
     def anchored(mark):
         return mark is not None and mark["kind"] == "anchor"
 
+    def drilled(mark):
+        return anchored(mark) and mark["cls"] == "drilling"
+
     for iv in intervals:
         left, right = iv["left"], iv["right"]
+        iv["between_drilling"] = drilled(left) and drilled(right)
         if anchored(left) and anchored(right):
             iv["span_ft"] = right["value"] - left["value"]
             if abs(iv["rig_ft"]) < SHORT_FT:
@@ -242,45 +303,54 @@ def entry_depth(time, bit, hole, block, hook, threshold, events, start=None):
                 else:
                     iv["flag"] = f"implausible scale {s:.3f}"
 
+    # Run scales. Intervals between two drilling anchors do not set them.
+    def fits(k, skip=None):
+        return [iv["scale"] for iv in intervals if iv["run"] == k and iv["basis"] == "fitted"
+                and not iv["between_drilling"] and iv is not skip]
+
+    numbers = np.unique(run)
+    centre = {k: float(np.median(time[run == k])) for k in numbers}
+    ends = {k: float(time[run == k][-1]) for k in numbers}
     scales = {}
-    for k in np.unique(run):
-        fitted = [iv["scale"] for iv in intervals if iv["run"] == k and iv["basis"] == "fitted"]
+    for k in numbers:
+        fitted = fits(k)
         if fitted:
             spread = (max(fitted) - min(fitted)) / 2 if len(fitted) > 1 else np.nan
             scales[k] = dict(scale=float(np.median(fitted)), basis="run median", fitted=len(fitted),
                              half_spread=spread)
-    for k in np.unique(run):
-        if k in scales or not fine(time):
-            continue
-        s, count = stroke_scale(time, block, hook, threshold, run == k)
-        if np.isfinite(s):
-            scales[k] = dict(scale=s, basis=f"stand length over mean stroke ({count} strokes)",
-                             fitted=0, half_spread=np.nan)
-    centre = {k: float(np.median(time[run == k])) for k in np.unique(run)}
-    ends = {k: float(time[run == k][-1]) for k in np.unique(run)}
-    donors = [k for k in scales if scales[k]["fitted"] and ends[k] < SCOPE_END]
-    donors = donors or [k for k in scales if scales[k]["fitted"]]
-    for k in np.unique(run):
+    donors = [k for k in scales if scales[k]["fitted"] >= MIN_DONOR_FITS and ends[k] < SCOPE_END]
+    for k in numbers:
         if k in scales:
             continue
-        if donors:
-            near = min(donors, key=lambda d: abs(centre[d] - centre[k]))
+        same = [d for d in donors if pipe(centre[d]) == pipe(centre[k])]
+        if same:
+            near = min(same, key=lambda d: abs(centre[d] - centre[k]))
             scales[k] = dict(scales[near], basis=f"borrowed from run {near}", fitted=0)
-        else:
-            scales[k] = dict(scale=1., basis="no scale available", fitted=0, half_spread=np.nan)
-    spreads = [scales[k]["half_spread"] for k in donors if np.isfinite(scales[k]["half_spread"])]
+            continue
+        if fine(time):
+            s, count = stroke_scale(time, block, hook, threshold, run == k)
+            if np.isfinite(s):
+                scales[k] = dict(scale=s, basis=f"stand length over mean stroke ({count} strokes)",
+                                 fitted=0, half_spread=np.nan)
+                continue
+        scales[k] = dict(scale=1., basis="scale 1", fitted=0, half_spread=np.nan)
+    scoped = [k for k in numbers if ends[k] < SCOPE_END and scales[k]["fitted"]] or \
+        [k for k in numbers if scales[k]["fitted"]]
+    spreads = [scales[k]["half_spread"] for k in scoped if np.isfinite(scales[k]["half_spread"])]
     default_spread = float(np.max(spreads)) if spreads else 0.
-    # A scale not fitted in its own run carries the spread between runs.
-    medians = [scales[k]["scale"] for k in donors]
+    medians = [scales[k]["scale"] for k in scoped]
     between = (max(medians) - min(medians)) / 2 if len(medians) > 1 else default_spread
+    if rates is not None:
+        default_spread = default_spread if spreads else rates[0]
+        between = between if len(medians) > 1 else rates[1]
     for k, v in scales.items():
-        v["error_rate"] = (v["half_spread"] if v["fitted"] and np.isfinite(v["half_spread"])
+        v["pipe"] = pipe(centre[k])
+        v["error_rate"] = (v["half_spread"] if v["fitted"] >= 2 and np.isfinite(v["half_spread"])
                            else default_spread if v["fitted"] else max(between, default_spread))
-    for k, v in scales.items():
         v["start"], v["end"] = float(time[run == k][0]), float(time[run == k][-1])
-        v["anchors"] = sum(1 for m in marks if m["kind"] == "anchor" and run[m["last"]] == k)
+        v["anchors"] = sum(1 for m in marks if m["kind"] == "anchor" and m["cls"] != "drilling"
+                           and run[m["last"]] == k)
 
-    has_anchor = {k: scales[k]["anchors"] > 0 for k in scales}
     depth, error = np.full(n, np.nan), np.zeros(n)
     distance = np.full(n, np.inf)
     for iv in intervals:
@@ -308,29 +378,55 @@ def entry_depth(time, bit, hole, block, hook, threshold, events, start=None):
             distance[idx] = np.minimum(distance[idx], travel[b] - travel[idx])
         if not (anchored(left) or anchored(right)):
             iv["basis"] += "; no anchor in span"
-            if not has_anchor[k]:
-                bottom = idx[drilling[idx]]
-                if len(bottom):
-                    j = bottom[0]
-                    depth[idx] = hole[j] + s * (cum[idx] - cum[j])
-                    distance[idx] = np.abs(travel[idx] - travel[j])
-                    iv["flag"] = (iv["flag"] + "; " if iv["flag"] else "") + \
-                        f"drilling anchor at {iso(time[j])}"
-            if np.isnan(depth[idx]).all():
-                depth[idx] = bit[idx]
-                iv["flag"] = (iv["flag"] + "; " if iv["flag"] else "") + "recorded, no reference"
-                iv["unreferenced"] = True
+            depth[idx] = bit[idx]
+            iv["flag"] = (iv["flag"] + "; " if iv["flag"] else "") + "recorded, no reference"
+            iv["unreferenced"] = True
         rate = scales[k]["error_rate"]
         insulated = (time[idx] >= INSULATED[0]) & (time[idx] <= INSULATED[1])
         rate = np.where(insulated, max(rate, INSULATED_STAND_ERROR_FT / INSULATED_STAND_FT), rate)
+        iv["rate"] = rate
         finite = np.isfinite(distance[idx])
         error[idx] = np.maximum(error[idx], np.where(finite, rate * np.where(finite, distance[idx], 0.), 0.))
-    for start, end, value in FIXED:
-        inside = (time >= start) & (time < end)
+        # Closing misclosure: the last entry of a trip carried to the hole
+        # depth at the first drilling sample on the scale of the run's other
+        # fitted intervals, before the closing anchor sets it.
+        if drilled(right) and anchored(left) and not drilled(left):
+            others = fits(k, skip=iv)
+            check = float(np.median(others)) if others else scales[k]["scale"]
+            iv["closing"] = dict(entry=left["cls"], entry_value=left["value"], rig_ft=iv["rig_ft"],
+                                 check_scale=check,
+                                 check_basis="other fits" if others else scales[k]["basis"],
+                                 predicted_ft=left["value"] + check * iv["rig_ft"],
+                                 hole_ft=right["value"])
+    depth[on_bottom] = hole[on_bottom]
+    error[on_bottom] = 0.
+    for start_t, end_t, value in FIXED:
+        inside = (time >= start_t) & (time < end_t)
         error[inside] = np.maximum(error[inside], value)
-    for iv in intervals:
-        if iv.get("unreferenced"):
-            error[iv["a"]:iv["b"] + 1] = np.nan     # no reference, so no stated bound
+
+    # A span with no reference keeps the recorded depth. Its uncertainty is
+    # the run rate times the rig travel to the nearest anchor, plus the
+    # offset of the referenced depth across a bounding unknown jump.
+    anchors = np.array(sorted({m["last"] for m in marks if m["kind"] == "anchor"}), dtype=int)
+    for i, iv in enumerate(intervals):
+        if not iv.get("unreferenced"):
+            continue
+        idx = np.arange(iv["a"], iv["b"] + 1)
+        near = np.full(len(idx), np.inf)
+        if len(anchors):
+            j = np.searchsorted(anchors, idx)
+            before = anchors[np.clip(j - 1, 0, len(anchors) - 1)]
+            after = anchors[np.clip(j, 0, len(anchors) - 1)]
+            near = np.minimum(np.abs(travel[idx] - travel[before]), np.abs(travel[after] - travel[idx]))
+        offsets = []
+        if i > 0 and iv["left"] is not None and iv["left"]["kind"] == "unknown":
+            p = intervals[i - 1]["b"]
+            offsets.append(abs(depth[p] - bit[p]))
+        if i + 1 < len(intervals) and iv["right"] is not None and iv["right"]["kind"] == "unknown":
+            q = intervals[i + 1]["a"]
+            offsets.append(abs(depth[q] - bit[q]))
+        jump = max([o for o in offsets if np.isfinite(o)], default=0.)
+        error[idx] = np.where(np.isfinite(near), iv["rate"] * near + jump, np.nan)
 
     # Implied jump at each unknown breakpoint, where both sides have depth.
     for iv, nxt in zip(intervals, intervals[1:]):
@@ -339,42 +435,45 @@ def entry_depth(time, bit, hole, block, hook, threshold, events, start=None):
             before, after = iv["b"], nxt["a"]
             right["implied_jump_ft"] = float(depth[after] - depth[before])
             right["recorded_step_ft"] = float(bit[after] - bit[before])
+    if intervals:
+        intervals[0]["yielded"] = yielded
+        intervals[0]["rates"] = (default_spread, between)
     return depth, error, intervals, scales
 
 
-def bottom_misclosures(time, bit, hole, depth):
-    """Rebuilt minus hole depth at the first drilling sample after each trip."""
-    drilling = rebuild.drilling(bit, hole)
-    for start, end in trip_windows(bit, hole):
-        if drilling[end]:
-            yield dict(trip_start=iso(time[start]), bottom=iso(time[end]),
-                       hole_ft=round(float(hole[end]), 2), recorded_ft=round(float(bit[end]), 2),
-                       rebuilt_ft=round(float(depth[end]), 2),
-                       misclosure_ft=round(float(depth[end] - hole[end]), 2))
-
-
-def drilling_check(time, bit, hole, depth):
-    """Rebuilt depth minus hole depth over the drilling samples of each run.
-
-    While drilling the bit is on bottom, so the rebuilt depth should
-    stay within a few feet of the hole depth. The hole depth advances on
-    the same encoder, and the driller sets it from the tally; this check
-    shows how far the run's scale carries the bit from it.
-    """
-    drilling = rebuild.drilling(bit, hole)
-    run = runs(bit, hole)
-    for k in np.unique(run):
-        on = np.flatnonzero(drilling & (run == k))
-        if not len(on):
+def closing_rows(time, intervals):
+    """Closing misclosure per trip in, from the intervals that close on the hole."""
+    for iv in intervals:
+        c = iv.get("closing")
+        if c is None:
             continue
-        diff = depth[on] - hole[on]
-        diff = diff[np.isfinite(diff)]
-        if not len(diff):
-            continue
-        yield dict(run=int(k), first=iso(time[on[0]]), last=iso(time[on[-1]]), samples=len(on),
-                   drilled_ft=round(float(hole[on[-1]] - hole[on[0]]), 2),
-                   first_diff_ft=round(float(diff[0]), 2), last_diff_ft=round(float(diff[-1]), 2),
-                   max_abs_diff_ft=round(float(np.max(np.abs(diff))), 2))
+        yield dict(run=iv["run"], last_entry=iso(time[iv["a"]]), bottom=iso(time[iv["b"]]),
+                   entry=c["entry"], entry_ft=round(c["entry_value"], 2),
+                   rig_ft=round(float(c["rig_ft"]), 2), check_scale=round(c["check_scale"], 4),
+                   check_basis=c["check_basis"], predicted_ft=round(float(c["predicted_ft"]), 2),
+                   hole_ft=round(c["hole_ft"], 2),
+                   misclosure_ft=round(float(c["predicted_ft"] - c["hole_ft"]), 2),
+                   closing_scale=round(float(iv["scale"]), 4), closing_basis=iv["basis"], flag=iv["flag"])
+
+
+def yielded_rows(time, intervals):
+    """Entries and unknown jumps that landed on a drilling sample."""
+    for m in (intervals[0].get("yielded", []) if intervals else []):
+        ev = m["event"]
+        yield dict(time=iso(time[m["last"]]), cls=m["cls"],
+                   before_ft=round(float(ev["before_ft"]), 2), after_ft=round(float(ev["after_ft"]), 2))
+
+
+def bound_breaches(time, bit, hole, depth, tolerance=5.):
+    """Spans where the rebuilt bit is more than `tolerance` below the hole."""
+    excess = depth - hole - tolerance
+    idx = np.flatnonzero(np.isfinite(excess) & (excess > 0))
+    if not len(idx):
+        return
+    for group in np.split(idx, np.flatnonzero(np.diff(idx) != 1) + 1):
+        yield dict(start=iso(time[group[0]]), end=iso(time[group[-1]]), samples=len(group),
+                   max_below_hole_ft=round(float(np.max(depth[group] - hole[group])), 2),
+                   hole_ft=round(float(hole[group[0]]), 2))
 
 
 def stand_counts(time, bit, block, hook, threshold, events, depth):
@@ -451,25 +550,35 @@ def pason_against_sanvean(pason, sanvean, align):
                        max_abs_ft=round(float(diff.max()), 2))
 
 
-def segment_rows(time, bit, depth, error, intervals, label):
-    """Linear maps depth = intercept + scale * recorded, one row per constant piece."""
+def segment_rows(time, bit, hole, depth, error, intervals, label):
+    """Maps from the recorded depth, one row per constant piece.
+
+    Off bottom, depth = intercept + scale x recorded bit. A drilling spell
+    is one row that follows the recorded hole depth.
+    """
+    on_bottom = drilling(time, bit, hole)
     rows = []
+    for first, last in drilling_spells(on_bottom):
+        rows.append(dict(label, start=iso(time[first]), end=iso(time[last]), scale="", intercept_ft="",
+                         follows_hole=1, run="", basis="drilling", max_uncertainty_ft=0.))
     for iv in intervals:
         a, b, s = iv["a"], iv["b"], iv["scale"]
         idx = np.arange(a, b + 1)
-        ok = np.isfinite(bit[idx]) & np.isfinite(depth[idx])
-        if not ok.any():
+        idx = idx[np.isfinite(bit[idx]) & np.isfinite(depth[idx]) & ~on_bottom[idx]]
+        if not len(idx):
             continue
         slope = s if "recorded, no reference" not in iv["flag"] else 1.
-        intercept = depth[idx][ok] - slope * bit[idx][ok]
-        # Glitch excursions shift the intercept; emit one row per constant run.
-        breaks = np.flatnonzero(np.abs(np.diff(intercept)) > 1e-6) + 1
-        times, errs = time[idx][ok], error[idx][ok]
-        for piece in np.split(np.arange(ok.sum()), breaks):
-            rows.append(dict(label, start=iso(times[piece[0]]), end=iso(times[piece[-1]]),
+        intercept = depth[idx] - slope * bit[idx]
+        # Glitch excursions shift the intercept, and drilling samples split a
+        # span; emit one row per constant, contiguous run.
+        breaks = np.flatnonzero((np.abs(np.diff(intercept)) > 1e-6) | (np.diff(idx) != 1)) + 1
+        for piece in np.split(np.arange(len(idx)), breaks):
+            errs = error[idx[piece]]
+            rows.append(dict(label, start=iso(time[idx[piece[0]]]), end=iso(time[idx[piece[-1]]]),
                              scale=round(float(slope), 6), intercept_ft=round(float(intercept[piece[0]]), 4),
-                             run=iv["run"], basis=iv["basis"],
-                             max_uncertainty_ft=round(float(np.max(errs[piece])), 2)))
+                             follows_hole=0, run=iv["run"], basis=iv["basis"],
+                             max_uncertainty_ft=round(float(np.max(errs)), 2) if np.isfinite(errs).all() else ""))
+    rows.sort(key=lambda r: (r["start"], r["follows_hole"]))
     return rows
 
 
@@ -564,23 +673,25 @@ def records(archive):
     """The Pason record and the seven Sanvean records, each rebuilt.
 
     Each Sanvean record starts inside a trip. Its first sample takes the
-    Pason rebuilt depth as an anchor, matched on recorded depth.
+    Pason rebuilt depth as an anchor, matched on recorded depth, and its
+    uncertainty rates come from the Pason runs.
     """
     sanvean = {run: sanvean_record(run) for run in range(11, 18)}
     pason = pason_record(archive, sanvean)
     p_result = entry_depth(*pason)
     yield "pason", "", pason, p_result
     align = alignment()
+    rates = p_result[2][0]["rates"]
     for run, rec in sanvean.items():
         start = start_anchor(pason[0], pason[1], p_result[0], p_result[1], rec[0], rec[1], align[run])
-        yield "sanvean", run, rec, entry_depth(*rec, start=start)
+        yield "sanvean", run, rec, entry_depth(*rec, start=start, rates=rates)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path, help="16B_Pason.zip from GDR 1516")
     args = parser.parse_args()
-    segments, table, scale_rows, bottoms, stands, drilled = [], [], [], [], [], []
+    segments, table, scale_rows, closings, breaches, yielded, stands = [], [], [], [], [], [], []
     rebuilt = {}
     for clock, run, rec, (depth, error, intervals, scales) in records(args.archive):
         time, bit, hole = rec[:3]
@@ -588,20 +699,27 @@ def main():
         rebuilt[(clock, run)] = (time, bit, depth)
         if clock == "sanvean":
             stands += [dict(label, **row) for row in stand_counts(time, bit, rec[3], rec[4], rec[5], rec[6], depth)]
-        segments += segment_rows(time, bit, depth, error, intervals, label)
+        segments += segment_rows(time, bit, hole, depth, error, intervals, label)
         table += list(interval_rows(time, intervals, label))
-        scale_rows += [dict(label, run=k, start=iso(v["start"]), end=iso(v["end"]), anchors=v["anchors"],
-                            fitted=v["fitted"], scale=round(v["scale"], 4), basis=v["basis"],
+        scale_rows += [dict(label, run=k, start=iso(v["start"]), end=iso(v["end"]), pipe=v["pipe"],
+                            anchors=v["anchors"], fitted=v["fitted"], scale=round(v["scale"], 4),
+                            basis=v["basis"], error_rate=round(float(v["error_rate"]), 4),
                             half_spread=round(v["half_spread"], 4) if np.isfinite(v["half_spread"]) else "")
                        for k, v in sorted(scales.items())]
-        bottoms += [dict(label, **row) for row in bottom_misclosures(time, bit, hole, depth)]
-        drilled += [dict(label, **row) for row in drilling_check(time, bit, hole, depth)]
+        closings += [dict(label, **row) for row in closing_rows(time, intervals)]
+        breaches += [dict(label, **row) for row in bound_breaches(time, bit, hole, depth)]
+        yielded += [dict(label, **row) for row in yielded_rows(time, intervals)]
     rebuild.write(OUT / "segments.csv", segments)
     rebuild.write(OUT / "intervals.csv", table)
     rebuild.write(OUT / "run-scales.csv", scale_rows)
-    rebuild.write(OUT / "bottom-misclosure.csv", bottoms)
+    rebuild.write(OUT / "closing-misclosure.csv", closings)
+    if breaches:
+        rebuild.write(OUT / "bit-below-hole.csv", breaches)
+    else:
+        (OUT / "bit-below-hole.csv").write_bytes(
+            b"clock,assembly,start,end,samples,max_below_hole_ft,hole_ft\n")
+    rebuild.write(OUT / "entries-on-drilling.csv", yielded)
     rebuild.write(OUT / "stand-counts.csv", stands)
-    rebuild.write(OUT / "drilling-check.csv", drilled)
     sanvean = {run: rebuilt[("sanvean", run)] for run in range(11, 18)}
     rebuild.write(OUT / "pason-against-sanvean.csv",
                   pason_against_sanvean(rebuilt[("pason", "")], sanvean, alignment()))

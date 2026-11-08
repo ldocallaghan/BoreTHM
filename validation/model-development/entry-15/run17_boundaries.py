@@ -33,7 +33,7 @@ def rig_inputs(archive, first, last, *, correct_depth=True):
                 bit, hole, flow, inlet = (
                     number(row[i]) if row[i] != "-999.25" else np.nan for i in indices)
                 if correct_depth:
-                    bit = entry_depth(stamp, bit)
+                    bit = entry_depth(stamp, bit, hole=hole)
                 yield stamp, bit, hole, flow, inlet
 
 

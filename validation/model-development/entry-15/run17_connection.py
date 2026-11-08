@@ -66,7 +66,7 @@ def run(event, operating, *, cells, radial, step_s, well_mixed, recorded_contact
         midpoint = g.md_bit-(lower+upper)/2*b.FT
         index = np.searchsorted(faces, midpoint)-1
         tool = LayeredTool(bore*b.INCH/2, od*b.INCH/2, capacity, td[index])
-        length = lengths[index] if recorded_contact else 0.25
+        length = lengths[index] if recorded_contact else min(0.25, lengths[index])
         sensors.append((label, index, tool, length))
 
     def steps():
@@ -97,6 +97,8 @@ def main():
     parser.add_argument("archive", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--time-fine", action="store_true")
+    parser.add_argument("--pilot", action="store_true",
+                        help="the two-configuration pilot with a 0.25 m contact")
     args = parser.parse_args()
     event = next(r for r in audit.rows(audit.HERE/"run17-boundaries.csv")
                  if r["event"] == "pause-02")
@@ -119,6 +121,8 @@ def main():
     }
     if args.time_fine:
         settings = {"time": ((80, 80, 2.5), (80, 80, 1.25), (80, 80, .625))}
+    if args.pilot:
+        settings = {"pilot": ((40, 40, 10.), (80, 80, 5.))}
     results = {}
     for axis, variants in settings.items():
         for cells, radial, step in variants:
@@ -126,13 +130,14 @@ def main():
                 key = (cells, radial, step, mixed)
                 if key not in results:
                     results[key] = list(run(event, operating, cells=cells, radial=radial,
-                                            step_s=step, well_mixed=mixed))
+                                            step_s=step, well_mixed=mixed,
+                                            recorded_contact=not args.pilot))
     rows = [dict(axis=axis, level=level) | row
             for axis, variants in settings.items()
             for level, (cells, radial, step) in enumerate(variants, 1)
             for mixed in (False, True)
             for row in results[cells, radial, step, mixed]]
-    if not args.time_fine:
+    if not (args.time_fine or args.pilot):
         rows.extend(dict(axis="contact", level=1) | row
                 for mixed in (False, True)
                 for row in run(event, operating, cells=80, radial=80, step_s=5.,

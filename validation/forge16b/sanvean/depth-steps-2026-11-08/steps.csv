@@ -1,116 +1,213 @@
-clock,assembly,start,end,span_s,longest_step_s,samples,merged,before_ft,after_ft,step_ft,landing,holds_flat,block_travel_ft,block_change_ft,block_speed_ft_per_s,hook_before,hook_after,hanging_before,hanging_after,hole_step_ft,hole_ft,hole_moved,class,pair,sanvean_class,sanvean_after_ft,sanvean_end,final_class
-pason,,2023-04-26 18:26:10,2023-04-26 18:26:20,10.0,10.0,1,False,1123.23,936.0,-187.23,foot,True,0.0,0.0,0.0,31.9,31.9,False,False,0.0,1145.98,False,typed_entry,,,,,typed_entry
-pason,,2023-04-26 18:42:40,2023-04-26 18:42:50,10.0,10.0,1,False,935.93,1140.0,204.07,foot,True,0.0,0.0,0.0,109.0,109.0,True,True,0.0,1145.98,False,typed_entry,,,,,typed_entry
-pason,,2023-04-27 00:14:40,2023-04-27 00:14:50,10.0,10.0,1,False,1145.8,0.0,-1145.8,foot,True,0.0,0.0,0.0,35.4,35.5,False,False,0.0,1146.09,False,zero_reset,,,,,zero_reset
-pason,,2023-04-27 02:15:40,2023-04-27 02:15:50,10.0,10.0,1,False,126.2,466.0,339.8,foot,True,0.0,0.0,0.0,35.0,34.8,False,False,0.0,1146.09,False,typed_entry,,,,,typed_entry
-pason,,2023-04-29 00:45:00,2023-04-29 00:45:10,10.0,10.0,1,False,1059.26,186.8,-872.46,tenth,False,0.09,0.09,0.01,66.5,66.6,True,True,0.0,1155.14,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-04-29 00:56:40,2023-04-29 00:56:50,10.0,10.0,1,False,93.72,277.6,183.88,tenth,False,0.0,0.0,0.0,70.4,70.4,True,True,0.0,1155.14,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-04-29 01:19:10,2023-04-29 01:19:20,10.0,10.0,1,False,0.0,936.0,936.0,foot,True,1.89,1.89,0.19,93.1,91.8,True,True,0.0,1155.14,False,typed_entry,,,,,typed_entry
-pason,,2023-04-29 02:00:10,2023-04-29 02:00:20,10.0,10.0,1,False,765.94,1096.95,331.01,,False,0.28,0.28,0.03,106.2,106.0,True,True,0.0,1155.14,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-05-03 14:45:10,2023-05-03 14:45:20,10.0,10.0,1,False,4695.73,4839.0,143.27,foot,True,0.0,0.0,0.0,39.9,39.8,False,False,0.0,4844.98,False,typed_entry,,,,,typed_entry
-pason,,2023-05-05 03:16:30,2023-05-05 03:16:40,10.0,10.0,1,False,4854.87,0.0,-4854.87,foot,True,0.0,0.0,0.0,42.8,42.8,False,False,0.0,4854.87,False,zero_reset,,,,,zero_reset
-pason,,2023-05-07 23:18:30,2023-05-07 23:18:40,10.0,10.0,1,False,1758.06,2046.3,288.24,tenth,False,0.0,0.0,0.0,132.2,131.7,True,True,0.0,4839.0,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-05-07 23:55:10,2023-05-07 23:55:20,10.0,10.0,1,False,3465.55,3324.37,-141.18,,False,0.0,0.0,0.0,154.8,156.2,True,True,0.0,4839.0,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-05-09 14:58:40,2023-05-09 14:58:50,10.0,10.0,1,False,4814.71,4733.9,-80.81,tenth,True,0.0,0.0,0.0,188.4,188.4,True,True,0.0,4871.62,False,typed_entry_tenth,,,,,typed_entry_tenth
-pason,,2023-05-10 04:08:10,2023-05-10 04:08:20,10.0,10.0,1,False,1472.0,1356.3,-115.7,tenth,True,0.0,0.0,0.0,119.4,119.4,True,True,0.0,4878.4,False,typed_entry_tenth,,,,,typed_entry_tenth
-pason,,2023-05-13 05:53:40,2023-05-13 05:53:50,10.0,10.0,1,False,4076.4,4015.0,-61.4,foot,True,0.0,0.0,0.0,142.1,142.2,True,True,0.0,4980.46,False,typed_entry,,,,,typed_entry
-pason,,2023-05-13 21:07:30,2023-05-13 21:07:40,10.0,10.0,1,False,4327.38,4148.0,-179.38,foot,True,0.0,0.0,0.0,192.8,192.8,True,True,0.0,5269.86,False,typed_entry,,typed_entry,4148.0,2023-05-13 21:07:24,typed_entry
-pason,,2023-05-14 21:10:30,2023-05-14 21:10:40,10.0,10.0,1,False,5667.19,5577.0,-90.19,hole,True,0.0,0.0,0.0,218.2,218.2,True,True,-94.19,5577.0,True,typed_entry,,typed_entry,5577.0,2023-05-14 21:10:29,typed_entry
-pason,,2023-05-15 14:31:50,2023-05-15 14:32:00,10.0,10.0,1,False,1114.54,658.03,-456.51,,False,2.03,2.03,0.2,40.4,97.4,False,True,0.0,5956.7,False,pickup_entry,,,,,pickup_entry
-pason,,2023-05-15 15:28:00,2023-05-15 15:28:10,10.0,10.0,1,False,2380.45,3760.0,1379.55,foot,True,0.0,0.0,0.0,159.9,160.5,True,True,0.0,5956.7,False,typed_entry,,,,,typed_entry
-pason,,2023-05-15 17:46:50,2023-05-15 17:47:00,10.0,10.0,1,False,3879.41,4046.0,166.59,foot,False,0.0,0.0,0.0,39.5,39.5,False,False,0.0,5956.7,False,typed_entry,,typed_entry,4046.0,2023-05-15 17:46:57,typed_entry
-pason,,2023-05-15 17:59:00,2023-05-15 17:59:10,10.0,10.0,1,False,5052.9,4580.0,-472.9,foot,True,0.0,0.0,0.0,38.9,38.9,False,False,0.0,5956.7,False,typed_entry,,typed_entry,4580.0,2023-05-15 17:58:53,typed_entry
-pason,,2023-05-15 23:28:10,2023-05-15 23:28:20,10.0,10.0,1,False,6246.97,6138.0,-108.97,hole,False,0.0,0.0,0.0,182.8,186.7,True,True,-108.97,6138.0,True,typed_entry,,typed_entry,6138.0,2023-05-15 23:28:04,typed_entry
-pason,,2023-05-20 00:38:20,2023-05-20 00:38:30,10.0,10.0,1,False,788.76,0.0,-788.76,foot,True,0.0,0.0,0.0,36.9,36.9,False,False,0.0,6950.14,False,zero_reset,,,,,zero_reset
-pason,,2023-05-20 03:34:00,2023-05-20 03:34:10,10.0,10.0,1,False,3876.43,4253.0,376.57,foot,True,0.0,0.0,0.0,36.2,36.2,False,False,0.0,6950.14,False,typed_entry,,,,,typed_entry
-pason,,2023-05-20 06:29:30,2023-05-20 06:29:40,10.0,10.0,1,False,6690.0,6824.0,134.0,foot,True,0.0,0.0,0.0,216.5,216.4,True,True,0.0,6950.14,False,typed_entry,,typed_entry,6824.0,2023-05-20 06:29:40,typed_entry
-pason,,2023-05-21 06:19:10,2023-05-21 06:19:20,10.0,10.0,1,False,3180.28,2692.0,-488.28,foot,False,1.2,1.2,0.12,33.7,36.5,False,False,0.0,7583.98,False,typed_entry,,typed_entry,2692.0,2023-05-21 06:19:10,typed_entry
-pason,,2023-05-21 07:10:40,2023-05-21 07:10:50,10.0,10.0,1,False,4646.85,4788.58,141.73,,False,0.84,-0.84,0.08,197.0,191.6,True,True,0.0,7583.98,False,unresolved_entry,,typed_entry,4783.0,2023-05-21 07:10:41,typed_entry
-pason,,2023-05-21 07:49:30,2023-05-21 07:49:40,10.0,10.0,1,False,5844.77,5924.0,79.23,foot,True,0.0,0.0,0.0,33.4,33.2,False,False,0.0,7583.98,False,typed_entry,,typed_entry,5924.0,2023-05-21 07:49:32,typed_entry
-pason,,2023-05-22 16:48:30,2023-05-22 16:48:40,10.0,10.0,1,False,2162.74,1453.53,-709.21,,False,2.7,2.7,0.27,29.9,126.6,False,True,0.0,8085.01,False,pickup_entry,,,,,pickup_entry
-pason,,2023-05-22 19:05:10,2023-05-22 19:05:20,10.0,10.0,1,False,4596.37,4780.0,183.63,foot,True,0.0,0.0,0.0,30.1,30.5,False,False,0.0,8085.01,False,typed_entry,,,,,typed_entry
-pason,,2023-05-23 23:49:10,2023-05-23 23:49:20,10.0,10.0,1,False,631.53,0.0,-631.53,foot,True,0.0,0.0,0.0,37.0,37.0,False,False,0.0,8585.02,False,zero_reset,,,,,zero_reset
-pason,,2023-05-24 21:19:40,2023-05-24 21:19:50,10.0,10.0,1,False,3143.61,3430.0,286.39,foot,True,0.0,0.0,0.0,140.3,140.3,True,True,0.0,8585.02,False,typed_entry,,,,,typed_entry
-pason,,2023-05-25 00:14:20,2023-05-25 00:14:30,10.0,10.0,1,False,6862.99,7064.0,201.01,foot,True,0.0,0.0,0.0,199.4,199.8,True,True,0.0,8585.02,False,typed_entry,,,,,typed_entry
-pason,,2023-05-25 02:21:40,2023-05-25 02:21:50,10.0,10.0,1,False,8580.96,8085.6,-495.36,tenth,False,0.27,-0.27,0.03,197.2,197.2,True,True,0.0,8585.02,False,glitch,2023-05-25 02:23:00,,,,glitch
-pason,,2023-05-25 02:22:50,2023-05-25 02:23:00,10.0,10.0,1,False,8087.66,8590.55,502.89,,True,0.18,-0.18,0.02,198.2,203.2,True,True,3.55,8590.55,False,restore,2023-05-25 02:21:50,,,,restore
-pason,,2023-05-26 14:54:40,2023-05-26 14:54:50,10.0,10.0,1,False,3267.03,3145.3,-121.73,tenth,False,0.0,0.0,0.0,143.6,143.6,True,True,0.0,9255.4,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-05-26 20:42:40,2023-05-26 20:42:50,10.0,10.0,1,False,6190.4,5997.0,-193.4,foot,True,0.0,0.0,0.0,41.0,41.0,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
-pason,,2023-05-26 21:17:20,2023-05-26 21:17:30,10.0,10.0,1,False,6600.35,6567.0,-33.35,foot,True,0.0,0.0,0.0,40.3,40.3,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
-pason,,2023-05-26 22:10:20,2023-05-26 22:10:30,10.0,10.0,1,False,7575.84,7517.0,-58.84,foot,True,0.0,0.0,0.0,27.1,26.8,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
-pason,,2023-05-26 23:00:30,2023-05-26 23:00:40,10.0,10.0,1,False,8027.11,7993.0,-34.11,foot,True,0.0,0.0,0.0,25.6,25.6,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
-pason,,2023-05-26 23:22:30,2023-05-26 23:22:40,10.0,10.0,1,False,8502.43,8468.0,-34.43,foot,True,0.0,0.0,0.0,26.5,26.1,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
-pason,,2023-05-27 19:35:10,2023-05-27 19:35:20,10.0,10.0,1,False,2905.58,3016.0,110.42,foot,True,0.0,0.0,0.0,32.9,32.8,False,False,0.0,9800.0,False,typed_entry,,,,,typed_entry
-pason,,2023-05-27 20:55:30,2023-05-27 20:55:40,10.0,10.0,1,False,6287.47,6059.0,-228.47,foot,True,0.0,0.0,0.0,35.9,35.8,False,False,0.0,9800.0,False,typed_entry,,,,,typed_entry
-pason,,2023-05-27 21:54:10,2023-05-27 21:54:20,10.0,10.0,1,False,8206.54,8057.0,-149.54,foot,True,0.0,0.0,0.0,36.2,36.2,False,False,0.0,9800.0,False,typed_entry,,,,,typed_entry
-pason,,2023-05-27 22:46:30,2023-05-27 22:46:40,10.0,10.0,1,False,9799.02,9678.0,-121.02,foot,False,0.0,0.0,0.0,37.5,37.6,False,False,0.0,9800.0,False,typed_entry,,,,,typed_entry
-pason,,2023-05-30 12:41:00,2023-05-30 12:41:10,10.0,10.0,1,False,1105.39,995.52,-109.87,,False,10.69,-10.69,1.07,81.8,91.6,True,True,0.0,9817.62,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-05-31 08:14:10,2023-05-31 08:14:20,10.0,10.0,1,False,1996.31,1935.3,-61.01,tenth,False,1.04,-1.04,0.1,95.7,107.3,True,True,0.0,9817.62,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-06-01 08:35:30,2023-06-01 08:35:40,10.0,10.0,1,False,1080.9,1004.08,-76.82,,False,0.0,0.0,0.0,86.4,87.2,True,True,0.0,9822.98,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-06-02 23:27:40,2023-06-02 23:27:50,10.0,10.0,1,False,3102.2,2975.0,-127.2,foot,True,0.0,0.0,0.0,37.8,37.9,False,False,0.0,9853.0,False,typed_entry,,,,,typed_entry
-pason,,2023-06-03 20:57:00,2023-06-03 20:57:10,10.0,10.0,1,False,3163.3,3059.0,-104.3,foot,True,0.0,0.0,0.0,37.9,38.0,False,False,0.0,9862.98,False,typed_entry,,,,,typed_entry
-pason,,2023-06-06 02:19:40,2023-06-06 02:19:50,10.0,10.0,1,False,3105.11,3019.0,-86.11,foot,True,0.0,0.0,0.0,31.2,31.2,False,False,0.0,10256.65,False,typed_entry,,,,,typed_entry
-pason,,2023-06-06 14:25:00,2023-06-06 14:25:10,10.0,10.0,1,False,411.15,0.0,-411.15,foot,True,0.0,0.0,0.0,31.7,31.7,False,False,0.0,10264.06,False,zero_reset,,,,,zero_reset
-pason,,2023-06-06 17:05:40,2023-06-06 17:05:50,10.0,10.0,1,False,750.07,1028.9,278.83,tenth,True,0.0,0.0,0.0,33.6,33.7,False,False,0.0,10264.06,False,typed_entry_tenth,,,,,typed_entry_tenth
-pason,,2023-06-06 18:27:20,2023-06-06 18:27:30,10.0,10.0,1,False,3023.79,3091.0,67.21,foot,True,0.0,0.0,0.0,32.7,32.8,False,False,0.0,10264.06,False,typed_entry,,,,,typed_entry
-pason,,2023-06-07 19:59:40,2023-06-07 19:59:50,10.0,10.0,1,False,3118.11,3019.0,-99.11,foot,True,0.0,0.0,0.0,38.8,38.9,False,False,0.0,10271.79,False,typed_entry,,,,,typed_entry
-pason,,2023-06-08 13:29:10,2023-06-08 13:29:20,10.0,10.0,1,False,4985.26,4899.0,-86.26,foot,True,0.0,0.0,0.0,181.7,181.6,True,True,0.0,10273.97,False,typed_entry,,,,,typed_entry
-pason,,2023-06-11 15:06:20,2023-06-11 15:06:30,10.0,10.0,1,False,4910.88,4787.0,-123.88,foot,True,0.0,0.0,0.0,168.2,168.3,True,True,0.0,10303.96,False,typed_entry,,,,,typed_entry
-pason,,2023-06-12 14:18:20,2023-06-12 14:18:30,10.0,10.0,1,False,10420.0,10325.0,-95.0,foot,True,0.0,0.0,0.0,201.5,201.5,True,True,0.0,10430.06,False,typed_entry,,,,,typed_entry
-pason,,2023-06-14 02:19:50,2023-06-14 02:20:00,10.0,10.0,1,False,4933.94,4828.0,-105.94,foot,True,0.0,0.0,0.0,0.0,0.0,False,False,0.0,10459.98,False,typed_entry,,,,,typed_entry
-pason,,2023-06-14 17:31:10,2023-06-14 17:31:20,10.0,10.0,1,False,4853.17,4441.27,-411.9,,False,2.57,2.57,0.26,39.7,231.8,False,True,0.0,10461.96,False,pickup_entry,,,,,pickup_entry
-pason,,2023-06-16 08:44:10,2023-06-16 08:44:20,10.0,10.0,1,False,4907.82,4785.0,-122.82,foot,True,0.0,0.0,0.0,169.9,169.9,True,True,0.0,10493.0,False,typed_entry,,,,,typed_entry
-pason,,2023-06-16 21:44:20,2023-06-16 21:44:30,10.0,10.0,1,False,1703.53,1643.35,-60.18,,False,27.61,27.61,2.76,113.8,107.5,True,True,0.0,10502.97,False,motion,,,,,motion
-pason,,2023-06-16 21:48:30,2023-06-16 21:48:40,10.0,10.0,1,False,1498.52,1437.7,-60.82,tenth,False,7.68,7.68,0.77,110.5,100.0,True,True,0.0,10502.97,False,motion,,,,,motion
-pason,,2023-06-16 22:13:30,2023-06-16 22:13:40,10.0,10.0,1,False,529.98,468.83,-61.15,,False,9.06,9.06,0.91,71.4,70.7,True,True,0.0,10502.97,False,motion,,,,,motion
-pason,,2023-06-16 22:15:20,2023-06-16 22:15:30,10.0,10.0,1,False,460.02,399.2,-60.82,tenth,False,33.57,33.57,3.36,67.5,66.3,True,True,0.0,10502.97,False,motion,,,,,motion
-pason,,2023-06-16 22:17:20,2023-06-16 22:17:30,10.0,10.0,1,False,350.69,290.01,-60.68,,False,6.95,6.95,0.7,60.5,61.1,True,True,0.0,10502.97,False,motion,,,,,motion
-pason,,2023-06-17 02:32:20,2023-06-17 02:32:30,10.0,10.0,1,False,4976.46,4880.0,-96.46,foot,True,0.0,0.0,0.0,184.4,184.4,True,True,0.0,10502.97,False,typed_entry,,,,,typed_entry
-pason,,2023-06-17 23:13:20,2023-06-17 23:13:30,10.0,10.0,1,False,1022.75,959.97,-62.78,,False,24.22,24.22,2.42,103.9,96.9,True,True,0.0,10947.0,False,motion,,,,,motion
-pason,,2023-06-23 23:53:10,2023-06-23 23:53:20,10.0,10.0,1,False,1221.79,1015.2,-206.59,tenth,True,0.0,0.0,0.0,102.5,102.3,True,True,0.0,10947.0,False,typed_entry_tenth,,,,,typed_entry_tenth
-pason,,2023-06-24 19:47:50,2023-06-24 19:48:00,10.0,10.0,1,False,5834.97,5789.2,-45.77,tenth,True,0.0,0.0,0.0,40.8,40.7,False,False,0.0,10947.0,False,typed_entry_tenth,,,,,typed_entry_tenth
-pason,,2023-06-25 16:45:20,2023-06-25 16:45:30,10.0,10.0,1,False,3385.85,3011.0,-374.85,foot,True,0.0,0.0,0.0,47.6,47.4,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-06-25 17:53:50,2023-06-25 17:54:00,10.0,10.0,1,False,5792.03,5864.0,71.97,foot,True,0.0,0.0,0.0,45.6,45.7,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-06-27 18:05:40,2023-06-27 18:05:50,10.0,10.0,1,False,729.18,683.0,-46.18,foot,True,0.13,0.13,0.01,32.3,32.6,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-06-29 00:26:00,2023-06-29 00:26:10,10.0,10.0,1,False,1736.76,1638.44,-98.32,,False,3.01,-3.01,0.3,95.2,103.7,True,True,0.0,10947.0,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-06-30 04:08:30,2023-06-30 04:08:40,10.0,10.0,1,False,1225.65,1150.4,-75.25,tenth,False,0.0,0.0,0.0,85.8,85.8,True,True,0.0,10947.0,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-07-01 21:12:50,2023-07-01 21:13:00,10.0,10.0,1,False,547.59,0.0,-547.59,foot,True,0.0,0.0,0.0,31.4,31.4,False,False,0.0,10947.0,False,zero_reset,,,,,zero_reset
-pason,,2023-07-03 03:24:30,2023-07-03 03:24:40,10.0,10.0,1,False,974.76,1332.2,357.44,tenth,False,3.02,-3.02,0.3,96.4,93.2,True,True,0.0,10947.0,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-07-04 02:34:10,2023-07-04 02:34:20,10.0,10.0,1,False,2236.23,1613.0,-623.23,foot,True,0.0,0.0,0.0,48.4,47.8,False,False,0.0,10182.29,False,typed_entry,,,,,typed_entry
-pason,,2023-07-04 04:15:20,2023-07-04 04:15:30,10.0,10.0,1,False,267.49,0.0,-267.49,foot,True,0.0,0.0,0.0,26.6,26.6,False,False,0.0,10947.0,False,zero_reset,,,,,zero_reset
-pason,,2023-07-06 10:44:40,2023-07-06 10:44:50,10.0,10.0,1,False,2331.87,3148.0,816.13,foot,True,0.0,0.0,0.0,43.0,42.9,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-07-06 13:44:30,2023-07-06 13:44:40,10.0,10.0,1,False,9119.44,9142.0,22.56,foot,False,1.16,1.16,0.12,32.7,35.9,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-07-06 21:30:00,2023-07-06 21:30:10,10.0,10.0,1,False,6763.69,4100.0,-2663.69,foot,False,0.42,0.42,0.04,49.7,49.5,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-07-07 06:09:00,2023-07-07 06:09:10,10.0,10.0,1,False,3375.0,1354.0,-2021.0,foot,True,0.0,0.0,0.0,43.9,43.7,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-07-07 08:03:40,2023-07-07 08:03:50,10.0,10.0,1,False,5865.69,6493.0,627.31,foot,True,0.0,0.0,0.0,234.4,234.6,True,True,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-07-07 20:54:00,2023-07-07 20:54:10,10.0,10.0,1,False,5525.5,5352.0,-173.5,foot,True,0.0,0.0,0.0,230.4,230.4,True,True,0.0,10947.0,False,typed_entry,,,,,typed_entry
-pason,,2023-07-10 15:43:40,2023-07-10 15:43:50,10.0,10.0,1,False,983.56,399.0,-584.56,foot,True,0.0,0.0,0.0,30.2,31.1,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
-pason,,2023-07-10 15:44:50,2023-07-10 15:45:00,10.0,10.0,1,False,399.0,448.0,49.0,foot,True,0.0,0.0,0.0,30.0,30.6,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
-pason,,2023-07-10 19:50:20,2023-07-10 19:50:30,10.0,10.0,1,False,447.15,875.0,427.85,foot,True,0.0,0.0,0.0,0.0,0.0,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
-pason,,2023-07-15 14:33:20,2023-07-15 14:33:30,10.0,10.0,1,False,10208.0,300.0,-9908.0,foot,True,0.0,0.0,0.0,32.2,32.4,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
-pason,,2023-07-15 17:08:50,2023-07-15 17:09:00,10.0,10.0,1,False,4379.92,4748.0,368.08,foot,True,0.0,0.0,0.0,28.3,28.3,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
-pason,,2023-07-15 20:40:20,2023-07-15 20:40:30,10.0,10.0,1,False,6942.92,7000.0,57.08,foot,True,0.0,0.0,0.0,24.2,24.3,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
-pason,,2023-07-16 01:13:10,2023-07-16 01:13:20,10.0,10.0,1,False,9929.7,9897.0,-32.7,foot,True,0.0,0.0,0.0,32.6,32.6,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
-pason,,2023-07-17 01:36:50,2023-07-17 01:37:00,10.0,10.0,1,False,446.89,0.0,-446.89,foot,True,0.0,0.0,0.0,34.0,34.0,False,False,0.0,10947.31,False,zero_reset,,,,,zero_reset
-pason,,2023-07-20 09:43:10,2023-07-20 09:43:20,10.0,10.0,1,False,3119.79,3603.2,483.41,tenth,False,0.55,0.55,0.05,29.3,29.3,False,False,0.0,10947.31,False,unresolved_entry,,,,,unresolved_entry
-pason,,2023-07-20 11:39:20,2023-07-20 11:39:30,10.0,10.0,1,False,9417.27,9324.0,-93.27,foot,True,0.0,0.0,0.0,28.6,28.6,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
-pason,,2023-07-21 00:42:20,2023-07-21 00:42:30,10.0,10.0,1,False,620.33,0.0,-620.33,foot,True,0.0,0.0,0.0,29.2,29.2,False,False,0.0,10947.31,False,zero_reset,,,,,zero_reset
-sanvean,12,2023-05-13 21:07:23,2023-05-13 21:07:24,1.0,1.0,1,False,4327.38,4148.0,-179.38,foot,True,0.0,0.0,0.0,192.8,192.8,True,True,0.0,5269.86,False,typed_entry,,,,,typed_entry
-sanvean,12,2023-05-14 17:50:54,2023-05-14 17:50:55,1.0,1.0,1,False,5506.27,5482.0,-24.27,foot,True,0.0,0.0,0.0,226.1,226.0,True,True,0.0,5537.3,False,typed_entry,,,,,typed_entry
-sanvean,12,2023-05-14 21:10:28,2023-05-14 21:10:29,1.0,1.0,1,False,5667.19,5577.0,-90.19,hole,True,0.0,0.0,0.0,218.2,218.2,True,True,-94.19,5577.0,True,typed_entry,,,,,typed_entry
-sanvean,12,2023-05-14 21:29:30,2023-05-14 21:29:31,1.0,1.0,1,False,5574.0,5669.0,95.0,foot,True,0.0,0.0,0.0,221.8,221.8,True,True,0.0,5672.0,False,typed_entry,,,,,typed_entry
-sanvean,13,2023-05-15 17:46:56,2023-05-15 17:46:57,1.0,1.0,1,False,3879.41,4046.0,166.59,foot,True,0.0,0.0,0.0,39.4,39.5,False,False,0.0,5956.7,False,typed_entry,,,,,typed_entry
-sanvean,13,2023-05-15 17:58:52,2023-05-15 17:58:53,1.0,1.0,1,False,5052.9,4580.0,-472.9,foot,True,0.0,0.0,0.0,38.8,38.7,False,False,0.0,5956.7,False,typed_entry,,,,,typed_entry
-sanvean,13,2023-05-15 18:45:00,2023-05-15 18:45:01,1.0,1.0,1,False,5986.87,5957.0,-29.87,hole,True,0.0,0.0,0.0,211.8,211.8,True,True,-29.87,5957.0,True,typed_entry,,,,,typed_entry
-sanvean,13,2023-05-15 20:12:20,2023-05-15 20:12:21,1.0,1.0,1,False,6032.78,6011.0,-21.78,hole,True,0.0,0.0,0.0,182.2,182.7,True,True,-21.86,6011.0,True,typed_entry,,,,,typed_entry
-sanvean,13,2023-05-15 20:43:56,2023-05-15 20:43:57,1.0,1.0,1,False,6102.55,6043.0,-59.55,hole,True,0.0,0.0,0.0,176.5,177.1,True,True,-59.55,6043.0,True,typed_entry,,,,,typed_entry
-sanvean,13,2023-05-15 20:55:09,2023-05-15 20:55:10,1.0,1.0,1,False,5984.33,6040.0,55.67,foot,True,0.0,0.0,0.0,240.0,240.0,True,True,0.0,6043.0,False,typed_entry,,,,,typed_entry
-sanvean,13,2023-05-15 22:27:11,2023-05-15 22:27:12,1.0,1.0,1,False,6091.81,6170.03,78.22,hole,False,0.09,-0.09,0.09,196.1,194.3,True,True,0.03,6170.03,False,typed_entry,,,,,typed_entry
-sanvean,13,2023-05-15 23:28:03,2023-05-15 23:28:04,1.0,1.0,1,False,6246.97,6138.0,-108.97,hole,True,0.0,0.0,0.0,179.8,180.92,True,True,-108.97,6138.0,True,typed_entry,,,,,typed_entry
-sanvean,15,2023-05-17 22:39:28,2023-05-17 22:39:29,1.0,1.0,1,False,4832.14,4919.0,86.86,foot,True,0.0,0.0,0.0,198.0,198.0,True,True,0.0,6609.87,False,typed_entry,,,,,typed_entry
-sanvean,15,2023-05-17 23:26:59,2023-05-17 23:27:00,1.0,1.0,1,False,6476.76,6539.0,62.24,foot,True,0.0,0.0,0.0,234.8,234.8,True,True,0.0,6609.87,False,typed_entry,,,,,typed_entry
-sanvean,16,2023-05-20 06:29:39,2023-05-20 06:29:40,1.0,1.0,1,False,6690.0,6824.0,134.0,foot,True,0.0,0.0,0.0,216.2,216.0,True,True,0.0,6950.14,False,typed_entry,,,,,typed_entry
-sanvean,17,2023-05-21 06:19:09,2023-05-21 06:19:10,1.0,1.0,1,False,3180.28,2692.0,-488.28,foot,True,0.0,0.0,0.0,33.7,33.7,False,False,0.0,7583.98,False,typed_entry,,,,,typed_entry
-sanvean,17,2023-05-21 07:10:40,2023-05-21 07:10:41,1.0,1.0,1,False,4646.85,4783.0,136.15,foot,True,0.0,0.0,0.0,191.7,191.6,True,True,0.0,7583.98,False,typed_entry,,,,,typed_entry
-sanvean,17,2023-05-21 07:49:30,2023-05-21 07:49:32,2.0,1.0,2,True,5844.77,5924.0,79.23,foot,True,0.0,0.0,0.0,33.2,33.14,False,False,0.0,7583.98,False,typed_entry,,,,,typed_entry
-sanvean,17,2023-05-21 10:17:48,2023-05-21 10:17:50,2.0,1.0,2,True,7370.26,7446.0,75.74,foot,True,0.0,0.0,0.0,194.4,194.4,True,True,0.0,7583.98,False,typed_entry,,,,,typed_entry
+clock,assembly,start,end,span_s,longest_step_s,samples,merged,small,before_ft,after_ft,step_ft,landing,holds_flat,block_travel_ft,block_change_ft,block_speed_ft_per_s,hook_before,hook_after,hanging_before,hanging_after,hole_step_ft,hole_ft,hole_moved,class,pair,sanvean_class,sanvean_after_ft,sanvean_end,final_class
+pason,,2023-04-26 03:17:00,2023-04-26 03:17:10,10.0,10.0,1,False,True,175.36,200.0,24.64,foot,True,0.0,0.0,0.0,75.8,75.9,True,True,21.12,200.0,True,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 05:32:10,2023-04-26 05:32:20,10.0,10.0,1,False,True,458.05,476.0,17.95,foot,True,0.0,0.0,0.0,100.6,100.6,True,True,16.38,476.0,True,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 06:04:50,2023-04-26 06:05:00,10.0,10.0,1,False,True,542.91,567.0,24.09,foot,True,0.0,0.0,0.0,97.8,97.5,True,True,0.0,570.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 06:46:40,2023-04-26 06:46:50,10.0,10.0,1,False,True,627.05,658.0,30.95,foot,True,0.0,0.0,0.0,100.7,100.6,True,True,0.0,661.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 07:21:40,2023-04-26 07:21:50,10.0,10.0,1,False,True,716.79,750.0,33.21,foot,True,0.0,0.0,0.0,105.3,105.3,True,True,0.0,753.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 09:10:50,2023-04-26 09:11:00,10.0,10.0,1,False,True,823.76,840.0,16.24,foot,True,0.0,0.0,0.0,111.2,111.3,True,True,0.0,843.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 09:54:30,2023-04-26 09:54:40,10.0,10.0,1,False,True,913.42,935.0,21.58,foot,True,0.0,0.0,0.0,112.8,112.9,True,True,0.0,938.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 11:44:20,2023-04-26 11:44:30,10.0,10.0,1,False,True,1025.74,1030.0,4.26,foot,True,0.0,0.0,0.0,118.7,118.7,True,True,0.0,1033.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 12:27:30,2023-04-26 12:27:40,10.0,10.0,1,False,True,1121.33,1125.0,3.67,foot,True,0.0,0.0,0.0,116.9,116.9,True,True,0.0,1128.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 14:01:30,2023-04-26 14:01:40,10.0,10.0,1,False,True,1111.58,1143.0,31.42,foot,True,0.0,0.0,0.0,120.9,121.0,True,True,0.0,1145.98,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-26 18:26:10,2023-04-26 18:26:20,10.0,10.0,1,False,False,1123.23,936.0,-187.23,foot,True,0.0,0.0,0.0,31.9,31.9,False,False,0.0,1145.98,False,typed_entry,,,,,typed_entry
+pason,,2023-04-26 18:42:40,2023-04-26 18:42:50,10.0,10.0,1,False,False,935.93,1140.0,204.07,foot,True,0.0,0.0,0.0,109.0,109.0,True,True,0.0,1145.98,False,typed_entry,,,,,typed_entry
+pason,,2023-04-26 18:50:20,2023-04-26 18:50:30,10.0,10.0,1,False,True,1140.02,1146.0,5.98,foot,True,0.0,0.0,0.0,116.0,115.6,True,True,0.02,1146.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-04-27 00:14:40,2023-04-27 00:14:50,10.0,10.0,1,False,False,1145.8,0.0,-1145.8,foot,True,0.0,0.0,0.0,35.4,35.5,False,False,0.0,1146.09,False,zero_reset,,,,,zero_reset
+pason,,2023-04-27 02:15:40,2023-04-27 02:15:50,10.0,10.0,1,False,False,126.2,466.0,339.8,foot,True,0.0,0.0,0.0,35.0,34.8,False,False,0.0,1146.09,False,typed_entry,,,,,typed_entry
+pason,,2023-04-29 00:45:00,2023-04-29 00:45:10,10.0,10.0,1,False,False,1059.26,186.8,-872.46,tenth,False,0.09,0.09,0.01,66.5,66.6,True,True,0.0,1155.14,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-04-29 00:56:40,2023-04-29 00:56:50,10.0,10.0,1,False,False,93.72,277.6,183.88,tenth,False,0.0,0.0,0.0,70.4,70.4,True,True,0.0,1155.14,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-04-29 01:19:10,2023-04-29 01:19:20,10.0,10.0,1,False,False,0.0,936.0,936.0,foot,True,1.89,1.89,0.19,93.1,91.8,True,True,0.0,1155.14,False,typed_entry,,,,,typed_entry
+pason,,2023-04-29 02:00:10,2023-04-29 02:00:20,10.0,10.0,1,False,False,765.94,1096.95,331.01,,False,0.28,0.28,0.03,106.2,106.0,True,True,0.0,1155.14,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-05-01 09:13:10,2023-05-01 09:13:20,10.0,10.0,1,False,True,405.11,393.0,-12.11,foot,True,0.22,-0.22,0.02,95.0,94.6,True,True,0.0,4353.63,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-02 03:32:20,2023-05-02 03:32:30,10.0,10.0,1,False,True,4718.92,4722.0,3.08,foot,True,0.0,0.0,0.0,139.2,143.4,True,True,3.08,4722.0,True,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-02 11:00:00,2023-05-02 11:00:10,10.0,10.0,1,False,True,3968.83,3963.0,-5.83,foot,True,0.04,0.04,0.0,204.0,201.3,True,True,0.0,4844.98,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-02 12:26:50,2023-05-02 12:27:00,10.0,10.0,1,False,True,2549.08,2543.0,-6.08,foot,True,0.02,0.02,0.0,169.8,172.0,True,True,0.0,4844.98,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-03 14:45:10,2023-05-03 14:45:20,10.0,10.0,1,False,False,4695.73,4839.0,143.27,foot,True,0.0,0.0,0.0,39.9,39.8,False,False,0.0,4844.98,False,typed_entry,,,,,typed_entry
+pason,,2023-05-05 03:16:30,2023-05-05 03:16:40,10.0,10.0,1,False,False,4854.87,0.0,-4854.87,foot,True,0.0,0.0,0.0,42.8,42.8,False,False,0.0,4854.87,False,zero_reset,,,,,zero_reset
+pason,,2023-05-07 23:18:30,2023-05-07 23:18:40,10.0,10.0,1,False,False,1758.06,2046.3,288.24,tenth,False,0.0,0.0,0.0,132.2,131.7,True,True,0.0,4839.0,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-05-07 23:55:10,2023-05-07 23:55:20,10.0,10.0,1,False,False,3465.55,3324.37,-141.18,,False,0.0,0.0,0.0,154.8,156.2,True,True,0.0,4839.0,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-05-09 14:58:40,2023-05-09 14:58:50,10.0,10.0,1,False,False,4814.71,4733.9,-80.81,tenth,True,0.0,0.0,0.0,188.4,188.4,True,True,0.0,4871.62,False,typed_entry_tenth,,,,,typed_entry_tenth
+pason,,2023-05-10 04:08:10,2023-05-10 04:08:20,10.0,10.0,1,False,False,1472.0,1356.3,-115.7,tenth,True,0.0,0.0,0.0,119.4,119.4,True,True,0.0,4878.4,False,typed_entry_tenth,,,,,typed_entry_tenth
+pason,,2023-05-12 19:58:20,2023-05-12 19:58:30,10.0,10.0,1,False,True,4944.87,4908.0,-36.87,foot,True,0.0,0.0,0.0,166.3,166.4,True,True,0.0,4978.52,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-13 05:53:40,2023-05-13 05:53:50,10.0,10.0,1,False,False,4076.4,4015.0,-61.4,foot,True,0.0,0.0,0.0,142.1,142.2,True,True,0.0,4980.46,False,typed_entry,,,,,typed_entry
+pason,,2023-05-13 06:40:50,2023-05-13 06:41:00,10.0,10.0,1,False,True,4966.7,4969.0,2.3,foot,True,0.0,0.0,0.0,170.3,170.4,True,True,0.0,4980.46,False,typed_entry_small,,typed_entry_small,4969.0,2023-05-13 06:40:56,typed_entry_small
+pason,,2023-05-13 21:07:30,2023-05-13 21:07:40,10.0,10.0,1,False,False,4327.38,4148.0,-179.38,foot,True,0.0,0.0,0.0,192.8,192.8,True,True,0.0,5269.86,False,typed_entry,,typed_entry,4148.0,2023-05-13 21:07:24,typed_entry
+pason,,2023-05-13 21:52:20,2023-05-13 21:52:30,10.0,10.0,1,False,True,5190.48,5197.0,6.52,foot,True,0.0,0.0,0.0,216.8,216.9,True,True,0.0,5269.86,False,typed_entry_small,,typed_entry_small,5197.0,2023-05-13 21:52:26,typed_entry_small
+pason,,2023-05-14 17:51:00,2023-05-14 17:51:10,10.0,10.0,1,False,True,5506.27,5482.0,-24.27,foot,True,0.0,0.0,0.0,226.2,226.1,True,True,0.0,5537.3,False,typed_entry_small,,typed_entry,5482.0,2023-05-14 17:50:55,typed_entry
+pason,,2023-05-14 21:10:30,2023-05-14 21:10:40,10.0,10.0,1,False,False,5667.19,5577.0,-90.19,hole,True,0.0,0.0,0.0,218.2,218.2,True,True,-94.19,5577.0,True,typed_entry,,typed_entry,5577.0,2023-05-14 21:10:29,typed_entry
+pason,,2023-05-14 21:11:10,2023-05-14 21:11:20,10.0,10.0,1,False,True,5577.0,5574.0,-3.0,foot,True,0.0,0.0,0.0,216.0,216.0,True,True,0.0,5577.0,False,typed_entry_small,,typed_entry_small,5574.0,2023-05-14 21:11:08,typed_entry_small
+pason,,2023-05-15 14:31:50,2023-05-15 14:32:00,10.0,10.0,1,False,False,1114.54,658.03,-456.51,,False,2.03,2.03,0.2,40.4,97.4,False,True,0.0,5956.7,False,pickup_entry,,,,,pickup_entry
+pason,,2023-05-15 15:28:00,2023-05-15 15:28:10,10.0,10.0,1,False,False,2380.45,3760.0,1379.55,foot,True,0.0,0.0,0.0,159.9,160.5,True,True,0.0,5956.7,False,typed_entry,,,,,typed_entry
+pason,,2023-05-15 17:46:50,2023-05-15 17:47:00,10.0,10.0,1,False,False,3879.41,4046.0,166.59,foot,False,0.0,0.0,0.0,39.5,39.5,False,False,0.0,5956.7,False,typed_entry,,typed_entry,4046.0,2023-05-15 17:46:57,typed_entry
+pason,,2023-05-15 17:59:00,2023-05-15 17:59:10,10.0,10.0,1,False,False,5052.9,4580.0,-472.9,foot,True,0.0,0.0,0.0,38.9,38.9,False,False,0.0,5956.7,False,typed_entry,,typed_entry,4580.0,2023-05-15 17:58:53,typed_entry
+pason,,2023-05-15 18:45:00,2023-05-15 18:45:10,10.0,10.0,1,False,True,5986.87,5957.0,-29.87,foot,True,0.0,0.0,0.0,211.8,212.4,True,True,-29.87,5957.0,True,typed_entry_small,,typed_entry,5957.0,2023-05-15 18:45:01,typed_entry
+pason,,2023-05-15 18:45:40,2023-05-15 18:45:50,10.0,10.0,1,False,True,5957.0,5948.0,-9.0,foot,True,0.0,0.0,0.0,214.0,214.2,True,True,0.0,5957.0,False,typed_entry_small,,typed_entry_small,5948.0,2023-05-15 18:45:37,typed_entry_small
+pason,,2023-05-15 19:39:30,2023-05-15 19:39:40,10.0,10.0,1,False,True,5983.0,5980.0,-3.0,foot,True,0.0,0.0,0.0,227.1,227.2,True,True,0.0,5983.0,False,typed_entry_small,,,,,unmatched_in_sanvean
+pason,,2023-05-15 20:55:00,2023-05-15 20:55:10,10.0,10.0,1,False,True,5984.33,6040.0,55.67,foot,True,0.0,0.0,0.0,240.0,240.1,True,True,0.0,6043.0,False,typed_entry_small,,typed_entry,6040.0,2023-05-15 20:55:10,typed_entry
+pason,,2023-05-15 23:28:10,2023-05-15 23:28:20,10.0,10.0,1,False,False,6246.97,6138.0,-108.97,hole,False,0.0,0.0,0.0,182.8,186.7,True,True,-108.97,6138.0,True,typed_entry,,typed_entry,6138.0,2023-05-15 23:28:04,typed_entry
+pason,,2023-05-17 01:43:20,2023-05-17 01:43:30,10.0,10.0,1,False,True,4819.57,4858.0,38.43,foot,True,0.0,0.0,0.0,188.7,188.7,True,True,0.0,6545.82,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-17 04:00:40,2023-05-17 04:00:50,10.0,10.0,1,False,True,6486.76,6536.0,49.24,foot,True,0.0,0.0,0.0,213.9,214.3,True,True,0.0,6545.82,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-17 12:59:30,2023-05-17 12:59:40,10.0,10.0,1,False,True,6540.5,6539.0,-1.5,foot,True,0.0,0.0,0.0,220.5,220.5,True,True,0.0,6545.82,False,typed_entry_small,,typed_entry_small,6539.0,2023-05-17 12:59:25,typed_entry_small
+pason,,2023-05-17 16:37:30,2023-05-17 16:37:40,10.0,10.0,1,False,True,5216.88,5211.0,-5.88,foot,True,0.25,0.25,0.03,224.0,220.7,True,True,0.0,6609.87,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-17 22:39:20,2023-05-17 22:39:30,10.0,10.0,1,False,True,4832.14,4919.0,86.86,foot,True,0.0,0.0,0.0,198.0,198.0,True,True,0.0,6609.87,False,typed_entry_small,,typed_entry,4919.0,2023-05-17 22:39:29,typed_entry
+pason,,2023-05-17 23:26:50,2023-05-17 23:27:00,10.0,10.0,1,False,True,6476.76,6539.0,62.24,foot,True,0.0,0.0,0.0,234.3,234.8,True,True,0.0,6609.87,False,typed_entry_small,,typed_entry,6539.0,2023-05-17 23:27:00,typed_entry
+pason,,2023-05-18 00:23:40,2023-05-18 00:23:50,10.0,10.0,1,False,True,6610.0,6609.0,-1.0,foot,True,0.0,0.0,0.0,227.8,228.0,True,True,0.0,6610.0,False,typed_entry_small,,typed_entry_small,6609.0,2023-05-18 00:23:35,typed_entry_small
+pason,,2023-05-20 00:38:20,2023-05-20 00:38:30,10.0,10.0,1,False,False,788.76,0.0,-788.76,foot,True,0.0,0.0,0.0,36.9,36.9,False,False,0.0,6950.14,False,zero_reset,,,,,zero_reset
+pason,,2023-05-20 03:34:00,2023-05-20 03:34:10,10.0,10.0,1,False,False,3876.43,4253.0,376.57,foot,True,0.0,0.0,0.0,36.2,36.2,False,False,0.0,6950.14,False,typed_entry,,,,,typed_entry
+pason,,2023-05-20 06:29:30,2023-05-20 06:29:40,10.0,10.0,1,False,False,6690.0,6824.0,134.0,foot,True,0.0,0.0,0.0,216.5,216.4,True,True,0.0,6950.14,False,typed_entry,,typed_entry,6824.0,2023-05-20 06:29:40,typed_entry
+pason,,2023-05-21 06:19:10,2023-05-21 06:19:20,10.0,10.0,1,False,False,3180.28,2692.0,-488.28,foot,False,1.2,1.2,0.12,33.7,36.5,False,False,0.0,7583.98,False,typed_entry,,typed_entry,2692.0,2023-05-21 06:19:10,typed_entry
+pason,,2023-05-21 07:10:40,2023-05-21 07:10:50,10.0,10.0,1,False,False,4646.85,4788.58,141.73,,False,0.84,-0.84,0.08,197.0,191.6,True,True,0.0,7583.98,False,unresolved_entry,,typed_entry,4783.0,2023-05-21 07:10:41,typed_entry
+pason,,2023-05-21 07:49:30,2023-05-21 07:49:40,10.0,10.0,1,False,False,5844.77,5924.0,79.23,foot,True,0.0,0.0,0.0,33.4,33.2,False,False,0.0,7583.98,False,typed_entry,,typed_entry,5924.0,2023-05-21 07:49:32,typed_entry
+pason,,2023-05-21 10:17:40,2023-05-21 10:17:50,10.0,10.0,1,False,True,7370.26,7446.0,75.74,foot,True,0.0,0.0,0.0,194.2,194.4,True,True,0.0,7583.98,False,typed_entry_small,,typed_entry,7446.0,2023-05-21 10:17:50,typed_entry
+pason,,2023-05-21 10:32:00,2023-05-21 10:32:10,10.0,10.0,1,False,True,7535.44,7541.0,5.56,foot,True,0.0,0.0,0.0,206.2,206.1,True,True,0.0,7583.98,False,typed_entry_small,,typed_entry_small,7541.0,2023-05-21 10:32:02,typed_entry_small
+pason,,2023-05-21 10:41:00,2023-05-21 10:41:10,10.0,10.0,1,False,True,7570.67,7573.0,2.33,foot,True,0.0,0.0,0.0,196.3,197.5,True,True,0.0,7583.98,False,typed_entry_small,,typed_entry_small,7573.0,2023-05-21 10:41:09,typed_entry_small
+pason,,2023-05-22 16:48:30,2023-05-22 16:48:40,10.0,10.0,1,False,False,2162.74,1453.53,-709.21,,False,2.7,2.7,0.27,29.9,126.6,False,True,0.0,8085.01,False,pickup_entry,,,,,pickup_entry
+pason,,2023-05-22 19:05:10,2023-05-22 19:05:20,10.0,10.0,1,False,False,4596.37,4780.0,183.63,foot,True,0.0,0.0,0.0,30.1,30.5,False,False,0.0,8085.01,False,typed_entry,,,,,typed_entry
+pason,,2023-05-22 22:00:40,2023-05-22 22:00:50,10.0,10.0,1,False,True,7141.94,7245.0,103.06,foot,True,0.0,0.0,0.0,186.6,187.0,True,True,0.0,8085.01,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-22 23:17:10,2023-05-22 23:17:20,10.0,10.0,1,False,True,7937.41,8009.0,71.59,foot,True,0.0,0.0,0.0,238.0,238.4,True,True,0.0,8085.01,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-22 23:46:20,2023-05-22 23:46:30,10.0,10.0,1,False,True,8078.37,8083.0,4.63,foot,True,0.11,-0.11,0.01,229.7,226.4,True,True,0.0,8085.01,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-23 05:26:30,2023-05-23 05:26:40,10.0,10.0,1,False,True,8343.78,8354.0,10.22,foot,True,0.0,0.0,0.0,254.5,254.5,True,True,0.0,8357.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-23 09:34:50,2023-05-23 09:35:00,10.0,10.0,1,False,True,8543.79,8547.0,3.21,foot,True,0.0,0.0,0.0,181.8,187.6,True,True,0.0,8547.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-23 19:32:40,2023-05-23 19:32:50,10.0,10.0,1,False,True,2850.55,2833.0,-17.55,foot,True,0.29,0.29,0.03,151.7,148.3,True,True,0.0,8585.02,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-23 23:49:10,2023-05-23 23:49:20,10.0,10.0,1,False,False,631.53,0.0,-631.53,foot,True,0.0,0.0,0.0,37.0,37.0,False,False,0.0,8585.02,False,zero_reset,,,,,zero_reset
+pason,,2023-05-24 21:19:40,2023-05-24 21:19:50,10.0,10.0,1,False,False,3143.61,3430.0,286.39,foot,True,0.0,0.0,0.0,140.3,140.3,True,True,0.0,8585.02,False,typed_entry,,,,,typed_entry
+pason,,2023-05-25 00:14:20,2023-05-25 00:14:30,10.0,10.0,1,False,False,6862.99,7064.0,201.01,foot,True,0.0,0.0,0.0,199.4,199.8,True,True,0.0,8585.02,False,typed_entry,,,,,typed_entry
+pason,,2023-05-25 01:04:30,2023-05-25 01:04:40,10.0,10.0,1,False,True,7963.35,8018.0,54.65,foot,True,0.0,0.0,0.0,196.8,197.0,True,True,0.0,8585.02,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-25 02:09:10,2023-05-25 02:09:20,10.0,10.0,1,False,True,8471.43,8495.0,23.57,foot,True,0.0,0.0,0.0,197.1,197.4,True,True,0.0,8585.02,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-25 02:21:40,2023-05-25 02:21:50,10.0,10.0,1,False,False,8580.96,8085.6,-495.36,tenth,False,0.27,-0.27,0.03,197.2,197.2,True,True,0.0,8585.02,False,glitch,2023-05-25 02:23:00,,,,glitch
+pason,,2023-05-25 02:22:50,2023-05-25 02:23:00,10.0,10.0,1,False,False,8087.66,8590.55,502.89,,True,0.18,-0.18,0.02,198.2,203.2,True,True,3.55,8590.55,False,restore,2023-05-25 02:21:50,,,,restore
+pason,,2023-05-26 14:54:40,2023-05-26 14:54:50,10.0,10.0,1,False,False,3267.03,3145.3,-121.73,tenth,False,0.0,0.0,0.0,143.6,143.6,True,True,0.0,9255.4,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-05-26 20:42:40,2023-05-26 20:42:50,10.0,10.0,1,False,False,6190.4,5997.0,-193.4,foot,True,0.0,0.0,0.0,41.0,41.0,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
+pason,,2023-05-26 21:17:20,2023-05-26 21:17:30,10.0,10.0,1,False,False,6600.35,6567.0,-33.35,foot,True,0.0,0.0,0.0,40.3,40.3,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
+pason,,2023-05-26 22:10:20,2023-05-26 22:10:30,10.0,10.0,1,False,False,7575.84,7517.0,-58.84,foot,True,0.0,0.0,0.0,27.1,26.8,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
+pason,,2023-05-26 23:00:30,2023-05-26 23:00:40,10.0,10.0,1,False,False,8027.11,7993.0,-34.11,foot,True,0.0,0.0,0.0,25.6,25.6,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
+pason,,2023-05-26 23:22:30,2023-05-26 23:22:40,10.0,10.0,1,False,False,8502.43,8468.0,-34.43,foot,True,0.0,0.0,0.0,26.5,26.1,False,False,0.0,9255.4,False,typed_entry,,,,,typed_entry
+pason,,2023-05-27 00:10:50,2023-05-27 00:11:00,10.0,10.0,1,False,True,8977.0,8945.0,-32.0,foot,True,0.0,0.0,0.0,191.6,191.6,True,True,0.0,9255.4,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-27 19:35:10,2023-05-27 19:35:20,10.0,10.0,1,False,False,2905.58,3016.0,110.42,foot,True,0.0,0.0,0.0,32.9,32.8,False,False,0.0,9800.0,False,typed_entry,,,,,typed_entry
+pason,,2023-05-27 20:55:30,2023-05-27 20:55:40,10.0,10.0,1,False,False,6287.47,6059.0,-228.47,foot,True,0.0,0.0,0.0,35.9,35.8,False,False,0.0,9800.0,False,typed_entry,,,,,typed_entry
+pason,,2023-05-27 21:54:10,2023-05-27 21:54:20,10.0,10.0,1,False,False,8206.54,8057.0,-149.54,foot,True,0.0,0.0,0.0,36.2,36.2,False,False,0.0,9800.0,False,typed_entry,,,,,typed_entry
+pason,,2023-05-27 22:46:30,2023-05-27 22:46:40,10.0,10.0,1,False,False,9799.02,9678.0,-121.02,foot,False,0.0,0.0,0.0,37.5,37.6,False,False,0.0,9800.0,False,typed_entry,,,,,typed_entry
+pason,,2023-05-27 22:46:40,2023-05-27 22:46:50,10.0,10.0,1,False,True,9678.0,9676.0,-2.0,foot,True,0.0,0.0,0.0,37.6,37.3,False,False,0.0,9800.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-29 03:05:20,2023-05-29 03:05:30,10.0,10.0,1,False,True,6082.31,6043.0,-39.31,foot,True,0.0,0.0,0.0,188.7,188.9,True,True,0.0,9800.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-30 01:44:50,2023-05-30 01:45:00,10.0,10.0,1,False,True,4560.24,4543.0,-17.24,foot,True,0.14,0.14,0.01,165.1,164.5,True,True,0.0,9817.62,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-05-30 12:41:00,2023-05-30 12:41:10,10.0,10.0,1,False,False,1105.39,995.52,-109.87,,False,10.69,-10.69,1.07,81.8,91.6,True,True,0.0,9817.62,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-05-31 08:14:10,2023-05-31 08:14:20,10.0,10.0,1,False,False,1996.31,1935.3,-61.01,tenth,False,1.04,-1.04,0.1,95.7,107.3,True,True,0.0,9817.62,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-06-01 08:35:30,2023-06-01 08:35:40,10.0,10.0,1,False,False,1080.9,1004.08,-76.82,,False,0.0,0.0,0.0,86.4,87.2,True,True,0.0,9822.98,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-06-02 14:15:40,2023-06-02 14:15:50,10.0,10.0,1,False,True,3602.99,3590.0,-12.99,foot,True,0.2,-0.2,0.02,157.9,164.9,True,True,0.0,9853.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-02 23:27:40,2023-06-02 23:27:50,10.0,10.0,1,False,False,3102.2,2975.0,-127.2,foot,True,0.0,0.0,0.0,37.8,37.9,False,False,0.0,9853.0,False,typed_entry,,,,,typed_entry
+pason,,2023-06-03 00:46:50,2023-06-03 00:47:00,10.0,10.0,1,False,True,5539.18,5544.0,4.82,foot,True,0.0,0.0,0.0,186.4,186.3,True,True,0.0,9853.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-03 01:15:00,2023-06-03 01:15:10,10.0,10.0,1,False,True,6018.82,6020.0,1.18,foot,True,0.0,0.0,0.0,209.6,209.6,True,True,0.0,9853.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-03 20:57:00,2023-06-03 20:57:10,10.0,10.0,1,False,False,3163.3,3059.0,-104.3,foot,True,0.0,0.0,0.0,37.9,38.0,False,False,0.0,9862.98,False,typed_entry,,,,,typed_entry
+pason,,2023-06-03 22:12:00,2023-06-03 22:12:10,10.0,10.0,1,False,True,5526.83,5535.0,8.17,foot,True,0.0,0.0,0.0,197.2,197.3,True,True,0.0,9862.98,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-04 19:20:30,2023-06-04 19:20:40,10.0,10.0,1,False,True,2988.0,2999.0,11.0,foot,True,0.0,0.0,0.0,38.4,38.4,False,False,0.0,10249.99,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-06 02:19:40,2023-06-06 02:19:50,10.0,10.0,1,False,False,3105.11,3019.0,-86.11,foot,True,0.0,0.0,0.0,31.2,31.2,False,False,0.0,10256.65,False,typed_entry,,,,,typed_entry
+pason,,2023-06-06 14:25:00,2023-06-06 14:25:10,10.0,10.0,1,False,False,411.15,0.0,-411.15,foot,True,0.0,0.0,0.0,31.7,31.7,False,False,0.0,10264.06,False,zero_reset,,,,,zero_reset
+pason,,2023-06-06 17:05:40,2023-06-06 17:05:50,10.0,10.0,1,False,False,750.07,1028.9,278.83,tenth,True,0.0,0.0,0.0,33.6,33.7,False,False,0.0,10264.06,False,typed_entry_tenth,,,,,typed_entry_tenth
+pason,,2023-06-06 18:27:20,2023-06-06 18:27:30,10.0,10.0,1,False,False,3023.79,3091.0,67.21,foot,True,0.0,0.0,0.0,32.7,32.8,False,False,0.0,10264.06,False,typed_entry,,,,,typed_entry
+pason,,2023-06-07 12:40:00,2023-06-07 12:40:10,10.0,10.0,1,False,True,7966.42,7956.0,-10.42,foot,True,0.35,-0.35,0.03,321.1,272.9,True,True,0.0,10271.79,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-07 19:59:40,2023-06-07 19:59:50,10.0,10.0,1,False,False,3118.11,3019.0,-99.11,foot,True,0.0,0.0,0.0,38.8,38.9,False,False,0.0,10271.79,False,typed_entry,,,,,typed_entry
+pason,,2023-06-08 00:23:50,2023-06-08 00:24:00,10.0,10.0,1,False,True,9005.2,9013.0,7.8,foot,True,0.0,0.0,0.0,36.0,36.1,False,False,0.0,10271.79,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-08 13:29:10,2023-06-08 13:29:20,10.0,10.0,1,False,False,4985.26,4899.0,-86.26,foot,True,0.0,0.0,0.0,181.7,181.6,True,True,0.0,10273.97,False,typed_entry,,,,,typed_entry
+pason,,2023-06-11 15:06:20,2023-06-11 15:06:30,10.0,10.0,1,False,False,4910.88,4787.0,-123.88,foot,True,0.0,0.0,0.0,168.2,168.3,True,True,0.0,10303.96,False,typed_entry,,,,,typed_entry
+pason,,2023-06-11 20:29:40,2023-06-11 20:29:50,10.0,10.0,1,False,True,10212.99,10214.0,1.01,foot,True,0.0,0.0,0.0,220.6,229.6,True,True,0.0,10303.96,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-12 03:54:40,2023-06-12 03:54:50,10.0,10.0,1,False,True,377.85,379.0,1.15,foot,True,0.36,0.36,0.04,43.1,63.7,False,True,0.0,10430.06,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-12 09:15:00,2023-06-12 09:15:10,10.0,10.0,1,False,True,4837.49,4804.0,-33.49,foot,True,0.0,0.0,0.0,178.8,178.8,True,True,0.0,10430.06,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-12 14:17:20,2023-06-12 14:17:30,10.0,10.0,1,False,True,10326.65,10420.0,93.35,foot,True,0.0,0.0,0.0,201.4,201.5,True,True,0.0,10430.06,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-12 14:18:20,2023-06-12 14:18:30,10.0,10.0,1,False,False,10420.0,10325.0,-95.0,foot,True,0.0,0.0,0.0,201.5,201.5,True,True,0.0,10430.06,False,typed_entry,,,,,typed_entry
+pason,,2023-06-13 21:02:00,2023-06-13 21:02:10,10.0,10.0,1,False,True,1338.35,1319.0,-19.35,foot,True,0.42,-0.42,0.04,104.1,43.2,True,False,0.0,10459.98,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-14 02:19:50,2023-06-14 02:20:00,10.0,10.0,1,False,False,4933.94,4828.0,-105.94,foot,True,0.0,0.0,0.0,0.0,0.0,False,False,0.0,10459.98,False,typed_entry,,,,,typed_entry
+pason,,2023-06-14 17:31:10,2023-06-14 17:31:20,10.0,10.0,1,False,False,4853.17,4441.27,-411.9,,False,2.57,2.57,0.26,39.7,231.8,False,True,0.0,10461.96,False,pickup_entry,,,,,pickup_entry
+pason,,2023-06-16 08:44:10,2023-06-16 08:44:20,10.0,10.0,1,False,False,4907.82,4785.0,-122.82,foot,True,0.0,0.0,0.0,169.9,169.9,True,True,0.0,10493.0,False,typed_entry,,,,,typed_entry
+pason,,2023-06-16 14:18:20,2023-06-16 14:18:30,10.0,10.0,1,False,True,10211.1,10210.0,-1.1,foot,True,0.0,0.0,0.0,198.4,198.4,True,True,0.0,10493.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-16 21:44:20,2023-06-16 21:44:30,10.0,10.0,1,False,False,1703.53,1643.35,-60.18,,False,27.61,27.61,2.76,113.8,107.5,True,True,0.0,10502.97,False,motion,,,,,motion
+pason,,2023-06-16 21:48:30,2023-06-16 21:48:40,10.0,10.0,1,False,False,1498.52,1437.7,-60.82,tenth,False,7.68,7.68,0.77,110.5,100.0,True,True,0.0,10502.97,False,motion,,,,,motion
+pason,,2023-06-16 22:13:30,2023-06-16 22:13:40,10.0,10.0,1,False,False,529.98,468.83,-61.15,,False,9.06,9.06,0.91,71.4,70.7,True,True,0.0,10502.97,False,motion,,,,,motion
+pason,,2023-06-16 22:15:20,2023-06-16 22:15:30,10.0,10.0,1,False,False,460.02,399.2,-60.82,tenth,False,33.57,33.57,3.36,67.5,66.3,True,True,0.0,10502.97,False,motion,,,,,motion
+pason,,2023-06-16 22:17:20,2023-06-16 22:17:30,10.0,10.0,1,False,False,350.69,290.01,-60.68,,False,6.95,6.95,0.7,60.5,61.1,True,True,0.0,10502.97,False,motion,,,,,motion
+pason,,2023-06-17 02:32:20,2023-06-17 02:32:30,10.0,10.0,1,False,False,4976.46,4880.0,-96.46,foot,True,0.0,0.0,0.0,184.4,184.4,True,True,0.0,10502.97,False,typed_entry,,,,,typed_entry
+pason,,2023-06-17 22:08:50,2023-06-17 22:09:00,10.0,10.0,1,False,True,3919.37,3901.0,-18.37,foot,True,0.31,-0.31,0.03,181.3,43.3,True,False,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-17 23:13:20,2023-06-17 23:13:30,10.0,10.0,1,False,False,1022.75,959.97,-62.78,,False,24.22,24.22,2.42,103.9,96.9,True,True,0.0,10947.0,False,motion,,,,,motion
+pason,,2023-06-19 03:37:10,2023-06-19 03:37:20,10.0,10.0,1,False,True,10252.07,10251.0,-1.07,foot,True,0.25,-0.25,0.03,390.2,378.3,True,True,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-19 10:37:50,2023-06-19 10:38:00,10.0,10.0,1,False,True,1935.59,1907.0,-28.59,foot,True,0.47,-0.47,0.05,117.1,42.1,True,False,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-20 09:56:00,2023-06-20 09:56:10,10.0,10.0,1,False,True,4748.1,4789.0,40.9,foot,True,0.0,0.0,0.0,137.8,137.7,True,True,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-20 10:37:40,2023-06-20 10:37:50,10.0,10.0,1,False,True,5264.08,5266.0,1.92,foot,True,0.0,0.0,0.0,163.2,163.3,True,True,0.0,5337.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-20 23:46:10,2023-06-20 23:46:20,10.0,10.0,1,False,True,8109.06,8106.0,-3.06,foot,True,0.12,-0.12,0.01,275.0,276.4,True,True,0.0,8109.21,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-21 02:53:10,2023-06-21 02:53:20,10.0,10.0,1,False,True,8768.72,8782.0,13.28,foot,True,0.16,-0.16,0.02,227.7,60.8,True,True,0.0,8785.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-23 23:53:10,2023-06-23 23:53:20,10.0,10.0,1,False,False,1221.79,1015.2,-206.59,tenth,True,0.0,0.0,0.0,102.5,102.3,True,True,0.0,10947.0,False,typed_entry_tenth,,,,,typed_entry_tenth
+pason,,2023-06-24 00:59:20,2023-06-24 00:59:30,10.0,10.0,1,False,True,2340.24,2337.0,-3.24,foot,True,0.22,-0.22,0.02,142.8,55.9,True,True,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-24 19:47:50,2023-06-24 19:48:00,10.0,10.0,1,False,False,5834.97,5789.2,-45.77,tenth,True,0.0,0.0,0.0,40.8,40.7,False,False,0.0,10947.0,False,typed_entry_tenth,,,,,typed_entry_tenth
+pason,,2023-06-25 01:14:10,2023-06-25 01:14:20,10.0,10.0,1,False,True,4750.96,4741.0,-9.96,foot,True,0.0,0.0,0.0,42.8,41.4,False,False,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-25 16:45:20,2023-06-25 16:45:30,10.0,10.0,1,False,False,3385.85,3011.0,-374.85,foot,True,0.0,0.0,0.0,47.6,47.4,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-06-25 17:53:50,2023-06-25 17:54:00,10.0,10.0,1,False,False,5792.03,5864.0,71.97,foot,True,0.0,0.0,0.0,45.6,45.7,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-06-26 09:31:50,2023-06-26 09:32:00,10.0,10.0,1,False,True,8992.66,9005.0,12.34,foot,True,0.0,0.0,0.0,182.7,183.3,True,True,0.0,10947.01,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-27 07:09:30,2023-06-27 07:09:40,10.0,10.0,1,False,True,8995.59,9006.0,10.41,foot,True,0.0,0.0,0.0,188.7,188.9,True,True,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-27 18:05:40,2023-06-27 18:05:50,10.0,10.0,1,False,False,729.18,683.0,-46.18,foot,True,0.13,0.13,0.01,32.3,32.6,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-06-29 00:26:00,2023-06-29 00:26:10,10.0,10.0,1,False,False,1736.76,1638.44,-98.32,,False,3.01,-3.01,0.3,95.2,103.7,True,True,0.0,10947.0,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-06-29 00:56:20,2023-06-29 00:56:30,10.0,10.0,1,False,True,2912.78,2918.0,5.22,foot,True,0.0,0.0,0.0,31.6,31.6,False,False,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-30 04:08:30,2023-06-30 04:08:40,10.0,10.0,1,False,False,1225.65,1150.4,-75.25,tenth,False,0.0,0.0,0.0,85.8,85.8,True,True,0.0,10947.0,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-06-30 06:42:30,2023-06-30 06:42:40,10.0,10.0,1,False,True,4754.43,4763.0,8.57,foot,True,0.0,0.0,0.0,170.6,170.6,True,True,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-06-30 11:04:30,2023-06-30 11:04:40,10.0,10.0,1,False,True,6771.02,6781.0,9.98,foot,True,0.0,0.0,0.0,28.9,29.0,False,False,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-01 21:12:50,2023-07-01 21:13:00,10.0,10.0,1,False,False,547.59,0.0,-547.59,foot,True,0.0,0.0,0.0,31.4,31.4,False,False,0.0,10947.0,False,zero_reset,,,,,zero_reset
+pason,,2023-07-03 03:24:30,2023-07-03 03:24:40,10.0,10.0,1,False,False,974.76,1332.2,357.44,tenth,False,3.02,-3.02,0.3,96.4,93.2,True,True,0.0,10947.0,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-07-04 02:34:10,2023-07-04 02:34:20,10.0,10.0,1,False,False,2236.23,1613.0,-623.23,foot,True,0.0,0.0,0.0,48.4,47.8,False,False,0.0,10182.29,False,typed_entry,,,,,typed_entry
+pason,,2023-07-04 04:15:20,2023-07-04 04:15:30,10.0,10.0,1,False,False,267.49,0.0,-267.49,foot,True,0.0,0.0,0.0,26.6,26.6,False,False,0.0,10947.0,False,zero_reset,,,,,zero_reset
+pason,,2023-07-06 10:44:40,2023-07-06 10:44:50,10.0,10.0,1,False,False,2331.87,3148.0,816.13,foot,True,0.0,0.0,0.0,43.0,42.9,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-07-06 13:44:30,2023-07-06 13:44:40,10.0,10.0,1,False,False,9119.44,9142.0,22.56,foot,False,1.16,1.16,0.12,32.7,35.9,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-07-06 19:05:20,2023-07-06 19:05:30,10.0,10.0,1,False,True,9535.52,9529.0,-6.52,foot,True,0.05,0.05,0.01,403.9,401.5,True,True,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-06 21:30:00,2023-07-06 21:30:10,10.0,10.0,1,False,False,6763.69,4100.0,-2663.69,foot,False,0.42,0.42,0.04,49.7,49.5,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-07-07 06:09:00,2023-07-07 06:09:10,10.0,10.0,1,False,False,3375.0,1354.0,-2021.0,foot,True,0.0,0.0,0.0,43.9,43.7,False,False,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-07-07 08:03:40,2023-07-07 08:03:50,10.0,10.0,1,False,False,5865.69,6493.0,627.31,foot,True,0.0,0.0,0.0,234.4,234.6,True,True,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-07-07 20:54:00,2023-07-07 20:54:10,10.0,10.0,1,False,False,5525.5,5352.0,-173.5,foot,True,0.0,0.0,0.0,230.4,230.4,True,True,0.0,10947.0,False,typed_entry,,,,,typed_entry
+pason,,2023-07-07 22:42:10,2023-07-07 22:42:20,10.0,10.0,1,False,True,5731.3,5827.0,95.7,foot,True,0.0,0.0,0.0,226.5,226.9,True,True,0.0,10947.0,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-10 15:43:40,2023-07-10 15:43:50,10.0,10.0,1,False,False,983.56,399.0,-584.56,foot,True,0.0,0.0,0.0,30.2,31.1,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
+pason,,2023-07-10 15:44:50,2023-07-10 15:45:00,10.0,10.0,1,False,False,399.0,448.0,49.0,foot,True,0.0,0.0,0.0,30.0,30.6,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
+pason,,2023-07-10 19:50:20,2023-07-10 19:50:30,10.0,10.0,1,False,False,447.15,875.0,427.85,foot,True,0.0,0.0,0.0,0.0,0.0,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
+pason,,2023-07-11 04:10:30,2023-07-11 04:10:40,10.0,10.0,1,False,True,1859.89,1873.0,13.11,foot,True,0.0,0.0,0.0,0.0,0.0,False,False,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-11 19:21:50,2023-07-11 19:22:00,10.0,10.0,1,False,True,4248.39,4239.0,-9.39,foot,True,0.0,0.0,0.0,0.0,0.0,False,False,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-12 21:35:10,2023-07-12 21:35:20,10.0,10.0,1,False,True,10206.15,10213.0,6.85,foot,True,0.0,0.0,0.0,28.4,28.4,False,False,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-12 22:50:00,2023-07-12 22:50:10,10.0,10.0,1,False,True,10213.0,10208.0,-5.0,foot,True,0.0,0.0,0.0,29.1,29.1,False,False,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-15 14:33:20,2023-07-15 14:33:30,10.0,10.0,1,False,False,10208.0,300.0,-9908.0,foot,True,0.0,0.0,0.0,32.2,32.4,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
+pason,,2023-07-15 17:08:50,2023-07-15 17:09:00,10.0,10.0,1,False,False,4379.92,4748.0,368.08,foot,True,0.0,0.0,0.0,28.3,28.3,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
+pason,,2023-07-15 20:40:20,2023-07-15 20:40:30,10.0,10.0,1,False,False,6942.92,7000.0,57.08,foot,True,0.0,0.0,0.0,24.2,24.3,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
+pason,,2023-07-16 00:45:00,2023-07-16 00:45:10,10.0,10.0,1,False,True,9876.22,9837.0,-39.22,foot,True,0.0,0.0,0.0,112.0,111.9,True,True,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-16 01:13:10,2023-07-16 01:13:20,10.0,10.0,1,False,False,9929.7,9897.0,-32.7,foot,True,0.0,0.0,0.0,32.6,32.6,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
+pason,,2023-07-16 01:21:50,2023-07-16 01:22:00,10.0,10.0,1,False,True,9896.8,9900.0,3.2,foot,True,0.0,0.0,0.0,127.1,127.7,True,True,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-17 01:36:50,2023-07-17 01:37:00,10.0,10.0,1,False,False,446.89,0.0,-446.89,foot,True,0.0,0.0,0.0,34.0,34.0,False,False,0.0,10947.31,False,zero_reset,,,,,zero_reset
+pason,,2023-07-20 09:43:10,2023-07-20 09:43:20,10.0,10.0,1,False,False,3119.79,3603.2,483.41,tenth,False,0.55,0.55,0.05,29.3,29.3,False,False,0.0,10947.31,False,unresolved_entry,,,,,unresolved_entry
+pason,,2023-07-20 10:39:50,2023-07-20 10:40:00,10.0,10.0,1,False,True,6453.41,6564.0,110.59,foot,True,0.0,0.0,0.0,133.2,134.2,True,True,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-20 11:39:20,2023-07-20 11:39:30,10.0,10.0,1,False,False,9417.27,9324.0,-93.27,foot,True,0.0,0.0,0.0,28.6,28.6,False,False,0.0,10947.31,False,typed_entry,,,,,typed_entry
+pason,,2023-07-20 21:09:20,2023-07-20 21:09:30,10.0,10.0,1,False,True,3421.01,3405.0,-16.01,foot,True,0.21,-0.21,0.02,108.6,50.2,True,False,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-20 21:41:00,2023-07-20 21:41:10,10.0,10.0,1,False,True,2665.77,2647.0,-18.77,foot,True,0.22,0.22,0.02,98.1,91.5,True,True,0.0,10947.31,False,typed_entry_small,,,,,typed_entry_small
+pason,,2023-07-21 00:42:20,2023-07-21 00:42:30,10.0,10.0,1,False,False,620.33,0.0,-620.33,foot,True,0.0,0.0,0.0,29.2,29.2,False,False,0.0,10947.31,False,zero_reset,,,,,zero_reset
+sanvean,11,2023-05-13 06:40:55,2023-05-13 06:40:56,1.0,1.0,1,False,True,4967.44,4969.0,1.56,foot,True,0.0,0.0,0.0,170.3,170.3,True,True,0.0,4980.46,False,typed_entry_small,,,,,typed_entry_small
+sanvean,12,2023-05-13 21:07:23,2023-05-13 21:07:24,1.0,1.0,1,False,False,4327.38,4148.0,-179.38,foot,True,0.0,0.0,0.0,192.8,192.8,True,True,0.0,5269.86,False,typed_entry,,,,,typed_entry
+sanvean,12,2023-05-13 21:52:25,2023-05-13 21:52:26,1.0,1.0,1,False,True,5190.48,5197.0,6.52,foot,True,0.0,0.0,0.0,216.8,216.8,True,True,0.0,5269.86,False,typed_entry_small,,,,,typed_entry_small
+sanvean,12,2023-05-14 17:50:54,2023-05-14 17:50:55,1.0,1.0,1,False,False,5506.27,5482.0,-24.27,foot,True,0.0,0.0,0.0,226.1,226.0,True,True,0.0,5537.3,False,typed_entry,,,,,typed_entry
+sanvean,12,2023-05-14 21:10:28,2023-05-14 21:10:29,1.0,1.0,1,False,False,5667.19,5577.0,-90.19,hole,True,0.0,0.0,0.0,218.2,218.2,True,True,-94.19,5577.0,True,typed_entry,,,,,typed_entry
+sanvean,12,2023-05-14 21:11:07,2023-05-14 21:11:08,1.0,1.0,1,False,True,5576.41,5574.0,-2.41,foot,True,0.0,0.0,0.0,216.0,216.0,True,True,0.0,5577.0,False,typed_entry_small,,,,,typed_entry_small
+sanvean,12,2023-05-14 21:29:30,2023-05-14 21:29:31,1.0,1.0,1,False,False,5574.0,5669.0,95.0,foot,True,0.0,0.0,0.0,221.8,221.8,True,True,0.0,5672.0,False,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-15 17:46:56,2023-05-15 17:46:57,1.0,1.0,1,False,False,3879.41,4046.0,166.59,foot,True,0.0,0.0,0.0,39.4,39.5,False,False,0.0,5956.7,False,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-15 17:58:52,2023-05-15 17:58:53,1.0,1.0,1,False,False,5052.9,4580.0,-472.9,foot,True,0.0,0.0,0.0,38.8,38.7,False,False,0.0,5956.7,False,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-15 18:45:00,2023-05-15 18:45:01,1.0,1.0,1,False,False,5986.87,5957.0,-29.87,hole,True,0.0,0.0,0.0,211.8,211.8,True,True,-29.87,5957.0,True,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-15 18:45:36,2023-05-15 18:45:37,1.0,1.0,1,False,True,5957.0,5948.0,-9.0,foot,True,0.0,0.0,0.0,213.8,213.8,True,True,0.0,5957.0,False,typed_entry_small,,,,,typed_entry_small
+sanvean,13,2023-05-15 19:39:14,2023-05-15 19:39:15,1.0,1.0,1,False,True,6001.6,5983.0,-18.6,foot,True,0.0,0.0,0.0,227.0,227.0,True,True,-25.53,5983.0,True,typed_entry_small,,,,,typed_entry_small
+sanvean,13,2023-05-15 20:12:20,2023-05-15 20:12:21,1.0,1.0,1,False,False,6032.78,6011.0,-21.78,hole,True,0.0,0.0,0.0,182.2,182.7,True,True,-21.86,6011.0,True,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-15 20:43:56,2023-05-15 20:43:57,1.0,1.0,1,False,False,6102.55,6043.0,-59.55,hole,True,0.0,0.0,0.0,176.5,177.1,True,True,-59.55,6043.0,True,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-15 20:55:09,2023-05-15 20:55:10,1.0,1.0,1,False,False,5984.33,6040.0,55.67,foot,True,0.0,0.0,0.0,240.0,240.0,True,True,0.0,6043.0,False,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-15 22:27:11,2023-05-15 22:27:12,1.0,1.0,1,False,False,6091.81,6170.03,78.22,hole,False,0.09,-0.09,0.09,196.1,194.3,True,True,0.03,6170.03,False,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-15 22:54:04,2023-05-15 22:54:05,1.0,1.0,1,False,True,6211.64,6202.0,-9.64,foot,True,0.0,0.0,0.0,182.47,182.9,True,True,-9.64,6202.0,True,typed_entry_small,,,,,typed_entry_small
+sanvean,13,2023-05-15 23:28:03,2023-05-15 23:28:04,1.0,1.0,1,False,False,6246.97,6138.0,-108.97,hole,True,0.0,0.0,0.0,179.8,180.92,True,True,-108.97,6138.0,True,typed_entry,,,,,typed_entry
+sanvean,13,2023-05-16 03:20:33,2023-05-16 03:20:34,1.0,1.0,1,False,True,6295.14,6297.0,1.86,foot,True,0.0,0.0,0.0,183.3,183.5,True,True,0.0,6297.0,False,typed_entry_small,,,,,typed_entry_small
+sanvean,14,2023-05-17 12:59:24,2023-05-17 12:59:25,1.0,1.0,1,False,True,6540.5,6539.0,-1.5,foot,True,0.0,0.0,0.0,220.3,220.5,True,True,0.0,6545.82,False,typed_entry_small,,,,,typed_entry_small
+sanvean,15,2023-05-17 22:39:28,2023-05-17 22:39:29,1.0,1.0,1,False,False,4832.14,4919.0,86.86,foot,True,0.0,0.0,0.0,198.0,198.0,True,True,0.0,6609.87,False,typed_entry,,,,,typed_entry
+sanvean,15,2023-05-17 23:26:59,2023-05-17 23:27:00,1.0,1.0,1,False,False,6476.76,6539.0,62.24,foot,True,0.0,0.0,0.0,234.8,234.8,True,True,0.0,6609.87,False,typed_entry,,,,,typed_entry
+sanvean,15,2023-05-18 00:23:23,2023-05-18 00:23:24,1.0,1.0,1,False,True,6611.13,6610.0,-1.13,foot,True,0.0,0.0,0.0,227.6,227.6,True,True,-1.13,6610.0,True,typed_entry_small,,,,,typed_entry_small
+sanvean,15,2023-05-18 00:23:34,2023-05-18 00:23:35,1.0,1.0,1,False,True,6610.0,6609.0,-1.0,foot,True,0.0,0.0,0.0,227.8,227.8,True,True,0.0,6610.0,False,typed_entry_small,,,,,typed_entry_small
+sanvean,15,2023-05-18 15:16:16,2023-05-18 15:16:17,1.0,1.0,1,False,True,6732.4,6729.0,-3.4,foot,True,0.0,0.0,0.0,233.2,233.2,True,True,0.0,6777.53,False,typed_entry_small,,,,,typed_entry_small
+sanvean,16,2023-05-20 06:29:39,2023-05-20 06:29:40,1.0,1.0,1,False,False,6690.0,6824.0,134.0,foot,True,0.0,0.0,0.0,216.2,216.0,True,True,0.0,6950.14,False,typed_entry,,,,,typed_entry
+sanvean,17,2023-05-21 06:19:09,2023-05-21 06:19:10,1.0,1.0,1,False,False,3180.28,2692.0,-488.28,foot,True,0.0,0.0,0.0,33.7,33.7,False,False,0.0,7583.98,False,typed_entry,,,,,typed_entry
+sanvean,17,2023-05-21 07:10:40,2023-05-21 07:10:41,1.0,1.0,1,False,False,4646.85,4783.0,136.15,foot,True,0.0,0.0,0.0,191.7,191.6,True,True,0.0,7583.98,False,typed_entry,,,,,typed_entry
+sanvean,17,2023-05-21 07:49:30,2023-05-21 07:49:32,2.0,1.0,2,True,False,5844.77,5924.0,79.23,foot,True,0.0,0.0,0.0,33.2,33.14,False,False,0.0,7583.98,False,typed_entry,,,,,typed_entry
+sanvean,17,2023-05-21 10:17:48,2023-05-21 10:17:50,2.0,1.0,2,True,False,7370.26,7446.0,75.74,foot,True,0.0,0.0,0.0,194.4,194.4,True,True,0.0,7583.98,False,typed_entry,,,,,typed_entry
+sanvean,17,2023-05-21 10:32:01,2023-05-21 10:32:02,1.0,1.0,1,False,True,7537.64,7541.0,3.36,foot,True,0.0,0.0,0.0,206.06,206.04,True,True,0.0,7583.98,False,typed_entry_small,,,,,typed_entry_small
+sanvean,17,2023-05-21 10:41:08,2023-05-21 10:41:09,1.0,1.0,1,False,True,7571.59,7573.0,1.41,foot,True,0.0,0.0,0.0,197.24,197.38,True,True,0.0,7583.98,False,typed_entry_small,,,,,typed_entry_small

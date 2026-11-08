@@ -69,7 +69,8 @@ def index(history, definitions, frozen, incoming):
                               start=rig.iso(history.time[start]), end=rig.iso(history.time[end]),
                               pump_on=rig.iso(history.time[pump_on]),
                               circulation_end=rig.iso(history.time[pump_stop-1]+history.step),
-                              bit_at_pump_on_ft=entry_depth(history.time[pump_on], history.bit[pump_on]),
+                              bit_at_pump_on_ft=entry_depth(history.time[pump_on], history.bit[pump_on],
+                                                            hole=history.hole[pump_on]),
                               mwd_offsets_ft=offsets,
                               status="candidate" if offsets else "no documented MWD",
                               timing_basis=("archived trip" if run in frozen else
