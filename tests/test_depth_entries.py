@@ -244,7 +244,16 @@ def test_a_run_borrows_only_from_a_run_with_two_fits():
     (_, _, _, scales), _ = run(time, rec, hole, block, hook)
     assert scales[1]["fitted"] >= 2
     assert scales[0]["basis"] == "borrowed from run 1"
-    time, true, rec, block, hook, hole, at, bottom = round_trip([25])
+    time, true, rec, block, hook, hole, at, bottom = round_trip([15, 25])
     (_, _, _, scales), _ = run(time, rec, hole, block, hook)
     assert scales[1]["fitted"] == 1
     assert not scales[0]["basis"].startswith("borrowed")
+
+
+def test_a_closing_interval_does_not_set_the_run_scale():
+    time, true, rec, block, hook, hole, at, bottom = round_trip([25])
+    (_, _, intervals, scales), _ = run(time, rec, hole, block, hook)
+    closing = [iv for iv in intervals if iv["closing_interval"]]
+    assert len(closing) == 1 and closing[0]["basis"] == "fitted"
+    assert scales[1]["fitted"] == 0
+    assert scales[1]["basis"] != "run median"

@@ -2852,10 +2852,12 @@ at about 1,739 ft, against 2,094 ft from the 7 November rebuild and
 string does not explain. The early run 20 stages are at 4,859 ft. The
 [pump-on depth table](../../validation/model-development/entry-15/pump-on-depths.csv)
 gives every H3 and run 17 stage under each depth reference with its
-uncertainty. The last entry of each trip carried to the bottom on the
-run's other fits closes within 10 ft at 55 of 63 closings; run 7 (+125 ft)
-and run 21 (−261 ft) do not, and on run 21 the encoder scale changes
-between two trips. The rebuilt bit stays within 10 ft of the hole depth.
+uncertainty. Near bottom the depth is the rig's depth of record, to which
+the formation surveys are tied, and closing intervals do not set the
+encoder scale. The last entry of each trip carried to the bottom on the
+run scale closes within 10 ft at 52 of 63 closings; run 7 (+125 ft) and
+run 21 (−261 ft) do not, and on run 21 the encoder scale changes between
+two trips. The rebuilt bit stays within 10 ft of the hole depth.
 The run 17 descent and two-configuration connection pilots are
 regenerated with the new depths, and the connection refinement is written
 separately.

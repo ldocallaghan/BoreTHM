@@ -53,15 +53,20 @@ Black Box axial span and a 0.25 m tool contact length or the cell
 length if shorter. The pilot applies recorded flow through the
 five-minute window. It has no quasi-steady handover.
 
-The [replay calculation](run17_connection.py) refines the axial grid
-from 46 to 86 cells, the radial grid from 40 to 80 nodes and the
-maximum step from 10 to 5 seconds together. The bit peak moves by
-about 0.014 °C. The Black Box peak moves by 0.156 °C at the slow
-limit and 0.351 °C at the fast limit. The Black Box exceeds the
-0.1 K convergence requirement in this pilot. The joint refinement
-does not isolate the responsible discretisation. The maximum
-single-step energy residual is 0.000043 J. Event forecasts remain
-pending.
+The [replay calculation](run17_connection.py), run with `--pilot`,
+refines the axial grid from 49 to 89 cells, the radial grid from 40 to
+80 nodes and the maximum step from 10 to 5 seconds together, on the
+tally-entry depths. The axial grids include faces at the tool contacts.
+The bit peak moves by less than 0.001 °C. The Black Box peak moves by
+−0.132 °C at the slow limit and −0.012 °C at the fast limit. The joint
+refinement does not isolate the discretisation responsible, and the
+slow-limit change is above 0.1 K, so convergence is judged axis by axis
+with the recorded contacts. The maximum single-step energy residual is
+0.0002 J. The first pilot, with the
+cell-averaged transport this replay replaced, moved the Black Box peak
+by 0.156 and 0.351 °C on 46 and 86 cells. The axis-by-axis refinement is
+in [run17-connection-refinement.csv](run17-connection-refinement.csv).
+Event forecasts remain pending.
 
 ### Parcel transport and recorded carrier lengths
 

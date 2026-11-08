@@ -374,7 +374,13 @@ Between two anchors the depth is the earlier anchor plus the rig
 increments since it times
 s = (later value − earlier value) / (rig increments between them).
 Before the first anchor and after the last the run median scale applies.
-Intervals between two drilling anchors do not set the run median.
+Intervals between two drilling anchors, and closing intervals from the
+last entry of a trip to the bottom, do not set the run median or its
+spread. The hole depth is built from the rig's own bit-depth record, so a
+closing interval with no entry below the last one fits that record
+exactly and says nothing about the encoder. Near bottom the rebuild
+therefore adopts the rig's depth of record. The survey depths that map
+the formation are tied to the same record.
 
 | Rule | Value |
 |---|---|
@@ -405,17 +411,24 @@ offset across a bounding unknown jump. Drilling samples carry none.
 
 | Check | File | Result to 17 June |
 |---|---|---|
-| Closing misclosure: the last entry of each trip in carried to the hole depth on the median of the run's other fits, before the closing anchor | [closing-misclosure.csv](depth-entries-closed-2026-11-08/closing-misclosure.csv) | Sanvean: 19 closings, 0 to 7 ft. Pason: 44 closings, 36 within 10 ft and 42 within 50 ft; run 7 +125 ft and run 21 −261 ft |
+| Closing misclosure: the last entry of each trip in carried to the hole depth on the run median, before the closing anchor | [closing-misclosure.csv](depth-entries-closed-2026-11-08/closing-misclosure.csv) | Sanvean: 19 closings, 18 within 10 ft, the largest 25 ft. Pason: 44 closings, 34 within 10 ft and 40 within 50 ft; run 7 +125 ft and run 21 −261 ft |
 | Rebuilt bit against the recorded hole depth plus 5 ft | [bit-below-hole.csv](depth-entries-closed-2026-11-08/bit-below-hole.csv) | 7 spans, at most 10 ft below the hole, all with the bit near bottom |
-| Pason against Sanvean, matched on recorded depth | [pason-against-sanvean.csv](depth-entries-closed-2026-11-08/pason-against-sanvean.csv) | median 0.0 ft on runs 11 to 17; p95 under 1 ft on runs 11 to 15 and 4.7 ft on run 16; run 17 p95 264 ft from the 85 minutes after its turnaround, at surface |
+| Pason against Sanvean, matched on recorded depth | [pason-against-sanvean.csv](depth-entries-closed-2026-11-08/pason-against-sanvean.csv) | median 0.0 ft on runs 11 to 17; p95 under 5 ft on runs 11 to 16; run 17 p95 264 ft from the 85 minutes after its turnaround, at surface |
 | Stands between slips entries, one-second record | [stand-counts.csv](depth-entries-closed-2026-11-08/stand-counts.csv) | run 17, 06:19 to 07:49: 34 stands, 3,232 ft entered, 95.06 ft per stand |
-| Scale per run | [run-scales.csv](depth-entries-closed-2026-11-08/run-scales.csv) | run medians 0.93 to 1.08; 1.04 to 1.08 on runs 15 to 19, 0.93 to 0.94 on runs 20 and 21, and 1.000 to 1.002 on the June runs |
+| Scale per run | [run-scales.csv](depth-entries-closed-2026-11-08/run-scales.csv) | run medians 0.93 to 1.08; 1.04 to 1.08 on runs 15 to 19, 0.93 to 0.94 on runs 20 and 21, and 1.000 to 1.012 on the June runs |
 
 The encoder scale changes between runs and, on run 21, within one: the
 27 May trip fits 0.930 and the 29 May trip closes at 1.000. On run 13 the
 Pason depth tracking was repaired from 15:30 to 17:30 on 15 May (daily
 report 30), and the block height drifts to −560 ft in the following hour;
 the interval between the 17:47 and 17:59 entries fits 0.53 and is flagged.
+
+Two closings exceed one stand and are noted without further work. On run
+21 the last entry, 6,043 ft on 29 May, carried on the run median of 0.930
+from the 27 May trip, falls 261 ft short of the hole; the 29 May trip
+itself closes at 1.000. On run 7 the last entry is a tenth-of-a-foot
+value, 1,356.30 ft on 10 May, and carried on the run scale it lands 125 ft
+below the hole. No H3 or run 17 pump-on falls in either run.
 
 Seven entries on runs 12 and 13 set the hole depth with the bit. Drilling
 before each follows the recorded hole, so it carries the hole step as an

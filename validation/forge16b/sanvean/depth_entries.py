@@ -43,10 +43,12 @@ misclosure at the later anchor reported, when the net increments are under
 SHORT_FT, when the rig travels more than ROUND_TRIP times the net
 increments (an out-and-back between the anchors), or when s falls outside
 SCALE_RANGE. Before the first anchor and after the last in a run, the run
-median scale applies. Intervals between two drilling anchors do not set
-the run median. Before the closing anchor sets it, the last entry of each
-trip in is carried to the hole depth on the median of the run's other
-fitted intervals; that closing misclosure is the check on the scale.
+median scale applies. Intervals between two drilling anchors, and
+closing intervals from the last entry of a trip to the bottom, do not set
+the run median or its spread: the hole depth is built from the rig's own
+record, so a closing fit reproduces the record. Before the closing anchor
+sets it, the last entry of each trip in is carried to the hole depth on
+the run median; that closing misclosure is the check on the scale.
 
 A run with no fitted scale borrows the median of the nearest run in time
 with the same pipe and at least MIN_DONOR_FITS fitted intervals. Without
@@ -290,6 +292,10 @@ def entry_depth(time, bit, hole, block, hook, threshold, events, start=None, rat
     for iv in intervals:
         left, right = iv["left"], iv["right"]
         iv["between_drilling"] = drilled(left) and drilled(right)
+        # A closing interval runs from the last entry of a trip to the
+        # bottom. The hole depth is built from the rig's own record, so its
+        # fit reproduces the record and says nothing about the encoder.
+        iv["closing_interval"] = drilled(right) and anchored(left) and not drilled(left)
         if anchored(left) and anchored(right):
             iv["span_ft"] = right["value"] - left["value"]
             if abs(iv["rig_ft"]) < SHORT_FT:
@@ -303,10 +309,11 @@ def entry_depth(time, bit, hole, block, hook, threshold, events, start=None, rat
                 else:
                     iv["flag"] = f"implausible scale {s:.3f}"
 
-    # Run scales. Intervals between two drilling anchors do not set them.
+    # Run scales. Intervals between two drilling anchors and closing
+    # intervals do not set them.
     def fits(k, skip=None):
         return [iv["scale"] for iv in intervals if iv["run"] == k and iv["basis"] == "fitted"
-                and not iv["between_drilling"] and iv is not skip]
+                and not iv["between_drilling"] and not iv["closing_interval"] and iv is not skip]
 
     numbers = np.unique(run)
     centre = {k: float(np.median(time[run == k])) for k in numbers}
