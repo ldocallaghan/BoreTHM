@@ -1,0 +1,162 @@
+clock,assembly,start,end,run,left,right,rig_ft,travel_ft,span_ft,scale,basis,misclosure_ft,flag
+pason,,2023-04-26 02:30:00,2023-04-26 18:26:10,0,record start,typed_entry 936.00,1006.08,2518.0,nan,1.0355,borrowed from run 7,nan,
+pason,,2023-04-26 18:26:20,2023-04-26 18:42:40,0,typed_entry 936.00,typed_entry 1140.00,-0.07,0.07,204.0,1.0355,borrowed from run 7,-204.07,short
+pason,,2023-04-26 18:42:50,2023-04-27 00:14:40,0,typed_entry 1140.00,run start,5.8,7.12,nan,1.0355,borrowed from run 7,nan,
+pason,,2023-04-27 00:14:50,2023-04-27 02:15:40,1,zero_reset 0.00,typed_entry 466.00,126.2,126.24,466.0,1.0355,borrowed from run 7,-335.32,short
+pason,,2023-04-27 02:15:50,2023-04-29 00:45:00,1,typed_entry 466.00,unresolved_entry (implied jump -893.50),593.26,799.72,nan,1.0355,borrowed from run 7,nan,
+pason,,2023-04-29 00:45:10,2023-04-29 00:56:40,1,unresolved_entry (implied jump -893.50),unresolved_entry (implied jump 183.88),-93.08,94.16,nan,1.0355,borrowed from run 7; no anchor in span,nan,"recorded, no reference"
+pason,,2023-04-29 00:56:50,2023-04-29 01:03:50,1,unresolved_entry (implied jump 183.88),run start,-245.1,247.92,nan,1.0355,borrowed from run 7; no anchor in span,nan,"recorded, no reference"
+pason,,2023-04-29 01:04:00,2023-04-29 01:19:10,2,run start,typed_entry 936.00,0.0,5.88,nan,1.0355,borrowed from run 7,nan,
+pason,,2023-04-29 01:19:20,2023-04-29 02:00:10,2,typed_entry 936.00,unresolved_entry (implied jump 337.04),-170.06,198.56,nan,1.0355,borrowed from run 7,nan,
+pason,,2023-04-29 02:00:20,2023-04-29 18:55:30,2,unresolved_entry (implied jump 337.04),run start,-1077.98,1516.68,nan,1.0355,borrowed from run 7; no anchor in span,nan,"recorded, no reference"
+pason,,2023-04-29 18:55:40,2023-05-01 11:48:10,3,run start,run start,8.1,10063.8,nan,1.0355,borrowed from run 7; no anchor in span,nan,drilling anchor at 2023-04-29 21:31:00
+pason,,2023-05-01 11:48:20,2023-05-03 01:26:00,4,run start,run start,5.47,16858.63,nan,1.0355,borrowed from run 7; no anchor in span,nan,drilling anchor at 2023-05-01 21:07:10
+pason,,2023-05-03 01:26:10,2023-05-03 14:45:10,5,run start,typed_entry 4839.00,4667.46,4750.04,nan,1.0355,borrowed from run 7,nan,
+pason,,2023-05-03 14:45:20,2023-05-05 03:16:30,5,typed_entry 4839.00,run start,15.87,24.73,nan,1.0355,borrowed from run 7,nan,
+pason,,2023-05-05 03:16:40,2023-05-07 23:18:30,6,zero_reset 0.00,unresolved_entry (implied jump 225.88),1758.06,1770.02,nan,1.0355,borrowed from run 7,nan,
+pason,,2023-05-07 23:18:40,2023-05-07 23:55:10,6,unresolved_entry (implied jump 225.88),unresolved_entry (implied jump -141.18),1419.25,1419.25,nan,1.0355,borrowed from run 7; no anchor in span,nan,"recorded, no reference"
+pason,,2023-05-07 23:55:20,2023-05-08 19:14:40,6,unresolved_entry (implied jump -141.18),run start,-3183.47,6310.83,nan,1.0355,borrowed from run 7; no anchor in span,nan,"recorded, no reference"
+pason,,2023-05-08 19:14:50,2023-05-09 14:58:40,7,run start,typed_entry_tenth 4733.90,4673.9,14147.08,nan,1.0355,run median,nan,
+pason,,2023-05-09 14:58:50,2023-05-10 04:08:10,7,typed_entry_tenth 4733.90,typed_entry_tenth 1356.30,-3261.9,6224.96,-3377.6,1.0355,fitted,0.0,
+pason,,2023-05-10 04:08:20,2023-05-11 09:52:00,7,typed_entry_tenth 1356.30,run start,-1218.02,8682.32,nan,1.0355,run median,nan,
+pason,,2023-05-11 09:52:10,2023-05-12 04:22:10,8,run start,run start,158.35,9796.37,nan,1.0355,borrowed from run 7; no anchor in span,nan,drilling anchor at 2023-05-11 18:40:40
+pason,,2023-05-12 04:22:20,2023-05-13 03:34:10,9,run start,run start,81.78,9413.22,nan,1.0355,borrowed from run 7; no anchor in span,nan,drilling anchor at 2023-05-12 20:49:10
+pason,,2023-05-13 03:34:20,2023-05-13 05:53:40,10,run start,typed_entry 4015.00,3706.19,3706.55,nan,0.9788,borrowed from run 13,nan,
+pason,,2023-05-13 05:53:50,2023-05-13 15:10:00,10,typed_entry 4015.00,run start,-3728.7,6557.32,nan,0.9788,borrowed from run 13,nan,
+pason,,2023-05-13 15:10:10,2023-05-13 21:07:30,11,run start,typed_entry 4148.00,4041.37,4047.25,nan,0.9788,borrowed from run 13,nan,
+pason,,2023-05-13 21:07:40,2023-05-14 16:30:20,11,typed_entry 4148.00,run start,596.55,2497.67,nan,0.9788,borrowed from run 13,nan,
+pason,,2023-05-14 16:30:30,2023-05-14 17:51:00,12,run start,typed_entry 5482.00,762.05,815.19,nan,0.9788,borrowed from run 13,nan,
+pason,,2023-05-14 17:51:10,2023-05-14 21:10:30,12,typed_entry 5482.00,typed_entry 5577.00,185.19,238.07,95.0,0.9788,borrowed from run 13,86.26,short
+pason,,2023-05-14 21:10:40,2023-05-14 21:29:30,12,typed_entry 5577.00,typed_entry 5669.00,-3.0,3.0,92.0,0.9788,borrowed from run 13,-94.94,short
+pason,,2023-05-14 21:29:40,2023-05-15 08:16:10,12,typed_entry 5669.00,run start,-5108.34,6617.9,nan,0.9788,borrowed from run 13,nan,
+pason,,2023-05-15 08:16:20,2023-05-15 14:31:50,13,run start,pickup_entry 658.03,554.89,556.23,nan,0.9788,run median,nan,
+pason,,2023-05-15 14:32:00,2023-05-15 15:28:00,13,pickup_entry 658.03,typed_entry 3760.00,1722.42,1776.18,3101.97,0.9788,run median,-1416.12,implausible scale 1.801
+pason,,2023-05-15 15:28:10,2023-05-15 17:46:50,13,typed_entry 3760.00,typed_entry 4046.00,119.41,126.01,286.0,0.9788,run median,-169.13,short
+pason,,2023-05-15 17:47:00,2023-05-15 17:59:00,13,typed_entry 4046.00,typed_entry 4580.00,1006.9,1006.9,534.0,0.9788,run median,451.52,implausible scale 0.530
+pason,,2023-05-15 17:59:10,2023-05-15 18:45:00,13,typed_entry 4580.00,typed_entry 5957.00,1406.87,1521.47,1377.0,0.9788,fitted,0.0,
+pason,,2023-05-15 18:45:10,2023-05-15 20:12:20,13,typed_entry 5957.00,typed_entry 6011.00,75.86,159.88,54.0,0.9788,run median,20.25,short
+pason,,2023-05-15 20:12:30,2023-05-15 20:44:00,13,typed_entry 6011.00,typed_entry 6043.00,91.55,100.35,32.0,0.9788,run median,57.61,short
+pason,,2023-05-15 20:44:10,2023-05-15 20:55:00,13,typed_entry 6043.00,typed_entry 6040.00,-58.67,125.71,-3.0,0.9788,run median,-54.42,short
+pason,,2023-05-15 20:55:10,2023-05-15 22:27:10,13,typed_entry 6040.00,typed_entry 6170.54,51.71,64.51,130.54,0.9788,run median,-79.93,short
+pason,,2023-05-15 22:27:20,2023-05-15 23:28:10,13,typed_entry 6170.54,typed_entry 6138.00,76.43,112.79,-32.54,0.9788,run median,107.35,short
+pason,,2023-05-15 23:28:20,2023-05-16 18:27:00,13,typed_entry 6138.00,run start,-6011.84,7061.66,nan,0.9788,run median,nan,
+pason,,2023-05-16 18:27:10,2023-05-17 18:57:50,14,run start,run start,13.35,13888.99,nan,0.9788,borrowed from run 13; no anchor in span,nan,drilling anchor at 2023-05-17 13:04:30
+pason,,2023-05-17 18:58:00,2023-05-17 22:39:20,15,run start,typed_entry 4919.00,4693.63,4697.75,nan,1.04,run median,nan,
+pason,,2023-05-17 22:39:30,2023-05-17 23:26:50,15,typed_entry 4919.00,typed_entry 6539.00,1557.76,1561.72,1620.0,1.04,fitted,0.0,
+pason,,2023-05-17 23:27:00,2023-05-20 00:38:20,15,typed_entry 6539.00,run start,-5750.24,7791.74,nan,1.04,run median,nan,
+pason,,2023-05-20 00:38:30,2023-05-20 03:34:00,16,zero_reset 0.00,typed_entry 4253.00,3876.43,3877.67,4253.0,1.0971,fitted,0.0,
+pason,,2023-05-20 03:34:10,2023-05-20 06:29:30,16,typed_entry 4253.00,typed_entry 6824.00,2437.0,2482.06,2571.0,1.055,fitted,0.0,
+pason,,2023-05-20 06:29:40,2023-05-21 02:07:30,16,typed_entry 6824.00,run start,-6000.26,7842.04,nan,1.0761,run median,nan,
+pason,,2023-05-21 02:07:40,2023-05-21 06:19:10,17,run start,typed_entry 2692.00,2371.36,2486.38,nan,1.0725,run median,nan,
+pason,,2023-05-21 06:19:20,2023-05-21 07:10:40,17,typed_entry 2692.00,typed_entry 4788.58,1954.85,1955.11,2096.58,1.0725,fitted,0.0,
+pason,,2023-05-21 07:10:50,2023-05-21 07:49:30,17,typed_entry 4788.58,typed_entry 5924.00,1056.19,1057.21,1135.42,1.075,fitted,0.0,
+pason,,2023-05-21 07:49:40,2023-05-21 10:17:40,17,typed_entry 5924.00,typed_entry 7446.00,1446.26,1456.54,1522.0,1.0524,fitted,0.0,
+pason,,2023-05-21 10:17:50,2023-05-22 04:39:20,17,typed_entry 7446.00,run start,-6508.26,8330.46,nan,1.0725,run median,nan,
+pason,,2023-05-22 04:39:30,2023-05-22 16:48:30,18,run start,pickup_entry 1453.53,1251.65,1261.71,nan,1.0584,run median,nan,
+pason,,2023-05-22 16:48:40,2023-05-22 19:05:10,18,pickup_entry 1453.53,typed_entry 4780.00,3142.84,3144.34,3326.47,1.0584,fitted,0.0,
+pason,,2023-05-22 19:05:20,2023-05-23 23:49:10,18,typed_entry 4780.00,run start,-4148.47,12495.17,nan,1.0584,run median,nan,
+pason,,2023-05-23 23:49:20,2023-05-24 21:19:40,19,zero_reset 0.00,typed_entry 3430.00,3143.61,3599.21,3430.0,1.0911,fitted,-0.0,
+pason,,2023-05-24 21:19:50,2023-05-25 00:14:20,19,typed_entry 3430.00,typed_entry 7064.00,3432.99,3666.45,3634.0,1.0586,fitted,0.0,
+pason,,2023-05-25 00:14:30,2023-05-25 23:42:00,19,typed_entry 7064.00,run start,-7040.29,17074.07,nan,1.0748,run median,nan,
+pason,,2023-05-25 23:42:10,2023-05-26 14:54:40,20,run start,unresolved_entry (implied jump -124.52),3267.03,3625.89,nan,0.9374,run median; no anchor in span,nan,"recorded, no reference"
+pason,,2023-05-26 14:54:50,2023-05-26 20:42:40,20,unresolved_entry (implied jump -124.52),typed_entry 5997.00,3045.1,3139.48,nan,0.9374,run median,nan,
+pason,,2023-05-26 20:42:50,2023-05-26 21:17:20,20,typed_entry 5997.00,typed_entry 6567.00,603.35,603.35,570.0,0.9447,fitted,0.0,
+pason,,2023-05-26 21:17:30,2023-05-26 22:10:20,20,typed_entry 6567.00,typed_entry 7517.00,1008.84,1011.82,950.0,0.9417,fitted,0.0,
+pason,,2023-05-26 22:10:30,2023-05-26 23:00:30,20,typed_entry 7517.00,typed_entry 7993.00,510.11,514.11,476.0,0.9331,fitted,0.0,
+pason,,2023-05-26 23:00:40,2023-05-26 23:22:30,20,typed_entry 7993.00,typed_entry 8468.00,509.43,509.43,475.0,0.9324,fitted,0.0,
+pason,,2023-05-26 23:22:40,2023-05-27 15:57:10,20,typed_entry 8468.00,run start,-8467.92,12117.3,nan,0.9374,run median,nan,
+pason,,2023-05-27 15:57:20,2023-05-27 19:35:10,21,run start,typed_entry 3016.00,2905.58,2907.86,nan,0.9304,run median,nan,
+pason,,2023-05-27 19:35:20,2023-05-27 20:55:30,21,typed_entry 3016.00,typed_entry 6059.00,3271.47,3281.59,3043.0,0.9302,fitted,0.0,
+pason,,2023-05-27 20:55:40,2023-05-27 21:54:10,21,typed_entry 6059.00,typed_entry 8057.00,2147.54,2147.54,1998.0,0.9304,fitted,0.0,
+pason,,2023-05-27 21:54:20,2023-05-27 22:46:30,21,typed_entry 8057.00,typed_entry 9678.00,1742.02,1742.02,1621.0,0.9305,fitted,0.0,
+pason,,2023-05-27 22:46:40,2023-05-30 12:41:00,21,typed_entry 9678.00,unresolved_entry (implied jump -706.81),-8572.61,29914.13,nan,0.9304,run median,nan,
+pason,,2023-05-30 12:41:10,2023-05-31 08:14:10,21,unresolved_entry (implied jump -706.81),unresolved_entry (implied jump -61.01),1000.79,19775.27,nan,0.9304,run median; no anchor in span,nan,"recorded, no reference"
+pason,,2023-05-31 08:14:20,2023-06-01 04:20:30,21,unresolved_entry (implied jump -61.01),run start,-1604.07,18018.77,nan,0.9304,run median; no anchor in span,nan,"recorded, no reference"
+pason,,2023-06-01 04:20:40,2023-06-01 08:35:30,22,run start,unresolved_entry (implied jump 537.28),749.91,750.23,nan,0.9304,borrowed from run 21; no anchor in span,nan,"recorded, no reference"
+pason,,2023-06-01 08:35:40,2023-06-02 16:21:50,22,unresolved_entry (implied jump 537.28),run start,-709.32,19265.14,nan,0.9304,borrowed from run 21; no anchor in span,nan,drilling anchor at 2023-06-01 18:50:40
+pason,,2023-06-02 16:22:00,2023-06-02 23:27:40,23,run start,typed_entry 2975.00,2808.5,2809.26,nan,0.9304,borrowed from run 21,nan,
+pason,,2023-06-02 23:27:50,2023-06-03 15:49:10,23,typed_entry 2975.00,run start,-2717.73,16871.65,nan,0.9304,borrowed from run 21,nan,
+pason,,2023-06-03 15:49:20,2023-06-03 20:57:00,24,run start,typed_entry 3059.00,2917.63,2918.95,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-03 20:57:10,2023-06-04 15:13:00,24,typed_entry 3059.00,run start,-2894.23,18276.79,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-04 15:13:10,2023-06-06 02:19:40,25,run start,typed_entry 3019.00,2940.38,22811.54,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-06 02:19:50,2023-06-06 14:25:00,25,typed_entry 3019.00,run start,-2607.85,17557.17,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-06 14:25:10,2023-06-06 17:05:40,26,zero_reset 0.00,typed_entry_tenth 1028.90,750.07,750.77,1028.9,1.0337,run median,-253.56,implausible scale 1.372
+pason,,2023-06-06 17:05:50,2023-06-06 18:27:20,26,typed_entry_tenth 1028.90,typed_entry 3091.00,1994.89,1994.89,2062.1,1.0337,fitted,0.0,
+pason,,2023-06-06 18:27:30,2023-06-07 19:59:40,26,typed_entry 3091.00,typed_entry 3019.00,27.11,20224.41,-72.0,1.0337,run median,100.02,short
+pason,,2023-06-07 19:59:50,2023-06-08 13:29:10,26,typed_entry 3019.00,typed_entry 4899.00,1966.26,22165.28,1880.0,1.0337,run median,152.51,out and back
+pason,,2023-06-08 13:29:20,2023-06-11 10:29:00,26,typed_entry 4899.00,run start,-4602.04,17535.2,nan,1.0337,run median,nan,
+pason,,2023-06-11 10:29:10,2023-06-11 15:06:20,27,run start,typed_entry 4787.00,4614.17,4614.17,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-11 15:06:30,2023-06-12 03:58:40,27,typed_entry 4787.00,run start,-4525.78,16434.32,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-12 03:58:50,2023-06-12 14:18:20,28,run start,typed_entry 10325.00,10160.75,10249.93,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-12 14:18:30,2023-06-14 02:19:50,28,typed_entry 10325.00,typed_entry 4828.00,-5391.06,15107.76,-5497.0,1.0337,borrowed from run 26,-75.69,out and back
+pason,,2023-06-14 02:20:00,2023-06-14 14:23:20,28,typed_entry 4828.00,run start,-4292.8,16501.1,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-14 14:23:30,2023-06-14 17:31:10,29,run start,pickup_entry 4441.27,4318.35,4320.81,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-14 17:31:20,2023-06-16 03:48:20,29,pickup_entry 4441.27,run start,-4141.31,16532.65,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-16 03:48:30,2023-06-16 08:44:10,30,run start,typed_entry 4785.00,4608.15,4611.65,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-16 08:44:20,2023-06-17 00:18:40,30,typed_entry 4785.00,run start,-4520.83,16092.33,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-17 00:18:50,2023-06-17 02:32:20,31,run start,typed_entry 4880.00,4712.38,4715.54,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-17 02:32:30,2023-06-17 23:49:30,31,typed_entry 4880.00,run start,-4673.58,17544.84,nan,1.0337,borrowed from run 26,nan,
+pason,,2023-06-17 23:49:40,2023-06-19 11:19:00,32,run start,run start,80.78,21607.8,nan,1.0337,borrowed from run 26; no anchor in span,nan,drilling anchor at 2023-06-18 16:23:00
+pason,,2023-06-19 11:19:10,2023-06-23 23:53:10,33,run start,typed_entry_tenth 1015.20,938.49,33593.45,nan,1.0259,run median,nan,
+pason,,2023-06-23 23:53:20,2023-06-24 19:47:50,33,typed_entry_tenth 1015.20,typed_entry_tenth 5789.20,4819.77,11886.89,4774.0,1.0259,run median,170.5,out and back
+pason,,2023-06-24 19:48:00,2023-06-25 16:45:20,33,typed_entry_tenth 5789.20,typed_entry 3011.00,-2403.35,9839.15,-2778.2,1.0259,run median,312.65,out and back
+pason,,2023-06-25 16:45:30,2023-06-25 17:53:50,33,typed_entry 3011.00,typed_entry 5864.00,2781.03,2934.45,2853.0,1.0259,fitted,0.0,
+pason,,2023-06-25 17:54:00,2023-06-27 18:05:40,33,typed_entry 5864.00,typed_entry 683.00,-5134.82,20524.02,-5181.0,1.0259,run median,-86.7,out and back
+pason,,2023-06-27 18:05:50,2023-06-29 00:26:00,33,typed_entry 683.00,unresolved_entry (implied jump -125.59),1053.76,12186.06,nan,1.0259,run median,nan,
+pason,,2023-06-29 00:26:10,2023-06-30 04:08:30,33,unresolved_entry (implied jump -125.59),unresolved_entry (implied jump -75.25),-412.79,18348.49,nan,1.0259,run median; no anchor in span,nan,"recorded, no reference"
+pason,,2023-06-30 04:08:40,2023-07-01 21:12:50,33,unresolved_entry (implied jump -75.25),run start,-602.81,15837.21,nan,1.0259,run median; no anchor in span,nan,"recorded, no reference"
+pason,,2023-07-01 21:13:00,2023-07-03 03:24:30,34,zero_reset 0.00,unresolved_entry (implied jump -354.64),974.76,974.76,nan,1.0473,run median,nan,
+pason,,2023-07-03 03:24:40,2023-07-04 02:34:10,34,unresolved_entry (implied jump -354.64),typed_entry 1613.00,904.03,19010.83,nan,1.0473,run median,nan,
+pason,,2023-07-04 02:34:20,2023-07-04 04:15:20,34,typed_entry 1613.00,zero_reset 0.00,-1345.51,1420.67,-1613.0,1.0473,run median,203.86,implausible scale 1.199
+pason,,2023-07-04 04:15:30,2023-07-06 10:44:40,34,zero_reset 0.00,typed_entry 3148.00,2331.87,3061.79,3148.0,1.0473,run median,-705.86,implausible scale 1.350
+pason,,2023-07-06 10:44:50,2023-07-06 13:44:30,34,typed_entry 3148.00,typed_entry 9142.00,5971.44,6179.92,5994.0,1.0038,fitted,0.0,
+pason,,2023-07-06 13:44:40,2023-07-06 21:30:00,34,typed_entry 9142.00,typed_entry 4100.00,-2378.31,9609.51,-5042.0,1.0473,run median,2551.22,out and back
+pason,,2023-07-06 21:30:10,2023-07-07 06:09:00,34,typed_entry 4100.00,typed_entry 1354.00,-725.0,7417.5,-2746.0,1.0473,run median,1986.72,out and back
+pason,,2023-07-07 06:09:10,2023-07-07 08:03:40,34,typed_entry 1354.00,typed_entry 6493.00,4511.69,5762.73,5139.0,1.139,fitted,-0.0,
+pason,,2023-07-07 08:03:50,2023-07-07 20:54:00,34,typed_entry 6493.00,typed_entry 5352.00,-967.5,8951.4,-1141.0,1.0473,run median,127.75,out and back
+pason,,2023-07-07 20:54:10,2023-07-10 15:43:40,34,typed_entry 5352.00,typed_entry 399.00,-4368.44,32527.66,-4953.0,1.0473,run median,377.98,out and back
+pason,,2023-07-10 15:43:50,2023-07-10 15:44:50,34,typed_entry 399.00,typed_entry 448.00,0.0,0.0,49.0,1.0473,run median,-49.0,short
+pason,,2023-07-10 15:45:00,2023-07-10 19:50:20,34,typed_entry 448.00,typed_entry 875.00,-0.85,0.85,427.0,1.0473,run median,-427.89,short
+pason,,2023-07-10 19:50:30,2023-07-15 14:33:20,34,typed_entry 875.00,typed_entry 300.00,9333.0,10554.18,-575.0,1.0473,run median,10349.35,implausible scale -0.062
+pason,,2023-07-15 14:33:30,2023-07-15 17:08:50,34,typed_entry 300.00,typed_entry 4748.00,4079.92,4080.32,4448.0,1.0902,fitted,0.0,
+pason,,2023-07-15 17:09:00,2023-07-15 20:40:20,34,typed_entry 4748.00,typed_entry 7000.00,2194.92,2196.04,2252.0,1.026,fitted,0.0,
+pason,,2023-07-15 20:40:30,2023-07-16 01:13:10,34,typed_entry 7000.00,typed_entry 9897.00,2929.7,3012.74,2897.0,0.9888,fitted,0.0,
+pason,,2023-07-16 01:13:20,2023-07-17 01:36:50,34,typed_entry 9897.00,zero_reset 0.00,-9450.11,14287.83,-9897.0,1.0473,fitted,0.0,
+pason,,2023-07-17 01:37:00,2023-07-20 09:43:10,34,zero_reset 0.00,unresolved_entry (implied jump -32.34),3119.79,3290.95,nan,1.0473,run median,nan,
+pason,,2023-07-20 09:43:20,2023-07-20 11:39:20,34,unresolved_entry (implied jump -32.34),typed_entry 9324.00,5814.07,5815.35,nan,1.0473,run median,nan,
+pason,,2023-07-20 11:39:30,2023-07-21 00:42:20,34,typed_entry 9324.00,zero_reset 0.00,-8703.67,11953.71,-9324.0,1.0713,fitted,0.0,
+pason,,2023-07-21 00:42:30,2023-07-21 18:00:00,34,zero_reset 0.00,record end,0.0,0.0,nan,1.0473,run median,nan,
+sanvean,11,2023-05-13 06:02:27,2023-05-13 06:02:27,0,record start,pason_start 4015.34,0.0,0.0,nan,1.0096,stand length over mean stroke (30 strokes),nan,
+sanvean,11,2023-05-13 06:02:27,2023-05-13 13:17:54,0,pason_start 4015.34,record end,-450.89,3144.37,nan,1.0096,stand length over mean stroke (30 strokes),nan,
+sanvean,12,2023-05-13 20:59:17,2023-05-13 20:59:17,0,record start,pason_start 4056.40,0.0,0.0,nan,1.0005,stand length over mean stroke (22 strokes),nan,
+sanvean,12,2023-05-13 20:59:17,2023-05-13 21:07:23,0,pason_start 4056.40,typed_entry 4148.00,93.59,100.25,91.6,1.0005,stand length over mean stroke (22 strokes),2.03,short
+sanvean,12,2023-05-13 21:07:24,2023-05-14 16:30:11,0,typed_entry 4148.00,run start,596.55,2584.01,nan,1.0005,stand length over mean stroke (22 strokes),nan,
+sanvean,12,2023-05-14 16:30:12,2023-05-14 17:50:54,1,run start,typed_entry 5482.00,762.25,841.05,nan,1.0164,stand length over mean stroke (37 strokes),nan,
+sanvean,12,2023-05-14 17:50:55,2023-05-14 21:10:28,1,typed_entry 5482.00,typed_entry 5577.00,185.19,244.53,95.0,1.0164,stand length over mean stroke (37 strokes),93.23,short
+sanvean,12,2023-05-14 21:10:29,2023-05-14 21:29:30,1,typed_entry 5577.00,typed_entry 5669.00,-3.0,3.0,92.0,1.0164,stand length over mean stroke (37 strokes),-95.05,short
+sanvean,12,2023-05-14 21:29:31,2023-05-15 06:20:58,1,typed_entry 5669.00,record end,-1926.37,2754.25,nan,1.0164,stand length over mean stroke (37 strokes),nan,
+sanvean,13,2023-05-15 17:01:40,2023-05-15 17:01:40,0,record start,pason_start 3759.98,0.0,0.0,nan,0.9788,run median,nan,
+sanvean,13,2023-05-15 17:01:40,2023-05-15 17:46:56,0,pason_start 3759.98,typed_entry 4046.00,119.43,128.33,286.02,0.9788,run median,-169.13,short
+sanvean,13,2023-05-15 17:46:57,2023-05-15 17:58:52,0,typed_entry 4046.00,typed_entry 4580.00,1006.9,1032.48,534.0,0.9788,run median,451.52,implausible scale 0.530
+sanvean,13,2023-05-15 17:58:53,2023-05-15 18:45:00,0,typed_entry 4580.00,typed_entry 5957.00,1406.87,1578.61,1377.0,0.9788,fitted,0.0,
+sanvean,13,2023-05-15 18:45:01,2023-05-15 20:12:20,0,typed_entry 5957.00,typed_entry 6011.00,75.78,210.32,54.0,0.9788,run median,20.17,short
+sanvean,13,2023-05-15 20:12:21,2023-05-15 20:43:56,0,typed_entry 6011.00,typed_entry 6043.00,91.55,110.79,32.0,0.9788,run median,57.61,short
+sanvean,13,2023-05-15 20:43:57,2023-05-15 20:55:09,0,typed_entry 6043.00,typed_entry 6040.00,-58.67,148.14,-3.0,0.9788,run median,-54.42,short
+sanvean,13,2023-05-15 20:55:10,2023-05-15 22:27:11,0,typed_entry 6040.00,typed_entry 6170.03,51.81,65.05,130.03,0.9788,run median,-79.32,short
+sanvean,13,2023-05-15 22:27:12,2023-05-15 23:28:03,0,typed_entry 6170.03,typed_entry 6138.00,76.94,113.36,-32.03,0.9788,run median,107.34,short
+sanvean,13,2023-05-15 23:28:04,2023-05-16 18:18:10,0,typed_entry 6138.00,record end,-5922.52,7068.4,nan,0.9788,run median,nan,
+sanvean,14,2023-05-17 07:10:12,2023-05-17 07:10:12,0,record start,pason_start 6536.64,0.0,0.0,nan,1.0,no scale available,nan,
+sanvean,14,2023-05-17 07:10:12,2023-05-17 15:49:23,0,pason_start 6536.64,record end,-101.52,810.6,nan,1.0,no scale available,nan,
+sanvean,15,2023-05-17 22:33:50,2023-05-17 22:33:50,0,record start,pason_start 4919.00,0.0,0.0,nan,1.04,run median,nan,
+sanvean,15,2023-05-17 22:33:50,2023-05-17 22:39:28,0,pason_start 4919.00,typed_entry 4919.00,0.0,0.0,0.0,1.04,run median,0.0,short
+sanvean,15,2023-05-17 22:39:29,2023-05-17 23:26:59,0,typed_entry 4919.00,typed_entry 6539.00,1557.76,1603.34,1620.0,1.04,fitted,0.0,
+sanvean,15,2023-05-17 23:27:00,2023-05-19 04:15:17,0,typed_entry 6539.00,record end,-2166.02,4560.8,nan,1.04,run median,nan,
+sanvean,16,2023-05-20 05:24:54,2023-05-20 05:24:54,0,record start,pason_start 6056.21,0.0,0.0,nan,1.055,run median,nan,
+sanvean,16,2023-05-20 05:24:54,2023-05-20 06:29:39,0,pason_start 6056.21,typed_entry 6824.00,727.77,744.03,767.79,1.055,fitted,0.0,
+sanvean,16,2023-05-20 06:29:40,2023-05-20 23:37:11,0,typed_entry 6824.00,record end,-938.93,2825.44,nan,1.055,run median,nan,
+sanvean,17,2023-05-21 05:58:10,2023-05-21 05:58:10,0,record start,pason_start 1738.56,0.0,0.0,nan,1.0711,run median,nan,
+sanvean,17,2023-05-21 05:58:10,2023-05-21 06:19:09,0,pason_start 1738.56,typed_entry 2692.00,888.99,917.81,953.44,1.0725,fitted,0.0,
+sanvean,17,2023-05-21 06:19:10,2023-05-21 07:10:40,0,typed_entry 2692.00,typed_entry 4783.00,1954.85,2024.87,2091.0,1.0696,fitted,0.0,
+sanvean,17,2023-05-21 07:10:41,2023-05-21 07:49:30,0,typed_entry 4783.00,typed_entry 5924.00,1061.77,1087.45,1141.0,1.0746,fitted,0.0,
+sanvean,17,2023-05-21 07:49:32,2023-05-21 10:17:48,0,typed_entry 5924.00,typed_entry 7446.00,1446.26,1489.62,1522.0,1.0524,fitted,0.0,
+sanvean,17,2023-05-21 10:17:50,2023-05-22 06:04:32,0,typed_entry 7446.00,record end,-6508.28,8540.27,nan,1.0711,run median,nan,

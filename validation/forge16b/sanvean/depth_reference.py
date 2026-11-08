@@ -1,5 +1,11 @@
 """Bit depths for FORGE 16B replay inputs.
 
+entry_depth applies the linear maps from depth_entries.py, which take the
+driller's tally entries as the depth reference and scale the rig
+increments between them. It supersedes rebuilt_depth, which removed the
+entries as resets. rebuilt_depth and corrected_depth are kept so the
+earlier archives can be rebuilt.
+
 rebuilt_depth applies the dated offsets from depth_rebuild.py, which
 remove rig depth-tally resets and anchor each trip at the drilling
 bottom. It supersedes corrected_depth, the constant subtractions of the
@@ -15,6 +21,7 @@ from .build_extracts import timestamp
 
 TABLE = Path(__file__).with_name("depth-reference-corrections.csv")
 OFFSETS = Path(__file__).with_name("depth-rebuild-2026-11-07") / "offsets.csv"
+ENTRY_SEGMENTS = Path(__file__).with_name("depth-entries-2026-11-08") / "segments.csv"
 
 
 @lru_cache
@@ -62,3 +69,33 @@ def rebuilt_depth(time, depth, *, clock="pason", assembly=None):
     if i >= 0 and time <= ends[i]:
         return round(depth + values[i], 6)
     return depth
+
+
+@lru_cache
+def _entry_segments(clock, assembly):
+    with ENTRY_SEGMENTS.open(encoding="utf-8-sig", newline="") as stream:
+        rows = [r for r in csv.DictReader(stream) if r["clock"] == clock
+                and (clock == "pason" or r["assembly"] == str(assembly))]
+    rows.sort(key=lambda r: timestamp(r["start"]))
+    return ([timestamp(r["start"]) for r in rows],
+            [(float(r["scale"]), float(r["intercept_ft"])) for r in rows])
+
+
+def entry_depth(time, depth, *, clock="pason", assembly=None):
+    """Return the tally-entry depth for a recorded depth at this time.
+
+    Each segment maps the recorded depth linearly, depth = intercept +
+    scale x recorded, from its start until the next segment starts.
+    Pason segments cover the whole record. Sanvean segments are per run,
+    so the assembly must be given for the Sanvean clock.
+    """
+    if clock not in ("pason", "sanvean"):
+        raise ValueError("unknown rig clock")
+    if clock == "sanvean" and assembly is None:
+        raise ValueError("the Sanvean clock needs the assembly")
+    starts, maps = _entry_segments(clock, None if clock == "pason" else int(assembly))
+    i = bisect.bisect_right(starts, time) - 1
+    if i < 0:
+        return depth
+    scale, intercept = maps[i]
+    return round(intercept + scale * depth, 6)
