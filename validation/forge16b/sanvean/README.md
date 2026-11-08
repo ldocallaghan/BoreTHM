@@ -290,3 +290,45 @@ stage index change on assemblies 12, 15, 16, 19, 20 and 27. The
 largest change is on assembly 19, where two mid-trip tally corrections
 (+286.39 ft at 24 May 21:19:50 and +201.01 ft at 25 May 00:14:30) move
 the early stages 495 ft deeper than recorded.
+
+## Bit-depth steps, 8 November 2026
+
+Most steps in the rig bit-depth channel are depths the driller typed in
+from the pipe tally. A typed value replaces the integrated depth in one
+step with the block still, and it lands on a whole foot, a tenth of a
+foot or the hole depth. [`depth_steps.py`](depth_steps.py) classifies
+every candidate step in the Pason and one-second Sanvean records and
+writes [`depth-steps-2026-11-08/steps.csv`](depth-steps-2026-11-08/steps.csv).
+It reads time, bit depth, hole depth, block height, hook load and the
+slips threshold only.
+
+The thresholds were set from the rig channels only. The classes are
+tested in this order.
+
+| Rule | Value |
+|---|---|
+| Candidate | a step `depth_rebuild.tally_resets` flags, or any step over 20 ft spanning more than 10 s |
+| Merge | consecutive candidates of the same sign form one event |
+| Gap | a constituent step spans more than 10 s |
+| Encoder reset | the block moves faster than 20 ft/s |
+| Zero reset | lands on 0 ft |
+| Glitch and restore | an opposite event within 180 s cancels it to within 20 ft plus the string motion between them |
+| Typed entry | lands on a whole foot or the hole depth, with under 5 ft of block travel |
+| Typed entry, tenth | lands on a tenth of a foot, with under 5 ft of block travel, and holds flat for the next sample |
+| Pick-up entry | the hook goes from the slips to hanging within the event, with under 5 ft of block travel; the value is uncertain by that travel |
+| Motion | coarser than 2 s, hanging at both ends, more than 5 ft of block travel in the direction of the bit step; not a step |
+| Unresolved entry | any other candidate; an entry of unknown value |
+| Clock match | a Pason event inside a Sanvean trip takes the Sanvean class and value when exactly one Sanvean event lies within 15 s of the aligned time |
+
+| Record | Events | Typed | Typed, tenth | Pick-up | Zero reset | Glitch and restore | Motion | Unresolved |
+|---|---|---|---|---|---|---|---|---|
+| Sanvean, runs 11 to 17 | 19 | 19 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Pason, whole record | 96 | 58 | 5 | 3 | 9 | 2 | 6 | 13 |
+
+Every Pason event inside a Sanvean trip matches one Sanvean event. No
+event spans a data gap or an encoder reset. The glitch is the 25 May
+02:21:50 excursion to 8,085.60 ft on run 19, restored at 02:23:00. The six
+motion events are pulls on 16 and 17 June just over the 6 ft/s ascent
+limit. Seven typed entries on runs 12 and 13 set the hole depth with the
+bit (14 May 21:10, 15 May 18:45, 20:12, 20:43 and 23:28 on the clocks
+where each appears).
