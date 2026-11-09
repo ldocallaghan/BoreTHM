@@ -504,13 +504,13 @@ def test_stated_cleaning_velocity_and_pumps_are_named(water):
 def test_reading_names_the_stated_values_behind_the_controlling_constraint():
     o = dict(site=SimpleNamespace(operations=Operations(tool_limit_C=175.0, rig_pumps=2)), fluid=None)
     assert se._stated_inputs(o, 'tool: 180 C at the bit while drilling') == (
-        ' Stated operations that enter this check: tool limit 175 C.')
+        ' Stated operations used in this check: tool limit 175 C.')
     assert se._stated_inputs(o, 'more pump capacity than the stated 2 pumps') == (
-        ' Stated operations that enter this check: rig pumps 2 pumps.')
+        ' Stated operations used in this check: rig pumps 2 pumps.')
     assert se._stated_inputs(o, 'the standpipe pressure exceeds the pump limit') == ''
     o['site'].operations = Operations(flow=40.0, drilling_fluid_kg_m3=1100.0)
     assert se._stated_inputs(o, 'the stated drilling fluid, 1.100 SG at surface, is outside') == (
-        ' Stated operations that enter this check: drilling fluid 1100 kg/m3 at 20 C; flow 40 kg/s.')
+        ' Stated operations used in this check: drilling fluid 1100 kg/m3 at 20 C; flow 40 kg/s.')
     assert se._stated_inputs(dict(site=SimpleNamespace(operations=None)), 'tool: x') == ''
 
 
