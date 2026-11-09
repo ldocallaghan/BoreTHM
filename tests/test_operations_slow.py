@@ -268,7 +268,9 @@ def test_stated_operations_are_the_ones_evaluated():
 @pytest.mark.parametrize('unit', ['mass_flow_kg_s', 'volume_flow_L_s'])
 def test_stating_the_chosen_water_flow_reproduces_the_result(results, unit):
     """Newberry circulates water. The chosen flow stated in either unit
-    gives the default result, apart from the operations record."""
+    gives the default result, apart from the operations record. Values are
+    compared as numbers: the evaluator's grid gives programme.flow as the
+    whole number 30, a stated flow as 30.0."""
     default = results('newberry', 'v1.7.0')
     value = default['operations'][unit]['value']
     stated = se.result_dict(se.evaluate(se.find_site('newberry'), physics='v1.7.0', operations=Operations(
@@ -276,7 +278,7 @@ def test_stating_the_chosen_water_flow_reproduces_the_result(results, unit):
     assert stated['operations'][unit]['stated']
     for key in default:
         if key not in ('operations', 'versions'):
-            assert canonical(stated[key]) == canonical(default[key]), key
+            assert stated[key] == default[key], key
 
 
 @pytest.mark.parametrize('unit', ['mass_flow_kg_s', 'volume_flow_L_s'])
