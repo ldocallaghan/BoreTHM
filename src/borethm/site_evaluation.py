@@ -326,7 +326,8 @@ def validate_site(site):
     table's temperature and absolute-pressure limits.
 
     A site's operations are checked by validate_operations after the site's
-    own inputs; its warnings follow the site's.
+    own inputs. Its errors raise ValueError and its warnings follow the
+    site's, each as text that starts with operations.<field>:.
     """
     errs, warns = [], []
     if site.programme is not None and not isinstance(site.programme,HydraulicProgramme):
@@ -398,10 +399,12 @@ def validate_site(site):
     if errs:
         raise ValueError(f"{site.name}: " + "; ".join(errs))
     if site.operations is not None:
-        try:
-            warns += validate_operations(site.operations)
-        except ValueError as error:
-            raise ValueError(f'{site.name}: {error}') from None
+        records = validate_operations(site.operations)
+        text = lambda r: f"operations.{r['field']}: {r['message']}"
+        errors = [text(r) for r in records if r['level'] == 'error']
+        if errors:
+            raise ValueError(f'{site.name}: ' + '; '.join(errors))
+        warns += [text(r) for r in records if r['level'] == 'warning']
     return warns
 
 
@@ -781,6 +784,7 @@ def rig_capacity_gpm(spp_Pa, pumps=RIG_PUMPS):
         return 0.0
     return pumps * min(PUMP_HYD_HP * 1714.0 / max(psi, 1.0), PUMP_MAX_GPM)
 GPM = 6.30902e-5   # m^3/s
+US_GALLON_L = 3.785411784   # L per US gallon, exact
 Q_FACE_SITE = 30000.0
 FILM_MULT_FORGE = 0.75   # fitted on FORGE 16B; retired sensitivity, never primary
 
@@ -932,23 +936,27 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
         pipes = ops.pipes
     if site.programme is not None and site.programme.segments:
         pipes=(site.programme.segments[0].pipe,)
-    flows = SITE_FLOWS if ops.flows is None else ops.flows
+    grid = ops.flow_grid
+    pairs = ([(md, mass_flow(md, fluid)) for md in SITE_FLOWS] if grid is None
+             else _stated_flows(*grid, fluid))
+    flows, rates = [md for md, _ in pairs], dict(pairs)
     limit = _tool_limit(site)
-    if ops.flow is not None:
+    if ops.fixed_flow is not None:
+        (md, rate), = _stated_flows(ops.fixed_flow[0], (ops.fixed_flow[1],), fluid)
         return _fixed_circulation(site, z, geotherm, exposure, pipes, film_mult, P_surface, fluid,
-                                  retry, ops.flow, limit)
+                                  retry, md, rate, limit, ops.fixed_flow)
     tried = []
 
     def solved(r, pipe, md):
         if retry or r["success"]:
             return r
-        return circulate(site, z, geotherm, pipe, mass_flow(md, fluid), exposure, film_mult,
+        return circulate(site, z, geotherm, pipe, rates[md], exposure, film_mult,
                          P_surface, fluid)
 
     for pipe in pipes:
         t = dict(pipe=pipe, survival_flow=None, cleaning_flow=None, runs={}, failed=[])
         for md in flows:
-            r = circulate(site, z, geotherm, pipe, mass_flow(md, fluid), exposure, film_mult,
+            r = circulate(site, z, geotherm, pipe, rates[md], exposure, film_mult,
                           P_surface, fluid, retry)
             if r.get('failure') == 'surface return is outside the saturation-pressure domain':
                 t['failed'].append(md)
@@ -977,7 +985,7 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
                         conflict=why, tried=tried)
     t = next((t for t in tried if t["runs"]), tried[0])
     md = max(t["runs"]) if t["runs"] else flows[0]
-    r = t["runs"].get(md) or circulate(site, z, geotherm, t["pipe"], mass_flow(md, fluid),
+    r = t["runs"].get(md) or circulate(site, z, geotherm, t["pipe"], rates[md],
                                        exposure, film_mult, P_surface, fluid)
     r = solved(r, t["pipe"], md)
     return dict(pipe=t["pipe"], m_dot=md, run=r, tried=tried,
@@ -985,9 +993,28 @@ def choose_circulation(site, z, geotherm, exposure=None, pipes=SITE_PIPES, film_
                          "within the pump limit")
 
 
+def _stated_flows(name, values, fluid):
+    """Stated flows as (evaluator flow number, mass flow [kg/s]) pairs.
+
+    The evaluator's flow number is kg/s with water and L/s at surface with a
+    weighted fluid (mass_flow). A flow stated in that unit is used
+    unchanged; the other unit is converted at the fluid's surface density
+    at 20 C."""
+    water = fluid is None
+    rho = fluids.water().rho_surface if water else fluid.rho_surface
+    pairs = []
+    for value in values:
+        if name.startswith('mass'):
+            pairs.append((value, value) if water else (value * 1000.0 / rho, value))
+        else:
+            pairs.append((value * rho / 1000.0,) * 2 if water else (value, mass_flow(value, fluid)))
+    return pairs
+
+
 def _fixed_circulation(site, z, geotherm, exposure, pipes, film_mult, P_surface, fluid, retry,
-                       md, limit):
-    """choose_circulation at one stated flow md. Each pipe is solved at md
+                       md, rate, limit, stated):
+    """choose_circulation at one stated flow: md is the evaluator's flow
+    number and rate the mass flow [kg/s]. Each pipe is solved at md
     only; the pipe is the first that keeps the bit below the tool limit,
     cleans the hole and stays within the pump limit, then the first that
     keeps the bit below the limit within the pump limit, then the first
@@ -995,7 +1022,7 @@ def _fixed_circulation(site, z, geotherm, exposure, pipes, film_mult, P_surface,
     the conflict names each check the flow fails."""
     tried = []
     for pipe in pipes:
-        r = circulate(site, z, geotherm, pipe, mass_flow(md, fluid), exposure, film_mult,
+        r = circulate(site, z, geotherm, pipe, rate, exposure, film_mult,
                       P_surface, fluid, retry)
         t = dict(pipe=pipe, survival_flow=None, cleaning_flow=None, runs={md: r}, failed=[])
         if not r["success"]:
@@ -1019,7 +1046,7 @@ def _fixed_circulation(site, z, geotherm, exposure, pipes, film_mult, P_surface,
               or tried[0])
     r = chosen["runs"][md]
     if not r["success"] and not retry:
-        r = circulate(site, z, geotherm, chosen["pipe"], mass_flow(md, fluid), exposure,
+        r = circulate(site, z, geotherm, chosen["pipe"], rate, exposure,
                       film_mult, P_surface, fluid)
     failed = []
     if not r["success"]:
@@ -1031,8 +1058,9 @@ def _fixed_circulation(site, z, geotherm, exposure, pipes, film_mult, P_surface,
         failed.append("the annular velocity is below the hole-cleaning velocity")
     if r["hyd"]["over_pump_limit"]:
         failed.append("the standpipe pressure exceeds the pump limit")
-    unit = "kg/s" if fluid is None else "L/s"
-    conflict = (f"at the stated flow of {md:g} {unit}, " + "; ".join(failed)) if failed else None
+    from borethm.operations import UNITS
+    conflict = (f"at the stated flow of {stated[1]:g} {UNITS[stated[0]]}, " + "; ".join(failed)
+                if failed else None)
     return dict(pipe=chosen["pipe"], m_dot=md, run=r, conflict=conflict, tried=tried)
 
 
@@ -2488,23 +2516,38 @@ def site_status(components, windows=None, tools=None, operations=None):
 
 def _effective_operations(site, out):
     """Each operating choice as the evaluation used it, marked stated or
-    default, with its unit, the rule a default follows, and any source."""
+    default, with its unit, the rule a default follows and the rule's
+    source (operation_defaults), and any stated basis and source. Flows are
+    given in both units, at the drilling fluid's surface density."""
     from borethm import operations as ops_module
     ops = _operations(site)
     stated = ops.stated()
+    defaults = ops_module.operation_defaults(site)
     t = _timings(site)
     tl, circ = out["tools"], out["circ"]
     water = fluids.water().rho_surface
-    trip_fluid = out.get("trip_fluid")
-    unit = "kg/s" if out.get("fluid") is None else "L/s"
+    fluid, trip_fluid = out.get("fluid"), out.get("trip_fluid")
+    rho = water if fluid is None else fluid.rho_surface
     staged = tl["trip_in"]["staged"]
     programme = site.programme
     pipes = ((programme.segments[0].pipe,) if programme is not None and programme.segments
              else ops.pipes or SITE_PIPES)
+    mass = float(circ["mass_flow"])
+    volume = float(circ["m_dot"]) if fluid is not None else mass * 1000.0 / water
+    if ops.fixed_flow is not None:
+        pairs = _stated_flows(ops.fixed_flow[0], (ops.fixed_flow[1],), fluid)
+    elif ops.flow_grid is not None:
+        pairs = _stated_flows(*ops.flow_grid, fluid)
+    else:
+        pairs = [(md, mass_flow(md, fluid)) for md in SITE_FLOWS]
+    grid_mass = [m for _, m in pairs]
+    grid_volume = [md if fluid is not None else m * 1000.0 / water for md, m in pairs]
     values = dict(
         pipes=[p.name for p in pipes],
-        flow=circ["m_dot"],
-        flows=list(ops.flows or SITE_FLOWS) if ops.flow is None else [ops.flow],
+        mass_flow_kg_s=mass,
+        volume_flow_L_s=volume,
+        mass_flows_kg_s=grid_mass,
+        volume_flows_L_s=grid_volume,
         tool_limit_C=tl["limit"],
         coating_ratings_C=dict(COATING_RATINGS if ops.coating_ratings_C is None
                                else ops.coating_ratings_C),
@@ -2521,33 +2564,14 @@ def _effective_operations(site, out):
         stage_spacing_m=staged["spacing_m"],
         stage_minutes=staged["minutes"],
         rop_m_h=out["drill"]["ROP"] * 3600.0,
-        drilling_fluid_kg_m3=water if out.get("fluid") is None else out["fluid"].rho_surface,
+        drilling_fluid_kg_m3=rho,
         trip_fluid_kg_m3=water if trip_fluid is None else trip_fluid.rho_surface)
-    rules = dict(
-        pipes="the best-insulated commercial pipe for which a flow passes, in this order",
-        flow="the flow search over flows (choose_circulation)",
-        flows="the evaluator's flow grid",
-        tool_limit_C="geo_constants.BHA_SURVIVAL_TEMP",
-        coating_ratings_C="the TK-Drakon coating's published rating",
-        pump_pressure_limit_Pa="model1_coupled.PUMP_LIMIT, 7,500 psi",
-        rig_pumps="the reference rig's three pumps",
-        min_annular_velocity_m_s="the FORGE 16B annular velocity at 600 gal/min",
-        precirculation_min="FORGE 16B, 10th percentile; the connection schedule search follows",
-        connection_median_min="FORGE 16B, median",
-        connection_p90_min="FORGE 16B, 90th percentile",
-        trip_hours="FORGE 16B tripping speeds and surface time, scaled to the target depth",
-        trip_scale="no scale on the trip rule",
-        stage_spacing_m="FORGE 16B staging; the staging search follows",
-        stage_minutes="FORGE 16B staging; the staging search follows",
-        rop_m_h="Model 3 at the circulation, iterated with the exposure for a coupled site",
-        drilling_fluid_kg_m3="the drilling fluid common window's lower bound, iterated",
-        trip_fluid_kg_m3="the larger of the drilling fluid and the trip window's lower bound, iterated")
     record = {}
     for name, value in values.items():
-        entry = dict(value=value, unit=unit if name in ("flow", "flows") else ops_module.UNITS[name],
-                     stated=name in stated)
+        entry = dict(value=value, unit=ops_module.UNITS[name], stated=name in stated)
         if name not in stated:
-            entry["rule"] = rules[name]
+            entry["rule"] = defaults[name]["rule"]
+            entry["rule_source"] = defaults[name]["source"]
         if name in ops.sources:
             entry["basis"], entry["source"] = ops.sources[name]
         record[name] = entry
@@ -2559,7 +2583,10 @@ def programme_checks(site, out, profile):
     operations; the window profile down the hole (profile, from
     common_windows) and the common windows' widths; and the pumps, the tool
     and the coating against their limits, with margins and pass flags.
-    Margins are the limit less the value, so a positive margin passes."""
+    Margins are the limit less the value, so a positive margin passes.
+    sets_status marks the entries that decide the tool or coating status:
+    every entry except the unstaged run-in, which is reported for
+    comparison. Pump flows are given in US gal/min and in L/s."""
     ops = _operations(site)
     limit_P = m1.PUMP_LIMIT if ops.pump_pressure_limit_Pa is None else ops.pump_pressure_limit_Pa
     pumps = RIG_PUMPS if ops.rig_pumps is None else ops.rig_pumps
@@ -2568,7 +2595,8 @@ def programme_checks(site, out, profile):
         spp, gpm = float(run["hyd"]["spp"]), flow_gpm(run)
         capacity = rig_capacity_gpm(spp, pumps)
         return dict(spp_Pa=spp, margin_Pa=limit_P - spp, ok=not bool(run["hyd"]["over_pump_limit"]),
-                    flow_gpm=gpm, rig_capacity_gpm=capacity, within_rig=bool(gpm <= capacity))
+                    flow_gpm=gpm, rig_capacity_gpm=capacity, within_rig=bool(gpm <= capacity),
+                    flow_L_s=gpm * US_GALLON_L / 60.0, rig_capacity_L_s=capacity * US_GALLON_L / 60.0)
 
     trip_run = out.get('_trip_circulation') if out.get('apply_trip_fluid') else None
     pump_check = dict(limit_Pa=limit_P, pumps=pumps, drilling=pumping(out["m1"]),
@@ -2578,8 +2606,9 @@ def programme_checks(site, out, profile):
     tl = out["tools"]
     limit = tl["limit"]
 
-    def tool(peak):
-        return dict(peak_C=float(peak), margin_C=limit - float(peak), ok=bool(peak < limit))
+    def tool(peak, sets_status=True):
+        return dict(peak_C=float(peak), margin_C=limit - float(peak), ok=bool(peak < limit),
+                    sets_status=sets_status)
 
     conn, trip = tl["connection"], tl["trip_in"]
     tool_check = dict(
@@ -2589,7 +2618,8 @@ def programme_checks(site, out, profile):
                         off_min=conn["practice"]["off_min"]),
         run_in_staged=dict(tool(trip["staged"]["peak"]), spacing_m=trip["staged"]["spacing_m"],
                            minutes=trip["staged"]["minutes"]),
-        run_in_unstaged=tool(trip["unstaged"]["peak"]),
+        # reported for comparison: the staged run-in and the schedule search set the status
+        run_in_unstaged=tool(trip["unstaged"]["peak"], sets_status=False),
         connection_schedule=None if conn["schedule"] is None else dict(
             tool(conn["schedule"]["peak"]), precirc_min=conn["schedule"]["precirc_min"],
             off_min=conn["schedule"]["off_min"]),
@@ -2603,7 +2633,7 @@ def programme_checks(site, out, profile):
     def coating(value):
         value = float(value)
         return dict(max_C=value, margin_C=None if rating is None else rating - value,
-                    ok=None if rating is None else bool(value <= rating))
+                    ok=None if rating is None else bool(value <= rating), sets_status=True)
 
     coating_check = dict(pipe=co["pipe"], rating_C=rating, circulating=coating(co["circulating_max"]),
                          connection=coating(co["connection"]["max"]),
@@ -2991,20 +3021,21 @@ def _reading_reason(reason):
 
 # The operations used in each kind of controlling check, by the
 # start of the status reason (site_status) or a phrase in it.
-_TOOL_INPUTS = ('tool_limit_C', 'flow', 'flows', 'pipes', 'precirculation_min', 'connection_median_min',
+_FLOWS = ('mass_flow_kg_s', 'volume_flow_L_s', 'mass_flows_kg_s', 'volume_flows_L_s')
+_TOOL_INPUTS = ('tool_limit_C', *_FLOWS, 'pipes', 'precirculation_min', 'connection_median_min',
                 'connection_p90_min', 'stage_spacing_m', 'stage_minutes', 'trip_hours', 'trip_scale',
                 'rop_m_h')
 _FLUID_INPUTS = ('drilling_fluid_kg_m3', 'trip_fluid_kg_m3', 'rop_m_h', 'precirculation_min',
-                 'connection_p90_min', 'trip_hours', 'trip_scale', 'flow', 'flows', 'pipes')
+                 'connection_p90_min', 'trip_hours', 'trip_scale', *_FLOWS, 'pipes')
 _CONSTRAINT_INPUTS = (
     ('tool: ', _TOOL_INPUTS),
     ('the circulation schedule the tool needs', _TOOL_INPUTS),
-    ('the standpipe pressure exceeds', ('pump_pressure_limit_Pa', 'flow', 'flows', 'pipes',
+    ('the standpipe pressure exceeds', ('pump_pressure_limit_Pa', *_FLOWS, 'pipes',
                                         'drilling_fluid_kg_m3', 'trip_fluid_kg_m3')),
-    ('more pump capacity', ('rig_pumps', 'flow', 'flows', 'pipes', 'drilling_fluid_kg_m3',
+    ('more pump capacity', ('rig_pumps', *_FLOWS, 'pipes', 'drilling_fluid_kg_m3',
                             'trip_fluid_kg_m3')),
-    ('hole cleaning below', ('min_annular_velocity_m_s', 'flow', 'flows', 'pipes')),
-    ('coating is above its rating', ('coating_ratings_C', 'flow', 'flows', 'pipes', 'precirculation_min',
+    ('hole cleaning below', ('min_annular_velocity_m_s', *_FLOWS, 'pipes')),
+    ('coating is above its rating', ('coating_ratings_C', *_FLOWS, 'pipes', 'precirculation_min',
                                      'connection_p90_min', 'stage_spacing_m', 'stage_minutes',
                                      'trip_hours', 'trip_scale')),
     ('the wall is not held', _FLUID_INPUTS),
@@ -3025,9 +3056,8 @@ def _stated_inputs(o, reason):
     named = [name for name in names if name in stated]
     if not named:
         return ''
-    unit = 'kg/s' if o.get('fluid') is None else 'L/s'
     return (' Stated operations used in this check: '
-            + '; '.join(describe(n, stated[n], unit) for n in named) + '.')
+            + '; '.join(describe(n, stated[n]) for n in named) + '.')
 
 
 def reading(o):

@@ -109,7 +109,20 @@ def test_additions_agree_with_the_existing_keys(results, key, physics_name):
     assert (co['status'] == 'INDETERMINATE') == over
 
     ops, programme = data['operations'], data['programme']
-    assert ops['flow']['value'] == programme['flow'] and ops['flow']['unit'] == programme['flow_unit']
+    assert ops['mass_flow_kg_s']['value'] == programme['mass_flow_kg_s']
+    if programme['flow_unit'] == 'L/s':
+        assert ops['volume_flow_L_s']['value'] == programme['flow']
+    else:
+        assert ops['mass_flow_kg_s']['value'] == programme['flow']
+        assert ops['volume_flow_L_s']['value'] == programme['mass_flow_kg_s'] * 1000.0 / water
+    assert not ops['mass_flow_kg_s']['stated'] and not ops['volume_flow_L_s']['stated']
+    for state in ('drilling', 'trip'):
+        p = data['pump_check'][state]
+        assert p['flow_L_s'] == p['flow_gpm'] * 3.785411784 / 60.0
+        assert p['rig_capacity_L_s'] == p['rig_capacity_gpm'] * 3.785411784 / 60.0
+    tool_sets = {k: v['sets_status'] for k, v in data['tool_check'].items() if isinstance(v, dict)}
+    assert tool_sets == {k: k != 'run_in_unstaged' for k in tool_sets}
+    assert all(data['coating_check'][k]['sets_status'] for k in ('circulating', 'connection', 'run_in'))
     assert ops['trip_hours']['value'] == data['cycle']['trip_h']
     assert ops['rop_m_h']['value'] == programme['rop_m_h']
     assert ops['drilling_fluid_kg_m3']['value'] == programme['drilling_simulated_rho_surface']
@@ -209,23 +222,24 @@ def evaluate(operations):
 
 
 def test_a_stated_flow_over_the_pump_limit_is_reported_and_kept():
-    data = evaluate(Operations(flow=20.0, pump_pressure_limit_Pa=1.5e6,
+    data = evaluate(Operations(mass_flow_kg_s=20.0, pump_pressure_limit_Pa=1.5e6,
                                sources={'pump_pressure_limit_Pa': ('assumed', 'test rig')}))
     assert data['programme']['flow'] == 20.0
     assert data['status']['label'] == 'NO-GO'
     assert 'the standpipe pressure exceeds the pump limit' in data['status']['reasons']
     assert data['pump_check']['limit_Pa'] == 1.5e6 and not data['pump_check']['drilling']['ok']
     assert data['programme']['conflict'].startswith('at the stated flow of 20 kg/s')
-    assert data['operations']['flow']['stated'] and data['operations']['pump_pressure_limit_Pa']['stated']
+    assert data['operations']['mass_flow_kg_s']['stated'] and not data['operations']['volume_flow_L_s']['stated']
+    assert data['operations']['pump_pressure_limit_Pa']['stated']
     assert data['operations']['pump_pressure_limit_Pa']['basis'] == 'assumed'
-    assert 'operations.flow has no source' in data['input_warnings']
+    assert 'operations.mass_flow_kg_s: no source is given' in data['input_warnings']
     if data['status']['reasons'][0] == 'the standpipe pressure exceeds the pump limit':
         assert data['reading']['controlling_constraint'].endswith(
-            'Stated operations used in this check: pump pressure limit 1.5 MPa; flow 20 kg/s.')
+            'Stated operations used in this check: pump pressure limit 1.5 MPa; mass flow 20 kg/s.')
 
 
 def test_stated_operations_are_the_ones_evaluated():
-    data = evaluate(Operations(flow=25.0, rop_m_h=8.0, trip_hours=24.0, stage_spacing_m=300.0,
+    data = evaluate(Operations(volume_flow_L_s=25.0, rop_m_h=8.0, trip_hours=24.0, stage_spacing_m=300.0,
                                stage_minutes=10.0, rig_pumps=1, tool_limit_C=180.0,
                                drilling_fluid_kg_m3=1050.0))
     programme = data['programme']
@@ -238,7 +252,7 @@ def test_stated_operations_are_the_ones_evaluated():
     assert data['tool_check']['limit_C'] == 180.0 and data['tools']['limit'] == 180.0
     assert data['pump_check']['pumps'] == 1
     assert all(data['operations'][name]['stated'] for name in
-               ('flow', 'rop_m_h', 'trip_hours', 'stage_spacing_m', 'stage_minutes', 'rig_pumps',
+               ('volume_flow_L_s', 'rop_m_h', 'trip_hours', 'stage_spacing_m', 'stage_minutes', 'rig_pumps',
                 'tool_limit_C', 'drilling_fluid_kg_m3'))
     assert not data['operations']['pipes']['stated']
     window = data['windows']['drilling_fluid']
@@ -248,3 +262,40 @@ def test_stated_operations_are_the_ones_evaluated():
         assert not any('outside its common window' in r for r in reasons)
     else:
         assert data['status']['label'] in ('NO-GO', 'INDETERMINATE')
+
+
+# ------------------------------------------------------------ stating the chosen flow
+@pytest.mark.parametrize('unit', ['mass_flow_kg_s', 'volume_flow_L_s'])
+def test_stating_the_chosen_water_flow_reproduces_the_result(results, unit):
+    """Newberry circulates water. The chosen flow stated in either unit
+    gives the default result, apart from the operations record."""
+    default = results('newberry', 'v1.7.0')
+    value = default['operations'][unit]['value']
+    stated = se.result_dict(se.evaluate(se.find_site('newberry'), physics='v1.7.0', operations=Operations(
+        **{unit: value}, sources={unit: ('assumed', 'the flow the evaluator chose')})))
+    assert stated['operations'][unit]['stated']
+    for key in default:
+        if key not in ('operations', 'versions'):
+            assert canonical(stated[key]) == canonical(default[key]), key
+
+
+@pytest.mark.parametrize('unit', ['mass_flow_kg_s', 'volume_flow_L_s'])
+def test_stating_the_chosen_mud_flow_reproduces_the_circulation(unit):
+    """With a weighted fluid, the flow the search chooses, stated in either
+    unit, is solved with the same mass flow to the last bit."""
+    from borethm import fluids
+    site = replace(se.find_site('newberry'), programme=HydraulicProgramme.reference_programme())
+    z, geotherm = site.target(), site.temperature()
+    mud = fluids.Mud(1150.0, conserve_mass=True)
+    exposure = m1.exposure_from_rop(z, 10.0, 0.0)
+    with physics.using('v1.7.0'):
+        chosen = se.choose_circulation(site, z, geotherm, exposure, P_surface=m1.P_SURF, fluid=mud, retry=False)
+        value = chosen['run']['m_dot'] if unit == 'mass_flow_kg_s' else chosen['m_dot']
+        stated = se.choose_circulation(replace(site, operations=Operations(**{unit: value})), z, geotherm, exposure,
+                                       P_surface=m1.P_SURF, fluid=mud, retry=False)
+    assert stated['pipe'] == chosen['pipe']
+    assert stated['run']['m_dot'] == chosen['run']['m_dot']
+    for key in ('Td', 'Tu', 'z'):
+        assert (stated['run'][key] == chosen['run'][key]).all(), key
+    assert stated['run']['hyd']['spp'] == chosen['run']['hyd']['spp']
+

@@ -18,6 +18,7 @@ _EXPORTS = {
     'HydraulicProgramme': ('programme','HydraulicProgramme'),
     'Operations': ('operations', 'Operations'),
     'validate_operations': ('operations', 'validate_operations'),
+    'operation_defaults': ('operations', 'operation_defaults'),
     'evaluate': ('site_evaluation', 'evaluate'),
     'result_dict': ('site_evaluation', 'result_dict'),
     'export_result': ('site_evaluation', 'export_result'),

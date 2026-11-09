@@ -154,7 +154,7 @@ allowance; bha_tools adds or replaces named tools in its collar section.
 ## Operations
 
 ```python
-Operations(pipes: tuple | None = None, flow: float | None = None, flows: tuple | None = None, tool_limit_C: float | None = None, coating_ratings_C: dict | None = None, pump_pressure_limit_Pa: float | None = None, rig_pumps: int | None = None, min_annular_velocity_m_s: float | None = None, precirculation_min: float | None = None, connection_median_min: float | None = None, connection_p90_min: float | None = None, trip_hours: float | None = None, trip_scale: float | None = None, stage_spacing_m: float | None = None, stage_minutes: float | None = None, rop_m_h: float | None = None, drilling_fluid_kg_m3: float | None = None, trip_fluid_kg_m3: float | None = None, sources: dict = <factory>) -> None
+Operations(pipes: tuple | None = None, mass_flow_kg_s: float | None = None, volume_flow_L_s: float | None = None, mass_flows_kg_s: tuple | None = None, volume_flows_L_s: tuple | None = None, tool_limit_C: float | None = None, coating_ratings_C: dict | None = None, pump_pressure_limit_Pa: float | None = None, rig_pumps: int | None = None, min_annular_velocity_m_s: float | None = None, precirculation_min: float | None = None, connection_median_min: float | None = None, connection_p90_min: float | None = None, trip_hours: float | None = None, trip_scale: float | None = None, stage_spacing_m: float | None = None, stage_minutes: float | None = None, rop_m_h: float | None = None, drilling_fluid_kg_m3: float | None = None, trip_fluid_kg_m3: float | None = None, sources: dict = <factory>) -> None
 ```
 
 Operating choices for evaluate, in SI units. Every field is optional.
@@ -164,8 +164,10 @@ None keeps the evaluator's rule, given here for each field:
 | Field | Meaning | When None |
 |---|---|---|
 | pipes | PipeType candidates, tried in order | TK-Drakon coated, internally coated, externally coated, conventional |
-| flow | one fixed flow | the flow search |
-| flows | the flows the search tries, ascending | 5 to 50 in steps of 5, then 60 to 100 in steps of 10 |
+| mass_flow_kg_s | one fixed flow [kg/s] | the flow search |
+| volume_flow_L_s | one fixed flow [L/s at surface] | the flow search |
+| mass_flows_kg_s | the flows the search tries [kg/s], rising | the evaluator's grid |
+| volume_flows_L_s | the flows the search tries [L/s at surface], rising | the evaluator's grid |
 | tool_limit_C | the downhole tool temperature limit [C] | 200 |
 | coating_ratings_C | pipe name to coating rating [C] | TK-Drakon coated: 204 |
 | pump_pressure_limit_Pa | the standpipe pressure limit [Pa] | 51.7e6 |
@@ -183,10 +185,15 @@ None keeps the evaluator's rule, given here for each field:
 | trip_fluid_kg_m3 | trip fluid surface density at 20 C [kg/m3] | the larger of the drilling fluid and the trip window's lower bound |
 | sources | field name to (basis, source) | empty |
 
-Flows follow the evaluator's flow grid: kg/s with water; with a
-weighted fluid the same number is the surface volume flow in L/s, so the
-pumps deliver the same volume whatever the fluid's weight. The result
-reports the flow and its unit as programme.flow and programme.flow_unit.
+The evaluator's grid is 5 to 50 in steps of 5, then 60 to 100 in steps
+of 10: kg/s with water, and the same numbers as L/s at surface with a
+weighted fluid, so the pumps deliver the same volume whatever the
+fluid's weight. A volume flow is at surface, at the fluid's density at
+20 C; the mass flow is the volume times that density. A stated flow in
+the evaluator's own unit (kg/s with water, L/s with a weighted fluid)
+is used unchanged, so stating the flow the evaluator would choose gives
+the same circulation as letting it choose. The result's operations
+record gives each effective flow in both units.
 
 A stated flow, connection practice (precirculation_min or
 connection_p90_min), run-in staging (stage_spacing_m or stage_minutes),
@@ -196,12 +203,13 @@ rate and exposure for a coupled site. A stated drilling fluid lighter
 than water's 998.2 kg/m3 is water. coating_ratings_C replaces the whole
 table, so a pipe it leaves out has no rating. pipes cannot be combined
 with a HydraulicProgramme that gives custom segments, which fix the
-string. Give at most one of flow and flows, and at most one of trip_hours
-and trip_scale.
+string. Give at most one of the four flow fields, and at most one of
+trip_hours and trip_scale.
 
 sources maps a field name to a (basis, source) pair, with the basis
 labels of a site's data_basis. validate_operations checks ranges and
-returns warnings.
+returns records of errors and warnings; operation_defaults gives each
+field's default, unit, rule and source.
 
 ## validate_operations
 
@@ -209,13 +217,19 @@ returns warnings.
 validate_operations(operations)
 ```
 
-Check an Operations; return a list of warning strings.
+Check an Operations. Return a list of records, each a dictionary with
+field (an Operations field name, or 'operations' for a conflict between
+fields), level ('error' or 'warning') and message. An empty list means
+no finding. validate_site raises ValueError for the errors.
 
-Invalid values raise ValueError. Ranges are inclusive:
+Errors: a value outside its accepted range, an empty or unordered flow
+grid, an empty pipe list, more than one of the four flow fields, both
+trip_hours and trip_scale, and a sources entry that names no field or
+uses an unknown basis label. Ranges are inclusive:
 
 | Field | Accepted range | Unit |
 |---|---|---|
-| flow and each of flows | 1 to 300 | kg/s or L/s |
+| the flow fields and each value of a grid | 1 to 300 | kg/s or L/s at surface |
 | tool_limit_C | 50 to 400 | C |
 | each coating rating | 50 to 400 | C |
 | pump_pressure_limit_Pa | 1e6 to 150e6 | Pa |
@@ -230,17 +244,30 @@ Invalid values raise ValueError. Ranges are inclusive:
 | rop_m_h | 0.1 to 100 | m/h |
 | drilling_fluid_kg_m3, trip_fluid_kg_m3 | 990 to 2,600 | kg/m3 at 20 C |
 
-flows must rise strictly. flow with flows, and trip_hours with
-trip_scale, raise ValueError. Each sources entry must name a field and
-use a site data_basis label. Warnings: a flow outside the evaluator's
-5 to 100 grid; a pipe with no drill pipe on sale; a coating rating for
-a pipe not among the candidates; a tool limit above 300 C; a pump
-limit above the reference pumps' 7,475 psi rating, above which the rig
-check finds no capacity; a median connection longer than the 90th
-percentile; a staging interval shorter than a stand; a rate of
-penetration above Model 3's 20 m/h ceiling; a drilling fluid below
-water's density; a trip fluid lighter than the drilling fluid; a stated
-field without a source.
+Warnings: a flow outside the evaluator's 5 to 100 grid; a pipe with no
+drill pipe on sale; a coating rating for a pipe that is not a
+candidate; a tool limit above 300 C; a pump limit above the reference
+pumps' 7,475 psi rating, above which the rig check finds no capacity; a
+median connection longer than the 90th percentile; a staging interval
+shorter than a stand; a rate of penetration above Model 3's 20 m/h
+ceiling; a fluid below water's density; a trip fluid lighter than the
+drilling fluid; a stated field without a source.
+
+## operation_defaults
+
+```python
+operation_defaults(site=None, programme=None)
+```
+
+The evaluator's rule for each Operations field, as
+{field: dict(value, unit, rule, source)}.
+
+value is the default the evaluator uses where it is a fixed value, and
+None where the evaluator searches or iterates for it (the flow, the rate
+of penetration and the fluids). With a site, values that depend on it
+are given for that site: the trip time at its target depth. With a
+programme (HydraulicProgramme) that gives custom segments, the pipe is
+the first segment's. Without them those entries give the rule alone.
 
 ## evaluate
 
@@ -441,7 +468,8 @@ not establish that every fluid state remains inside the water-property
 table's temperature and absolute-pressure limits.
 
 A site's operations are checked by validate_operations after the site's
-own inputs; its warnings follow the site's.
+own inputs. Its errors raise ValueError and its warnings follow the
+site's, each as text that starts with operations.<field>:.
 
 ## load_site
 

@@ -172,6 +172,55 @@ def _tools(value,key):
     return tuple(tools)
 
 
+# The model's named pipe types, which a site file's programme segment may name.
+NAMED_PIPES={pipe.name:pipe for pipe in (wg.TK_DRAKON,wg.INTERNALLY_COATED,wg.EXTERNALLY_COATED,
+                                         wg.CONVENTIONAL,wg.DUAL_WALL,wg.VACUUM_INSULATED)}
+# Keys that describe a pipe's wall, which a named pipe already gives.
+WALL_KEYS=('name','bore_diameter','outer_diameter','conductivity','joint_fraction','source')
+
+
+def _named_pipe(segment,joint):
+    """The model's named pipe type for a segment's pipe key, with any
+    hydraulic joint the segment gives."""
+    clash=[k for k in WALL_KEYS if k in segment]
+    if clash:
+        raise ValueError(f'pipe names a built-in pipe type, which gives its own wall; remove {", ".join(clash)}')
+    name=segment['pipe']
+    if name not in NAMED_PIPES:
+        raise ValueError(f'unknown pipe {name!r}; choose from '+', '.join(repr(n) for n in NAMED_PIPES))
+    pipe=NAMED_PIPES[name]
+    return pipe if joint is None else replace(pipe,hydraulic_joint=joint)
+
+
+# The commented [programme] example in starter site files.
+TEMPLATE='''
+# Hydraulic programme: optional. Without it the evaluator uses its
+# reference string and casing scenario. A custom string lists its segments
+# from surface to bit; their lengths must add up to the target depth.
+# Each segment gives either pipe, naming one of the model's pipe types
+# ("TK-Drakon coated", "internally coated", "externally coated",
+# "conventional", "dual-wall" or "vacuum-insulated (sensitivity)"), or a
+# single wall layer through bore_diameter and outer_diameter [m] and
+# conductivity [W/(m K)], with an optional name and source. pipe cannot be
+# combined with those keys. A segment may also give hydraulic_joint,
+# local_loss, tool_loss and tools. Without hole intervals the reference
+# casing scenario applies. The example's lengths add up to 10,700 m.
+# [programme]
+# [[programme.segments]]
+# length = 1000.0
+# pipe = "vacuum-insulated (sensitivity)"
+# [[programme.segments]]
+# length = 9233.2
+# pipe = "TK-Drakon coated"
+# [[programme.segments]]
+# length = 466.8
+# name = "drill collar"
+# bore_diameter = 0.0714
+# outer_diameter = 0.1714
+# conductivity = 45.0
+'''
+
+
 def programme_from_dict(value):
     """Parse the optional programme TOML table; unknown nested keys fail."""
     allowed={f.name for f in fields(HydraulicProgramme)}
@@ -210,18 +259,21 @@ def programme_from_dict(value):
         for i,s in enumerate(values['segments']):
             key=f'programme.segments[{i}]'
             _keys(s,{'length','name','bore_diameter','outer_diameter','conductivity','source','joint_fraction',
-                     'hydraulic_joint','local_loss','tool_loss','tools'},key)
+                     'hydraulic_joint','local_loss','tool_loss','tools','pipe'},key)
             try:
                 for name in ('length','bore_diameter','outer_diameter','conductivity','joint_fraction'):
                     if name in s and (isinstance(s[name],bool) or not isinstance(s[name],(float,int)) or not math.isfinite(s[name])):
                         raise ValueError(f'{name} must be a finite number')
-                for name in ('name','source'):
+                for name in ('name','source','pipe'):
                     if name in s and not isinstance(s[name],str):
                         raise ValueError(f'{name} must be text')
-                pipe=wg.PipeType(s.get('name',f'segment {i}'),
-                    (wg.Layer(s['bore_diameter']/2,s['outer_diameter']/2,s.get('conductivity',wg.K_STEEL)),),
-                    s.get('joint_fraction',0.),s.get('source','site-supplied geometry'),
-                    _record(HydraulicJoint,s['hydraulic_joint'],key+'.hydraulic_joint') if 'hydraulic_joint' in s else None)
+                joint=_record(HydraulicJoint,s['hydraulic_joint'],key+'.hydraulic_joint') if 'hydraulic_joint' in s else None
+                if 'pipe' in s:
+                    pipe=_named_pipe(s,joint)
+                else:
+                    pipe=wg.PipeType(s.get('name',f'segment {i}'),
+                        (wg.Layer(s['bore_diameter']/2,s['outer_diameter']/2,s.get('conductivity',wg.K_STEEL)),),
+                        s.get('joint_fraction',0.),s.get('source','site-supplied geometry'),joint)
                 if not 0 < pipe.r_bore < pipe.r_out or pipe.layers[0].k<=0:
                     raise ValueError('require 0 < bore < OD and positive conductivity')
                 segments.append(wg.StringSegment(s['length'],pipe,

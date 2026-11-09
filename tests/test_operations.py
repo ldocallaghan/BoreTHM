@@ -42,24 +42,24 @@ def test_public_interface_exports_operations():
 
 
 def test_values_are_normalised_and_frozen():
-    ops = Operations(flow=30, flows=[5, 10], rig_pumps=2, coating_ratings_C={'conventional': 180},
-                     sources={'flow': ['assumed', 'pump sheet']})
-    assert ops.flow == 30.0 and isinstance(ops.flow, float)
-    assert ops.flows == (5.0, 10.0)
+    ops = Operations(mass_flow_kg_s=30, mass_flows_kg_s=[5, 10], rig_pumps=2, coating_ratings_C={'conventional': 180},
+                     sources={'mass_flow_kg_s': ['assumed', 'pump sheet']})
+    assert ops.mass_flow_kg_s == 30.0 and isinstance(ops.mass_flow_kg_s, float)
+    assert ops.mass_flows_kg_s == (5.0, 10.0)
     assert ops.coating_ratings_C == {'conventional': 180.0}
-    assert ops.sources == {'flow': ('assumed', 'pump sheet')}
+    assert ops.sources == {'mass_flow_kg_s': ('assumed', 'pump sheet')}
     with pytest.raises(AttributeError):
-        ops.flow = 20.0
+        ops.mass_flow_kg_s = 20.0
 
 
 @pytest.mark.parametrize('fields,message', [
-    (dict(flow='30'), 'flow: expected a finite number'),
-    (dict(flow=float('nan')), 'flow: expected a finite number'),
+    (dict(mass_flow_kg_s='30'), 'mass_flow_kg_s: expected a finite number'),
+    (dict(volume_flow_L_s=float('nan')), 'volume_flow_L_s: expected a finite number'),
     (dict(tool_limit_C=True), 'tool_limit_C: expected a finite number'),
     (dict(rig_pumps=2.5), 'rig_pumps: expected a whole number'),
-    (dict(flows=30), 'flows: expected a sequence'),
+    (dict(mass_flows_kg_s=30), 'mass_flows_kg_s: expected a sequence'),
     (dict(coating_ratings_C=[204.0]), 'coating_ratings_C: expected a mapping'),
-    (dict(sources={'flow': 'assumed'}), 'sources.flow: expected a'),
+    (dict(sources={'mass_flow_kg_s': 'assumed'}), 'sources.mass_flow_kg_s: expected a'),
 ])
 def test_wrong_types_are_rejected(fields, message):
     with pytest.raises(ValueError, match=message):
@@ -84,70 +84,77 @@ def test_stated_timings_replace_only_their_own_values():
 
 
 # ------------------------------------------------------------ validation
-@pytest.mark.parametrize('fields,message', [
-    (dict(flow=0.5), 'flow = 0.5 is outside 1 to 300'),
-    (dict(pump_pressure_limit_Pa=7500.0), 'pump_pressure_limit_Pa = 7500 is outside'),
-    (dict(tool_limit_C=473.15), 'tool_limit_C = 473.15 is outside'),
-    (dict(connection_p90_min=0.0), 'connection_p90_min = 0 is outside'),
-    (dict(drilling_fluid_kg_m3=1.1), 'drilling_fluid_kg_m3 = 1.1 is outside'),
-    (dict(rig_pumps=0), 'rig_pumps = 0 is outside'),
-    (dict(flows=(10.0, 5.0)), 'flows must rise strictly'),
-    (dict(flows=()), 'flows is empty'),
-    (dict(pipes=()), 'pipes is empty'),
-    (dict(flow=30.0, flows=(10.0, 20.0)), 'flow and flows cannot both be given'),
-    (dict(trip_hours=10.0, trip_scale=2.0), 'trip_hours and trip_scale cannot both be given'),
-    (dict(coating_ratings_C={'conventional': 20.0}), "coating rating for 'conventional' = 20"),
-    (dict(sources={'tool': ('assumed', 'x')}), "'tool', which is not an operations field"),
-    (dict(sources={'flow': ('guessed', 'x')}), "'guessed' is not one of"),
+@pytest.mark.parametrize('fields,field,message', [
+    (dict(mass_flow_kg_s=0.5), 'mass_flow_kg_s', '0.5 is outside 1 to 300 kg/s'),
+    (dict(volume_flow_L_s=400.0), 'volume_flow_L_s', '400 is outside 1 to 300 L/s at surface'),
+    (dict(pump_pressure_limit_Pa=7500.0), 'pump_pressure_limit_Pa', '7500 is outside'),
+    (dict(tool_limit_C=473.15), 'tool_limit_C', '473.15 is outside'),
+    (dict(connection_p90_min=0.0), 'connection_p90_min', '0 is outside'),
+    (dict(drilling_fluid_kg_m3=1.1), 'drilling_fluid_kg_m3', '1.1 is outside'),
+    (dict(rig_pumps=0), 'rig_pumps', '0 is outside'),
+    (dict(mass_flows_kg_s=(10.0, 5.0)), 'mass_flows_kg_s', 'the flows must rise strictly'),
+    (dict(volume_flows_L_s=()), 'volume_flows_L_s', 'the grid is empty'),
+    (dict(pipes=()), 'pipes', 'the list is empty'),
+    (dict(mass_flow_kg_s=30.0, volume_flow_L_s=30.0), 'operations', 'give at most one of mass_flow_kg_s'),
+    (dict(mass_flow_kg_s=30.0, mass_flows_kg_s=(10.0, 20.0)), 'operations', 'give at most one of mass_flow_kg_s'),
+    (dict(mass_flows_kg_s=(10.0, 20.0), volume_flows_L_s=(10.0, 20.0)), 'operations', 'give at most one'),
+    (dict(trip_hours=10.0, trip_scale=2.0), 'operations', 'give at most one of trip_hours and trip_scale'),
+    (dict(coating_ratings_C={'conventional': 20.0}), 'coating_ratings_C', "the rating for 'conventional', 20"),
+    (dict(sources={'tool': ('assumed', 'x')}), 'sources', "'tool' is not an operations field"),
+    (dict(sources={'mass_flow_kg_s': ('guessed', 'x')}), 'mass_flow_kg_s', "the basis 'guessed' is not one of"),
 ])
-def test_invalid_values_raise(fields, message):
-    with pytest.raises(ValueError, match=message):
-        validate_operations(Operations(**fields))
+def test_invalid_values_are_error_records(fields, field, message):
+    records = validate_operations(Operations(**fields))
+    errors = [r for r in records if r['level'] == 'error']
+    assert errors and errors[0]['field'] == field and message in errors[0]['message'], records
 
 
-@pytest.mark.parametrize('fields,warning', [
-    (dict(flow=150.0), 'outside the evaluator\'s flow grid'),
-    (dict(pipes=(wg.DUAL_WALL,)), 'not a drill pipe on sale'),
-    (dict(coating_ratings_C={'dual-wall': 180.0}), 'not a candidate pipe'),
-    (dict(tool_limit_C=320.0), 'above 300 C'),
-    (dict(pump_pressure_limit_Pa=60e6), '7,475 psi rating'),
-    (dict(connection_median_min=8.0, connection_p90_min=6.0), 'longer than connection_p90_min'),
-    (dict(stage_spacing_m=20.0), 'shorter than a stand'),
-    (dict(rop_m_h=25.0), "above Model 3's 20 m/h ceiling"),
-    (dict(drilling_fluid_kg_m3=995.0), 'the drilling fluid is water'),
-    (dict(drilling_fluid_kg_m3=1200.0, trip_fluid_kg_m3=1100.0), 'lighter than drilling_fluid_kg_m3'),
+@pytest.mark.parametrize('fields,field,warning', [
+    (dict(mass_flow_kg_s=150.0), 'mass_flow_kg_s', "150 kg/s is outside the evaluator's flow grid"),
+    (dict(volume_flows_L_s=(2.0, 50.0)), 'volume_flows_L_s', "2 L/s at surface is outside the evaluator's flow grid"),
+    (dict(pipes=(wg.DUAL_WALL,)), 'pipes', 'not a drill pipe on sale'),
+    (dict(coating_ratings_C={'dual-wall': 180.0}), 'coating_ratings_C', 'not a candidate pipe'),
+    (dict(tool_limit_C=320.0), 'tool_limit_C', 'above 300 C'),
+    (dict(pump_pressure_limit_Pa=60e6), 'pump_pressure_limit_Pa', '7,475 psi rating'),
+    (dict(connection_median_min=8.0, connection_p90_min=6.0), 'connection_median_min', 'longer than connection_p90_min'),
+    (dict(stage_spacing_m=20.0), 'stage_spacing_m', 'shorter than a stand'),
+    (dict(rop_m_h=25.0), 'rop_m_h', "above Model 3's 20 m/h ceiling"),
+    (dict(drilling_fluid_kg_m3=995.0), 'drilling_fluid_kg_m3', 'the drilling fluid is water'),
+    (dict(drilling_fluid_kg_m3=1200.0, trip_fluid_kg_m3=1100.0), 'trip_fluid_kg_m3', 'lighter than drilling_fluid_kg_m3'),
 ])
-def test_questionable_values_warn(fields, warning):
-    assert any(warning in w for w in validate_operations(stated(**fields)))
+def test_questionable_values_are_warning_records(fields, field, warning):
+    records = validate_operations(stated(**fields))
+    assert all(r['level'] == 'warning' for r in records)
+    assert any(r['field'] == field and warning in r['message'] for r in records), records
 
 
 def test_a_stated_value_without_a_source_warns():
-    assert validate_operations(Operations(tool_limit_C=175.0)) == ['operations.tool_limit_C has no source']
-    assert validate_operations(Operations(tool_limit_C=175.0, sources={'tool_limit_C': ('assumed', '')})) == [
-        'operations.tool_limit_C has no source']
+    record = dict(field='tool_limit_C', level='warning', message='no source is given')
+    assert validate_operations(Operations(tool_limit_C=175.0)) == [record]
+    assert validate_operations(Operations(tool_limit_C=175.0, sources={'tool_limit_C': ('assumed', '')})) == [record]
     assert validate_operations(stated(tool_limit_C=175.0)) == []
 
 
 def test_validate_site_adds_operation_warnings_and_names_the_site():
     site = replace(se.find_site('newberry'), operations=Operations(tool_limit_C=175.0))
-    assert se.validate_site(site)[-1] == 'operations.tool_limit_C has no source'
+    assert se.validate_site(site)[-1] == 'operations.tool_limit_C: no source is given'
     assert se.validate_site(replace(site, operations=Operations())) == se.validate_site(
         se.find_site('newberry'))
-    with pytest.raises(ValueError, match=r'^Newberry.*operations: flow = 0.5 is outside'):
-        se.validate_site(replace(site, operations=Operations(flow=0.5)))
+    with pytest.raises(ValueError, match=r'^Newberry.*: operations.mass_flow_kg_s: 0.5 is outside'):
+        se.validate_site(replace(site, operations=Operations(mass_flow_kg_s=0.5)))
     with pytest.raises(ValueError, match='operations must be Operations or None'):
-        se.validate_site(replace(site, operations={'flow': 30.0}))
+        se.validate_site(replace(site, operations={'mass_flow_kg_s': 30.0}))
 
 
 # ------------------------------------------------------------ evaluate's argument
 def test_evaluate_rejects_operations_it_cannot_apply():
     site = se.find_site('newberry')
     with pytest.raises(TypeError, match='operations must be Operations or None'):
-        se.evaluate(site, operations={'flow': 30.0})
+        se.evaluate(site, operations={'mass_flow_kg_s': 30.0})
     with pytest.raises(ValueError, match="circulation='v1.3.4' only"):
-        se.evaluate(site, circulation='v1.3.3', operations=Operations(flow=30.0))
+        se.evaluate(site, circulation='v1.3.3', operations=Operations(mass_flow_kg_s=30.0))
     with pytest.raises(ValueError, match="circulation='v1.3.4' only"):
-        se.evaluate(replace(site, operations=Operations(flow=30.0)), v10=True)
+        se.evaluate(replace(site, operations=Operations(mass_flow_kg_s=30.0)), v10=True)
     custom = borethm.HydraulicProgramme(reference=None, segments=(wg.StringSegment(site.target(), wg.CONVENTIONAL),))
     with pytest.raises(ValueError, match='custom segments'):
         se.evaluate(site, programme=custom, operations=Operations(pipes=(wg.CONVENTIONAL,)))
@@ -157,7 +164,7 @@ def test_evaluate_rejects_operations_it_cannot_apply():
 EXAMPLE = '''
 [operations]
 pipes = ["TK-Drakon coated", "conventional"]
-flow = 30.0
+mass_flow_kg_s = 30.0
 tool_limit_C = 175.0
 pump_pressure_limit_Pa = 45.0e6
 rig_pumps = 2
@@ -171,7 +178,7 @@ drilling_fluid_kg_m3 = 1050.0
 
 [operations.sources]
 tool_limit_C = ["assumed", "high-temperature MWD rating"]
-flow = ["assumed", "two pumps at 90 strokes/min"]
+mass_flow_kg_s = ["assumed", "two pumps at 90 strokes/min"]
 '''
 
 
@@ -185,7 +192,7 @@ def test_site_file_operations_table_is_parsed(tmp_path):
     site = load_site(write(tmp_path, template_text() + EXAMPLE))
     ops = site.operations
     assert ops.pipes == (wg.TK_DRAKON, wg.CONVENTIONAL)
-    assert (ops.flow, ops.tool_limit_C, ops.pump_pressure_limit_Pa, ops.rig_pumps) == (30.0, 175.0, 45e6, 2)
+    assert (ops.mass_flow_kg_s, ops.tool_limit_C, ops.pump_pressure_limit_Pa, ops.rig_pumps) == (30.0, 175.0, 45e6, 2)
     assert (ops.trip_hours, ops.stage_spacing_m, ops.stage_minutes) == (20.0, 100.0, 20.0)
     assert ops.drilling_fluid_kg_m3 == 1050.0
     assert ops.coating_ratings_C == {'TK-Drakon coated': 190.0}
@@ -197,14 +204,15 @@ def test_site_file_operations_table_is_parsed(tmp_path):
 
 @pytest.mark.parametrize('line,message', [
     ('tool_limit = 175.0', 'operations: tool_limit: unknown key'),
-    ('flow = "30"', 'operations: flow: expected a number'),
-    ('flow = true', 'operations: flow: expected a number'),
+    ('mass_flow_kg_s = "30"', 'operations: mass_flow_kg_s: expected a number'),
+    ('volume_flow_L_s = true', 'operations: volume_flow_L_s: expected a number'),
+    ('flow = 30.0', 'operations: flow: unknown key'),
     ('rig_pumps = 2.0', 'operations: rig_pumps: expected a whole number'),
     ('pipes = ["steel"]', "operations: pipes: unknown pipe 'steel'"),
     ('pipes = "conventional"', 'operations: pipes: expected an array of pipe names'),
-    ('flows = [5, "10"]', r'operations: flows\[1\]: expected a number'),
+    ('mass_flows_kg_s = [5, "10"]', r'operations: mass_flows_kg_s\[1\]: expected a number'),
     ('coating_ratings_C = 204.0', 'operations: coating_ratings_C: expected a table'),
-    ('sources = { flow = ["assumed"] }', 'operations: sources.flow: expected \\[basis, source\\]'),
+    ('sources = { mass_flow_kg_s = ["assumed"] }', 'operations: sources.mass_flow_kg_s: expected \\[basis, source\\]'),
 ])
 def test_site_file_operations_are_strict(tmp_path, line, message):
     path = write(tmp_path, template_text() + '\n[operations]\n' + line + '\n')
@@ -220,7 +228,7 @@ def test_operations_must_be_a_table(tmp_path):
 
 
 def test_operations_round_trip_through_toml(tmp_path):
-    ops = Operations(pipes=(wg.INTERNALLY_COATED,), flows=(10.0, 20.0, 40.0), tool_limit_C=180.0,
+    ops = Operations(pipes=(wg.INTERNALLY_COATED,), mass_flows_kg_s=(10.0, 20.0, 40.0), tool_limit_C=180.0,
                      coating_ratings_C={'internally coated': 150.0}, rig_pumps=4,
                      min_annular_velocity_m_s=1.0, precirculation_min=5.0, connection_median_min=3.0,
                      connection_p90_min=8.0, trip_scale=1.5, rop_m_h=6.5, trip_fluid_kg_m3=1150.0,
@@ -232,20 +240,21 @@ def test_operations_round_trip_through_toml(tmp_path):
 
 @pytest.mark.parametrize('key', ['soultz', 'larderello', 'united-downs', 'pannonian', 'newberry'])
 def test_starter_files_carry_the_operations_table_commented_out(tmp_path, key):
+    from borethm.programme import TEMPLATE as PROGRAMME
     text = site_text(key)
-    assert text.endswith(op.TEMPLATE)
+    assert text.endswith(op.TEMPLATE + PROGRAMME)
     path = tmp_path / 'mysite.toml'
     command = subprocess.run([sys.executable, '-m', 'borethm.site_files', str(path), '--from', key],
                              capture_output=True, text=True, timeout=60)
     assert command.returncode == 0, command.stderr
     assert load_site(path).operations is None
     # every key in the commented table is a valid example once uncommented
-    lines = path.read_text(encoding='utf-8').split(op.TEMPLATE.splitlines()[1], 1)[1].splitlines()
+    lines = op.TEMPLATE.splitlines()
     keys = [line[2:] for line in lines if line.startswith('# ') and ('=' in line or line.startswith('# ['))]
-    keys = [line for line in keys if not line.startswith(('flows', 'trip_scale'))]
+    keys = [line for line in keys if not line.startswith(('volume_flow_L_s', 'mass_flows_kg_s', 'volume_flows_L_s', 'trip_scale'))]
     path.write_text(path.read_text(encoding='utf-8') + '\n' + '\n'.join(keys) + '\n', encoding='utf-8')
     ops = load_site(path).operations
-    assert ops.flow == 30.0 and ops.tool_limit_C == 200.0 and ops.trip_hours == 17.5
+    assert ops.mass_flow_kg_s == 30.0 and ops.tool_limit_C == 200.0 and ops.trip_hours == 17.5
     assert ops.coating_ratings_C == se.COATING_RATINGS
     assert ops.pipes == se.SITE_PIPES
     assert ops.pump_pressure_limit_Pa == se.m1.PUMP_LIMIT and ops.rig_pumps == se.RIG_PUMPS
@@ -258,7 +267,8 @@ def test_starter_files_carry_the_operations_table_commented_out(tmp_path, key):
 
 
 def test_template_documents_the_default_flow_grid_and_pipes():
-    assert '# flows = [' + ', '.join(f'{f:g}' for f in se.SITE_FLOWS) + ']' in op.TEMPLATE
+    assert '# mass_flows_kg_s = [' + ', '.join(f'{f:g}' for f in se.SITE_FLOWS) + ']' in op.TEMPLATE
+    assert '# volume_flows_L_s = [' + ', '.join(f'{f:g}' for f in se.SITE_FLOWS) + ']' in op.TEMPLATE
     assert '# pipes = [' + ', '.join(f'"{p.name}"' for p in se.SITE_PIPES) + ']' in op.TEMPLATE
     assert set(op.PIPES) >= {p.name for p in se.SITE_PIPES}
 
@@ -268,7 +278,7 @@ def test_check_command_reports_operation_warnings(tmp_path):
     command = subprocess.run([sys.executable, '-m', 'borethm.site_evaluation', '--site-file', str(path),
                               '--check'], capture_output=True, text=True, timeout=60)
     assert command.returncode == 0, command.stderr
-    assert 'warning: operations.pipes has no source' in command.stdout
+    assert 'warning: operations.pipes: no source is given' in command.stdout
     assert 'inputs valid' in command.stdout
 
 
@@ -287,7 +297,8 @@ def fake_circulation(monkeypatch):
         hyd = dict(spp=1e6 * m_dot, v_ann_min=0.04 * m_dot, over_pump_limit=1e6 * m_dot > se.m1.PUMP_LIMIT,
                    cleans_hole=0.04 * m_dot >= se.m1.HOLE_CLEANING_V)
         se._stated_limits(site, hyd)
-        return dict(success=True, T_bottom_delivered=300.0 - 4.0 * m_dot + insulation[pipe.name], hyd=hyd)
+        return dict(success=True, T_bottom_delivered=300.0 - 4.0 * m_dot + insulation[pipe.name], hyd=hyd,
+                    m_dot=m_dot)
 
     monkeypatch.setattr(se, 'circulate', circulate)
     return calls
@@ -311,7 +322,7 @@ def test_tool_limit_sets_the_survival_flow(fake_circulation):
 
 
 def test_stated_flow_grid_is_searched(fake_circulation):
-    c = choose(Operations(flows=(33.0, 44.0)))
+    c = choose(Operations(mass_flows_kg_s=(33.0, 44.0)))
     assert c['m_dot'] == 33.0
     assert [m for _, m in fake_circulation] == [33.0]
 
@@ -333,19 +344,19 @@ def test_pump_limit_ends_the_search(fake_circulation):
 
 
 def test_a_stated_flow_is_used_as_given_and_its_failures_reported(fake_circulation):
-    c = choose(Operations(flow=20.0))
+    c = choose(Operations(mass_flow_kg_s=20.0))
     assert c['m_dot'] == 20.0 and c['pipe'] == wg.TK_DRAKON
     assert c['conflict'] == ('at the stated flow of 20 kg/s, the bit reaches 220 C, at or above the 200 C '
                              'tool limit; the annular velocity is below the hole-cleaning velocity')
     assert all(m == 20.0 for _, m in fake_circulation)
-    c = choose(Operations(flow=60.0))
+    c = choose(Operations(mass_flow_kg_s=60.0))
     assert c['m_dot'] == 60.0 and c['run']['hyd']['over_pump_limit']
     assert c['conflict'] == 'at the stated flow of 60 kg/s, the standpipe pressure exceeds the pump limit'
-    assert choose(Operations(flow=40.0))['conflict'] is None
+    assert choose(Operations(mass_flow_kg_s=40.0))['conflict'] is None
 
 
 def test_a_stated_flow_takes_a_pipe_that_passes(fake_circulation):
-    c = choose(Operations(flow=40.0, pipes=(wg.CONVENTIONAL, wg.TK_DRAKON), tool_limit_C=150.0))
+    c = choose(Operations(mass_flow_kg_s=40.0, pipes=(wg.CONVENTIONAL, wg.TK_DRAKON), tool_limit_C=150.0))
     assert c['pipe'] == wg.TK_DRAKON and c['conflict'] is None
 
 
@@ -508,9 +519,9 @@ def test_reading_names_the_stated_values_behind_the_controlling_constraint():
     assert se._stated_inputs(o, 'more pump capacity than the stated 2 pumps') == (
         ' Stated operations used in this check: rig pumps 2 pumps.')
     assert se._stated_inputs(o, 'the standpipe pressure exceeds the pump limit') == ''
-    o['site'].operations = Operations(flow=40.0, drilling_fluid_kg_m3=1100.0)
+    o['site'].operations = Operations(mass_flow_kg_s=40.0, drilling_fluid_kg_m3=1100.0)
     assert se._stated_inputs(o, 'the stated drilling fluid, 1.100 SG at surface, is outside') == (
-        ' Stated operations used in this check: drilling fluid 1100 kg/m3 at 20 C; flow 40 kg/s.')
+        ' Stated operations used in this check: drilling fluid 1100 kg/m3 at 20 C; mass flow 40 kg/s.')
     assert se._stated_inputs(dict(site=SimpleNamespace(operations=None)), 'tool: x') == ''
 
 
@@ -585,3 +596,136 @@ def test_common_windows_record_matches_the_windows(monkeypatch):
     assert set(profile['depths_m']) >= set(windows['depths'])
     mechanisms = {m for case in profile['states']['fresh rock'].values() for m in case['lo_mechanism']}
     assert mechanisms == {'breakout width', 'pore pressure'}
+
+
+# ------------------------------------------------------------ public defaults
+def test_operation_defaults_give_value_unit_rule_and_source():
+    defaults = borethm.operation_defaults()
+    assert set(defaults) == set(op.UNITS)
+    for name, entry in defaults.items():
+        assert set(entry) == {'value', 'unit', 'rule', 'source'}, name
+        assert entry['unit'] == op.UNITS[name]
+        assert entry['rule'] and entry['source'], name
+    t = dc.forge_timings()
+    assert defaults['tool_limit_C']['value'] == se.C.BHA_SURVIVAL_TEMP
+    assert defaults['pump_pressure_limit_Pa']['value'] == se.m1.PUMP_LIMIT
+    assert defaults['rig_pumps']['value'] == se.RIG_PUMPS
+    assert defaults['mass_flows_kg_s']['value'] == list(se.SITE_FLOWS)
+    assert defaults['pipes']['value'] == [p.name for p in se.SITE_PIPES]
+    assert defaults['coating_ratings_C']['value'] == se.COATING_RATINGS
+    assert defaults['connection_p90_min']['value'] == t.connection_p90_min
+    assert defaults['stage_spacing_m']['value'] == t.stage_spacing_ft * dc.FT
+    for searched in ('mass_flow_kg_s', 'volume_flow_L_s', 'rop_m_h', 'drilling_fluid_kg_m3', 'trip_fluid_kg_m3'):
+        assert defaults[searched]['value'] is None
+    assert defaults['trip_hours']['value'] is None
+
+
+def test_operation_defaults_for_a_site_and_a_programme():
+    site = se.find_site('newberry')
+    defaults = borethm.operation_defaults(site)
+    assert defaults['trip_hours']['value'] == dc.trip_hours(site.target(), dc.forge_timings())
+    custom = borethm.HydraulicProgramme(reference=None, segments=(wg.StringSegment(site.target(), wg.VACUUM_INSULATED),))
+    defaults = borethm.operation_defaults(site, custom)
+    assert defaults['pipes']['value'] == ['vacuum-insulated (sensitivity)']
+    assert 'custom string' in defaults['pipes']['rule']
+
+
+# ------------------------------------------------------------ flow units
+def flow_pairs(name, values, fluid):
+    return se._stated_flows(name, values, fluid)
+
+
+def test_a_flow_in_the_evaluators_unit_is_used_unchanged(water):
+    from borethm import fluids
+    mud = fluids.Mud(1200.0)
+    assert flow_pairs('mass_flow_kg_s', (30.0,), None) == [(30.0, 30.0)]
+    assert flow_pairs('volume_flow_L_s', (30.0,), mud) == [(30.0, se.mass_flow(30.0, mud))]
+    (md, m), = flow_pairs('volume_flow_L_s', (30.0,), None)
+    assert md == m == 30.0 * 998.2 / 1000.0
+    (md, m), = flow_pairs('mass_flow_kg_s', (36.0,), mud)
+    assert m == 36.0 and md == pytest.approx(30.0)
+
+
+@pytest.mark.parametrize('name', ['mass_flow_kg_s', 'volume_flow_L_s'])
+@pytest.mark.parametrize('weighted', [False, True])
+def test_stating_the_chosen_flow_in_either_unit_gives_the_same_circulation(fake_circulation, monkeypatch, name, weighted):
+    """The stated flow, converted at the fluid's surface density, is the mass
+    flow the search passed to circulate, to the last bit."""
+    from borethm import fluids
+    monkeypatch.setattr(se.fluids, 'water', lambda: SimpleNamespace(rho_surface=998.2012723757281))
+    fluid = fluids.Mud(1150.5) if weighted else None
+    site = replace(se.find_site('newberry'), operations=Operations())
+    chosen = se.choose_circulation(site, 3000.0, None, fluid=fluid)
+    mass = chosen['run']['m_dot']
+    rho = fluid.rho_surface if weighted else 998.2012723757281
+    value = mass if name == 'mass_flow_kg_s' else (chosen['m_dot'] if weighted else mass * 1000.0 / rho)
+    stated = se.choose_circulation(replace(site, operations=Operations(**{name: value})), 3000.0, None, fluid=fluid)
+    assert stated['run']['m_dot'] == mass
+    assert stated['m_dot'] == pytest.approx(chosen['m_dot'], rel=1e-15)
+    assert stated['pipe'] == chosen['pipe'] and stated['run']['T_bottom_delivered'] == chosen['run']['T_bottom_delivered']
+
+
+def test_a_stated_grid_in_either_unit_searches_the_same_flows(fake_circulation):
+    site = replace(se.find_site('newberry'), operations=Operations(volume_flows_L_s=(33.0, 44.0)))
+    se.choose_circulation(site, 3000.0, None)
+    from borethm import fluids
+    assert fake_circulation[0][1] == pytest.approx(33.0 * fluids.water().rho_surface / 1000.0)
+
+
+# ------------------------------------------------------------ named pipes in site files
+NAMED_STRING = '''
+[programme]
+[[programme.segments]]
+length = 1000.0
+pipe = "vacuum-insulated (sensitivity)"
+[[programme.segments]]
+length = 9233.2
+pipe = "TK-Drakon coated"
+[programme.segments.hydraulic_joint]
+outer_diameter = 0.1778
+bore_diameter = 0.1016
+restriction_length = 0.7366
+spacing = 9.677
+source = "test joint"
+[[programme.segments]]
+length = 466.8
+name = "drill collar"
+bore_diameter = 0.0714
+outer_diameter = 0.1714
+conductivity = 45.0
+'''
+
+
+def test_named_pipes_round_trip_through_a_site_file(tmp_path):
+    from borethm.hydraulic_losses import HydraulicJoint, SurfaceLoss
+    site = load_site(write(tmp_path, template_text() + NAMED_STRING))
+    segments = site.programme.segments
+    assert segments[0].pipe == wg.VACUUM_INSULATED
+    assert segments[1].pipe == replace(wg.TK_DRAKON, hydraulic_joint=HydraulicJoint(0.1778, 0.1016, 0.7366, 9.677, source='test joint'))
+    assert segments[2].pipe.layers == (wg.Layer(0.0357, 0.0857, 45.0),)
+    expected = borethm.HydraulicProgramme(reference=None, segments=(
+        wg.StringSegment(1000.0, wg.VACUUM_INSULATED), wg.StringSegment(9233.2, segments[1].pipe),
+        wg.StringSegment(466.8, segments[2].pipe)))
+    assert site.programme == expected
+    geometry = site.programme.geometry(site.target(), wg.CONVENTIONAL)
+    assert [s.pipe.name for s in geometry.string] == ['vacuum-insulated (sensitivity)', 'TK-Drakon coated', 'drill collar']
+
+
+def test_the_starter_files_programme_example_parses(tmp_path):
+    from borethm.programme import TEMPLATE as PROGRAMME
+    keys = [line[2:] for line in PROGRAMME.splitlines() if line.startswith('# ') and ('=' in line or line.startswith('# ['))]
+    site = load_site(write(tmp_path, template_text() + '\n' + '\n'.join(keys) + '\n'))
+    assert [s.pipe.name for s in site.programme.segments] == ['vacuum-insulated (sensitivity)', 'TK-Drakon coated', 'drill collar']
+    assert sum(s.length for s in site.programme.segments) == pytest.approx(site.target())
+
+
+@pytest.mark.parametrize('segment,message', [
+    ('length = 10700.0\npipe = "steel"', "unknown pipe 'steel'; choose from 'TK-Drakon coated'"),
+    ('length = 10700.0\npipe = "conventional"\nbore_diameter = 0.1', 'remove bore_diameter'),
+    ('length = 10700.0\npipe = "conventional"\nname = "mine"', 'remove name'),
+    ('length = 10700.0\npipe = 3', 'pipe must be text'),
+])
+def test_named_pipes_are_strict(tmp_path, segment, message):
+    text = template_text() + '\n[programme]\n[[programme.segments]]\n' + segment + '\n'
+    with pytest.raises(ValueError, match=message):
+        load_site(write(tmp_path, text))

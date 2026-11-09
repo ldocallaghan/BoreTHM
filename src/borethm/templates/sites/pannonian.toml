@@ -55,11 +55,16 @@ source = "regime: strike-slip, locally transtensional (Bada et al. 2007)"
 # Pipe candidates, tried in order. Default: the four below. Also accepted:
 # "dual-wall" and "vacuum-insulated (sensitivity)", which are not on sale.
 # pipes = ["TK-Drakon coated", "internally coated", "externally coated", "conventional"]
-# One fixed flow, kg/s with water or L/s at surface with a weighted fluid,
-# 1 to 300. Default: the search over flows below. Give flow or flows.
-# flow = 30.0
-# The flows the search tries, rising. Default:
-# flows = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100]
+# One fixed flow, 1 to 300: a mass flow in kg/s, or a volume flow in L/s
+# at surface (at the fluid's density at 20 C). Default: the flow search.
+# Give at most one of the four flow keys.
+# mass_flow_kg_s = 30.0
+# volume_flow_L_s = 30.0
+# The flows the search tries, rising, as mass or volume flows. Default:
+# 5 to 50 in steps of 5, then 60 to 100 in steps of 10, in kg/s with
+# water and in L/s with a weighted fluid.
+# mass_flows_kg_s = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100]
+# volume_flows_L_s = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100]
 # Downhole tool temperature limit, C, 50 to 400. Default 200.
 # tool_limit_C = 200.0
 # Standpipe pressure limit, Pa, 1e6 to 150e6. Default 51.7e6 (7,500 psi).
@@ -102,3 +107,28 @@ source = "regime: strike-slip, locally transtensional (Bada et al. 2007)"
 # Sources for stated values, [basis, source], with the data_basis labels.
 # [operations.sources]
 # tool_limit_C = ["assumed", "Replace with the tool's rating sheet"]
+
+# Hydraulic programme: optional. Without it the evaluator uses its
+# reference string and casing scenario. A custom string lists its segments
+# from surface to bit; their lengths must add up to the target depth.
+# Each segment gives either pipe, naming one of the model's pipe types
+# ("TK-Drakon coated", "internally coated", "externally coated",
+# "conventional", "dual-wall" or "vacuum-insulated (sensitivity)"), or a
+# single wall layer through bore_diameter and outer_diameter [m] and
+# conductivity [W/(m K)], with an optional name and source. pipe cannot be
+# combined with those keys. A segment may also give hydraulic_joint,
+# local_loss, tool_loss and tools. Without hole intervals the reference
+# casing scenario applies. The example's lengths add up to 10,700 m.
+# [programme]
+# [[programme.segments]]
+# length = 1000.0
+# pipe = "vacuum-insulated (sensitivity)"
+# [[programme.segments]]
+# length = 9233.2
+# pipe = "TK-Drakon coated"
+# [[programme.segments]]
+# length = 466.8
+# name = "drill collar"
+# bore_diameter = 0.0714
+# outer_diameter = 0.1714
+# conductivity = 45.0
