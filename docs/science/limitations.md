@@ -80,6 +80,34 @@ The tool is represented by a lumped thermal model of the collar and enclosed flu
 
 These approximations matter when interpreting a small tool-temperature margin or a narrow allowable density range. The [approximation comparisons](approximation-comparisons.md) test selected alternatives. Their results do not replace a calculation with a common timeline and explicit fluid displacement.
 
+## Operating choices that remain fixed
+
+`Operations` and the `[operations]` table state the pipe candidates, the
+flow, the tool limit, the coating ratings, the pump limit and pump count,
+the hole-cleaning velocity, the connection and trip timings, the run-in
+staging, the rate of penetration and the drilling and trip fluids
+([operating choices](../guides/new-site.md#operating-choices)). The string,
+the hole and casing intervals, the surface losses, the tools on the string
+and the physics are set through `[programme]`. These choices remain fixed:
+
+| Choice | Value | Why it is fixed |
+|---|---|---|
+| Rig pump rating | 1,980 hydraulic hp, 1,215 US gal/min, 7,475 psi per pump | The data sheet of the reference rig's pump model; the pump count can be stated |
+| Tripping speeds, surface time and stand length | FORGE 16B medians: out 1,694 ft/h, in 1,833 ft/h, 3.93 h at surface, 93.6 ft | Measured values. A stated trip time or scale sets the static time; the run-in history of the tool keeps the measured speed |
+| The schedules the searches try | Circulation before a connection of 1 to 20 min, pumps-off times down to 0.5 min, staging intervals halved to a stand and stages of 2 and 4 times the FORGE time | They report the schedule the tool needs. A stated practice or staging is checked alone |
+| Mud rheology | Plastic viscosity 27 mPa s and yield point 28 lbf/100 ft² at 26.7 °C | The mud model's one measured pair; the annulus model and physics are set through `[programme]` |
+| Surge and swab allowance | 0.02 SG | Part of the pressure model, a sensitivity assumption |
+| Window margin and breakout width limit | 0.05 SG below Shmin; 90° | Stability criteria of the model |
+| Model 3's bit power and rate ceiling | 8 kW at the face; 20 m/h | Inputs of the rate model. A stated rate of penetration replaces the model's rate |
+| Face heat load | 30 kW | Input of the circulation model |
+| Wellhead pressure | Atmospheric, with the backpressure that keeps the return liquid | Part of the pressure budget |
+| Resolution and convergence | Depth spacing of the windows and trip column, density grid, fluid and rate tolerances | Numerical settings |
+
+A stated value is used in the same equations as the default it replaces. The
+result does not check that a stated value is achievable with the rig or
+the tools, beyond the pump, tool and coating checks it reports. Operations
+apply to the default calculation mode only.
+
 ## Other design limits and study scope
 
 The assessments do not include detailed casing and cement integrity, string loads and fatigue, circulation losses, or creep coupled to the drilling cycle. The hole-cleaning reference and cycle timings come from one well. Rig capacity is checked against three pumps of one published rating. The 0.02 SG allowance for pressure changes during pipe movement is a sensitivity assumption, with no verified field range for these 10 to 13 km wells.

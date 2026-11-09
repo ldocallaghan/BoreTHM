@@ -215,6 +215,9 @@ the water-property cache. Invalid units or values produce an error.
 `validate_site` checks the accepted ranges, a finite rising geotherm through
 the open hole, the target temperature within 5 °C, and consistent stresses
 with pore pressure below Shmin. Missing sources produce warnings.
+An `[operations]` table is checked as well: a value outside its range is an
+error, and a value outside the evaluator's reference range or without a
+source produces a warning ([operating choices](#operating-choices)).
 
 ## 4. Evaluate and read the result
 
@@ -236,11 +239,14 @@ The JSON does not contain the complete file or a complete programme definition.
 
 The site file supplies geology and site inputs. The evaluator selects the
 well geometry, pipe, flow and drilling cycle through its reference rules.
+The optional `[programme]` table states the string and hole, and the
+optional `[operations]` table states the operating choices.
 
 | Task | Interface |
 |---|---|
 | Evaluate a built-in site | `borethm-evaluate --site KEY` |
 | Assess a new site under the evaluator's programme rules | A TOML file with `--site-file`, or `SiteProfile` in Python for a custom geotherm |
+| Assess your own pipe, flow, limits, timings or fluids | The [`[operations]` table](#operating-choices), or `Operations` in Python |
 | Specify a circulation, stability, wall-temperature or tool calculation | Public component functions in the [Python API](../api.md) |
 | Reproduce documented design interventions | Internal [study modules](../science/design-comparisons.md#evidence-and-reproduction), which provide no stable programme-configuration interface |
 
@@ -291,11 +297,102 @@ The classes are `mwd_pulser`, `rotary_steerable`, `mud_motor`, `filter_sub` and 
 
 No published no-load figure with a stated flow was found for a mud motor, and no figure was found for filter or float subs. These classes default to zero, and the result carries a warning. The 9.5-in pulser and rotary steerable allowances each come from one source, and rotary steerable tools have no allowance at 8 in.
 
+## Operating choices
+
+The evaluator chooses the pipe, the flow, the tool and pump limits, the
+connection and trip timings, the rate of penetration and the drilling and
+trip fluids by fixed rules. The optional `[operations]` table states any of
+these. A key left out keeps the evaluator's rule, so a file without the
+table gives the result it gave before. Every starter file written by
+`borethm-new-site` ends with the table commented out, with units, ranges and
+defaults; remove the leading `# ` from `[operations]` and from each key you
+state.
+
+| Key | Unit | Accepted range | Default when left out |
+|---|---|---|---|
+| `pipes` | pipe names, tried in order | built-in names | `"TK-Drakon coated"`, `"internally coated"`, `"externally coated"`, `"conventional"` |
+| `flow` | kg/s with water; L/s at surface with a weighted fluid | 1 to 300 | the flow search |
+| `flows` | as `flow`, rising | each 1 to 300 | 5 to 50 in steps of 5, then 60 to 100 in steps of 10 |
+| `tool_limit_C` | °C | 50 to 400 | 200 |
+| `pump_pressure_limit_Pa` | Pa | 1e6 to 150e6 | 51.7e6 (7,500 psi) |
+| `rig_pumps` | pumps | 1 to 10 | 3 |
+| `min_annular_velocity_m_s` | m/s | 0.05 to 5 | 1.245 |
+| `precirculation_min` | min | 0 to 240 | 0.33 |
+| `connection_median_min` | min | 0.1 to 480 | 2.83 |
+| `connection_p90_min` | min | 0.1 to 480 | 6.33 |
+| `trip_hours` | h | 0.5 to 500 | FORGE 16B speeds and surface time, scaled to the target depth |
+| `trip_scale` | factor on that rule | 0.05 to 20 | 1 |
+| `stage_spacing_m` | m | 10 to 10,000 | 144.88, then the staging search |
+| `stage_minutes` | min | 0.5 to 600 | 15.51, then the staging search |
+| `rop_m_h` | m/h | 0.1 to 100 | Model 3, iterated with the wall's exposure for a coupled site |
+| `drilling_fluid_kg_m3` | kg/m³ at 20 °C | 990 to 2,600 | the drilling fluid's common window lower bound, iterated |
+| `trip_fluid_kg_m3` | kg/m³ at 20 °C | 990 to 2,600 | the larger of the drilling fluid and the trip window's lower bound |
+| `[operations.coating_ratings_C]` | pipe name to °C | each 50 to 400 | `"TK-Drakon coated" = 204.0` |
+| `[operations.sources]` | key to `[basis, source]` | the basis labels above | none |
+
+The flow follows the evaluator's flow grid: kg/s with water, and the same
+number as a surface volume flow in L/s with a weighted fluid, so the pumps
+deliver the same volume whatever the fluid's weight. The connection practice
+is the circulation after the last new hole (`precirculation_min`) followed by
+the 90th-percentile pumps-off time (`connection_p90_min`); the median sets
+the shorter pumps-off times the schedule search tries. `precirculation_min`,
+the two connection times and the staging defaults are FORGE 16B values.
+
+A stated value is used as given. Where the evaluator would otherwise search,
+stating the value ends the search, and a check the value fails is reported
+as failed:
+
+- a stated `flow` is the flow evaluated. A flow over the pump limit makes
+  the status NO-GO, and `programme.conflict` names each check the flow fails;
+- `precirculation_min` or `connection_p90_min` ends the connection schedule
+  search, and `stage_spacing_m` or `stage_minutes` ends the run-in staging
+  search. If the stated practice takes the tool past its limit, the tool fails;
+- `rop_m_h` replaces Model 3's rate and ends the iteration of rate and
+  exposure;
+- a stated fluid outside its common window makes the status NO-GO; inside
+  it, the condition names the stated fluid. A value below water's 998.2 kg/m³
+  is water.
+
+Give at most one of `flow` and `flows`, and at most one of `trip_hours` and
+`trip_scale`. `coating_ratings_C` replaces the whole table, so a pipe it
+leaves out has no rating. `pipes` cannot be combined with custom
+`programme.segments`, which fix the string. Operations apply to the default
+calculation mode, `--circulation v1.3.4`; with another mode a stated value
+is an error.
+
+```toml
+[operations]
+flow = 30.0
+tool_limit_C = 175.0
+stage_spacing_m = 100.0
+stage_minutes = 20.0
+
+[operations.sources]
+flow = ["assumed", "two pumps at 90 strokes/min"]
+tool_limit_C = ["measured", "MWD maker's rating sheet, edition, page"]
+stage_spacing_m = ["assumed", "planned run-in practice"]
+stage_minutes = ["assumed", "planned run-in practice"]
+```
+
+The check warns about a flow outside 5 to 100, a pipe that is not on sale,
+a coating rating for a pipe that is not a candidate, a tool limit above
+300 °C, a pump limit above the reference pumps' 7,475 psi rating, a median
+connection longer than the 90th percentile, a staging interval shorter than
+a stand, a rate of penetration above Model 3's 20 m/h ceiling, a fluid
+below water's density, a trip fluid lighter than the drilling fluid, and a
+stated value without a source. The result records each operating choice as
+stated or default ([interpreting results](interpreting-results.md#operations-and-limit-checks)),
+and the [limitations guide](../science/limitations.md#operating-choices-that-remain-fixed)
+lists the choices that remain fixed.
+
 ## Python route
 
 `load_site` returns a `SiteProfile`. Use it with the public validation,
 evaluation and export functions, as in the [README example](../../README.md#run-your-own-assessment).
 You can also construct a `SiteProfile` directly with `StressProfile` objects.
+`Operations` states operating choices in Python, as
+`evaluate(site, operations=Operations(flow=30.0))` or on
+`SiteProfile.operations`; `validate_operations` checks it.
 The public `layered_geotherm` builds a temperature callable from measured points.
 
 For a temperature shape beyond the file's forms, supply your own callable.

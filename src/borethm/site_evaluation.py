@@ -2989,7 +2989,7 @@ def _reading_reason(reason):
     return reason[:1].upper() + reason[1:].rstrip('.') + '.'
 
 
-# The operations that enter each kind of controlling constraint, by the
+# The operations used in each kind of controlling check, by the
 # start of the status reason (site_status) or a phrase in it.
 _TOOL_INPUTS = ('tool_limit_C', 'flow', 'flows', 'pipes', 'precirculation_min', 'connection_median_min',
                 'connection_p90_min', 'stage_spacing_m', 'stage_minutes', 'trip_hours', 'trip_scale',
@@ -3013,7 +3013,7 @@ _CONSTRAINT_INPUTS = (
 
 
 def _stated_inputs(o, reason):
-    """A sentence naming the stated operations that enter the check behind a
+    """A sentence naming the stated operations used in the check behind a
     status reason, or '' if none does."""
     from borethm.operations import describe
     ops = _operations(o['site']) if 'site' in o else EMPTY
@@ -3026,7 +3026,7 @@ def _stated_inputs(o, reason):
     if not named:
         return ''
     unit = 'kg/s' if o.get('fluid') is None else 'L/s'
-    return (' Stated operations that enter this check: '
+    return (' Stated operations used in this check: '
             + '; '.join(describe(n, stated[n], unit) for n in named) + '.')
 
 

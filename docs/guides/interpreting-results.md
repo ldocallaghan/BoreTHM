@@ -153,6 +153,46 @@ Some study exports also include a schedule search under `tools.robustness_search
 
 Coating temperatures and time above rating are separate from tool temperature. A coating history can use a different schedule from the best tool attempt. The [reference-programme comparison](../science/design-comparisons.md#independent-programme-failures) illustrates that distinction.
 
+## Operations and limit checks
+
+Results of the default calculation mode, `v1.3.4`, carry six further keys.
+Densities are surface densities in kg/m³ at 20 °C. A margin is the limit
+less the value, so a positive margin passes.
+
+| JSON field | What it describes |
+|---|---|
+| `operations` | Each operating choice as the evaluation used it: `value`, `unit`, `stated` (true where the `[operations]` table or `Operations` gave it), `rule` for a default, and `basis` and `source` where stated. Values the evaluator searched for are the results of the search: the flow chosen, the trip time, the staging checked, the rate of penetration and the fluids simulated |
+| `window_profile` | The bounds at every depth `common_windows` evaluated (`depths_m`, deepest first). For each state and case under `states`: `lo_kg_m3`, `lo_mechanism`, `hi_kg_m3` and `hi_mechanism`, one entry per depth, `null` where that state sets no bound. For `drilling_fluid` and `trip_fluid`: the bounds across their states and cases at each depth, with the state, case and mechanism that set each (`lo_by`, `hi_by`) and the width |
+| `window_width` | For the drilling and trip fluids: the common window's lower and upper bounds, its width (negative when the window is closed) and whether it is open |
+| `pump_check` | The pressure limit and pump count used; for drilling and for the trip, the standpipe pressure, the margin to the limit, a pass flag, the flow and the rig's capacity at that pressure. `trip.separate_circulation` is true when a trip fluid heavier than the drilling fluid has its own circulation |
+| `tool_check` | The tool limit; for drilling, the connection, the staged run-in and the unstaged run-in, the peak, the margin and a pass flag; and the connection and run-in schedules found or stated |
+| `coating_check` | The rating of the deepest coated pipe and, while circulating, through a connection and running in, the maximum, the margin and a pass flag (`null` without a rating) |
+
+The mechanism of a lower bound is `breakout width`, the pressure that keeps
+the breakout within its width limit, or `pore pressure` where that is
+higher. The upper bound is `Shmin less margin`: Shmin less 0.05 SG, with the
+circulating friction while drilling and the surge allowance on the trip. A
+lower bound below water's density at a depth means that water keeps the breakout within its limit
+there; the common window's lower bound is never below water. At each
+common window's binding depth, `window_profile` gives the bound under
+`windows`.
+
+`tool_check.run_in_unstaged` is the run-in with no circulation pauses. Its
+pass flag is reported for comparison and does not set the status, which
+uses the staged run-in and any schedule found.
+
+For Newberry with no operations, `window_width.drilling_fluid` runs from
+998.2 to 1,218.8 kg/m³, a width of 220.6 kg/m³. The upper bound is set at the
+target, 3,629.5 m, by the drilling state of the case mu 0.7, p10, through
+Shmin less margin. `tool_check` gives a 200 °C limit with peaks of 92.3 °C
+while drilling, 97.3 °C on the staged run-in and 175.7 °C unstaged, a
+margin of 24.3 °C.
+
+When a stated value is used in the check behind the controlling constraint,
+`reading.controlling_constraint` adds a sentence naming it, for example:
+"The tool check fails: 180 C at the bit while drilling. Stated operations
+that enter this check: tool limit 175 C."
+
 ## Other outputs to inspect
 
 | JSON field | What it describes |
@@ -163,6 +203,7 @@ Coating temperatures and time above rating are separate from tool temperature. A
 | `programme` | Pipe and flow, required and simulated fluid densities, thermal results and hydraulic losses |
 | `cycle.cases[]` | Target stability-cycle results for each stress and strength case |
 | `components` | Numerical, pressure and equipment checks contributing to status |
+| `operations`, `window_profile`, `window_width`, `pump_check`, `tool_check`, `coating_check` | The operating choices used and the checks against each limit ([above](#operations-and-limit-checks)) |
 | `sensitivities` | The comparisons actually supplied |
 | `versions`, `evaluation` | Software and runtime provenance, and the calculation mode |
 

@@ -1,5 +1,35 @@
 # Changelog
 
+## Unreleased
+
+**Operating choices.** `evaluate` takes `operations`, an `Operations` with
+optional fields for the pipe candidates, a fixed flow or the flows searched,
+the tool limit, the coating ratings, the pump pressure limit and pump count,
+the hole-cleaning velocity, the connection times, the trip time or a scale on
+it, the run-in staging, the rate of penetration and the drilling and trip
+fluids. A field left as `None` keeps the evaluator's rule, so every result
+without operations is unchanged to the last bit under both physics choices.
+A stated value is used as given; where the evaluator would otherwise search
+for it, the search does not run, and a check the value fails is reported as
+failed. Operations apply to `circulation='v1.3.4'`.
+
+**Site files.** An optional `[operations]` table gives the same fields, with
+`pipes` by name and `sources` with the data-basis labels. It is parsed
+strictly. `borethm-new-site` writes it commented out at the end of every
+starter file, with units, ranges and defaults. `validate_operations`, also
+run by `validate_site` and `borethm-evaluate --check`, rejects values outside
+their ranges and warns about values outside the evaluator's reference ranges
+and values without a source. `SiteProfile` has a new optional field,
+`operations`.
+
+**Result additions.** Results of `circulation='v1.3.4'` add `operations` (each
+choice as used, stated or default), `window_profile` (the drilling and trip
+fluid bounds at every evaluated depth, for each state and case, with the
+mechanism that sets each), `window_width`, `pump_check`, `tool_check` (with a
+pass flag for the unstaged run-in) and `coating_check`. No existing key or
+value changes. `reading.controlling_constraint` names any stated value that
+is used in the controlling check.
+
 ## v1.8.0 (6 November 2026)
 
 Every result calculated with the package defaults changes. `physics='v1.7.0'`
