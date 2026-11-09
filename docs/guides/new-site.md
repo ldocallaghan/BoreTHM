@@ -297,6 +297,36 @@ The classes are `mwd_pulser`, `rotary_steerable`, `mud_motor`, `filter_sub` and 
 
 No published no-load figure with a stated flow was found for a mud motor, and no figure was found for filter or float subs. These classes default to zero, and the result carries a warning. The 9.5-in pulser and rotary steerable allowances each come from one source, and rotary steerable tools have no allowance at 8 in.
 
+### Named pipes in a custom string
+
+A custom string in `[programme]` lists its segments from surface to bit,
+with lengths that add up to the target depth. A segment gives either `pipe`,
+naming one of the model's pipe types, or a single wall layer through
+`bore_diameter` and `outer_diameter` [m] and `conductivity` [W/(m K)], with an
+optional `name` and `source`. `pipe` cannot be combined with those keys,
+since the named type gives its own wall; an unknown name is an error that
+lists the names. The names are `"TK-Drakon coated"`, `"internally coated"`,
+`"externally coated"`, `"conventional"`, `"dual-wall"` and
+`"vacuum-insulated (sensitivity)"`; the last two are not on sale. A segment
+with `pipe` may still give `hydraulic_joint`, `local_loss`, `tool_loss` and
+`tools`. Starter files end with a commented example.
+
+```toml
+[programme]
+[[programme.segments]]
+length = 1000.0
+pipe = "vacuum-insulated (sensitivity)"
+[[programme.segments]]
+length = 9233.2
+pipe = "TK-Drakon coated"
+[[programme.segments]]
+length = 466.8
+name = "drill collar"
+bore_diameter = 0.0714
+outer_diameter = 0.1714
+conductivity = 45.0
+```
+
 ## Operating choices
 
 The evaluator chooses the pipe, the flow, the tool and pump limits, the
@@ -311,8 +341,10 @@ state.
 | Key | Unit | Accepted range | Default when left out |
 |---|---|---|---|
 | `pipes` | pipe names, tried in order | built-in names | `"TK-Drakon coated"`, `"internally coated"`, `"externally coated"`, `"conventional"` |
-| `flow` | kg/s with water; L/s at surface with a weighted fluid | 1 to 300 | the flow search |
-| `flows` | as `flow`, rising | each 1 to 300 | 5 to 50 in steps of 5, then 60 to 100 in steps of 10 |
+| `mass_flow_kg_s` | kg/s | 1 to 300 | the flow search |
+| `volume_flow_L_s` | L/s at surface | 1 to 300 | the flow search |
+| `mass_flows_kg_s` | kg/s, rising | each 1 to 300 | 5 to 50 in steps of 5, then 60 to 100 in steps of 10, in kg/s with water |
+| `volume_flows_L_s` | L/s at surface, rising | each 1 to 300 | the same numbers in L/s with a weighted fluid |
 | `tool_limit_C` | °C | 50 to 400 | 200 |
 | `pump_pressure_limit_Pa` | Pa | 1e6 to 150e6 | 51.7e6 (7,500 psi) |
 | `rig_pumps` | pumps | 1 to 10 | 3 |
@@ -330,9 +362,13 @@ state.
 | `[operations.coating_ratings_C]` | pipe name to °C | each 50 to 400 | `"TK-Drakon coated" = 204.0` |
 | `[operations.sources]` | key to `[basis, source]` | the basis labels above | none |
 
-The flow follows the evaluator's flow grid: kg/s with water, and the same
-number as a surface volume flow in L/s with a weighted fluid, so the pumps
-deliver the same volume whatever the fluid's weight. The connection practice
+A flow is a mass flow in kg/s or a volume flow in L/s at surface, at the
+fluid's density at 20 °C; the mass flow is the volume times that density.
+The evaluator's own flow grid is in kg/s with water and in L/s with a
+weighted fluid, so its pumps deliver the same volume whatever the fluid's
+weight. A flow stated in the evaluator's own unit is used unchanged, and
+the other unit is converted at the fluid's density, so stating the flow the
+evaluator chose gives the same circulation. The connection practice
 is the circulation after the last new hole (`precirculation_min`) followed by
 the 90th-percentile pumps-off time (`connection_p90_min`); the median sets
 the shorter pumps-off times the schedule search tries. `precirculation_min`,
@@ -342,7 +378,7 @@ A stated value is used as given. Where the evaluator would otherwise search,
 stating the value ends the search, and a check the value fails is reported
 as failed:
 
-- a stated `flow` is the flow evaluated. A flow over the pump limit makes
+- a stated `mass_flow_kg_s` or `volume_flow_L_s` is the flow evaluated. A flow over the pump limit makes
   the status NO-GO, and `programme.conflict` names each check the flow fails;
 - `precirculation_min` or `connection_p90_min` ends the connection schedule
   search, and `stage_spacing_m` or `stage_minutes` ends the run-in staging
@@ -353,7 +389,7 @@ as failed:
   it, the condition names the stated fluid. A value below water's 998.2 kg/m³
   is water.
 
-Give at most one of `flow` and `flows`, and at most one of `trip_hours` and
+Give at most one of the four flow keys, and at most one of `trip_hours` and
 `trip_scale`. `coating_ratings_C` replaces the whole table, so a pipe it
 leaves out has no rating. `pipes` cannot be combined with custom
 `programme.segments`, which fix the string. Operations apply to the default
@@ -362,13 +398,13 @@ is an error.
 
 ```toml
 [operations]
-flow = 30.0
+volume_flow_L_s = 30.0
 tool_limit_C = 175.0
 stage_spacing_m = 100.0
 stage_minutes = 20.0
 
 [operations.sources]
-flow = ["assumed", "two pumps at 90 strokes/min"]
+volume_flow_L_s = ["assumed", "two pumps at 90 strokes/min"]
 tool_limit_C = ["measured", "MWD maker's rating sheet, edition, page"]
 stage_spacing_m = ["assumed", "planned run-in practice"]
 stage_minutes = ["assumed", "planned run-in practice"]
@@ -380,7 +416,8 @@ a coating rating for a pipe that is not a candidate, a tool limit above
 connection longer than the 90th percentile, a staging interval shorter than
 a stand, a rate of penetration above Model 3's 20 m/h ceiling, a fluid
 below water's density, a trip fluid lighter than the drilling fluid, and a
-stated value without a source. The result records each operating choice as
+stated value without a source. Each message names its key, as in
+`operations.tool_limit_C: no source is given`. The result records each operating choice as
 stated or default ([interpreting results](interpreting-results.md#operations-and-limit-checks)),
 and the [limitations guide](../science/limitations.md#operating-choices-that-remain-fixed)
 lists the choices that remain fixed.
@@ -391,8 +428,11 @@ lists the choices that remain fixed.
 evaluation and export functions, as in the [README example](../../README.md#run-your-own-assessment).
 You can also construct a `SiteProfile` directly with `StressProfile` objects.
 `Operations` states operating choices in Python, as
-`evaluate(site, operations=Operations(flow=30.0))` or on
-`SiteProfile.operations`; `validate_operations` checks it.
+`evaluate(site, operations=Operations(volume_flow_L_s=30.0))` or on
+`SiteProfile.operations`. `validate_operations` checks it and returns records
+with the field, a level (`error` or `warning`) and the message;
+`operation_defaults(site, programme)` gives each field's default value, unit,
+rule and source, with the values that depend on the site and programme.
 The public `layered_geotherm` builds a temperature callable from measured points.
 
 For a temperature shape beyond the file's forms, supply your own callable.

@@ -161,12 +161,12 @@ less the value, so a positive margin passes.
 
 | JSON field | What it describes |
 |---|---|
-| `operations` | Each operating choice as the evaluation used it: `value`, `unit`, `stated` (true where the `[operations]` table or `Operations` gave it), `rule` for a default, and `basis` and `source` where stated. Values the evaluator searched for are the results of the search: the flow chosen, the trip time, the staging checked, the rate of penetration and the fluids simulated |
+| `operations` | Each operating choice as the evaluation used it: `value`, `unit`, `stated` (true where the `[operations]` table or `Operations` gave it), `rule` and `rule_source` for a default, and `basis` and `source` where stated. Values the evaluator searched for are the results of the search: the flow chosen, the trip time, the staging checked, the rate of penetration and the fluids simulated. The flow appears in both units, as `mass_flow_kg_s` and `volume_flow_L_s` (at the drilling fluid's density at 20 °C), and so does the grid searched; `stated` marks the one given |
 | `window_profile` | The bounds at every depth `common_windows` evaluated (`depths_m`, deepest first). For each state and case under `states`: `lo_kg_m3`, `lo_mechanism`, `hi_kg_m3` and `hi_mechanism`, one entry per depth, `null` where that state sets no bound. For `drilling_fluid` and `trip_fluid`: the bounds across their states and cases at each depth, with the state, case and mechanism that set each (`lo_by`, `hi_by`) and the width |
 | `window_width` | For the drilling and trip fluids: the common window's lower and upper bounds, its width (negative when the window is closed) and whether it is open |
-| `pump_check` | The pressure limit and pump count used; for drilling and for the trip, the standpipe pressure, the margin to the limit, a pass flag, the flow and the rig's capacity at that pressure. `trip.separate_circulation` is true when a trip fluid heavier than the drilling fluid has its own circulation |
-| `tool_check` | The tool limit; for drilling, the connection, the staged run-in and the unstaged run-in, the peak, the margin and a pass flag; and the connection and run-in schedules found or stated |
-| `coating_check` | The rating of the deepest coated pipe and, while circulating, through a connection and running in, the maximum, the margin and a pass flag (`null` without a rating) |
+| `pump_check` | The pressure limit and pump count used; for drilling and for the trip, the standpipe pressure, the margin to the limit, a pass flag, the flow and the rig's capacity at that pressure, in US gal/min (`flow_gpm`, `rig_capacity_gpm`) and in L/s (`flow_L_s`, `rig_capacity_L_s`, with 1 US gal = 3.785411784 L). `trip.separate_circulation` is true when a trip fluid heavier than the drilling fluid has its own circulation |
+| `tool_check` | The tool limit; for drilling, the connection, the staged run-in and the unstaged run-in, the peak, the margin, a pass flag and `sets_status`; and the connection and run-in schedules found or stated |
+| `coating_check` | The rating of the deepest coated pipe and, while circulating, through a connection and running in, the maximum, the margin, a pass flag (`null` without a rating) and `sets_status` |
 
 The mechanism of a lower bound is `breakout width`, the pressure that keeps
 the breakout within its width limit, or `pore pressure` where that is
@@ -177,9 +177,10 @@ there; the common window's lower bound is never below water. At each
 common window's binding depth, `window_profile` gives the bound under
 `windows`.
 
-`tool_check.run_in_unstaged` is the run-in with no circulation pauses. Its
-pass flag is reported for comparison and does not set the status, which
-uses the staged run-in and any schedule found.
+`sets_status` is true for each entry that decides the tool or coating status
+and false for an entry reported for comparison. The only such entry is
+`tool_check.run_in_unstaged`, the run-in with no circulation pauses: the
+status uses the staged run-in and any schedule found.
 
 For Newberry with no operations, `window_width.drilling_fluid` runs from
 998.2 to 1,218.8 kg/m³, a width of 220.6 kg/m³. The upper bound is set at the
