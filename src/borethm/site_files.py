@@ -179,6 +179,11 @@ def load_site(path):
     strength_cases contains [label, UCS in Pa] pairs; data_basis maps input
     names to [basis, source] pairs. Arrays become the corresponding tuples.
 
+    An optional [operations] table gives Operations fields in their SI
+    units: pipes names built-in pipe types, coating_ratings_C is a table of
+    pipe name to rating in degrees C, and sources maps field names to
+    [basis, source] pairs. Unknown keys and wrong types are errors.
+
     File, TOML and schema errors raise a one-line ValueError naming the
     file and key. This function parses data and executes no file content.
     Call validate_site on the returned profile to check physical ranges,
@@ -203,6 +208,12 @@ def load_site(path):
                 arguments[name]=programme_from_dict(item)
             except (ValueError,TypeError,KeyError) as error:
                 raise _error(path,name,str(error)) from None
+        elif name == 'operations':
+            from borethm.operations import operations_from_dict
+            try:
+                arguments[name] = operations_from_dict(item)
+            except (ValueError, TypeError) as error:
+                raise _error(path, name, str(error)) from None
         elif name in ('geotherm', 'geotherm_v11'):
             arguments[name] = _geotherm(item, path, name)
         elif name == 'stress_cases':

@@ -151,10 +151,101 @@ names the changes between sections; 'gradual' applies to joints as well.
 Under v1.8.0 the reference programme declares a 6.75-in MWD pulser
 allowance; bha_tools adds or replaces named tools in its collar section.
 
+## Operations
+
+```python
+Operations(pipes: tuple | None = None, flow: float | None = None, flows: tuple | None = None, tool_limit_C: float | None = None, coating_ratings_C: dict | None = None, pump_pressure_limit_Pa: float | None = None, rig_pumps: int | None = None, min_annular_velocity_m_s: float | None = None, precirculation_min: float | None = None, connection_median_min: float | None = None, connection_p90_min: float | None = None, trip_hours: float | None = None, trip_scale: float | None = None, stage_spacing_m: float | None = None, stage_minutes: float | None = None, rop_m_h: float | None = None, drilling_fluid_kg_m3: float | None = None, trip_fluid_kg_m3: float | None = None, sources: dict = <factory>) -> None
+```
+
+Operating choices for evaluate, in SI units. Every field is optional.
+
+None keeps the evaluator's rule, given here for each field:
+
+| Field | Meaning | When None |
+|---|---|---|
+| pipes | PipeType candidates, tried in order | TK-Drakon coated, internally coated, externally coated, conventional |
+| flow | one fixed flow | the flow search |
+| flows | the flows the search tries, ascending | 5 to 50 in steps of 5, then 60 to 100 in steps of 10 |
+| tool_limit_C | the downhole tool temperature limit [C] | 200 |
+| coating_ratings_C | pipe name to coating rating [C] | TK-Drakon coated: 204 |
+| pump_pressure_limit_Pa | the standpipe pressure limit [Pa] | 51.7e6 |
+| rig_pumps | number of rig pumps | 3 |
+| min_annular_velocity_m_s | the hole-cleaning annular velocity [m/s] | 1.245 |
+| precirculation_min | circulation after the last new hole before a connection [min] | FORGE 16B 10th percentile, 0.33 |
+| connection_median_min | median connection, pumps off [min] | FORGE 16B, 2.83 |
+| connection_p90_min | 90th-percentile connection, pumps off [min] | FORGE 16B, 6.33 |
+| trip_hours | time the bottom of the hole is static for a trip [h] | FORGE 16B speeds and surface time, scaled to depth |
+| trip_scale | a factor on that rule | 1 |
+| stage_spacing_m | run-in staging interval [m] | FORGE 16B 144.88, then the staging search |
+| stage_minutes | circulation at each run-in stage [min] | FORGE 16B 15.51, then the staging search |
+| rop_m_h | rate of penetration [m/h] | Model 3, iterated with the exposure for a coupled site |
+| drilling_fluid_kg_m3 | drilling fluid surface density at 20 C [kg/m3] | the common window's lower bound, iterated |
+| trip_fluid_kg_m3 | trip fluid surface density at 20 C [kg/m3] | the larger of the drilling fluid and the trip window's lower bound |
+| sources | field name to (basis, source) | empty |
+
+Flows follow the evaluator's flow grid: kg/s with water; with a
+weighted fluid the same number is the surface volume flow in L/s, so the
+pumps deliver the same volume whatever the fluid's weight. The result
+reports the flow and its unit as programme.flow and programme.flow_unit.
+
+A stated flow, connection practice (precirculation_min or
+connection_p90_min), run-in staging (stage_spacing_m or stage_minutes),
+rate of penetration or fluid is used as given, without the search for
+another value. A stated rate of penetration also ends the iteration of
+rate and exposure for a coupled site. A stated drilling fluid lighter
+than water's 998.2 kg/m3 is water. coating_ratings_C replaces the whole
+table, so a pipe it leaves out has no rating. pipes cannot be combined
+with a HydraulicProgramme that gives custom segments, which fix the
+string. Give at most one of flow and flows, and at most one of trip_hours
+and trip_scale.
+
+sources maps a field name to a (basis, source) pair, with the basis
+labels of a site's data_basis. validate_operations checks ranges and
+returns warnings.
+
+## validate_operations
+
+```python
+validate_operations(operations)
+```
+
+Check an Operations; return a list of warning strings.
+
+Invalid values raise ValueError. Ranges are inclusive:
+
+| Field | Accepted range | Unit |
+|---|---|---|
+| flow and each of flows | 1 to 300 | kg/s or L/s |
+| tool_limit_C | 50 to 400 | C |
+| each coating rating | 50 to 400 | C |
+| pump_pressure_limit_Pa | 1e6 to 150e6 | Pa |
+| rig_pumps | 1 to 10 | pumps |
+| min_annular_velocity_m_s | 0.05 to 5 | m/s |
+| precirculation_min | 0 to 240 | min |
+| connection_median_min, connection_p90_min | 0.1 to 480 | min |
+| trip_hours | 0.5 to 500 | h |
+| trip_scale | 0.05 to 20 | dimensionless |
+| stage_spacing_m | 10 to 10,000 | m |
+| stage_minutes | 0.5 to 600 | min |
+| rop_m_h | 0.1 to 100 | m/h |
+| drilling_fluid_kg_m3, trip_fluid_kg_m3 | 990 to 2,600 | kg/m3 at 20 C |
+
+flows must rise strictly. flow with flows, and trip_hours with
+trip_scale, raise ValueError. Each sources entry must name a field and
+use a site data_basis label. Warnings: a flow outside the evaluator's
+5 to 100 grid; a pipe with no drill pipe on sale; a coating rating for
+a pipe not among the candidates; a tool limit above 300 C; a pump
+limit above the reference pumps' 7,475 psi rating, above which the rig
+check finds no capacity; a median connection longer than the 90th
+percentile; a staging interval shorter than a stand; a rate of
+penetration above Model 3's 20 m/h ceiling; a drilling fluid below
+water's density; a trip fluid lighter than the drilling fluid; a stated
+field without a source.
+
 ## evaluate
 
 ```python
-evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupled=None, programme=None, hydraulics_model=None, surface=None, physics=None)
+evaluate(site: SiteProfile, v10=False, thermal=True, circulation='v1.3.4', coupled=None, programme=None, hydraulics_model=None, surface=None, physics=None, operations=None)
 ```
 
 Evaluate a SiteProfile through circulation, connections and trips.
@@ -203,6 +294,14 @@ physics is 'v1.8.0' or 'v1.7.0', which restores the previous defaults. None
 uses the programme's physics, and then the package default, v1.8.0. The
 v1.5.0 legacy calculation always uses v1.7.0. The result records physics.
 
+operations is an Operations, which states choices the evaluator
+otherwise makes by its own rules. None uses the site's operations, and
+then those rules; Operations() keeps every rule. Operations apply to
+circulation='v1.3.4': any stated value with another mode, or pipes with
+a programme that gives custom segments, raises ValueError. The result
+adds the effective operations and the checks against each limit, which
+result_dict reports.
+
 ## result_dict
 
 ```python
@@ -219,7 +318,13 @@ programme.backpressure_Pa is gauge; programme.spp_Pa is a pressure
 difference. The gauge reference is 0.1 MPa absolute.
 Includes input sources and runtime versions; does not run calculations.
 Results with components and status also include a reading of the
-existing checks and controlling constraint.
+existing checks and controlling constraint. Results of
+circulation='v1.3.4' also include operations (the effective operations,
+each stated or default), window_profile and window_width (the common
+windows at each depth, with the mechanism that sets each bound, and
+their widths), and pump_check, tool_check and coating_check (each limit
+used, the margin to it and a pass flag), described in
+docs/guides/interpreting-results.md.
 site_file optionally gives the TOML path, recorded as supplied with its
 current SHA-256. A previously captured {path, sha256} record may be
 supplied to preserve the identity of the file loaded before evaluation.
@@ -240,7 +345,7 @@ described in result_dict.
 ## SiteProfile
 
 ```python
-SiteProfile(name: str, geotherm: Callable, target_depth: float, target_T: float, Sv_grad: float, K0_min: float, SHmax_over_Sv: float, rho_fluid_grad: float, k_rock: float, E_rock: float, UCS: float, T_inj: float = 40.0, stress_cases: tuple = (), stress_basis: str = 'v1.0 ratios', strength_cases: tuple = (), data_basis: dict = <factory>, geotherm_v11: Callable = None, target_depth_v11: float = None, temperature_data_to: float = None, mu: float = 0.8, coupled: bool = False, programme: borethm.programme.HydraulicProgramme | None = None) -> None
+SiteProfile(name: str, geotherm: Callable, target_depth: float, target_T: float, Sv_grad: float, K0_min: float, SHmax_over_Sv: float, rho_fluid_grad: float, k_rock: float, E_rock: float, UCS: float, T_inj: float = 40.0, stress_cases: tuple = (), stress_basis: str = 'v1.0 ratios', strength_cases: tuple = (), data_basis: dict = <factory>, geotherm_v11: Callable = None, target_depth_v11: float = None, temperature_data_to: float = None, mu: float = 0.8, coupled: bool = False, programme: borethm.programme.HydraulicProgramme | None = None, operations: Operations | None = None) -> None
 ```
 
 Site inputs for evaluate, with temperature and stress profiles.
@@ -266,6 +371,10 @@ Construct a profile, then call validate_site.
 programme optionally supplies a HydraulicProgramme. None selects the
 documented reference programme during circulation. A custom string
 keeps its supplied pipes and does not receive reference tool curves.
+
+operations optionally supplies an Operations: the pipe, flow, limits,
+timings, rate of penetration and fluids that evaluate otherwise chooses
+by its own rules. None keeps those rules.
 
 The target() method returns the effective depth [m]; temperature()
 returns the effective geotherm callable. Passing v10=True selects the
@@ -331,6 +440,9 @@ These checks catch unit slips and implausible inputs. Acceptance does
 not establish that every fluid state remains inside the water-property
 table's temperature and absolute-pressure limits.
 
+A site's operations are checked by validate_operations after the site's
+own inputs; its warnings follow the site's.
+
 ## load_site
 
 ```python
@@ -358,6 +470,11 @@ and fractions [dimensionless]. Its defaults are transitional_bounds'
 defaults, including mu=0.8, independently of the site's own mu.
 strength_cases contains [label, UCS in Pa] pairs; data_basis maps input
 names to [basis, source] pairs. Arrays become the corresponding tuples.
+
+An optional [operations] table gives Operations fields in their SI
+units: pipes names built-in pipe types, coating_ratings_C is a table of
+pipe name to rating in degrees C, and sources maps field names to
+[basis, source] pairs. Unknown keys and wrong types are errors.
 
 File, TOML and schema errors raise a one-line ValueError naming the
 file and key. This function parses data and executes no file content.

@@ -36,6 +36,7 @@ def render():
             continue
         obj = getattr(borethm, name)
         signature = str(inspect.signature(obj)).replace('borethm.site_evaluation.', '')
+        signature = signature.replace('borethm.operations.', '')
         signature = signature.replace('<built-in function callable>', 'Callable')
         rows += ['```python', name + signature, '```', '', inspect.getdoc(obj), '']
     return '\n'.join(rows)

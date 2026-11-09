@@ -55,9 +55,10 @@ def test_expected_values_are_exact_copies_of_existing_goldens(case):
 @pytest.mark.parametrize('key', ['soultz', 'united-downs', 'larderello', 'pannonian', 'newberry'])
 def test_all_profile_fields_and_geotherm_samples_match_their_sources(key):
     original = asdict(se.named_sites()[key])
-    # Dataset 1.0 predates the optional hydraulic programme. Its published
-    # input snapshot stays fixed; absence must mean no custom programme.
+    # Dataset 1.0 predates the optional hydraulic programme and operations.
+    # Its published input snapshot stays fixed; absence must mean neither.
     assert original.pop('programme') is None
+    assert original.pop('operations') is None
     exported = read(DATASET / 'sites' / (key + '.json'))
     saved = read(ROOT / 'results/v1.3.4/checkpoint-1' / (key + '.json'))
     assert len(exported['stress_cases']) == len(saved['site']['stress_cases'])

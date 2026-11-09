@@ -12,6 +12,7 @@ import numpy as np
 
 from borethm import comparative_sites as cs
 from borethm import crosscheck_newberry as nb
+from borethm.operations import TEMPLATE as OPERATIONS_TEMPLATE
 
 
 DESTINATION = Path(__file__).resolve().parents[1] / 'src/borethm/templates/sites'
@@ -112,7 +113,7 @@ def render_record(record):
         rows += [_assignment(name, value) for name, value in case.items()]
     rows += ['', '[data_basis]']
     rows += [_assignment(_value(name), pair) for name, pair in data['data_basis'].items()]
-    return '\n'.join(rows) + '\n'
+    return '\n'.join(rows) + '\n' + OPERATIONS_TEMPLATE
 
 
 def capture_sites():

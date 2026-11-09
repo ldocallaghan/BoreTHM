@@ -147,3 +147,61 @@ temperature = ["extrapolated", "200 C at 5 km measured (GPK wells); 35 C/km assu
 "well check" = ["checked", "GPK3/GPK4 breakout onset and occurrence (crosscheck_soultz.py)"]
 conductivity = ["assumed", "2.9 W/(m K), representative granite value; no Soultz measurement source identified in the repository"]
 stiffness = ["assumed", "55 GPa, representative granite value; no Soultz measurement source identified in the repository"]
+
+# Operations: optional. Each key states a choice the evaluator otherwise
+# makes by its own rule; leave a key out to keep that rule. Remove the
+# leading "# " from [operations] and from each key you state. A stated
+# flow, connection practice, staging, rate of penetration or fluid is used
+# as given: if it fails a check, the result reports the failure and the
+# evaluator does not search for another value.
+# [operations]
+# Pipe candidates, tried in order. Default: the four below. Also accepted:
+# "dual-wall" and "vacuum-insulated (sensitivity)", which are not on sale.
+# pipes = ["TK-Drakon coated", "internally coated", "externally coated", "conventional"]
+# One fixed flow, kg/s with water or L/s at surface with a weighted fluid,
+# 1 to 300. Default: the search over flows below. Give flow or flows.
+# flow = 30.0
+# The flows the search tries, rising. Default:
+# flows = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100]
+# Downhole tool temperature limit, C, 50 to 400. Default 200.
+# tool_limit_C = 200.0
+# Standpipe pressure limit, Pa, 1e6 to 150e6. Default 51.7e6 (7,500 psi).
+# pump_pressure_limit_Pa = 51.7e6
+# Rig pumps, 1 to 10. Default 3 (each 1,980 hydraulic hp, 7,475 psi).
+# rig_pumps = 3
+# Hole-cleaning annular velocity, m/s, 0.05 to 5. Default 1.245.
+# min_annular_velocity_m_s = 1.245
+# Circulation after the last new hole before a connection, min, 0 to 240.
+# Default 0.33 (FORGE 16B, 10th percentile). Stating it or
+# connection_p90_min ends the connection schedule search.
+# precirculation_min = 0.33
+# Connection with the pumps off, min, 0.1 to 480. Defaults: FORGE 16B
+# median 2.83 and 90th percentile 6.33.
+# connection_median_min = 2.83
+# connection_p90_min = 6.33
+# Time the bottom of the hole is static for a trip, h, 0.5 to 500.
+# Default: FORGE 16B tripping speeds and surface time, scaled to the
+# target depth. trip_scale, 0.05 to 20, multiplies that rule. Give one.
+# trip_hours = 17.5
+# trip_scale = 1.0
+# Run-in staging: interval, m, 10 to 10,000, and circulation at each
+# stage, min, 0.5 to 600. Defaults: FORGE 16B 144.88 m and 15.51 min,
+# then a search over shorter intervals and longer stages. Stating either
+# ends the search.
+# stage_spacing_m = 144.88
+# stage_minutes = 15.51
+# Rate of penetration, m/h, 0.1 to 100. Default: Model 3, iterated with
+# the wall's exposure for a coupled site.
+# rop_m_h = 10.0
+# Drilling and trip fluid surface densities at 20 C, kg/m3, 990 to 2,600.
+# Defaults: the common windows' lower bounds, iterated with the
+# circulation. A value below water's 998.2 is water.
+# drilling_fluid_kg_m3 = 1100.0
+# trip_fluid_kg_m3 = 1150.0
+# Coating ratings, C, by pipe name. Default: TK-Drakon coated 204. A
+# stated table replaces the default, so a pipe left out has no rating.
+# [operations.coating_ratings_C]
+# "TK-Drakon coated" = 204.0
+# Sources for stated values, [basis, source], with the data_basis labels.
+# [operations.sources]
+# tool_limit_C = ["assumed", "Replace with the tool's rating sheet"]

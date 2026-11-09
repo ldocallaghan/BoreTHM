@@ -16,6 +16,8 @@ _EXPORTS = {
     'ReferenceToolLoss': ('hydraulic_losses','ReferenceToolLoss'),
     'SurfaceLoss': ('hydraulic_losses','SurfaceLoss'),
     'HydraulicProgramme': ('programme','HydraulicProgramme'),
+    'Operations': ('operations', 'Operations'),
+    'validate_operations': ('operations', 'validate_operations'),
     'evaluate': ('site_evaluation', 'evaluate'),
     'result_dict': ('site_evaluation', 'result_dict'),
     'export_result': ('site_evaluation', 'export_result'),
