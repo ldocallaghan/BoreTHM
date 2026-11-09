@@ -177,6 +177,11 @@ there; the common window's lower bound is never below water. At each
 common window's binding depth, `window_profile` gives the bound under
 `windows`.
 
+The pump flows are volume flows at the inlet, at the fluid's density at the
+inlet temperature and wellhead pressure. The operations record's
+`volume_flow_L_s` is at the fluid's density at 20 °C. For Newberry, with
+water entering at 40 °C, they are 30.24 and 30.05 L/s for 30 kg/s.
+
 `sets_status` is true for each entry that decides the tool or coating status
 and false for an entry reported for comparison. The only such entry is
 `tool_check.run_in_unstaged`, the run-in with no circulation pauses: the
