@@ -12,6 +12,18 @@ def pytest_addoption(parser):
                      help="also run the physical regressions marked slow")
 
 
+def pytest_terminal_summary(terminalreporter):
+    """After the tests that compare results with the recorded release
+    results, say which comparison ran (exact, or within a tolerance)."""
+    ran = [report for reports in terminalreporter.stats.values() for report in reports
+           if getattr(report, "when", None) == "call"
+           and "test_results_reproduce_the_release[" in getattr(report, "nodeid", "")]
+    if ran:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from make_golden_reproduction import comparison
+        terminalreporter.write_line("release reproduction: " + comparison()[1])
+
+
 def pytest_collection_modifyitems(config, items):
     """Skip tests marked slow unless --runslow is given. An explicit -m
     expression (for example -m slow) selects tests on its own terms."""

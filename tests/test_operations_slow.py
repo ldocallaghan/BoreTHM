@@ -1,7 +1,10 @@
 """Operations on Model 1 solves and full evaluations.
 
 With no operations and with Operations(), the evaluation reproduces the
-v1.8.0 release result exactly (tests/make_golden_reproduction.py records it).
+v1.8.0 release result (tests/make_golden_reproduction.py records it): exactly
+on the platform the results were recorded on, and within a relative
+tolerance of 1e-9 elsewhere. The test report's header says which comparison
+ran.
 The result additions agree with the existing keys, and stated values change
 what they state on real circulations.
 """
@@ -16,7 +19,7 @@ from borethm import site_evaluation as se
 from borethm import well_geometry as wg
 from borethm.operations import Operations
 from borethm.programme import HydraulicProgramme
-from make_golden_reproduction import ADDED_KEYS, PHYSICS, SITES, path, recorded
+from make_golden_reproduction import ADDED_KEYS, PHYSICS, SITES, comparison, differences, path, recorded
 
 pytestmark = [pytest.mark.slow, pytest.mark.default_physics]
 CASES = [(key, p) for key in SITES for p in PHYSICS]
@@ -44,9 +47,15 @@ def canonical(data):
 
 @pytest.mark.parametrize('mode', ['none', 'empty'])
 @pytest.mark.parametrize('key,physics_name', CASES)
-def test_results_reproduce_the_release_exactly(results, key, physics_name, mode):
+def test_results_reproduce_the_release(results, key, physics_name, mode):
     golden = json.loads(path(key, physics_name).read_text(encoding='utf-8'))
-    assert canonical(recorded(results(key, physics_name, mode))) == canonical(golden)
+    result = recorded(results(key, physics_name, mode))
+    kind, description = comparison()
+    if kind == 'exact':
+        assert canonical(result) == canonical(golden), description
+    else:
+        found = differences(json.loads(canonical(result)), golden)
+        assert not found, description + '\n' + '\n'.join(found[:20])
 
 
 @pytest.mark.parametrize('key,physics_name', CASES)
