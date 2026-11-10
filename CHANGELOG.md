@@ -22,6 +22,11 @@ search and for the flow grids, which have no value: the evaluator reads its
 grid as kg/s while the fluid is water and as L/s at surface once it is
 weighted, and a stated grid keeps its unit in every pass.
 
+**Stated fluids.** A stated drilling or trip fluid heavier than water and
+inside its common window makes the status CONDITIONAL with a condition that
+gives the window it was checked against, and says whether the window admits
+water. Results without a stated fluid are unchanged.
+
 **Site files.** An optional `[operations]` table gives the same fields, with
 `pipes` by name and `sources` with the data-basis labels. It is parsed
 strictly. `borethm-new-site` writes it commented out at the end of every

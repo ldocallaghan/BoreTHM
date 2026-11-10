@@ -2429,6 +2429,19 @@ def component_statuses(out):
     return result
 
 
+def _stated_fluid_condition(name, rho, window):
+    """The condition for a stated fluid heavier than water inside its common
+    window: the window it is checked against, and why it is a condition."""
+    text = f"the stated {name} of {rho / 1000:.3f} SG at surface"
+    if window is None:
+        return text
+    upper = "no upper bound" if window["hi"] == float("inf") else f"{window['hi'] / 1000:.3f} SG"
+    text += f", within its common window, {window['lo'] / 1000:.3f} SG to {upper}"
+    if window["lo"] <= fluids.water().rho_surface + 1.0:
+        return text + "; the window admits water, so the condition is the stated fluid heavier than water"
+    return text + "; the window needs a fluid heavier than water"
+
+
 def site_status(components, windows=None, tools=None, operations=None):
     """The top-level label and its reasons, from component_statuses:
 
@@ -2445,8 +2458,9 @@ def site_status(components, windows=None, tools=None, operations=None):
       GO              none of these.
 
     operations: the evaluation's Operations. A stated drilling or trip
-    fluid outside its common window (windows) is a NO-GO; inside it, the
-    condition names the stated fluid. A stated hole-cleaning velocity or
+    fluid outside its common window (windows) is a NO-GO; inside it and
+    heavier than water, the condition names the stated fluid, its window and
+    whether the window admits water. A stated hole-cleaning velocity or
     pump count is named in its condition."""
     c = components
     ops = operations or EMPTY
@@ -2492,7 +2506,7 @@ def site_status(components, windows=None, tools=None, operations=None):
             rho = dict((key, value) for key, _, value in stated_fluids)[k]
             if rho is not None:
                 if rho > fluids.water().rho_surface + 1.0:
-                    conds.append(f"the stated {name} of {rho / 1000:.3f} SG at surface")
+                    conds.append(_stated_fluid_condition(name, rho, None if windows is None else windows[k]))
                 continue
             if not p["open"]:
                 conds.append(f"{name}: {p['note']}")

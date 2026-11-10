@@ -385,9 +385,10 @@ as failed:
   search. If the stated practice takes the tool past its limit, the tool fails;
 - `rop_m_h` replaces Model 3's rate and ends the iteration of rate and
   exposure;
-- a stated fluid outside its common window makes the status NO-GO; inside
-  it, the condition names the stated fluid. A value below water's 998.2 kg/m³
-  is water.
+- a stated fluid outside its common window makes the status NO-GO. A stated
+  fluid inside it and heavier than water makes the status CONDITIONAL: the
+  condition names the fluid and its window, and says whether the window
+  admits water. A value below water's 998.2 kg/m³ is water.
 
 Give at most one of the four flow keys, and at most one of `trip_hours` and
 `trip_scale`. `coating_ratings_C` replaces the whole table, so a pipe it

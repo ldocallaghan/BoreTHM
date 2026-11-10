@@ -502,8 +502,21 @@ def test_a_stated_fluid_outside_its_window_is_a_no_go(water):
 def test_a_stated_fluid_inside_its_window_is_named_as_the_condition(water):
     status = se.site_status(components(), windows=WINDOWS,
                             operations=Operations(drilling_fluid_kg_m3=1100.0, trip_fluid_kg_m3=1100.0))
-    assert status == dict(label='CONDITIONAL', reasons=['the stated drilling fluid of 1.100 SG at surface',
-                                                        'the stated trip fluid of 1.100 SG at surface'])
+    assert status == dict(label='CONDITIONAL', reasons=[
+        'the stated drilling fluid of 1.100 SG at surface, within its common window, 1.040 SG to 1.200 SG; '
+        'the window needs a fluid heavier than water',
+        'the stated trip fluid of 1.100 SG at surface, within its common window, 1.060 SG to no upper bound; '
+        'the window needs a fluid heavier than water'])
+
+
+def test_a_stated_fluid_where_water_would_do_says_so(water):
+    windows = dict(drilling_fluid=dict(lo=998.2, hi=1163.0, open=True),
+                   trip_fluid=dict(lo=998.2, hi=1221.0, open=True))
+    status = se.site_status(components(), windows=windows, operations=Operations(drilling_fluid_kg_m3=1100.0))
+    assert status == dict(label='CONDITIONAL', reasons=[
+        'the stated drilling fluid of 1.100 SG at surface, within its common window, 0.998 SG to 1.163 SG; '
+        'the window admits water, so the condition is the stated fluid heavier than water'])
+    assert se.site_status(components(), windows=windows) == se.site_status(components())
 
 
 def test_stated_cleaning_velocity_and_pumps_are_named(water):
