@@ -260,14 +260,24 @@ operation_defaults(site=None, programme=None)
 ```
 
 The evaluator's rule for each Operations field, as
-{field: dict(value, unit, rule, source)}.
+{field: dict(value, unit, rule, source, restates_default)}.
 
 value is the default the evaluator uses where it is a fixed value, and
 None where the evaluator searches or iterates for it (the flow, the rate
-of penetration and the fluids). With a site, values that depend on it
-are given for that site: the trip time at its target depth. With a
-programme (HydraulicProgramme) that gives custom segments, the pipe is
-the first segment's. Without them those entries give the rule alone.
+of penetration and the fluids) or reads it in a unit that depends on the
+fluid (the flow grids). With a site, values that depend on it are given
+for that site: the trip time at its target depth. With a programme
+(HydraulicProgramme) that gives custom segments, the pipe is the first
+segment's. Without them those entries give the rule alone.
+
+rule is one sentence that gives the value the model uses; source names
+where the value comes from. restates_default is True when stating value
+alone in Operations gives the same result as stating nothing, apart from
+the operations record and the sentences that name stated values. It is
+False where value is None, for the pipe of a custom string, which
+Operations cannot state, and for every field whose stated value ends a
+search (precirculation_min, connection_p90_min, stage_spacing_m and
+stage_minutes; see SEARCHED).
 
 ## evaluate
 

@@ -3,6 +3,7 @@ the functions that use them, on synthetic inputs without Model 1 solves."""
 from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
+import re
 import subprocess
 import sys
 
@@ -603,14 +604,15 @@ def test_operation_defaults_give_value_unit_rule_and_source():
     defaults = borethm.operation_defaults()
     assert set(defaults) == set(op.UNITS)
     for name, entry in defaults.items():
-        assert set(entry) == {'value', 'unit', 'rule', 'source'}, name
+        assert set(entry) == {'value', 'unit', 'rule', 'source', 'restates_default'}, name
         assert entry['unit'] == op.UNITS[name]
         assert entry['rule'] and entry['source'], name
     t = dc.forge_timings()
     assert defaults['tool_limit_C']['value'] == se.C.BHA_SURVIVAL_TEMP
     assert defaults['pump_pressure_limit_Pa']['value'] == se.m1.PUMP_LIMIT
     assert defaults['rig_pumps']['value'] == se.RIG_PUMPS
-    assert defaults['mass_flows_kg_s']['value'] == list(se.SITE_FLOWS)
+    assert defaults['mass_flows_kg_s']['value'] is None and defaults['volume_flows_L_s']['value'] is None
+    assert 'first fluid pass' in defaults['mass_flows_kg_s']['rule']
     assert defaults['pipes']['value'] == [p.name for p in se.SITE_PIPES]
     assert defaults['coating_ratings_C']['value'] == se.COATING_RATINGS
     assert defaults['connection_p90_min']['value'] == t.connection_p90_min
@@ -618,6 +620,52 @@ def test_operation_defaults_give_value_unit_rule_and_source():
     for searched in ('mass_flow_kg_s', 'volume_flow_L_s', 'rop_m_h', 'drilling_fluid_kg_m3', 'trip_fluid_kg_m3'):
         assert defaults[searched]['value'] is None
     assert defaults['trip_hours']['value'] is None
+
+
+# A sample value for each field, to build an Operations stating it alone.
+SAMPLES = dict(pipes=(wg.TK_DRAKON,), mass_flow_kg_s=30.0, volume_flow_L_s=30.0, mass_flows_kg_s=(20.0, 30.0),
+               volume_flows_L_s=(20.0, 30.0), tool_limit_C=200.0, coating_ratings_C={'TK-Drakon coated': 204.0},
+               pump_pressure_limit_Pa=51.7e6, rig_pumps=3, min_annular_velocity_m_s=1.245,
+               precirculation_min=0.33, connection_median_min=2.83, connection_p90_min=6.33, trip_hours=17.0,
+               trip_scale=1.0, stage_spacing_m=144.9, stage_minutes=15.51, rop_m_h=5.0,
+               drilling_fluid_kg_m3=1050.0, trip_fluid_kg_m3=1050.0)
+# The evaluator iterates these with the circulation (drilling_fluid and the
+# rate-of-penetration passes), so a stated value ends the iteration.
+ITERATED = ('rop_m_h', 'drilling_fluid_kg_m3', 'trip_fluid_kg_m3')
+
+
+def test_fields_the_evaluator_searches_never_restate_the_default():
+    assert set(SAMPLES) == set(op.UNITS)
+    searched = set(ITERATED)
+    for name, value in SAMPLES.items():
+        ops = Operations(**{name: value})
+        if ops.fixed_flow or ops.flow_grid or ops.fixed_connection or ops.fixed_staging:
+            searched.add(name)
+    assert searched == set(op.SEARCHED)
+    site = se.find_site('newberry')
+    custom = borethm.HydraulicProgramme(reference=None, segments=(wg.StringSegment(site.target(), wg.TK_DRAKON),))
+    for defaults in (borethm.operation_defaults(), borethm.operation_defaults(site),
+                     borethm.operation_defaults(site, custom)):
+        for name, entry in defaults.items():
+            if name in searched or entry['value'] is None:
+                assert entry['restates_default'] is False, name
+    assert borethm.operation_defaults(site)['trip_hours']['restates_default'] is True
+    assert borethm.operation_defaults(site, custom)['pipes']['restates_default'] is False
+    assert borethm.operation_defaults(site)['pipes']['restates_default'] is True
+
+
+def test_operation_defaults_name_their_sources_in_words():
+    site = se.find_site('newberry')
+    for defaults in (borethm.operation_defaults(), borethm.operation_defaults(site)):
+        for name, entry in defaults.items():
+            for text in (entry['rule'], entry['source']):
+                assert '_' not in text and 'data/' not in text, (name, text)
+                assert not re.search(r'[A-Za-z]\.[A-Za-z]', text), (name, text)
+    defaults = borethm.operation_defaults(site)
+    assert defaults['pump_pressure_limit_Pa']['rule'] == "51.7 MPa, from the reference design's 7,500 psi"
+    assert defaults['tool_limit_C']['rule'].startswith('200 C')
+    assert defaults['trip_hours']['rule'].startswith('17.459 h at the target depth')
+    assert defaults['min_annular_velocity_m_s']['rule'].startswith('1.245 m/s')
 
 
 def test_operation_defaults_for_a_site_and_a_programme():

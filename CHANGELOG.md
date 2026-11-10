@@ -14,7 +14,13 @@ A stated value is used as given; where the evaluator would otherwise search
 for it, the search does not run, and a check the value fails is reported as
 failed. Operations apply to `circulation='v1.3.4'`. `operation_defaults`
 gives each field's default value, unit, rule and source, for a site and
-programme where the default depends on them.
+programme where the default depends on them. Each rule gives the value the
+model uses, and each source names a paper, a data set or a rule of the model.
+`restates_default` marks the defaults that, stated alone, give the same result
+as stating nothing. It is false for the fields whose stated value ends a
+search and for the flow grids, which have no value: the evaluator reads its
+grid as kg/s while the fluid is water and as L/s at surface once it is
+weighted, and a stated grid keeps its unit in every pass.
 
 **Site files.** An optional `[operations]` table gives the same fields, with
 `pipes` by name and `sources` with the data-basis labels. It is parsed

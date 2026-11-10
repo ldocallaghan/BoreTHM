@@ -373,16 +373,41 @@ def validate_operations(operations):
     return records
 
 
+# Fields whose stated value ends a search or an iteration of the evaluator:
+# the flow, the connection practice, the run-in staging, the rate of
+# penetration and the fluids. The flow grids are read in a unit that depends
+# on the fluid pass. Stating any of these at its default value does not
+# reproduce the default result.
+SEARCHED = FLOW_FIELDS + GRID_FIELDS + (
+    'precirculation_min', 'connection_p90_min', 'stage_spacing_m', 'stage_minutes', 'rop_m_h',
+    'drilling_fluid_kg_m3', 'trip_fluid_kg_m3')
+
+
+def _number(value, digits=3):
+    """A value in a rule sentence, to a few significant figures."""
+    return f'{float(f"{value:.{digits}g}"):,g}'
+
+
 def operation_defaults(site=None, programme=None):
     """The evaluator's rule for each Operations field, as
-    {field: dict(value, unit, rule, source)}.
+    {field: dict(value, unit, rule, source, restates_default)}.
 
     value is the default the evaluator uses where it is a fixed value, and
     None where the evaluator searches or iterates for it (the flow, the rate
-    of penetration and the fluids). With a site, values that depend on it
-    are given for that site: the trip time at its target depth. With a
-    programme (HydraulicProgramme) that gives custom segments, the pipe is
-    the first segment's. Without them those entries give the rule alone.
+    of penetration and the fluids) or reads it in a unit that depends on the
+    fluid (the flow grids). With a site, values that depend on it are given
+    for that site: the trip time at its target depth. With a programme
+    (HydraulicProgramme) that gives custom segments, the pipe is the first
+    segment's. Without them those entries give the rule alone.
+
+    rule is one sentence that gives the value the model uses; source names
+    where the value comes from. restates_default is True when stating value
+    alone in Operations gives the same result as stating nothing, apart from
+    the operations record and the sentences that name stated values. It is
+    False where value is None, for the pipe of a custom string, which
+    Operations cannot state, and for every field whose stated value ends a
+    search (precirculation_min, connection_p90_min, stage_spacing_m and
+    stage_minutes; see SEARCHED).
     """
     from borethm import drilling_cycle as dc
     from borethm import geo_constants as C
@@ -391,49 +416,76 @@ def operation_defaults(site=None, programme=None):
     t = dc.forge_timings()
     programme = programme if programme is not None else getattr(site, 'programme', None)
     custom = programme is not None and bool(programme.segments)
-    grid = list(se.SITE_FLOWS)
     trip = None if site is None else dc.trip_hours(site.target(), t)
-    forge = 'FORGE 16B drilling record (data/forge16b, drilling_cycle.forge_timings)'
+    forge = ('Utah FORGE well 16B drilling data, May 2023 '
+             '(Geothermal Data Repository submission 1516)')
+    pipes = [programme.segments[0].pipe.name] if custom else [p.name for p in se.SITE_PIPES]
+    ratings = dict(se.COATING_RATINGS)
+    grid = ('the model\'s flow grid, 5 to 50 in steps of 5 and then 60 to 100 in steps of 10, '
+            'is read as kg/s while the fluid is water, which it is in the first fluid pass, and as '
+            'L/s at surface once the fluid is weighted; a stated grid keeps its own unit in every '
+            'pass, so stating these numbers does not reproduce the default result')
+    speeds = (f'FORGE 16B tripping speeds of {t.trip_out_ft_h:,.0f} ft/h out and '
+              f'{t.trip_in_ft_h:,.0f} ft/h in, with {_number(t.surface_h)} h at surface')
+    spacing_m = t.stage_spacing_ft * dc.FT
     rows = dict(
-        pipes=([programme.segments[0].pipe.name] if custom else [p.name for p in se.SITE_PIPES],
-               "the programme's custom string fixes the pipe" if custom else
-               'the best-insulated commercial pipe for which a flow passes, tried in this order',
-               'site_evaluation.SITE_PIPES; pipe data in data/materials.md'),
+        pipes=(pipes,
+               f"the programme's custom string fixes the pipe: {pipes[0]}" if custom else
+               'the best-insulated commercial pipe for which a flow passes, tried in this order: '
+               + ', '.join(pipes),
+               'the stated programme' if custom else
+               'pipe conductivities from Wu et al. (2025) and Vetsak et al. (2024); the TK-Drakon '
+               'coating from NOV\'s product flyer (2024)'),
         mass_flow_kg_s=(None, 'the lowest flow on the grid that keeps the tool below its limit and cleans '
-                              'the hole within the pump limit', 'site_evaluation.choose_circulation'),
+                              'the hole within the pump limit', 'the model\'s flow search'),
         volume_flow_L_s=(None, 'the same search; a volume flow is at surface, at the fluid\'s density at 20 C',
-                         'site_evaluation.choose_circulation'),
-        mass_flows_kg_s=(grid, 'the evaluator\'s grid, in kg/s with water',
-                         'site_evaluation.SITE_FLOWS'),
-        volume_flows_L_s=(grid, 'the evaluator\'s grid, in L/s at surface with a weighted fluid',
-                          'site_evaluation.SITE_FLOWS'),
-        tool_limit_C=(C.BHA_SURVIVAL_TEMP, 'the high-temperature tool class', 'geo_constants.BHA_SURVIVAL_TEMP'),
-        coating_ratings_C=(dict(se.COATING_RATINGS), 'the coating maker\'s rating, given while circulation '
-                                                      'is maintained', 'data/materials.md'),
-        pump_pressure_limit_Pa=(m1.PUMP_LIMIT, '7,500 psi, the limit of the reference well design',
-                                'model1_coupled.PUMP_LIMIT, after Wu et al. (2025)'),
-        rig_pumps=(se.RIG_PUMPS, 'three pumps of the reference rig\'s model, each 1,980 hydraulic hp and '
-                                 '7,475 psi', 'NOV 14-P-220 data sheet (data/materials.md)'),
-        min_annular_velocity_m_s=(m1.HOLE_CLEANING_V, 'the annular velocity around the drill pipe at FORGE '
-                                                      '16B at 600 US gal/min', 'model1_coupled.HOLE_CLEANING_V'),
-        precirculation_min=(t.fresh_circ_p10_min, 'the 10th percentile of circulation after the last new '
-                                                  'hole; the schedule search follows if the tool needs it', forge),
-        connection_median_min=(t.connection_median_min, 'the median connection with the pumps off', forge),
-        connection_p90_min=(t.connection_p90_min, 'the 90th-percentile connection with the pumps off', forge),
-        trip_hours=(trip, 'tripping speeds and surface time from FORGE 16B, scaled to the target depth', forge),
-        trip_scale=(1.0, 'no factor on the trip-time rule', forge),
-        stage_spacing_m=(t.stage_spacing_ft * dc.FT, 'the FORGE 16B staging interval; the staging search '
-                                                    'follows if the tool needs it', forge),
-        stage_minutes=(t.stage_minutes, 'the FORGE 16B stage circulation; the staging search follows if the '
-                                        'tool needs it', forge),
+                         'the model\'s flow search'),
+        mass_flows_kg_s=(None, grid, 'the model\'s flow search'),
+        volume_flows_L_s=(None, grid, 'the model\'s flow search'),
+        tool_limit_C=(C.BHA_SURVIVAL_TEMP, f'{_number(C.BHA_SURVIVAL_TEMP)} C, the rating of the '
+                                           'high-temperature commercial tool class',
+                      'the model\'s downhole electronics classes: about 150 to 175 C for conventional '
+                      'MWD and LWD tools, about 200 C for high-temperature tools'),
+        coating_ratings_C=(ratings, '; '.join(f'{name} {_number(value)} C' for name, value in ratings.items())
+                           + ', the coating maker\'s rating, given while circulation is maintained; '
+                             'other pipes have no rating',
+                           'NOV Tuboscope TK-Drakon flyer D392006697-MKT-001 Rev 01 (2024)'),
+        pump_pressure_limit_Pa=(m1.PUMP_LIMIT, f'{_number(m1.PUMP_LIMIT / 1e6)} MPa, from the reference '
+                                               'design\'s 7,500 psi',
+                                'the reference well design of Wu et al. (2025)'),
+        rig_pumps=(se.RIG_PUMPS, f'{se.RIG_PUMPS} pumps, each an NOV 14-P-220 giving '
+                                 f'{se.PUMP_HYD_HP:,.0f} hydraulic hp, up to 7,475 psi on 5.5-inch liners',
+                   'NOV 14-P-220 mud pump technical marketing sheet; the pump count from the FORGE 16B '
+                   'daily reports'),
+        min_annular_velocity_m_s=(m1.HOLE_CLEANING_V,
+                                  f'{_number(m1.HOLE_CLEANING_V, 4)} m/s, the annular velocity around the '
+                                  'drill pipe at FORGE 16B at 600 US gal/min (245.1 ft/min)', forge),
+        precirculation_min=(t.fresh_circ_p10_min, f'{_number(t.fresh_circ_p10_min)} min, the 10th percentile '
+                                                  'of circulation after the last new hole at FORGE 16B; a '
+                                                  'stated value ends the schedule search', forge),
+        connection_median_min=(t.connection_median_min, f'{_number(t.connection_median_min)} min, the '
+                                                        'median FORGE 16B connection with the pumps off', forge),
+        connection_p90_min=(t.connection_p90_min, f'{_number(t.connection_p90_min)} min, the 90th-percentile '
+                                                  'FORGE 16B connection with the pumps off; a stated value '
+                                                  'ends the schedule search', forge),
+        trip_hours=(trip, (f'{_number(trip, 5)} h at the target depth, from ' if trip is not None else
+                           'the time at the target depth from ') + speeds, forge),
+        trip_scale=(1.0, '1, no factor on the trip-time rule', forge),
+        stage_spacing_m=(spacing_m, f'{_number(spacing_m, 4)} m ({_number(t.stage_spacing_ft)} ft), the '
+                                    'FORGE 16B staging interval; a stated value ends the staging search',
+                         forge),
+        stage_minutes=(t.stage_minutes, f'{_number(t.stage_minutes, 4)} min, the FORGE 16B stage circulation; '
+                                        'a stated value ends the staging search', forge),
         rop_m_h=(None, 'Model 3 at the circulation, iterated with the wall\'s exposure for a coupled site',
-                 'model3_optimiser.evaluate_at'),
+                 'the model\'s drilling-rate model (Model 3)'),
         drilling_fluid_kg_m3=(None, 'the lower bound of the drilling fluid\'s common window, never below '
-                                    'water, iterated with the circulation', 'site_evaluation.drilling_fluid'),
+                                    'water, iterated with the circulation', 'the model\'s mud-weight window'),
         trip_fluid_kg_m3=(None, 'the larger of the drilling fluid and the lower bound of the trip fluid\'s '
-                                'common window', 'site_evaluation.drilling_fluid'),
+                                'common window', 'the model\'s mud-weight window'),
     )
-    return {name: dict(value=value, unit=UNITS[name], rule=rule, source=source)
+    return {name: dict(value=value, unit=UNITS[name], rule=rule, source=source,
+                       restates_default=bool(value is not None and name not in SEARCHED
+                                             and not (name == 'pipes' and custom)))
             for name, (value, rule, source) in rows.items()}
 
 
