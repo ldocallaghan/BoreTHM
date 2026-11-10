@@ -102,3 +102,28 @@ def test_module_help_exits_before_computing(module):
     assert command.returncode == 0
     assert 'usage:' in command.stdout
     assert command.stderr == ''
+
+
+def test_exported_model_functions_are_the_internal_objects():
+    from borethm import (model1_coupled, physics, pressure, programme, site_evaluation, site_files,
+                         tool_losses, tool_thermal, wall_thermal, water_table, fluids, hydraulic_losses,
+                         operations)
+    from borethm.studies import release_v134
+    same = dict(Mud=fluids.Mud, LossModel=hydraulic_losses.LossModel,
+                operations_from_dict=operations.operations_from_dict, site_text=site_files.site_text,
+                site_well=site_evaluation.site_well, resolve_physics=physics.resolve,
+                fluid_props=model1_coupled.fluid_props, hydrostatic_pressure=model1_coupled.P_of_z,
+                pressure_column=pressure.column, exposure_seconds=model1_coupled.exposure_seconds,
+                wall_grid_radius=wall_thermal.r_max_for, tool_temperatures=tool_thermal.run,
+                ToolSegment=tool_thermal.Segment, ToolHistory=tool_thermal.History,
+                tool_loss_defaults=tool_losses.defaults, release_reference_row=release_v134.reference_row)
+    for name, value in same.items():
+        assert getattr(bt, name) is value, name
+    assert issubclass(bt.WallGrid, wall_thermal.Grid)
+    np.testing.assert_array_equal(bt.WallGrid(0.11, 30.0, 40).build()[0], wall_thermal.Grid(0.11, 30.0, 40).build()[0])
+    assert bt.named_pipes() == programme.NAMED_PIPES and bt.named_pipes() is not programme.NAMED_PIPES
+    assert bt.data_bases() == site_evaluation.BASES
+    info = bt.water_table_info()
+    assert info['path'] == water_table._CACHE
+    np.testing.assert_array_equal(info['temperatures_C'], water_table.T_GRID)
+    np.testing.assert_array_equal(info['pressures_Pa'], water_table.P_GRID)
