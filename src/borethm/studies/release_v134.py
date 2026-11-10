@@ -28,6 +28,9 @@ def windows_row(windows):
 
 
 def reference_row(data):
+    """The values of a result_dict that the v1.3.4 release reference
+    compares: the status, target, pipe, flow, bit temperature, fluid
+    weights, common windows and the component checks."""
     p, c = data['programme'], data['components']
     return dict(status=data['status']['label'], target_m=data['z_m'],
         pipe=p['pipe'], flow=p['flow'], flow_unit=p['flow_unit'], bit_C=p['bit_C'],

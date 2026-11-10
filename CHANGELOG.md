@@ -27,6 +27,20 @@ inside its common window makes the status CONDITIONAL with a condition that
 gives the window it was checked against, and says whether the window admits
 water. Results without a stated fluid are unchanged.
 
+**Public names.** These names are now exported from `borethm` and listed on
+the API page, each the existing object with its behaviour unchanged:
+`Mud`, `LossModel`, `operations_from_dict`, `site_text`, `site_well`,
+`fluid_props`, `exposure_seconds`, `tool_temperatures`, `ToolSegment`,
+`ToolHistory` and `tool_loss_defaults` under the names they had;
+`resolve_physics` (physics.resolve), `hydrostatic_pressure`
+(model1_coupled.P_of_z), `pressure_column` (pressure.column),
+`wall_grid_radius` (wall_thermal.r_max_for) and `release_reference_row`
+(studies.release_v134.reference_row). `WallGrid` is the wall model's radial
+grid. Four functions give values that were module constants: `named_pipes`
+(the model's pipe types by name), `data_bases` (the data-basis labels),
+`water_table_info` (the water-property table's cache file and grid) and
+`prepare_water_table` (load or build the table).
+
 **Site files.** An optional `[operations]` table gives the same fields, with
 `pipes` by name and `sources` with the data-basis labels. It is parsed
 strictly. `borethm-new-site` writes it commented out at the end of every

@@ -1,6 +1,7 @@
 """Public call defaults for circulating temperatures."""
 from borethm import geo_constants as C
 from borethm import model1_coupled as _model
+from borethm import wall_thermal as _wall
 
 
 def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
@@ -91,3 +92,26 @@ def circulating_temperatures(m_dot=2.0, T_inj=40.0, G=C.GEOTHERM_GRADIENT,
     verbose=False suppresses the solver's printed report by default.
     """
     return _model.solve(**locals())
+
+
+def named_pipes():
+    """The model's pipe types by name, as {name: PipeType}: the names a site
+    file's [programme] segments and [operations] pipes accept."""
+    from borethm.programme import NAMED_PIPES
+    return dict(NAMED_PIPES)
+
+
+def data_bases():
+    """The data-basis labels a site's data_basis and an Operations sources
+    entry accept, in the order the model lists them."""
+    from borethm.site_evaluation import BASES
+    return BASES
+
+
+
+class WallGrid(_wall.Grid):
+    """The radial grid of the wall model (wall_temperatures): a the hole
+    radius [m], r_max the outer radius [m] (wall_grid_radius gives the
+    usual one), and n the number of nodes, spaced logarithmically from the
+    wall. build returns the node radii, face radii and the volume per unit
+    length of each control volume."""

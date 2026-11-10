@@ -790,6 +790,11 @@ FILM_MULT_FORGE = 0.75   # fitted on FORGE 16B; retired sensitivity, never prima
 
 
 def site_well(z, pipe, programme=None):
+    """The WellGeometry evaluate builds for a site with target depth z [m]
+    and a PipeType: the Wu et al. (2025) well, or with a HydraulicProgramme
+    the programme's geometry. The conductor, surface and intermediate shoes
+    are at 100, 1,000 and 4,000 m, or at 5, 25 and 50 % of z where that is
+    shallower."""
     shoes = tuple(min(s, f * z) for s, f in zip(wg.WU_SHOES, (0.05, 0.25, 0.5)))
     return wg.wu2025_well(z, pipe, shoes=shoes) if programme is None else programme.geometry(z,pipe,shoes=shoes)
 

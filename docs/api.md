@@ -96,6 +96,16 @@ rise = (T_star [K], E_H [K]) follows Alderman et al. (1988, eqs. 8-9):
     tau_0(T) = tau_0                                 T <= T*
     tau_0(T) = tau_0 exp(E_H (1/T* - 1/T))           T >  T*
 
+## Mud
+
+```python
+Mud(rho_surface, pv_ref=0.027, yield_point=13.406472800000001, pv_ref_T=26.7, conserve_mass=True)
+```
+
+A barite-weighted water-based mud of density rho_surface [kg/m3] at
+T_REF and atmospheric pressure. With rho_surface at water's density and
+yield_point 0 it is water (pv_ref None takes water's own viscosity).
+
 ## LocalLoss
 
 ```python
@@ -132,6 +142,14 @@ SurfaceLoss(value: float, source: str = '') -> None
 
 API surface-layout coefficient, in the psi/ppg/US-gpm convention.
 
+## LossModel
+
+```python
+LossModel(geometry, friction='blasius', transitions='abrupt', regime='apparent-viscosity', band='founargiotakis', roughness=0.0, physics=None)
+```
+
+Prepared geometry-only loss placement, shared by pressure and heat.
+
 ## HydraulicProgramme
 
 ```python
@@ -150,6 +168,15 @@ friction, roughness and joint_transition override its rows. transitions
 names the changes between sections; 'gradual' applies to joints as well.
 Under v1.8.0 the reference programme declares a 6.75-in MWD pulser
 allowance; bha_tools adds or replaces named tools in its collar section.
+
+## named_pipes
+
+```python
+named_pipes()
+```
+
+The model's pipe types by name, as {name: PipeType}: the names a site
+file's [programme] segments and [operations] pipes accept.
 
 ## Operations
 
@@ -278,6 +305,19 @@ False where value is None, for the pipe of a custom string, which
 Operations cannot state, and for every field whose stated value ends a
 search (precirculation_min, connection_p90_min, stage_spacing_m and
 stage_minutes; see SEARCHED).
+
+## operations_from_dict
+
+```python
+operations_from_dict(value)
+```
+
+Parse the optional [operations] table of a site file.
+
+Keys are Operations field names. pipes names built-in pipe types;
+coating_ratings_C is a table of pipe name to rating; sources is a table
+of field name to [basis, source]. Unknown keys and wrong types raise
+ValueError naming the key.
 
 ## evaluate
 
@@ -481,6 +521,15 @@ A site's operations are checked by validate_operations after the site's
 own inputs. Its errors raise ValueError and its warnings follow the
 site's, each as text that starts with operations.<field>:.
 
+## data_bases
+
+```python
+data_bases()
+```
+
+The data-basis labels a site's data_basis and an Operations sources
+entry accept, in the order the model lists them.
+
 ## load_site
 
 ```python
@@ -518,6 +567,26 @@ File, TOML and schema errors raise a one-line ValueError naming the
 file and key. This function parses data and executes no file content.
 Call validate_site on the returned profile to check physical ranges,
 temperature and stress consistency, and provenance labels and sources.
+
+## site_text
+
+```python
+site_text(key)
+```
+
+Return a packaged starting site, selected by its exact built-in key.
+
+## site_well
+
+```python
+site_well(z, pipe, programme=None)
+```
+
+The WellGeometry evaluate builds for a site with target depth z [m]
+and a PipeType: the Wu et al. (2025) well, or with a HydraulicProgramme
+the programme's geometry. The conductor, surface and intermediate shoes
+are at 100, 1,000 and 4,000 m, or at 5, 25 and 50 % of z where that is
+shallower.
 
 ## layered_geotherm
 
@@ -632,6 +701,64 @@ Q_product [W], m_dot [kg/s], P_bottom [Pa absolute from that approximate
 hydrostatic profile], geometry and success, plus
 the underlying solution. Check success before using a profile.
 verbose=False suppresses the solver's printed report by default.
+
+## resolve_physics
+
+```python
+resolve_physics(physics=None, annulus_model=None, friction=None, roughness=None, hydraulics_model=None)
+```
+
+Every resolved setting as a dictionary, with its name under 'physics'.
+
+hydraulics_model 'v1.5.0' reproduces the original calculation, so it takes
+the v1.7.0 preset. A keyword that is not None overrides the preset.
+
+## fluid_props
+
+```python
+fluid_props(T_C, P_Pa, fluid=None)
+```
+
+rho, cp, mu, k of the circulating fluid: IAPWS-95 water, constant
+values from a dict with those keys, or an object with props(T, P).
+
+## hydrostatic_pressure
+
+```python
+hydrostatic_pressure(z, P_surface=100000.0)
+```
+
+Hydrostatic pressure [Pa absolute] at true vertical depth z [m]:
+P_surface [Pa absolute] plus 10 MPa/km times z.
+
+## pressure_column
+
+```python
+pressure_column(tvd, T, fluid=None, P_surface=0.0)
+```
+
+Static pressure [Pa gauge] down a fluid column whose temperature is T
+[C] at true vertical depths tvd (increasing from the surface, tvd[0] = 0).
+fluid as for model1_coupled.fluid_props (None for water). The density
+depends on the pressure, so the integral is repeated with the pressure
+from the pass before; two passes settle it to well under 1 kPa.
+
+## exposure_seconds
+
+```python
+exposure_seconds(z, t_years, exposure)
+```
+
+The time the rock term uses at each node. With exposure=None it is the
+constant t_years (floored at 1e-3 yr, as the model always has); otherwise
+exposure(z), floored at one hour.
+
+The original logarithmic rock term, r_inf = r + 2 sqrt(alpha t), only makes
+sense once 2 sqrt(alpha t) is well beyond the hole radius; at alpha ~1e-6
+m^2/s it is about 12 cm after an hour, comparable to a 10 cm hole, so
+shorter times were floored. The cylindrical response is valid at all
+times; the same floor is kept for both so that changing the response
+changes nothing else.
 
 ## hydraulics
 
@@ -793,6 +920,26 @@ temperature. By default it starts from the last circulating fluid
 temperature, or the wall temperature when no circulation preceded it.
 Every default reproduces the previous results.
 
+## WallGrid
+
+```python
+WallGrid(a: float, r_max: float, n: int = 200) -> None
+```
+
+The radial grid of the wall model (wall_temperatures): a the hole
+radius [m], r_max the outer radius [m] (wall_grid_radius gives the
+usual one), and n the number of nodes, spaced logarithmically from the
+wall. build returns the node radii, face radii and the volume per unit
+length of each control volume.
+
+## wall_grid_radius
+
+```python
+wall_grid_radius(a, alpha, t_total)
+```
+
+a + 10 sqrt(alpha t), and at least 30 m.
+
 ## tool_trip_in
 
 ```python
@@ -817,6 +964,48 @@ returns the endpoints of each stationary period. T_s0 and T_f0 set the
 initial steel and internal-fluid temperatures [degrees C] separately; their
 defaults both use T0. Every default reproduces the previous results.
 
+## tool_temperatures
+
+```python
+tool_temperatures(lump, segments, T_s0, T_f0, dt=10.0)
+```
+
+Integrate the two nodes through the segments.
+
+lump is a ToolLump, segments a sequence of ToolSegment, T_s0 and T_f0
+the solid and fluid temperatures at the start [C], and dt the largest
+time step [s]. Returns a ToolHistory.
+
+## ToolSegment
+
+```python
+ToolSegment(duration: float, T_out: object, h_out: float, h_in: float, T_flow: float = None, label: str = '') -> None
+```
+
+A stretch of time: T_out the fluid outside (a value, or a function of
+the time [s] from the segment's start), h_out and h_in the films, and
+T_flow the fluid flowing through the string (None: static inside).
+
+## ToolHistory
+
+```python
+ToolHistory(t: numpy.ndarray, T_s: numpy.ndarray, T_f: numpy.ndarray, labels: list = <factory>) -> None
+```
+
+A tool's temperatures through its segments, from tool_temperatures: t the time [s]
+from the first segment's start, T_s the solid node and T_f the fluid
+node inside the tool [C], and labels the segment label at each time.
+peak gives the fluid node's highest temperature and its time;
+time_above the time a node spends above a temperature.
+
+## tool_loss_defaults
+
+```python
+tool_loss_defaults()
+```
+
+Mapping of (tool_class, band) to ToolDefault for every class and band.
+
 ## water_properties
 
 ```python
@@ -832,6 +1021,36 @@ interpolated from the cached IAPWS-95 table, whose grid spans
 2-degree C and 2 MPa spacing. Inputs outside these ranges are
 clipped to the nearest grid edge before interpolation.
 The table is built on first use when no cache is present.
+
+## water_table_info
+
+```python
+water_table_info()
+```
+
+The water-property table's cache file and grid: path (the .npz file,
+which may not exist yet), exists, temperatures_C and pressures_Pa (the
+grid's axes, degrees C and Pa absolute).
+
+## prepare_water_table
+
+```python
+prepare_water_table()
+```
+
+Load the water-property table, building it from IAPWS-95 and writing
+the cache file first if it is missing. Building takes several minutes.
+Returns the cache file's path.
+
+## release_reference_row
+
+```python
+release_reference_row(data)
+```
+
+The values of a result_dict that the v1.3.4 release reference
+compares: the status, target, pipe, flow, bit temperature, fluid
+weights, common windows and the component checks.
 
 ## WellGeometry
 

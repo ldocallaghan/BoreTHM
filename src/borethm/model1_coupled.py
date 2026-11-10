@@ -54,6 +54,8 @@ P_LIQUID = 5.0e6  # Pa, floor on the pressure at which the friction heating's
                   # liquid properties are taken (_friction_gradient)
 
 def P_of_z(z, P_surface=P_SURF):
+    """Hydrostatic pressure [Pa absolute] at true vertical depth z [m]:
+    P_surface [Pa absolute] plus 10 MPa/km times z."""
     return P_surface + C.HYDROSTATIC_GRAD * z
 
 

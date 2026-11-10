@@ -77,6 +77,11 @@ class Segment:
 
 @dataclass
 class History:
+    """A tool's temperatures through its segments, from tool_temperatures: t the time [s]
+    from the first segment's start, T_s the solid node and T_f the fluid
+    node inside the tool [C], and labels the segment label at each time.
+    peak gives the fluid node's highest temperature and its time;
+    time_above the time a node spends above a temperature."""
     t: np.ndarray
     T_s: np.ndarray
     T_f: np.ndarray
@@ -94,7 +99,11 @@ class History:
 
 
 def run(lump, segments, T_s0, T_f0, dt=10.0):
-    """Integrate the two nodes through the segments."""
+    """Integrate the two nodes through the segments.
+
+    lump is a ToolLump, segments a sequence of ToolSegment, T_s0 and T_f0
+    the solid and fluid temperatures at the start [C], and dt the largest
+    time step [s]. Returns a ToolHistory."""
     t, Ts, Tf = 0.0, float(T_s0), float(T_f0)
     ts, Tss, Tfs, labels = [t], [Ts], [Tf], [""]
     for seg in segments:

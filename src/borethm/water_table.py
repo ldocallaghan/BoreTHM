@@ -68,6 +68,22 @@ def _interpolators():
     return _INTERP
 
 
+def water_table_info():
+    """The water-property table's cache file and grid: path (the .npz file,
+    which may not exist yet), exists, temperatures_C and pressures_Pa (the
+    grid's axes, degrees C and Pa absolute)."""
+    return dict(path=_CACHE, exists=_CACHE.is_file(), temperatures_C=T_GRID.copy(),
+                pressures_Pa=P_GRID.copy())
+
+
+def prepare_water_table():
+    """Load the water-property table, building it from IAPWS-95 and writing
+    the cache file first if it is missing. Building takes several minutes.
+    Returns the cache file's path."""
+    _interpolators()
+    return _CACHE
+
+
 def __getattr__(name):
     """Lazy module attributes: wt.RHO, wt.CP, wt.MU, wt.K."""
     if name in ("RHO", "CP", "MU", "K"):
