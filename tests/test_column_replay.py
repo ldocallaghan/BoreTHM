@@ -44,3 +44,42 @@ def test_restart_throughput_splits_a_recorded_step_and_resets_after_pause():
     assert [(kind, step.duration) for kind, step in phases] == [
         ("restart", 10.), ("restart", 5.), ("steady", 15.),
         ("static", 10.), ("restart", 2.)]
+
+
+def _slug_column():
+    rock = [RadialColumn(.1, 120., 2.5, 2.5e6, 3600., radial_nodes=20,
+                         temperature_C=40.) for _ in range(4)]
+    # A short hot slug sits in the bore two tool lengths above the tool.
+    column = MovingColumn(rock, [10.]*4, [2.]*4, 4.18e6, [1., .05, .2, .05, 1.],
+                          [20., 20., 80., 20., 20.])
+    tool = LayeredTool(.025, .08, column.fluid_heat_capacity, 20.)
+    # The tool's bore span is 1.25 to 1.30 and its annulus span 4.0 to 4.4.
+    return column, ToolContact(tool, .5, 0, 0, 50., 400., ((4., 4.4), (1.25, 1.3)))
+
+
+def test_sub_stepped_exchange_meets_liquid_shorter_than_the_step():
+    hot = []
+    for volume in (None, .02):
+        column, contact = _slug_column()
+        step = ColumnStep(1., (0.,)*4, (contact,), flow=.5, inlet_C=20., active_cells=4,
+                          exchange_volume=volume)
+        result = next(replay(column, [step]))
+        readings = [s[1][0][0] for s in result.samples] or [result.sensors_C[0][0]]
+        hot.append(max(readings))
+        assert abs(result.energy_residual_J) < 1e-6*result.supplied_J
+        if volume:
+            assert len(result.samples) == 25
+            assert result.samples[-1][0] == pytest.approx(1.)
+    # One step moves 0.5 past the tool; the slug passes between the two
+    # exchanges of the single step and only the split step meets it.
+    assert hot[0] < 21.
+    assert hot[1] > 70.
+
+
+def test_advect_matches_restart_step_without_wall_exchange():
+    a, _ = _slug_column()
+    b, _ = _slug_column()
+    out_a, _ = a.restart_step(1., .3, 20., (0.,)*4, active_cells=4)
+    out_b = b.advect(.3, 20., active_cells=4)
+    assert out_a == pytest.approx(out_b)
+    np.testing.assert_allclose(a.bore_temperature, b.bore_temperature)

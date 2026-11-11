@@ -19,7 +19,9 @@ class RadialColumn:
     Geometry and material properties are in SI. The wall radius is
     the fluid-side radius. A casing resistance, if supplied, is per metre
     of well in series with the film. This approximation has no casing
-    heat capacity. The fluid capacity is per metre of well.
+    heat capacity. The fluid capacity is per metre of well. grid_power
+    above 1 concentrates the radial nodes at the wall; the default is the
+    logarithmic grid of wall_thermal.
     """
     radius: float
     formation_C: float
@@ -30,11 +32,12 @@ class RadialColumn:
     casing_resistance: float = 0.
     temperature_C: float | None = None
     max_radial_step_s: float | None = None
+    grid_power: float = 1.
     rock: np.ndarray | None = field(default=None, init=False, repr=False)
 
     def __post_init__(self):
         if (min(self.radius, self.conductivity, self.rock_heat_capacity,
-                self.history_horizon_s) <= 0 or self.radial_nodes < 2
+                self.history_horizon_s) <= 0 or self.radial_nodes < 2 or self.grid_power < 1
                 or self.casing_resistance < 0):
             raise ValueError("invalid radial column geometry or material properties")
         if self.temperature_C is None:
@@ -55,7 +58,7 @@ class RadialColumn:
         result = wall_thermal.run([state], self.formation_C, self.radius,
                                   self.conductivity, self.rock_heat_capacity,
                                   n=self.radial_nodes, r_max=radius, T0=self.rock,
-                                  dt_max=self.max_radial_step_s)
+                                  dt_max=self.max_radial_step_s, grid_power=self.grid_power)
         self.rock = result.fields[-1]
         return result
 

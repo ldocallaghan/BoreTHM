@@ -31,6 +31,9 @@ class ColumnStep:
     inlet_C: float | None = None
     active_cells: int | None = None
     bore_volume: np.ndarray | None = None
+    bit_volumes: tuple[float, float] | None = None
+    circuit_end: float | None = None
+    exchange_volume: float | None = None
 
 
 @dataclass(frozen=True)
@@ -41,6 +44,7 @@ class StepResult:
     returned_J: float
     into_rock_J: float
     energy_residual_J: float
+    samples: tuple = ()
 
 
 def stored_energy(column, contacts):
@@ -59,6 +63,11 @@ def replay(column: MovingColumn, steps):
     The caller supplies time steps, geometry, contact positions and films.
     The radial steel travels with each tool. Its liquid temperature is
     shared with the bore volume used for advection.
+
+    A pumped step with an exchange volume is split so that no more than
+    that volume passes between tool exchanges, and liquid shorter than a
+    step still meets each tool. The wall recovers once over the step.
+    Readings after each part are returned as (time into the step, sensors).
     """
     elapsed = 0.
     for step in steps:
@@ -77,34 +86,55 @@ def replay(column: MovingColumn, steps):
         if step.annulus_volume is not None:
             _, returned = column.descend(step.annulus_volume, step.added_bore_volume,
                                          float_valve=step.float_valve,
-                                         fill_temperature=step.fill_C)
+                                         fill_temperature=step.fill_C,
+                                         bit_volumes=step.bit_volumes)
             if step.float_valve and step.added_bore_volume:
                 supplied += step.added_bore_volume*step.fill_C*column.fluid_heat_capacity
         if step.bore_volume is not None:
             column.regrid_bore(step.bore_volume)
-        if step.flow:
-            outlet, rock = column.restart_step(
-                step.duration, step.flow, step.inlet_C, step.wall_films,
-                active_cells=step.active_cells)
-            supplied += step.duration*step.flow*step.inlet_C*column.fluid_heat_capacity
-            returned += outlet
-        else:
+        samples = []
+        if step.flow and step.exchange_volume is not None:
+            if not step.exchange_volume > 0:
+                raise ValueError("exchange volume must be positive")
+            pumped = step.duration*step.flow
+            parts = max(1, int(np.ceil(pumped/step.exchange_volume)))
+            for part in range(parts):
+                returned += column.advect(pumped/parts, step.inlet_C, active_cells=step.active_cells,
+                                          circuit_end=step.circuit_end)
+                exchange(column, step.contacts, step.duration/parts)
+                samples.append(((part+1)*step.duration/parts,
+                                tuple(c.tool.sensor_temperatures() for c in step.contacts)))
+            supplied += pumped*step.inlet_C*column.fluid_heat_capacity
             rock = column.recover(step.duration, step.wall_films)
-        for contact in step.contacts:
-            if contact.footprint is None:
-                column.exchange_string_tool_heat(
-                    contact.annulus_index, contact.bore_index, contact.tool,
-                    step.duration, contact.inside_film, contact.outside_film,
-                    tool_length=contact.length)
+        else:
+            if step.flow:
+                outlet, rock = column.restart_step(
+                    step.duration, step.flow, step.inlet_C, step.wall_films,
+                    active_cells=step.active_cells, circuit_end=step.circuit_end)
+                supplied += step.duration*step.flow*step.inlet_C*column.fluid_heat_capacity
+                returned += outlet
             else:
-                annulus, bore = contact.footprint
-                column.exchange_tool_footprint(
-                    contact.tool, step.duration, contact.inside_film, contact.outside_film,
-                    tool_length=contact.length, annulus_interval=annulus, bore_interval=bore)
+                rock = column.recover(step.duration, step.wall_films)
+            exchange(column, step.contacts, step.duration)
         elapsed += step.duration
         residual = stored_energy(column, step.contacts)-initial-supplied+returned+rock
         yield StepResult(elapsed, tuple(c.tool.sensor_temperatures() for c in step.contacts),
-                         supplied, returned, rock, residual)
+                         supplied, returned, rock, residual, tuple(samples))
+
+
+def exchange(column, contacts, duration):
+    """Exchange heat between each tool and the liquid at its contact."""
+    for contact in contacts:
+        if contact.footprint is None:
+            column.exchange_string_tool_heat(
+                contact.annulus_index, contact.bore_index, contact.tool,
+                duration, contact.inside_film, contact.outside_film,
+                tool_length=contact.length)
+        else:
+            annulus, bore = contact.footprint
+            column.exchange_tool_footprint(
+                contact.tool, duration, contact.inside_film, contact.outside_film,
+                tool_length=contact.length, annulus_interval=annulus, bore_interval=bore)
 
 
 def circulation_phases(steps, flush_volume):

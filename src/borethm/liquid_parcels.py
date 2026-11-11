@@ -26,6 +26,22 @@ class Parcels:
         keep = sizes > 0.
         return Parcels(sizes[keep], self.temperature[keep])
 
+    def fitted(self, total, tolerance=1e-9):
+        """Give a rounding gap in the total volume to the largest parcel.
+
+        Repeated slicing loses or gains volume at the rounding level. A gap
+        larger than the relative tolerance is an error, not rounding.
+        """
+        gap = total-self.size
+        if not gap:
+            return self
+        largest = int(np.argmax(self.volume))
+        if abs(gap) > tolerance*max(total, 1e-300) or self.volume[largest]+gap <= 0.:
+            raise ValueError(f"parcel volume {self.size!r} differs from the conduit volume {total!r}")
+        volume = self.volume.copy()
+        volume[largest] += gap
+        return Parcels(volume, self.temperature)
+
     def reversed(self):
         return Parcels(self.volume[::-1], self.temperature[::-1])
 

@@ -114,3 +114,39 @@ def test_tool_footprint_exchange_preserves_total_energy_across_cell_boundary():
     assert column.annulus_temperature[0] < 40.
     assert column.annulus_temperature[1] < 60.
     assert column.annulus_temperature[2] == pytest.approx(80.)
+
+
+def test_descent_at_the_bit_takes_intake_below_the_bit_and_keeps_deeper_liquid():
+    from borethm.liquid_parcels import Parcels
+    column = make_column()
+    # A front inside the middle cell: 50 °C above 2.5 m³, 70 °C below.
+    column._annulus = Parcels(np.array([2., .5, 1.5, 2.]), np.array([40., 50., 70., 80.]))
+    column.rock[1].temperature_C = 65.
+    initial = inventory(column)
+    exit_volume, exit_heat = column.descend([2., 1.8, 2.], .1, float_valve=False,
+                                            bit_volumes=(2.5, 2.3))
+    assert exit_volume == pytest.approx(.1)
+    assert column.bore_temperature[-1] == pytest.approx(50.)
+    # The column shifts up by the exit volume; the 70 °C liquid below the bit stays.
+    assert column.annulus_temperature == pytest.approx([(1.9*40.+.1*50.)/2., (.3*50.+1.5*70.)/1.8, 80.])
+    assert inventory(column)+exit_heat == pytest.approx(initial)
+
+
+def test_restart_circuit_turns_at_the_bit():
+    column = make_column()
+    initial = inventory(column)
+    returned, rock_heat = column.restart_step(1e-6, 1e5, 25., [0., 0., 0.], circuit_end=3.)
+    # 0.1 m³ pumped: the bore and the annulus down to 3 m³ circulate;
+    # the liquid below the bit keeps its temperature.
+    assert column.annulus_temperature[2] == pytest.approx(80.)
+    assert inventory(column)+returned+rock_heat == pytest.approx(initial+.1*25.*column.fluid_heat_capacity)
+
+
+def test_parcels_take_a_rounding_gap_in_the_largest_parcel_only():
+    from borethm.liquid_parcels import Parcels
+    parcels = Parcels(np.array([1., 2., 1e-16]), np.array([10., 20., 30.]))
+    fitted = parcels.fitted(3.-1e-14)
+    assert fitted.volume[0] == 1. and fitted.volume[2] == 1e-16
+    assert fitted.size == pytest.approx(3.-1e-14, abs=1e-15)
+    with pytest.raises(ValueError):
+        parcels.fitted(3.1)

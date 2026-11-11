@@ -39,6 +39,8 @@ class MovingColumn:
         self._bore = self._bore.with_cell_heat(self.bore_volume, self.bore_temperature)
 
     def _read_parcels(self):
+        self._annulus = self._annulus.fitted(float(np.sum(self.annulus_volume)))
+        self._bore = self._bore.fitted(float(np.sum(self.bore_volume)))
         self._set_annulus_temperature(self._annulus.averages(self.annulus_volume))
         self.bore_temperature = self._bore.averages(self.bore_volume)
 
@@ -51,13 +53,16 @@ class MovingColumn:
             node.temperature_C = value
 
     def descend(self, new_annulus_volume, added_bore_volume, *, float_valve,
-                fill_temperature=None):
+                fill_temperature=None, bit_volumes=None):
         """Displace fluid above the entering bit and extend the bore column.
 
         With a float valve, new pipe and its fill enter from the surface.
-        Without it, new bore volume is taken at the deepest displaced cell.
-        Return the surface exit volume and sensible-heat inventory (joules
-        relative to 0 °C).
+        Without it, new bore volume is taken at the deepest displaced cell,
+        or, with bit_volumes, just below the new bit position. bit_volumes
+        is the annulus volume from surface to the new bit depth in the old
+        and the new geometry; the liquid below the bit is then untouched,
+        whatever the cell size. Return the surface exit volume and
+        sensible-heat inventory (joules relative to 0 °C).
         """
         new_volume = np.asarray(new_annulus_volume, dtype=float)
         if new_volume.shape != self.annulus_volume.shape or added_bore_volume < 0:
@@ -72,8 +77,14 @@ class MovingColumn:
         if float_valve and added_bore_volume and not np.isfinite(
                 fill_temperature if fill_temperature is not None else np.nan):
             raise ValueError("float-valve bore extension requires a finite fill temperature")
-        old_end = float(np.sum(self.annulus_volume[:stop]))
-        new_end = float(np.sum(new_volume[:stop]))
+        if bit_volumes is None:
+            old_end = float(np.sum(self.annulus_volume[:stop]))
+            new_end = float(np.sum(new_volume[:stop]))
+        else:
+            old_end, new_end = map(float, bit_volumes)
+            if not (0. < new_end and 0. < old_end <= float(np.sum(self.annulus_volume))*(1+1e-12)):
+                raise ValueError("bit volumes must lie inside the annulus")
+            old_end = min(old_end, float(np.sum(self.annulus_volume)))
         exit_volume = old_end-new_end-intake_volume
         if not np.all(np.isfinite(new_volume)) or np.any(new_volume <= 0) or exit_volume < -1e-12:
             raise ValueError("invalid displacement inventory")
@@ -114,23 +125,39 @@ class MovingColumn:
                    for length, node, cap, film in zip(
                        self.cell_length, self.rock, capacity, films, strict=True))
 
-    def restart_step(self, duration, flow, inlet_C, films, *, active_cells=None):
+    def restart_step(self, duration, flow, inlet_C, films, *, active_cells=None,
+                     circuit_end=None):
         """Advect the connected bore and annulus, then advance wall exchange.
 
-        Cells below the bit recover without through-flow. Return the surface
-        exit inventory and the wall heat in joules.
+        Cells below the bit recover without through-flow. circuit_end, if
+        given, is the annulus volume from surface to the bit, so the circuit
+        turns at the bit itself rather than the bottom of its cell. Return
+        the surface exit inventory and the wall heat in joules.
+        """
+        pumped = duration*flow
+        if not np.isfinite(pumped) or pumped < 0:
+            raise ValueError("invalid pumped volume or inlet temperature")
+        returned = self.advect(pumped, inlet_C, active_cells=active_cells, circuit_end=circuit_end)
+        return returned, self.recover(duration, films)
+
+    def advect(self, pumped, inlet_C, *, active_cells=None, circuit_end=None):
+        """Push a volume of inlet liquid round the circuit without wall exchange.
+
+        Return the inventory that leaves at surface, in joules.
         """
         active = len(self.rock) if active_cells is None else active_cells
         if not 0 < active <= len(self.rock) or not len(self.bore_volume):
             raise ValueError("circulation needs a bore and a connected annulus")
-        pumped = duration*flow
         if not np.isfinite(pumped) or pumped < 0 or not np.isfinite(inlet_C):
             raise ValueError("invalid pumped volume or inlet temperature")
         if not pumped:
-            return 0., self.recover(duration, films)
+            return 0.
         self._sync_parcels()
         bore_end = float(np.sum(self.bore_volume))
-        annulus_end = float(np.sum(self.annulus_volume[:active]))
+        annulus_end = (float(np.sum(self.annulus_volume[:active])) if circuit_end is None
+                       else min(float(circuit_end), float(np.sum(self.annulus_volume))))
+        if annulus_end <= 0.:
+            raise ValueError("circuit end must lie inside the annulus")
         total = bore_end+annulus_end
         stagnant = self._annulus.slice(annulus_end, self._annulus.size)
         inlet = Parcels(np.array([pumped]), np.array([inlet_C]))
@@ -138,8 +165,7 @@ class MovingColumn:
         self._bore = circuit.slice(0., bore_end)
         self._annulus = circuit.slice(bore_end, total).reversed().join(stagnant)
         self._read_parcels()
-        returned = circuit.slice(total, circuit.size).inventory*self.fluid_heat_capacity
-        return returned, self.recover(duration, films)
+        return circuit.slice(total, circuit.size).inventory*self.fluid_heat_capacity
 
     def exchange_tool_heat(self, index, tool, duration, inside_film, outside_film, *, tool_length):
         """Exchange heat with a tool at the chosen depth without losing energy."""

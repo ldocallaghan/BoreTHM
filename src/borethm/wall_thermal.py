@@ -66,10 +66,15 @@ class Grid:
     a: float
     r_max: float
     n: int = 200
+    power: float = 1.
 
     def build(self, radius_m=None):
         """Node radii (log-spaced, the first at the wall), face radii, and the
         volume per unit length of each control volume.
+
+        With power p > 1 the node radii are a (r_max/a)^(xi^p) on uniform xi,
+        which concentrates nodes at the wall for short exposures. The default
+        p = 1 is the logarithmic grid.
 
         radius_m reuses supplied radial coordinates when every coordinate
         differs from the declared logarithmic grid by at most eight units
@@ -77,7 +82,10 @@ class Grid:
         adjacent floating-point numbers at that radius. Geometry and node
         count must agree. The default reproduces the previous grid.
         """
-        r = self.a * (self.r_max / self.a) ** np.linspace(0.0, 1.0, self.n)
+        xi = np.linspace(0.0, 1.0, self.n)
+        if self.power != 1.:
+            xi = xi ** self.power
+        r = self.a * (self.r_max / self.a) ** xi
         if radius_m is not None:
             stored = np.asarray(radius_m, dtype=float)
             # Preserve the authoritative archived grid. Only platform rounding
@@ -129,7 +137,8 @@ class Result:
 
 
 def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growth=1.08,
-        probe_r=None, observe=None, radius_m=None, carry_static_node=False, dt_max=None):
+        probe_r=None, observe=None, radius_m=None, carry_static_node=False, dt_max=None,
+        grid_power=1.):
     """Conduct heat through the history of states. T_rock: far-field and
     initial temperature (or T0, an initial field on the grid).
 
@@ -149,11 +158,12 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
     temperature. By default it starts from the last circulating fluid
     temperature, or the wall temperature when no circulation preceded it.
     dt_max sets a maximum radial time step in seconds. By default the cap
-    is one fiftieth of each state's duration.
+    is one fiftieth of each state's duration. grid_power > 1 concentrates
+    the radial nodes at the wall (see Grid); the default is the log grid.
     """
     alpha = k / rhocp
     total = sum(s.duration for s in history)
-    r, faces, vol = Grid(a, r_max or r_max_for(a, alpha, total), n).build(radius_m)
+    r, faces, vol = Grid(a, r_max or r_max_for(a, alpha, total), n, grid_power).build(radius_m)
     T = np.full(n, float(T_rock)) if T0 is None else np.array(T0, float)
     T_start = T.copy()
     # conductance between neighbouring nodes per unit length
