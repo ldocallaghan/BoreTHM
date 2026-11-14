@@ -46,6 +46,7 @@ class ColumnStep:
     circuit_end: float | None = None
     exchange_volume: float | None = None
     moves: tuple[Move, ...] = ()
+    split: int = 0
 
 
 @dataclass(frozen=True)
@@ -85,6 +86,11 @@ def replay(column: MovingColumn, steps):
     part descends to its own geometry, pumps its share of the flow and then
     exchanges with the tools at their new contacts, so the liquid displaced
     below the bit passes each tool as pumped liquid does, whatever the step.
+
+    A static step with split = m is advanced in parts of 2**-m, 2**-m,
+    2**-(m-1) and so on up to a half of the step, each with its own wall
+    recovery and tool exchange. It resolves the fast response that follows
+    a change of film, such as the bit stopping, independent of the step.
     """
     elapsed = 0.
     for step in steps:
@@ -98,8 +104,22 @@ def replay(column: MovingColumn, steps):
         if len(step.wall_films) != len(column.rock):
             raise ValueError("each radial cell needs a wall film")
 
+        if step.split and (step.flow or step.moves or step.annulus_volume is not None
+                           or not isinstance(step.split, int) or step.split < 0):
+            raise ValueError("only a static step can be split, into a whole number of halvings")
         initial = stored_energy(column, step.contacts)
         supplied = returned = 0.
+        if step.split:
+            samples, rock, into = [], 0., 0.
+            for duration in split_durations(step.duration, step.split):
+                rock += column.recover(duration, step.wall_films)
+                exchange(column, step.contacts, duration)
+                into += duration
+                samples.append((into, tuple(c.tool.sensor_temperatures() for c in step.contacts)))
+            elapsed += step.duration
+            residual = stored_energy(column, step.contacts)-initial+rock
+            yield StepResult(elapsed, samples[-1][1], 0., 0., rock, residual, tuple(samples))
+            continue
         if step.moves:
             if step.annulus_volume is not None or step.bore_volume is not None:
                 raise ValueError("a moving step gives its geometry in its parts")
@@ -164,6 +184,11 @@ def replay(column: MovingColumn, steps):
         residual = stored_energy(column, step.contacts)-initial-supplied+returned+rock
         yield StepResult(elapsed, tuple(c.tool.sensor_temperatures() for c in step.contacts),
                          supplied, returned, rock, residual, tuple(samples))
+
+
+def split_durations(duration, halvings):
+    """Parts of 2**-m, 2**-m, 2**-(m-1), ... 1/2 of a step; they sum to it."""
+    return [duration/2**halvings]+[duration/2**k for k in range(halvings, 0, -1)]
 
 
 def exchange(column, contacts, duration):

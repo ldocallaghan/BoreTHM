@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from borethm.column_replay import ColumnStep, Move, ToolContact, replay
+from borethm.column_replay import ColumnStep, Move, ToolContact, replay, split_durations
 from borethm.layered_tool import LayeredTool
 from borethm.moving_column import MovingColumn
 from borethm.run_in_column import RadialColumn
@@ -136,3 +136,30 @@ def test_moving_parts_do_not_depend_on_the_step_division(flow):
     halves, halves_tool, step = _descending(flow)
     list(replay(halves, [step(2., [22.], 20.), step(2., [24.], 22.)]))
     assert abs(coarse_tool.temperature_C[-1]-halves_tool.temperature_C[-1]) > 1e-3
+
+
+def test_split_static_step_matches_its_parts_and_resolves_the_stop():
+    def stopped(film):
+        column, tool, step = _descending(0.)
+        list(replay(column, [step(4., [21., 22., 23., 24.], 20.)]))
+        contact = replace_film(step(1., [24.], 24.).contacts[0], film)
+        return column, tool, ColumnStep(2., (300.,)*4, (contact,))
+
+    def replace_film(contact, film):
+        return ToolContact(contact.tool, contact.length, 0, 0, contact.inside_film, film,
+                           contact.footprint)
+
+    assert split_durations(2., 3) == [.25, .25, .5, 1.] and sum(split_durations(2., 10)) == 2.
+    whole, whole_tool, static = stopped(np.inf)
+    one = list(replay(whole, [ColumnStep(**{**static.__dict__, "split": 3})]))
+    parts, parts_tool, static = stopped(np.inf)
+    many = list(replay(parts, [ColumnStep(**{**static.__dict__, "duration": d})
+                               for d in split_durations(2., 3)]))
+    np.testing.assert_allclose(whole_tool.temperature_C, parts_tool.temperature_C, rtol=0, atol=1e-12)
+    np.testing.assert_allclose(whole.annulus_temperature, parts.annulus_temperature, rtol=0, atol=1e-12)
+    assert [s[0] for s in one[0].samples] == pytest.approx([.25, .5, 1., 2.])
+    np.testing.assert_allclose(one[0].samples[0][1][0], many[0].sensors_C[0], rtol=0, atol=1e-12)
+    inventory = whole.fluid_heat_capacity*np.dot(whole.annulus_volume, whole.annulus_temperature)
+    assert abs(one[0].energy_residual_J) < 1e-9*inventory
+    with pytest.raises(ValueError):
+        next(replay(whole, [ColumnStep(1., (300.,)*4, static.contacts, flow=.01, inlet_C=20., split=2)]))

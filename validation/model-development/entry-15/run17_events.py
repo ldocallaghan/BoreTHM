@@ -65,6 +65,7 @@ RESTART_S = 300.                  # the restart window of D3 and D4
 BIT_OFFSET_FT = .625              # middle of the 1.25 ft bit contact
 MERGE_FT = .01                    # bit depths closer than this share one fixed face
 GRADE_LEVELS = 6                  # halvings of the cell length above each fixed face
+SPLIT_HALVINGS = 10               # halvings of the first static step after motion or pumping
 SHALLOW_FT = 1500.                # longer than the run 16 and 17 assemblies
 
 
@@ -500,6 +501,10 @@ def replay_event(event, record, profiles, grid, snapshot, config):
     # Depth of the bit in the column's current annulus geometry.
     geometry_depth = min(depth0, bottom)
     elapsed = 0.
+    # Whether the last step moved or pumped. The film then changes, and with
+    # the fast coupling the outside film becomes infinite, so the tool steel
+    # meets its liquid at once; the next static step is split to resolve it.
+    disturbed = True
 
     def q_on(j):
         return flow[rows[j]] > PUMPS_ON_GPM
@@ -552,7 +557,7 @@ def replay_event(event, record, profiles, grid, snapshot, config):
                               float(sample(p, z-offset, "h")), bore_capacity=None)
                     tool.temperature_C[0] = float(sample(p, z-offset, "td"))
                 out.append((end, phase, *[tool.sensor_temperatures() for *_, tool in tools], 0., 0.))
-                previous_depth, now = z, end
+                previous_depth, now, disturbed = z, end, True
                 continue
             films = sample(p, grid.md, "h") if q else static_films
 
@@ -607,7 +612,9 @@ def replay_event(event, record, profiles, grid, snapshot, config):
                 step = ColumnStep(dt, tuple(films), contacts, float_valve=config.float_valve,
                                   fill_C=inlet_C, flow=q, inlet_C=inlet_C if q else None,
                                   active_cells=active, circuit_end=at_bit if q else None,
-                                  exchange_volume=exchange_volume if q else None)
+                                  exchange_volume=exchange_volume if q else None,
+                                  split=SPLIT_HALVINGS if disturbed and not q else 0)
+            disturbed = moved or bool(q)
             result = next(replay(column, [step]))
             elapsed += dt
             for into, sensors in result.samples[:-1]:
