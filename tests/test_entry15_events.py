@@ -138,3 +138,23 @@ def test_model_pump_on_is_the_switch_nearest_the_event():
     # Switches at 93 s and 160 s; the recorded flow came on 7 s early.
     assert events.model_pump_on(event, series) == 93.
     assert events.model_pump_on(dict(pump_on_t=300.), series) == 300.
+
+
+def test_replayed_rows_are_written_once_and_combine_identically(tmp_path):
+    rows = [dict(event="stage-01", band="high", stage_peak_C=101.23456789012345, restart_peak_C=float("nan")),
+            dict(event="stage-01", band="low", stage_peak_C=1e-17, restart_peak_C=88.1)]
+    calls = []
+
+    def compute():
+        calls.append(1)
+        return [dict(row) for row in rows]
+    key = events.replay_key("stage-01", True, False)
+    assert key == "stage-01-fast-open"
+    first = events.replayed_rows(tmp_path, key, compute)
+    again = events.replayed_rows(tmp_path, key, compute)
+    assert len(calls) == 1 and (tmp_path/f"{key}.csv").exists()
+    assert not list(tmp_path.glob("*.tmp"))
+    events.write_csv(tmp_path/"direct.csv", first)
+    events.write_csv(tmp_path/"reread.csv", again)
+    assert (tmp_path/"direct.csv").read_bytes() == (tmp_path/"reread.csv").read_bytes()
+    assert events.replayed_rows(None, key, compute) == rows and len(calls) == 2

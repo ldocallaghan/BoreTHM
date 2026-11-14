@@ -35,6 +35,7 @@ import csv
 import hashlib
 import importlib
 import json
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -696,6 +697,43 @@ def quantities(event, series, config):
     return out
 
 
+def replay_key(event_id, mixed, float_valve):
+    return f"{event_id}-{'fast' if mixed else 'slow'}-{'float' if float_valve else 'open'}"
+
+
+def replayed_rows(directory, key, compute):
+    """Rows of one replay, kept in their own file as soon as they exist.
+
+    With a directory, a replay already written there is read back instead
+    of recomputed, and a new one is written through a temporary file so a
+    partial file never appears. CSV fields keep Python's float repr, so the
+    combined output is the same whichever way the rows arrive.
+    """
+    if directory is None:
+        return compute()
+    path = directory/f"{key}.csv"
+    if path.exists():
+        with path.open(encoding="utf-8", newline="") as stream:
+            return list(csv.DictReader(stream))
+    rows = compute()
+    temporary = path.with_suffix(".tmp")
+    write_csv(temporary, rows)
+    temporary.replace(path)
+    return rows
+
+
+def replay_rows(event, record, profiles, grid, snapshot, config):
+    """D3 and D4 rows of one replay with its energy check."""
+    series = replay_event(event, record, profiles, grid, snapshot, config)
+    residual = max(abs(row[-2]) for row in series)
+    # Summed residual over summed heat exchanged with the rock in the
+    # column-tracked steps (the steady phase is prescribed).
+    exchanged = sum(abs(row[-1]) for row in series)
+    fraction = sum(abs(row[-2]) for row in series)/exchanged if exchanged else 0.
+    return [row | dict(max_step_energy_residual_J=residual, energy_residual_fraction=fraction)
+            for row in quantities(event, series, config)]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
@@ -706,7 +744,11 @@ def main():
     parser.add_argument("--radial", type=int, default=40)
     parser.add_argument("--cap", type=float, default=1.25)
     parser.add_argument("--coupling", choices=("slow", "fast", "both"), default="both")
+    parser.add_argument("--events-dir", type=Path, default=None,
+                        help="folder for one file per replay, written as each finishes and reused")
     args = parser.parse_args()
+    if args.events_dir is not None:
+        args.events_dir.mkdir(parents=True, exist_ok=True)
     alignment = next(r for r in audit.rows(rig.HERE/"clock-alignment.csv") if r["eow_bha"] == "17")
     offset = int(alignment["pason_minus_sanvean_s"])
     selected = [e for e in events(offset) if args.only is None or e["id"] in args.only]
@@ -720,22 +762,23 @@ def main():
     couplings = {"slow": (False,), "fast": (True,), "both": (False, True)}[args.coupling]
     rows = []
     for mixed in couplings:
-        base = Config(args.cells, args.radial, args.cap, mixed)
-        snapshots = history(record, profiles, grid, base, [e["start_t"] for e in selected])
-        for event in selected:
-            floats = (False, True) if event["kind"] == "trip_stage" else (False,)
-            for float_valve in floats:
-                config = Config(args.cells, args.radial, args.cap, mixed, float_valve)
-                series = replay_event(event, record, profiles, grid, snapshots[event["start_t"]], config)
-                residual = max(abs(row[-2]) for row in series)
-                # Summed residual over summed heat exchanged with the rock in
-                # the column-tracked steps (the steady phase is prescribed).
-                exchanged = sum(abs(row[-1]) for row in series)
-                fraction = sum(abs(row[-2]) for row in series)/exchanged if exchanged else 0.
-                for row in quantities(event, series, config):
-                    rows.append(row | dict(max_step_energy_residual_J=residual,
-                                            energy_residual_fraction=fraction))
-                print(event["id"], "fast" if mixed else "slow", float_valve, flush=True)
+        replays = [(event, float_valve) for event in selected
+                   for float_valve in ((False, True) if event["kind"] == "trip_stage" else (False,))]
+        done = args.events_dir is not None and all(
+            (args.events_dir/f"{replay_key(e['id'], mixed, f)}.csv").exists() for e, f in replays)
+        started = time.perf_counter()
+        snapshots = None if done else history(record, profiles, grid, Config(args.cells, args.radial,
+                                                                             args.cap, mixed),
+                                              [e["start_t"] for e in selected])
+        print("history", "fast" if mixed else "slow", f"{time.perf_counter()-started:.0f} s", flush=True)
+        for event, float_valve in replays:
+            config = Config(args.cells, args.radial, args.cap, mixed, float_valve)
+            started = time.perf_counter()
+            rows += replayed_rows(args.events_dir, replay_key(event["id"], mixed, float_valve),
+                                  lambda: replay_rows(event, record, profiles, grid,
+                                                      snapshots[event["start_t"]], config))
+            print(event["id"], "fast" if mixed else "slow", float_valve,
+                  f"{time.perf_counter()-started:.0f} s", flush=True)
     write_csv(args.output, rows)
 
 
