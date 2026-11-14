@@ -19,6 +19,17 @@ class ToolContact:
 
 
 @dataclass(frozen=True)
+class Move:
+    """One part of a moving step: the geometry and contacts at its end."""
+    annulus_volume: np.ndarray
+    contacts: tuple[ToolContact, ...]
+    added_bore_volume: float = 0.
+    bore_volume: np.ndarray | None = None
+    bit_volumes: tuple[float, float] | None = None
+    circuit_end: float | None = None
+
+
+@dataclass(frozen=True)
 class ColumnStep:
     duration: float
     wall_films: tuple[float, ...]
@@ -34,6 +45,7 @@ class ColumnStep:
     bit_volumes: tuple[float, float] | None = None
     circuit_end: float | None = None
     exchange_volume: float | None = None
+    moves: tuple[Move, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -68,6 +80,11 @@ def replay(column: MovingColumn, steps):
     that volume passes between tool exchanges, and liquid shorter than a
     step still meets each tool. The wall recovers once over the step.
     Readings after each part are returned as (time into the step, sensors).
+
+    A moving step may instead give its motion as equal parts (moves). Each
+    part descends to its own geometry, pumps its share of the flow and then
+    exchanges with the tools at their new contacts, so the liquid displaced
+    below the bit passes each tool as pumped liquid does, whatever the step.
     """
     elapsed = 0.
     for step in steps:
@@ -83,6 +100,33 @@ def replay(column: MovingColumn, steps):
 
         initial = stored_energy(column, step.contacts)
         supplied = returned = 0.
+        if step.moves:
+            if step.annulus_volume is not None or step.bore_volume is not None:
+                raise ValueError("a moving step gives its geometry in its parts")
+            parts = len(step.moves)
+            samples = []
+            for number, move in enumerate(step.moves, 1):
+                _, out = column.descend(move.annulus_volume, move.added_bore_volume,
+                                        float_valve=step.float_valve, fill_temperature=step.fill_C,
+                                        bit_volumes=move.bit_volumes)
+                returned += out
+                if step.float_valve and move.added_bore_volume:
+                    supplied += move.added_bore_volume*step.fill_C*column.fluid_heat_capacity
+                if move.bore_volume is not None:
+                    column.regrid_bore(move.bore_volume)
+                if step.flow:
+                    pumped = step.duration*step.flow/parts
+                    returned += column.advect(pumped, step.inlet_C, active_cells=step.active_cells,
+                                              circuit_end=move.circuit_end)
+                    supplied += pumped*step.inlet_C*column.fluid_heat_capacity
+                exchange(column, move.contacts, step.duration/parts)
+                samples.append((number*step.duration/parts,
+                                tuple(c.tool.sensor_temperatures() for c in move.contacts)))
+            rock = column.recover(step.duration, step.wall_films)
+            elapsed += step.duration
+            residual = stored_energy(column, step.contacts)-initial-supplied+returned+rock
+            yield StepResult(elapsed, samples[-1][1], supplied, returned, rock, residual, tuple(samples))
+            continue
         if step.annulus_volume is not None:
             _, returned = column.descend(step.annulus_volume, step.added_bore_volume,
                                          float_valve=step.float_valve,

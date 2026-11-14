@@ -40,7 +40,7 @@ from pathlib import Path
 
 import numpy as np
 
-from borethm.column_replay import ColumnStep, ToolContact, replay
+from borethm.column_replay import ColumnStep, Move, ToolContact, replay
 from borethm.layered_tool import LayeredTool, displacement_film
 from borethm.moving_column import MovingColumn
 from borethm.run_in_column import RadialColumn
@@ -554,38 +554,60 @@ def replay_event(event, record, profiles, grid, snapshot, config):
                 out.append((end, phase, *[tool.sensor_temperatures() for *_, tool in tools], 0., 0.))
                 previous_depth, now = z, end
                 continue
-            bore_grid, annulus_grid = string_volumes(grid.faces, grid.full_volume, assembly, z)
-            new_total = float(np.sum(bore_grid))
-            # The intake and the restart circuit turn at the bit itself, so
-            # the liquid below it stays in place whatever the cell size.
-            at_bit = annulus_to(z, grid.faces, grid.full_volume, assembly, z)
-            bit_volumes = (annulus_to(z, grid.faces, grid.full_volume, assembly, geometry_depth), at_bit)
             films = sample(p, grid.md, "h") if q else static_films
-            contacts = []
-            for label, offset, length, tool in tools:
-                i = min(int(np.searchsorted(grid.faces, z-offset)-1), len(bore_grid)-1)
-                outside = (displacement_film(tool.outer_radius, grid.dims["r_wall"][i], speed,
-                                             rho[i], cp[i], mu[i], k[i])
-                           if speed and tool.outer_radius < grid.dims["r_wall"][i] else float(films[i]))
-                # The tool exchanges with the parcels along its carrier, so
-                # its liquid is independent of the cell length.
-                footprint = carrier_interval((z-offset-length/2, z-offset+length/2), grid.faces,
-                                             grid.full_volume, assembly, z)
-                contacts.append(ToolContact(tool, length, i, i, 3.66*float(k[i])/(2*tool.bore_radius),
-                                            outside, footprint))
-            # While pumping, each tool exchanges at least exchange_parts times
-            # per footprint volume passing it, so short slugs meet the tool.
-            smallest = min(b1-b0 for c in contacts for b0, b1 in c.footprint)
-            step = ColumnStep(dt, tuple(films), tuple(contacts),
-                              annulus_volume=annulus_grid if moved else None,
-                              added_bore_volume=max(0., new_total-previous_total) if moved else 0.,
-                              float_valve=config.float_valve, fill_C=(inlet[rows[j]]-32)/1.8,
-                              flow=q, inlet_C=(inlet[rows[j]]-32)/1.8 if q else None,
-                              active_cells=max(1, int(np.count_nonzero(grid.faces[:-1] < z))) if q else None,
-                              bore_volume=bore_grid if moved else None,
-                              bit_volumes=bit_volumes if moved else None,
-                              circuit_end=at_bit if q else None,
-                              exchange_volume=smallest/config.exchange_parts if q else None)
+
+            def contacts_at(depth):
+                contacts = []
+                for label, offset, length, tool in tools:
+                    i = min(int(np.searchsorted(grid.faces, depth-offset)-1), len(grid.md)-1)
+                    outside = (displacement_film(tool.outer_radius, grid.dims["r_wall"][i], speed,
+                                                 rho[i], cp[i], mu[i], k[i])
+                               if speed and tool.outer_radius < grid.dims["r_wall"][i] else float(films[i]))
+                    # The tool exchanges with the parcels along its carrier, so
+                    # its liquid is independent of the cell length.
+                    footprint = carrier_interval((depth-offset-length/2, depth-offset+length/2),
+                                                 grid.faces, grid.full_volume, assembly, depth)
+                    contacts.append(ToolContact(tool, length, i, i, 3.66*float(k[i])/(2*tool.bore_radius),
+                                                outside, footprint))
+                return tuple(contacts)
+            contacts = contacts_at(z)
+            # Each tool exchanges at least exchange_parts times per footprint
+            # volume passing it, so short slugs meet the tool.
+            exchange_volume = min(b1-b0 for c in contacts for b0, b1 in c.footprint)/config.exchange_parts
+            inlet_C = (inlet[rows[j]]-32)/1.8
+            active = max(1, int(np.count_nonzero(grid.faces[:-1] < z))) if q else None
+            if moved:
+                # The liquid below the old bit is displaced past the tools as
+                # the bit advances. The motion is split with the pumped flow
+                # into parts no larger than the exchange volume, and each part
+                # descends, pumps and exchanges in turn. The intake and the
+                # restart circuit turn at the bit itself, so the liquid below
+                # it stays in place whatever the cell size.
+                swept = (annulus_to(z, grid.faces, grid.full_volume, assembly, geometry_depth)
+                         - annulus_to(geometry_depth, grid.faces, grid.full_volume, assembly, geometry_depth))
+                parts = max(1, int(np.ceil((q*dt+max(swept, 0.))/exchange_volume)))
+                moves, depth_from, total_from = [], geometry_depth, previous_total
+                for part in range(1, parts+1):
+                    depth = depth_from+(z-geometry_depth)/parts if part < parts else z
+                    bore_grid, annulus_grid = string_volumes(grid.faces, grid.full_volume, assembly, depth)
+                    total = float(np.sum(bore_grid))
+                    at_bit = annulus_to(depth, grid.faces, grid.full_volume, assembly, depth)
+                    moves.append(Move(annulus_grid, contacts_at(depth) if part < parts else contacts,
+                                      added_bore_volume=max(0., total-total_from), bore_volume=bore_grid,
+                                      bit_volumes=(annulus_to(depth, grid.faces, grid.full_volume,
+                                                              assembly, depth_from), at_bit),
+                                      circuit_end=at_bit if q else None))
+                    depth_from, total_from = depth, total
+                new_total = total_from
+                step = ColumnStep(dt, tuple(films), contacts, float_valve=config.float_valve,
+                                  fill_C=inlet_C, flow=q, inlet_C=inlet_C if q else None,
+                                  active_cells=active, moves=tuple(moves))
+            else:
+                at_bit = annulus_to(z, grid.faces, grid.full_volume, assembly, z)
+                step = ColumnStep(dt, tuple(films), contacts, float_valve=config.float_valve,
+                                  fill_C=inlet_C, flow=q, inlet_C=inlet_C if q else None,
+                                  active_cells=active, circuit_end=at_bit if q else None,
+                                  exchange_volume=exchange_volume if q else None)
             result = next(replay(column, [step]))
             elapsed += dt
             for into, sensors in result.samples[:-1]:

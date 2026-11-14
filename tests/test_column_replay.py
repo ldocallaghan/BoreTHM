@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from borethm.column_replay import ColumnStep, ToolContact, replay
+from borethm.column_replay import ColumnStep, Move, ToolContact, replay
 from borethm.layered_tool import LayeredTool
 from borethm.moving_column import MovingColumn
 from borethm.run_in_column import RadialColumn
@@ -83,3 +83,56 @@ def test_advect_matches_restart_step_without_wall_exchange():
     out_b = b.advect(.3, 20., active_cells=4)
     assert out_a == pytest.approx(out_b)
     np.testing.assert_allclose(a.bore_temperature, b.bore_temperature)
+
+
+def _descending(flow):
+    """A bit at 20 m entering hot static liquid, with a 1.25 m tool at the bit."""
+    def annulus(bit):
+        return np.array([2.-.05*min(max(bit-10.*i, 0.), 10.) for i in range(4)])
+
+    def to(depth, bit):
+        return .2*depth-.05*min(depth, bit)
+    rock = [RadialColumn(.1, 120., 2.5, 2.5e6, 3600., radial_nodes=20, temperature_C=t)
+            for t in (20., 20., 80., 80.)]
+    column = MovingColumn(rock, [10.]*4, annulus(20.), 4.18e6, [.2], [20.])
+    tool = LayeredTool(.025, .08, column.fluid_heat_capacity, 20.)
+
+    def move(bit, before):
+        contact = ToolContact(tool, 1.25, 0, 0, 50., 400.,
+                              ((to(bit-1.25, bit), to(bit, bit)), (.01*bit-.0125, .01*bit)))
+        return Move(annulus(bit), (contact,), added_bore_volume=.01*(bit-before),
+                    bit_volumes=(to(bit, before), to(bit, bit)),
+                    circuit_end=to(bit, bit) if flow else None)
+
+    def step(duration, depths, before):
+        moves = []
+        for bit in depths:
+            moves.append(move(bit, before))
+            before = bit
+        return ColumnStep(duration, (0.,)*4, moves[-1].contacts, float_valve=True, fill_C=20.,
+                          flow=flow, inlet_C=20. if flow else None,
+                          active_cells=3 if flow else None, moves=tuple(moves))
+    return column, tool, step
+
+
+@pytest.mark.parametrize("flow", [0., .02])
+def test_moving_parts_do_not_depend_on_the_step_division(flow):
+    whole, whole_tool, step = _descending(flow)
+    one = list(replay(whole, [step(4., [21., 22., 23., 24.], 20.)]))
+    split, split_tool, step = _descending(flow)
+    two = list(replay(split, [step(2., [21., 22.], 20.), step(2., [23., 24.], 22.)]))
+    # Without wall films only the division into steps differs.
+    np.testing.assert_allclose(whole_tool.temperature_C, split_tool.temperature_C, rtol=0, atol=1e-10)
+    np.testing.assert_allclose(whole.annulus_temperature, split.annulus_temperature, rtol=0, atol=1e-10)
+    assert len(one[0].samples) == 4 and one[0].samples[-1][0] == pytest.approx(4.)
+    # The displaced hot liquid passes the tool.
+    assert max(s[1][0][-1] for s in one[0].samples) > 21.
+    inventory = whole.fluid_heat_capacity*np.dot(whole.annulus_volume, whole.annulus_temperature)
+    assert max(abs(r.energy_residual_J) for r in one+two) < 1e-9*inventory
+    # One descent per step drops the displaced liquid into the footprint at
+    # once, so the tool depends on how the motion is divided.
+    coarse, coarse_tool, step = _descending(flow)
+    list(replay(coarse, [step(4., [24.], 20.)]))
+    halves, halves_tool, step = _descending(flow)
+    list(replay(halves, [step(2., [22.], 20.), step(2., [24.], 22.)]))
+    assert abs(coarse_tool.temperature_C[-1]-halves_tool.temperature_C[-1]) > 1e-3
