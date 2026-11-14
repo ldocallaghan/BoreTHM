@@ -80,6 +80,18 @@ The tool is represented by a lumped thermal model of the collar and enclosed flu
 
 These approximations matter when interpreting a small tool-temperature margin or a narrow allowable density range. The [approximation comparisons](approximation-comparisons.md) test selected alternatives. Their results do not replace a calculation with a common timeline and explicit fluid displacement.
 
+**Provisional finding: the static coupling limit.** Heat transfer between the static liquid and the steel is bounded by two limits. The slow limit is a laminar conduction floor, and the fast limit treats the static liquid as well mixed. No onset criterion for convection in these geometries could be sourced, so the [entry 15 event model](model-development.md#entry-15-run-in-column-and-restart-7-november-2026) fixes a limit for each fluid and carries the other as a band ([static coupling](../../validation/model-development/entry-15/static-coupling.md), [protocol](../../validation/model-development/entry-15/protocol.md)). Model-only runs of that event model at its base resolution (160 axial cells, 40 radial nodes and a 1.25 s maximum step) give the fast limit the higher sensor peak in every event:
+
+| Events | Sensor | Open bore | With a float valve |
+|---|---|---|---|
+| FORGE 16B run 17, eight trip stages (stage peak) | Bit | 2 to 41 °C | 4 to 51 °C |
+| FORGE 16B run 17, eight trip stages (stage peak) | Black Box | 2 to 23 °C | 2 to 22 °C |
+| FORGE 16A, eleven run-in legs (leg peak) | Bit box | 5 to 21 °C | 4 to 15 °C |
+
+The values are fast minus slow at the centre of each sensor band. On run 17 stages 3, 4, 6 and 7 the bit spread is 35 to 51 °C. The published run 17 errors are 2 to 5 °C. The choice of limit therefore moves a predicted tool peak by more than any discretisation error found in the same model. The site tool check uses the laminar floor. Where the static liquid mixes, a peak computed at that floor may be low by an amount of this order. The spread comes from the event model, and the site tool model has not been run at the fast limit.
+
+These figures are provisional. They predate two corrections to the event model, which change trip and run-in results and were not rerun. The first passes the liquid that a descending bit displaces past the tools in parts. The second resolves the first static step after the bit stops or the pumps go off. Before those corrections, some stage peaks still moved by up to 1.7 °C between the two finest cell counts. No measured temperature was compared, and entry 15 closed before its scored comparison.
+
 ## Other design limits and study scope
 
 The assessments do not include detailed casing and cement integrity, string loads and fatigue, circulation losses, or creep coupled to the drilling cycle. The hole-cleaning reference and cycle timings come from one well. Rig capacity is checked against three pumps of one published rating. The 0.02 SG allowance for pressure changes during pipe movement is a sensitivity assumption, with no verified field range for these 10 to 13 km wells.
