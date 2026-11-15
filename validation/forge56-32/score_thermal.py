@@ -26,6 +26,8 @@ PRIMARY = "v1.8.0"
 PERSISTENCE = "persistence"
 MIN_FINITE_FRACTION = .8
 RANGE_C = (0., 120.)
+UNIT_CHECK_MARGIN_C = 5.
+UNIT_CHECK = "unit check, scored with return more than 5 °C below inlet (excludes nothing)"
 UNIT_CONVERSION = "(F-32)/1.8"
 TARGET_FIELDS = ("sample_id", "qualified_bins", "qualified_seconds", "finite_seconds",
                  "mean_C", "min_C", "max_C", "unit_conversion")
@@ -96,7 +98,31 @@ def read_targets(path):
             qualified_bins=int(row["qualified_bins"]), qualified_seconds=int(row["qualified_seconds"]),
             finite_seconds=int(row["finite_seconds"]),
             **{k: float(row[k]) if finite(row[k]) else math.nan for k in ("mean_C", "min_C", "max_C")})
+        check_target(row["sample_id"], targets[row["sample_id"]])
     return targets
+
+
+def to_celsius(fahrenheit):
+    """The declared conversion of a Pason Degrees reading."""
+    return (fahrenheit-32)/1.8
+
+
+def valid_second(value_C):
+    """R2: a converted second at or below 0 °C or above 120 °C is missing."""
+    return math.isfinite(value_C) and RANGE_C[0] < value_C <= RANGE_C[1]
+
+
+def check_target(sample_id, target):
+    """Stop on a target row that the extraction rules could not have produced."""
+    if not 0 <= target["finite_seconds"] <= target["qualified_seconds"]:
+        raise ValueError(f"{sample_id}: finite seconds outside 0 to qualified seconds")
+    values = [target[k] for k in ("mean_C", "min_C", "max_C")]
+    if target["finite_seconds"] == 0:
+        if any(math.isfinite(v) for v in values):
+            raise ValueError(f"{sample_id}: a value is given without finite seconds")
+    elif not (all(valid_second(v) for v in values)
+              and target["min_C"] <= target["mean_C"] <= target["max_C"]):
+        raise ValueError(f"{sample_id}: values must lie within the R2 range, with min <= mean <= max")
 
 
 def exclusion_rules(target):
@@ -105,11 +131,8 @@ def exclusion_rules(target):
     seconds = target["qualified_seconds"]
     if seconds <= 0 or target["finite_seconds"]/seconds < MIN_FINITE_FRACTION:
         rules.append("R1 finite seconds below 80 % of qualified seconds")
-    if target["finite_seconds"] > 0:
-        if not (RANGE_C[0] <= target["min_C"] and target["max_C"] <= RANGE_C[1]):
-            rules.append("R2 value outside 0 to 120 °C")
-        if target["min_C"] == target["max_C"]:
-            rules.append("R3 one constant value across the window")
+    if target["finite_seconds"] > 0 and target["min_C"] == target["max_C"]:
+        rules.append("R3 one constant value across the window")
     return rules
 
 
@@ -214,7 +237,13 @@ def counts(windows):
             tally[f"not predicted: {w['reasons']}"] += 1
     tally["scored with persistence"] = sum(
         w["status"] == "scored" and math.isfinite(w[PERSISTENCE]) for w in windows)
+    tally[UNIT_CHECK] = sum(w["status"] == "scored" and below_inlet(w) for w in windows)
     return [dict(count=k, windows=v) for k, v in tally.items()]
+
+
+def below_inlet(window):
+    """Unit check: the converted return is more than 5 °C below the converted inlet."""
+    return window["measured_C"] < window["inlet_C"]-UNIT_CHECK_MARGIN_C
 
 
 def figures(windows, output):
@@ -278,7 +307,8 @@ def figures(windows, output):
 WINDOW_FIELDS = ["sample_id", "time", "bha", "bit_ft", "flow_gpm", "inlet_C", "qualified_bins",
                  "qualified_seconds", "finite_seconds", "finite_fraction", "status", "reasons",
                  "measured_C", *PREDICTORS, PERSISTENCE, *[f"{n}_minus_measured_C" for n in PREDICTORS],
-                 f"{PERSISTENCE}_minus_measured_C", "depth_quartile", "flow_quartile", "inlet_quartile"]
+                 f"{PERSISTENCE}_minus_measured_C", "measured_minus_inlet_C", "unit_check",
+                 "depth_quartile", "flow_quartile", "inlet_quartile"]
 SUMMARY_FIELDS = ["set", "predictor", "group_kind", "group", "n", "bias_C", "mae_C", "rmse_C",
                   "within_2C", "within_5C", "skill_of_v1.8.0"]
 
@@ -295,6 +325,9 @@ def score(targets_path, output, predictions=PREDICTIONS):
         row = dict(w)
         for name in [*PREDICTORS, PERSISTENCE]:
             row[f"{name}_minus_measured_C"] = w[name]-w["measured_C"]
+        row["measured_minus_inlet_C"] = w["measured_C"]-w["inlet_C"]
+        row["unit_check"] = ("return more than 5 °C below inlet" if w["status"] == "scored"
+                             and below_inlet(w) else "")
         rows.append({k: "" if isinstance(v, float) and not math.isfinite(v) else v
                      for k, v in row.items()})
     write_csv(output/"windows.csv", rows, WINDOW_FIELDS)

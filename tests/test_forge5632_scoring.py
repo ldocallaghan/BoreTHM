@@ -102,31 +102,27 @@ def test_each_exclusion_rule_is_applied_and_listed(tmp_path):
     seconds = lambda k: rows[k]["qualified_seconds"]
     rows[ids[0]]["finite_seconds"] = math.floor(.8*seconds(ids[0]))-1
     rows[ids[1]]["finite_seconds"] = math.ceil(.8*seconds(ids[1]))
-    rows[ids[2]]["min_C"] = -.1
-    rows[ids[3]]["max_C"] = 120.1
     rows[ids[4]]["min_C"] = rows[ids[4]]["max_C"] = rows[ids[4]]["mean_C"]
     rows[ids[5]]["finite_seconds"] = 0
     rows[ids[5]]["mean_C"] = rows[ids[5]]["min_C"] = rows[ids[5]]["max_C"] = ""
-    rows[ids[6]].update(min_C=0., max_C=120.)
+    rows[ids[6]].update(min_C=1e-9, max_C=120.)
     score_thermal.score(write_targets(tmp_path/"targets.csv", rows), tmp_path/"scores")
     out = {r["sample_id"]: r for r in read(tmp_path/"scores"/"windows.csv")}
     assert out[ids[0]]["status"] == "excluded" and out[ids[0]]["reasons"].startswith("R1")
     assert out[ids[1]]["status"] == "scored"
-    assert out[ids[2]]["reasons"].startswith("R2") and out[ids[3]]["reasons"].startswith("R2")
     assert out[ids[4]]["reasons"].startswith("R3")
     assert out[ids[5]]["reasons"].startswith("R1") and out[ids[5]]["measured_C"] == ""
     assert out[ids[6]]["status"] == "scored"
-    for k in ids[:6]:
-        if k != ids[1]:
-            assert out[k]["measured_C"] == "" and out[k]["v1.8.0_minus_measured_C"] == ""
+    for k in (ids[0], ids[4], ids[5]):
+        assert out[k]["measured_C"] == "" and out[k]["v1.8.0_minus_measured_C"] == ""
     counts = {r["count"]: int(r["windows"]) for r in read(tmp_path/"scores"/"counts.csv")}
-    assert counts["scored"] == 402-5
-    assert counts["excluded"] == 5
+    assert counts["scored"] == 402-3
+    assert counts["excluded"] == 3
     assert counts["excluded by R1 finite seconds below 80 % of qualified seconds"] == 2
-    assert counts["excluded by R2 value outside 0 to 120 °C"] == 2
     assert counts["excluded by R3 one constant value across the window"] == 1
+    assert not any("R2" in k for k in counts)
     summary = read(tmp_path/"scores"/"summary.csv")
-    assert int(summary_row(summary, "v1.8.0")["n"]) == 402-5
+    assert int(summary_row(summary, "v1.8.0")["n"]) == 402-3
     not_predicted = [r for r in out.values() if r["status"] == "not predicted"]
     assert len(not_predicted) == 20 and all(r["reasons"] for r in not_predicted)
 
@@ -154,6 +150,77 @@ def test_persistence_uses_the_preceding_scored_window_of_the_assembly(tmp_path):
     row = next(r for r in with_persistence if r["predictor"] == "persistence")
     primary = next(r for r in with_persistence if r["predictor"] == "v1.8.0")
     assert row["skill_of_v1.8.0"] == pytest.approx(1-primary["rmse_C"]/row["rmse_C"])
+
+
+def test_r2_marks_seconds_missing_at_the_declared_limits():
+    assert score_thermal.to_celsius(32.) == 0.
+    assert score_thermal.to_celsius(248.) == pytest.approx(120.)
+    valid = score_thermal.valid_second
+    assert not valid(score_thermal.to_celsius(32.))
+    assert not valid(-.1) and not valid(math.nan) and not valid(score_thermal.to_celsius(-999.25))
+    assert valid(1e-9) and valid(120.) and not valid(120.000001)
+
+
+def test_r2_seconds_count_against_r1_without_excluding_the_window(tmp_path):
+    """Seconds removed by R2 reduce the valid count; the window survives at 80 %."""
+    rows = synthetic()
+    ids = sorted(rows)
+    total = rows[ids[0]]["qualified_seconds"]
+    second = np.full(total, rows[ids[0]]["mean_C"])
+    second[:total//10] = 0.            # at 32 °F: missing under R2
+    second[total//10:total//5] = 130.  # above 120 °C: missing under R2
+    kept = second[[score_thermal.valid_second(v) for v in second]]
+    rows[ids[0]].update(finite_seconds=len(kept), mean_C=kept.mean(), min_C=kept.min()-1., max_C=kept.max()+1.)
+    total = rows[ids[1]]["qualified_seconds"]
+    second = np.full(total, rows[ids[1]]["mean_C"])
+    second[:total//5+1] = 0.
+    kept = second[[score_thermal.valid_second(v) for v in second]]
+    rows[ids[1]].update(finite_seconds=len(kept), mean_C=kept.mean(), min_C=kept.min()-1., max_C=kept.max()+1.)
+    score_thermal.score(write_targets(tmp_path/"targets.csv", rows), tmp_path/"scores")
+    out = {r["sample_id"]: r for r in read(tmp_path/"scores"/"windows.csv")}
+    assert out[ids[0]]["status"] == "scored"
+    assert float(out[ids[0]]["finite_fraction"]) == pytest.approx(1-(total//5)/total)
+    assert out[ids[1]]["status"] == "excluded" and out[ids[1]]["reasons"].startswith("R1")
+
+
+def test_unit_check_counts_without_excluding(tmp_path):
+    rows = synthetic()
+    every = {w["sample_id"]: w for w in windows() if w["predicted"]}
+    chosen = sorted(rows)[:7]
+    for k in chosen:
+        mean = max(every[k]["inlet_C"]-6., 1.)
+        rows[k].update(mean_C=mean, min_C=mean/2, max_C=mean+1.)
+    expected = sum(rows[k]["mean_C"] < every[k]["inlet_C"]-5. for k in rows)
+    assert expected >= 1
+    score_thermal.score(write_targets(tmp_path/"targets.csv", rows), tmp_path/"scores")
+    counts = {r["count"]: int(r["windows"]) for r in read(tmp_path/"scores"/"counts.csv")}
+    assert counts[score_thermal.UNIT_CHECK] == expected
+    assert counts["scored"] == 402 and counts["excluded"] == 0
+    out = read(tmp_path/"scores"/"windows.csv")
+    assert sum(bool(r["unit_check"]) for r in out) == expected
+    for r in out:
+        if r["status"] == "scored":
+            assert float(r["measured_minus_inlet_C"]) == pytest.approx(
+                rows[r["sample_id"]]["mean_C"]-every[r["sample_id"]]["inlet_C"])
+
+
+@pytest.mark.parametrize("change", ["at zero", "above range", "mean outside", "too many seconds",
+                                    "value without seconds"])
+def test_values_the_extraction_cannot_produce_stop_the_scoring(tmp_path, change):
+    rows = synthetic()
+    row = rows[sorted(rows)[0]]
+    if change == "at zero":
+        row["min_C"] = 0.
+    elif change == "above range":
+        row["max_C"] = 120.1
+    elif change == "mean outside":
+        row["mean_C"] = row["max_C"]+.5
+    elif change == "too many seconds":
+        row["finite_seconds"] = row["qualified_seconds"]+1
+    else:
+        row["finite_seconds"] = 0
+    with pytest.raises(ValueError):
+        score_thermal.score(write_targets(tmp_path/"targets.csv", rows), tmp_path/"scores")
 
 
 @pytest.mark.parametrize("change", ["missing", "extra", "bins", "unit", "columns"])

@@ -26,9 +26,11 @@ Their number must equal `qualified_bins` in the
 [conditions table](predictions-v1.8.0/conditions.csv). A 1 s archive row
 belongs to a bin when its source time, truncated to 10 s, equals the bin
 time. These rows are the window's qualified seconds. The measured value
-is the mean of `Temp OUT (Degrees)` over the qualified seconds with a
-finite reading. Empty, non-numeric and non-finite fields and the Pason
-null value −999.25 are missing. Pauses, connections and trip stages are
+is the mean of the converted `Temp OUT (Degrees)` over the qualified
+seconds with a valid reading. Empty, non-numeric and non-finite fields
+and the Pason null value −999.25 are missing. Under rule R2 below, a
+converted reading at or below 0 °C (32 °F) or above 120 °C is also
+missing. Pauses, connections and trip stages are
 not scored: their return values refer to the preceding circulation,
 and 56-32 has no usable downhole temperature in the selected windows.
 
@@ -37,32 +39,44 @@ and 56-32 has no usable downhole temperature in the selected windows.
 inlet as Fahrenheit under the daily report convention. The extract
 [README](README.md) records the same label for both channels. The
 return is read under the same convention and converted to °C as
-(F − 32)/1.8, recorded in the targets file as `(F-32)/1.8`.
+(F − 32)/1.8, recorded in the targets file as `(F-32)/1.8`. The
+`report_inlet_F` field of the [mud table](mud_reports.csv) is the
+daily report Mud Information column headed "Temp" over "In", for
+example in `56-32 Daily Drilling Reports.zip!DailyReportDetailRpt_210210081912.pdf`,
+page 1. The neighbouring "Out" column is not extracted.
 
 **Targets file.** The extraction writes
 `targets/return_temperature.csv` with one row for each window that has
 converged v1.8.0, v1.7.0 and analytical return predictions, and no other
 rows. Its columns are `sample_id`, `qualified_bins`,
 `qualified_seconds`, `finite_seconds`, `mean_C`, `min_C`, `max_C` and
-`unit_conversion`. The minimum and maximum are over the finite
-qualified seconds and are needed for rules R2 and R3. The scorer stops
-without output if a predicted window is missing, an extra window is
-present, a bin count differs from the forecast inputs or the conversion
-differs from the one stated here.
+`unit_conversion`. The finite seconds are the qualified seconds with a
+valid reading after rule R2. The mean, minimum and maximum are over
+those seconds; the minimum and maximum are needed for rule R3. The
+scorer stops without output if a predicted window is missing, an extra
+window is present, a bin count differs from the forecast inputs, the
+conversion differs from the one stated here, or a value lies outside
+the R2 range.
 
-**Validity.** A window with a target row is scored unless one of these
-rules applies:
+**Validity.** Rule R2 applies to seconds. Rules R1 and R3 apply to
+windows, after R2.
 
-| Rule | Exclusion |
-| --- | --- |
-| R1 | Fewer than 80 % of its qualified seconds have a finite `Temp OUT`. |
-| R2 | A finite qualified second lies outside 0 to 120 °C after conversion. |
-| R3 | Every finite qualified second has the same value. |
+| Rule | Applies to | Effect |
+| --- | --- | --- |
+| R2 | Each qualified second | A converted reading at or below 0 °C (32 °F) or above 120 °C is missing. |
+| R1 | Window | Excluded if fewer than 80 % of its qualified seconds have a valid reading. |
+| R3 | Window | Excluded if every valid qualified second has the same value. |
 
-Every excluded window is listed in `scores/windows.csv` with each rule
-that applies. Windows without converged predictions are listed with
+A single reading does not exclude a window. Every excluded window is
+listed in `scores/windows.csv` with each rule that applies. Windows without converged predictions are listed with
 their input or calculation status and are not scored. No other
 exclusion is allowed after the targets are read.
+
+**Unit check.** The scorer counts the scored windows whose converted
+return is more than 5 °C below the window's converted inlet
+temperature, `inlet_C` in the conditions table. The count is reported
+in `scores/counts.csv` and each such window is marked in
+`scores/windows.csv`. The check excludes no window.
 
 **Predictions scored.** The v1.8.0 return is the primary prediction.
 The comparators are the v1.7.0 return, the analytical comparator's
