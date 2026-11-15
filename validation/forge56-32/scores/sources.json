@@ -1,0 +1,11 @@
+{
+  "predictions_sha256": "cff0ab3939becbaf1dc802a7cdc94b878a868ae1822e837caf0b8ec1cf72ea08",
+  "targets_sha256": "9ac840008fc271e74d5cbf20a4707959a8565f17f70aef4f813e5618082c091e",
+  "scorer_sha256": "a36b80993027ba2173ad546875be4f0ba279d9e5bf1f9cc6ee2a9bf9964a9238",
+  "figures": [
+    "measured_vs_predicted.png",
+    "residual_vs_depth.png",
+    "residual_vs_time.png",
+    "residual_vs_flow.png"
+  ]
+}
