@@ -258,6 +258,100 @@ Well 56-32 was drilled in 2021 and supplied nothing to BoreTHM's development. It
 
 On 196 ten-minute drilling windows at 7,219–8,809 ft, with measured standpipe pressure less the reported motor differential as the target, the lower end of the v1.6.0 interval has a median residual of -9.2% for BHA 9 and +7.2% for BHA 10. The v1.5.0 calculation's lower end is -33.4% and -21.7%. Most of the difference comes from the connection losses: removing the NC50 connection scenario lowers the v1.6.0 prediction by 620–730 psi. That scenario is a catalogue transfer with no measured bore behind it, so this comparison supports the hydraulic terms only as far as the connection and motor inputs are right. Two shallow trip events disagree with every calculation, and one window records 0 psi at 376 gal/min; the archive reports them as found.
 
+### FORGE 56-32: blind return temperature
+
+*Draft for review.*
+
+The v1.8.0 model-only predictions for well 56-32 were committed on
+7 November 2026 in `ba56445`, before any 56-32 temperature was read
+([forecast](../../validation/forge56-32/predictions-v1.8.0/README.md)).
+The [scoring protocol](../../validation/forge56-32/scoring_protocol.md)
+and [scorer](../../validation/forge56-32/score_thermal.py) were committed
+and pushed on 15 November 2026 in `7b4ae21` and `93bd21c`. The measured
+return temperature was then extracted and committed on 15 November in
+`741573b` ([targets](../../validation/forge56-32/targets/return_temperature.csv)),
+and scored with the unchanged scorer in `c1b9e27`
+([scores](../../validation/forge56-32/scores/summary.csv)).
+
+The measure is the mean of the Pason `Temp OUT` channel over the
+qualified seconds of each half-hour drilling window. Qualified seconds
+are those in 10 s bins with flow above 300 US gal/min, the bit within
+5 ft of hole depth and penetration above 1 ft/h. The channel is labelled
+`Degrees`; it is read as Fahrenheit, the convention used for the inlet,
+and converted to °C. A converted reading at or below 0 °C or above
+120 °C counts as missing, and a window needs 80 % of its qualified
+seconds valid. Errors are model minus measured.
+
+Of 422 drilling windows, 402 have converged predictions. Nineteen have
+no uniquely assigned assembly and one lacks a required input. One
+predicted window, `56b-0506` on assembly 10, has 424 valid seconds of
+1,800 and is excluded under the 80 % rule. The remaining 401 windows
+are scored, 391 of them
+with a persistence value. No scored window has a return more than 5 °C
+below its inlet.
+
+| Windows | Prediction | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill of v1.8.0 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| All scored | v1.8.0 | 401 | -11.77 | 12.05 | 20.75 | 57.6 | 67.8 | |
+| All scored | v1.7.0 | 401 | -11.42 | 11.77 | 20.26 | 57.1 | 67.8 | -0.024 |
+| All scored | Analytical | 401 | -8.52 | 13.32 | 20.17 | 15.2 | 54.9 | -0.029 |
+| With persistence | v1.8.0 | 391 | -11.74 | 12.02 | 20.81 | 58.8 | 68.3 | |
+| With persistence | v1.7.0 | 391 | -11.39 | 11.75 | 20.32 | 58.6 | 68.3 | -0.024 |
+| With persistence | Analytical | 391 | -8.47 | 13.37 | 20.22 | 14.6 | 54.7 | -0.029 |
+| With persistence | Persistence | 391 | -0.10 | 0.86 | 1.40 | 87.0 | 99.0 | -13.884 |
+
+Skill is 1 − RMSE(v1.8.0)/RMSE(comparator) on the same windows.
+The v1.8.0 errors by assembly are:
+
+| Assembly | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % |
+|---|---:|---:|---:|---:|---:|---:|
+| 2 | 21 | -32.90 | 32.90 | 34.40 | 0.0 | 0.0 |
+| 3 | 2 | -39.15 | 39.15 | 39.15 | 0.0 | 0.0 |
+| 4 | 60 | -37.30 | 37.30 | 37.87 | 0.0 | 0.0 |
+| 5 | 53 | -28.84 | 29.75 | 33.16 | 0.0 | 15.1 |
+| 6 | 33 | -1.61 | 1.69 | 2.09 | 63.6 | 100.0 |
+| 7 | 31 | -0.92 | 1.31 | 1.68 | 80.6 | 100.0 |
+| 8 | 110 | -0.44 | 0.61 | 0.87 | 95.5 | 100.0 |
+| 9 | 11 | -1.54 | 1.54 | 1.64 | 81.8 | 100.0 |
+| 10 | 74 | -0.32 | 0.72 | 1.22 | 93.2 | 98.6 |
+| 11 | 6 | -2.06 | 2.06 | 2.14 | 33.3 | 100.0 |
+
+By quartile of the inputs over the 402 predicted windows, the v1.8.0
+errors are:
+
+| Input | Quartile | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Bit depth, ft | 640.70 to 4,812.78 | 101 | -37.20 | 37.20 | 37.95 | 0.0 | 0.0 |
+| Bit depth, ft | 4,812.78 to 6,031.94 | 100 | -8.62 | 9.25 | 16.44 | 47.0 | 73.0 |
+| Bit depth, ft | 6,031.94 to 7,089.27 | 100 | -0.43 | 0.61 | 0.87 | 95.0 | 100.0 |
+| Bit depth, ft | 7,089.27 to 9,115.35 | 100 | -0.57 | 0.87 | 1.31 | 89.0 | 99.0 |
+| Flow, US gal/min | 375.12 to 662.51 | 100 | -16.79 | 16.99 | 25.26 | 47.0 | 56.0 |
+| Flow, US gal/min | 662.51 to 670.13 | 100 | -4.99 | 5.18 | 12.31 | 81.0 | 85.0 |
+| Flow, US gal/min | 670.13 to 680.76 | 100 | -7.00 | 7.58 | 16.06 | 64.0 | 80.0 |
+| Flow, US gal/min | 680.76 to 928.04 | 101 | -18.23 | 18.37 | 25.94 | 38.6 | 50.5 |
+| Inlet, °C | 2.14 to 10.71 | 101 | -37.35 | 37.35 | 37.96 | 0.0 | 0.0 |
+| Inlet, °C | 10.71 to 37.81 | 100 | -8.50 | 8.52 | 16.35 | 67.0 | 74.0 |
+| Inlet, °C | 37.81 to 42.12 | 100 | -0.69 | 1.03 | 1.50 | 83.0 | 99.0 |
+| Inlet, °C | 42.12 to 56.30 | 100 | -0.27 | 1.03 | 1.57 | 81.0 | 99.0 |
+
+The Phase 0 [gap coverage](../../validation/model-development/phase-0/gap-exposure.md),
+labelled inferred, gave development return residual endpoints of
+-12.0 to +2.9 °C for 266 of the 422 return forecasts. The 16A blind
+surface return had a mean error of -6.00 °C and an RMSE of 6.43 °C.
+These were declared as context and were not pass marks.
+
+The test covers the surface return temperature in drilling windows on
+assemblies 2 to 11; the predicted windows span bit depths of 640.70 to
+9,115.35 ft. It does not
+cover pauses, connections, trip stages or downhole temperatures. It
+does not resolve the scale of the `Degrees` label, which is a declared
+convention, or where on the flowline the return is measured. With the
+targets read, 56-32 return temperature is development data.
+
+![FORGE 56-32 measured and predicted return temperature](../../validation/forge56-32/scores/measured_vs_predicted.png?raw=1)
+
+![FORGE 56-32 v1.8.0 return error against bit depth, by assembly](../../validation/forge56-32/scores/residual_vs_depth.png?raw=1)
+
 ## Rock reheating
 
 The reheating of the wall when circulation stops is calculated with a transient model of conduction in the rock around the hole, described in the [physical-model guide](models.md#wall-reheating-and-thermal-stress). It was compared with the return temperature recorded in FORGE 16B when circulation resumed after each of the five trips in the trial (`validate_forge_pauses.py`). While the pumps are off, the fluid in the hole drifts towards the temperature of the rock around it, warming in the deep part of the hole and cooling near surface, and when they restart the annulus column reaches surface over the first bottoms-up, shallowest fluid first. In the model, the rock at points every 200 ft along the hole is taken through its own history of circulation and pauses from the rig's minute-by-minute record, and the column of fluid temperatures is pushed to surface as plug flow. Plug flow ignores the heat the returning fluid exchanges with the string and the rock on its way up, so one factor scales the modelled anomaly in the return temperature. Fitted on four of the five trips and used to predict the fifth, in turn, the factor is 0.56, and the predicted mean anomalies differ from the observed ones by 12 °F (root mean square), against observed anomalies of −10 to +38 °F (Fig. 3). The largest miss is the 33-hour trip, observed at +25 °F and predicted at 0 °F. With the fluid in the hole taken at the wall's temperature, the sensitivity used for the sites, the factor is 0.39 and the misfit 13 °F. The pauses with the bit on bottom could not be used, as most were for gyroscopic surveys or circulation at reduced flow, and their first bottoms-up runs into the next operation. The modelled curves are dominated by the arrival of the hot fluid from the bottom of the hole, which the observed curves do not show, and the fit barely separates the base case from the case with no fluid in the hole. The comparison is therefore too coarse to confirm or reject the reheating model, which rests on the [analytic checks](#analytic-checks). The 16A comparison below supplies a separate conditional check.
