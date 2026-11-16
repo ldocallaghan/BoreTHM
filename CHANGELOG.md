@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## v1.9.0 (17 November 2026)
+
+**Changes to results.** None. The five built-in sites were evaluated under
+both physics choices at this release and at v1.8.0, and every value of the
+v1.8.0 `result_dict` apart from `versions`, 5,863 in all, was compared
+exactly: none changed and none is missing. The keys this release adds are
+listed under "Result additions".
 
 **Operating choices.** `evaluate` takes `operations`, an `Operations` with
 optional fields for the pipe candidates, a fixed flow or the flows searched

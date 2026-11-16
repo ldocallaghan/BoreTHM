@@ -44,7 +44,7 @@ Use Python 3.14.4 and the locked dependencies in a source checkout:
 ```bash
 git clone https://github.com/ldocallaghan/BoreTHM.git
 cd BoreTHM
-git checkout v1.8.0
+git checkout v1.9.0
 python -m venv .venv
 ```
 
@@ -92,12 +92,13 @@ To evaluate a built-in site directly, run `borethm-evaluate --site soultz --json
 
 ### What you can change
 
-A site file supplies geology and site inputs. The evaluator selects the well geometry, pipe, flow and drilling cycle through its reference rules.
+A site file supplies geology and site inputs. The evaluator selects the well geometry, pipe, flow and drilling cycle through its reference rules. An optional `[operations]` table, or `Operations` in Python, states the pipe, flow, limits, timings or fluids, and a choice left out keeps its rule.
 
 | Task | Interface |
 |---|---|
 | Evaluate a built-in site | `borethm-evaluate --site KEY` |
 | Assess a new site under the evaluator's programme rules | A TOML file with `--site-file`, or `SiteProfile` in Python for a custom geotherm |
+| Assess your own pipe, flow, limits, timings or fluids | The [`[operations]` table](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/guides/new-site.md#operating-choices), or `Operations` in Python |
 | Specify a circulation, stability, wall-temperature or tool calculation | Public component functions in the [Python API](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/api.md) |
 | Reproduce the documented design interventions | Internal study modules described in the [design comparisons](https://github.com/ldocallaghan/BoreTHM/blob/main/docs/science/design-comparisons.md); these provide no stable programme-configuration interface |
 
