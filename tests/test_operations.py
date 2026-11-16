@@ -612,6 +612,78 @@ def test_common_windows_record_matches_the_windows(monkeypatch):
     assert mechanisms == {'breakout width', 'pore pressure'}
 
 
+# ------------------------------------------------------------ the open-hole trip profile
+@pytest.fixture
+def trip_profile(monkeypatch):
+    """trip_profile on synthetic inputs. Returns a function of the site's
+    operations and the budget flag that gives the rows, the trip time [h] the
+    trip column was taken at, and each wall element's static time [h]. The
+    wall temperature falls by 1 degree C per static hour, so the rows show
+    the trip time too."""
+    geometry = wg.WellGeometry([wg.StringSegment(3000., wg.CONVENTIONAL)],
+                               [wg.HoleInterval(0., 1000., 0.15), wg.HoleInterval(1000., 3000., 0.15)])
+    site = replace(se.SOULTZ, target_depth=3000., geotherm=lambda z: np.asarray(z) * 0.04 + 20.)
+    seen = dict(column=[], static=[])
+
+    def column(site, out, run, trip_h, *args):
+        seen['column'].append(trip_h)
+        return run['z'], run['Tu']
+
+    def wall(states, T_rock, r_wall, *args, **kwargs):
+        hours = states[-1].duration / 3600.
+        seen['static'].append(hours)
+        return SimpleNamespace(r=np.array([r_wall, r_wall + 0.1]), fields=[np.full(2, T_rock - hours)])
+
+    def inputs(site, depth, rock, T_wall=None, **kwargs):
+        case = dict(label='scenario', window=dict(verdict='GO', SG_lo=1.0, SG_hi=1.8, SG_hydro=1.0 + T_wall / 1000.))
+        return case, [case]
+
+    monkeypatch.setattr(se, 'trip_temperatures', column)
+    monkeypatch.setattr(se.wall_thermal, 'run', wall)
+    monkeypatch.setattr(se, 'stability_inputs', inputs)
+    monkeypatch.setattr(se, '_ref_depth', lambda *args: 0.)
+    monkeypatch.setattr(se, '_static_node', lambda *args: (1000., 10.))
+    monkeypatch.setattr(se, '_bottom_conditions', lambda *args: dict(r_wall=0.15, r_string=0.05, Tu=20., h=100., bu_h=1.))
+    monkeypatch.setattr(se.pr, 'bottomhole_pressure', lambda *args, **kwargs: dict(
+        P_lo=3e7, P_static=3e7, allowance=0., SG=1.0))
+
+    def profile(operations=None, budget=False):
+        seen['column'].clear()
+        seen['static'].clear()
+        run = dict(geometry=geometry, fluid=None, z=np.linspace(0., 3000., 12), Tu=np.full(12, 20.))
+        out = dict(z=3000., drill={'ROP': 10. / 3600.}, m1=run, budget=budget, cycle=dict(deciding_case='scenario'))
+        rows = se.trip_profile(replace(site, operations=operations), out)
+        return rows, list(seen['column']), list(seen['static'])
+    return profile
+
+
+@pytest.mark.parametrize('budget', [False, True])
+def test_a_stated_trip_time_sets_the_trip_profiles_trip_time(trip_profile, budget):
+    rows, column, static = trip_profile(Operations(trip_hours=9.0), budget)
+    assert static == [9.0] * len(rows) and len(rows) > 1
+    assert column == ([9.0] if budget else [])
+    assert [r['T_ref'] for r in rows] == [r['T_rock'] - 9.0 for r in rows]
+
+
+@pytest.mark.parametrize('budget', [False, True])
+def test_a_stated_trip_scale_scales_the_trip_profiles_trip_time(trip_profile, budget):
+    expected = 2.0 * dc.trip_hours(3000., dc.forge_timings())
+    rows, column, static = trip_profile(Operations(trip_scale=2.0), budget)
+    assert static == pytest.approx([expected] * len(rows))
+    assert column == (pytest.approx([expected]) if budget else [])
+
+
+@pytest.mark.parametrize('budget', [False, True])
+def test_the_trip_profile_without_operations_keeps_the_forge_trip_time(trip_profile, budget):
+    """The trip time before stated values reached the trip profile, compared exactly."""
+    trip = dc.trip_hours(3000., dc.forge_timings())
+    for operations in (None, Operations()):
+        rows, column, static = trip_profile(operations, budget)
+        assert static == [trip] * len(rows)
+        assert column == ([trip] if budget else [])
+        assert [r['T_ref'] for r in rows] == [r['T_rock'] - trip for r in rows]
+
+
 # ------------------------------------------------------------ public defaults
 def test_operation_defaults_give_value_unit_rule_and_source():
     defaults = borethm.operation_defaults()

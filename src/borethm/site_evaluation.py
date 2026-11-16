@@ -2672,16 +2672,18 @@ def trip_profile(site, out, heights=(0.0, 100.0, 250.0, 500.0, 1000.0, 2000.0, 3
     """The trip verdict up the open hole: wall elements at heights above the
     end of the bit run, up to the casing shoe, each circulated since the bit
     passed at the rate of penetration (connections ignored) and through the
-    bottoms-up, then the trip. With the budget, the pressure at each is the
-    water column at the end of the trip, less the swab allowance."""
+    bottoms-up, then the trip. The trip takes the site's stated trip time or
+    scale, as in the rest of the evaluation. With the budget, the pressure at
+    each is the water column at the end of the trip, less the swab allowance."""
     from borethm import drilling_cycle as dc
     t = dc.forge_timings()
     run = out["m1"]
     z_bit = out["z"]
+    trip = _trip_hours(site, z_bit, t)
     budget = out.get("budget", False)
     if budget:
         bp = run.get("backpressure", 0.0)
-        temps_t = trip_temperatures(site, out, run, dc.trip_hours(z_bit, t))
+        temps_t = trip_temperatures(site, out, run, trip)
     geotherm = site.temperature()
     shoe = max(h.md_top for h in run["geometry"].hole)
     rop = out["drill"]["ROP"] * 3600.0
@@ -2692,7 +2694,6 @@ def trip_profile(site, out, heights=(0.0, 100.0, 250.0, 500.0, 1000.0, 2000.0, 3
             break
         T_rock = float(geotherm(z))
         bc = _bottom_conditions(run, z)
-        trip = dc.trip_hours(z_bit, t)
         cap, hs = _static_node(T_rock, z, bc["r_wall"], 0.0, run.get("fluid"))
         states = [wall_thermal.State("circulating", ((H + t.stand_ft * dc.FT) / rop + bc["bu_h"]) * 3600,
                                      T_fluid=bc["Tu"], h=bc["h"]),
