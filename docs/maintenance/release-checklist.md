@@ -2,17 +2,17 @@
 
 ## v1.9.0
 
-- [ ] Apply a stated trip time or trip scale to the open-hole trip profile, with fast tests that fail before the fix.
-- [ ] Compare every `result_dict` value of the five built-in sites under both physics choices with v1.8.0, excluding `versions`.
-- [ ] Run the golden comparison and the UT Austin benchmark tests of the fast suite.
-- [ ] Compare public names and signatures with v1.8.0, listing additions and changed signatures.
-- [ ] Run the fast suite locally.
-- [ ] Build and check the wheel and source distribution.
-- [ ] Check a fresh wheel installation outside the checkout.
-- [ ] Run the link checker and the strict documentation build from a clean export.
-- [ ] Confirm that the results archives under `validation/` are unchanged since they were committed.
+- [x] Apply a stated trip time or trip scale to the open-hole trip profile, with fast tests that fail before the fix.
+- [x] Compare every `result_dict` value of the five built-in sites under both physics choices with v1.8.0, excluding `versions`.
+- [x] Run the golden comparison and the UT Austin benchmark tests of the fast suite.
+- [x] Compare public names and signatures with v1.8.0, listing additions and changed signatures.
+- [x] Run the fast suite locally.
+- [x] Build and check the wheel and source distribution.
+- [x] Check a fresh wheel installation outside the checkout.
+- [x] Run the link checker and the strict documentation build from a clean export.
+- [x] Confirm that the results archives under `validation/` are unchanged since they were committed.
 - [ ] Confirm the citation date against the actual tag date.
-- [ ] Record the fast matrix and slow job from CI, the slow job including `tests/test_operations_slow.py`.
+- [x] Record the fast matrix and slow job from CI, the slow job including `tests/test_operations_slow.py`.
 - [ ] Tag v1.9.0 and publish the GitHub release.
 - [ ] Check PyPI, the website and the Zenodo version DOI, and record publication.
 
