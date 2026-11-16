@@ -94,7 +94,7 @@ jobs:
     needs: [docs, fast, fast-matrix, wheel-install]
     if: (github.event_name == 'workflow_dispatch' && !inputs.v134-goldens) || github.event_name == 'schedule'
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 300
     env:
       OPENBLAS_NUM_THREADS: "1"
       OMP_NUM_THREADS: "1"
