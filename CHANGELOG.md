@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.9.0 (17 November 2026)
+## v1.9.0 (16 November 2026)
 
 **Changes to results.** None. The five built-in sites were evaluated under
 both physics choices at this release and at v1.8.0, and every value of the
