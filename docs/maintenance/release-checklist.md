@@ -11,10 +11,10 @@
 - [x] Check a fresh wheel installation outside the checkout.
 - [x] Run the link checker and the strict documentation build from a clean export.
 - [x] Confirm that the results archives under `validation/` are unchanged since they were committed.
-- [ ] Confirm the citation date against the actual tag date.
+- [x] Confirm the citation date against the actual tag date.
 - [x] Record the fast matrix and slow job from CI, the slow job including `tests/test_operations_slow.py`.
-- [ ] Tag v1.9.0 and publish the GitHub release.
-- [ ] Check PyPI, the website and the Zenodo version DOI, and record publication.
+- [x] Tag v1.9.0 and publish the GitHub release.
+- [x] Check PyPI, the website and the Zenodo version DOI, and record publication.
 
 See the [v1.9.0 release record](../releases/v1.9.0.md) for the checks and publication status.
 
