@@ -12,7 +12,7 @@
 - [ ] Run the link checker and the strict documentation build from a clean export.
 - [ ] Confirm that the results archives under `validation/` are unchanged since they were committed.
 - [ ] Confirm the citation date against the actual tag date.
-- [ ] Record the fast matrix and slow job from CI, the slow job including `tests/test_operations_slow.py` and `tests/test_operation_defaults_slow.py`.
+- [ ] Record the fast matrix and slow job from CI, the slow job including `tests/test_operations_slow.py`.
 - [ ] Tag v1.9.0 and publish the GitHub release.
 - [ ] Check PyPI, the website and the Zenodo version DOI, and record publication.
 
