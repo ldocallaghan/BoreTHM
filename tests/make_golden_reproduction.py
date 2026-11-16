@@ -9,11 +9,12 @@ Each site is evaluated with circulation='v1.3.4' under each physics choice
 and its result_dict is written to tests/golden/reproduction/<site>-<physics>.json,
 without the versions record. Result keys added after v1.8.0 are dropped, so
 the script gives the same files when run on later code that reproduces the
-release. The values are floating-point results of one environment (the
+release. The values are floating-point results of one machine (the
 locked dependencies, one BLAS thread). platform.json records its operating
-system, Python minor version and NumPy version. On that platform
-test_operations_slow.py compares the results exactly; elsewhere it compares
-them with a relative tolerance (comparison()).
+system, Python minor version and NumPy version. Another machine gives
+different last digits, even with the same operating system, Python and
+NumPy, so test_operations_slow.py compares the results with a relative
+tolerance (comparison()).
 """
 import argparse
 import json
@@ -33,8 +34,8 @@ ADDED_KEYS = ('operations', 'window_profile', 'window_width', 'pump_check', 'too
 
 
 PLATFORM = OUT / 'platform.json'
-# Elsewhere than the recorded platform: the relative tolerance of every
-# number, and the absolute floor of the energy balance's residual [W].
+# The relative tolerance of every number, and the absolute floor of the
+# energy balance's residual [W].
 RELATIVE = 1e-9
 RESIDUAL_FLOOR_W = 1e-7
 
@@ -47,16 +48,13 @@ def this_platform():
 
 
 def comparison():
-    """'exact' on the platform the results were recorded on, 'tolerance' elsewhere,
-    with a line that says which comparison runs and why."""
+    """A line that gives the tolerance of the comparison and the platforms the
+    results were recorded and compared on."""
     recorded_on = json.loads(PLATFORM.read_text(encoding='utf-8'))
-    now = this_platform()
     describe = lambda p: f"{p['system']}, Python {p['python']}, NumPy {p['numpy']}"
-    if now == recorded_on:
-        return 'exact', f'exact comparison: running on the recorded platform ({describe(now)})'
-    return 'tolerance', (f'relative tolerance {RELATIVE:g}, energy-balance residual floor '
-                         f'{RESIDUAL_FLOOR_W:g} W: recorded on {describe(recorded_on)}, '
-                         f'running on {describe(now)}')
+    return (f'relative tolerance {RELATIVE:g}, energy-balance residual floor '
+            f'{RESIDUAL_FLOOR_W:g} W: recorded on {describe(recorded_on)}, '
+            f'running on {describe(this_platform())}')
 
 
 def differences(result, golden, path=''):

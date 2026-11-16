@@ -1,5 +1,5 @@
-"""The comparison with the recorded release results: exact on the recorded
-platform, within a relative tolerance elsewhere."""
+"""The comparison with the recorded release results, within a relative
+tolerance on every platform."""
 import copy
 import json
 
@@ -16,15 +16,14 @@ def test_the_platform_record_names_system_python_and_numpy():
     assert record['python'].count('.') == 1
 
 
-def test_another_platform_selects_the_tolerance_comparison(monkeypatch):
+def test_the_recorded_platform_also_uses_the_tolerance_comparison(monkeypatch):
     record = json.loads(golden.PLATFORM.read_text(encoding='utf-8'))
     monkeypatch.setattr(golden, 'this_platform', lambda: dict(record))
-    kind, text = golden.comparison()
-    assert kind == 'exact' and text.startswith('exact comparison')
+    text = golden.comparison()
+    assert text.startswith('relative tolerance 1e-09') and f"running on {record['system']}" in text
     monkeypatch.setattr(golden, 'this_platform', lambda: dict(record, system='Windows'))
-    kind, text = golden.comparison()
-    assert kind == 'tolerance'
-    assert 'relative tolerance 1e-09' in text and 'running on Windows' in text
+    text = golden.comparison()
+    assert text.startswith('relative tolerance 1e-09') and 'running on Windows' in text
 
 
 def test_differences_allow_last_digits_and_the_residual_floor():

@@ -14,14 +14,14 @@ def pytest_addoption(parser):
 
 def pytest_terminal_summary(terminalreporter):
     """After the tests that compare results with the recorded release
-    results, say which comparison ran (exact, or within a tolerance)."""
+    results, give the tolerance and platforms of the comparison."""
     ran = [report for reports in terminalreporter.stats.values() for report in reports
            if getattr(report, "when", None) == "call"
            and "test_results_reproduce_the_release[" in getattr(report, "nodeid", "")]
     if ran:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         from make_golden_reproduction import comparison
-        terminalreporter.write_line("release reproduction: " + comparison()[1])
+        terminalreporter.write_line("release reproduction: " + comparison())
 
 
 def pytest_collection_modifyitems(config, items):

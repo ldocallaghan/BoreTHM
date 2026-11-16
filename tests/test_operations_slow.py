@@ -1,10 +1,10 @@
 """Operations on Model 1 solves and full evaluations.
 
 With no operations and with Operations(), the evaluation reproduces the
-v1.8.0 release result (tests/make_golden_reproduction.py records it): exactly
-on the platform the results were recorded on, and within a relative
-tolerance of 1e-9 elsewhere. The test report's header says which comparison
-ran.
+v1.8.0 release result (tests/make_golden_reproduction.py records it) within
+a relative tolerance of 1e-9. The recorded values are those of one machine,
+and another machine gives different last digits. The test report ends with
+a line that gives the comparison.
 The result additions agree with the existing keys, and stated values change
 what they state on real circulations.
 """
@@ -50,12 +50,8 @@ def canonical(data):
 def test_results_reproduce_the_release(results, key, physics_name, mode):
     golden = json.loads(path(key, physics_name).read_text(encoding='utf-8'))
     result = recorded(results(key, physics_name, mode))
-    kind, description = comparison()
-    if kind == 'exact':
-        assert canonical(result) == canonical(golden), description
-    else:
-        found = differences(json.loads(canonical(result)), golden)
-        assert not found, description + '\n' + '\n'.join(found[:20])
+    found = differences(json.loads(canonical(result)), golden)
+    assert not found, comparison() + '\n' + '\n'.join(found[:20])
 
 
 @pytest.mark.parametrize('key,physics_name', CASES)
