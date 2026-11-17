@@ -1,12 +1,12 @@
 /* Below 1100 px the page's contents column hides. */
 @media (max-width: 1100px) {
-  .layout { grid-template-columns: 240px minmax(0, 1fr); }
+  .layout, .home .layout { grid-template-columns: 240px minmax(0, var(--column)); }
   .page-toc { display: none; }
 }
 
 /* Below 760 px the navigation opens from a button. */
 @media (max-width: 760px) {
-  :root { --topbar-height: 104px; }
+  :root { --topbar-height: 104px; --page-padding: 18px; }
   .topbar { flex-wrap: wrap; gap: 8px 10px; padding: 8px 16px 10px; }
   .nav-toggle {
     display: grid; place-items: center;
@@ -21,6 +21,7 @@
   .search-results { width: 100%; }
 
   .layout, .home .layout { display: block; padding: 16px 16px 40px; }
+  .content { max-width: var(--column); margin: 0 auto; }
   .site-nav {
     position: fixed; z-index: 25;
     top: var(--topbar-height); left: 0; bottom: 0;
@@ -33,10 +34,9 @@
     transition: transform 0.18s ease, visibility 0s linear 0.18s;
   }
   .nav-open .site-nav { visibility: visible; transform: none; transition: transform 0.18s ease; }
-  .page { padding: 20px 18px 28px; border-radius: var(--radius); }
+  .page { padding: 20px var(--page-padding) 28px; border-radius: var(--radius); }
   h1 { font-size: 23px; }
   h2 { font-size: 18.5px; margin-top: 30px; }
-  .paths { grid-template-columns: minmax(0, 1fr); }
   .pager { grid-template-columns: minmax(0, 1fr); }
   .pager-next { grid-column: 1; }
 }
