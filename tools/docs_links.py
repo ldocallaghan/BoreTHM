@@ -139,11 +139,17 @@ def figure(image, caption=None):
     return html + '</figure>'
 
 
+def is_caption(paragraph):
+    """A paragraph after an image is its caption if it starts with "Fig." or is wholly one emphasis."""
+    return (re.sub(r'<[^>]+>', '', paragraph).lstrip().startswith('Fig.')
+            or WHOLE_EMPHASIS.fullmatch(paragraph.strip()) is not None)
+
+
 def on_page_content(html, page, config, files):
-    """Turn each image paragraph, and a following paragraph that starts with "Fig.", into a figure."""
+    """Turn each image paragraph, and a caption paragraph directly after it, into a figure."""
     def replace(match):
         image, gap, following = match[1], match[2], match[3]
-        if following is not None and re.sub(r'<[^>]+>', '', following).lstrip().startswith('Fig.'):
+        if following is not None and is_caption(following):
             return figure(image, following)
         rest = '' if following is None else IMAGE_PARAGRAPH.sub(replace, f'{gap}<p>{following}</p>')
         return figure(image) + rest

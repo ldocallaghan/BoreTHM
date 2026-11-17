@@ -77,6 +77,21 @@ def test_fig_paragraphs_away_from_images_and_code_examples_are_left_alone():
     assert docs_links.on_page_content(html, None, None, None) == html
 
 
+def test_an_emphasised_paragraph_after_an_image_becomes_its_caption():
+    html = ('<p><img alt="A" src="a.png" /></p>\n'
+            '<p><em>Crop from the <a href="log.pdf">mud log</a>, page 2.</em></p>')
+    assert docs_links.on_page_content(html, None, None, None) == (
+        '<figure><a href="a.png"><img alt="A" src="a.png" /></a>'
+        '<figcaption>Crop from the <a href="log.pdf">mud log</a>, page 2.</figcaption></figure>')
+    partly = '<p><img alt="A" src="a.png" /></p>\n<p><em>Partly</em> emphasised text.</p>'
+    assert docs_links.on_page_content(partly, None, None, None).endswith('</figure>\n<p><em>Partly</em> emphasised text.</p>')
+
+
+def test_an_emphasised_paragraph_after_text_is_left_alone():
+    html = '<p>Ordinary text.</p>\n<p><em>An emphasised remark.</em></p>'
+    assert docs_links.on_page_content(html, None, None, None) == html
+
+
 def test_markdown_links_change_but_code_examples_do_not():
     page = SimpleNamespace(file=SimpleNamespace(src_uri='README.md'))
     config = dict(docs_dir=str(ROOT / 'docs'), extra=dict(source_ref='v1.5.0'))
