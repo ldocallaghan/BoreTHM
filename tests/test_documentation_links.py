@@ -1,5 +1,6 @@
 """Reader documentation links remain usable after moves and new releases."""
 from pathlib import Path
+import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,6 +11,14 @@ from check_links import check_documents, reader_documents
 def test_reader_documentation_links_resolve():
     errors = check_documents(reader_documents())
     assert not errors, '\n'.join(errors)
+
+
+def test_release_records_page_lists_every_record_newest_first():
+    listing = (ROOT / 'docs/releases/README.md').read_text(encoding='utf-8')
+    records = [path.name for path in (ROOT / 'docs/releases').glob('v*.md')]
+    listed = re.findall(r'\]\((v[\d.]+\.md)\)', listing)
+    newest_first = sorted(records, key=lambda name: [int(part) for part in name[1:-3].split('.')], reverse=True)
+    assert listed == newest_first
 
 
 def test_checker_reports_missing_paths_and_headings(tmp_path):

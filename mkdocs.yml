@@ -23,6 +23,9 @@ markdown_extensions:
 exclude_docs: |
   /archive/**
   /theme/**
+# Each release record is linked from the Release records page.
+not_in_nav: |
+  /releases/v*.md
 hooks:
   - tools/docs_links.py
 validation:
@@ -54,14 +57,4 @@ nav:
       - Development priorities: maintenance/development.md
       - Release checklist: maintenance/release-checklist.md
   - Python API: api.md
-  - Release records:
-      - v1.9.0: releases/v1.9.0.md
-      - v1.8.0: releases/v1.8.0.md
-      - v1.7.0: releases/v1.7.0.md
-      - v1.6.0: releases/v1.6.0.md
-      - v1.5.0: releases/v1.5.0.md
-      - v1.4.3: releases/v1.4.3.md
-      - v1.4.2: releases/v1.4.2.md
-      - v1.4.1: releases/v1.4.1.md
-      - v1.4.0: releases/v1.4.0.md
-      - v1.3.6: releases/v1.3.6.md
+  - Release records: releases/README.md
