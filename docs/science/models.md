@@ -91,7 +91,11 @@ T_d(0)=T_{\text{inj}},\qquad T_u(L)=T_d(L)+\frac{Q_{\text{face}}}{\dot{m}c_p}+\f
 The conductances per unit length are resistances in series: the films on each side, each layer of the pipe wall, and on the rock side any casing and cement and the conduction into the rock, which limits the heat per unit length:
 
 ```math
-\frac{1}{UA_i}=\frac{1}{2\pi r_b h_d}+\sum_j\frac{\ln(r_{j+1}/r_j)}{2\pi k_j}+\frac{1}{2\pi r_o h_u},\qquad \frac{1}{UA_o}=\frac{1}{2\pi r_w h_u}+\sum_c\frac{\ln(r_{c+1}/r_c)}{2\pi k_c}+\frac{1}{2\pi k_{\text{rock}}G(t_D)}
+\frac{1}{UA_i}=\frac{1}{2\pi r_b h_d}+\sum_j\frac{\ln(r_{j+1}/r_j)}{2\pi k_j}+\frac{1}{2\pi r_o h_u},
+```
+
+```math
+\frac{1}{UA_o}=\frac{1}{2\pi r_w h_u}+\sum_c\frac{\ln(r_{c+1}/r_c)}{2\pi k_c}+\frac{1}{2\pi k_{\text{rock}}G(t_D)}
 ```
 
 The rock term is the exact response of a cylindrical hole of radius r_r in infinite, initially uniform rock whose wall temperature changes by a step and is then held (Carslaw and Jaeger, 1959). With t_D = α t_eff / r_r², G is the inverse Laplace transform of
@@ -137,7 +141,11 @@ Spallation (Model 2) requires the constrained thermal stress of the quenched fac
 ```
 
 ```math
-T(x,t)=T_{\text{rock}}+(T_{\text{cold}}-T_{\text{rock}})\big[\mathrm{erfc}(\eta)-e^{-\eta^2}\mathrm{erfcx}(\eta+\beta)\big],\qquad \eta=\frac{x}{2\sqrt{\alpha t}},\quad \beta=\frac{h\sqrt{\alpha t}}{k}
+T(x,t)=T_{\text{rock}}+(T_{\text{cold}}-T_{\text{rock}})\big[\mathrm{erfc}(\eta)-e^{-\eta^2}\mathrm{erfcx}(\eta+\beta)\big],
+```
+
+```math
+\eta=\frac{x}{2\sqrt{\alpha t}},\quad \beta=\frac{h\sqrt{\alpha t}}{k}
 ```
 
 ### Drilling rate and face heat
@@ -159,7 +167,15 @@ The intact-rock MSE defaults to 300 MPa. The spallation branch uses `MSE_SPALL`,
 The assisted branch combines a damage fraction from the change in differential stress, D_macro, with a fraction representing thermal microcracking, D_micro:
 
 ```math
-D=\min(D_{\text{macro}}+D_{\text{micro}},\;0.6),\qquad D_{\text{macro}}=\chi_{\text{macro}}\,\mathrm{clip}\!\left(\frac{\Delta\sigma_{\text{dev}}}{\sigma_{\text{dev,fail}}},0,1\right),\qquad D_{\text{micro}}=\chi_{\text{micro}}\,\mathrm{clip}\!\left(\frac{\Delta T}{\Delta T_{\text{ref}}},0,1\right).
+D=\min(D_{\text{macro}}+D_{\text{micro}},\;0.6),
+```
+
+```math
+D_{\text{macro}}=\chi_{\text{macro}}\,\mathrm{clip}\!\left(\frac{\Delta\sigma_{\text{dev}}}{\sigma_{\text{dev,fail}}},0,1\right),
+```
+
+```math
+D_{\text{micro}}=\chi_{\text{micro}}\,\mathrm{clip}\!\left(\frac{\Delta T}{\Delta T_{\text{ref}}},0,1\right).
 ```
 
 Here `clip(x, 0, 1)` limits x to the interval from 0 to 1, and ΔT = T_rock − T_cold. The default coefficients are χ_macro = 0.5, χ_micro = 0.4 and ΔT_ref = 400 K. They are assumed damage parameters that need calibration by experiment.
@@ -167,7 +183,15 @@ Here `clip(x, 0, 1)` limits x to the interval from 0 to 1, and ΔT = T_rock − 
 `model2_spallation.deviatoric_increase` supplies the differential stresses before and after cooling. It uses the face thermal tension σ_T returned by `model2_spallation.sigma_thermal_surface` at the specified exposure time and film coefficient. In its tension-positive convention, σ_v = −ρgz and σ_h = −K0ρgz, with rock density ρ and gravitational acceleration g:
 
 ```math
-\Delta\sigma_{\text{dev}}=\left|\sigma_v-(\sigma_h+\sigma_T)\right|-\left|\sigma_v-\sigma_h\right|,\qquad \sigma_{\text{dev,fail}}=\mathrm{UCS}+(q-1)K_0\rho gz,\qquad q=\tan^2\!\left(45^\circ+\frac{\phi}{2}\right).
+\Delta\sigma_{\text{dev}}=\left|\sigma_v-(\sigma_h+\sigma_T)\right|-\left|\sigma_v-\sigma_h\right|,
+```
+
+```math
+\sigma_{\text{dev,fail}}=\mathrm{UCS}+(q-1)K_0\rho gz,
+```
+
+```math
+q=\tan^2\!\left(45^\circ+\frac{\phi}{2}\right).
 ```
 
 UCS is the reference unconfined compressive strength, and the friction angle φ defaults to 30° in `effective_mse`. `rop_from_power` divides mechanical power P_mech by the effective energy per unit volume and the bit area A_bit, then applies `ROP_CAP`:
@@ -181,7 +205,11 @@ The cap is 20 m/h.
 `face_load` sums conduction from the face with the mechanical cutting heat and the sensible heat of the removed rock:
 
 ```math
-Q_{\text{face}}=Q_{\text{cond}}+Q_{\text{cut}}+Q_{\text{spall}},\qquad Q_{\text{cut}}=\begin{cases}
+Q_{\text{face}}=Q_{\text{cond}}+Q_{\text{cut}}+Q_{\text{spall}},
+```
+
+```math
+Q_{\text{cut}}=\begin{cases}
 0, & \text{spallation},\\
 P_{\text{mech}}, & \text{assisted or mechanical},
 \end{cases}
@@ -212,7 +240,11 @@ k=\frac{1+\sin\phi}{1-\sin\phi},\qquad p_{\text{cr}}=\frac{2p_0-\sigma_{cm}}{1+k
 The stability verdict uses the hoop stress at the wall of a vertical hole, at angle θ from the direction of the maximum horizontal stress, including the thermal stress from cooling the wall:
 
 ```math
-\sigma_\theta(\theta)=S_H+S_h-2(S_H-S_h)\cos 2\theta-P_w+\Delta\sigma_T,\qquad \Delta\sigma_T=-\frac{E\alpha}{1-\nu}\,(T_{\text{rock}}-T_{\text{wall}})
+\sigma_\theta(\theta)=S_H+S_h-2(S_H-S_h)\cos 2\theta-P_w+\Delta\sigma_T,
+```
+
+```math
+\Delta\sigma_T=-\frac{E\alpha}{1-\nu}\,(T_{\text{rock}}-T_{\text{wall}})
 ```
 
 The wall fails where the Mohr-Coulomb criterion is exceeded in effective stress, with pore pressure P_p and drilling-fluid pressure P_w:
@@ -224,25 +256,49 @@ The wall fails where the Mohr-Coulomb criterion is exceeded in effective stress,
 which holds over a breakout of width
 
 ```math
-W=\arccos\!\left(-\frac{a}{d}\right),\qquad a=S_H+S_h-P_w+\Delta\sigma_T-P_p-\sigma_{cm}-k(P_w-P_p),\quad d=2(S_H-S_h)
+W=\arccos\!\left(-\frac{a}{d}\right),
+```
+
+```math
+a=S_H+S_h-P_w+\Delta\sigma_T-P_p-\sigma_{cm}-k(P_w-P_p),
+```
+
+```math
+d=2(S_H-S_h)
 ```
 
 The temperature in the rock around the hole through the drilling cycle follows radial conduction. While circulating, the wall exchanges heat with the annulus fluid at T_f; when circulation stops, the fluid in the hole is one well-mixed volume of heat capacity C per unit length, coupled to the wall by the laminar film, h = 4.36 k_f/D_h:
 
 ```math
-\frac{\partial T}{\partial t}=\frac{\alpha}{r}\frac{\partial}{\partial r}\left(r\frac{\partial T}{\partial r}\right),\qquad -k\frac{\partial T}{\partial r}\Big|_{a}=h\,\big(T_f-T(a)\big),\qquad C\frac{dT_f}{dt}=2\pi a h\,\big(T(a)-T_f\big)
+\frac{\partial T}{\partial t}=\frac{\alpha}{r}\frac{\partial}{\partial r}\left(r\frac{\partial T}{\partial r}\right),
+```
+
+```math
+-k\frac{\partial T}{\partial r}\Big|_{a}=h\,\big(T_f-T(a)\big),
+```
+
+```math
+C\frac{dT_f}{dt}=2\pi a h\,\big(T(a)-T_f\big)
 ```
 
 The thermal stresses behind the wall are those of plane strain with a free wall, for a temperature change ΔT(r) from the rock temperature, compression positive:
 
 ```math
-\Delta\sigma_r=\frac{E\alpha}{1-\nu}\,\frac{1}{r^2}\int_a^r\Delta T\,s\,ds,\qquad \Delta\sigma_\theta=\frac{E\alpha}{1-\nu}\left[\Delta T(r)-\frac{1}{r^2}\int_a^r\Delta T\,s\,ds\right]
+\Delta\sigma_r=\frac{E\alpha}{1-\nu}\,\frac{1}{r^2}\int_a^r\Delta T\,s\,ds,
+```
+
+```math
+\Delta\sigma_\theta=\frac{E\alpha}{1-\nu}\left[\Delta T(r)-\frac{1}{r^2}\int_a^r\Delta T\,s\,ds\right]
 ```
 
 and are added to the Kirsch stresses at radius r and angle θ from SHmax, with S = (S_H + S_h)/2 and D = (S_H − S_h)/2:
 
 ```math
-\sigma_r=S\Big(1-\frac{a^2}{r^2}\Big)+D\Big(1-\frac{4a^2}{r^2}+\frac{3a^4}{r^4}\Big)\cos 2\theta+P_w\frac{a^2}{r^2},\qquad \sigma_\theta=S\Big(1+\frac{a^2}{r^2}\Big)-D\Big(1+\frac{3a^4}{r^4}\Big)\cos 2\theta-P_w\frac{a^2}{r^2}
+\sigma_r=S\Big(1-\frac{a^2}{r^2}\Big)+D\Big(1-\frac{4a^2}{r^2}+\frac{3a^4}{r^4}\Big)\cos 2\theta+P_w\frac{a^2}{r^2},
+```
+
+```math
+\sigma_\theta=S\Big(1+\frac{a^2}{r^2}\Big)-D\Big(1+\frac{3a^4}{r^4}\Big)\cos 2\theta-P_w\frac{a^2}{r^2}
 ```
 
 ```math
