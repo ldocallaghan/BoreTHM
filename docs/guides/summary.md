@@ -1,6 +1,6 @@
 # BoreTHM: cooling and borehole stability in superhot geothermal drilling
 
-*Prepared 22 October 2026. Calculation basis: v1.4.0.*
+*Prepared 17 November 2026. Calculation basis: v1.9.0.*
 
 ## The question and approach
 
@@ -8,46 +8,33 @@ Can a drilling programme keep equipment cool while maintaining borehole stabilit
 
 Cold fluid travels down an insulated drill string and returns through the annulus, the space around the string. Insulation limits heating of the downgoing fluid. The fluid pressure needed to support the wall also affects frictional losses and cooling. A programme must meet the pressure and equipment limits throughout the exposed hole and operating cycle.
 
-The reference programmes use TK-Drakon coated pipe and target rock near 400 °C. Soultz and United Downs use intermediate casing ending at 4,000 m and flows of 40 and 50 L/s, respectively. Separate drilling and trip fluids are calculated, using water-based mud weighted with barite, a dense mineral, where required. The heavier trip fluid is assumed to occupy the whole column from trip start.
+The reference programmes use TK-Drakon coated pipe and target rock near 400 °C. Separate drilling and trip fluids are calculated, using water-based mud weighted with barite, a dense mineral, where required. The heavier trip fluid is assumed to occupy the whole column from trip start.
 
-## Reference results with immediate breakout formation
+## Results for the five built-in sites
 
-Breakouts are local failures of rock at the borehole wall. The base case assumes they form as soon as rock is exposed. Both deep-site programmes are **NO-GO**: no drilling or trip-fluid density satisfies all pressure limits throughout the hole, and tool temperatures exceed the assumed 200 °C limit.
+Each site was evaluated with the v1.9.0 defaults on 17 November 2026, and the [results archive](../../results/v1.9.0/sites/README.md) keeps the full results. A fluid window is the range of surface densities that meets the pressure limits at every evaluated depth, state and case. It is closed when its lower limit is above its upper limit. The status follows the [assessment rules](interpreting-results.md): NO-GO when a decisive pressure, tool or pump-pressure check fails, CONDITIONAL when additional fluid, operating or equipment conditions apply, and GO when the assessed checks pass with none of those conditions.
 
-| Site and target | Open target drilling intervals | Whole-hole pressure check | Tool peaks: drilling / best attempted run-in |
+| Site and target | Status and controlling constraint | Tool peaks, °C: drilling / best attempted run-in | Fluid windows, SG at 20 °C |
 |---|---|---|---|
-| Soultz, 10.70 km | 8 of 9 cases | No allowable drilling or trip-fluid density | 197.0 / 201.2 °C |
-| United Downs, 12.86 km | 2 of 4 cases | No allowable drilling or trip-fluid density | 205.7 / 224.5 °C |
-
-The counts describe selected stress and strength cases using each site's reference thermal and hydraulic solution. They are not probabilities of success. An open target interval does not establish a fluid that works throughout the hole. Run-in peaks are the lowest among the schedules searched. Coating qualification remains **INDETERMINATE** because the evaluated cycle exceeds the stated rating; this does not predict a particular failure mode. The [reference comparison](../science/design-comparisons.md#reference-programmes) gives the cases and equipment histories.
-
-## How breakout timing changes the drilling window
-
-With an assumed one-hour formation delay, the whole-hole drilling-fluid window opens at both sites. The saved scan brackets the opening at **15–20 minutes at Soultz** and **10–15 minutes at United Downs**. These brackets come from calculations with assumed delays. They do not measure formation time. Both full programmes remain NO-GO because trip-fluid windows remain closed and tool temperatures exceed the limit. The [timing study](../science/breakout-timing.md) gives the paired results and scan.
+| Soultz, 10.7 km | **NO-GO**: no drilling or trip fluid meets every pressure limit | 194.0 / 198.2 | Drilling closed (lower 1.38, upper 1.24); trip closed (1.44, 1.37) |
+| United Downs, 12.9 km | **NO-GO**: no drilling or trip fluid meets every pressure limit, and the bit reaches 226.4 °C while drilling | 226.4 / 242.5 | Drilling closed (1.35, 1.26); trip closed (1.41, 1.38) |
+| Larderello, 2.40 km | **CONDITIONAL**: a prescribed drilling fluid of 1.03 SG and trip fluid of 1.09 SG | 46.2 / 49.2 | Drilling 1.03 to 1.26; trip 1.09 to 1.32 |
+| Pannonian, 9.71 km | **NO-GO**: no single drilling or trip fluid meets the limits in every state | 193.6 / 198.1 | Drilling closed (1.47, 1.25); trip closed (1.55, 1.35) |
+| Newberry, 3.63 km | **GO** with water | 92.3 / 97.3 | Drilling 1.00 to 1.22; trip 1.00 to 1.24 |
 
 <!-- PAGEBREAK -->
 
-## Other sites and design comparisons
+The tool limit is 200 °C. At Soultz and Pannonian the tool passes only with the staged circulation schedule found for running in. At Soultz the drilling fluid's lower limit is set by a connection at the target, and its upper limit by drilling at the 4,000 m casing shoe. Target stability passes in 2 of 9 drilling cases at Soultz and 1 of 4 at United Downs, and no fluid works through the whole hole.
 
-The other reference programmes give Pannonian NO-GO, Larderello CONDITIONAL with prescribed fluids, and Newberry GO with water. These verdicts apply to the stated designs and inputs; their [source records](../../src/borethm/data/sites/stress_sources.md) describe differences in evidence quality.
+The TK-Drakon coating reaches 231.0, 298.1 and 229.6 °C while running in at Soultz, United Downs and Pannonian, against its stated 204 °C rating, so its qualification is unresolved.
 
-No evaluated individual design change or pair made Soultz or United Downs pass. Deeper casing permits a trip fluid at Soultz, and lower viscosity can permit a drilling fluid at United Downs, while other checks still fail. Only one pair per site and selected continuous settings were evaluated. The [design study](../science/design-comparisons.md) establishes no complete operating envelope or general limit on drilling with existing technology.
+## Earlier studies
 
-## Evidence and its limits
+Three earlier studies examined the deep-site programmes with earlier calculations. The [design comparisons](../science/design-comparisons.md) tested changes to the design, the [breakout-timing study](../science/breakout-timing.md) assumed delays before breakouts form, and the [approximation comparisons](../science/approximation-comparisons.md) changed one approximation at a time. Under their calculations, none made a deep-site programme pass. The current defaults change their numbers, and they have not been repeated.
 
-Circulation temperatures have been compared with Utah FORGE measurements. In well 16B, parameters were fitted using regular-pipe runs and the fully insulated run; the partial-insulation run was predicted without further fitting. A published-model comparison supplies another benchmark, with the coated-pipe interpretation unresolved.
+## Evidence
 
-The [unfitted FORGE 16A comparison](../science/validation.md#forge-16a-blind-circulation-comparison) underpredicted the deeper downhole temperatures and the surface return. Run-in peaks there were underpredicted by about 20–50 °C on partial legs with approximate initial states, so the [run-in tool check can be non-conservative](../science/limitations.md#tool-temperature-and-programme-timing).
-
-Rock reheating is checked against analytical conduction solutions. The FORGE return-temperature comparison after trips is too coarse to confirm or reject the reheating model. Rock strength is calibrated against United Downs breakouts, with separate checks at Soultz and Newberry. Newberry's observed pattern is not reproduced in every rock type. These checks do not validate a complete 10–13 km drilling programme. The [validation guide](../science/validation.md) explains the fitting and comparisons.
-
-## What remains uncertain
-
-The deep targets lie beyond measured stresses, and strength calibration depends on the assumed stress profile. The reference mud uses approximate flow properties, with constant barite heat capacity and thermal expansion. Coolant travel time and fluid displacement during trips remain approximations.
-
-The studies reviewed here provide no measurement of breakout formation time in hot crystalline rock. Observations in sediment do not establish that timing or a growth law in granite. Near-bit pre-cooling remains a separate question. Equipment ratings also require qualification for repeated connections and hot trips.
-
-The [approximation comparisons](../science/approximation-comparisons.md) generally change one assumption at a time and do not cover every joint uncertainty. The [limitations guide](../science/limitations.md) explains the remaining assumptions.
+Circulation temperatures have been compared with Utah FORGE observations and a published simulator, and standpipe pressure with FORGE 56-32, a well that played no part in the model's development. The [validation guide](../science/validation.md#results-at-a-glance) gives each comparison's error and the calculation it used. The [limitations guide](../science/limitations.md) explains the remaining assumptions.
 
 ## Questions for specialist discussion
 
