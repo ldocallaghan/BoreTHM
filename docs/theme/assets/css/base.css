@@ -162,12 +162,14 @@ pre code { background: none; padding: 0; font-size: inherit; overflow-wrap: norm
 table {
   display: block; width: max-content; max-width: 100%;
   overflow-x: auto;
-  border-collapse: collapse;
+  border-collapse: collapse; table-layout: auto;
   border: 1px solid var(--table-rule); border-radius: 6px;
   font-size: 15px; line-height: 1.5;
   font-variant-numeric: tabular-nums;
 }
 th, td { border: 1px solid var(--table-rule); padding: 6px 9px; text-align: left; vertical-align: top; }
+/* A code value in a table stays on one line, and its column widens to fit it. */
+th code, td code { white-space: nowrap; overflow-wrap: normal; }
 th { background: var(--table-head); font-weight: 600; color: var(--heading); }
 tr > :first-child { border-left: 0; }
 tr > :last-child { border-right: 0; }
