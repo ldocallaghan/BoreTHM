@@ -32,19 +32,10 @@ Choose a path based on what you want to do.
 ## Understand the science
 
 - [Physical models](science/models.md): component calculations, programme evaluation and equations.
-- [Model development](science/model-development.md): declared changes, development-data gaps and candidate outcomes.
+- [Model development](science/model-development.md): the changes in the current defaults and how each was tested.
 - [Validation and calibration](science/validation.md): what the observations and analytic checks establish.
 - [Limitations and open questions](science/limitations.md): input uncertainties, approximations and the deferred work.
 - [Sources and related work](science/sources.md): bibliography and links to data provenance.
-
-</div>
-<div class="path" markdown="1">
-
-## Examine the studies
-
-- [Approximation comparisons](science/approximation-comparisons.md): the individual physical and numerical sensitivity checks.
-- [Design comparisons](science/design-comparisons.md): the evaluated interventions, remaining failures and qualification evidence.
-- [Breakout timing](science/breakout-timing.md): assumed formation delays and the drilling-window opening brackets.
 - [Benchmark dataset](../benchmarks/README.md): reference inputs and outputs for checking another model, with tolerances and source records.
 
 </div>
@@ -54,6 +45,17 @@ Choose a path based on what you want to do.
 
 - [Maintenance notes](maintenance/README.md): implementation priorities and triggers.
 - [Contributing](../CONTRIBUTING.md) and [support](../SUPPORT.md): changes, problem reports and questions.
+
+</div>
+<div class="path" markdown="1">
+
+## Earlier studies
+
+These studies used earlier calculations, and the current defaults change their numbers.
+
+- [Design comparisons](science/design-comparisons.md): the evaluated interventions, remaining failures and qualification evidence.
+- [Breakout timing](science/breakout-timing.md): assumed formation delays and the drilling-window opening brackets.
+- [Approximation comparisons](science/approximation-comparisons.md): the individual physical and numerical sensitivity checks.
 
 </div>
 </div>
