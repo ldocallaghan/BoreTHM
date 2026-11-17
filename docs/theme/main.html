@@ -1,0 +1,54 @@
+{#- The page frame: top bar, navigation, content and the page's contents. -#}
+{%- set has_maths = page and page.content and 'class="arithmatex"' in page.content -%}
+{%- set home_url = nav.homepage.url|url if nav and nav.homepage else base_url ~ '/' -%}
+<!doctype html>
+<html lang="{{ config.theme.locale|default('en') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- if config.site_description %}
+  <meta name="description" content="{{ config.site_description }}">
+  {%- endif %}
+  {%- if page and page.canonical_url %}
+  <link rel="canonical" href="{{ page.canonical_url }}">
+  {%- endif %}
+  <title>{% if page and page.title and not page.is_homepage %}{{ page.title|striptags }} | {% endif %}{{ config.site_name }}</title>
+  <link rel="icon" href="{{ 'assets/icons/favicon.svg'|url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ 'assets/css/base.css'|url }}">
+  {%- if has_maths %}
+  <link rel="stylesheet" href="{{ 'assets/katex/katex.min.css'|url }}">
+  {%- endif %}
+  {%- for path in config.extra_css %}
+  <link rel="stylesheet" href="{{ path|url }}">
+  {%- endfor %}
+</head>
+<body class="{% if page and page.is_homepage %}home{% endif %}">
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="{{ home_url }}">
+      <span class="brand-mark" aria-hidden="true">{% include 'assets/icons/waves.svg' %}</span>
+      <span class="brand-name">BoreTHM</span>
+    </a>
+    <span class="version" title="Documentation for this release">{{ config.extra.source_ref }}</span>
+    <a class="repo-link" href="{{ config.repo_url }}">GitHub</a>
+  </header>
+  <div class="layout">
+    <main id="content" class="content" tabindex="-1">
+      <article class="page">
+        {%- block content %}
+        {{ page.content }}
+        {%- endblock %}
+      </article>
+    </main>
+  </div>
+  <script>var base_url = {{ base_url|tojson }};</script>
+  {%- for script in config.extra_javascript %}
+  {{ script|script_tag }}
+  {%- endfor %}
+  {%- if has_maths %}
+  <script src="{{ 'assets/katex/katex.min.js'|url }}"></script>
+  <script src="{{ 'assets/katex/contrib/auto-render.min.js'|url }}"></script>
+  <script src="{{ 'assets/maths.js'|url }}"></script>
+  {%- endif %}
+</body>
+</html>

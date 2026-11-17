@@ -1,0 +1,9 @@
+<!-- The waves icon from lucide-static v1.66.0 (ISC), on a teal square. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34">
+  <rect width="34" height="34" rx="9" fill="#167f75"/>
+  <g transform="translate(5 5)" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 12q2.5 2 5 0t5 0 5 0 5 0"/>
+    <path d="M2 19q2.5 2 5 0t5 0 5 0 5 0"/>
+    <path d="M2 5q2.5 2 5 0t5 0 5 0 5 0"/>
+  </g>
+</svg>

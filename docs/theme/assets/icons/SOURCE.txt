@@ -1,0 +1,3 @@
+The icons waves.svg, search.svg and menu.svg are from the icons directory of the
+npm package lucide-static@1.66.0, the Lucide version the BoreTHM Workbench uses.
+favicon.svg draws the waves icon on the Workbench's teal square.
