@@ -1,22 +1,27 @@
 /* Up to 1320 px the side columns narrow, so all three still fit at 1280 px. */
 @media (max-width: 1320px) {
-  .layout { grid-template-columns: 240px minmax(0, var(--column)) 200px; }
-  .home .layout { grid-template-columns: 240px minmax(0, var(--column)); }
+  :root { --nav-width: 240px; --toc-width: 200px; }
 }
 
 /* Below 1100 px the page's contents column hides. */
 @media (max-width: 1100px) {
-  .layout, .home .layout { grid-template-columns: 240px minmax(0, var(--column)); }
+  :root, .home { --grid: var(--nav-width) minmax(0, var(--column)); }
   .page-toc { display: none; }
 }
 
 /* Below 760 px the navigation opens from a button. */
 @media (max-width: 760px) {
   :root { --topbar-height: 104px; --page-padding: 18px; }
-  .topbar { flex-wrap: wrap; gap: 8px 10px; padding: 8px 16px 10px; }
+  /* The bar's contents take the content column's width, centred as the page is. */
+  .topbar-inner {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+    max-width: calc(var(--column) + 32px); margin: 0 auto; padding: 8px 16px 10px;
+  }
+  .topbar-start { display: contents; }
+  .repo-link { margin-left: auto; }
   .nav-toggle {
     display: grid; place-items: center;
-    width: 36px; height: 36px; padding: 7px; margin-left: -6px;
+    width: 36px; height: 36px; padding: 7px;
     border: 0; border-radius: 6px; background: none; color: var(--text); cursor: pointer;
   }
   .nav-toggle:hover { background: #f0f3f1; }

@@ -23,6 +23,10 @@
   --measure: 620px;          /* the reading column: about 88 characters of running text at 16 px in Segoe UI */
   --page-padding: 40px;
   --column: calc(var(--measure) + 2 * var(--page-padding) + 2px);  /* the content panel: measure, padding, border */
+  /* The page columns, shared by the page grid and the top bar so that their edges line up. */
+  --nav-width: 264px;
+  --toc-width: 224px;
+  --grid: var(--nav-width) minmax(0, var(--column)) var(--toc-width);
   color-scheme: light;
 }
 
@@ -64,14 +68,21 @@ a:hover { color: var(--accent-hover); }
 .lucide { width: 100%; height: 100%; display: block; }
 
 /* Top bar */
+.home { --grid: var(--nav-width) minmax(0, var(--column)); }
+/* The bar spans the window; its contents use the page grid, so the logo starts at the
+   navigation column and GitHub ends at the last column. */
 .topbar {
   position: sticky; top: 0; z-index: 20;
-  display: flex; align-items: center; gap: 12px;
-  min-height: var(--topbar-height);
-  padding: 0 24px;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
 }
+.topbar-inner {
+  display: grid; grid-template-columns: var(--grid); justify-content: center; column-gap: 28px;
+  align-items: center;
+  min-height: var(--topbar-height);
+  padding: 0 24px;
+}
+.topbar-start { grid-column: 1 / -1; grid-row: 1; display: flex; align-items: center; gap: 12px; min-width: 0; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--heading); text-decoration: none; }
 .brand:hover { color: var(--heading); }
 .brand-mark {
@@ -88,7 +99,7 @@ a:hover { color: var(--accent-hover); }
   font-variant-numeric: tabular-nums;
 }
 .repo-link {
-  margin-left: auto;
+  grid-column: -2 / -1; grid-row: 1; justify-self: end; position: relative;
   padding: 6px 12px;
   border: 1px solid var(--border); border-radius: 5px;
   color: var(--text); font-size: 14px; font-weight: 500; text-decoration: none;

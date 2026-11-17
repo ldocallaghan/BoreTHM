@@ -1,14 +1,13 @@
 /* Wide windows: navigation, one reading column and the page's contents, centred together. */
 .layout {
   display: grid;
-  grid-template-columns: 264px minmax(0, var(--column)) 224px;
+  grid-template-columns: var(--grid);
   justify-content: center;
   gap: 28px;
   margin: 0 auto;
   padding: 24px 24px 48px;
   align-items: start;
 }
-.home .layout { grid-template-columns: 264px minmax(0, var(--column)); }
 
 .site-nav, .page-toc {
   position: sticky; top: calc(var(--topbar-height) + 24px);

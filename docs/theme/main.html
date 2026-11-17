@@ -29,17 +29,21 @@
 <body class="{% if page and page.is_homepage %}home{% endif %}">
   <a class="skip-link" href="#content">Skip to content</a>
   <header class="topbar">
-    <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" data-nav-toggle>
-      <span aria-hidden="true">{% include 'assets/icons/menu.svg' %}</span>
-      <span class="visually-hidden">Navigation</span>
-    </button>
-    <a class="brand" href="{{ home_url }}">
-      <span class="brand-mark" aria-hidden="true">{% include 'assets/icons/waves.svg' %}</span>
-      <span class="brand-name">BoreTHM</span>
-    </a>
-    <span class="version" title="Documentation for this release">{{ config.extra.source_ref }}</span>
-    {% include 'partials/search.html' %}
-    <a class="repo-link" href="{{ config.repo_url }}">GitHub</a>
+    <div class="topbar-inner">
+      <div class="topbar-start">
+        <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" data-nav-toggle>
+          <span aria-hidden="true">{% include 'assets/icons/menu.svg' %}</span>
+          <span class="visually-hidden">Navigation</span>
+        </button>
+        <a class="brand" href="{{ home_url }}">
+          <span class="brand-mark" aria-hidden="true">{% include 'assets/icons/waves.svg' %}</span>
+          <span class="brand-name">BoreTHM</span>
+        </a>
+        <span class="version" title="Documentation for this release">{{ config.extra.source_ref }}</span>
+        {% include 'partials/search.html' %}
+      </div>
+      <a class="repo-link" href="{{ config.repo_url }}">GitHub</a>
+    </div>
   </header>
   <div class="layout">
     {% include 'partials/nav.html' %}
