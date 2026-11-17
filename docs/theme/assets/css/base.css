@@ -20,7 +20,7 @@
   --topbar-height: 60px;
   --font: Inter, 'Segoe UI', Arial, sans-serif;
   --font-code: Consolas, Menlo, monospace;
-  --measure: 66ch;           /* about 72 characters of running text */
+  --measure: 620px;          /* the reading column: about 88 characters of running text at 16 px in Segoe UI */
   --page-padding: 40px;
   --column: calc(var(--measure) + 2 * var(--page-padding) + 2px);  /* the content panel: measure, padding, border */
   color-scheme: light;
@@ -35,7 +35,7 @@ body {
   background: var(--background);
   color: var(--text);
   font-family: var(--font);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -104,14 +104,15 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-large);
   padding: 32px var(--page-padding) 40px;
   min-width: 0;
+  overflow-wrap: break-word;  /* a long reference or address breaks within the column */
 }
 .page > :first-child { margin-top: 0; }
 
 h1, h2, h3, h4, h5, h6 { color: var(--heading); line-height: 1.3; scroll-margin-top: calc(var(--topbar-height) + 16px); }
-h1 { font-size: 27px; font-weight: 600; letter-spacing: -0.6px; margin: 0 0 16px; }
-h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; margin: 36px 0 12px; padding-top: 4px; }
-h3 { font-size: 16.5px; font-weight: 600; margin: 28px 0 8px; }
-h4, h5, h6 { font-size: 15px; font-weight: 600; margin: 22px 0 6px; }
+h1 { font-size: 29px; font-weight: 600; letter-spacing: -0.6px; margin: 0 0 16px; }
+h2 { font-size: 21.5px; font-weight: 600; letter-spacing: -0.3px; margin: 36px 0 12px; padding-top: 4px; }
+h3 { font-size: 17.5px; font-weight: 600; margin: 28px 0 8px; }
+h4, h5, h6 { font-size: 16px; font-weight: 600; margin: 22px 0 6px; }
 [id] { scroll-margin-top: calc(var(--topbar-height) + 16px); }
 
 p, ul, ol, dl, blockquote, table, pre, figure { margin: 0 0 16px; }
@@ -142,7 +143,7 @@ pre {
   padding: 12px 16px;
   background: #f9fbfa;
   border: 1px solid var(--border); border-radius: 6px;
-  font-size: 13.5px; line-height: 1.55;
+  font-size: 14.5px; line-height: 1.55;
 }
 pre code { background: none; padding: 0; font-size: inherit; overflow-wrap: normal; }
 
@@ -152,7 +153,7 @@ table {
   overflow-x: auto;
   border-collapse: collapse;
   border: 1px solid var(--table-rule); border-radius: 6px;
-  font-size: 14px; line-height: 1.5;
+  font-size: 15px; line-height: 1.5;
   font-variant-numeric: tabular-nums;
 }
 th, td { border: 1px solid var(--table-rule); padding: 6px 9px; text-align: left; vertical-align: top; }
@@ -178,7 +179,7 @@ img { max-width: 100%; height: auto; }
 .page figure > a:focus-visible img { outline: 2px solid var(--focus); outline-offset: 3px; }
 .page figcaption {
   margin-top: 8px;
-  font-size: 13.5px; line-height: 1.5; font-style: normal;
+  font-size: 14px; line-height: 1.5; font-style: normal;
   color: var(--muted-text);
 }
 .arithmatex { margin: 0 0 16px; max-width: 100%; overflow-x: auto; overflow-y: hidden; }
@@ -194,9 +195,9 @@ div.arithmatex::-webkit-scrollbar-button { display: none; }
 .katex { font-size: 1.12em; }
 
 /* Landing page */
-.home .page h1 + p { font-size: 16px; }
+.home .page h1 + p { font-size: 17px; }
 .paths { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin: 20px 0 8px; }
 .path { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px 4px; background: #fcfdfc; min-width: 0; }
-.path h2 { font-size: 16px; margin: 0 0 8px; padding: 0; }
-.path ul { padding-left: 18px; font-size: 14px; }
+.path h2 { font-size: 17px; margin: 0 0 8px; padding: 0; }
+.path ul { padding-left: 18px; font-size: 15px; }
 .path li { max-width: none; }

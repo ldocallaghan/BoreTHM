@@ -1,3 +1,9 @@
+/* Up to 1320 px the side columns narrow, so all three still fit at 1280 px. */
+@media (max-width: 1320px) {
+  .layout { grid-template-columns: 240px minmax(0, var(--column)) 200px; }
+  .home .layout { grid-template-columns: 240px minmax(0, var(--column)); }
+}
+
 /* Below 1100 px the page's contents column hides. */
 @media (max-width: 1100px) {
   .layout, .home .layout { grid-template-columns: 240px minmax(0, var(--column)); }
@@ -35,8 +41,8 @@
   }
   .nav-open .site-nav { visibility: visible; transform: none; transition: transform 0.18s ease; }
   .page { padding: 20px var(--page-padding) 28px; border-radius: var(--radius); }
-  h1 { font-size: 23px; }
-  h2 { font-size: 18.5px; margin-top: 30px; }
+  h1 { font-size: 24.5px; }
+  h2 { font-size: 19.5px; margin-top: 30px; }
   .pager { grid-template-columns: minmax(0, 1fr); }
   .pager-next { grid-column: 1; }
 }
