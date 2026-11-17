@@ -20,7 +20,7 @@
   --topbar-height: 60px;
   --font: Inter, 'Segoe UI', Arial, sans-serif;
   --font-code: Consolas, Menlo, monospace;
-  --measure: 72ch;
+  --measure: 66ch;           /* about 72 characters of running text */
   color-scheme: light;
 }
 
