@@ -32,6 +32,7 @@ markdown_extensions:
   - md_in_html
 exclude_docs: |
   /archive/**
+  /maintenance/**
   /theme/**
 # Each release record is linked from the Release records page.
 not_in_nav: |
@@ -60,10 +61,6 @@ nav:
       - Sources: science/sources.md
   - Python API: api.md
   - Release records: releases/README.md
-  - Maintain the project:
-      - Maintenance notes: maintenance/README.md
-      - Development priorities: maintenance/development.md
-      - Release checklist: maintenance/release-checklist.md
   - Earlier studies:
       - Design comparisons: science/design-comparisons.md
       - Breakout timing: science/breakout-timing.md

@@ -19,6 +19,13 @@ def test_source_data_and_archive_links_use_the_release():
         assert link == 'https://github.com/ldocallaghan/BoreTHM/' + expected
 
 
+def test_links_to_maintenance_pages_go_to_github():
+    for path, source, expected in [('maintenance/README.md', 'README.md', 'blob/v1.9.0/docs/maintenance/README.md'),
+                                   ('../maintenance/release-checklist.md#v190', 'releases/v1.9.0.md',
+                                    'blob/v1.9.0/docs/maintenance/release-checklist.md#v190')]:
+        assert docs_links.rewrite_link(path, source, ROOT / 'docs', 'v1.9.0') == 'https://github.com/ldocallaghan/BoreTHM/' + expected
+
+
 def test_internal_and_external_links_are_unchanged():
     for link in ('../api.md#load_site', '#heading', 'https://example.com/file.md', '/absolute/path'):
         assert docs_links.rewrite_link(link, 'guides/new-site.md', ROOT / 'docs', 'v1.5.0') == link

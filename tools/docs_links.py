@@ -17,6 +17,8 @@ REPOSITORY = 'https://github.com/ldocallaghan/BoreTHM'
 INLINE_LINK = re.compile(r'(!?\[[^\]\n]*\]\()(<[^>]+>|[^\s)]+)')
 REFERENCE_LINK = re.compile(r'^(\s{0,3}\[[^\]]+\]:\s*)(<[^>]+>|\S+)')
 IMAGE_ASSETS = 'assets/repo'
+# Folders under docs/ that the site does not publish (exclude_docs in mkdocs.yml).
+UNPUBLISHED = ('archive', 'maintenance')
 
 
 def on_config(config):
@@ -41,7 +43,7 @@ def outside_docs(link, source, docs_dir):
         return None
     docs_dir = Path(docs_dir).resolve()
     target = (docs_dir / source).parent.joinpath(unquote(parsed.path)).resolve()
-    if target.is_relative_to(docs_dir) and not target.is_relative_to(docs_dir / 'archive'):
+    if target.is_relative_to(docs_dir) and not any(target.is_relative_to(docs_dir / d) for d in UNPUBLISHED):
         return None
     if not target.is_relative_to(docs_dir.parent):
         raise ValueError(f'{source}: link outside the repository: {link}')
