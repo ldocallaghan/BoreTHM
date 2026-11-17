@@ -1,0 +1,15 @@
+{
+  "forecast_commit": "ba564450f2129fa1adfe522cc3880ce651e4a1d9",
+  "action": "sensitivity",
+  "assemblies": [
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "physics": "v1.8.0",
+  "other_settings": "as declared",
+  "deep_median_return_minus_inlet_C": 9.133456790123866,
+  "native_profile": "CBL MTEM by TVD, end values held",
+  "report_inlet": "nearest daily report 'In' sample in time"
+}
