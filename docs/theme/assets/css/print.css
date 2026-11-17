@@ -1,0 +1,11 @@
+/* Print the page content only. */
+.topbar, .site-nav, .page-toc, .pager, .skip-link, .headerlink, .nav-toggle { display: none !important; }
+body { background: #ffffff; font-size: 11pt; }
+.layout, .home .layout { display: block; max-width: none; padding: 0; }
+.page { border: 0; padding: 0; }
+.page p, .page li, .page dd, .page blockquote { max-width: none; }
+table { display: table; width: auto; max-width: 100%; overflow: visible; font-size: 9pt; }
+pre, .arithmatex { overflow: visible; white-space: pre-wrap; }
+h1, h2, h3, h4 { break-after: avoid; }
+img, table, pre, .arithmatex { break-inside: avoid; }
+a { color: inherit; }

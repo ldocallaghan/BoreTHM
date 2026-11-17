@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ 'assets/css/base.css'|url }}">
   <link rel="stylesheet" href="{{ 'assets/css/layout.css'|url }}">
   <link rel="stylesheet" href="{{ 'assets/css/search.css'|url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/responsive.css'|url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/print.css'|url }}" media="print">
   {%- if has_maths %}
   <link rel="stylesheet" href="{{ 'assets/katex/katex.min.css'|url }}">
   {%- endif %}
@@ -27,6 +29,10 @@
 <body class="{% if page and page.is_homepage %}home{% endif %}">
   <a class="skip-link" href="#content">Skip to content</a>
   <header class="topbar">
+    <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" data-nav-toggle>
+      <span aria-hidden="true">{% include 'assets/icons/menu.svg' %}</span>
+      <span class="visually-hidden">Navigation</span>
+    </button>
     <a class="brand" href="{{ home_url }}">
       <span class="brand-mark" aria-hidden="true">{% include 'assets/icons/waves.svg' %}</span>
       <span class="brand-name">BoreTHM</span>
@@ -48,6 +54,7 @@
     {% include 'partials/toc.html' %}
   </div>
   <script>var base_url = {{ base_url|tojson }};</script>
+  <script src="{{ 'assets/js/nav.js'|url }}"></script>
   <script src="{{ 'assets/js/search.js'|url }}"></script>
   {%- for script in config.extra_javascript %}
   {{ script|script_tag }}
