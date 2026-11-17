@@ -16,6 +16,7 @@
   <link rel="icon" href="{{ 'assets/icons/favicon.svg'|url }}" type="image/svg+xml">
   <link rel="stylesheet" href="{{ 'assets/css/base.css'|url }}">
   <link rel="stylesheet" href="{{ 'assets/css/layout.css'|url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/search.css'|url }}">
   {%- if has_maths %}
   <link rel="stylesheet" href="{{ 'assets/katex/katex.min.css'|url }}">
   {%- endif %}
@@ -31,6 +32,7 @@
       <span class="brand-name">BoreTHM</span>
     </a>
     <span class="version" title="Documentation for this release">{{ config.extra.source_ref }}</span>
+    {% include 'partials/search.html' %}
     <a class="repo-link" href="{{ config.repo_url }}">GitHub</a>
   </header>
   <div class="layout">
@@ -46,6 +48,7 @@
     {% include 'partials/toc.html' %}
   </div>
   <script>var base_url = {{ base_url|tojson }};</script>
+  <script src="{{ 'assets/js/search.js'|url }}"></script>
   {%- for script in config.extra_javascript %}
   {{ script|script_tag }}
   {%- endfor %}

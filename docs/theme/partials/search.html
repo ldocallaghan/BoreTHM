@@ -1,0 +1,7 @@
+{#- The search box. MkDocs' search plugin fills the results list. -#}
+<div class="search" role="search" data-search>
+  <label class="visually-hidden" for="mkdocs-search-query">Search the documentation</label>
+  <span class="search-icon" aria-hidden="true">{% include 'assets/icons/search.svg' %}</span>
+  <input id="mkdocs-search-query" class="search-input" type="search" name="q" placeholder="Search" autocomplete="off" spellcheck="false" aria-controls="mkdocs-search-results">
+  <div id="mkdocs-search-results" class="search-results" role="region" aria-label="Search results" data-no-results-text="No pages match this search." hidden></div>
+</div>
