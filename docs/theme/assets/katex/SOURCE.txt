@@ -1,0 +1,2 @@
+KaTeX 0.19.1, from the dist directory of the npm package katex@0.19.1.
+Only the WOFF2 fonts are included.

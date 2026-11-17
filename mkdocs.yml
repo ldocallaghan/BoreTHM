@@ -6,6 +6,7 @@ edit_uri: ''
 docs_dir: docs
 theme:
   name: material
+  custom_dir: docs/theme
   features:
     - navigation.sections
     - navigation.top
@@ -18,8 +19,17 @@ markdown_extensions:
   - fenced_code
   - toc:
       permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+extra_css:
+  - assets/katex/katex.min.css
+extra_javascript:
+  - assets/katex/katex.min.js
+  - assets/katex/contrib/auto-render.min.js
+  - assets/maths.js
 exclude_docs: |
   /archive/**
+  /theme/**
 hooks:
   - tools/docs_links.py
 validation:
