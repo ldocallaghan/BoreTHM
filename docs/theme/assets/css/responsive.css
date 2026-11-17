@@ -1,3 +1,19 @@
+/* From 1800 px: a wider column, side columns 10% wider, and text scaled from 16 to 19 px. */
+@media (min-width: 1800px) {
+  :root { --measure: 720px; --nav-width: 290px; --toc-width: 246px; }
+  body { font-size: 19px; }
+  h1 { font-size: 34.5px; }
+  h2 { font-size: 25.5px; }
+  h3 { font-size: 21px; }
+  h4, h5, h6 { font-size: 19px; }
+  pre { font-size: 17px; }
+  table { font-size: 18px; }
+  .page figcaption { font-size: 16.5px; }
+  .home .page h1 + p { font-size: 20px; }
+  .path h2 { font-size: 20px; }
+  .path ul { font-size: 18px; }
+}
+
 /* Up to 1320 px the side columns narrow, so all three still fit at 1280 px. */
 @media (max-width: 1320px) {
   :root { --nav-width: 240px; --toc-width: 200px; }
