@@ -58,13 +58,13 @@ nav:
       - Validation and calibration: science/validation.md
       - Limitations: science/limitations.md
       - Sources: science/sources.md
-  - Examine the studies:
-      - Approximation comparisons: science/approximation-comparisons.md
-      - Design comparisons: science/design-comparisons.md
-      - Breakout timing: science/breakout-timing.md
   - Python API: api.md
   - Release records: releases/README.md
   - Maintain the project:
       - Maintenance notes: maintenance/README.md
       - Development priorities: maintenance/development.md
       - Release checklist: maintenance/release-checklist.md
+  - Earlier studies:
+      - Design comparisons: science/design-comparisons.md
+      - Breakout timing: science/breakout-timing.md
+      - Approximation comparisons: science/approximation-comparisons.md
