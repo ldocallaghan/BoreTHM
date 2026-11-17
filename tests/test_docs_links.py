@@ -52,6 +52,31 @@ def test_links_outside_the_repository_are_rejected():
         docs_links.image_file('../../../elsewhere.png', 'science/models.md', ROOT / 'docs')
 
 
+def test_an_image_and_its_caption_become_a_figure():
+    html = ('<p><img alt="Profiles" src="../assets/repo/figures/a.png" /></p>\n'
+            '<p><em>Fig. 1. Profiles from the <a href="../models/">model</a>, <em>illustrative</em>.</em></p>')
+    nested = docs_links.on_page_content(html, None, None, None)
+    assert nested == ('<figure><a href="../assets/repo/figures/a.png"><img alt="Profiles" src="../assets/repo/figures/a.png" /></a>'
+                      '<figcaption><em>Fig. 1. Profiles from the <a href="../models/">model</a>, <em>illustrative</em>.</em></figcaption></figure>')
+    plain = docs_links.on_page_content('<p><img alt="A" src="a.png" /></p>\n<p><em>Fig. 2. A <a href="b/">link</a>.</em></p>', None, None, None)
+    assert plain == '<figure><a href="a.png"><img alt="A" src="a.png" /></a><figcaption>Fig. 2. A <a href="b/">link</a>.</figcaption></figure>'
+    roman = docs_links.on_page_content('<p><img alt="A" src="a.png" /></p><p>Fig. 3. Upright.</p>', None, None, None)
+    assert roman.endswith('<figcaption>Fig. 3. Upright.</figcaption></figure>')
+
+
+def test_an_image_without_a_caption_becomes_a_figure_and_the_next_paragraph_stays():
+    html = '<p><img alt="A" src="a.png" /></p>\n<p>The next paragraph.</p>\n<p><img alt="B" src="b.png" /></p>'
+    assert docs_links.on_page_content(html, None, None, None) == (
+        '<figure><a href="a.png"><img alt="A" src="a.png" /></a></figure>\n<p>The next paragraph.</p>\n'
+        '<figure><a href="b.png"><img alt="B" src="b.png" /></a></figure>')
+
+
+def test_fig_paragraphs_away_from_images_and_code_examples_are_left_alone():
+    html = ('<p>Fig. 4 shows the result.</p>\n<p><em>Fig. 5. A caption with no image.</em></p>\n'
+            '<pre><code>![A](a.png)\n&lt;p&gt;&lt;img src="a.png" /&gt;&lt;/p&gt;\n*Fig. 6. Text.*\n</code></pre>')
+    assert docs_links.on_page_content(html, None, None, None) == html
+
+
 def test_markdown_links_change_but_code_examples_do_not():
     page = SimpleNamespace(file=SimpleNamespace(src_uri='README.md'))
     config = dict(docs_dir=str(ROOT / 'docs'), extra=dict(source_ref='v1.5.0'))

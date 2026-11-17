@@ -125,6 +125,31 @@ def on_files(files, config):
     return files
 
 
+IMAGE_PARAGRAPH = re.compile(r'<p>\s*(<img\b[^>]*>)\s*</p>(?:(\s*)<p>(.*?)</p>)?', re.S)
+WHOLE_EMPHASIS = re.compile(r'<em>((?:(?!</?em>).)*)</em>', re.S)
+
+
+def figure(image, caption=None):
+    """Return a figure that links to its full-size image, with the caption if there is one."""
+    source = re.search(r'\ssrc="([^"]*)"', image)
+    html = f'<figure><a href="{source[1]}">{image}</a>' if source else f'<figure>{image}'
+    if caption is not None:
+        whole = WHOLE_EMPHASIS.fullmatch(caption.strip())
+        html += f'<figcaption>{whole[1] if whole else caption.strip()}</figcaption>'
+    return html + '</figure>'
+
+
+def on_page_content(html, page, config, files):
+    """Turn each image paragraph, and a following paragraph that starts with "Fig.", into a figure."""
+    def replace(match):
+        image, gap, following = match[1], match[2], match[3]
+        if following is not None and re.sub(r'<[^>]+>', '', following).lstrip().startswith('Fig.'):
+            return figure(image, following)
+        rest = '' if following is None else IMAGE_PARAGRAPH.sub(replace, f'{gap}<p>{following}</p>')
+        return figure(image) + rest
+    return IMAGE_PARAGRAPH.sub(replace, html)
+
+
 def on_page_markdown(markdown, page, config, files):
     source = page.file.src_uri
     ref = config['extra']['source_ref']
