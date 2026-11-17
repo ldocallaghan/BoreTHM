@@ -67,7 +67,7 @@ def test_tool_peaks_and_coating_qualification_match_the_reference_records():
 
 
 @pytest.mark.parametrize('key,name', SITES.items())
-def test_summary_counts_bounds_and_tool_peaks_follow_the_same_evidence(key, name):
+def test_design_counts_and_closed_windows_follow_the_same_evidence(key, name):
     data = source(key)
     cases = data['cycle']['cases']
     opened = sum(case['drill_SG'] <= case['drill_SG_hi'] + 1e-9 for case in cases)
@@ -76,7 +76,24 @@ def test_summary_counts_bounds_and_tool_peaks_follow_the_same_evidence(key, name
     for field in ('drilling_fluid', 'trip_fluid'):
         w = data['windows'][field]
         assert w['lo'] > w['hi'] and not w['open']
-    peaks = base_trial(key)['metrics']['tool_peaks_C']
-    row = (f"| {name}, {data['site']['target_depth_m'] / 1000:.2f} km | {opened} of {len(cases)} cases | "
-           f"No allowable drilling or trip-fluid density | {peaks['drilling']:.1f} / {peaks['run_in']:.1f} °C |")
-    assert row in SUMMARY
+
+
+SUMMARY_SITES = {'soultz': 'Soultz', 'united-downs': 'United Downs', 'larderello': 'Larderello',
+                 'pannonian': 'Pannonian', 'newberry': 'Newberry'}
+
+
+@pytest.mark.parametrize('key,name', SUMMARY_SITES.items())
+def test_summary_rows_follow_the_v190_site_archive(key, name):
+    assert '*Prepared 17 November 2026. Calculation basis: v1.9.0.*' in SUMMARY
+    data = json.loads((ROOT / f'results/v1.9.0/sites/{key}.json').read_text(encoding='utf-8'))
+    rows = [line for line in SUMMARY.splitlines() if line.startswith(f"| {name}, {data['z_m'] / 1000:#.3g} km | ")]
+    assert len(rows) == 1
+    row = rows[0]
+    assert f"**{data['status']['label']}**" in row
+    tools = data['tool_check']
+    run_in = tools['run_in_schedule'] or tools['run_in_staged']
+    assert f"| {tools['drilling']['peak_C']:.1f} / {run_in['peak_C']:.1f} |" in row
+    for field in ('drilling_fluid', 'trip_fluid'):
+        w = data['window_width'][field]
+        lo, hi = f"{w['lo_kg_m3'] / 1000:.2f}", f"{w['hi_kg_m3'] / 1000:.2f}"
+        assert (f'{lo} to {hi}' in row) if w['open'] else (lo in row and hi in row and 'closed' in row)
