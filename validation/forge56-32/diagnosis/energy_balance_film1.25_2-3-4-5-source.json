@@ -1,0 +1,36 @@
+{
+  "forecast_commit": "ba564450f2129fa1adfe522cc3880ce651e4a1d9",
+  "action": "bound",
+  "film_mult": 1.25,
+  "k_rock_W_mK": 3.087,
+  "rhocp_rock_J_m3K": 2924147.9999999995,
+  "exposure_s": 3600.0,
+  "physics": "v1.8.0",
+  "friction_heat": false,
+  "motor_heat": false,
+  "profile": "larger of the 16A transfer and the CBL MTEM log at each TVD",
+  "hole_sections": [
+    {
+      "bottom_ft": 129.0,
+      "diameter_in": 20.0
+    },
+    {
+      "bottom_ft": 382.0,
+      "diameter_in": 17.5
+    },
+    {
+      "bottom_ft": 3494.0,
+      "diameter_in": 12.25
+    },
+    {
+      "bottom_ft": "bit",
+      "diameter_in": 8.75
+    }
+  ],
+  "assemblies": [
+    "2",
+    "3",
+    "4",
+    "5"
+  ]
+}
