@@ -74,7 +74,7 @@ The equations are given in the notation used in the code.
 
 ### Circulation heat balance
 
-The loop model (Model 1) solves coupled heat balances for the downgoing and returning fluid along measured depth z, with the rock at the temperature of its true vertical depth, and with the heat dissipated by friction (pressure gradient dp/dz) added to each stream:
+The loop model (Model 1) solves coupled heat balances for the downgoing and returning fluid along measured depth $z$, with the rock at the temperature of its true vertical depth, and with the heat dissipated by friction (pressure gradient $dp/dz$) added to each stream:
 
 ```math
 \dot{m}c_p\frac{dT_d}{dz}=UA_i(T_u-T_d)+\frac{\dot{m}}{\rho}\left|\frac{dp}{dz}\right|_d
@@ -98,15 +98,15 @@ The conductances per unit length are resistances in series: the films on each si
 \frac{1}{UA_o}=\frac{1}{2\pi r_w h_u}+\sum_c\frac{\ln(r_{c+1}/r_c)}{2\pi k_c}+\frac{1}{2\pi k_{\text{rock}}G(t_D)}
 ```
 
-The rock term is the exact response of a cylindrical hole of radius r_r in infinite, initially uniform rock whose wall temperature changes by a step and is then held (Carslaw and Jaeger, 1959). With t_D = α t_eff / r_r², G is the inverse Laplace transform of
+The rock term is the exact response of a cylindrical hole of radius $r_r$ in infinite, initially uniform rock whose wall temperature changes by a step and is then held (Carslaw and Jaeger, 1959). With $t_D = \alpha t_{\text{eff}} / r_r^2$, $G$ is the inverse Laplace transform of
 
 ```math
 \bar G(s)=\frac{K_1(\sqrt s)}{\sqrt s\,K_0(\sqrt s)},
 ```
 
-where K_0 and K_1 are modified Bessel functions. `rock_response.py` evaluates it once by numerical inversion and interpolates it. At short times G ≈ 1/√(π t_D) + 1/2; at long times it falls slowly, as 2/(ln 4t_D − 2γ). The original calculation used the quasi-steady approximation 1/G ≈ ln(1 + 2√t_D), which overstates the rock resistance by about 5% after 30 days and 9% after one hour. The explicit v1.5.0 mode keeps it.
+where $K_0$ and $K_1$ are modified Bessel functions. `rock_response.py` evaluates it once by numerical inversion and interpolates it. At short times $G \approx 1/\sqrt{\pi t_D} + 1/2$; at long times it falls slowly, as $2/(\ln 4t_D - 2\gamma)$. The original calculation used the quasi-steady approximation $1/G \approx \ln(1 + 2\sqrt{t_D})$, which overstates the rock resistance by about 5% after 30 days and 9% after one hour. The explicit v1.5.0 mode keeps it.
 
-Here t(z) is the time the wall at z has been exposed to circulation, and t_eff is the effective time used by `model1_coupled.exposure_seconds` in the rock term. For a depth-dependent exposure history,
+Here $t(z)$ is the time the wall at $z$ has been exposed to circulation, and $t_{\text{eff}}$ is the effective time used by `model1_coupled.exposure_seconds` in the rock term. For a depth-dependent exposure history,
 
 ```math
 t_{\text{eff}}(z)=\max\big(t(z),\;3600\ \mathrm{s}\big).
@@ -116,17 +116,17 @@ With a uniform `t_years` and no exposure history, the minimum is 0.001 years, ab
 
 The cylindrical response is valid at all exposure times; the one-hour floor is retained so that earlier results remain comparable, and removing it would be a separate change. The separate radial wall-temperature solver used by the stability checks and the [breakout-timing study](breakout-timing.md) resolves early cooling with its supplied state durations and does not apply these circulation floors. Its fluid-temperature and film-coefficient boundaries come from the circulation calculation. The exposure floor sets no breakout formation time; the timing study's assumed delay is a separate input.
 
-Where a pipe has bare tool joints over a fraction f of its length, UA_i is the length-weighted mean of the insulated body and bare steel. The bit nozzles lose
+Where a pipe has bare tool joints over a fraction f of its length, $UA_i$ is the length-weighted mean of the insulated body and bare steel. The bit nozzles lose
 
 ```math
 \Delta p_{\text{bit}}=\frac{\rho Q^2}{2C_d^2A_n^2},\qquad C_d=0.95
 ```
 
-The standpipe pressure is the sum of the friction losses down the pipe and up the annulus, the bit loss, the surface-equipment loss, and the buoyancy of the hotter annulus, the integral of (ρ_u − ρ_d) g over true vertical depth.
+The standpipe pressure is the sum of the friction losses down the pipe and up the annulus, the bit loss, the surface-equipment loss, and the buoyancy of the hotter annulus, the integral of $(\rho_u - \rho_d) g$ over true vertical depth.
 
 ### Pressure losses and their heat
 
-`hydraulic_losses.py` calculates every in-hole pressure loss with one kernel and releases each as heat where it occurs, q' = Q |dp/dz|, in the stream that carries it. In the pipe, straight passages use the Bingham law for mud and the Newtonian law for water (Bourgoyne et al., 1986), with Colebrook friction on a smooth wall in turbulent flow. In the annulus, the default uses the Herschel-Bulkley slot model of Founargiotakis et al. (2008) for pressure, with the transition band of Erge et al. (2015) as one regime criterion for pressure and heat transfer, and Gnielinski's correlation on the plastic viscosity for the turbulent film. A mud that reports only plastic viscosity and yield point takes a power law with no yield stress. With `physics='v1.7.0'`, straight passages use the Bingham law in both streams with Blasius friction, and the annulus film uses Dittus-Boelter on the plastic viscosity. Repeated connections replace the body friction over their restriction length with friction at the connection's bore and outside diameter. Changes of area lose K ρ v²/2 at the smaller area, with K = (1 − r)² for an expansion and 0.5(1 − r)^0.75 for a contraction, r being the area ratio. The bore of an ordinary drill-pipe joint is treated as conical by default, at an included angle of 11.5°, with the coefficients of Crane Technical Paper 410. Other connections and the annulus side keep the abrupt coefficients. A supplied tool curve scales as Δp_ref (ρ/ρ_ref)(Q/Q_ref)² (API RP 13D, 2009) and replaces the internal passage losses it covers. A named downhole tool scales as Δp_ref (ρ/ρ_ref)(Q/Q_ref)^n, with a user's figure or a generic allowance from [published sheets](../../src/borethm/data/tool-losses-README.md). Off bottom, a mud motor's pressure drop is its no-load drop. On bottom it is the no-load drop plus the differential, and the heat released at the motor is that sum times the flow, because both the motor's output and its internal losses become heat within a few metres of the bit. Surface equipment uses the API RP 13D layout coefficients and adds to standpipe pressure only. The sources and the development comparisons are recorded in the [development log](model-development.md#27-october-2026-entry-1-hydraulic-losses-and-heat-placement).
+`hydraulic_losses.py` calculates every in-hole pressure loss with one kernel and releases each as heat where it occurs, $q' = Q |dp/dz|$, in the stream that carries it. In the pipe, straight passages use the Bingham law for mud and the Newtonian law for water (Bourgoyne et al., 1986), with Colebrook friction on a smooth wall in turbulent flow. In the annulus, the default uses the Herschel-Bulkley slot model of Founargiotakis et al. (2008) for pressure, with the transition band of Erge et al. (2015) as one regime criterion for pressure and heat transfer, and Gnielinski's correlation on the plastic viscosity for the turbulent film. A mud that reports only plastic viscosity and yield point takes a power law with no yield stress. With `physics='v1.7.0'`, straight passages use the Bingham law in both streams with Blasius friction, and the annulus film uses Dittus-Boelter on the plastic viscosity. Repeated connections replace the body friction over their restriction length with friction at the connection's bore and outside diameter. Changes of area lose $K \rho v^2/2$ at the smaller area, with $K = (1 - r)^2$ for an expansion and $0.5(1 - r)^{0.75}$ for a contraction, $r$ being the area ratio. The bore of an ordinary drill-pipe joint is treated as conical by default, at an included angle of 11.5°, with the coefficients of Crane Technical Paper 410. Other connections and the annulus side keep the abrupt coefficients. A supplied tool curve scales as $\Delta p_{\text{ref}} (\rho/\rho_{\text{ref}})(Q/Q_{\text{ref}})^2$ (API RP 13D, 2009) and replaces the internal passage losses it covers. A named downhole tool scales as $\Delta p_{\text{ref}} (\rho/\rho_{\text{ref}})(Q/Q_{\text{ref}})^n$, with a user's figure or a generic allowance from [published sheets](../../src/borethm/data/tool-losses-README.md). Off bottom, a mud motor's pressure drop is its no-load drop. On bottom it is the no-load drop plus the differential, and the heat released at the motor is that sum times the flow, because both the motor's output and its internal losses become heat within a few metres of the bit. Surface equipment uses the API RP 13D layout coefficients and adds to standpipe pressure only. The sources and the development comparisons are recorded in the [development log](model-development.md#27-october-2026-entry-1-hydraulic-losses-and-heat-placement).
 
 ### Rotary heat
 
@@ -152,7 +152,7 @@ T(x,t)=T_{\text{rock}}+(T_{\text{cold}}-T_{\text{rock}})\big[\mathrm{erfc}(\eta)
 
 The drilling model (Model 3, `model3_optimiser.py`) converts cooling at the cutting face into an effective mechanical specific energy (MSE), the energy needed to remove a unit volume of rock. It uses that energy to calculate the rate of penetration (ROP).
 
-`effective_mse` selects the spallation branch when the formation temperature is below the assumed brittle-to-ductile transition, `model2_spallation.T_BDT = 400 °C`, and the thermal tension exceeds confinement plus tensile strength, as defined in the Model 2 equations above. Other thermally assisted cases use a damage fraction D. Disabling thermal assistance with `quench=False` in `evaluate` or `evaluate_at` selects the mechanical branch:
+`effective_mse` selects the spallation branch when the formation temperature is below the assumed brittle-to-ductile transition, `model2_spallation.T_BDT = 400 °C`, and the thermal tension exceeds confinement plus tensile strength, as defined in the Model 2 equations above. Other thermally assisted cases use a damage fraction $D$. Disabling thermal assistance with `quench=False` in `evaluate` or `evaluate_at` selects the mechanical branch:
 
 ```math
 \text{MSE}_{\text{eff}}=\begin{cases}
@@ -162,9 +162,9 @@ The drilling model (Model 3, `model3_optimiser.py`) converts cooling at the cutt
 \end{cases}
 ```
 
-The intact-rock MSE defaults to 300 MPa. The spallation branch uses `MSE_SPALL`, fixed at 40 MPa, and returns D = 1 as a regime label. The damage formula applies only to the assisted branch; the mechanical branch returns D = 0.
+The intact-rock MSE defaults to 300 MPa. The spallation branch uses `MSE_SPALL`, fixed at 40 MPa, and returns $D = 1$ as a regime label. The damage formula applies only to the assisted branch; the mechanical branch returns $D = 0$.
 
-The assisted branch combines a damage fraction from the change in differential stress, D_macro, with a fraction representing thermal microcracking, D_micro:
+The assisted branch combines a damage fraction from the change in differential stress, $D_{\text{macro}}$, with a fraction representing thermal microcracking, $D_{\text{micro}}$:
 
 ```math
 D=\min(D_{\text{macro}}+D_{\text{micro}},\;0.6),
@@ -178,9 +178,9 @@ D_{\text{macro}}=\chi_{\text{macro}}\,\mathrm{clip}\!\left(\frac{\Delta\sigma_{\
 D_{\text{micro}}=\chi_{\text{micro}}\,\mathrm{clip}\!\left(\frac{\Delta T}{\Delta T_{\text{ref}}},0,1\right).
 ```
 
-Here `clip(x, 0, 1)` limits x to the interval from 0 to 1, and ΔT = T_rock − T_cold. The default coefficients are χ_macro = 0.5, χ_micro = 0.4 and ΔT_ref = 400 K. They are assumed damage parameters that need calibration by experiment.
+Here `clip(x, 0, 1)` limits x to the interval from 0 to 1, and $\Delta T = T_{\text{rock}} - T_{\text{cold}}$. The default coefficients are $\chi_{\text{macro}} = 0.5$, $\chi_{\text{micro}} = 0.4$ and $\Delta T_{\text{ref}} = 400$ K. They are assumed damage parameters that need calibration by experiment.
 
-`model2_spallation.deviatoric_increase` supplies the differential stresses before and after cooling. It uses the face thermal tension σ_T returned by `model2_spallation.sigma_thermal_surface` at the specified exposure time and film coefficient. In its tension-positive convention, σ_v = −ρgz and σ_h = −K0ρgz, with rock density ρ and gravitational acceleration g:
+`model2_spallation.deviatoric_increase` supplies the differential stresses before and after cooling. It uses the face thermal tension $\sigma_T$ returned by `model2_spallation.sigma_thermal_surface` at the specified exposure time and film coefficient. In its tension-positive convention, $\sigma_v = -\rho g z$ and $\sigma_h = -K_0 \rho g z$, with rock density $\rho$ and gravitational acceleration $g$:
 
 ```math
 \Delta\sigma_{\text{dev}}=\left|\sigma_v-(\sigma_h+\sigma_T)\right|-\left|\sigma_v-\sigma_h\right|,
@@ -194,7 +194,7 @@ Here `clip(x, 0, 1)` limits x to the interval from 0 to 1, and ΔT = T_rock − 
 q=\tan^2\!\left(45^\circ+\frac{\phi}{2}\right).
 ```
 
-UCS is the reference unconfined compressive strength, and the friction angle φ defaults to 30° in `effective_mse`. `rop_from_power` divides mechanical power P_mech by the effective energy per unit volume and the bit area A_bit, then applies `ROP_CAP`:
+UCS is the reference unconfined compressive strength, and the friction angle $\phi$ defaults to 30° in `effective_mse`. `rop_from_power` divides mechanical power $P_{\text{mech}}$ by the effective energy per unit volume and the bit area $A_{\text{bit}}$, then applies `ROP_CAP`:
 
 ```math
 \mathrm{ROP}=\min\!\left(\frac{P_{\text{mech}}}{\mathrm{MSE}_{\text{eff}}\,A_{\text{bit}}},\;\frac{20}{3600}\ \mathrm{m/s}\right).
@@ -219,7 +219,7 @@ P_{\text{mech}}, & \text{assisted or mechanical},
 Q_{\text{spall}}=\rho c\,A_{\text{bit}}\,\mathrm{ROP}\,\Delta T,\qquad Q_{\text{cond}}=2\pi ka\,\Delta T.
 ```
 
-Here ρ, c and k are rock density, specific heat capacity and thermal conductivity; a is the face-cavity radius, `CAVITY_RADIUS = 0.108 m`. These heat terms use ROP in m/s and return watts. The term named Q_spall represents the sensible heat of removed rock in every regime.
+Here $\rho$, $c$ and $k$ are rock density, specific heat capacity and thermal conductivity; $a$ is the face-cavity radius, `CAVITY_RADIUS = 0.108 m`. These heat terms use ROP in m/s and return watts. The term named $Q_{\text{spall}}$ represents the sensible heat of removed rock in every regime.
 
 The standalone `model3_optimiser.evaluate` iterates Model 1 with the face load returned by `face_load`. The reference site evaluation supplies the fixed `Q_FACE_SITE = 30 kW` to circulation and calls `evaluate_at` with the resulting coolant temperature. `evaluate_at` returns ROP and a face load without feeding that load back into the circulation calculation. The [face-load approximation comparison, A2](approximation-comparisons.md#what-each-comparison-changes), replaces the fixed load in a separate test.
 
@@ -237,7 +237,7 @@ Yielding at the wall (Model 5) follows the ground-reaction curve:
 k=\frac{1+\sin\phi}{1-\sin\phi},\qquad p_{\text{cr}}=\frac{2p_0-\sigma_{cm}}{1+k}
 ```
 
-The stability verdict uses the hoop stress at the wall of a vertical hole, at angle θ from the direction of the maximum horizontal stress, including the thermal stress from cooling the wall:
+The stability verdict uses the hoop stress at the wall of a vertical hole, at angle $\theta$ from the direction of the maximum horizontal stress, including the thermal stress from cooling the wall:
 
 ```math
 \sigma_\theta(\theta)=S_H+S_h-2(S_H-S_h)\cos 2\theta-P_w+\Delta\sigma_T,
@@ -247,7 +247,7 @@ The stability verdict uses the hoop stress at the wall of a vertical hole, at an
 \Delta\sigma_T=-\frac{E\alpha}{1-\nu}\,(T_{\text{rock}}-T_{\text{wall}})
 ```
 
-The wall fails where the Mohr-Coulomb criterion is exceeded in effective stress, with pore pressure P_p and drilling-fluid pressure P_w:
+The wall fails where the Mohr-Coulomb criterion is exceeded in effective stress, with pore pressure $P_p$ and drilling-fluid pressure $P_w$:
 
 ```math
 \sigma_\theta-P_p>\sigma_{cm}(T_{\text{wall}})+k\,(P_w-P_p)
@@ -267,7 +267,7 @@ a=S_H+S_h-P_w+\Delta\sigma_T-P_p-\sigma_{cm}-k(P_w-P_p),
 d=2(S_H-S_h)
 ```
 
-The temperature in the rock around the hole through the drilling cycle follows radial conduction. While circulating, the wall exchanges heat with the annulus fluid at T_f; when circulation stops, the fluid in the hole is one well-mixed volume of heat capacity C per unit length, coupled to the wall by the laminar film, h = 4.36 k_f/D_h:
+The temperature in the rock around the hole through the drilling cycle follows radial conduction. While circulating, the wall exchanges heat with the annulus fluid at $T_f$; when circulation stops, the fluid in the hole is one well-mixed volume of heat capacity $C$ per unit length, coupled to the wall by the laminar film, $h = 4.36 k_f/D_h$:
 
 ```math
 \frac{\partial T}{\partial t}=\frac{\alpha}{r}\frac{\partial}{\partial r}\left(r\frac{\partial T}{\partial r}\right),
@@ -281,7 +281,7 @@ The temperature in the rock around the hole through the drilling cycle follows r
 C\frac{dT_f}{dt}=2\pi a h\,\big(T(a)-T_f\big)
 ```
 
-The thermal stresses behind the wall are those of plane strain with a free wall, for a temperature change ΔT(r) from the rock temperature, compression positive:
+The thermal stresses behind the wall are those of plane strain with a free wall, for a temperature change $\Delta T(r)$ from the rock temperature, compression positive:
 
 ```math
 \Delta\sigma_r=\frac{E\alpha}{1-\nu}\,\frac{1}{r^2}\int_a^r\Delta T\,s\,ds,
@@ -291,7 +291,7 @@ The thermal stresses behind the wall are those of plane strain with a free wall,
 \Delta\sigma_\theta=\frac{E\alpha}{1-\nu}\left[\Delta T(r)-\frac{1}{r^2}\int_a^r\Delta T\,s\,ds\right]
 ```
 
-and are added to the Kirsch stresses at radius r and angle θ from SHmax, with S = (S_H + S_h)/2 and D = (S_H − S_h)/2:
+and are added to the Kirsch stresses at radius $r$ and angle $\theta$ from SHmax, with $S = (S_H + S_h)/2$ and $D = (S_H - S_h)/2$:
 
 ```math
 \sigma_r=S\Big(1-\frac{a^2}{r^2}\Big)+D\Big(1-\frac{4a^2}{r^2}+\frac{3a^4}{r^4}\Big)\cos 2\theta+P_w\frac{a^2}{r^2},
@@ -305,9 +305,9 @@ and are added to the Kirsch stresses at radius r and angle θ from SHmax, with S
 \tau_{r\theta}=-D\Big(1+\frac{2a^2}{r^2}-\frac{3a^4}{r^4}\Big)\sin 2\theta
 ```
 
-The Mohr-Coulomb criterion is applied to the principal stresses in the plane of the hole. The breakout width used for the verdict is that of the wall equations above with T_wall replaced by the temperature at a + d, where d is the depth the uncooled breakout reaches in the direction of Shmin.
+The Mohr-Coulomb criterion is applied to the principal stresses in the plane of the hole. The breakout width used for the verdict is that of the wall equations above with $T_{\text{wall}}$ replaced by the temperature at $a + d$, where $d$ is the depth the uncooled breakout reaches in the direction of Shmin.
 
-Each stress state is also required to be within the frictional strength of the crust, with a friction coefficient μ of 0.8 (Reinecker et al., 2021), or at Newberry the 0.55 and 0.70 of Davatzes and Hickman (2011):
+Each stress state is also required to be within the frictional strength of the crust, with a friction coefficient $\mu$ of 0.8 (Reinecker et al., 2021), or at Newberry the 0.55 and 0.70 of Davatzes and Hickman (2011):
 
 ```math
 \frac{S_1-P_p}{S_3-P_p}\le\left(\sqrt{1+\mu^2}+\mu\right)^2
