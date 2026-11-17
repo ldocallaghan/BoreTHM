@@ -1,0 +1,17 @@
+count,windows
+drilling windows,821
+with converged predictions,760
+scored,760
+excluded,0
+not predicted: no single recorded nozzle set,9
+not predicted: no uniquely assigned assembly,52
+scored with persistence,746
+"unit check, scored with return more than 5 °C below inlet (excludes nothing)",4
+"part D, primary flow: consistent",693
+"part D, primary flow: inconsistent",67
+"part D, primary flow: unclassified",0
+"part D, secondary flow: consistent",682
+"part D, secondary flow: inconsistent",78
+"part D, secondary flow: unclassified",0
+scored with history through the 27-31 August report clock,116
+part B scored,2879
