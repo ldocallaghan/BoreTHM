@@ -135,7 +135,7 @@ h4:hover .headerlink, h5:hover .headerlink, h6:hover .headerlink,
 /* Code */
 code, kbd, pre { font-family: var(--font-code); }
 code { font-size: 0.875em; background: var(--code-background); padding: 1px 4px; border-radius: 3px; overflow-wrap: anywhere; }
-a code { color: inherit; }
+a code { color: var(--accent-hover); }
 pre {
   max-width: 100%; overflow-x: auto;
   padding: 12px 16px;
