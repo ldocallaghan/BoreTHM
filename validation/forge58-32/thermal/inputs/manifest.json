@@ -1,0 +1,127 @@
+{
+  "sources": {
+    "1006.zip": "43615d79d000104ae698de23dd5aee6a981bcaa9b9a72548690556eef5fb6caa",
+    "58-32_Temp_Pres_11_08_18.zip": "04de1f0aebe92e6b3963fcc43f054033d0898cab3d9a238f78d8038ec2826ec8"
+  },
+  "flow_scale": {
+    "scale": 0.7055078836404207,
+    "rows": [
+      {
+        "report_no": "37",
+        "day": "2017-09-01",
+        "interval_id": "report-37-27",
+        "reported_flow_gpm": 414.0,
+        "pason_median_flow_gpm": 614.21,
+        "ratio": 0.6740365672978297
+      },
+      {
+        "report_no": "38",
+        "day": "2017-09-02",
+        "interval_id": "report-38-28",
+        "reported_flow_gpm": 492.0,
+        "pason_median_flow_gpm": 697.65,
+        "ratio": 0.7052246828639003
+      },
+      {
+        "report_no": "39",
+        "day": "2017-09-03",
+        "interval_id": "report-39-29",
+        "reported_flow_gpm": 492.0,
+        "pason_median_flow_gpm": 697.6,
+        "ratio": 0.7052752293577982
+      },
+      {
+        "report_no": "40",
+        "day": "2017-09-04",
+        "interval_id": "report-40-30",
+        "reported_flow_gpm": 209.0,
+        "pason_median_flow_gpm": 281.09,
+        "ratio": 0.7435340993987691
+      },
+      {
+        "report_no": "41",
+        "day": "2017-09-05",
+        "interval_id": "report-41-31",
+        "reported_flow_gpm": 209.0,
+        "pason_median_flow_gpm": 322.85,
+        "ratio": 0.6473594548551959
+      },
+      {
+        "report_no": "43",
+        "day": "2017-09-07",
+        "interval_id": "report-43-32",
+        "reported_flow_gpm": 430.0,
+        "pason_median_flow_gpm": 609.49,
+        "ratio": 0.7055078836404207
+      },
+      {
+        "report_no": "44",
+        "day": "2017-09-08",
+        "interval_id": "report-44-33",
+        "reported_flow_gpm": 430.0,
+        "pason_median_flow_gpm": 613.58,
+        "ratio": 0.7008051109879722
+      },
+      {
+        "report_no": "46",
+        "day": "2017-09-10",
+        "interval_id": "report-46-34",
+        "reported_flow_gpm": 435.0,
+        "pason_median_flow_gpm": 614.45,
+        "ratio": 0.707950199365286
+      },
+      {
+        "report_no": "47",
+        "day": "2017-09-11",
+        "interval_id": "report-47-35",
+        "reported_flow_gpm": 435.0,
+        "pason_median_flow_gpm": 616.38,
+        "ratio": 0.7057334761024043
+      },
+      {
+        "report_no": "48",
+        "day": "2017-09-12",
+        "interval_id": "report-48-36",
+        "reported_flow_gpm": 200.0,
+        "pason_median_flow_gpm": 282.21,
+        "ratio": 0.7086921087133695
+      },
+      {
+        "report_no": "49",
+        "day": "2017-09-13",
+        "interval_id": "report-49-37",
+        "reported_flow_gpm": 435.0,
+        "pason_median_flow_gpm": 609.92,
+        "ratio": 0.7132082896117524
+      }
+    ],
+    "source": "validation/model-development/entry-11/results/A2-report-comparison.csv",
+    "source_sha256": "c70e50a83193da8d81bc71fb2fbda901ec19361bae1c83a4e9e1f443cb240061",
+    "rule": "median of reported_flow_gpm/median_flow_gpm over rows with status 'available' and a September 2017 day"
+  },
+  "report_flow_27_31_august_gpm": 414.0,
+  "formation": {
+    "member": "UOFU_MU-ESW1_PT118.las",
+    "log_date": "2018-11-08",
+    "kb_ft": 21.5,
+    "fluid_level_ft": 317.0,
+    "tag_depth_ft": 7539.0,
+    "unit": "degF (curve T.DEGF), converted by (F-32)/1.8"
+  },
+  "counts": {
+    "operations": 479,
+    "operations_added": 271,
+    "operations_suppressed": 70,
+    "pump_pressure_bins": 340028,
+    "report_clock_bins": 43200,
+    "formation_bins": 755
+  },
+  "outputs": {
+    "formation-pt118.csv": "801436bdb6aca97513010e657d8bb4c9747a8bc7634a368dccfd56d826499242",
+    "operations-extended.csv": "34f96b40ec2f2ba2e16d23703f0f307df3eff51164c088fec1803ed018e193d6",
+    "pump_pressure_10s.csv.gz": "38c4848c1d2be23b9438018420db67bb491581a87ec8982a92ea05846e41fc8a",
+    "report-clock-intervals.csv": "2fecd0e91ef532123f616196a75829849417ad5777b5cd15357d91a02eba625a",
+    "report_clock_10s.csv.gz": "5d575704a2da1d39e6ea4a61594365941bedef0ba06d95d9163f2fbf4d533864"
+  },
+  "code_sha256": "7fdf87114997203b28fd681c8e38d2b8e151853cb1f1ffd53322be815bc24fa0"
+}
