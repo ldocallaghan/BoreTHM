@@ -19,6 +19,7 @@ markdown_extensions:
       permalink: true
   - pymdownx.arithmatex:
       generic: true
+  - md_in_html
 exclude_docs: |
   /archive/**
   /theme/**
