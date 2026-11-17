@@ -192,6 +192,11 @@ div.arithmatex::-webkit-scrollbar-button { display: none; }
   div.arithmatex { scrollbar-width: thin; scrollbar-color: #c3cdc9 transparent; }
 }
 .katex-display { margin: 0.6em 0; padding: 2px 0; }
+/* Consecutive display equations read as one group: about a third of the usual
+   display margin between them, while the space before the first and after the last stays. */
+div.arithmatex:has(+ div.arithmatex) { margin-bottom: 0; }
+div.arithmatex:has(+ div.arithmatex) .katex-display { margin-bottom: 0; }
+div.arithmatex + div.arithmatex .katex-display { margin-top: 8px; }
 .katex { font-size: 1.12em; }
 
 /* Landing page */
