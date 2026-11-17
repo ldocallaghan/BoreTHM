@@ -14,11 +14,21 @@ plugins:
   - search
 markdown_extensions:
   - tables
-  - fenced_code
   - toc:
       permalink: true
   - pymdownx.arithmatex:
       generic: true
+  # Fenced code, with ```math fences passed to KaTeX as display equations.
+  - pymdownx.highlight:
+      use_pygments: false
+  - pymdownx.superfences:
+      custom_fences:
+        - name: math
+          class: arithmatex
+          format: !!python/object/apply:pymdownx.arithmatex.arithmatex_fenced_format
+            kwds:
+              mode: generic
+              tag: div
   - md_in_html
 exclude_docs: |
   /archive/**
