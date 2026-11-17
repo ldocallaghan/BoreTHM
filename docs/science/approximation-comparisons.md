@@ -1,5 +1,7 @@
 # Approximation and numerical comparisons
 
+*This study used the v1.5.0 calculation and the v1.5.0 reference programmes. The current defaults (v1.8.0 physics, from release v1.8.0) change its numbers; it has not been repeated. The [study summary](../guides/summary.md) gives current results.*
+
 This study tests how the reference Soultz and United Downs programmes respond to individual approximations, with separate resolution checks at Pannonian. The base deep-site verdicts remain NO-GO for this programme and these assumptions in the comparisons performed. The comparison IDs A1-A9 identify the saved runs and are defined below.
 
 ## How the margins are read

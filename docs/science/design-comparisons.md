@@ -1,5 +1,7 @@
 # Design comparisons at Soultz and United Downs
 
+*This study used the v1.5.0 calculation and the v1.3.4 reference programmes. The current defaults (v1.8.0 physics, from release v1.8.0) change its numbers; it has not been repeated. The [study summary](../guides/summary.md) gives current results.*
+
 No evaluated individual design change or evaluated pair made either deep-site programme pass. The comparisons apply to the specified programmes and inputs. Only one pair per site was evaluated; sampled continuous searches do not establish a complete operating envelope. Each table names the intervention alongside the identifier used in the saved results, L1 to L8. The breakout formation-delay experiment, L7, varies the assumed time between rock exposure and breakout formation.
 
 ## Reference programmes

@@ -1,6 +1,6 @@
 # Breakout timing
 
-*This study uses the v1.3.6 reference programmes and the v1.5.0 calculation, which reproduces its saved records. It has not been repeated with v1.6.0; see the [design comparisons](design-comparisons.md#with-the-v160-calculation) for the reference programmes under that calculation.*
+*This study used the v1.5.0 calculation and the v1.3.6 reference programmes. The current defaults (v1.8.0 physics, from release v1.8.0) change its numbers; it has not been repeated. The [study summary](../guides/summary.md) gives current results.*
 
 When the bit exposes new rock, the rock a few centimetres behind the wall is still at formation temperature. The drilling fluid starts to cool it at once, and cooling relieves the compressive hoop stress that causes breakouts. Whether that cooling helps depends on timing. If breakouts form as soon as the rock is exposed, the drilling fluid must support the wall as if it were uncooled. If they take longer to form than cooling takes to reach the rock where they start, cooling lowers the fluid weight needed.
 
