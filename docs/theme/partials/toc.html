@@ -1,0 +1,17 @@
+{#- The page's second- and third-level headings. -#}
+{%- macro toc_items(items) -%}
+{%- for item in items -%}
+{%- if item.level in (2, 3) %}
+<li class="toc-level-{{ item.level }}"><a href="{{ item.url }}">{{ item.title }}</a></li>
+{%- endif -%}
+{%- if item.children %}{{ toc_items(item.children) }}{% endif -%}
+{%- endfor -%}
+{%- endmacro -%}
+{%- set entries = toc_items(page.toc) if page and not page.is_homepage else '' -%}
+{%- if entries|trim %}
+<aside class="page-toc" aria-labelledby="page-toc-title">
+  <p class="page-toc-title" id="page-toc-title">On this page</p>
+  <ul>{{ entries }}
+  </ul>
+</aside>
+{%- endif %}

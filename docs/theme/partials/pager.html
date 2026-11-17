@@ -1,0 +1,11 @@
+{#- Links to the previous and next pages in the navigation. -#}
+{%- if page and (page.previous_page or page.next_page) %}
+<nav class="pager" aria-label="Previous and next pages">
+  {%- if page.previous_page %}
+  <a class="pager-link pager-previous" href="{{ page.previous_page.url|url }}"><span>Previous</span>{{ page.previous_page.title }}</a>
+  {%- endif %}
+  {%- if page.next_page %}
+  <a class="pager-link pager-next" href="{{ page.next_page.url|url }}"><span>Next</span>{{ page.next_page.title }}</a>
+  {%- endif %}
+</nav>
+{%- endif %}

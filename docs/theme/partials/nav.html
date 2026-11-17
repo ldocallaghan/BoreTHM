@@ -1,0 +1,23 @@
+{#- The site navigation. A release record outside the navigation marks "Release records" as current. -#}
+{%- macro nav_link(item) -%}
+{%- set current = item.active or (item.url == 'releases/' and page and page.url.startswith('releases/')) -%}
+<li><a class="nav-link{% if current %} active{% endif %}" href="{{ item.url|url }}"{% if item.active %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+{%- endmacro -%}
+<nav id="site-nav" class="site-nav" aria-label="Documentation">
+  <ul class="nav-list">
+    {%- for item in nav %}
+    {%- if item.is_section %}
+    <li class="nav-section">
+      <span class="nav-section-title">{{ item.title }}</span>
+      <ul>
+        {%- for child in item.children %}
+        {{ nav_link(child) }}
+        {%- endfor %}
+      </ul>
+    </li>
+    {%- else %}
+    {{ nav_link(item) }}
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</nav>
