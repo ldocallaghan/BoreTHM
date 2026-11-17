@@ -80,7 +80,7 @@ jobs:
         run: python tools/check_wheel.py
 
   fast:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -93,7 +93,7 @@ jobs:
   slow:
     needs: [docs, fast, fast-matrix, wheel-install]
     if: (github.event_name == 'workflow_dispatch' && !inputs.v134-goldens) || github.event_name == 'schedule'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 300
     env:
       OPENBLAS_NUM_THREADS: "1"
@@ -121,7 +121,7 @@ jobs:
     # the v1.3.3 site table pinned in the CI environment, on the lock file's
     # versions; download the artifact and commit tests/golden/v133_site_table.json
     if: github.event_name == 'workflow_dispatch' && inputs.goldens
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 240
     env:
       OPENBLAS_NUM_THREADS: "1"
@@ -145,7 +145,7 @@ jobs:
 
   v134-goldens:
     if: github.event_name == 'workflow_dispatch' && inputs.v134-goldens
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 240
     env:
       OPENBLAS_NUM_THREADS: "1"
