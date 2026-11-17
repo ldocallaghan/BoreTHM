@@ -781,7 +781,7 @@ are Colebrook and zero. A result's physics is inherited as well.
 Explicit values override inheritance; non-zero roughness
 requires Colebrook. An override gives a pressure diagnostic at the supplied
 temperature profile, which was solved with its recorded options. See
-[entry 10](science/model-development.md#31-october-2026-entry-10-sourced-pressure-options)
+[entry 10](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/model-development/LOG.md#31-october-2026-entry-10-sourced-pressure-options)
 for the friction sources and equipment uncertainties.
 
 ## mud_window

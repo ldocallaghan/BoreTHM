@@ -170,7 +170,7 @@ and `carry_static_node`. `tool_trip_in` accepts `retain_stage_samples`, `T_s0`
 and `T_f0`.
 
 The [v1.7.0 release record](docs/releases/v1.7.0.md) gives the details, and the
-[development log](docs/science/model-development.md) gives the evidence.
+[development log](validation/model-development/LOG.md) gives the evidence.
 
 ## v1.6.0 (29 October 2026)
 

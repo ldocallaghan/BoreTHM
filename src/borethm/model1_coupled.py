@@ -692,7 +692,7 @@ def hydraulics(m_dot, geometry, result=None, T_avg=80.0, tfa=BIT_TFA_DEFAULT,
     Explicit values override inheritance; non-zero roughness
     requires Colebrook. An override gives a pressure diagnostic at the supplied
     temperature profile, which was solved with its recorded options. See
-    [entry 10](science/model-development.md#31-october-2026-entry-10-sourced-pressure-options)
+    [entry 10](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/model-development/LOG.md#31-october-2026-entry-10-sourced-pressure-options)
     for the friction sources and equipment uncertainties.
     """
     from borethm import hydraulic_losses as hl

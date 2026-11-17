@@ -4,7 +4,7 @@ This amendment completes the inputs that the [protocol](comparison_protocol.md) 
 
 ## Calculations compared
 
-The protocol compares v1.5.0 with v1.6.0. Since it was registered, v1.6.0 has gained the development entries recorded in the [development log](../../docs/science/model-development.md): the hydraulic losses of entry 1 with the D5 equipment representation, and the cylindrical rock response of entry 3. The v1.6.0 calculation here is the branch's working calculation. Entry 4's rotary heat is not applied, because the registered input extract holds no torque channel; on 16A and 16B it changed standpipe pressure by under 7 psi.
+The protocol compares v1.5.0 with v1.6.0. Since it was registered, v1.6.0 has gained the development entries recorded in the [development log](../model-development/LOG.md): the hydraulic losses of entry 1 with the D5 equipment representation, and the cylindrical rock response of entry 3. The v1.6.0 calculation here is the branch's working calculation. Entry 4's rotary heat is not applied, because the registered input extract holds no torque channel; on 16A and 16B it changed standpipe pressure by under 7 psi.
 
 | Name | Mode | PV reference | Role |
 |---|---|---|---|

@@ -882,7 +882,7 @@ The fills matter now because the next entry's candidate makes the yield stress d
 
 ### Provenance
 
-The S2 rule was adopted in the 16B whole-well study after its S1 comparison had been seen. That study's revised results, under the earlier calculation, are already in the [validation guide](validation.md): the EOW 11, 12, 16, 17 and 18 run means warmed by 0.4–8.5 °C. This entry is therefore not blind to the direction of the temperature change. Its justification is input consistency: measured values replace a value taken from a different mud. Agreement with the targets played no part.
+The S2 rule was adopted in the 16B whole-well study after its S1 comparison had been seen. That study's revised results, under the earlier calculation, are already in the [validation guide](../../docs/science/validation.md): the EOW 11, 12, 16, 17 and 18 run means warmed by 0.4–8.5 °C. This entry is therefore not blind to the direction of the temperature change. Its justification is input consistency: measured values replace a value taken from a different mud. Agreement with the targets played no part.
 
 ### What stays the same
 
@@ -1795,7 +1795,7 @@ Here epsilon is absolute wall roughness in metres. The primary uses zero roughne
 
 [`fluids.bingham_gradient`](../../src/borethm/fluids.py) accepts the friction selection and absolute roughness. Its laminar expressions and apparent-viscosity transition at 2,100 remain unchanged. In the turbulent branch it continues to use plastic viscosity as a Newtonian approximation. The entry 8 Herschel-Bulkley annulus retains its existing friction law and heat-transfer treatment. No rock response or transient equation changes.
 
-The shared loss calculation applies the selected law to body passages and connection restrictions, with the same local volumetric flow times pressure loss deposited as heat. A pressure budget inherits the friction selection and roughness from its circulation result. An explicit override is a diagnostic at that temperature profile; it does not recalculate the profile. Legacy circulation retains Blasius and rejects the new selection. Package defaults are unchanged. The [Python API](../api.md#circulating_temperatures) documents the optional arguments.
+The shared loss calculation applies the selected law to body passages and connection restrictions, with the same local volumetric flow times pressure loss deposited as heat. A pressure budget inherits the friction selection and roughness from its circulation result. An explicit override is a diagnostic at that temperature profile; it does not recalculate the profile. Legacy circulation retains Blasius and rejects the new selection. Package defaults are unchanged. The [Python API](../../docs/api.md#circulating_temperatures) documents the optional arguments.
 
 A connection is represented by the existing `HydraulicJoint`: its restriction replaces the corresponding body length, with entry and exit losses added at the smaller-passage velocity. No new local-loss coefficient is introduced. The retained abrupt-change expressions are K_expansion = (1 - A_small/A_large)² and K_contraction = 0.5 (1 - A_small/A_large)^0.75. An idealised zero-local-loss connection variant retains the restricted passage friction. It is a limiting calculation, with no assertion that an unmeasured real taper produces zero local loss. Serial component transitions outside the repeated connections remain unchanged.
 

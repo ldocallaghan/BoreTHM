@@ -1,6 +1,6 @@
 # String-loss diagnosis
 
-The component budget implements the entry 2 method in the [development log](../../../docs/science/model-development.md). Select one pressure-available window per assembly at the lower median depth rank, resolving equal depths by time and sample identifier. Selection uses recorded inputs. Each calculation uses the original blind mud convention, plastic viscosity referenced to 26.7 °C and film multiplier 1.0, with the declared NC50/EIS scenarios.
+The component budget implements the entry 2 method in the [development log](../LOG.md). Select one pressure-available window per assembly at the lower median depth rank, resolving equal depths by time and sample identifier. Selection uses recorded inputs. Each calculation uses the original blind mud convention, plastic viscosity referenced to 26.7 °C and film multiplier 1.0, with the declared NC50/EIS scenarios.
 
 | File | Contents |
 |---|---|

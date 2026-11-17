@@ -1,6 +1,6 @@
 # Additional pressure checks
 
-These reductions were declared after the original entry 9 results at `ee1dec1` were seen. They use the same recorded windows and saved pressures. The [development log](../../../../../docs/science/model-development.md#31-october-2026-additions-declared-after-the-pressure-results) gives their rules and predictions. Run `validation/model-development/entry-9/additions.py` from the repository root to rebuild the CSV files. No circulation solve is required.
+These reductions were declared after the original entry 9 results at `ee1dec1` were seen. They use the same recorded windows and saved pressures. The [development log](../../../LOG.md#31-october-2026-additions-declared-after-the-pressure-results) gives their rules and predictions. Run `validation/model-development/entry-9/additions.py` from the repository root to rebuild the CSV files. No circulation solve is required.
 
 The original P1 result files are unchanged. Primary, inferred secondary and earlier exploratory assignments retain their original roles. A filtered result is a sensitivity and does not replace a declared result.
 

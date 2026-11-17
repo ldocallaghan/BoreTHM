@@ -1,6 +1,6 @@
 # Development scoreboard
 
-The scoreboard compares physical-model changes on the frozen FORGE 16A and 16B development samples. The [development log](../../docs/science/model-development.md) defines the gaps and records candidate declarations. No validation-well target is read.
+The scoreboard compares physical-model changes on the frozen FORGE 16A and 16B development samples. The [development log](../model-development/LOG.md) defines the gaps and records candidate declarations. No validation-well target is read.
 
 The single script uses recorded mud, PV referenced to 26.7 °C, film multiplier 1.0 and cumulative exposure. The baseline uses the original hydraulic mode. It retains the original 16B mud substitutions and the explicitly disclosed fitted trial insulation conductivity. Later revised-rheology results do not replace the original blind settings.
 
@@ -28,7 +28,7 @@ The committed `transient-inputs.json` is that extract, with source checksums. Su
 python validation/scoreboard/scoreboard.py run --mode legacy --output EMPTY_OUTPUT_DIRECTORY
 ```
 
-The `current` mode is reserved for the declared candidate comparison. It retains the same samples, mud convention and primary sensor proxies, using the previously declared NC50 scenario for 16A and EIS for 16B. Its run-in conditioning profiles are recalculated using that hydraulic mode. The development entries are scored through their own scripts on the frozen functions, with results under `validation/model-development/`; see the [development log](../../docs/science/model-development.md).
+The `current` mode is reserved for the declared candidate comparison. It retains the same samples, mud convention and primary sensor proxies, using the previously declared NC50 scenario for 16A and EIS for 16B. Its run-in conditioning profiles are recalculated using that hydraulic mode. The development entries are scored through their own scripts on the frozen functions, with results under `validation/model-development/`; see the [development log](../model-development/LOG.md).
 
 ## Baseline archive
 

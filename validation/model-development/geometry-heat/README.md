@@ -33,4 +33,4 @@ Columns come from `assemblies.csv`: `archived_bit_rise_C`, `bit_change_C`, `arch
 
 ![Thermal geometry and heat split](thermal-heat-split.png)
 
-The diagnostic composes the original conductance and source functions. Its standalone mesh merges coincident boundaries at 10-nanometre resolution, far below the physical reporting resolution. Matched controls verify the composition at 0.1 °C. `entry1_geometry` preserves the pre-D5 assembly representation for reproduction. No equipment input was selected from these diagnostic results. The equipment correction is declared independently in the [development log](../../../docs/science/model-development.md).
+The diagnostic composes the original conductance and source functions. Its standalone mesh merges coincident boundaries at 10-nanometre resolution, far below the physical reporting resolution. Matched controls verify the composition at 0.1 °C. `entry1_geometry` preserves the pre-D5 assembly representation for reproduction. No equipment input was selected from these diagnostic results. The equipment correction is declared independently in the [development log](../LOG.md).

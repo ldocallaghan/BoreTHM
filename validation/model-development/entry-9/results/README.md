@@ -1,6 +1,6 @@
 # Pressure diagnosis results
 
-The declaration is commit `38c352c45b94e3276ec80bc5c747468c5c37b561`. This archive compares the existing calculation with development observations. No new correction or fitted coefficient enters it. The [development log](../../../../docs/science/model-development.md#31-october-2026-entry-9-pressure-diagnosis-results) presents the findings and their limits.
+The declaration is commit `38c352c45b94e3276ec80bc5c747468c5c37b561`. This archive compares the existing calculation with development observations. No new correction or fitted coefficient enters it. The [development log](../../LOG.md#31-october-2026-entry-9-pressure-diagnosis-results) presents the findings and their limits.
 
 ## Calculation
 

@@ -266,7 +266,7 @@ The optional `[programme]` table of a site file sets how the circulation is calc
 
 ### Mud rheology from PV and YP
 
-Plastic viscosity (PV) and yield point (YP) are the usual field readings of a drilling mud. When a fluid gives only these, the default annulus converts them to a power law through the 600 and 300 rpm viscometer readings, θ600 = 2 PV + YP and θ300 = PV + YP, with zero yield stress. This is the no-yield conversion of [entry 8](../science/model-development.md#31-october-2026-entry-8-score). A fluid with a `fluids.HerschelBulkley` rheology uses it as given, and a fluid with neither is treated as Newtonian.
+Plastic viscosity (PV) and yield point (YP) are the usual field readings of a drilling mud. When a fluid gives only these, the default annulus converts them to a power law through the 600 and 300 rpm viscometer readings, θ600 = 2 PV + YP and θ300 = PV + YP, with zero yield stress. This is the no-yield conversion of [entry 8](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/model-development/LOG.md#31-october-2026-entry-8-score). A fluid with a `fluids.HerschelBulkley` rheology uses it as given, and a fluid with neither is treated as Newtonian.
 
 The zero yield stress was chosen after two comparisons with FORGE 16A and 16B, so those wells do not test it. The yield stress can matter: in entry 7, a yield stress at the 10-second gel made the 16A bit temperature 4–19 °C colder. If you have low-shear readings for your mud, enter them through `fluids.HerschelBulkley`.
 

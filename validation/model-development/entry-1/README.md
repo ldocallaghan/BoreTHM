@@ -16,4 +16,4 @@ The historical trial insulation-conductivity fit and the transferred connection 
 
 G1 compares 16A standpipe minus raw reported differential and 16B unadjusted motorless standpipe. G2 compares in-hole dissipative/face power with measured surface hydraulic power; surface losses and useful mechanical work make those distinct quantities. G3 uses the fixed bore-at-bit sensor proxy. G4 retains the conditional partial-leg initial states. G5 preserves overlapping return-sample populations. G6 separates regular-pipe and trial groups. No alternative sensor proxy or rheology convention is selected after calculation.
 
-The [development log](../../../docs/science/model-development.md) records the result and recommendation. Acceptance remains a separate decision.
+The [development log](../LOG.md) records the result and recommendation. Acceptance remains a separate decision.

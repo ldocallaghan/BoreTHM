@@ -1,6 +1,6 @@
 # Sourced pressure options
 
-This archive contains the declaration inputs, model-only predictions and subsequent development comparison for [entry 10](../../../docs/science/model-development.md#31-october-2026-entry-10-sourced-pressure-options). The original predictions remain under `predictions/`; the scored comparisons are under `results/`.
+This archive contains the declaration inputs, model-only predictions and subsequent development comparison for [entry 10](../LOG.md#31-october-2026-entry-10-sourced-pressure-options). The original predictions remain under `predictions/`; the scored comparisons are under `results/`.
 
 `options.json` defines the primary friction option and separate equipment scenarios. `references.json` records their sources and applicability. It includes the entry 9 source inventory so that recorded equipment information remains distinguishable from catalogue examples. No new installed tool curve is assumed. In particular, the published 100-psi and 110-psi motor examples do not establish an uncertainty interval for an installed motor or for HALO.
 
@@ -48,6 +48,6 @@ The scoring scripts accept an output directory. `score.py` also requires a separ
 
 ## Decision corrected 1 November 2026
 
-The decision recorded on 31 October was transcribed from an earlier instruction. The maintainer's decision on 31 October is to adopt smooth Colebrook with zero roughness into the working calculation, which is entry 8 with the entry 10 primary. Working-calculation harnesses pass `friction='colebrook'` explicitly. The package default remains Blasius with zero roughness. The steel, GPDS55, FH and gradual variants are not adopted. Later entries compare against `results/smooth/`. The [development log](../../../docs/science/model-development.md#interpretation-and-recommendation) records the dated correction beside the recommendation. The result archive, including `results/decision.json`, is unchanged.
+The decision recorded on 31 October was transcribed from an earlier instruction. The maintainer's decision on 31 October is to adopt smooth Colebrook with zero roughness into the working calculation, which is entry 8 with the entry 10 primary. Working-calculation harnesses pass `friction='colebrook'` explicitly. The package default remains Blasius with zero roughness. The steel, GPDS55, FH and gradual variants are not adopted. Later entries compare against `results/smooth/`. The [development log](../LOG.md#interpretation-and-recommendation) records the dated correction beside the recommendation. The result archive, including `results/decision.json`, is unchanged.
 
 In `results/secondary/slopes.csv`, the measured/modelled `slope_ratio` is 0.95–1.15 for the five regular-pipe GPDS55 groups. EOW 19's insulated-increment ratio is 0.97 under smooth Colebrook with EIS joints and 0.59 under GPDS55, which transfers the 3.5-in joints to insulated pipe. These scored development comparisons cannot identify installed connections or select a variant. The log sets out pipe-specific alternatives and their separating checks.
