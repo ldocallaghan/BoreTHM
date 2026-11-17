@@ -1,0 +1,73 @@
+{
+  "submission": "GDR 1295",
+  "archive_sha256": "7ffa76e05cbd89984f04b15cac00dcf88df425ecac79a011c8f1c300a7067781",
+  "member": "56-32_Pason_Archive.zip",
+  "files": [
+    {
+      "member": "27029986-3.csv",
+      "rows": 586808
+    },
+    {
+      "member": "27029986-4.csv",
+      "rows": 604091
+    },
+    {
+      "member": "27029986-5.csv",
+      "rows": 602693
+    },
+    {
+      "member": "27029986-6.csv",
+      "rows": 712590
+    }
+  ],
+  "channels": {
+    "inlet_C": "Temp IN (Degrees)",
+    "return_C": "Temp OUT (Degrees)",
+    "mwd_C": "MWD Temp (Fahrenheit)",
+    "flow_gpm": "Total Pump Output (gal_per_min)",
+    "spp_psi": "Standpipe Pressure (psi)",
+    "differential_psi": "Differential Pressure (psi)",
+    "bit_ft": "Bit Depth (feet)",
+    "hole_ft": "Hole Depth (feet)",
+    "mud_volume_bbl": "Total Mud Volume (barrels)",
+    "trip_tank_bbl": "Trip Tank 1 Volume (barrels)",
+    "tank1_bbl": "Mud Tank 1 Volume (barrels)",
+    "tank2_bbl": "Mud Tank 2 Volume (barrels)",
+    "tank3_bbl": "Mud Tank 3 Volume (barrels)",
+    "tank4_bbl": "Mud Tank 4 Volume (barrels)",
+    "tank5_bbl": "Mud Tank 5 Volume (barrels)"
+  },
+  "conversion": "(F-32)/1.8 for inlet_C, return_C, mwd_C",
+  "valid_ranges": {
+    "inlet_C": [
+      0.0,
+      120.0
+    ],
+    "return_C": [
+      0.0,
+      120.0
+    ],
+    "mwd_C": [
+      0.0,
+      250.0
+    ],
+    "flow_gpm": [
+      0.0,
+      2000.0
+    ],
+    "spp_psi": [
+      0.0,
+      10000.0
+    ],
+    "differential_psi": [
+      -2000.0,
+      5000.0
+    ]
+  },
+  "temperature_range_rule": "a converted second at or below the lower bound or above the upper bound is missing",
+  "assembly_rule": "prepare_thermal.bha_for with the trip allowance, on the 10-minute mean hole depth",
+  "period": [
+    "2021-02-08 00:00:00",
+    "2021-03-02 00:00:00"
+  ]
+}
