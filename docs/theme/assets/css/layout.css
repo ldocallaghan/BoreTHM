@@ -20,7 +20,7 @@
 .nav-list, .nav-list ul { list-style: none; margin: 0; padding: 0; }
 .nav-list li, .nav-list li + li { margin: 0; max-width: none; }
 .nav-list > li { margin-bottom: 2px; }
-.nav-section { margin-top: 18px !important; }
+.nav-section, .nav-section + li { margin-top: 18px !important; }
 .nav-section-title {
   display: block; padding: 0 10px 6px;
   font-size: 12px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase;
