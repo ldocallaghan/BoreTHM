@@ -1,8 +1,39 @@
 # Validation, calibration and analytic checks
 
-The checks below have different scopes. Circulation temperatures have been compared with Utah FORGE observations and a published simulator, and standpipe pressure with FORGE 56-32, a well that played no part in the model's development. Rock reheating has analytic checks and a limited field comparison. Rock strength is calibrated at UD-1; checks at other wells test parts of the stability calculation. Together they do not validate a complete 10-13 km drilling programme.
+Circulation temperatures have been compared with Utah FORGE observations and a published simulator, and standpipe pressure with FORGE 56-32, a well that played no part in the model's development. In the table below, blind means that nothing in the comparison was fitted to the observations it is scored against. The version column names the calculation that produced each result; the current defaults use the v1.8.0 physics. Together they do not validate a complete 10-13 km drilling programme.
 
-## Evidence and independence
+## Results at a glance
+
+| Comparison | Quantity | Samples | Error | Model version | Blind or fitted | Section |
+|---|---|---|---|---|---|---|
+| UT Austin benchmark | Fluid temperature from a published simulator | 6 cases | Conventional and dual-wall pipe within 7 °C (vertical) and 2 °C (horizontal); coated pipe 34 to 63 °C hotter, or 9 to 34 °C colder with the whole-wall reading | v1.7.0 physics, with v1.8.0 values also given | Unfitted (a) | [Circulation](#circulation) |
+| FORGE 16B insulated-pipe trial | MWD fluid temperature | 4 runs | Partial-insulation run (BHA 12) within 4 to 6 °F with the film unfitted; regular-pipe runs 4 to 12 °F high | Not stated | Fitted (b) | [FORGE 16B](#forge-16b) |
+| FORGE 16B whole well | Downhole fluid temperature (Pason EYE) | 109 samples, 13 assemblies | Run-mean bias −24.3 to +3.2 °C in the original protocol, and −24.3 to +8.7 °C with the revised mud; on EOW 27, RMSE 13.0 °C | v1.5.0 | Blind | [16B whole well](#forge-16b-whole-well-circulation-comparison) |
+| FORGE 16A, downhole | Bit-box temperature | 135 samples, 9 runs | Pooled RMSE 8.9 to 9.6 °C; BHA 42 mean error −19.9 to −18.7 °C | v1.5.0 | Blind | [16A](#forge-16a-blind-circulation-comparison) |
+| FORGE 16A, surface return | Mud-log return temperature | 135 samples | Mean error −6.0 °C, RMSE 6.4 °C | v1.5.0 | Blind | [16A](#forge-16a-blind-circulation-comparison) |
+| FORGE 16A and 16B pressure | Standpipe pressure less the reported differential | 135 (16A), 109 (16B) | Mean −1,624 psi on 16A and −969 psi on 16B with the revised mud | v1.5.0 | Blind | [Pressure accounting](#pressure-and-heat-input-accounting) |
+| FORGE 56-32 pressure | Standpipe pressure less the motor differential | 196 windows | Median residual −9.2% (BHA 9) and +7.2% (BHA 10), at the lower end of the prediction interval | v1.6.0 | Blind | [56-32](#forge-56-32-standpipe-pressure-on-an-unseen-well) |
+| FORGE 56-32 return temperature | Surface return temperature | 401 windows | RMSE 20.8 °C; assemblies 6 to 11, RMSE 0.9 to 2.1 °C; assemblies 2 to 5, bias −28.8 to −39.2 °C | v1.8.0 | Blind | [Commit `c1b9e27`](https://github.com/ldocallaghan/BoreTHM/commit/c1b9e27b022b3226c9982e2aa6ab424f28d80135) (c) |
+| FORGE 16B trips | Return-temperature anomaly after each trip | 5 trips | RMS 12 °F, against observed anomalies of −10 to +38 °F | Not stated | Fitted (d) | [Rock reheating](#rock-reheating) |
+| FORGE 16A run-in legs | Peak tool temperature | 9 legs | Mean peak error −28.5 to −20.4 °C; BHA 42's two legs −50.3 to −33.1 °C | Not stated | Unfitted (e) | [16A transients](#forge-16a-conditional-transient-checks) |
+| FORGE 16A pauses | Temperature change while pumps are off | 60 pauses | Mean end-rise error +0.0 to +0.3 °C | Not stated | Unfitted (e) | [16A transients](#forge-16a-conditional-transient-checks) |
+| Analytic checks | Heat flow and recovery of a cylinder | 2 solutions | Within 1.2% and 2% | Not stated | Analytic | [Analytic checks](#analytic-checks) |
+| UD-1 | Breakout width and onset | 24 breakouts | Widths 53 to 57° near the base against 50 to 53° logged; onset from about 2.9 km against 2.2 and 3.1 km | Not stated | Fitted (f) | [UD-1](#ud1-strength-calibration) |
+| Soultz | Breakout onset | 2 wells | First breakouts at 2.6 to 3.8 km against about 3.0 km in GPK4 | Not stated | Unfitted (g) | [Soultz](#soultz-cross-check) |
+| Newberry | Breakout width | 1 well | Modal width of 36° matched for a wall 25 to 35 K below its static temperature; the pattern by rock type is not reproduced | Not stated | Fitted (h) | [Newberry](#newberry-cross-check) |
+
+**Notes.**
+
+- (a) A comparison with another simulator, with nothing fitted.
+- (b) The heat-transfer multiplier was fitted on the regular-pipe runs and the pipe conductivity on BHA 11; BHA 12 was predicted with no further fitting.
+- (c) Scored on 15 November 2026 on the `gap-closure` branch; the cause of the shallow difference is under investigation.
+- (d) One attenuation factor, fitted on four trips and used to predict the fifth, in turn.
+- (e) Each leg or pause starts from its first observed temperature.
+- (f) Rock strength is fitted to the breakout widths.
+- (g) Rock strength is taken from UD-1 without refitting.
+- (h) The wall-cooling range is scanned for widths matching the observations.
+
+## What each comparison depends on
 
 An observation is held out when it is excluded from the parameter fit being assessed. A comparison can still share inputs inferred from those observations. The table separates those dependencies:
 
