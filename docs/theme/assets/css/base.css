@@ -182,6 +182,14 @@ img { max-width: 100%; height: auto; }
   color: var(--muted-text);
 }
 .arithmatex { margin: 0 0 16px; max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+/* A display equation wider than the column scrolls in its own box, with a thin scrollbar and no arrow buttons. */
+div.arithmatex::-webkit-scrollbar { height: 6px; }
+div.arithmatex::-webkit-scrollbar-track { background: transparent; }
+div.arithmatex::-webkit-scrollbar-thumb { background: #c3cdc9; border-radius: 3px; }
+div.arithmatex::-webkit-scrollbar-button { display: none; }
+@supports not selector(::-webkit-scrollbar) {
+  div.arithmatex { scrollbar-width: thin; scrollbar-color: #c3cdc9 transparent; }
+}
 .katex-display { margin: 0.6em 0; padding: 2px 0; }
 .katex { font-size: 1.12em; }
 
