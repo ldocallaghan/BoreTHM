@@ -1,0 +1,160 @@
+{
+  "purpose": "The five built-in sites with the package defaults, for the study summary.",
+  "command": "python results/v1.9.0/sites/run_sites.py",
+  "started_utc": "2026-11-17T13:43:34+00:00",
+  "finished_utc": "2026-11-17T13:50:29+00:00",
+  "workers": 4,
+  "threads_per_worker": 1,
+  "circulation": "v1.3.4",
+  "physics": "package default",
+  "versions": {
+    "commit": "6425460e680555f858971461d5725c3df8af28d7",
+    "dirty": false,
+    "python": "3.14.4",
+    "packages": {
+      "borethm": "1.9.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "seconds": {
+    "soultz": 190.1,
+    "united-downs": 414.2,
+    "larderello": 111.9,
+    "pannonian": 225.6,
+    "newberry": 79.6
+  },
+  "compared_with": {
+    "file": "tests/golden/v180_site_table.json",
+    "golden_versions": {
+      "commit": "5b8648eda4ac139c87a183932b51d1a9662964c9",
+      "dirty": true,
+      "python": "3.14.4",
+      "packages": {
+        "borethm": "1.8.0",
+        "numpy": "2.5.3",
+        "scipy": "1.18.1",
+        "iapws": "1.5.5",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "sites": {
+      "soultz": {
+        "largest_absolute_difference": 1.1823431123048067e-11,
+        "at": "/bit_C"
+      },
+      "united-downs": {
+        "largest_absolute_difference": 5.684341886080801e-13,
+        "at": "/bit_C"
+      },
+      "larderello": {
+        "largest_absolute_difference": 1.0018652574217413e-12,
+        "at": "/bit_C"
+      },
+      "pannonian": {
+        "largest_absolute_difference": 2.2737367544323206e-12,
+        "at": "/bit_C"
+      },
+      "newberry": {
+        "largest_absolute_difference": 1.5120349416974932e-11,
+        "at": "/bit_C"
+      }
+    }
+  },
+  "package_files_sha256": {
+    "__init__.py": "f5b8db864a90f8facea321b01d28b687c3170d35e0bb194bd104beb28f4b2adc",
+    "_api.py": "00bd8d9dd8b28de58c75646d8c1e2f25a2432b6bfe6da8d91b4a1f6373632f93",
+    "_paths.py": "779d3cf2b28a6c3e9415e27429164d7965d91ff4ee3c52b349657b4068116815",
+    "calibrate_ud1.py": "37e1f7731ad313c32105955067061203c7de3b764f07079856ee4157f09f3975",
+    "comparative_sites.py": "ee8440e40dd8809a68eaf9438941db617aeaee723b7d3b861602b87cc028e015",
+    "crosscheck_newberry.py": "280f49f5d64de66c7c095eee32ca36991bab2cc44edbbc4c9baa066ac921bcfc",
+    "data/benchmarks/utaustin2025.md": "d1c3adf375722bff6f517a47c4c4cfdfa4dc67dbcff336f07669e7f00808ecc6",
+    "data/forge16b/README.md": "01622e74de029576877c2f45beef239a68b6882ea33484c630d77f5cfd5d8b2f",
+    "data/forge16b/build_extracts.py": "08d4c9e503d47106637cf43659499bb23ef546d3ea638908bc6d7851ff747c7e",
+    "data/forge16b/connections_10s.csv": "47d39fb9b95f32114272c493c34a96d7e008f83b60cb2591007c5dc089fd12c1",
+    "data/forge16b/cycle_timings.csv": "8ae8810a69828f1200bc21c30724fdc811e58da46472797549564d9ba5c9e778",
+    "data/forge16b/drilling_history_10min.csv": "6c145d8165eb7389751937dbe65064387ba2eb7b01d44aca3adc5f40be31a47b",
+    "data/forge16b/formation_temperature_16a.csv": "d7e273de8aaa30433a3ff3ff7203247bcaeb4993c4625e28b5a630b29bb30e8a",
+    "data/forge16b/gdr1531_listing.csv": "0a42c30a71ae4392bcf531fddfd43954bc3544b45d0023c39f2ce467658c6e54",
+    "data/forge16b/image_logs_inventory.md": "ebe2a187504bded25d9d1648afca0d045f782690132c6cfc6ba8cd4a97781bd0",
+    "data/forge16b/pason_trial_1min.csv": "97544f75d3c45b5509d47561f09d76544a74e4a3a5e0514d107b9fb989abd19b",
+    "data/forge16b/rig_hydraulics.csv": "005a9f69e422ef404017578dd6fdc9201e97968033e39ae79a2f43c71f1bd2e2",
+    "data/forge16b/run_observations.csv": "afab4e123953b0dc95134cc64aca90dd4453c0569edf068e5bcf17041268562d",
+    "data/forge16b/string_components.csv": "59e2d1e1b75f3a6f47820928a6850ece6ed3ba2f2525aee1c1e65e58effcf137",
+    "data/forge16b/survey_16b.csv": "6445bf4fc08288e8a09d92a34992f4ff2afb63bd9f1675956bbb69a76e8b8935",
+    "data/forge16b/trip_surface_operations.csv": "6b9966157228939c617740810a951ce226ee9700c717a02848279fe4e6679ebe",
+    "data/materials.md": "7a3ec3d4ce36b6d32ba949f2ca6b583bce6849b7be80e593529865d21ef750cd",
+    "data/newberry/README.md": "1c12938a961b20a6aa52ae74345396e7bbfde597491ae6cf4a83f7ffb1742229",
+    "data/newberry/build_extracts.py": "779489ad5ceb90fa78baa349958ec1b1ba59e1f403f48190d2e97c8f6bb72df0",
+    "data/newberry/davatzes_hickman_2011.md": "085cbf7964a4d73625b63192a46d02fcd65dfdd3354866302c864cacbf608d40",
+    "data/newberry/nwg5529_deviation.csv": "adaa140bf44b00fc4bb1b5dd3f1c2dc6e2900826fdf9a03a17a1c469ce7fc08a",
+    "data/newberry/nwg5529_open_hole_logs.csv": "a95251ed734f038820994cef99b44653da89b955f4b98d9559c37f515b5f2612",
+    "data/newberry/nwg5529_static_2008.csv": "8ccc7bae5927f7c2a8a6da95dd4ef266cccd743296714ab44108f25b5f3c2a3d",
+    "data/sites/stress_sources.md": "d41b59d849b8b42306ac2244c598db8001ac913445dfc1d0ceea2ed8a20412a0",
+    "data/tool-losses-README.md": "b3e676d2a8e1bf05078fc3604ee1d5fd29f8fee8c88f570c9fcf77894cfb25ce",
+    "data/tool_loss_defaults.csv": "b0736bc0b2a9cef971c9c4905d8aa785d700870c57c37daf02554025b02e71d7",
+    "data/tool_losses.csv": "fb5762b453318687d8a6e6e3f1fce2dad0b26b1fc50b840fa4b739c2f3d42d53",
+    "data/ud1/UD1_Borehole_Imaging_Interpretation.csv": "4508b9a5fadb7473714eab87d72611bedba6f0b46af837567899af8e942e258c",
+    "data/ud1/bgs_image_log.md": "356f4afc0fe8f555111f28bd89cb07169eea8722c3b35b47ccc25b2facfae76a",
+    "data/ud1/reinecker2021.md": "9b9782c45b48fe3fd4a3113d5dd1565b14a31b4121a91db209f65fc4e821a505",
+    "drilling_cycle.py": "87f4341cf4fb868b4b230e961102e0f3601855e78e1e87755aae9c723a7444a1",
+    "fluids.py": "e8a11ca7a7cb86374b3247618b9efada67a28720eacbac5481a5753b364b010a",
+    "geo_constants.py": "56f33b9073a2ea208b9292d621daf5c25bdfa6d5b3735b467563da48f3d1eb71",
+    "hydraulic_losses.py": "2f279af4aa69884f21942bb9ae83d61efffeb684462331d744f4e346d4d9f071",
+    "model1_coupled.py": "7c1bfd5d2321b13168ef3eea8ad64d33eed0aa72c23537587bb4cb66dd91d053",
+    "model1_steadystate.py": "e07beb5b74ec481fc24005e5a2c868c2dfb94848616bf0ab2b317e5a5c6aaf4b",
+    "model2_spallation.py": "80338968cee3f2e605201295d53833d2b090dd7b1b0d4dd138ccb1ee2b19c839",
+    "model3_optimiser.py": "5d0adb1e024d8eb3390b9360a96c131c9c3ddab8eff7cf2268185d1577f9bd3d",
+    "model4_hole_stability.py": "6a150f197694dd65f91a70169d4656e3ce22483fe136318d8f9e38dcdd15c703",
+    "model5_convergence_confinement.py": "ad0da11948512aa97b29f5f155feb9757a39f94f7c377eecbc96bfa6438f7859",
+    "operations.py": "224e3bee7ed2eeb19372032a67c4a8403150819e28ca824931ddea81224c807e",
+    "physics.py": "c0c9f279b337c6d053bab79c3238147fe137c0bed3c3fdea7732694a1ae79fe0",
+    "pressure.py": "7a884c2743fc7b45462cfcf00df68a8e30d9e94d3f39410f3f7e1b74deaa4254",
+    "programme.py": "1693d6d5b1d1a97726400de2bad636e09f49ca1d95cdf234270261f5243f41de",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a",
+    "rotary_heat.py": "3715bed3cf60584fbe96192a1deff1a9429d8fbc62bab07e925988ae1f870d8d",
+    "site_evaluation.py": "9ef47ae9d7bf93c29b557019510bf9fda8e6071c547f8b723948303c076e57ae",
+    "site_files.py": "1f8a67213586c83e590171ee855140db912542013a8ac40aab3b379010aab006",
+    "studies/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "studies/benchmark_utaustin.py": "4039638190fa0857b5ef96cc081ee5daa2e486f92e96890a339bde5324a1b6c4",
+    "studies/checkpoint_v134.py": "521f957df3991cc174c3149fc5d6cf8898905fe0761649340cea574d90cd47f9",
+    "studies/crosscheck_soultz.py": "513701b16d66af9c2a4938436287df485eb604db29d20c8c3c6446523dfc5901",
+    "studies/forge16_energy.py": "be45e9d712f2fd4665da812f94fb61338f5a87aa0db3e5d8a57d2c1d84bb99fe",
+    "studies/forge16a_evidence.py": "f642a6f137615527ab4d45dabd4c6d83dc91508170cc927df1ffaf9aa0952f06",
+    "studies/forge16a_inventory.py": "eb6c74e2908c4921d8e185918a6585c0e43f08329958de1fcce398a33af93cf3",
+    "studies/forge16b_hydraulics.py": "362de5d7e4d07690da214ba9f3f6ded3e0c7d50be9e21ed5dab4a766c1c3bfc3",
+    "studies/lever_flow_limit.py": "0e6d539fec31895c65ebf6b0ac0d7237f346cdcb3abe19eb0f5d9780fcfbb363",
+    "studies/lever_pairs.py": "51fd6b08ab8d4265768a0628232878b40a02b734319a8761202611471feee386",
+    "studies/levers.py": "503c7423f2d715190c7a6abbca0b0382187b9f43a42a41ab8820babce80dd628",
+    "studies/pressure_comparison.py": "72c1733e4cb3cfdebd0cb265cfa5017f72e8d4cba6edcd478812a14824104560",
+    "studies/release_v134.py": "68d33d7ad33d2d48f1de3e6ae9cc5403499d74e9cd97aa6a5533957be4a52ec1",
+    "studies/robustness.py": "06de13d6c6dc0ad88a4c98de035435e060a2497a240477924ea872576f1df3fd",
+    "studies/validate_forge16a.py": "d65af33954b201a8721ed682f1b83c69dd63b706e25824d69c98c55049e9a669",
+    "studies/validate_forge16a_transients.py": "916130dd0645eca6708f0c56c5dd403f6034613b65e89f0d67592a9a6637f71b",
+    "studies/validate_forge16b.py": "ebe5e45a40a59cdf96655a161938f97bb36279582765c8b16b732446df85e93a",
+    "studies/validate_forge16b_wholewell.py": "654cb84d7075926f896919f54b2bcc800d415fccbeadb63190863456b45ee6aa",
+    "studies/validate_forge_pauses.py": "f25834676dfc03a4509dc7f62f119fab4c776ce30813234dbff9878f44a9a74c",
+    "templates/site_template.toml": "69fd5f62edbeedb81a9f4d1efadf08035a5c15f214b45b51a758a7e0369b0f5c",
+    "templates/sites/larderello.toml": "7d17a2b8e2e895ce73189722b7c1c4d2c504e8d5460be453bfead417a1eade4c",
+    "templates/sites/newberry.toml": "777f29ff6a9ae4bc4537f8052ad5d02e824e4ca11dc03c74bd492075029f3ab3",
+    "templates/sites/pannonian.toml": "7b8b8603f7288e49331cddc87334fa6e73b842532c3c81dc3de80bbd4c62d7bc",
+    "templates/sites/united-downs.toml": "cf0245196c6e68dc9afae6e6c5c0fd6296263640aa3e53508377c985e02ae233",
+    "tool_losses.py": "355969b79040cbba3628f104c38ce16f959037509b1e4187b969e49b1be4ccae",
+    "tool_thermal.py": "5600fe1c485730bf232a4440b7d573d2c3b97ff6b7e3d717ffec74eceb545326",
+    "wall_thermal.py": "8ec4cca7d1ce5bbc8f012331ced3fcb2f1150798b8df222e86f2e26d1c11bf39",
+    "water_props.py": "4fd268fa43c2f55667e019458752359ca4f5cebe347bc7113bb54da92670a3a3",
+    "water_table.py": "6772d4586789c8c8d51d1f3c7aa7cd65eb47a72907dfaba940191b883bba423d",
+    "well_geometry.py": "0146a746074ea0033bf797746474a94135023eae4751a91dd4838b446be80873"
+  },
+  "script_sha256": "b6d7a3d70c6d213a175ee67df0410fb8445e08d74e38eac2015625ba75049f0b",
+  "outputs_sha256": {
+    "larderello.json": "c99a3d73fb3e49535de854f45ddcb5fd0e655ab5ab0c2fce36ac8ba0a6b8a5ad",
+    "newberry.json": "107797f1ce79087dfc0d5b7c0701a85eea2cd44d14569f3c2dcb81c89d1f0d84",
+    "pannonian.json": "eff1bb4eb6751bfe34446025403485b1a4313efc5ac501ebbe8e0be481046aed",
+    "soultz.json": "7777603805df5e00d08c524d27e5b4f25f401bf32898c6565ad6a7866d6a0023",
+    "table.json": "87c8b19065d87aadc1a03d50e85dfeb847b83b340f5436bb37d7ed791fee9c4a",
+    "united-downs.json": "fd40271dd1e5328675ffad0f318dc20b6a984617ace41df62f76d731f7c67672"
+  }
+}

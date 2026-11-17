@@ -1,0 +1,3552 @@
+{
+  "site": {
+    "name": "Larderello (Italy)",
+    "tier": "speculative",
+    "target_depth_m": 2400.0,
+    "legacy_target_depth_m": 2850.0,
+    "target_T_C": 400.0,
+    "k_rock": 2.6,
+    "E_rock_Pa": 45000000000.0,
+    "T_inj_C": 40.0,
+    "mu": 0.8,
+    "data_basis": {
+      "stress": {
+        "basis": "regime bounds",
+        "source": "Liotta & Brogi (manuscript, Geothermics); no magnitudes published"
+      },
+      "strength": {
+        "basis": "unsourced",
+        "source": "v1.0 140 MPa; only an Elba micaschist analogue found"
+      },
+      "pore pressure": {
+        "basis": "assumed",
+        "source": "hydrostatic; vapour-dominated field, with over-pressured fluids reported along active faults"
+      },
+      "temperature": {
+        "basis": "measured",
+        "source": "Venelle-2 to 2.9 km (Bertani et al. 2018)"
+      },
+      "well check": {
+        "basis": "none",
+        "source": "Venelle-2 drilled to 2.9 km (losses, stuck pipe), but no breakout data published"
+      }
+    },
+    "missing": [
+      [
+        "stress",
+        "regime bounds"
+      ],
+      [
+        "strength",
+        "unsourced"
+      ],
+      [
+        "well check",
+        "none"
+      ]
+    ],
+    "stress_cases": [
+      {
+        "label": "Shmin 0% of floor-to-Sv",
+        "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+        "z_data_m": null,
+        "Sv": [
+          25506.0,
+          0.0
+        ],
+        "Shmin": [
+          13581.889783797198,
+          0.0
+        ],
+        "SHmax": [
+          25506.0,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      },
+      {
+        "label": "Shmin 25% of floor-to-Sv",
+        "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+        "z_data_m": null,
+        "Sv": [
+          25506.0,
+          0.0
+        ],
+        "Shmin": [
+          16562.9173378479,
+          0.0
+        ],
+        "SHmax": [
+          25506.0,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      },
+      {
+        "label": "Shmin 50% of floor-to-Sv",
+        "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+        "z_data_m": null,
+        "Sv": [
+          25506.0,
+          0.0
+        ],
+        "Shmin": [
+          19543.944891898598,
+          0.0
+        ],
+        "SHmax": [
+          25506.0,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      },
+      {
+        "label": "Shmin 75% of floor-to-Sv",
+        "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+        "z_data_m": null,
+        "Sv": [
+          25506.0,
+          0.0
+        ],
+        "Shmin": [
+          22524.9724459493,
+          0.0
+        ],
+        "SHmax": [
+          25506.0,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      },
+      {
+        "label": "Shmin 100% of floor-to-Sv",
+        "source": "regime: normal/strike-slip transition (Liotta & Brogi)",
+        "z_data_m": null,
+        "Sv": [
+          25506.0,
+          0.0
+        ],
+        "Shmin": [
+          25506.0,
+          0.0
+        ],
+        "SHmax": [
+          25506.0,
+          0.0
+        ],
+        "Pp": [
+          10000.0,
+          0.0
+        ],
+        "mu": null
+      }
+    ],
+    "strength_cases": [
+      {
+        "label": "site UCS",
+        "UCS_Pa": 140000000.0
+      }
+    ]
+  },
+  "evaluation": "v1.3.4",
+  "z_m": 2400.0,
+  "T_rock_C": 400.08,
+  "programme": {
+    "pipe": "TK-Drakon coated",
+    "flow": 30,
+    "flow_unit": "L/s",
+    "mass_flow_kg_s": 30.973428958863376,
+    "fluid": {
+      "rho_surface": 1032.4476319621126,
+      "sg": 1.0324476319621125,
+      "yield_point_Pa": 13.406472800000001,
+      "pv_ratio_to_water": 31.513581287688968
+    },
+    "fluid_passes": [
+      {
+        "fluid_SG": null,
+        "need_SG": 1.019367991845056,
+        "rho_surface": 1037.466654641238,
+        "simulated_rho_surface": 998.2012723757281,
+        "prescribed_rho_surface": 1037.466654641238,
+        "density_residual_SG": 0.03926538226550986,
+        "trip_simulated_rho_surface": 998.2012723757281,
+        "trip_prescribed_rho_surface": 1095.3866692067143,
+        "trip_residual_SG": 0.09718539683098618,
+        "ecd_SG": 0.038236931290451893,
+        "success": true,
+        "rop_m_h": 6.549586135468945,
+        "rop_passes": 1,
+        "tool": "PASS"
+      },
+      {
+        "fluid_SG": 1.0374666546412379,
+        "need_SG": 1.019367991845056,
+        "rho_surface": 1032.4476319621126,
+        "simulated_rho_surface": 1037.466654641238,
+        "prescribed_rho_surface": 1032.4476319621126,
+        "density_residual_SG": -0.005019022679125328,
+        "trip_simulated_rho_surface": 1095.3866692067143,
+        "trip_prescribed_rho_surface": 1087.1786156476348,
+        "trip_residual_SG": -0.008208053559079416,
+        "ecd_SG": 0.08627206786196065,
+        "success": true,
+        "rop_m_h": 6.549586135468945,
+        "rop_passes": 0,
+        "tool": "PASS"
+      },
+      {
+        "fluid_SG": 1.0324476319621125,
+        "need_SG": 1.019367991845056,
+        "rho_surface": 1032.4313949833388,
+        "simulated_rho_surface": 1032.4476319621126,
+        "prescribed_rho_surface": 1032.4313949833388,
+        "density_residual_SG": -1.6236978773804368e-05,
+        "trip_simulated_rho_surface": 1087.1786156476348,
+        "trip_prescribed_rho_surface": 1087.116419983748,
+        "trip_residual_SG": -6.219566388676868e-05,
+        "ecd_SG": 0.08619523027833097,
+        "success": true,
+        "rop_m_h": 6.549586135468945,
+        "rop_passes": 0,
+        "tool": "PASS"
+      }
+    ],
+    "fluid_converged": true,
+    "rop_m_h": 6.549586135468945,
+    "rop_passes": [],
+    "bit_C": 46.1715850957943,
+    "return_C": 59.6046125741643,
+    "backpressure_Pa": 0.0,
+    "spp_Pa": 7806991.127932896,
+    "ecd_SG": 0.08619523027833097,
+    "v_ann_min": 1.3267700328710321,
+    "conflict": null,
+    "hydraulic_configuration": {
+      "hydraulics_model": "v1.6.0",
+      "reference": "wu2025-with-hydraulic-allowances",
+      "segments": [],
+      "hole": [],
+      "surface": {
+        "value": 0.15,
+        "source": "API RP 13D, sixth edition (2009), section 7.3, equation 60/table 4, case 5"
+      },
+      "transitions": "abrupt",
+      "joints": true,
+      "tools": true,
+      "joint_restriction_length": 0.7365999999999999,
+      "hwdp_restriction_length": 1.2191999999999998,
+      "physics": null,
+      "annulus_model": null,
+      "friction": null,
+      "roughness": null,
+      "joint_transition": null,
+      "taper_angle_deg": null,
+      "bha_tools": []
+    },
+    "hydraulic_terms_Pa": {
+      "bore": {
+        "body": 3842853.6119487407,
+        "joint_replacement": 157479.51339759637,
+        "joint_local": 71950.05006729081,
+        "geometric_local": 15473.891986060775,
+        "supplied_local": 0.0,
+        "tool": 838436.3573890445
+      },
+      "annulus": {
+        "body": 1398403.515482741,
+        "joint_replacement": 336851.9604057817,
+        "joint_local": 293533.62133916817,
+        "geometric_local": 591.4044453336273,
+        "supplied_local": 0.0,
+        "tool": 0.0
+      }
+    },
+    "surface_loss_Pa": 162806.336531357,
+    "hydraulic_flags": [
+      "hydraulic_geometry_blend",
+      "joint_local_annular_or_Bingham_approximation",
+      "joint_local_outside_Newtonian_Re_domain",
+      "joint_taper_no_stated_Reynolds_range",
+      "local_change_annular_or_Bingham_approximation",
+      "local_change_outside_Newtonian_Re_domain",
+      "supplied_tool_loss_treated_as_dissipation",
+      "tool_allowance_generic"
+    ],
+    "hydraulic_sources": [
+      "0.635 mm at 0.162 W/m/K, NOV Tuboscope TK-Drakon flyer (2024)",
+      "",
+      "",
+      "xBolt G2-L Rev 7, p2",
+      "xBolt G2-L Rev 7, p2",
+      "",
+      "NOV GPDS/EIS catalogue; 29-in effective length and 16B tally pitch assumed; reference connection scenario",
+      "Workstrings 91005000020000, 1 Aug 2025; 48-in effective length assumed",
+      "generic mwd_pulser allowance, 6.75 in band, multiple sources",
+      "API RP 13D, sixth edition (2009), section 7.3, equation 60/table 4, case 5"
+    ],
+    "energy_check": {
+      "enabled": true,
+      "assigned_terms_W": {
+        "bore": {
+          "body": 115322.96957447978,
+          "joint_replacement": 4735.594514435786,
+          "joint_local": 2163.1013443447882,
+          "geometric_local": 463.54589052576824,
+          "supplied_local": 0.0,
+          "tool": 25109.85194087356
+        },
+        "annulus": {
+          "body": 42270.89528416004,
+          "joint_replacement": 10188.088255412964,
+          "joint_local": 8884.103910455164,
+          "geometric_local": 17.742111612688127,
+          "supplied_local": 0.0,
+          "tool": 0.0
+        }
+      },
+      "nozzle_W": 25566.200286091305,
+      "face_W": 30000.0,
+      "assigned_W": 264722.0931123919,
+      "applied_bore_W": 147795.06326465966,
+      "applied_annulus_W": 61360.82956164086,
+      "applied_turnaround_W": 55566.200286090985,
+      "applied_W": 264722.09311239154,
+      "residual_W": -3.4924596548080444e-10,
+      "relative_residual": -1.3192928530242719e-15,
+      "tolerance_W": 264.7220931123919,
+      "passed": true,
+      "flagged": false,
+      "status": "within reporting resolution",
+      "surface_W_in_hole": 0.0,
+      "density_column_W": 0.0
+    },
+    "drilling_simulated_rho_surface": 1032.4476319621126,
+    "drilling_prescribed_rho_surface": 1032.4313949833388,
+    "trip_simulated_rho_surface": 1087.1786156476348,
+    "trip_prescribed_rho_surface": 1087.116419983748,
+    "trip_fluid_treatment": "uniform column from the start of the trip",
+    "barite_mass_fraction": 0.04351125828309391,
+    "trip_barite_mass_fraction": 0.10735784752659348
+  },
+  "cycle": {
+    "site_verdict": "CONDITIONAL",
+    "deciding_case": "Shmin 0% of floor-to-Sv",
+    "verdicts": {
+      "drilling": "CONDITIONAL",
+      "connection": "GO",
+      "connection, fresh rock": "GO",
+      "trip": "GO"
+    },
+    "drill_SG": 1.019367991845056,
+    "drill_SG_hi": 1.2482991411586923,
+    "trip_SG": 1.039367991845056,
+    "trip_SG_hi": 1.3144943714370232,
+    "safe_pause_h": "inf",
+    "trip_h": 12.87685228318917,
+    "T_ref": {
+      "drilling": 400.08,
+      "connection": 119.26579685372965,
+      "connection, fresh rock": 340.3461257729402,
+      "trip": 323.87576523420665,
+      "end of drilling": 55.76474659633713
+    },
+    "budget": {
+      "water_SG": 0.9891040109982997,
+      "water_SG_trip": 0.9527385137217919,
+      "allowance_SG": 0.02,
+      "backpressure": 0.0,
+      "drill_rho_surface": 1028.519100412723,
+      "trip_rho_surface": 1087.1250355711709,
+      "trip_SG_start": 1.0778980863312015,
+      "trip_dP_heating": 907152.5445818102,
+      "water_dP_heating": 856189.2678781006
+    },
+    "cases": [
+      {
+        "label": "Shmin 0% of floor-to-Sv",
+        "UCS": 140000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 1.019367991845056,
+        "drill_SG_hi": 1.2482991411586923,
+        "trip_SG": 1.039367991845056,
+        "trip_SG_start": 1.0778980863312015,
+        "trip_rho_surface": 1087.1250355711709,
+        "trip_SG_hi": 1.3144943714370232
+      },
+      {
+        "label": "Shmin 25% of floor-to-Sv",
+        "UCS": 140000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 1.019367991845056,
+        "drill_SG_hi": 1.5521755482994366,
+        "trip_SG": 1.039367991845056,
+        "trip_SG_start": 1.0778980863312015,
+        "trip_rho_surface": 1087.1250355711709,
+        "trip_SG_hi": 1.6183707785777675
+      },
+      {
+        "label": "Shmin 50% of floor-to-Sv",
+        "UCS": 140000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 1.019367991845056,
+        "drill_SG_hi": 1.8560519554401806,
+        "trip_SG": 1.039367991845056,
+        "trip_SG_start": 1.0778980863312015,
+        "trip_rho_surface": 1087.1250355711709,
+        "trip_SG_hi": 1.9222471857185115
+      },
+      {
+        "label": "Shmin 75% of floor-to-Sv",
+        "UCS": 140000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 1.019367991845056,
+        "drill_SG_hi": 2.1599283625809247,
+        "trip_SG": 1.039367991845056,
+        "trip_SG_start": 1.0778980863312015,
+        "trip_rho_surface": 1087.1250355711709,
+        "trip_SG_hi": 2.2261235928592558
+      },
+      {
+        "label": "Shmin 100% of floor-to-Sv",
+        "UCS": 140000000.0,
+        "verdict": "CONDITIONAL",
+        "states": {
+          "drilling": "CONDITIONAL",
+          "connection": "GO",
+          "connection, fresh rock": "GO",
+          "trip": "GO"
+        },
+        "drill_SG": 1.019367991845056,
+        "drill_SG_hi": 2.4638047697216687,
+        "trip_SG": 1.039367991845056,
+        "trip_SG_start": 1.0778980863312015,
+        "trip_rho_surface": 1087.1250355711709,
+        "trip_SG_hi": 2.53
+      }
+    ]
+  },
+  "sensitivities": {},
+  "trip_profile": [],
+  "windows": {
+    "depths": [
+      2400.0,
+      2375.0,
+      2371.464624,
+      2350.0,
+      2325.0,
+      2300.0,
+      2200.0,
+      2100.0,
+      2000.0,
+      1900.0,
+      1800.0,
+      1700.0,
+      1600.0,
+      1500.0,
+      1400.0,
+      1300.0,
+      1275.0,
+      1250.0,
+      1225.0,
+      1200.0
+    ],
+    "states": {
+      "drilling": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo": 998.2012723757281,
+          "lo_md": null,
+          "hi": 1257.549973650369,
+          "hi_md": 2400.0
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo": 998.2012723757281,
+          "lo_md": null,
+          "hi": 1560.8730523289712,
+          "hi_md": 2400.0
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo": 998.2012723757281,
+          "lo_md": null,
+          "hi": 1863.656324080541,
+          "hi_md": 2400.0
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo": 998.2012723757281,
+          "lo_md": null,
+          "hi": 2166.158308253458,
+          "hi_md": 2400.0
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo": 998.2012723757281,
+          "lo_md": null,
+          "hi": 2468.630625091897,
+          "hi_md": 2400.0
+        }
+      },
+      "connection": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 1343.6586982033557,
+          "hi_md": 2400.0
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 1646.8024061043784,
+          "hi_md": 2400.0
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 1949.479752978795,
+          "hi_md": 2400.0
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 2251.9473855421134,
+          "hi_md": 2400.0
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 2554.455752399164,
+          "hi_md": 2400.0
+        }
+      },
+      "fresh rock": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 1343.6586982033557,
+          "hi_md": 2400.0
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 1646.8024061043784,
+          "hi_md": 2400.0
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 1949.479752978795,
+          "hi_md": 2400.0
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 2251.9473855421134,
+          "hi_md": 2400.0
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo": 1032.4313949833388,
+          "lo_md": 1200.0,
+          "hi": 2554.455752399164,
+          "hi_md": 2400.0
+        }
+      },
+      "trip": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo": 1087.116419983748,
+          "lo_md": 2400.0,
+          "hi": 1323.6828738732654,
+          "hi_md": 2400.0
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo": 1087.116419983748,
+          "lo_md": 2400.0,
+          "hi": 1626.8665997419519,
+          "hi_md": 2400.0
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo": 1087.116419983748,
+          "lo_md": 2400.0,
+          "hi": 1929.5671744236624,
+          "hi_md": 2400.0
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo": 1087.116419983748,
+          "lo_md": 2400.0,
+          "hi": 2232.041600753859,
+          "hi_md": 2400.0
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo": 1087.116419983748,
+          "lo_md": 2400.0,
+          "hi": 2534.5401414932085,
+          "hi_md": 2400.0
+        }
+      }
+    },
+    "drilling_fluid": {
+      "lo": 1032.4313949833388,
+      "lo_by": {
+        "state": "connection",
+        "case": "Shmin 0% of floor-to-Sv",
+        "md": 1200.0
+      },
+      "hi": 1257.549973650369,
+      "hi_by": {
+        "state": "drilling",
+        "case": "Shmin 0% of floor-to-Sv",
+        "md": 2400.0
+      },
+      "open": true,
+      "fluid": 1032.4313949833388
+    },
+    "trip_fluid": {
+      "lo": 1087.116419983748,
+      "lo_by": {
+        "state": "trip",
+        "case": "Shmin 0% of floor-to-Sv",
+        "md": 2400.0
+      },
+      "hi": 1323.6828738732654,
+      "hi_by": {
+        "state": "trip",
+        "case": "Shmin 0% of floor-to-Sv",
+        "md": 2400.0
+      },
+      "open": true,
+      "fluid": 1087.116419983748
+    },
+    "refinement": {
+      "levels": [
+        {
+          "spacing_m": 50.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        },
+        {
+          "spacing_m": 25.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        }
+      ],
+      "tolerance_SG": 0.002,
+      "converged": true
+    }
+  },
+  "tools": {
+    "limit": 200.0,
+    "drilling": {
+      "T": 46.1715850957943,
+      "ok": true
+    },
+    "connection": {
+      "practice": {
+        "precirc_min": 0.33,
+        "off_min": 6.33
+      },
+      "schedule": {
+        "precirc_min": 0.33,
+        "off_min": 6.33,
+        "peak": 46.25381523066841
+      },
+      "peak": 46.25381523066841,
+      "node_max": 80.48993297687979,
+      "ok": true
+    },
+    "trip_in": {
+      "unstaged": {
+        "peak": 79.98718418669992,
+        "md": 2400.0
+      },
+      "staged": {
+        "peak": 49.21076812093349,
+        "md": 2359.0202880000015,
+        "spacing_m": 144.8775360000002,
+        "minutes": 15.51
+      },
+      "ok": true,
+      "schedule": {
+        "spacing_m": 144.8775360000002,
+        "minutes": 15.51,
+        "peak": 49.21076812093349,
+        "md": 2359.0202880000015,
+        "stages": 8,
+        "staging_h": 2.068,
+        "circulating_fraction": 0.3249833230999471
+      }
+    },
+    "tool": "PASS",
+    "coating": {
+      "pipe": "TK-Drakon coated",
+      "rating": 204.0,
+      "circulating_max": 58.20959041018264,
+      "connection": {
+        "max": 54.999644754765455,
+        "minutes_above": 0.0
+      },
+      "trip_in": {
+        "max": 70.80986857771309,
+        "minutes_above": 0.0
+      },
+      "status": "within rating"
+    },
+    "trip_fluid_SG": 1.0871786156476348,
+    "trip_circulation_success": true
+  },
+  "status": {
+    "label": "CONDITIONAL",
+    "reasons": [
+      "a drilling fluid of 1.032 SG at surface",
+      "a trip fluid of 1.087 SG at surface"
+    ]
+  },
+  "components": {
+    "solver": {
+      "ok": true,
+      "converged": true,
+      "runs_ok": true,
+      "fluid_passes": 3
+    },
+    "tool": {
+      "ok": true,
+      "detail": "PASS"
+    },
+    "coating": {
+      "status": "within rating",
+      "pipe": "TK-Drakon coated"
+    },
+    "hole_cleaning": {
+      "ok": true,
+      "v_ann_min": 1.3267700328710321,
+      "conflict": null
+    },
+    "pumps": {
+      "ok": true,
+      "spp": 7806991.127932896,
+      "within_rig": true,
+      "gpm": 478.35434183532436,
+      "trip_spp": 8076831.962897419,
+      "trip_gpm": 478.31340589520426
+    },
+    "admissibility": {
+      "inadmissible": []
+    },
+    "stability": {
+      "verdict": "CONDITIONAL",
+      "states": {
+        "drilling": "CONDITIONAL",
+        "connection": "GO",
+        "connection, fresh rock": "GO",
+        "trip": "GO"
+      }
+    },
+    "prescription": {
+      "drilling_fluid": {
+        "open": true,
+        "fluid": 1032.4313949833388,
+        "note": null,
+        "heavier_than_water": true
+      },
+      "trip_fluid": {
+        "open": true,
+        "fluid": 1087.116419983748,
+        "note": null,
+        "heavier_than_water": true
+      }
+    },
+    "window_refinement": {
+      "levels": [
+        {
+          "spacing_m": 50.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        },
+        {
+          "spacing_m": 25.0,
+          "changes": {
+            "drilling_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            },
+            "trip_fluid": {
+              "lo": 0.0,
+              "hi": 0.0,
+              "binding_depth_change_m": 0.0
+            }
+          }
+        }
+      ],
+      "tolerance_SG": 0.002,
+      "converged": true
+    }
+  },
+  "reading": {
+    "calculation": "Valid: the reported numerical checks converged.",
+    "scenarios_at_target": "Cases passing target stability, including stated fluid conditions: drilling 5/5; connection 5/5; connection, fresh rock 5/5; trip 5/5.",
+    "whole_programme": "One drilling fluid and one trip fluid satisfy the pressure limits at every evaluated depth, state and case. Surface densities at 20 C: drilling fluid 1.032 to 1.258 SG; trip fluid 1.087 to 1.324 SG. Conditions: A drilling fluid of 1.032 SG at surface. A trip fluid of 1.087 SG at surface.",
+    "equipment": "The tool passes its 200 C temperature check. The TK-Drakon coating reaches 70.8 C against its stated 204 C rating (within rating).",
+    "controlling_constraint": "A drilling fluid of 1.032 SG at surface."
+  },
+  "operations": {
+    "pipes": {
+      "value": [
+        "TK-Drakon coated",
+        "internally coated",
+        "externally coated",
+        "conventional"
+      ],
+      "unit": null,
+      "stated": false,
+      "rule": "the best-insulated commercial pipe for which a flow passes, tried in this order: TK-Drakon coated, internally coated, externally coated, conventional",
+      "rule_source": "pipe conductivities from Wu et al. (2025) and Vetsak et al. (2024); the TK-Drakon coating from NOV's product flyer (2024)"
+    },
+    "mass_flow_kg_s": {
+      "value": 30.973428958863376,
+      "unit": "kg/s",
+      "stated": false,
+      "rule": "the lowest flow on the grid that keeps the tool below its limit and cleans the hole within the pump limit",
+      "rule_source": "the model's flow search"
+    },
+    "volume_flow_L_s": {
+      "value": 30.0,
+      "unit": "L/s at surface",
+      "stated": false,
+      "rule": "the same search; a volume flow is at surface, at the fluid's density at 20 C",
+      "rule_source": "the model's flow search"
+    },
+    "mass_flows_kg_s": {
+      "value": [
+        5.162238159810563,
+        10.324476319621127,
+        15.486714479431688,
+        20.648952639242253,
+        25.811190799052817,
+        30.973428958863376,
+        36.13566711867394,
+        41.29790527848451,
+        46.46014343829507,
+        51.62238159810563,
+        61.94685791772675,
+        72.27133423734789,
+        82.59581055696901,
+        92.92028687659014,
+        103.24476319621127
+      ],
+      "unit": "kg/s",
+      "stated": false,
+      "rule": "the model's flow grid, 5 to 50 in steps of 5 and then 60 to 100 in steps of 10, is read as kg/s while the fluid is water, which it is in the first fluid pass, and as L/s at surface once the fluid is weighted; a stated grid keeps its own unit in every pass, so stating these numbers does not reproduce the default result",
+      "rule_source": "the model's flow search"
+    },
+    "volume_flows_L_s": {
+      "value": [
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100
+      ],
+      "unit": "L/s at surface",
+      "stated": false,
+      "rule": "the model's flow grid, 5 to 50 in steps of 5 and then 60 to 100 in steps of 10, is read as kg/s while the fluid is water, which it is in the first fluid pass, and as L/s at surface once the fluid is weighted; a stated grid keeps its own unit in every pass, so stating these numbers does not reproduce the default result",
+      "rule_source": "the model's flow search"
+    },
+    "tool_limit_C": {
+      "value": 200.0,
+      "unit": "C",
+      "stated": false,
+      "rule": "200 C, the rating of the high-temperature commercial tool class",
+      "rule_source": "the model's downhole electronics classes: about 150 to 175 C for conventional MWD and LWD tools, about 200 C for high-temperature tools"
+    },
+    "coating_ratings_C": {
+      "value": {
+        "TK-Drakon coated": 204.0
+      },
+      "unit": "C",
+      "stated": false,
+      "rule": "TK-Drakon coated 204 C, the coating maker's rating, given while circulation is maintained; other pipes have no rating",
+      "rule_source": "NOV Tuboscope TK-Drakon flyer D392006697-MKT-001 Rev 01 (2024)"
+    },
+    "pump_pressure_limit_Pa": {
+      "value": 51700000.0,
+      "unit": "Pa",
+      "stated": false,
+      "rule": "51.7 MPa, from the reference design's 7,500 psi",
+      "rule_source": "the reference well design of Wu et al. (2025)"
+    },
+    "rig_pumps": {
+      "value": 3,
+      "unit": "pumps",
+      "stated": false,
+      "rule": "3 pumps, each an NOV 14-P-220 giving 1,980 hydraulic hp, up to 7,475 psi on 5.5-inch liners",
+      "rule_source": "NOV 14-P-220 mud pump technical marketing sheet; the pump count from the FORGE 16B daily reports"
+    },
+    "min_annular_velocity_m_s": {
+      "value": 1.245,
+      "unit": "m/s",
+      "stated": false,
+      "rule": "1.245 m/s, the annular velocity around the drill pipe at FORGE 16B at 600 US gal/min (245.1 ft/min)",
+      "rule_source": "Utah FORGE well 16B drilling data, May 2023 (Geothermal Data Repository submission 1516)"
+    },
+    "precirculation_min": {
+      "value": 0.33,
+      "unit": "min",
+      "stated": false,
+      "rule": "0.33 min, the 10th percentile of circulation after the last new hole at FORGE 16B; a stated value ends the schedule search",
+      "rule_source": "Utah FORGE well 16B drilling data, May 2023 (Geothermal Data Repository submission 1516)"
+    },
+    "connection_median_min": {
+      "value": 2.83,
+      "unit": "min",
+      "stated": false,
+      "rule": "2.83 min, the median FORGE 16B connection with the pumps off",
+      "rule_source": "Utah FORGE well 16B drilling data, May 2023 (Geothermal Data Repository submission 1516)"
+    },
+    "connection_p90_min": {
+      "value": 6.33,
+      "unit": "min",
+      "stated": false,
+      "rule": "6.33 min, the 90th-percentile FORGE 16B connection with the pumps off; a stated value ends the schedule search",
+      "rule_source": "Utah FORGE well 16B drilling data, May 2023 (Geothermal Data Repository submission 1516)"
+    },
+    "trip_hours": {
+      "value": 12.87685228318917,
+      "unit": "h",
+      "stated": false,
+      "rule": "12.877 h at the target depth, from FORGE 16B tripping speeds of 1,694 ft/h out and 1,833 ft/h in, with 3.93 h at surface",
+      "rule_source": "Utah FORGE well 16B drilling data, May 2023 (Geothermal Data Repository submission 1516)"
+    },
+    "trip_scale": {
+      "value": 1.0,
+      "unit": null,
+      "stated": false,
+      "rule": "1, no factor on the trip-time rule",
+      "rule_source": "Utah FORGE well 16B drilling data, May 2023 (Geothermal Data Repository submission 1516)"
+    },
+    "stage_spacing_m": {
+      "value": 144.8775360000002,
+      "unit": "m",
+      "stated": false,
+      "rule": "144.9 m (475 ft), the FORGE 16B staging interval; a stated value ends the staging search",
+      "rule_source": "Utah FORGE well 16B drilling data, May 2023 (Geothermal Data Repository submission 1516)"
+    },
+    "stage_minutes": {
+      "value": 15.51,
+      "unit": "min",
+      "stated": false,
+      "rule": "15.51 min, the FORGE 16B stage circulation; a stated value ends the staging search",
+      "rule_source": "Utah FORGE well 16B drilling data, May 2023 (Geothermal Data Repository submission 1516)"
+    },
+    "rop_m_h": {
+      "value": 6.549586135468945,
+      "unit": "m/h",
+      "stated": false,
+      "rule": "Model 3 at the circulation, iterated with the wall's exposure for a coupled site",
+      "rule_source": "the model's drilling-rate model (Model 3)"
+    },
+    "drilling_fluid_kg_m3": {
+      "value": 1032.4476319621126,
+      "unit": "kg/m3 at 20 C",
+      "stated": false,
+      "rule": "the lower bound of the drilling fluid's common window, never below water, iterated with the circulation",
+      "rule_source": "the model's mud-weight window"
+    },
+    "trip_fluid_kg_m3": {
+      "value": 1087.1786156476348,
+      "unit": "kg/m3 at 20 C",
+      "stated": false,
+      "rule": "the larger of the drilling fluid and the lower bound of the trip fluid's common window",
+      "rule_source": "the model's mud-weight window"
+    }
+  },
+  "window_profile": {
+    "depths_m": [
+      2400.0,
+      2375.0,
+      2371.464624,
+      2350.0,
+      2325.0,
+      2300.0,
+      2200.0,
+      2100.0,
+      2000.0,
+      1900.0,
+      1800.0,
+      1700.0,
+      1600.0,
+      1500.0,
+      1400.0,
+      1300.0,
+      1275.0,
+      1250.0,
+      1225.0,
+      1200.0
+    ],
+    "states": {
+      "drilling": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo_kg_m3": [
+            941.755596564736,
+            942.8288401628454,
+            942.9613120659328,
+            943.7823049051359,
+            944.7318093760306,
+            945.680419841711,
+            948.5093280087194,
+            950.6189689014761,
+            952.2635909088638,
+            952.7961178940843,
+            953.2822088138558,
+            953.7304335531016,
+            954.1390722520191,
+            954.5113880549957,
+            954.8507479467403,
+            955.1534161228967,
+            955.2282477965656,
+            955.2969874562078,
+            955.3637618639291,
+            955.4285871657434
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1257.549973650369,
+            1258.6508374597004,
+            1258.7873505686457,
+            1259.6325084921357,
+            1260.609816180135,
+            1261.5858623790862,
+            1264.5309786376251,
+            1266.7602833673277,
+            1268.5260060644716,
+            1269.187370564938,
+            1269.799843210397,
+            1270.3721045674133,
+            1270.9025196217265,
+            1271.3944216289283,
+            1271.8512538783616,
+            1272.2693619276085,
+            1272.3727022280352,
+            1272.4698504967637,
+            1272.5649067570218,
+            1272.6578952725633
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo_kg_m3": [
+            941.755596564736,
+            942.8288401628454,
+            942.9613120659328,
+            943.7823049051359,
+            944.7318093760306,
+            945.680419841711,
+            948.5093280087194,
+            950.6189689014761,
+            952.2635909088638,
+            952.7961178940843,
+            953.2822088138558,
+            953.7304335531016,
+            954.1390722520191,
+            954.5113880549957,
+            954.8507479467403,
+            955.1534161228967,
+            955.2282477965656,
+            955.2969874562078,
+            955.3637618639291,
+            955.4285871657434
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1560.8730523289712,
+            1562.0071263904097,
+            1562.148336856048,
+            1563.0218284939033,
+            1564.031847076707,
+            1565.0403233026757,
+            1568.1150330242108,
+            1570.4728943259347,
+            1572.3660597939022,
+            1573.1554866840906,
+            1573.8943593763047,
+            1574.5914643132937,
+            1575.2452503112086,
+            1575.8591088310086,
+            1576.4365640989918,
+            1576.9740092789784,
+            1577.1069802955533,
+            1577.2336824935396,
+            1577.3582198547726,
+            1577.4806193559837
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo_kg_m3": [
+            941.755596564736,
+            942.8288401628454,
+            942.9613120659328,
+            943.7823049051359,
+            944.7318093760306,
+            945.680419841711,
+            948.5093280087194,
+            950.6189689014761,
+            952.2635909088638,
+            952.7961178940843,
+            953.2822088138558,
+            953.7304335531016,
+            954.1390722520191,
+            954.5113880549957,
+            954.8507479467403,
+            955.1534161228967,
+            955.2282477965656,
+            955.2969874562078,
+            955.3637618639291,
+            955.4285871657434
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1863.656324080541,
+            1864.8195643013732,
+            1864.9648968268677,
+            1865.8632924673575,
+            1866.9021178337825,
+            1867.9392057027171,
+            1871.1281664383298,
+            1873.5995900811668,
+            1875.6056753587222,
+            1876.5086791885915,
+            1877.3602667230778,
+            1878.1693042621825,
+            1878.9343155063946,
+            1879.6587239301437,
+            1880.3461245323647,
+            1880.9929540252826,
+            1881.1531790282838,
+            1881.3071039776773,
+            1881.4588364951212,
+            1881.6084026275623
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo_kg_m3": [
+            941.755596564736,
+            942.8288401628454,
+            942.9613120659328,
+            943.7823049051359,
+            944.7318093760306,
+            945.680419841711,
+            948.5093280087194,
+            950.6189689014761,
+            952.2635909088638,
+            952.7961178940843,
+            953.2822088138558,
+            953.7304335531016,
+            954.1390722520191,
+            954.5113880549957,
+            954.8507479467403,
+            955.1534161228967,
+            955.2282477965656,
+            955.2969874562078,
+            955.3637618639291,
+            955.4285871657434
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            2166.158308253458,
+            2167.344197742574,
+            2167.4927271113424,
+            2168.410465606716,
+            2169.471701247404,
+            2170.5310882052054,
+            2173.80898380095,
+            2176.3689533112133,
+            2178.4633571970703,
+            2179.4553238241133,
+            2180.395742482973,
+            2181.2935317886177,
+            2182.147276280937,
+            2182.960422664618,
+            2183.736612289093,
+            2184.4723191188923,
+            2184.6547724555703,
+            2184.8309358965626,
+            2185.004917709927,
+            2185.1767413934276
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo_kg_m3": [
+            941.755596564736,
+            942.8288401628454,
+            942.9613120659328,
+            943.7823049051359,
+            944.7318093760306,
+            945.680419841711,
+            948.5093280087194,
+            950.6189689014761,
+            952.2635909088638,
+            952.7961178940843,
+            953.2822088138558,
+            953.7304335531016,
+            954.1390722520191,
+            954.5113880549957,
+            954.8507479467403,
+            955.1534161228967,
+            955.2282477965656,
+            955.2969874562078,
+            955.3637618639291,
+            955.4285871657434
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            2468.630625091897,
+            2469.830255126534,
+            2469.9807183429684,
+            2470.910190523381,
+            2471.9850572781447,
+            2473.0580401171032,
+            2476.3899665866447,
+            2479.0038262531207,
+            2481.1522497645874,
+            2482.198808907123,
+            2483.194346465047,
+            2484.1478022803967,
+            2485.0578031534683,
+            2485.927808186904,
+            2486.7614792079016,
+            2487.5553251236083,
+            2487.7524118434712,
+            2487.9432540705225,
+            2488.1319579692854,
+            2488.3185409557705
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        }
+      },
+      "connection": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1343.6586982033557,
+            1343.8070482638652,
+            1343.8277137843384,
+            1343.9519782324217,
+            1344.0943172115326,
+            1344.2343977904345,
+            1344.7763061019111,
+            1345.2956276672844,
+            1345.7954073574062,
+            1346.2769332677096,
+            1346.7408981591286,
+            1347.1882148549892,
+            1347.619373014324,
+            1348.0348723194625,
+            1348.4354067475251,
+            1348.8211785625683,
+            1348.9153700365102,
+            1349.008651124596,
+            1349.1010652954014,
+            1349.19261742542
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1646.8024061043784,
+            1646.9849230781647,
+            1647.010386590737,
+            1647.1636592581126,
+            1647.3395315464943,
+            1647.5129111136448,
+            1648.1861885375145,
+            1648.8347389019877,
+            1649.4619788804048,
+            1650.0693406058374,
+            1650.657474056171,
+            1651.227571464013,
+            1651.780181135407,
+            1652.315855704894,
+            1652.8353969167404,
+            1653.3390193675357,
+            1653.462503181204,
+            1653.5850044754834,
+            1653.7065707922316,
+            1653.8272038387972
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1949.479752978795,
+            1949.6908814079077,
+            1949.7203699810148,
+            1949.898007728563,
+            1950.1021008430746,
+            1950.3035588835749,
+            1951.0880967952764,
+            1951.846762145582,
+            1952.5832194486425,
+            1953.2990433509774,
+            1953.9951008372134,
+            1954.6725047900406,
+            1955.3318676650604,
+            1955.9737759062905,
+            1956.5990895358693,
+            1957.2080479752735,
+            1957.3578063638454,
+            1957.5065516966495,
+            1957.654333692243,
+            1957.8011625620004
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            2251.9473855421134,
+            2252.1791299515057,
+            2252.2115266284472,
+            2252.406798577842,
+            2252.6313891274817,
+            2252.8533131484883,
+            2253.719467346127,
+            2254.5595553676626,
+            2255.377363798771,
+            2256.174540941313,
+            2256.95200254475,
+            2257.710903513686,
+            2258.451902436208,
+            2259.1756004172626,
+            2259.882893471902,
+            2260.5740464405394,
+            2260.7443931760895,
+            2260.9137325946554,
+            2261.082124991153,
+            2261.249584038482
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            2554.455752399164,
+            2554.6978062720355,
+            2554.7316656224407,
+            2554.93584269624,
+            2555.1708567135556,
+            2555.403255310722,
+            2556.311761786721,
+            2557.194884022817,
+            2558.0564056532303,
+            2558.897993595824,
+            2559.7205869495588,
+            2560.5253458728616,
+            2561.312958199243,
+            2562.084020379928,
+            2562.8394338959047,
+            2563.579485748403,
+            2563.7621808476697,
+            2563.9439121869273,
+            2564.124747251114,
+            2564.3047023781314
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        }
+      },
+      "fresh rock": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1343.6586982033557,
+            1343.8070482638652,
+            1343.8277137843384,
+            1343.9519782324217,
+            1344.0943172115326,
+            1344.2343977904345,
+            1344.7763061019111,
+            1345.2956276672844,
+            1345.7954073574062,
+            1346.2769332677096,
+            1346.7408981591286,
+            1347.1882148549892,
+            1347.619373014324,
+            1348.0348723194625,
+            1348.4354067475251,
+            1348.8211785625683,
+            1348.9153700365102,
+            1349.008651124596,
+            1349.1010652954014,
+            1349.19261742542
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1646.8024061043784,
+            1646.9849230781647,
+            1647.010386590737,
+            1647.1636592581126,
+            1647.3395315464943,
+            1647.5129111136448,
+            1648.1861885375145,
+            1648.8347389019877,
+            1649.4619788804048,
+            1650.0693406058374,
+            1650.657474056171,
+            1651.227571464013,
+            1651.780181135407,
+            1652.315855704894,
+            1652.8353969167404,
+            1653.3390193675357,
+            1653.462503181204,
+            1653.5850044754834,
+            1653.7065707922316,
+            1653.8272038387972
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1949.479752978795,
+            1949.6908814079077,
+            1949.7203699810148,
+            1949.898007728563,
+            1950.1021008430746,
+            1950.3035588835749,
+            1951.0880967952764,
+            1951.846762145582,
+            1952.5832194486425,
+            1953.2990433509774,
+            1953.9951008372134,
+            1954.6725047900406,
+            1955.3318676650604,
+            1955.9737759062905,
+            1956.5990895358693,
+            1957.2080479752735,
+            1957.3578063638454,
+            1957.5065516966495,
+            1957.654333692243,
+            1957.8011625620004
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            2251.9473855421134,
+            2252.1791299515057,
+            2252.2115266284472,
+            2252.406798577842,
+            2252.6313891274817,
+            2252.8533131484883,
+            2253.719467346127,
+            2254.5595553676626,
+            2255.377363798771,
+            2256.174540941313,
+            2256.95200254475,
+            2257.710903513686,
+            2258.451902436208,
+            2259.1756004172626,
+            2259.882893471902,
+            2260.5740464405394,
+            2260.7443931760895,
+            2260.9137325946554,
+            2261.082124991153,
+            2261.249584038482
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1028.5155161852895,
+            1028.6252813308972,
+            1028.6405401990207,
+            1028.7321646010028,
+            1028.8368603117524,
+            1028.9396437961927,
+            1029.335158689817,
+            1029.7114411299358,
+            1030.0710309057183,
+            1030.4149839172899,
+            1030.7438690745005,
+            1031.0584607039411,
+            1031.359137384165,
+            1031.6463376930626,
+            1031.920642284833,
+            1032.1822038151095,
+            1032.2456509231602,
+            1032.3083154680787,
+            1032.3702282983159,
+            1032.4313949833388
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            2554.455752399164,
+            2554.6978062720355,
+            2554.7316656224407,
+            2554.93584269624,
+            2555.1708567135556,
+            2555.403255310722,
+            2556.311761786721,
+            2557.194884022817,
+            2558.0564056532303,
+            2558.897993595824,
+            2559.7205869495588,
+            2560.5253458728616,
+            2561.312958199243,
+            2562.084020379928,
+            2562.8394338959047,
+            2563.579485748403,
+            2563.7621808476697,
+            2563.9439121869273,
+            2564.124747251114,
+            2564.3047023781314
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        }
+      },
+      "trip": {
+        "Shmin 0% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1087.116419983748,
+            1085.8941707009478,
+            1085.7193827260521,
+            1084.6476344061314,
+            1083.3760799331096,
+            1082.0787464689467,
+            1076.6152811034488,
+            1072.9926720003036,
+            1070.6469424168156,
+            1068.1984858164396,
+            1066.0642437021163,
+            1063.6846265692036,
+            1061.5940929230435,
+            1059.3846186689643,
+            1057.1539684388258,
+            1055.0510531630548,
+            1054.4746198489981,
+            1053.8755112479325,
+            1053.2523625414717,
+            1052.6036971380458
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1323.6828738732654,
+            1323.8288130899152,
+            1323.8491405884897,
+            1323.9713628267943,
+            1324.1113428666686,
+            1324.249082489935,
+            1324.7817826384114,
+            1325.292075457449,
+            1325.7829857960348,
+            1326.255777920147,
+            1326.711142031455,
+            1327.1499892185136,
+            1327.5727901931057,
+            1327.9800509532008,
+            1328.3724614779242,
+            1328.7502072731004,
+            1328.84241208785,
+            1328.9337136381523,
+            1329.0241507080461,
+            1329.1137298853134
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 25% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1087.116419983748,
+            1085.8941707009478,
+            1085.7193827260521,
+            1084.6476344061314,
+            1083.3760799331096,
+            1082.0787464689467,
+            1076.6152811034488,
+            1072.9926720003036,
+            1070.6469424168156,
+            1068.1984858164396,
+            1066.0642437021163,
+            1063.6846265692036,
+            1061.5940929230435,
+            1059.3846186689643,
+            1057.1539684388258,
+            1055.0510531630548,
+            1054.4746198489981,
+            1053.8755112479325,
+            1053.2523625414717,
+            1052.6036971380458
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1626.8665997419519,
+            1627.0469779175824,
+            1627.0721407124156,
+            1627.2235939117288,
+            1627.3973620040754,
+            1627.5686516276653,
+            1628.233657526895,
+            1628.8740479686976,
+            1629.4932190872116,
+            1630.092611511901,
+            1630.6730113088233,
+            1631.235447563619,
+            1631.7804654502233,
+            1632.3086138042222,
+            1632.8206852553903,
+            1633.3168903554918,
+            1633.4385313075547,
+            1633.5591905577753,
+            1633.6789159325913,
+            1633.797711965614
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 50% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1087.116419983748,
+            1085.8941707009478,
+            1085.7193827260521,
+            1084.6476344061314,
+            1083.3760799331096,
+            1082.0787464689467,
+            1076.6152811034488,
+            1072.9926720003036,
+            1070.6469424168156,
+            1068.1984858164396,
+            1066.0642437021163,
+            1063.6846265692036,
+            1061.5940929230435,
+            1059.3846186689643,
+            1057.1539684388258,
+            1055.0510531630548,
+            1054.4746198489981,
+            1053.8755112479325,
+            1053.2523625414717,
+            1052.6036971380458
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            1929.5671744236624,
+            1929.7766038841944,
+            1929.8058533573642,
+            1929.9820422004118,
+            1930.1844655668656,
+            1930.3842719156598,
+            1931.1622645610144,
+            1931.9144455056746,
+            1932.644465397283,
+            1933.3538909012136,
+            1934.0435837119203,
+            1934.7146516411103,
+            1935.3677025727868,
+            1936.0033204704816,
+            1936.6223611751743,
+            1937.2250615820078,
+            1937.3732590712607,
+            1937.5204422429438,
+            1937.6666620051496,
+            1937.8119311538471
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 75% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1087.116419983748,
+            1085.8941707009478,
+            1085.7193827260521,
+            1084.6476344061314,
+            1083.3760799331096,
+            1082.0787464689467,
+            1076.6152811034488,
+            1072.9926720003036,
+            1070.6469424168156,
+            1068.1984858164396,
+            1066.0642437021163,
+            1063.6846265692036,
+            1061.5940929230435,
+            1059.3846186689643,
+            1057.1539684388258,
+            1055.0510531630548,
+            1054.4746198489981,
+            1053.8755112479325,
+            1053.2523625414717,
+            1052.6036971380458
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            2232.041600753859,
+            2232.2722498488088,
+            2232.304491781979,
+            2232.4988249105436,
+            2232.722325660454,
+            2232.943161678427,
+            2233.8049710668693,
+            2234.6407227477016,
+            2235.4541973506466,
+            2236.2470386383065,
+            2237.0201585160294,
+            2237.7747088964575,
+            2238.5113446025157,
+            2239.230665458135,
+            2239.9335652032078,
+            2240.620306049405,
+            2240.789547313835,
+            2240.957778242433,
+            2241.1250608742625,
+            2241.2914112190333
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        },
+        "Shmin 100% of floor-to-Sv": {
+          "lo_kg_m3": [
+            1087.116419983748,
+            1085.8941707009478,
+            1085.7193827260521,
+            1084.6476344061314,
+            1083.3760799331096,
+            1082.0787464689467,
+            1076.6152811034488,
+            1072.9926720003036,
+            1070.6469424168156,
+            1068.1984858164396,
+            1066.0642437021163,
+            1063.6846265692036,
+            1061.5940929230435,
+            1059.3846186689643,
+            1057.1539684388258,
+            1055.0510531630548,
+            1054.4746198489981,
+            1053.8755112479325,
+            1053.2523625414717,
+            1052.6036971380458
+          ],
+          "lo_mechanism": [
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure",
+            "pore pressure"
+          ],
+          "hi_kg_m3": [
+            2534.5401414932085,
+            2534.781835892429,
+            2534.815644038501,
+            2535.019507730296,
+            2535.2541518969138,
+            2535.4861771883247,
+            2536.3931610093314,
+            2537.2747205758837,
+            2538.134641951668,
+            2538.974591179022,
+            2539.795505066112,
+            2540.598543593561,
+            2541.384391834648,
+            2542.1536449390405,
+            2542.9072042404055,
+            2543.645356285566,
+            2543.827569758584,
+            2544.008813921706,
+            2544.189160861309,
+            2544.368625898949
+          ],
+          "hi_mechanism": [
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin",
+            "Shmin less margin"
+          ]
+        }
+      }
+    },
+    "drilling_fluid": {
+      "lo_kg_m3": [
+        1028.5155161852895,
+        1028.6252813308972,
+        1028.6405401990207,
+        1028.7321646010028,
+        1028.8368603117524,
+        1028.9396437961927,
+        1029.335158689817,
+        1029.7114411299358,
+        1030.0710309057183,
+        1030.4149839172899,
+        1030.7438690745005,
+        1031.0584607039411,
+        1031.359137384165,
+        1031.6463376930626,
+        1031.920642284833,
+        1032.1822038151095,
+        1032.2456509231602,
+        1032.3083154680787,
+        1032.3702282983159,
+        1032.4313949833388
+      ],
+      "lo_by": [
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "connection",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        }
+      ],
+      "hi_kg_m3": [
+        1257.549973650369,
+        1258.6508374597004,
+        1258.7873505686457,
+        1259.6325084921357,
+        1260.609816180135,
+        1261.5858623790862,
+        1264.5309786376251,
+        1266.7602833673277,
+        1268.5260060644716,
+        1269.187370564938,
+        1269.799843210397,
+        1270.3721045674133,
+        1270.9025196217265,
+        1271.3944216289283,
+        1271.8512538783616,
+        1272.2693619276085,
+        1272.3727022280352,
+        1272.4698504967637,
+        1272.5649067570218,
+        1272.6578952725633
+      ],
+      "hi_by": [
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "drilling",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        }
+      ],
+      "width_kg_m3": [
+        229.03445746507964,
+        230.02555612880315,
+        230.14681036962497,
+        230.90034389113293,
+        231.77295586838272,
+        232.64621858289343,
+        235.1958199478081,
+        237.0488422373919,
+        238.4549751587533,
+        238.7723866476481,
+        239.05597413589658,
+        239.31364386347218,
+        239.54338223756145,
+        239.74808393586568,
+        239.9306115935285,
+        240.08715811249908,
+        240.12705130487507,
+        240.16153502868497,
+        240.194678458706,
+        240.22650028922453
+      ]
+    },
+    "trip_fluid": {
+      "lo_kg_m3": [
+        1087.116419983748,
+        1085.8941707009478,
+        1085.7193827260521,
+        1084.6476344061314,
+        1083.3760799331096,
+        1082.0787464689467,
+        1076.6152811034488,
+        1072.9926720003036,
+        1070.6469424168156,
+        1068.1984858164396,
+        1066.0642437021163,
+        1063.6846265692036,
+        1061.5940929230435,
+        1059.3846186689643,
+        1057.1539684388258,
+        1055.0510531630548,
+        1054.4746198489981,
+        1053.8755112479325,
+        1053.2523625414717,
+        1052.6036971380458
+      ],
+      "lo_by": [
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "pore pressure"
+        }
+      ],
+      "hi_kg_m3": [
+        1323.6828738732654,
+        1323.8288130899152,
+        1323.8491405884897,
+        1323.9713628267943,
+        1324.1113428666686,
+        1324.249082489935,
+        1324.7817826384114,
+        1325.292075457449,
+        1325.7829857960348,
+        1326.255777920147,
+        1326.711142031455,
+        1327.1499892185136,
+        1327.5727901931057,
+        1327.9800509532008,
+        1328.3724614779242,
+        1328.7502072731004,
+        1328.84241208785,
+        1328.9337136381523,
+        1329.0241507080461,
+        1329.1137298853134
+      ],
+      "hi_by": [
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        },
+        {
+          "state": "trip",
+          "case": "Shmin 0% of floor-to-Sv",
+          "mechanism": "Shmin less margin"
+        }
+      ],
+      "width_kg_m3": [
+        236.56645388951733,
+        237.9346423889674,
+        238.1297578624376,
+        239.32372842066297,
+        240.73526293355894,
+        242.17033602098832,
+        248.16650153496266,
+        252.29940345714544,
+        255.13604337921925,
+        258.05729210370737,
+        260.6468983293387,
+        263.46536264931,
+        265.9786972700622,
+        268.5954322842365,
+        271.21849303909835,
+        273.6991541100456,
+        274.36779223885196,
+        275.0582023902198,
+        275.7717881665744,
+        276.5100327472676
+      ]
+    }
+  },
+  "window_width": {
+    "drilling_fluid": {
+      "lo_kg_m3": 1032.4313949833388,
+      "hi_kg_m3": 1257.549973650369,
+      "width_kg_m3": 225.1185786670303,
+      "open": true
+    },
+    "trip_fluid": {
+      "lo_kg_m3": 1087.116419983748,
+      "hi_kg_m3": 1323.6828738732654,
+      "width_kg_m3": 236.56645388951733,
+      "open": true
+    }
+  },
+  "pump_check": {
+    "limit_Pa": 51700000.0,
+    "pumps": 3,
+    "drilling": {
+      "spp_Pa": 7806991.127932896,
+      "margin_Pa": 43893008.8720671,
+      "ok": true,
+      "flow_gpm": 478.35434183532436,
+      "rig_capacity_gpm": 3645.0,
+      "within_rig": true,
+      "flow_L_s": 30.179469375183352,
+      "rig_capacity_L_s": 229.96376587799998
+    },
+    "trip": {
+      "spp_Pa": 8076831.962897419,
+      "margin_Pa": 43623168.03710258,
+      "ok": true,
+      "flow_gpm": 478.31340589520426,
+      "rig_capacity_gpm": 3645.0,
+      "within_rig": true,
+      "flow_L_s": 30.176886718681356,
+      "rig_capacity_L_s": 229.96376587799998,
+      "separate_circulation": true
+    }
+  },
+  "tool_check": {
+    "limit_C": 200.0,
+    "drilling": {
+      "peak_C": 46.1715850957943,
+      "margin_C": 153.82841490420572,
+      "ok": true,
+      "sets_status": true
+    },
+    "connection": {
+      "peak_C": 46.25381523066841,
+      "margin_C": 153.7461847693316,
+      "ok": true,
+      "sets_status": true,
+      "precirc_min": 0.33,
+      "off_min": 6.33
+    },
+    "run_in_staged": {
+      "peak_C": 49.21076812093349,
+      "margin_C": 150.7892318790665,
+      "ok": true,
+      "sets_status": true,
+      "spacing_m": 144.8775360000002,
+      "minutes": 15.51
+    },
+    "run_in_unstaged": {
+      "peak_C": 79.98718418669992,
+      "margin_C": 120.01281581330008,
+      "ok": true,
+      "sets_status": false
+    },
+    "connection_schedule": {
+      "peak_C": 46.25381523066841,
+      "margin_C": 153.7461847693316,
+      "ok": true,
+      "sets_status": true,
+      "precirc_min": 0.33,
+      "off_min": 6.33
+    },
+    "run_in_schedule": {
+      "peak_C": 49.21076812093349,
+      "margin_C": 150.7892318790665,
+      "ok": true,
+      "sets_status": true,
+      "spacing_m": 144.8775360000002,
+      "minutes": 15.51
+    }
+  },
+  "coating_check": {
+    "pipe": "TK-Drakon coated",
+    "rating_C": 204.0,
+    "circulating": {
+      "max_C": 58.20959041018264,
+      "margin_C": 145.79040958981736,
+      "ok": true,
+      "sets_status": true
+    },
+    "connection": {
+      "max_C": 54.999644754765455,
+      "margin_C": 149.00035524523454,
+      "ok": true,
+      "sets_status": true
+    },
+    "run_in": {
+      "max_C": 70.80986857771309,
+      "margin_C": 133.19013142228692,
+      "ok": true,
+      "sets_status": true
+    }
+  },
+  "physics": {
+    "annulus_model": "herschel-bulkley-erge",
+    "friction": "colebrook",
+    "roughness": 0.0,
+    "ordinary_joint_transition": "tapered",
+    "taper_angle_deg": 11.5,
+    "tool_defaults": true,
+    "motor_no_load": true,
+    "rheology_from_pv_yp": true,
+    "physics": "v1.8.0"
+  },
+  "versions": {
+    "commit": "6425460e680555f858971461d5725c3df8af28d7",
+    "dirty": false,
+    "python": "3.14.4",
+    "packages": {
+      "borethm": "1.9.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "iapws": "1.5.5",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "input_warnings": [
+    "no source stated for the rock's conductivity",
+    "no source stated for the rock's stiffness"
+  ]
+}
