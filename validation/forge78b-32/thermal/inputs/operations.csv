@@ -1,0 +1,638 @@
+report_date,time_from,time_to,elapsed_hours,end_md_ft,code,description,page
+2021-06-27,0:00,6:00,6.00,128,WOD,Wait on daylight.,1
+2021-06-27,6:00,9:00,3.00,128,RIGU,Pre-Spud Inspection.,1
+2021-06-27,9:00,16:00,7.00,128,1-01,"Cut and removed conductor pipe at 4” above ground level. Rigged up cellar pump.
+Set pipe racks in place. Strapped 105 joints of 5” drill pipe 9 joints of 5” HWDP and
+readied for pick up. Mixed spud mud.",1
+2021-06-27,16:00,17:00,1.00,128,10-341,Pick up and make up 5 stands of 5” HWDP.,1
+2021-06-27,17:00,22:30,5.50,128,10-341,"Pick up 114 joints of 5"" drill pipe and rack back in derrick.",1
+2021-06-27,22:30,0:00,1.50,128,3-34-3,"Make up 22"" surface hole assembly.",1
+2021-06-28,0:00,1:00,1.00,128,3-34-3,"Make up 22"" surface hole assembly.",4
+2021-06-28,1:00,1:30,0.50,128,03-051,Filled pipe and hole.,4
+2021-06-28,1:30,5:00,3.50,421,03-021,"Drilled 22"" hole from 128' to 421'.",4
+2021-06-28,5:00,5:30,0.50,421,03-051,Circulated well bore clean.,4
+2021-06-28,5:30,6:00,0.50,421,3-27,Wiped hole f/ 421' t/ 100' with no issues. No fill on bottom.,4
+2021-06-28,6:00,6:30,0.50,421,3-6-2,Pull out of the hole f/ 421',4
+2021-06-28,6:30,7:00,0.50,421,3-34-4,Lay down NMDC and bit,4
+2021-06-28,7:00,8:00,1.00,421,4-56,Rig up casing crew.,4
+2021-06-28,8:00,10:00,2.00,421,4-12-1,"Rigged up and Ran 9 joints of 16"" k-55 64# BTC casing (382.89') of total casing.
+Landed out with 33' landing joint. Shoe set at 416' KB. Float collar at 372' KB.",4
+2021-06-28,10:00,11:00,1.00,421,4-56,Rig down casing crew,4
+2021-06-28,11:00,12:30,1.50,421,4-12-1,Land casing with well head 3' below ground level.,4
+2021-06-28,12:30,13:00,0.50,421,5-56,RIH with stab-in and stab into float collar at 378,4
+2021-06-28,13:00,14:30,1.50,421,5-56,Rig up cement crew,4
+2021-06-28,14:30,16:00,1.50,421,5-99,[suppressed: pressure or temperature wording],4
+2021-06-28,16:00,16:30,0.50,421,5-56,Rig down cement crew,4
+2021-06-28,16:30,17:00,0.50,421,5-6-2,POH with stab-in,4
+2021-06-28,17:00,0:00,7.00,421,1-14,"Installed BOP as followed. 16” x 20” 2M DSA, 20” 2M spacer spool, 20” 2M x 20” 3M
+DSA, 20” 3M mud cross, 20” 3M X 20” 2M DSA, 20” 2M double gates, 20” 2M
+annular, 20” 2M flow spool.",4
+2021-06-29,0:00,3:00,3.00,421,3-15,"Installed inner and outer choke and kill valves. Installed choke and kill lines. Torqued
+all flanges.",7
+2021-06-29,3:00,6:00,3.00,421,3-15,[suppressed: pressure or temperature wording],7
+2021-06-29,6:00,9:00,3.00,421,2-14,[suppressed: pressure or temperature wording],7
+2021-06-29,9:00,10:00,1.00,421,2-14,Walk catwalk into place and raise V-Door,7
+2021-06-29,10:00,11:30,1.50,421,3-34-3,"Set racks and move and strap 15 each 8"" DCS",7
+2021-06-29,11:30,14:30,3.00,421,3-34-3,"Pick up 15 each 8"" DCS and stand back in Derrick",7
+2021-06-29,14:30,16:30,2.00,421,3-15,[suppressed: pressure or temperature wording],7
+2021-06-29,16:30,18:00,1.50,421,3-34-3,"PU 14-3/4"" bit, bit sub, 3 stands of DCS and 1 stand of HWDP and RIH to drill float,
+cement and shoe",7
+2021-06-29,18:00,18:30,0.50,421,2-14,Installed rotating rubber bushing to bearing assembly. Installed rotating rubber.,7
+2021-06-29,18:30,19:30,1.00,421,3-28,Drilled out shoe track from 370' to 416'. Good cement Throughout shoe track.,7
+2021-06-29,19:30,20:00,0.50,421,SERV,Serviced rig.,7
+2021-06-29,20:00,20:45,0.75,421,3-28,Cleaned out rat hole to 421'. Drilled new formation to 433',7
+2021-06-29,20:45,21:00,0.25,421,3-5-1,Circulated hole clean for FIT.,7
+2021-06-29,21:00,22:00,1.00,421,3-46,Performed FIT.,7
+2021-06-29,22:00,23:30,1.50,421,3-6-2,Pulled out of the hole from 433' to surface. Broke out bit along with bit sub.,7
+2021-06-29,23:30,0:00,0.50,421,3-98,Held detailed safety meeting with all involved personal on picking up BHA.,7
+2021-06-30,0:00,3:30,3.50,433,3-34-3,"Picked up 14 3/4"" RSS BHA to 433'.",10
+2021-06-30,3:30,4:15,0.75,665,3-2-3,"Drilled 14 3/4"" hole from 433' to 665' with full returns.",10
+2021-06-30,4:15,4:30,0.25,665,03-051,"Circulated hole clean to rack back HWDP and place 3 stands of 8"" drill collars into
+BHA.",10
+2021-06-30,4:30,5:30,1.00,665,3-34-3,"Pulled out of the hole from 665' to 389'. Racked back 3 stands of HWDP. Installed 3
+stands of 8"" drill collars into the BHA. Tripped in the hole to 665'.",10
+2021-06-30,5:30,6:00,0.50,858,3-2-3,"Drilled 14 3/4"" hole from 665' to 858 with full returns.",10
+2021-06-30,6:00,10:00,4.00,"2,077",3-2-3,"Drilled 14-3/4"" hole from 858' to 2,077' with full returns.",10
+2021-06-30,10:00,10:30,0.50,"2,077",SERV,Serviced rig / torqued saver sub,10
+2021-06-30,10:30,11:00,0.50,"2,232",3-2-3,"Drilled 14-3/4"" hole from 2,077' to 2,232' with full returns.",10
+2021-06-30,11:00,11:30,0.50,"2,232",REPR,Rig blacked out/ cleaned #2 generator radiator due to overheating. X,10
+2021-06-30,11:30,12:30,1.00,"2,359",3-2-3,"Drilled 14-3/4"" hole from 2,232' to 2,359' with full returns.",10
+2021-06-30,12:30,13:30,1.00,"2,359",REPR,Rig Repair cleaned #1 generator radiator due to overheating. X,10
+2021-06-30,13:30,14:00,0.50,"2,399",3-2-3,"Drilled 14-3/4"" hole from 2,359' to 2,399' with full returns.",10
+2021-06-30,14:00,15:30,1.50,"2,399",REPR,Rig Repairs cleaned #3 generator radiator due to overheating. X,10
+2021-06-30,15:30,21:15,5.75,"2,399",3-2-3,"Drilled 14-3/4"" hole from 2,399' to 2,699' with full returns.",10
+2021-06-30,21:15,22:00,0.75,"2,399",3-5-1,Circulate hole clean. Pump 15 bbl slug.,10
+2021-06-30,22:00,0:00,2.00,"2,399",3-6-4,"Pull out of the hole from 2,699' to 951'. Tight hole encountered from 2,351' to 1,799'
+50-100k over string weight. Extended trip time due to tight connections and using rig
+tongs. Removed rotating rubber at 850'.",10
+2021-07-01,0:00,2:00,2.00,"2,699",3-6-2,"Pulled out of the hole from 951' to Surface. Broke out bit and inspected MWD. No
+visible wear on roller reamer or stabs. Motor had minimal movement in bearing
+assembly. cleaned and cleared rig floor.",13
+2021-07-01,2:00,4:00,2.00,"2,699",3-6-1,"Make up 14 3/4"" Bit and trip in the hole with BHA to 951'.",13
+2021-07-01,4:00,5:15,1.25,"2,699",10-6-3,"Trip in the hole from 951' to 2,699'.",13
+2021-07-01,5:15,15:30,10.25,"3,009",3-2-3,"Drilled 14-3/4"" hole from 2,699' to 3,009' with full returns.",13
+2021-07-01,15:30,16:00,0.50,"3,009",3-2-3,[suppressed: pressure or temperature wording],13
+2021-07-01,16:00,19:30,3.50,"3,009",3-6-2,"Pulled out of the hole from 3,009' to 951' with no issues. hoe taking proper fill.
+Stopped and removed rotating rubber at 1,100'.",13
+2021-07-01,19:30,0:00,4.50,"3,009",3-6-2,"Racked back HWDP. Racked back 8"" drill collars. Laid out Cubic sensor, Diffuser sub,
+along with float sub. Pulled up and broke out bit. laid out the remaining RSS tools.
+(Note: Bit was 3.75"" under gage, 3.5"" of the center of the bit was washed out with 4
+jets missing. RSS had signs of wear below the pads approximately .25"" wide by .25""
+deep. No signs of wear on the stabilizers or roller reamer. Motor had
+approximately .25"" of play in bearing assembly.",13
+2021-07-02,0:00,0:30,0.50,"3,009",3-97,"Cleaned and cleared rig floor of 14 3/4"" handling tools.",16
+2021-07-02,0:30,1:00,0.50,"3,009",10-98,"Hold detailed safety meeting with Wyoming Casing Service/Rig crew along with GRG
+representative.",16
+2021-07-02,1:00,2:00,1.00,"3,009",CASE,"Rig up 11 3/4"" casing running equipment.",16
+2021-07-02,2:00,8:30,6.50,"3,009",CASE,"Run 11 3/4"", 54 lbs/ft, J-55 BTC casing as follows:.
+Float Shoe, 2-joints, Float collar followed by 71-joints. Landed out with 31' landing
+joint to set depth of 2,989.99'
+Total casing ran 2,958.99'
+Shoe set 2,984.70 KB.
+Float Collar 2,903.97' KB.",16
+2021-07-02,8:30,9:00,0.50,"3,009",CASE,Rig down casing crew,16
+2021-07-02,9:00,9:30,0.50,"3,009",SERV,Service rig,16
+2021-07-02,9:30,11:30,2.00,"3,009",CMTP,"Install valve in wellhead, rig up pumps in cellar, 4 bolt BOP",16
+2021-07-02,11:30,12:30,1.00,"3,009",TRPI,Trip in hole with stab-in,16
+2021-07-02,12:30,13:30,1.00,"3,009",CIRC,Circulate bottoms upo,16
+2021-07-02,13:30,14:30,1.00,"3,009",CMTP,Rig up cement crew and held JSA,16
+2021-07-02,14:30,16:30,2.00,"3,009",CMTP,[suppressed: pressure or temperature wording],16
+2021-07-02,16:30,18:00,1.50,"3,009",CMTP,Un-sting and trip out of the hole with stab-in to surface.,16
+2021-07-02,18:00,21:00,3.00,"3,009",BOPO,"Nipple down 21-1/4"" BOPE and set out.",16
+2021-07-02,21:00,23:45,2.75,"3,009",WELLHD,[suppressed: pressure or temperature wording],16
+2021-07-02,23:45,0:00,0.25,"3,009",2-14,"Installed 13 5/8"" 5M BOPE stack.",16
+2021-07-03,0:00,7:00,7.00,"3,009",2-14,"Installed BOP as followed. 11.75” x 13 5/8” 2M Spacer spool. 13 5/8” 5M mud cross,
+5M Double gates, 13 5/8” 5M Annular, 13 5/8” Riser with rotating head. Installed inner
+and outer choke and kill valves. Installed choke and kill lines. Torqued all flanges.
+(Note: removed variable 3.5”x 5” ram blocks and installed 5.5” ram blocks)",18
+2021-07-03,7:00,11:30,4.50,"3,009",2-15,[suppressed: pressure or temperature wording],18
+2021-07-03,11:30,15:00,3.50,"3,009",3-34-2,"RIH with 5 stands of 5"" HWDP and 20 stands of 5"" DP / POH laying down DP and
+transporting to 16A for inspection / excessive over torque.",18
+2021-07-03,15:00,17:30,2.50,"3,009",4-34-2,"RIH with same 5 stands of HWDP and remaining 18 stands of 5"" drill pipe / Laid
+down 54 joints of 5"" drill pipe and 15 joints of 5"" HWDP and transport to 16A for
+inspection / excessive over torque
+Note: When laying down 5"" DP every 3rd joint that had not been serviced ( due to
+making only 2 trips ) was extremely over torqued (55-70K) more than double max
+torque due to extreme drilling parameters.
+SD-80 unable to break so manual tongs were utilized teamed by 2 air tuggers to
+break the connection and ultimately had to go to a 4 part break line after the torque
+cylinder was destroyed.",18
+2021-07-03,17:30,18:00,0.50,"3,009",SERV,Serviced rig.,18
+2021-07-03,18:00,21:00,3.00,"3,009",OTHER,"Rebuild I-BOP with new 6 5/8” X 6 5/8” sub. Installed 6 5/8” X 5.5” X/O lower Valve.
+Installed saver sub. Installed torque clamps.",18
+2021-07-03,21:00,23:00,2.00,"3,009",3-34-1,"Transport 5.5” HWDP along with 71-joints of 5.5” drill pipe from 16A location to rig
+site. Load racks and strap same.",18
+2021-07-03,23:00,0:00,1.00,"3,009",3-34-3,"Make up 10 5/8"" drill out assembly as followed.
+10 5/8"" Mill Tooth.
+8 1/8"" Junk Basket.
+3-Stands of 8"" DC.
+5-Stands of 5.5"" HWDP.",18
+2021-07-04,0:00,4:00,4.00,"3,009",3-34-1,"Picked up 5.5"" drill pipe from 740' to 2,900'.",20
+2021-07-04,4:00,4:15,0.25,"3,009",3-5-1,Lined up mud pumps and shakers. Filled pipe.,20
+2021-07-04,4:15,6:00,1.75,"3,009",3-28,"Drilled out shoe track from 2,902' to 2,989'. Good cement in shoe track from 2,922’ to
+shoe. Observed 4’ off good cement outside of the shoe. Cleaned out rat hole from
+2,989’ to 3,009’.",20
+2021-07-04,6:00,7:00,1.00,"3,009",3-46,[suppressed: pressure or temperature wording],20
+2021-07-04,7:00,9:30,2.50,"3,009",3-6-4,"POH and lay down junk sub and bit.
+Junk basket had nine pieces of metal, small in size 0.5"" by .5"".",20
+2021-07-04,9:30,10:00,0.50,"3,009",4-34-3,Picked up Directional Tools and PDC,20
+2021-07-04,10:00,11:00,1.00,"3,009",OTHER,Repaired depth tracker in crown with Pason,20
+2021-07-04,11:00,12:00,1.00,"3,009",4-34-3,Picked up directional Tools and PDC,20
+2021-07-04,12:00,12:30,0.50,"3,009",SERV,Serviced Rig.,20
+2021-07-04,12:30,13:30,1.00,"3,009",OTHER,Broke off TIW and saver sub / welded saver sub to TIW and reinstalled same.,20
+2021-07-04,13:30,16:00,2.50,"3,009",TRPI,"Triped in hole to 3,009'. torqued every connection to 42K on 5.5"" drill pipe.",20
+2021-07-04,16:00,0:00,8.00,"3,456",3-2-3,"Drilled 10 5/8"" section from 3,009' to 3,456'.
+Performed rotary step from 3,230' to 3,260'.
+Performed weight on bit step test from 3,265' to 3,291'.",20
+2021-07-05,0:00,5:00,5.00,"3,582",3-2-3,"Drilled 10 5/8"" section from 3,456' to 3,582'.
+Pumped 100 bbl's of fresh water down at 3,557', ROP increased 85-95% once water
+hit the bit. ROP dropped back down once water cleared the bit. Reduced pump rate
+from 800 to 775 per Texas A&M advisor.",23
+2021-07-05,5:00,5:30,0.50,"3,582",3-5-1,[suppressed: pressure or temperature wording],23
+2021-07-05,5:30,6:00,0.50,"3,602",3-2-3,"Drilled 10 5/8"" section from 3,582' to 3,602'.",23
+2021-07-05,6:00,7:30,1.50,"3,651",3-2-3,"Drilled 10-5/8"" hole from 3,602' to 3,651'.",23
+2021-07-05,7:30,8:00,0.50,"3,651",CIRC,Take check shot and confirm steerable not working / circ and pump slug,23
+2021-07-05,8:00,12:00,4.00,"3,651",3-6-4,POH to change out directional assembly.,23
+2021-07-05,12:00,13:30,1.50,"3,651",4-34-4,Lay down rotary steerable assembly and bit,23
+2021-07-05,13:30,14:30,1.00,"3,651",4-34-3,[suppressed: pressure or temperature wording],23
+2021-07-05,14:30,16:00,1.50,"3,651",3-6-3,RIH to shoe,23
+2021-07-05,16:00,21:30,5.50,"3,651",OTHER,"Transferred mud from 78B-32 to sump @ 58-32 / cleaned pits / filled pits with water
+to prepare for change over.",23
+2021-07-05,21:30,22:00,0.50,"3,651",3-6-3,"RIH from 2900' to 3,645'.",23
+2021-07-05,22:00,23:00,1.00,"3,651",3-5-1,"Filled pipe and change hole over to fresh water with a total of 3,800 strokes at 486
+gpm.",23
+2021-07-05,23:00,23:30,0.50,"3,681",3-2-3,"Slide drill 10 5/8"" hole from 3,651' to 3,681'.",23
+2021-07-05,23:30,0:00,0.50,"3,730",3-2-3,"Drilled 10-5/8"" hole from 3,681' to 3,730'",23
+2021-07-06,0:00,0:30,0.50,"3,765",3-2-3,"Drilled 10-5/8"" hole from 3,730' to 3,765'",26
+2021-07-06,0:30,0:45,0.25,"3,780",3-2-3,"Slide drill 10 5/8"" hole from 3,765' to 3,780'.",26
+2021-07-06,0:45,1:30,0.75,"3,927",3-2-3,"Drilled 10-5/8"" hole from 3,780' to 3,927'.",26
+2021-07-06,1:30,2:00,0.50,"3,947",3-2-3,"Slide drill 10 5/8"" hole from 3,927' to 3,947'.",26
+2021-07-06,2:00,3:00,1.00,"4,060",3-2-3,"Drilled 10-5/8"" hole from 3,947' to 4,060'.",26
+2021-07-06,3:00,3:30,0.50,"4,085",3-2-3,"Slide drill 10 5/8"" hole from 4,060' to 4,085'.",26
+2021-07-06,3:30,4:15,0.75,"4,153",3-2-3,"Drilled 10-5/8"" hole from 4,085' to 4,153'.
+Performed weight on bit step test at 4,099' per Texas A&M advisor 50-70k.",26
+2021-07-06,4:15,4:45,0.50,"4,168",3-2-3,"Slide drill 10 5/8"" hole from 4,153' to 4,168'.",26
+2021-07-06,4:45,11:45,7.00,"4,753",3-2-3,"Drilled 10-5/8"" hole from 4,168' to 4,753",26
+2021-07-06,11:45,12:15,0.50,"4,773",3-2-3,"Slide drill 10-5/8"" hole from 4,753' to 4,773'.",26
+2021-07-06,12:15,16:30,4.25,"5,036",3-2-3,"Drilled 10-5/8"" hole from 4,773' to 5,036'.",26
+2021-07-06,16:30,17:00,0.50,"5,036",SERV,Serviced Rig.,26
+2021-07-06,17:00,17:30,0.50,"5,036",OTHER,Replaced stroke counter on # 2 mud pump.,26
+2021-07-06,17:30,18:15,0.75,"5,051",3-2-3,"Slide drill 10-5/8"" hole from 5,036' to 5,051'.",26
+2021-07-06,18:15,0:00,5.75,"5,334",3-2-3,"Drilled 10-5/8"" hole from 5,051' to 5,334'.
+Dump and diluted system with 200 bbl's of fresh water while drilling ahead at 5,166'.",26
+2021-07-07,0:00,4:30,4.50,"5,628",3-2-3,"Drilled 10-5/8"" hole from 5,334' to 5,628'.",29
+2021-07-07,4:30,5:00,0.50,"5,628",3-2-3,"Slide drill 10 5/8"" hole from 5,628' to 5,643'.",29
+2021-07-07,5:00,7:30,2.50,"5,761",3-2-3,"Drilled 10-5/8"" hole from 5,628' to 5,761'",29
+2021-07-07,7:30,11:00,3.50,"5,761",3-6-4,"ROP dropped to 30%, POH for Bit",29
+2021-07-07,11:00,12:30,1.50,"5,761",10-6-2,"POH w/BHA / found 2 jets plugged with motor rubber and bit DBR'd.
+NOTE: no over torqued connections.",29
+2021-07-07,12:30,13:00,0.50,"5,761",10-344,"Lay down NMDC, Motor and bit.",29
+2021-07-07,13:00,15:30,2.50,"5,761",CUTDL,"Slipped and Cut drilling line while waiting on Schlumberger tools to arrive.
+Note: Dumped and diluted system with 250 bbl's of fresh water.",29
+2021-07-07,15:30,16:00,0.50,"5,761",SERV,Serviced rig while waiting on Schlumberger tools to arrive.,29
+2021-07-07,16:00,19:00,3.00,"5,761",3-34-1,"Picked up 5.5"" drill pipe and standing back in derrick while waiting on Schlumberger
+tools to arrive. Motor arrived on location at 19:10 HRS.",29
+2021-07-07,19:00,19:30,0.50,"5,761",3-34-3,Strap Motor prior to picking up.,29
+2021-07-07,19:30,22:30,3.00,"5,761",3-34-3,[suppressed: pressure or temperature wording],29
+2021-07-07,22:30,23:30,1.00,"5,761",3-6-3,"Ran in the hole from 1,042' to 2,946'. Installed TIW valve in sting. Picked up and
+racked back 6 stands of 5.5"" drill pipe.",29
+2021-07-07,23:30,0:00,0.50,"5,761",3-34-1,"Picked up and racked back 6 stands of 5.5"" drill pipe out of the mouse hole.",29
+2021-07-08,0:00,1:00,1.00,"5,761",3-34-1,"Continue picking up and racking back 6 stands of 5.5"" drill pipe out of the mouse
+hole.",32
+2021-07-08,1:00,2:00,1.00,"5,761",3-5-1,[suppressed: pressure or temperature wording],32
+2021-07-08,2:00,6:00,4.00,"5,761",3-34-3,[suppressed: pressure or temperature wording],32
+2021-07-08,6:00,6:30,0.50,"5,761",3-34-4,"Lay down MWD, NMDC and motor X",32
+2021-07-08,6:30,11:30,5.00,"5,761",9-32,Waiting on Schlumberger to rebuild MWD X,32
+2021-07-08,11:30,13:00,1.50,"5,761",3-34-3,Picked up Directional tools and RIH with same. X,32
+2021-07-08,13:00,14:00,1.00,"5,761",OTHER,Changed Pason sensor in crown.,32
+2021-07-08,14:00,15:00,1.00,"5,761",3-34-3,RIH to 1135'. X,32
+2021-07-08,15:00,0:00,9.00,"5,761",REPR,"Repair Rig / Work on rig SCR system. Electrician was unable to locate issue with
+drawwork traction motor A. Wait on SCR tech to arrive. X",32
+2021-07-09,0:00,0:00,24.00,"5,761",REPR,Wait on SCR technician to arrive. X,35
+2021-07-10,0:00,10:00,10.00,"5,761",REPR,Wait on SCR technician to arrive. X,37
+2021-07-10,10:00,13:00,3.00,"5,761",REPR,"Diagnose issues with SCR house and repair same. Rig back on Dayrate @ 13:00
+hours on 7/10/2021
+Note: SCR tech found two bare wires between SCR bays causing system to short
+out. X",37
+2021-07-10,13:00,15:30,2.50,"5,761",10-6-3,RIH to bottom / fill pipe,37
+2021-07-10,15:30,16:30,1.00,"5,821",3-2-3,[suppressed: pressure or temperature wording],37
+2021-07-10,16:30,19:30,3.00,"5,821",3-6-4,"Trip out of the hole from 5,821' to surface with no issues.
+Dumped and diluted 100 bbl's of fresh water while tripping out of the hole. X",37
+2021-07-10,19:30,22:00,2.50,"5,821",3-6-2,"Rack back HWDP along with 8' drill collars.
+Broke out bit and laid out motor.
+Note: Motor rotated with no resistance, no fluid in motor. Bit had 2 plugged jets with
+stator rubber. Stabilizer above the motor at 41' was 3/4"" under-gagged. X",37
+2021-07-10,22:00,0:00,2.00,"5,821",3-6-1,[suppressed: pressure or temperature wording],37
+2021-07-11,0:00,1:15,1.25,"5,821",3-6-3,"Tripped in the hole from 1,000' to 3,245'. X",40
+2021-07-11,1:15,1:30,0.25,"5,821",3-5-1,[suppressed: pressure or temperature wording],40
+2021-07-11,1:30,2:00,0.50,"5,821",3-6-3,"Tripped in the hole from 3,245' to 4,192'. X",40
+2021-07-11,2:00,2:15,0.25,"5,821",3-5-1,[suppressed: pressure or temperature wording],40
+2021-07-11,2:15,2:45,0.50,"5,821",3-6-3,"Tripped in the hole from 4,192' to 5,200'. X",40
+2021-07-11,2:45,3:00,0.25,"5,821",3-5-1,[suppressed: pressure or temperature wording],40
+2021-07-11,3:00,3:15,0.25,"5,821",3-6-3,"Tripped in the hole from 5,200' to 5,710'. X",40
+2021-07-11,3:15,3:30,0.25,"5,821",3-5-1,[suppressed: pressure or temperature wording],40
+2021-07-11,3:30,6:00,2.50,"6,087",3-2-3,"Drill 10-5/8"" hole from 5,821' to 6,087'
+Performed WOB step test @ 5,900'.
+Performed RPM step test @ 5,920'.",40
+2021-07-11,6:00,6:30,0.50,"6,108",3-2-3,"Slide Drill from 6,087' to 6,108'",40
+2021-07-11,6:30,14:00,7.50,"6,561",3-2-3,"Drill 10-5/8"" hole from 6,108' to 6,561' with 65K WOB, 800 GPM and 40-50 surface
+RPM, Dump 180 bbl from active system and add 150 bbl fresh water to system",40
+2021-07-11,14:00,14:30,0.50,"6,561",SERV,[suppressed: pressure or temperature wording],40
+2021-07-11,14:30,16:00,1.50,"6,700",3-2-3,[suppressed: pressure or temperature wording],40
+2021-07-11,16:00,16:30,0.50,"6,700",3-5-1,Circulate bottoms up while allowing weight to drill off,40
+2021-07-11,16:30,20:00,3.50,"6,700",10-6-4,"Trip out of the hole from 6,700' to BHA. 30-40k over-pull.",40
+2021-07-11,20:00,23:30,3.50,"6,700",3-34-4,"Racked back HWDP along with 8' drill collars. Laid out all dir tools. Motor drained
+good with minimal movement in bearing assembly.
+Sleeve stab on motor had one blade completely worn off .",40
+2021-07-11,23:30,0:00,0.50,"6,700",OTHER,"Cleaned and cleared rig floor. Laid out 15 joints of 5.5"" drill pipe on racks and
+strapped same.",40
+2021-07-12,0:00,0:30,0.50,"6,700",SAFE,Held safety meeting with all involved personal on picking up coring assembly.,43
+2021-07-12,0:30,3:00,2.50,"6,700",3-34-3,"Made up 8-3/4"" coring assembly as followed.
+8-3/4"" x 4"" core bit.
+Stabilizer 8-15/32""
+Core barrel 7-1/4""
+Stabilizer 8-15/32""
+Lower sub
+Upper sub
+Float sub
+X/O
+10-5/8"" roller reamer
+1-stand 8"" drill collars
+5-stands HWDP",43
+2021-07-12,3:00,4:30,1.50,"6,700",3-34-1,"Picked up 15 joints of 5.5"" drill pipe from pipe rack and trip in the hole.",43
+2021-07-12,4:30,8:00,3.50,"6,700",3-6-3,"Tripped in the hole with 8-3/4"" core assembly. Filling pipe every 1,000'.",43
+2021-07-12,8:00,8:30,0.50,"6,700",3-4,"Tag bottom while circulating @ 400 GPM, drop ball and slow pump to 300 GPM, ball
+seated",43
+2021-07-12,8:30,10:00,1.50,"6,728",3-4,Cut core from 6700' to 6728',43
+2021-07-12,10:00,15:30,5.50,"6,728",3-4,POH with core @ controlled speed,43
+2021-07-12,15:30,18:00,2.50,"6,728",3-4,"Laid down Reamer, X/O, Float sub. Break down core barrel and collect core.
+Recovered 12' of core.",43
+2021-07-12,18:00,20:00,2.00,"6,728",3-34-4,"Run in the hole with 5-stands of 8"" drill collars. Remove lifting sub that belonged to
+Schlumberger and replace with lifting subs that belong to Frontier. Rack 8"" drill collars
+back in derrick.",43
+2021-07-12,20:00,21:00,1.00,"6,728",3-4,"Made up 8-3/4"" coring assembly as followed.
+8-3/4"" x 4"" core bit.
+Stabilizer 8-15/32"".
+Core barrel 7-1/4"" (dressed with aluminum barrel).
+Stabilizer 8-15/32"".
+Lower sub.
+Upper sub.
+Float sub.
+X/O.
+5-stands HWDP.",43
+2021-07-12,21:00,0:00,3.00,"6,728",3-4,"Tripped in the hole with 8-3/4"" core assembly to 5,623' at report time . Filling pipe
+every 1,000'.",43
+2021-07-13,0:00,1:00,1.00,"6,728",3-4,"Tripped in the hole with 8-3/4"" core assembly to 6,728' . Filling pipe every 1,000'.",46
+2021-07-13,1:00,1:30,0.50,"6,728",3-5-1,"Filled pipe and established circulation. Record up and down weights. Tagged bottom
+while circulating @ 400 GPM, dropped ball and slowed pump to 300 GPM, ball
+seated.",46
+2021-07-13,1:30,2:30,1.00,"6,740",3-4,"Cut core from 6,728' to 6,740'.
+Core barrel jammed up at 6,738', drilled down to 6,740' with no change. Decision was
+made to pull out of the hole.",46
+2021-07-13,2:30,6:00,3.50,"6,740",3-4,"Tripped out with core assembly from 6,740' to 1,300'.",46
+2021-07-13,6:00,7:00,1.00,"6,740",3-4,"Tripped out with core assembly from 1,300' to BHA",46
+2021-07-13,7:00,8:00,1.00,"6,740",3-34-4,Laid down core and coring assembly / Recovered 9.5' of core,46
+2021-07-13,8:00,9:00,1.00,"6,740",3-34-3,Made up bit and bit sub / pick up reamer at 30' off the bit,46
+2021-07-13,9:00,14:30,5.50,"6,740",3-6-3,"RIH with clean out run to open hole to 10-5/8""",46
+2021-07-13,14:30,15:00,0.50,"6,740",SERV,Serviuce rig and change tong dies in SD80,46
+2021-07-13,15:00,16:00,1.00,"6,740",3-21,"Open 8-3/4"" core hole to 10-5/8"" from 6,700' to 6,740'",46
+2021-07-13,16:00,16:30,0.50,"6,742",3-2-1,"Drilled 10-5/8"" hole from 6,740' to 6,742'.",46
+2021-07-13,16:30,17:00,0.50,"6,742",3-5-1,"Circulated hole clean @ 6,742'.",46
+2021-07-13,17:00,20:00,3.00,"6,742",3-6-4,"Tripped out of the hole from 6,742' to BHA.",46
+2021-07-13,20:00,21:30,1.50,"6,742",3-6-2,Racked back HWDP along with 8' drill collars. Broke out bit and laid out.,46
+2021-07-13,21:30,0:00,2.50,"6,742",3-34-3,[suppressed: pressure or temperature wording],46
+2021-07-14,0:00,2:00,2.00,"6,742",3-34-3,"Made up 10-5/8"" directional assembly and trip in the hole to 1,036'.",49
+2021-07-14,2:00,3:30,1.50,"6,742",CUTDL,Slipped and cut drilling line.,49
+2021-07-14,3:30,8:30,5.00,"6,742",3-6-3,"Tripped in the hole from 1,036' to 4,100'.
+Shallow test MWD tool @ 3,100'
+Filling pipe and breaking circulation every 1,000' from 3,100' to 6,742'. Once on
+bottom when filling pipe got pipe stuck. Work loose shortly afterwards",49
+2021-07-14,8:30,10:30,2.00,"6,946",3-2-3,"Rotate drilling 10-5/8"" hole from 6,742' to 6,946'",49
+2021-07-14,10:30,11:00,0.50,"6,970",3-2-3,"Slide drilling 10-5/8"" hole from 6,946' to 6,970'.",49
+2021-07-14,11:00,13:00,2.00,"7,158",3-2-3,"Rotate drilling 10-5/8"" hoe from 6,970' to 7,158'",49
+2021-07-14,13:00,13:30,0.50,"7,183",3-2-3,"Slide drilling 10-5/8"" hole from 7,158' to 7,183'",49
+2021-07-14,13:30,15:45,2.25,"7,316",3-2-3,[suppressed: pressure or temperature wording],49
+2021-07-14,15:45,16:00,0.25,"7,316",SERV,Service Rig,49
+2021-07-14,16:00,16:15,0.25,"7,326",3-2-3,"Rotate drilling 10-5/8"" hoe from 7,316' to 7,326''",49
+2021-07-14,16:15,17:00,0.75,"7,350",3-2-3,"Slide drilling 10-5/8"" hole from 7,326' to 7,350'.",49
+2021-07-14,17:00,18:00,1.00,"7,424",3-2-3,"Rotate drilling 10-5/8"" hoe from 7,350' to 7,424'.",49
+2021-07-14,18:00,20:30,2.50,"7,613",3-2-3,"Rotate drilling 10-5/8"" hoe from 7,424' to 7,613'.",49
+2021-07-14,20:30,21:00,0.50,"7,613",OTHER,[suppressed: pressure or temperature wording],49
+2021-07-14,21:00,22:00,1.00,"7,613",3-6-3,"Tripped out of the hole from 7,613' to 6,559'.",49
+2021-07-14,22:00,0:00,2.00,"7,613",REPR,[suppressed: pressure or temperature wording],49
+2021-07-15,0:00,8:00,8.00,"7,613",REPR,[suppressed: pressure or temperature wording],52
+2021-07-15,8:00,13:00,5.00,"7,613",3-6-4,"POH from 6,559' to 629'",52
+2021-07-15,13:00,16:30,3.50,"7,613",3-6-2,"Racked back HWDP along with 8' drill collars.
+Laid out motor, bit, stabs.
+Motor took a high amount of torque to drain 45 kft/lbs. Bit had 3-plugged jets with
+pieces of rubber from the stator bit was also DBR'ed.
+Motor Stabilizer was 0.5"" under-gauged
+Stabilizer above the motor was 0.75"" under-gauged.
+Top Stabilizer was 1.25"" under-gauged.",52
+2021-07-15,16:30,22:30,6.00,"7,613",3-34-3,[suppressed: pressure or temperature wording],52
+2021-07-15,22:30,23:30,1.00,"7,613",3-6-3,"Tripped in the hole from 1,000' to 2,613'.",52
+2021-07-15,23:30,0:00,0.50,"7,613",SERV,Serviced rig. Adjusted service loop.,52
+2021-07-16,0:00,0:30,0.50,"7,613",3-6-3,"Tripped in the hole from 2,613' to 3,145'.",55
+2021-07-16,0:30,0:45,0.25,"7,613",3-5-1,[suppressed: pressure or temperature wording],55
+2021-07-16,0:45,1:15,0.50,"7,613",3-6-3,"Tripped in the hole from 3,145' to 4,129'.",55
+2021-07-16,1:15,1:30,0.25,"7,613",3-5-1,[suppressed: pressure or temperature wording],55
+2021-07-16,1:30,2:00,0.50,"7,613",3-6-3,"Tripped in the hole from 4,129' to 5,078'.",55
+2021-07-16,2:00,2:15,0.25,"7,613",3-5-1,[suppressed: pressure or temperature wording],55
+2021-07-16,2:15,2:30,0.25,"7,613",3-6-3,"Tripped in the hole from 5,078' to 6,025'.",55
+2021-07-16,2:30,3:00,0.50,"7,613",3-5-1,[suppressed: pressure or temperature wording],55
+2021-07-16,3:00,3:30,0.50,"7,613",3-6-3,"Tripped in the hole from 6,025 to 6,974'.",55
+2021-07-16,3:30,4:00,0.50,"7,613",3-5-1,[suppressed: pressure or temperature wording],55
+2021-07-16,4:00,4:15,0.25,"7,613",3-6-3,"Tripped in the hole from 6,974' to 7,072'.",55
+2021-07-16,4:15,6:00,1.75,"7,613",3-3,"Took weight at 7,072'. Work string free with 90k in over-pull. Ream from 7,072' to
+7,231'.",55
+2021-07-16,6:00,8:00,2.00,"7,613",3-3,"Ream from 7,231' to 7,260'.
+Ran one stand from 7,260' to 7,340'.
+Ream from 7,260' to 7,613'.",55
+2021-07-16,8:00,13:00,5.00,"8,091",3-2-3,"Rotate drilling 10-5/8"" hole from 7,613' to 8,091' Conduct RPM step test @
+35,40,45,50 Conduct GPM step test at 700,800,900 GPM Best results were what we
+were running 50 RPM 800 GPM Conducted a water sweep test showing less ROP",55
+2021-07-16,13:00,13:45,0.75,"8,111",3-2-3,"Slid Drill from 8,091' to 8,111'.",55
+2021-07-16,13:45,16:15,2.50,"8,282",3-2-3,"Rotate drilling 10-5/8"" hole from 8,111' to 8,282'",55
+2021-07-16,16:15,16:45,0.50,"8,303",3-2-3,"Slide drill from 8,282' to 8,303'.",55
+2021-07-16,16:45,18:00,1.25,"8,377",3-2-3,"Rotate drill from 8,303' to 8,377'.",55
+2021-07-16,18:00,18:30,0.50,"8,395",3-2-3,"Slide drill from 8,377' to 8,395'.",55
+2021-07-16,18:30,20:00,1.50,"8,500",3-2-3,"Rotate drill from 8,395' to 8,500' (Core point).",55
+2021-07-16,20:00,20:30,0.50,"8,500",3-5-1,"Circulate bottoms up at 8,500'.",55
+2021-07-16,20:30,0:00,3.50,"8,500",3-6-4,"Tripped out of the hole from 8,500' to 4,000' with no issues.",55
+2021-07-17,0:00,2:00,2.00,"8,500",3-6-4,"Tripped out of the hole from 4,000' to BHA with no issues.",58
+2021-07-17,2:00,7:00,5.00,"8,500",3-34-4,"Racked back HWDP. Laid out 15-8"" drill collars and all directional tools.
+Motor had approximately .5"" of squat in bearing assembly. Kick pad was wore
+smooth.
+Roller reamer above the motor had heavy wear on all buttons, 2 of the rollers had
+bad bearings.
+Top Stabilizer was .75"" under-gauged.",58
+2021-07-17,7:00,8:30,1.50,"8,500",3-4,"Picked up 8-3/4"" Coring assembly / RIH 5 HWDP",58
+2021-07-17,8:30,9:00,0.50,"8,500",3-4,"Pick up 18 jts of 5.5"" drill pipe to replace DCS and Directional Tools",58
+2021-07-17,9:00,13:30,4.50,"8,500",3-4,"RIH to 8,500' filling pipe every 20 stands with 8-3/4"" core head",58
+2021-07-17,13:30,17:30,4.00,"8,530",3-4,"Drop ball and core from 8,500' to 8,530'.
+No over-pull observed when pulling off bottom.",58
+2021-07-17,17:30,23:00,5.50,"8,530",3-6-4,"Tripped out of the hole from 8,530' with core assembly.",58
+2021-07-17,23:00,0:00,1.00,"8,530",3-4,"Handled BHA. Laid out core barrel. Recovered 23.7' of core. 50% 2-3"" in length with
+the other 50% 9-12"" in length.
+Note: Inner barrel assembly was pushed up inside of core barrel approximately 3"".",58
+2021-07-18,0:00,2:30,2.50,"8,530",3-4,"Made up 8-3/4"" core assembly.",61
+2021-07-18,2:30,7:30,5.00,"8,530",3-4,"Tripped in the hole with 8-3/4"" core assembly to 8,530'.",61
+2021-07-18,7:30,10:30,3.00,"8,540",3-4,"Cored with 8-3/4"" assembly from 8,530' to 8,540'. Core barrel jammed up at 8,540'.",61
+2021-07-18,10:30,15:00,4.50,"8,540",3-4,POH with coring assembly as per trip out schedule.,61
+2021-07-18,15:00,16:00,1.00,"8,540",WOW,Shut down for high winds and thunder storm.,61
+2021-07-18,16:00,17:00,1.00,"8,540",3-4,Continue to POH with coring assembly,61
+2021-07-18,17:00,19:30,2.50,"8,540",3-4,"Laid down all coring tools.
+Recovered 8.7' of core.",61
+2021-07-18,19:30,20:00,0.50,"8,540",OTHER,"Cleaned and cleared floor.
+Laid out and lifting subs for 8"" drill collars for inspection along with crossover subs.",61
+2021-07-18,20:00,21:00,1.00,"8,540",3-34-3,"Make up 10-5/8"" clean out assembly.",61
+2021-07-18,21:00,0:00,3.00,"8,540",3-6-3,"Tripped in the hole with 10-5/8"" clean out assembly to 6,454'.
+Filled pipe every 3,000'.",61
+2021-07-19,0:00,1:15,1.25,"8,540",3-6-3,"Tripped in the hole with 10-5/8"" clean out assembly to 8,500'.
+Filled pipe and broke circulation.",64
+2021-07-19,1:15,2:00,0.75,"8,540",3-21,"Open 8-3/4"" core hole to 10-5/8"" from 8,500' to 8,514'. ROP dropped off from 50 ft/hr
+to 5 f/thr.",64
+2021-07-19,2:00,3:00,1.00,"8,540",3-5-1,[suppressed: pressure or temperature wording],64
+2021-07-19,3:00,6:00,3.00,"8,540",3-6-4,"Tripped out of the hole with 10-5/8"" clean out assembly from 8,514' to 1,947'.",64
+2021-07-19,6:00,7:00,1.00,"8,540",3-6-4,"Tripped out of the hole with clean out assembly from 1,947' to surface",64
+2021-07-19,7:00,15:00,8.00,"8,540",LOG,[suppressed: pressure or temperature wording],64
+2021-07-19,15:00,20:30,5.50,"8,540",LOG,[suppressed: pressure or temperature wording],64
+2021-07-19,20:30,21:00,0.50,"8,540",LOG,Laid down logging tools.,64
+2021-07-19,21:00,21:30,0.50,"8,540",3-6-1,"Make up 10-5/8"" clean out assembly with TCI bit.",64
+2021-07-19,21:30,23:00,1.50,"8,540",3-6-3,"Tripped in the hole with 10-5/8"" clean out assembly to 2,900'.",64
+2021-07-19,23:00,0:00,1.00,"8,540",CUTDL,Slipped and cut drilling line.,64
+2021-07-20,0:00,1:00,1.00,"8,540",CUTDL,Slipped and cut drilling line.,66
+2021-07-20,1:00,4:00,3.00,"8,540",3-6-3,"Tripped in the hole with 10-5/8"" clean out assembly from 2,900' to 8,514'.
+Filled pipe and broke circulation.
+Filled pipe every 3,000'.
+Strapped all drill pipe while running in the hole.",66
+2021-07-20,4:00,5:00,1.00,"8,540",OPEN,"Opened 8-3/4"" core hole to 10-5/8"" from 8,514' to 8,540'.",66
+2021-07-20,5:00,6:00,1.00,"8,540",3-5-1,[suppressed: pressure or temperature wording],66
+2021-07-20,6:00,10:00,4.00,"8,540",3-6-4,Tripped out of the hole for Schlumberger logs.,66
+2021-07-20,10:00,21:30,11.50,"8,540",LOG,"Rigged up Schlumberger . Ran UBI log.
+Rigged down loggers.",66
+2021-07-20,21:30,22:00,0.50,"8,540",3-6-1,"Made up 10-5/8"" clean out assembly with TCI bit.",66
+2021-07-20,22:00,0:00,2.00,"8,540",3-6-3,"Tripped in the hole with 10-5/8"" clean out assembly to 4,657'.
+Filled pipe very 3,000'.",66
+2021-07-21,0:00,2:00,2.00,"8,540",3-6-3,"Tripped in the hole with 10-5/8"" clean out assembly to 8,540'.
+Filled pipe very 3,000'.",68
+2021-07-21,2:00,2:30,0.50,"8,540",3-2-1,"Drilled 10-5/8"" hole from 8,540' to 8,545'.
+Note: Five foot was drilled to fit casing and provide 13' of rat hole.",68
+2021-07-21,2:30,3:30,1.00,"8,540",3-5-1,Circulated surface to surface strokes to clean the wellbore prior to running casing.,68
+2021-07-21,3:30,6:00,2.50,"8,540",3-34-2,"Pull out of the hole laying down 5.5"" drill pipe from 8,545' to 6,300'.",68
+2021-07-21,6:00,14:00,8.00,"8,540",3-34-2,"Pull out of the hole laying down 5.5"" drill pipe from 6,300' to HWDP, Lay down HWDP",68
+2021-07-21,14:00,17:00,3.00,"8,540",4-12-1,Changed out IBOP valve for CRT. Install saver sub. Laid down all handling tools.,68
+2021-07-21,17:00,18:00,1.00,"8,540",OTHER,"Removed 5.5"" ram blocks. Installed Frontiers 5"" ram blocks back into double gate.",68
+2021-07-21,18:00,21:00,3.00,"8,540",OTHER,"Load racks with 7"" casing. Cleaned threads on casing and prep to run.",68
+2021-07-21,21:00,23:30,2.50,"8,540",4-12-1,"Held detailed safety meeting with all involved personal. Rigged up Wyoming Casing
+Service. Rigged up Silixa.
+Loaded out floor with Silixa centralizes.",68
+2021-07-21,23:30,0:00,0.50,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing as followed.
+7""- float shoe.
+2-joints of 7"", 41#, T-110SS.
+7""- float collar at report time.
+Note: Casing was ran with torque turn system. All joints were torqued to
+manufactures recommendation of 17,070 FT/LBS.",68
+2021-07-22,0:00,6:00,6.00,"8,540",4-12-1,"Run 7"", 41#, T-110SS, Tenaris casing from 94' to 2,514'.
+Note: BHA on fiber optics was placed at 8,389' top of third full joint. Stopped and
+tested continuity every 15 joints while running casing. All joints were torqued to
+manufactures optimum recommendation of 17,070 FT/LBS.",70
+2021-07-22,6:00,15:00,9.00,"8,540",4-12-1,"Run 7"", 41#, T-110SS, Tenaris casing from 2,514'. to 6,178'.",70
+2021-07-22,15:00,15:30,0.50,"8,540",4-12-1,"Stopped to test fibers AT 6,178'. Breakage in fiber optic cable detected; decision was
+made to continue running in hole with remaining intact fiber/casing and monitor for
+cable quality.",70
+2021-07-22,15:30,16:00,0.50,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 6,178' to 6,517'.",70
+2021-07-22,16:00,18:30,2.50,"8,540",4-12-1,"Stopped at joint 6,517' to run Fiber optic tests- the measured fiber length shortened
+by approximately 500ft on the fibers. Meeting was held to decide plan moving forth;
+the decision was made to run 5 more joints in the hole and assess the fiber quality
+afterwards.",70
+2021-07-22,18:30,19:15,0.75,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 6,517' to 6,753'.",70
+2021-07-22,19:15,20:30,1.25,"8,540",4-12-1,"Tested fibers; fibers shortened by 500ft. The decision was made to pull casing out of
+hole.",70
+2021-07-22,20:30,0:00,3.50,"8,540",4-99,"Pull out of the hole with 7"" casing from 6,753' to 5,447'.
+Note: While pulling the first joint of 7"" casing fiber optic got cut pulling through the
+bushings.",70
+2021-07-23,0:00,6:00,6.00,"8,540",4-99,"Pulled out of the hole with 7"" casing from 5,477' to 1,212'.
+Note: Fiber-optic cable was broke from 3,017' down to 1,212' in multiple place
+ranging from 40' to 160' foot sections.",72
+2021-07-23,6:00,7:30,1.50,"8,540",4-99,"Pulled out of hole with 7"" casing from 1212' to 120'
+NOTE: Fiber optic had no breaks from 1212' to 120'",72
+2021-07-23,7:30,10:00,2.50,"8,540",WOO,"Waited on Orders while Silixa measured and determines usable length of fiber optic.
+Determined 3,686' of usable fiber-optic.",72
+2021-07-23,10:00,18:00,8.00,"8,540",WOE,"Silixa shipping a 5,000' cable from Montana to splice / Continue wiring 3,686' piece to
+BHA",72
+2021-07-23,18:00,20:00,2.00,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 94' to 685'.
+Note: BHA on fiber optics was placed at 8,389' top of third full joint. All joints were
+torqued to manufactures optimum recommendation of 17,070 FT/LBS. Pumped
+through shoe track to verify no blockage. Remaining joints were not filled.",72
+2021-07-23,20:00,20:30,0.50,"8,540",4-99,"Performed continuity test on fiber optics at 6,85'. Test was good.",72
+2021-07-23,20:30,21:45,1.25,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 685' to 1,376'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",72
+2021-07-23,21:45,22:00,0.25,"8,540",4-99,"Performed continuity test on fiber optics at 1,376'. Test was good.",72
+2021-07-23,22:00,23:15,1.25,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 1,376' to 2,060'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",72
+2021-07-23,23:15,23:30,0.25,"8,540",4-98,"Performed continuity test on fiber optics at 2,060'. Test was good.",72
+2021-07-23,23:30,0:00,0.50,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 2,060' to 2,380'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",72
+2021-07-24,0:00,0:45,0.75,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 2,380' to 2,742'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",74
+2021-07-24,0:45,1:00,0.25,"8,540",4-99,"Performed continuity test on fiber optics at 2,742'. Test was good.",74
+2021-07-24,1:00,2:00,1.00,"8,540",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 2,742' to 3,428'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",74
+2021-07-24,2:00,2:15,0.25,"8,545",4-99,"Performed continuity test on fiber optics at 3,428'. Test was good.",74
+2021-07-24,2:15,2:30,0.25,"8,545",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 3,428' to 3,722'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",74
+2021-07-24,2:30,9:00,6.50,"8,545",4-99,"Installed new spool of fiber-optic cable on to unit. Ran fiber-optic cable to rig floor.
+Spliced on new fiber-optic cable at 3,722'.",74
+2021-07-24,9:00,10:00,1.00,"8,545",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 3,711' to 4,117'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",74
+2021-07-24,10:00,10:30,0.50,"8,545",4-99,"Performed continuity test on fiber optics at 4,117'. Test was good.",74
+2021-07-24,10:30,11:30,1.00,"8,545",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 4,117' to 4,803'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",74
+2021-07-24,11:30,12:00,0.50,"8,545",4-99,"Performed continuity test on fiber optics at 4,803'. Test was good.",74
+2021-07-24,12:00,13:00,1.00,"8,545",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 4,803' to 5,480'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",74
+2021-07-24,13:00,13:30,0.50,"8,545",4-99,"Performed continuity test on fiber optics at 5,480'. Test was good.",74
+2021-07-24,13:30,15:00,1.50,"8,545",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 5,480' to 6,161'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",74
+2021-07-24,15:00,15:15,0.25,"8,545",4-99,"Performed continuity test on fiber optics at 6,161'. Test was good.",74
+2021-07-24,15:15,16:00,0.75,"8,545",4-12-1,"Run 7"", 41#, T-110SS, Tenaris casing from 6,161' to 6,614'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",74
+2021-07-24,16:00,16:15,0.25,"8,545",4-99,"Performed continuity test on fiber optics at 6,614'. Test was good.",74
+2021-07-24,16:15,17:00,0.75,"8,545",4-12-1,"Run 7"", 41#, T-110SS, Tenaris casing from 6,614' to 7,070'.
+Note: Floats failed at 6,795' while running casing gained 81k in hook load.
+All joints were torqued to manufactures optimum recommendation of 17,070 FT/LBS.
+Ran all 15-joints without filling.",75
+2021-07-24,17:00,17:30,0.50,"8,545",4-99,"Performed continuity test on fiber optics at 7,070'.
+Test indicated one of the five fiber-optic had failed at 4,000' from surface.
+Decision was made to run in one joint to 7,106' and circulate bottoms up.",75
+2021-07-24,17:30,19:00,1.50,"8,545",3-5-1,[suppressed: pressure or temperature wording],75
+2021-07-24,19:00,19:45,0.75,"8,545",4-12-1,"Run 7"", 41#, T-110SS, Tenaris casing from 7,070' to 7,812'.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling.",75
+2021-07-24,19:45,20:00,0.25,"8,545",4-99,[suppressed: pressure or temperature wording],75
+2021-07-24,20:00,21:15,1.25,"8,545",4-12-1,"Ran 7"", 41#, T-110SS, Tenaris casing from 7,812' to set depth of 8,508'.
+Shoe set at 8,508' KB.
+Float collar at 8,414' KB.
+Note: All joints were torqued to manufactures optimum recommendation of 17,070
+FT/LBS. Ran all 15-joints without filling. Thread locked last 3 joints in the hole below
+landing joint.",75
+2021-07-24,21:15,21:30,0.25,"8,545",4-99,[suppressed: pressure or temperature wording],75
+2021-07-24,21:30,22:30,1.00,"8,545",4-99,"Rigged down CRT tool.
+Rigged up cement head.
+Broke circulation.",75
+2021-07-24,22:30,0:00,1.50,"8,545",3-5-1,[suppressed: pressure or temperature wording],75
+2021-07-25,0:00,2:30,2.50,"8,545",3-5-1,[suppressed: pressure or temperature wording],77
+2021-07-25,2:30,6:00,3.50,"8,545",5-12-2,[suppressed: pressure or temperature wording],77
+2021-07-25,6:00,12:00,6.00,"8,545",3-13,[suppressed: pressure or temperature wording],77
+2021-07-25,12:00,13:00,1.00,"8,545",5-12-2,Mixed and pump 6 bbls of neat cement filling annulus from 95' to surface / CIP 13:00,77
+2021-07-25,13:00,0:00,11.00,"8,545",3-13,[suppressed: pressure or temperature wording],77
+2021-07-26,0:00,3:00,3.00,"8,545",3-13,[suppressed: pressure or temperature wording],79
+2021-07-26,3:00,6:00,3.00,"8,545",6-14,"Bled back 4 bbl's from casing to cement truck.
+Slacked off casing and monitored for 5 mins.
+Removed cement head and lines.
+Cut Silixa fiber-optic cable.
+Raised rotating head extension and made rough cut on 7"" casing.
+Laid out rotating head.
+Raised annular and made rough cut on 7"" casing.
+Laid out annular.",79
+2021-07-26,6:00,12:00,6.00,"8,545",6-14,"Remove double gate BOP and strip out fiber optic / Remove Drilling spool and strip
+out fiber optic / Extension spool 11""3000 X 13-5/8"" 5000 and 7"" cemented together /
+cut extension spool in half and chip out cement in lower half of spool while protecting
+the fiber optic.",79
+2021-07-26,12:00,13:00,1.00,"8,545",6-14,"Rig up power tongs underneath substructure and back out landing joint removing the
+casing collar with it.",79
+2021-07-26,13:00,14:00,1.00,"8,545",6-14,"Installed 7"" riser nipple on the well head and torqued the well head to 17,070 ft/lbs to
+the 7"" casing.",79
+2021-07-26,14:00,15:00,1.00,"8,545",6-14,[suppressed: pressure or temperature wording],79
+2021-07-26,15:00,21:30,6.50,"8,545",6-14,"Installed drilling spool w/ 2ea 2"" 10K valves and 1- 2"" 10K check valve on the kill side
+with a 2"" 1502, and 1ea 4""10K manual valve and a 4"" 10K hydraulic valve on the
+choke side / Installed 7-1/16"" 10 K double gate BOP, Installed 7-16"" 10K X 7-1/16""
+15K crossover spool / installed 7-1/16"" 10K annular BOP w/ 7-1/16"" 15K lower flange
+and 7-1/16"" 10K upper flange / installing 7-1/16"" 10K riser nipple. Installed turn
+buckles. Function test BOP.",79
+2021-07-26,21:30,23:00,1.50,"8,545",3-15,[suppressed: pressure or temperature wording],79
+2021-07-26,23:00,0:00,1.00,"8,545",3-15,[suppressed: pressure or temperature wording],79
+2021-07-27,0:00,3:00,3.00,"8,545",3-15,[suppressed: pressure or temperature wording],82
+2021-07-27,3:00,5:30,2.50,"8,545",3-34-3,"Picked up 4 3/4"" drill collar.
+Make up 5-3/4"" TCI bit.
+Picked up 29 joints of 4-3/4"" drill collars.
+Tripped in the hole to 900'.",82
+2021-07-27,5:30,7:15,1.75,"8,545",3-34-1,"Picked up 3.5"" drill pipe from 900' to 2,003' @07:15 noticed a slip die missing from
+rented slips.",82
+2021-07-27,7:15,9:00,1.75,"8,545",3-97,Open doors on BOP and search for slip die,82
+2021-07-27,9:00,12:00,3.00,"8,545",3-6-4,"Tripped out of the hole with drill pipe from 2,003' with BOP doors open looking for lost
+slip die.",82
+2021-07-27,12:00,14:00,2.00,"8,545",6-14,"Once at top of drill collars close blind ram doors, Rigged up slings to lift BOP while
+pulling drill collars. Pick stack up 1 foot and chained off to sub substructure and block
+between wellhead and BOP Release pick up slings",82
+2021-07-27,14:00,15:00,1.00,"8,545",3-6-2,Pulled out of the hole with 10 stands of drill collars to bit looking for slip die.,82
+2021-07-27,15:00,16:00,1.00,"8,545",6-14,"Remove BOP hanging system and Nipple BOP back up / Pull last stand of collars / no
+markings on bit to indicate slip die had passed / close blind rams and function pipe
+rams and Annular BOP / nothing fell on top of blind rams.",82
+2021-07-27,16:00,16:30,0.50,"8,545",3-6-1,RIH w/ bit and drill collars to 900'.,82
+2021-07-27,16:30,0:00,7.50,"8,545",3-6-3,"Picked up 3.5"" drill pipe and run in the hole to 8,400'.",82
+2021-07-28,0:00,0:30,0.50,"8,545",03-051,Circulated bottoms up Prior to testing.,85
+2021-07-28,0:30,1:45,1.25,"8,545",3-15,[suppressed: pressure or temperature wording],85
+2021-07-28,1:45,2:30,0.75,"8,545",3-28,"Drilled out cement and shoe track from 8,364'' to 8,508'. Good cement in shoe.
+Observed 1’ of good cement outside of the shoe. Cleaned out rat hole from 8,508’ to
+8,545’.
+Note: Float collar did not take any weight while drilling out.
+Note: Pumped 2-5 gallon buckets of Poly Vis along with 25 pounds of torkease mixed
+in 40 bbl's of water.",85
+2021-07-28,2:30,3:30,1.00,"8,555",3-99,"Drilled 5-3/4"" hole from 8,545' to 8,555'.",85
+2021-07-28,3:30,4:00,0.50,"8,555",3-5-1,Circulated bottoms up prior to performing XLOT.,85
+2021-07-28,4:00,5:00,1.00,"8,555",OTHER,[suppressed: pressure or temperature wording],85
+2021-07-28,5:00,6:00,1.00,"8,555",CUTDL,Slipped and cut drilling line.,85
+2021-07-28,6:00,8:00,2.00,"8,555",3-46,Conducted xLOT with Resource bleed back was 2.5 bbl with both low and high rates,85
+2021-07-28,8:00,11:30,3.50,"8,555",3-6-4,Pulled out of the hole and lay down bit.,85
+2021-07-28,11:30,12:00,0.50,"8,555",SERV,Serviced Rig.,85
+2021-07-28,12:00,14:00,2.00,"8,555",3-34-3,"Picked up 5-3/4"" directional drilling assembly. NOTE: hole took 25 bbls of fluid to fill
+while picking up tools avg loss is 12.5 bbl/hour X",85
+2021-07-28,14:00,20:00,6.00,"8,555",3-6-3,[suppressed: pressure or temperature wording],85
+2021-07-28,20:00,20:30,0.50,"8,615",3-2-3,"Drilled 5-3/4"" hole from 8,555' to 8,615'.",85
+2021-07-28,20:30,21:30,1.00,"8,654",3-2-3,"Slide Drilled 5-3/4"" from 8,615' to 8,654'.",85
+2021-07-28,21:30,22:00,0.50,"8,709",3-2-3,"Drilled 5-3/4"" hole from 8,654' to 8,709'.",85
+2021-07-28,22:00,22:30,0.50,"8,742",3-2-3,"Slide Drilled 5-3/4"" from 8,709' to 8,742'.",85
+2021-07-28,22:30,0:00,1.50,"8,950",3-2-3,"Drilled 5-3/4"" hole from 8,742' to 8,950'.",85
+2021-07-29,0:00,0:30,0.50,"8,995",3-2-3,"Drilled 5-3/4"" hole from 8,950' to 8,995'.",88
+2021-07-29,0:30,1:00,0.50,"9,031",3-2-3,"Slide Drilled 5-3/4"" from 8,995' to 9,031'.",88
+2021-07-29,1:00,2:00,1.00,"9,184",3-2-3,"Drilled 5-3/4"" hole from 9,031' to 9,184'.",88
+2021-07-29,2:00,3:00,1.00,"9,225",3-2-3,"Slide Drilled 5-3/4"" from 9,184' to 9,225'.",88
+2021-07-29,3:00,4:00,1.00,"9,225",3-2-3,"Drilled 5-3/4"" hole from 9,225' to 9,373'.",88
+2021-07-29,4:00,5:00,1.00,"9,225",3-2-3,"Slide Drilled 5-3/4"" from 9,373' to 9,406'.",88
+2021-07-29,5:00,6:00,1.00,"9,225",3-2-3,"Drilled 5-3/4"" hole from 9,406' to 9,500'.",88
+2021-07-29,6:00,7:00,1.00,"9,225",3-5-1,Circulated hole clean at TD.,88
+2021-07-29,7:00,12:00,5.00,"9,225",3-6-4,"Tripped out of the hole from 9,500' to BHA.
+Laid down directional tools.",88
+2021-07-29,12:00,13:00,1.00,"9,225",3-34-4,Lay down all directional tools,88
+2021-07-29,13:00,13:30,0.50,"9,225",SERV,Serviced Rig.,88
+2021-07-29,13:30,14:00,0.50,"9,225",3-6-1,"Tripped in the hole w/ same bit, BS w/ a float and all DCS",88
+2021-07-29,14:00,17:30,3.50,"9,225",3-6-3,"RIH filling pipe @ 4,000' 8,000' and bottom",88
+2021-07-29,17:30,20:00,2.50,"9,225",3-5-1,[suppressed: pressure or temperature wording],88
+2021-07-29,20:00,0:00,4.00,"9,225",3-6-4,"Tripped out of the hole from 9,500' to surface with no issues.",88
+2021-07-30,0:00,4:00,4.00,"9,225",LOG,[suppressed: pressure or temperature wording],91
+2021-07-30,4:00,6:00,2.00,"9,225",3-6-3,"Tripped in the hole with 5-3/4"" slick assembly to 5,000'.",91
+2021-07-30,6:00,10:30,4.50,"9,225",3-34-2,"Laid down 3.5"" drill pipe to top of drill collars.",91
+2021-07-30,10:30,12:15,1.75,"9,225",3-6-3,"Tripped in the hole with 3-1/2"" drill pipe and slick assembly to 5,500'.",91
+2021-07-30,12:15,15:30,3.25,"9,225",3-34-2,"Laid down 3-1/2"" drill pipe to the top of the drill collars.",91
+2021-07-30,15:30,18:00,2.50,"9,225",3-34-4,"Laid down 4-3/4"" drill collars.",91
+2021-07-30,18:00,19:00,1.00,"9,225",SAFE,"Shut down and test night tour for Covid-19 due to 3 guys on daylights testing positive.
+Night driller tested positive for Covid-19. Resume operations.",91
+2021-07-30,19:00,0:00,5.00,"9,225",6-99,"Nippled down 7-1/16"" 10K BOP's.",91
+2021-07-31,0:00,6:00,6.00,"9,225",6-99,"Continued nippling down 7-1/16"" 10K BOP's. Installed master valve with 3"" 10k spool
+on top.
+Note: Weatherized top section of casing by poring 8 gals of vegetable oil down 7""
+casing.",93
+2021-07-31,6:00,0:00,18.00,"9,225",OTHER,[suppressed: pressure or temperature wording],93

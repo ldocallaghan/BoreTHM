@@ -1,0 +1,23 @@
+bha,page,table,caption_bha,depth_in_source,depth_out_source,depth_in_ft,depth_out_ft,date_in_source,date_out_source,bha_length_ft,component_sum_ft,length_check,components,comments
+1,29,7,1,128,421,128.0,421.0,27-Jun-21 11:30,28-Jun-2106:30,314.3,314.3,matches,10,"22""Surface section BHA"
+2,35,13,2,370,433,370.0,433.0,29-Jun-2117:00,29-Jun-2123:45,433.74,443.49,differs,5,BHAfor drilling outthe shoe track.
+3,36,14,3,433,"2,699",433.0,2699.0,30-Jun-2100:00,01-Jul-2102:00,956.61,956.61,matches,16,"143/4""RSSAssembly"
+4,37,15,4,2.699,"3,009",2699.0,3009.0,01-Jul-21 02:00,01-Jul-2123:45,956.61,956.61,matches,16,"143/4""RSS run#2"
+5,44,,,"3,009","3,009",3009.0,3009.0,03-Jul-2123:00,04-Jul-2109:30,739.12,736.19,differs,4,"105/8""Clean outassemby"
+6,44,21,6,"3,009","3,651",3009.0,3651.0,04-Jul-2109:30,05-Jul-21 13:30,966.88,966.88,matches,16,"10 5/8""RSSAssembly.BHA was pulled dueto RSSfailure."
+7,46,22,7,"3,651","5,761",3651.0,5761.0,05-Jul-2121:00,07-Jul-21 17:00,960.36,960.36,matches,14,8° 1.5 DEG Motor. Pulled dueto low ROP. Found 2jets plugged with rubber the stator secion ofthe motor and bit DBRd.
+8,47,23,8,"5,761","5,761",5761.0,5761.0,07-Jul-2121:00,08-Jul-2100:00,962.49,962.49,matches,14,"8"" 1.50 DEG Assembly. Motor was notthe Wrightspeed. BHA was pulled out of thehole and motor was swapped."
+9,48,24,9,"5,761","5,821",5761.0,5821.0,08-Jul-21 06:00,10-Jul-2123:00,962.49,962.49,matches,14,Comments. | Motor failed after 1 hour stator rubber at shakers along with 2 plugged jets
+10,49,25,10,"5,821","6,700",5821.0,6700.0,11-Jul-2101:00,11-Jul-2111:30,963.16,963.16,matches,14,1.5deg.111rev
+11,50,26,11,6.700,"6,728",6700.0,6728.0,12-Jul-21 00:30,12-Jul-2120:00,612.69,612.69,matches,12,"8-3/4"" Coring assembly.Recovered approximately 12 of good core."
+12,51,27,12,"6,723","6,740",6723.0,6740.0,12-Jul-2123:00,13-Jul-2108:00,509.79,509.79,matches,9,"83/4"" core assembly.Corerun#2Recovered9.5 of core."
+13,52,28,13,"6,740","6,742",6740.0,6742.0,13-Jul-2109:00,13-Jul-2121:00,845.73,845.73,matches,6,"BHAwas used to open hole up from 8.75'to 10-5/8"" drilled2 ofnew formation"
+14,53,29,14,"6,742","7,613",6742.0,7613.0,14-Jul-2101:00,15-Jul-2117:00,1035.59,1035.59,matches,12,Motortook a high amount oftorqueto drain 45 kf/lbs. Bit had 3-plugged jets with pieces of rubber from the
+15,54,30,15,"7,613","8,500",7613.0,8500.0,15-Jul-2123:00,16-Jul-2123:00,1049.3,1049.3,matches,15,"1.5 deg .160 rev/gal. Motorhad approximately .5""ofsquatin bearing assembly.Kck pad was wore smooth."
+16,55,31,16,"8,500","8,530",8500.0,8530.0,17-Jul-21 08:00,18-Jul-2101:00,509.79,509.79,matches,9,Corerun#3.Recovered 23.7'ofcore.
+17,56,32,17,"8,530","8,540",8530.0,8540.0,18-Jul-2102:00,18-Jul-2118:00,509.79,509.79,matches,9,"8-3/4"" Core assembly run#4"
+18,56,33,18,8.500,"8,514",8500.0,8514.0,18-Jul-2119:00,19-Jul-2108:00,469.42,469.42,matches,3,"10-5/8""Ream out assembly."
+19,57,34,19,"8,514",8.540,8514.0,8540.0,19-Jul-2121:00,20-Jul-2110:00,469.42,469.42,matches,3,"BHA was used to open hole from 8-3/4"" to 10-58"
+20,57,35,20,8.540,8.545,8540.0,8545.0,20-Jul-2121:30,21-Jul-21 11:00,469.42,469.42,matches,3,"10-5/8""clean outassemby."
+21,64,40,21,8.545,"8,555",8545.0,8555.0,28-Jul-21 01:00,28-Jul-2109:00,921.57,921.57,matches,3,"5-3/4"" TCl clean out assemby."
+22,65,41,21,"8,555",10,8555.0,10.0,28-Jul-21 18:00,29-Jul-2107:00,1020.17,1020.17,matches,7,"5-3/4""DirAssemby"
