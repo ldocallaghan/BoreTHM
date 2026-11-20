@@ -1,0 +1,72 @@
+{
+  "package_version": "1.9.0",
+  "package_file": "site-packages/borethm/__init__.py",
+  "python": "3.12.13",
+  "code_commit": "13aa9b737e9fd5310d1b171ec91c074f92cc5401",
+  "uncommitted_thermal_changes": false,
+  "input_sha256": {
+    "validation/forge16a/formation_temperature_216day.csv": "5af4cf699f4133ebdfb11b91df12551b9ace041a2306c2ecbfdb2b9f60715ae4",
+    "validation/forge78b-32/thermal/inputs/bha-sheets-ocr.txt": "d8a08be87cde2d30d807332347e0f2e864b4ceb46ae912b6711071255baef9ee",
+    "validation/forge78b-32/thermal/inputs/bha_components.csv": "f642e597adeb4edad6d7c2a389c8c9570a75e44d141f2ab2d1e1664415e84d2f",
+    "validation/forge78b-32/thermal/inputs/bha_reports.csv": "35b890db829ad243466160d750e4230ea4932cb5a90a00d4406cef4574ccf6c9",
+    "validation/forge78b-32/thermal/inputs/bha_sheets.csv": "ef721375486ede7e7638ce7af1c213b24486fca48b2b316d48f82d530a18455b",
+    "validation/forge78b-32/thermal/inputs/bit_reports.csv": "cbb1dd8228da84e3b50d09a51aa817d31e82d9948b1fb1a5c15d718cc9557a3c",
+    "validation/forge78b-32/thermal/inputs/casing_reports.csv": "20ef827af024356e6cd1613406efea6223fdd137bf661c92a91341c70176135d",
+    "validation/forge78b-32/thermal/inputs/flow-check.csv": "59df0dfa26b9bb8dbbc89313215cfa09b435ac59d76a39d5eb71e85249c8030d",
+    "validation/forge78b-32/thermal/inputs/flow-inlet-summary.json": "9168655c92fcb19a90d6215e04c3b16fd6109c64c0a05c53cb323b41386e154c",
+    "validation/forge78b-32/thermal/inputs/inlet-check.csv": "b80f2d09114103e22ec1ccddfdf5293352567ce518f2abc74e5ea3926b3f4388",
+    "validation/forge78b-32/thermal/inputs/manifest.json": "191cef6ac5b3a8e94e5e720fb5e53afec2067a672a519537bb6c538235344f19",
+    "validation/forge78b-32/thermal/inputs/mud_reports.csv": "82f86419f0902f0b77aaea676657e5376b285ede1f3395e39a1e447dc50bfc94",
+    "validation/forge78b-32/thermal/inputs/operations.csv": "ae144c01abdab6f90812267342a4f7443a188933aaa1a3a5654809c5932191b7",
+    "validation/forge78b-32/thermal/inputs/report_flows.csv": "80b647d7d771921f1475b97aa91109d0444e21cca711037f61d9e80cc3778d5d",
+    "validation/forge78b-32/thermal/inputs/rig_inputs_10s.csv.gz": "7ceb2ece942c8347eab4c0c955bde69594709fa44ba53c332a68c560971b1c19",
+    "validation/forge78b-32/thermal/inputs/survey-source.csv": "199426cc6e72f59d55f74dade65a8fdca63321adda09371c6ecbcc48f6575877",
+    "validation/forge78b-32/thermal/samples/qualified-bins.csv.gz": "37824fcc1b27730ef04d7f799bbce9ba2b47167468d3b7cd286109d5396b24f2",
+    "validation/forge78b-32/thermal/samples/windows.csv": "03396cb2c13060e228b21472876e4bef9fbe3ad9548fe136b756292e144437f5"
+  },
+  "code_sha256": {
+    "validation/forge78b-32/thermal/predict_thermal.py": "1b542ecc42dfa05a9848b0c83cc66d49ef3c560c262567b11acbcda054d90023",
+    "validation/forge78b-32/thermal/common.py": "3f2f62c63fcab1bbaefe55fb4b15e3af840e5455884cc001bc4b05760931334f",
+    "validation/forge78b-32/thermal/prepare_thermal.py": "cdae6a459bb87647283dd32d9ef7ae7d61f92fe8eba97b4e6754598b4a5a37e4",
+    "validation/comparators/thermal.py": "582e9909dc1c090acfae8227c0570070351faa7d786a9dbfa88c8520320e3070"
+  },
+  "package_sha256": {
+    "model1_coupled.py": "7c1bfd5d2321b13168ef3eea8ad64d33eed0aa72c23537587bb4cb66dd91d053",
+    "physics.py": "c0c9f279b337c6d053bab79c3238147fe137c0bed3c3fdea7732694a1ae79fe0",
+    "well_geometry.py": "0146a746074ea0033bf797746474a94135023eae4751a91dd4838b446be80873",
+    "fluids.py": "e8a11ca7a7cb86374b3247618b9efada67a28720eacbac5481a5753b364b010a",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a"
+  },
+  "predictions_sha256": {
+    "predictions.csv": "b9a16d3b55725188af4fc9cf5c6c4fdbd2aedbf29a47879dc3410c587df93d4f"
+  },
+  "counts": {
+    "windows": 214,
+    "windows_complete_input": 209,
+    "part_a_windows": 160,
+    "part_a_v1.9.0": 160,
+    "part_a_v1.7.0": 160,
+    "part_a_analytical": 160,
+    "part_a_all_three": 160,
+    "part_b_eye_windows": 45,
+    "part_b_eye_v1.9.0": 45,
+    "part_b_eye_v1.7.0": 45,
+    "part_b_eye_analytical": 45,
+    "part_b_eye_all_three": 45,
+    "part_b_return_windows": 76,
+    "part_b_return_v1.9.0": 75,
+    "part_b_return_v1.7.0": 75,
+    "part_b_return_analytical": 75,
+    "part_b_return_all_three": 75,
+    "part_b_sanvean_sanvean_lower_windows": 63,
+    "part_b_sanvean_sanvean_lower_v1.9.0": 63,
+    "part_b_sanvean_sanvean_lower_v1.7.0": 63,
+    "part_b_sanvean_sanvean_lower_analytical": 63,
+    "part_b_sanvean_sanvean_lower_all_three": 63,
+    "part_b_sanvean_sanvean_upper_windows": 63,
+    "part_b_sanvean_sanvean_upper_v1.9.0": 63,
+    "part_b_sanvean_sanvean_upper_v1.7.0": 63,
+    "part_b_sanvean_sanvean_upper_analytical": 63,
+    "part_b_sanvean_sanvean_upper_all_three": 63
+  }
+}
