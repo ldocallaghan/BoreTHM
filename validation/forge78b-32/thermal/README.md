@@ -31,6 +31,7 @@ The formation reference is the FORGE 16A 216-day temperature survey in this repo
 | `predict_thermal.py` | The forecasts, in [predictions-v1.9.0](../predictions-v1.9.0/README.md) |
 | `extract_targets.py` | Run only after the declaration is public: extracts the targets into `../targets/` and records their hashes |
 | `score_thermal.py` | Scores the forecasts as declared |
+| `plot_scores.py` | Written after unsealing: figures of the scored windows in the 58-32 form, drawn from the files `score_thermal.py` writes; it calculates no score |
 
 ## Rebuild
 
@@ -52,4 +53,5 @@ After the declaration commit is public:
 ```bash
 python validation/forge78b-32/thermal/extract_targets.py PATH/1330.zip validation/forge78b-32/targets
 python validation/forge78b-32/thermal/score_thermal.py validation/forge78b-32/scores
+python validation/forge78b-32/thermal/plot_scores.py validation/forge78b-32/scores
 ```

@@ -1,0 +1,47 @@
+part,count,windows
+A,windows,160
+A,with converged predictions,160
+A,scored,108
+A,part E flag: above formation,1
+A,excluded,52
+A,excluded by R3,51
+A,excluded by R1,1
+A,scored on inlet-flagged days,0
+A,scored with report inlet,90
+"A, 56-32 mean",windows,160
+"A, 56-32 mean",with converged predictions,160
+"A, 56-32 mean",scored,110
+"A, 56-32 mean",excluded,50
+"A, 56-32 mean",excluded by R3,49
+"A, 56-32 mean",excluded by R1,1
+"A, 56-32 mean",scored on inlet-flagged days,0
+"A, 56-32 mean",scored with report inlet,92
+"B, EYE TEMP",windows,45
+"B, EYE TEMP",with converged predictions,45
+"B, EYE TEMP",scored,32
+"B, EYE TEMP",excluded,13
+"B, EYE TEMP",excluded by R3,12
+"B, EYE TEMP",excluded by R1,3
+"B, EYE TEMP",scored on inlet-flagged days,0
+"B, EYE TEMP",scored with report inlet,0
+"B, TEMP OUT",windows,76
+"B, TEMP OUT",with converged predictions,75
+"B, TEMP OUT",scored,75
+"B, TEMP OUT",not predicted,1
+"B, TEMP OUT",scored on inlet-flagged days,1
+"B, TEMP OUT",scored with report inlet,0
+"B, Sanvean lower",windows,63
+"B, Sanvean lower",with converged predictions,63
+"B, Sanvean lower",excluded,63
+"B, Sanvean lower",excluded by clock alignment not accepted,63
+"B, Sanvean lower",scored on inlet-flagged days,0
+"B, Sanvean lower",scored with report inlet,0
+"B, Sanvean upper",windows,63
+"B, Sanvean upper",with converged predictions,63
+"B, Sanvean upper",excluded,63
+"B, Sanvean upper",excluded by clock alignment not accepted,63
+"B, Sanvean upper",scored on inlet-flagged days,0
+"B, Sanvean upper",scored with report inlet,0
+"B, Sanvean","clock alignment accepted, BHA 3",False
+"B, Sanvean","clock alignment accepted, BHA 4",False
+"B, Sanvean","clock alignment accepted, BHA 15",False
