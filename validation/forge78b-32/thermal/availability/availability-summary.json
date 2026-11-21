@@ -1,0 +1,111 @@
+{
+ "windows": 214,
+ "qualified_bins": 35332,
+ "assembly_condition": "not applied",
+ "coverage": {
+  "mwd_temp": {
+   "windows_at_least_80_percent": 163,
+   "windows_with_any": 163,
+   "finite_in_windows": 25491,
+   "possible_in_windows": 33260
+  },
+  "eye_temp": {
+   "windows_at_least_80_percent": 42,
+   "windows_with_any": 43,
+   "finite_in_windows": 6374,
+   "possible_in_windows": 33260
+  },
+  "tool_temperature_10s": {
+   "windows_at_least_80_percent": 3,
+   "windows_with_any": 3,
+   "finite_in_windows": 424,
+   "possible_in_windows": 33260
+  },
+  "tool_temperature_1s": {
+   "windows_at_least_80_percent": 0,
+   "windows_with_any": 0,
+   "finite_in_windows": 0,
+   "possible_in_windows": 332598
+  },
+  "temp_out": {
+   "windows_at_least_80_percent": 79,
+   "windows_with_any": 79,
+   "finite_in_windows": 12138,
+   "possible_in_windows": 33260
+  },
+  "temp_in": {
+   "windows_at_least_80_percent": 79,
+   "windows_with_any": 79,
+   "finite_in_windows": 12138,
+   "possible_in_windows": 33260
+  }
+ },
+ "joint_availability_10s": {
+  "mwd_temp | tool_temperature_10s": {
+   "both": 9528,
+   "first_only": 106402,
+   "second_only": 0,
+   "neither": 206716
+  },
+  "eye_temp | tool_temperature_10s": {
+   "both": 0,
+   "first_only": 13049,
+   "second_only": 9528,
+   "neither": 300069
+  },
+  "mwd_temp | eye_temp": {
+   "both": 0,
+   "first_only": 115930,
+   "second_only": 13049,
+   "neither": 193667
+  },
+  "temp_out | mud_temperature_10s": {
+   "both": 0,
+   "first_only": 202257,
+   "second_only": 0,
+   "neither": 120389
+  },
+  "temp_in | mud_temperature_10s": {
+   "both": 0,
+   "first_only": 202253,
+   "second_only": 0,
+   "neither": 120393
+  }
+ },
+ "notes": {
+  "members": {
+   "78B-32 10 sec data 27200701.csv": {
+    "bytes": 762053403,
+    "crc32": "69d0ba6e"
+   },
+   "78B-32 10 sec data 27200701_standard.csv": {
+    "bytes": 25962042,
+    "crc32": "ee618e39"
+   },
+   "78B-32 1 sec data 27200701_standard.csv": {
+    "bytes": 225932046,
+    "crc32": "d96a88fd"
+   }
+  },
+  "ten_second_rows": 322646,
+  "ten_second_rows_wider_than_heading": 87,
+  "ten_second_rows_off_ten_second_mark": 0,
+  "ten_second_clock_reversals": 0,
+  "ten_second_duplicate_bins": 0,
+  "standard_10s": {
+   "rows": 322559,
+   "tool_temperature": 9528,
+   "mud_temperature": 0,
+   "return_flow": 0,
+   "bit_depth_compared_at_ten_second_marks": 10000,
+   "bit_depth_within_0.5_ft": 10000
+  },
+  "standard_1s": {
+   "rows": 2928977,
+   "tool_temperature": 0,
+   "mud_temperature": 0,
+   "return_flow": 0,
+   "rows_without_ten_second_bin": 38
+  }
+ }
+}

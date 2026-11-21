@@ -1,0 +1,70 @@
+{
+  "package_version": "1.9.0",
+  "package_file": "site-packages/borethm/__init__.py",
+  "python": "3.12.13",
+  "code_commit": "a2cb31b9f97d29092e9b9d7254bcb1bbef37ae2b",
+  "uncommitted_thermal_changes": false,
+  "input_sha256": {
+    "validation/forge58-32/bha_components.csv": "e48259b84edb03e3da6b06e71bbc0fbb9f10d38ca3e672056d9afb385f60cb7f",
+    "validation/forge58-32/bha_reports.csv": "70ccc860d8ed829c774a6e410be2ec73367c159424810aae6f6ee1e2202e973e",
+    "validation/forge58-32/bit_inputs.csv": "070a90975873fdf94182606e5c888f8c0f129bd35a05d4894feb622f43b834df",
+    "validation/forge58-32/mud_reports.csv": "e4fc5153d428c03d1baa45532e293615734aa099867606a8805edde5157b56c9",
+    "validation/forge58-32/pressure-test/inputs/components.csv": "18fc9f6c965c9f60aaed663f3113a1a32d237e881be5ad7b9b0d8d6db34dca28",
+    "validation/forge58-32/rig_inputs_10s.csv.gz": "ad487bab307b875c8c0d0daea7c805fabb62ae63e165cf8403b424ab46aab1ec",
+    "validation/forge58-32/survey.csv": "29c8791b2caa83a5e6e6f251577dbdac86652dcbb53a107aebb0afb0c846b4cd",
+    "validation/forge58-32/thermal/inputs/formation-pt118.csv": "801436bdb6aca97513010e657d8bb4c9747a8bc7634a368dccfd56d826499242",
+    "validation/forge58-32/thermal/inputs/operations-extended.csv": "34f96b40ec2f2ba2e16d23703f0f307df3eff51164c088fec1803ed018e193d6",
+    "validation/forge58-32/thermal/inputs/pump_pressure_10s.csv.gz": "38c4848c1d2be23b9438018420db67bb491581a87ec8982a92ea05846e41fc8a",
+    "validation/forge58-32/thermal/inputs/report-clock-intervals.csv": "2fecd0e91ef532123f616196a75829849417ad5777b5cd15357d91a02eba625a",
+    "validation/forge58-32/thermal/inputs/report_clock_10s.csv.gz": "5d575704a2da1d39e6ea4a61594365941bedef0ba06d95d9163f2fbf4d533864",
+    "validation/forge58-32/thermal/pt-headers.csv": "598f9b6226b0747d618bd82b80a4424ba3bff41adb4799122738a61645b24afd",
+    "validation/forge58-32/thermal/samples/conditions.csv": "352d7f13e549a4250f25db64c586e89a3e21e85f323d229f36387b559e4f8569",
+    "validation/forge58-32/thermal/samples/log-plan.csv": "d589b81310b981440d2ad85b115fc5b5f78dc382846e71d34f379f723d7bc88f",
+    "validation/forge58-32/thermal/samples/log-points.csv": "347c8a710c4525d01cbe8e0b37fcd533725fa3eb86feb64c2a9f12faf90fa09d",
+    "validation/forge58-32/thermal/samples/runs.csv": "c23db1f360a430bafe3fe8efb3baf93591755c1026d32f07079cb262cd883760"
+  },
+  "input_manifest_sha256": "19139e719ec1e19ac978317a7ea1e3351a093bf329fd7a6a5b3b11c783863f5d",
+  "code_sha256": {
+    "validation/forge58-32/thermal/predict_thermal.py": "a9938f20dd77d0976d7f1f9db8f68d02771a617c916cb18de6e682561e7fc36b",
+    "validation/forge58-32/thermal/common.py": "480b1c0235a5e502e172d6d5067afa899aadee40f096d20fe0268fa18a9734c0",
+    "validation/forge58-32/thermal/prepare_thermal.py": "819dc13c5172c3f9ef823a65c49942e3229023223106df84d580a26ca617e6e4",
+    "validation/forge58-32/thermal/build_thermal_inputs.py": "7fdf87114997203b28fd681c8e38d2b8e151853cb1f1ffd53322be815bc24fa0",
+    "validation/forge58-32/thermal/read_pt_headers.py": "6f22c2e26a99bd124862873c5cdd020e667d883cf75b3d3fe1b348dab755d155",
+    "validation/comparators/thermal.py": "582e9909dc1c090acfae8227c0570070351faa7d786a9dbfa88c8520320e3070"
+  },
+  "package_sha256": {
+    "model1_coupled.py": "7c1bfd5d2321b13168ef3eea8ad64d33eed0aa72c23537587bb4cb66dd91d053",
+    "physics.py": "c0c9f279b337c6d053bab79c3238147fe137c0bed3c3fdea7732694a1ae79fe0",
+    "well_geometry.py": "0146a746074ea0033bf797746474a94135023eae4751a91dd4838b446be80873",
+    "wall_thermal.py": "8ec4cca7d1ce5bbc8f012331ced3fcb2f1150798b8df222e86f2e26d1c11bf39",
+    "site_evaluation.py": "9ef47ae9d7bf93c29b557019510bf9fda8e6071c547f8b723948303c076e57ae",
+    "rock_response.py": "e6522070508c8de583d5275406f3b11073cb6dcb94c9f0d09cb0763b85d0e99a"
+  },
+  "predictions_sha256": {
+    "predictions.csv": "7bc46e07aa03220cd0f3de32d4875662254498e46192702804fdcde76dc4f201",
+    "log-predictions.csv": "388f48de7661b9e940d0429fa35289547fd0b0eecb9ab8b4eb26b681a326e8c4"
+  },
+  "counts": {
+    "windows": 821,
+    "windows_complete_input": 760,
+    "primary_v1.9.0_return_C": 760,
+    "primary_v1.7.0_return_C": 760,
+    "primary_analytical_return_C": 760,
+    "primary_all_three_returns": 760,
+    "primary_energy_limit": 760,
+    "secondary_v1.9.0_return_C": 760,
+    "secondary_v1.7.0_return_C": 760,
+    "secondary_analytical_return_C": 760,
+    "secondary_all_three_returns": 760,
+    "secondary_energy_limit": 760,
+    "log_points": 2879,
+    "log_points_RUN1": 681,
+    "log_points_RUN2": 681,
+    "log_points_RUN3": 680,
+    "log_points_RUN4": 681,
+    "log_points_TIME1": 22,
+    "log_points_TIME2": 41,
+    "log_points_TIME3": 37,
+    "log_points_TIME4": 56
+  }
+}

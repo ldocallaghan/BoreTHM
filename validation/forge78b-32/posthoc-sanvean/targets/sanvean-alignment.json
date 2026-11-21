@@ -1,0 +1,29 @@
+{
+ "Forge 78 B-32 (WOO - 1) Sensor Data/Forge 14.75 Run 1 - output data.csv": {
+  "offset_s": 10,
+  "pump_agreement": 0.9963153046453481,
+  "overlap_bins": 7599,
+  "hole_depth_median_abs_diff_ft": 0.0,
+  "assembly": "3",
+  "rows": 76320,
+  "unparsed_rows": 0
+ },
+ "Forge 78 B-32 (WOO - 1) Sensor Data/Forge 14.75 Run 2 - output data.csv": {
+  "offset_s": 10,
+  "pump_agreement": 0.9984242662989955,
+  "overlap_bins": 5077,
+  "hole_depth_median_abs_diff_ft": 0.0,
+  "assembly": "4",
+  "rows": 50762,
+  "unparsed_rows": 0
+ },
+ "Forge 78 B-32 (WOO - 1) Sensor Data/Forge 10.625 - output data.csv": {
+  "offset_s": 10,
+  "pump_agreement": 0.9957763699010781,
+  "overlap_bins": 8997,
+  "hole_depth_median_abs_diff_ft": 0.0999999999994543,
+  "assembly": "15",
+  "rows": 149675,
+  "unparsed_rows": 0
+ }
+}

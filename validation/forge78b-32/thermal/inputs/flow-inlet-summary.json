@@ -1,0 +1,13 @@
+{
+ "flow_rows": 16,
+ "flow_rows_with_pason": 16,
+ "ratio_median": 0.9914000000000001,
+ "ratio_min": 0.8166,
+ "ratio_max": 1.4207,
+ "rows_within_10_percent": 14,
+ "inlet_checks": 31,
+ "inlet_checks_with_pason": 21,
+ "inlet_flags_over_5K": 11,
+ "pason_inlet_first_day": "2021-07-09",
+ "pason_inlet_last_day": "2021-08-01"
+}

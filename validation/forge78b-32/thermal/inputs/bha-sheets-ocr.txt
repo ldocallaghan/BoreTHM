@@ -1,0 +1,945 @@
+==== page 29: 47 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 29 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 7: BHA # 1 used with bit #1.
+   BHANo: 1 | Wellbore:Original Wellbore
+   BHA Length (ft): | 314.30
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal): 8.90
+   BHA Wt: | 21,473 | 18,552
+   Drillstring Wt: | 21,473 | 18,552
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1m0
+   Depth (ft): | 128 | 421
+   Date/Time: | 27-Jun-21 11:30 | 28-Jun-2106:30
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 90 Drilling Hrs.: | 3.5
+   Build Rate: | Walk Rate:
+   WOB - Avg (Ibs): | 3 WOB -Max(Ibs): | 30
+   Comments:22"Surface section BHA
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | P/B | Length | OD | OD | Comment
+   BIT | 1 | 2.00 | 22.000 | 7.625REG | Pin | SINo:RH7510
+   BS | 1 | 4.44 | 9.625 | 3.000 | 223.3 | S-135 | 6.625REG | Box | 2.28 | 8.000 | SINo:DR42979
+   XO | 1 | 2.24 | 8.125 | 3.125 | 150.2 | S-136 | 5.51F | Box | S/No:DR31132
+   MWD | 1 | 30.11 | 8.125 | 4.250 | 128.0 | S-135 | 5.51F | Box | XBOLT MP MWD (D&IONLY
+   SINo:D80H158D
+   XO | 1 | 2.72 | 8.063 | 3.500 | 140.8 | S-135 | 6.625REG | Box | S/No:DR26834
+   MONEL | 1 | 28.45 | 8.375 | 3.500 | 154.5 | S-135 | 6.625REG | Box | S/No:DR34100
+   FLOAT | 1 | 2.34 | 8.000 | 2.750 | 160.7 | S-135 | 6.625REG | Box | SINo:DR28684
+   OTHER | 1 | 2.95 | 8.063 | 2.750 | 153.4 | 5-135 | 6.625REG | Box | SINo:DR44846
+   XO | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 4.51F | Box | 6.75 | 2.000 | S/No:DR44284
+   HWDP | 235.00 | 5.000 | 3.000 | 42.7 | S-135 | 4.51F | Box | SINo:RIGS
+   Total: | 314.30
+   6.2.5. 22 in. Drilling Fluids
+   Planned basic drilling parameters and the design of the mud system for the 22 in. drilling
+   sections are shown in Table 8 and the average parameters used are shown in Table 9. The spud
+   mud was designed as a pre-hydrated gel mud blended with 3% (4 ppb) fine micronized
+   cellulose. The accepted mud program included the maintenance of 3% micronized cellulose.
+   Table 8: Fluid Parameters Planned for 17-1/2 in. Section
+   Hole Size | 22 in.
+   Casing Size | 16 in.
+   Mud Type | Lime/Gel/Water System
+   Mud Weight (ppg) | 8.6 -9.2
+   Page| 29
+==== page 35: 31 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 35 of 67
+   TAHFORGE
+   U.S.Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 13: BHA #2 used with bit #2.
+   BHANo: 2 | Wellbore: |  Original Wellbore
+   BHA Length (ft): | 433.74
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal):
+   BHA Wt: | 48.914
+   Drillstring Wt: | 48,914
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth (ft): | 370 | 433
+   Date/Time: | 29-Jun-2117:00 | 29-Jun-2123:45
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 50 Drilling Hrs.. | 0
+   Build Rate: | Walk Rate:
+   WOB - Avg (Ibs): | 10 WOB -Max (Ibs): | 20
+   Comments: BHAfor drilling outthe shoe track.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | PIB | Length | OD | OD | Comment
+   BIT | 1 | 1.25 | 7.625REG | Pin | SINo:FO1JY
+   BS | 1 | 4.44 | 9.625 | 3.000 | 223.3 | S-135 | 7.625REG | Box | 8.00 | 2.280 | SINo:DR42979
+   DC | 9 | 270.00 | 8.000 | 2.750 | 150.7 | 5-135 | 6.625REG | Box | S/No:RIGS
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 4.5IF | Box | 6.75 | 1.950 | SINo:DR44284
+   HWDP | 6 | 164.00 | 5.000 | 3.000 | 42.7 | S-135 | 4.5IF | Box | SINo:RIGS
+   Total: | 433.74
+   Page|35
+==== page 36: 55 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 36 of 67
+   TAHFORGE
+   U.S.Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 14: BHA # 3 used with bit # 3.
+   BHA No: 3 | Wellbore: |  Original Wellbore
+   BHA Length (ft): | 956.61
+   Weights in Air | Buoyed Weight | Mud Wt of (Ilbs/gal): 9.10
+   BHA Wt: | 100,526 | 86,544
+   Drillstring Wt: | 100,526 | 86,544
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1n0
+   Depth (ft): | 433 | 2,699
+   Date/Time: | 30-Jun-2100:00 | 01-Jul-2102:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 80 Drilling Hrs.: | 9
+   Build Rate: | Walk Rate:
+   WOB - Avg (Ibs): | 40 WOB -Max(Ibs): | 65
+   Comments: 143/4"RSSAssembly
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | P/B | Length | OD | OD | Comment
+   BIT | 1 | 1.50 | 14.750 | 7.625REG | Pin | S/No:A279635
+   OTHER | 1 | 13.65 | 9.000 | 5.125 | 146.1 | 5-135 | 6.625REG | Box | RSSPD900 POWERV
+   S/No:68994
+   STAB | 1 | 6.67 | 8.000 | 3.000 | 146.8 | S-135 | 6.625REG | Box | 8.00 | 2.530 14.500 NONMAG STAB
+   S/No:DR11424
+   MWD | 1 | 28.45 | 8.375 | 3.500 | 154.5 | S-135 | 6.625REG | Box | S/No:DR34100
+   OTHER | 1 | 3.66 | 8.000 | 3.430 | 139.4 | 5-135 | 6.625REG | Box | GAP SUB
+   S/No: GSDRSN20
+   OTHER | 1 | 5.76 | 8.125 | 3.500 | 143.5 | 5-135 | 6.625REG | Box | PULSER SUB
+   S/No:80001-3
+   OTHER | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-135 | 6.625REG | Box | FILTER SUB
+   S/No:DR44846
+   OTHER | 1 | 2.18 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | CUBIC SENSOR
+   S/No: 800CSS008
+   MMTR | 1 | 33.81 | 9.625 | 7.852 | 82.7 | S-135 | 6.625REG | Box | 9.63 | 3.710 | S/No:RVDF96005
+   Mud Motor. | Type: PDM | Manufacturer. | Model:
+   Lobe Configuration: 5/6 | Speed: | 0.12 | Stages: | Torque. | 19,240 flbs
+   Dir.Company: SLB | Bend Setting: 0 | Distance. | 0.00 ft
+   Bearing Stab. OD: | 11.500 ins | Motor Pad | Motor Failure | Failure Time.
+   RR | 8.06 | 8.125 | 3.000 | 152.2 S-135 | 6.625REG | Box | 8.13 | 2.260 | RED BACKROLLERREAMER
+   S/No: GU4505
+   FLOAT | 1 | 8.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:DR28684
+   OTHER | 1 | 5.02 | 8.250 | 3.250 | 153.5 | S-135 | 6.625REG | Box | DIFFUSER SUB
+   S/No:DHRTDS399
+   OTHER | 1 | 2.08 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | CUBIC SENSOR
+   S/No: 800CSS007
+   DC | 1 | 450.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:RIG
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 4.51F | Box | S/No:DR44284
+   HWDP | 380.76 | 5.000 | 3.000 | 42.7 | S-135 | 4.5IF | Box | S/No:RIGS
+   Total: | 956.61
+   Page| 36
+==== page 37: 55 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 37 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 15: BHA # 4 used with bit # 4.
+   BHA No: 4 | Wellbore: | Original Wellbore
+   BHA Length (ft): | 956.61
+   Weights in Air | Buoyed Weight | Mud Wt of(lbs/gal): 9.10
+   BHA Wt: | 100,526 | 86,544
+   Drillstring Wt: | 100,526 | 86,544
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1n0
+   Depth (ft): | 2.699 | 3,009
+   Date/Time: | 01-Jul-21 02:00 | 01-Jul-2123:45
+   Inclination: | 0.02
+   Azimuth: | 0 | 0
+   Average RPM: | 188Drilling Hrs.: | 10.25
+   Build Rate: | Walk Rate:
+   WOB - Avg (lbs): | 40 WOB -Max(Ibs): | 70
+   Comments: 143/4"RSS run#2
+   BHA Component Details
+   No. | do1 | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | PIB | Length  | OD | 0D | Comment
+   BIT | 1 | 1.50 | 14.750 | 7.625REG | Pin | S/No: A279636
+   OTHER. | 1 | 13.65 | 9.000 | 5.125 | 146.1 | 5-135 | 6.625REG | Box | RSSPD 900POWERV
+   SINo:68994
+   STAB | 1 | 6.67 | 8.000 | 3.000 | 146.8 | S-135 | 6.625REG | Box | 008 | 2.530 | 14.500 NONMAG STAB
+   S/No:DR11424
+   MWD | 1 | 28.45 | 8.375 | 3.500 | 154.5 | S.135 | 6.625REG | Box | S/No:DR34100
+   OTHER | 1 | 3.66 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | GAP SUB
+   SINo: GSDRSN20
+   OTHER | 1 | 5.76 | 8.125 | 3.500 | 143.5 | S-135 | 6.625REG | Box | PULSER SUB
+   S/No: 80001-3
+   OTHER | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-135 | 6.625REG | Box | FILTER SUB
+   S/No:DR44846
+   OTHER | 1 | 2.18 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | CUBIC SENSOR
+   S/No: 800CSS008
+   MMTR | 1 | 33.81 | 9.625 | 7.852 | 82.7 | 5-135 | 6.625REG | Box | 9.63 | 3.710 | SINo:RVDF96005
+   Mud Motor. | Type: PDM | Manufacturer. | Model:
+   Lobe Configuration: 5/6 | Speed: | 0.12 | Stages: | 4 | 19,240 ftlbs
+   Dir.Company. SLB | Bend Setting: 0 | Distance. | 0.00 ft
+   Bearing Stab. OD: | 11.500 ins | Motor Pad | Motor Failure | Failure Time.
+   RR | 8.06 | 8.125 | 3.000 | 152.2 | S-135 | 6.625REG | Box | 8.13 | 2.260 | RED BACKROLLERREAMER
+   SINo: GU4505
+   FLOAT | 1 | 8.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | SINo: DR28684
+   OTHER | 1 | 5.02 | 8.250 | 3.250 | 153.5 | S-135 | 6.625REG | Box | DIFFUSER SUB
+   SINo:DHRTDS399
+   OTHER | 1 | 2.08 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | CUBIC SENSOR
+   SINo: 800CSS007
+   DC | 1 | 450.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:RIG
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 4.5IF | Box | SINo:DR44284
+   HWDP | 1 | 380.76 | 5.000 | 3.000 | 42.7 | S-135 | 4.5IF | Box | SINo: RIGS
+   Total: | 956.61
+   Page |37
+==== page 44: 31 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 44 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   BHA No: 5 | Wellbore: Original Wellbore
+   BHA Length (ft: | 739.12
+   Weights in Air | Buoyed Weight | Mud Wt of(lbs/gal: 9.10
+   BHA Wt: | 61,996 | 53.373
+   Drillstring Wt: | 61,996 | 53,373
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1m0
+   Depth (ft): | 3,009 | 3,009
+   Date/Time: | 03-Jul-2123:00 | 04-Jul-2109:30
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 50 Driling Hrs.. | 1.5
+   Build Rate: | Walk Rate:
+   WOB -Avg (bs): | 10 WOB -Max(Ibs): | 18
+   Comments: 105/8"Clean outassemby
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item  | Jnts Length | OD | ID | Weight | Grade | Connection | P/B | 3LengthOD | OD | Comment
+   BIT | 1 | 1.25 | 10.625 | 6.625REG | Pin  | S/No: A279636
+   JUNK | 1 | 2.93 | 8.375 | 3.000 | 163.2 S-135 | 6.625REG | xog | S/No:3595
+   DC | 9 | 274.52 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:RIG
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | 5-135 | 5.51F | Box | S/No:DR44284
+   HWDP | 15 | 456.37 | 5.000 | 3.000 | 42.7 S-135 | 5.51F | Box | S/No:RIGS
+   Total: | 739.12
+   Table 21: 10-5/8 in. BHA # 6 used with bit # 6
+   Page| 44
+==== page 45: 54 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 45 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   BHA No: 6 | Wellbore: | Original Wellbore
+   BHA Length (ft: | 966.88
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal): 9.10
+   BHA Wt: | 92,847 | 79,933
+   Drillstring Wt: | 92.847 | 79,933
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth (ft): | 3,009 | 3,651
+   Date/Time: | 04-Jul-2109:30 | 05-Jul-21 13:30
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 40 Drilling Hrs.. | 13
+   Build Rate: | Walk Rate:
+   WOB - Avg (bs): | 65 WOB -Max(Ibs): | 65
+   Comments: 10 5/8"RSSAssembly.BHA was pulled dueto RSSfailure.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | P/B | Length | OD | 0D | Comment
+   BIT | 1 | 1.50 | 10.625 | 7.625REG | Pin | S/No: A279637
+   OTHER | 1 | 13.65 | 9.000 | 6.126 | 146.1 | S-135 | 6.625REG | Box | RSSPD900 POWER V
+   S/No:68994
+   STAB | 1 | 7.35 | 8.313 | 2.750 | 164.39 | S-135 | 6.625REG | Box | 8.00 | 3.55010.500NONMAG STAB
+   SINo: SD604680
+   MWD | 1 | 28.45 | 8.375 | 3.500 | 154.5 | 5-135 | 6.625REG | Box | SINo:DR34100
+   OTHER | 1 | 3.66 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | GAPSUB
+   S/No: GSDRSN20
+   OTHER | 1 | 5.76 | 8.125 | 3.500 | 143.5 | S-135 | 6.625REG | Box | PULSER SUB
+   S/No: 80001-3
+   OTHER | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-135 | 6.625REG | Box | FILTER SUB
+   S/No:DR44846
+   OTHER | 1 | 2.18 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | CUBIC SENSOR
+   S/No:800CSS008
+   MMTR | 1 | 43.40 | 9.625 | 7.852 | 82.7S-135 | 6.625REG | Box | 8.00 | 1.410 | S/No:RVEN86118
+   Mud Motor. | Type: PDM | Manufacturer. | Model:
+   Lobe Configurafion: 7/8 | Speed: | 0.166 | Stages: | 6 | Torque: | 22,020 ftlbs
+   Dir.Company. SLB | Bend Setting: 0 | Distance. | 0.00ft
+   Bearing Stab.OD: | 10.500 ins | MotorPad | 口 | MotorFailure | Failure Time.
+   RR | 8.06 | 8.125 | 3.000 | 152.25 | S-135 | 6.625REG | Box | 8.13 | 2.260 | REDBACKROLLERREAMER
+   S/No: GU4505
+   FLOAT | 1 | 8.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:DR28684
+   OTHER | 1 | 5.02 | 8.250 | 3.250 | 153.5 | S-135 | 6.625REG | Box | DIFFUSER SUB
+   S/No:DHRTDS399
+   OTHER | 1 | 2.08 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | CUBIC SENSOR
+   S/No:800CSS007
+   DC | 1 | 450.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:RIG
+   XO | 1 | 4.05 | 8.000 | 2.750 | 160.7 | S-135 | 5.0XH | Box | S/No: DR44284
+   HWDP | 380.76 | 5.500 | 4.776 | 19.9S-135 | 5.0XH | Box | S/No:RIGS
+   Total: | 966.88
+   Page|45
+==== page 46: 51 lines; flag words: ['deg', '°']
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 46 of 67
+   TAHFORGE
+   U.S.Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 22: 10-5/8 in.BHA #7 used with bit # 7.
+   BHANo:7 | Wellbore:（ | Original Wellbore
+   BHA Length (ft): | 960.36
+   Weights in Air | Buoyed Weight | Mud Wt of (Ibs/gal): 9.10
+   BHA Wt: | 92,360 | 79.513
+   Drillstring Wt: | 92,360 | 79,513
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth (ft): | 3,651 | 5,761
+   Date/Time: | 05-Jul-2121:00 | 07-Jul-21 17:00
+   Inclination: | 3.93
+   Azimuth: | 223.19 | 0
+   Average RPM: | Drilling Hrs.:
+   Build Rate: | Walk Rate:
+   WOB -Avg (Ibs): | WOB - Max (lbs):
+   Comments: 8° 1.5 DEG Motor. Pulled dueto low ROP. Found 2jets plugged with rubber the stator secion ofthe motor and bit DBRd.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | P/B | Length | OD | OD | Comment
+   BIT | 1.50 | 10.625 | 7.625REG | Pin | S/No:A279639
+   MMTR | 1 | 30.87 | 8.250 | 6.250 | 77.4S-135 | 6.625REG | Box | S/No:RVENN86052
+   Mud Motor. | Type OTHER | Manufacturer. | Model:RVEN
+   Lobe Configuration: 7/8 | Speed: | 0.166 | Stages: | 4 | Torque: | 14,930 ftlbs
+   Dir.Company. SLB | Bend Setting: 1.5 | Distance: | 11.51 ft
+   Bearing Stab. OD: | ins | Motor Pad | Motor Failure | Failure Time.
+   STAB | 1 | 7.35 | 8.313 | 2.750 | 164.3 | 5-135 | 6.625REG | Box | 8.00 | 3.55010.375NONMAG STAB
+   S/No: SD604680
+   MWD | 1 | 28.45 | 8.375 | 3.500 | 154.5 | S-135 | 6.625REG | Box | S/No:DR34100
+   OTHER. | 1 | 3.66 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | GAPSUB
+   S/No: GSDRSN20
+   OTHER | 1 | 5.76 | 8.125 | 3.500 | 143.5 | S-135 | 6.625REG | Box | PULSER SUB
+   S/No:80001-3
+   STAB | 1 | 8.77 | 8.250 | 2.750 | 161.5 | 5-135 | 6.625REG | Box | 8.25 | 4.090 | 10 3/8" NM STAB
+   S/No:DR43576
+   MONEL | 1 | 28.87 | 8.000 | 3.430 | 139.4 | 5-135 | 6.625REG | Box | S/No:DR24762
+   OTHER. | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-135 | 6.625REG | Box | FILTER SUB
+   S/No:DR28684
+   OTHER | 1 | 2.34 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | FLOAT SUB
+   S/No:DR28684
+   OTHER | 1 | 5.02 | 8.250 | 3.250 | 150.7 | 5-135 | 6.625REG | Box | DIFFUSER SUB
+   S/No:DHRTDS399
+   DC | 1 | 450.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:RIGS
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 5.0XH | Box | S/No:DR44284
+   HWDP | 1 | 380.76 | 5.500 | 4.776 | 19.9 | S-135 | 5.0XH | Box | S/No:RIGS
+   Total: | 960.36
+   Page| 46
+==== page 47: 51 lines; flag words: ['deg']
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 47 of 67
+   TAHFORGE
+   U.S.Department of Energy | Seismic Monitoring Well 78B-32 | Issued:1 December2021
+   Table 23: 10-5/8 in.BHA # 8 used with bit # 8.
+   BHAN0:8 | Wellbore:Original Wellbore
+   BHA Length (ft): | 962.49
+   Weights in Air | Buoyed Weight | Mud Wt of (Ibs/gal): 9.10
+   BHA Wt: | 92,524 | 79,655
+   Drillstring Wt: | 92,524 | 79.655
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1no
+   Depth (ft): | 5,761 | 5,761
+   Date/Time: | 07-Jul-2121:00 | 08-Jul-2100:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 0 Drilling Hrs.. | 0
+   Build Rate: | Walk Rate:
+   WOB -Avg (bs): | 0 WOB -Max(Ibs): | 0
+   Comments: 8" 1.50 DEG Assembly. Motor was notthe Wrightspeed. BHA was pulled out of thehole and motor was swapped.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | PIB | Length | OD | OD | Comment
+   BIT | 1 | 1.50 | 10.625 | 7.625REG | Pin | S/No:A279690
+   MMTR | 1 | 33.00 | 8.250 | 6.250 | 77.4 5-135 | 6.625REG | Box | 8.00 | 1.420 | S/No:800-36-7618
+   Mud Motor. | Type: OTHER | Manufacturer. | Model: | NOV
+   Lobe Configurafion: 9/10 | Speed: | 0.111 | Stages: | 3.9 | 14.930 ftlbs
+   Dir.Company: SLB | Bend Setting: 1.5 | Distance. | 6.93 f
+   Bearing Stab. OD: | ins |  Motor Pad | Motor Failure | Failure Time.
+   STAB | 1 | 7.35 | 8.313 | 2.750 | 164.3 S-135 | 6.625REG | Box | 8.00 | 3.55010.375NONMAG STAB
+   S/No: SD604680
+   MWD | 1 | 28.45 | 8.375 | 3.500 | 154.5 S-135 | 6.625REG | Box | S/No:DR34100
+   OTHER. | 1 | 3.66 | 8.000 | 3.430 | 139.4 S-135 | 6.625REG | Box | GAPSUB
+   S/No:GSDRSN20
+   OTHER. | 1 | 5.76 | 8.125 | 3.500 | 143.5 S-135 | 6.625REG | Box | PULSER SUB
+   S/No: 80001-3
+   STAB | 1 | 8.77 | 8.250 | 2.750 | 161.5 S-135 | 6.625REG | Box | 8.25 | 4.090 | 10 3/8" NM STAB
+   S/No:DR43576
+   MONEL | 1 | 28.87 | 8.000 | 3.430 | 139.4 S-135 | 6.625REG | Box | S/No:DR24762
+   OTHER | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-135 | 6.625REG | Box | FILTER SUB
+   S/No:DR28684
+   OTHER | 1 | 2.34 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | FLOAT SUB
+   S/No:DR28684
+   OTHER. | 1 | 5.02 | 8.250 | 3.250 | 150.7 | S-135 | 6.625REG | Box | DIFFUSER SUB
+   S/No:DHRTDS399
+   DC | 1 | 450.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:RIGS
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 5.0XH | Box | S/No:DR44284
+   HWDP | 1 | 380.76 | 5.500 | 4.776 | 19.9 S-135 | 5.0XH | Box | S/No:RIGS
+   Total: | 962.49
+   Page|47
+==== page 48: 51 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 48 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 24: 10-5/8 in.BHA # 9 used with bit #9.
+   BHA No:9 | Wellbore: | Original Wellbore
+   BHA Length (ft): | 962.49
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal): 9.10
+   BHA Wt: | 92.524 | 79,655
+   Drillstring Wt: | 92,524 | 79,655
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1m0
+   Depth (ft): | 5,761 | 5,821
+   Date/Time: | 08-Jul-21 06:00 | 10-Jul-2123:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 40 Drilling Hrs.: | 1
+   Build Rate: | Wallk Rate:
+   WOB - Avg (bs): | 65 WOB -Max (Ibs): | 65
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | PIB | Length | OD | OD | Comment
+   BIT | 1 | 1.50 | 10.625 | 7.625REG | Pin | S/No:A279690
+   MMTR | 1 | 33.00 | 8.250 | 6.250 | 77.4S-135 | 6.625REG | Box | 8.00 | 1.420 | SINo:800-36-7618
+   Mud Motor. | Type: OTHER | Manufacturer Rival | Mode: NOV
+   Lobe Configuration: 9/10 | Speed: | 0.166 | Stages: | 3.9 | Torque. | 14,930 ftlbs
+   Dir.Company. SLB | Bend Setting: 1.25 | Distance. | 6.93 f
+   Bearing Stab.OD: | ins | Motor Pad | Motor Failure | Failure Time. | 10-Jul-2116:00
+   Comments. | Motor failed after 1 hour stator rubber at shakers along with 2 plugged jets
+   STAB | 1 | 7.35 | 8.313 | 2.750 | 164.3S-135 | 6.625REG | Box | 8.00 | 3.55010.375 NONMAG STAB
+   SINo: SD604680
+   MWD | 1 | 28.45 | 8.375 | 3.500 | 154.5 S-135 | 6.625REG | Box | SINo:DR34100
+   OTHER | 1 | 3.66 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | GAP SUB
+   S/No: GSDRSN20
+   OTHER | 1 | 5.76 | 8.125 | 3.500 | 143.5 | S-135 | 6.625REG | Box | PULSER SUB
+   S/No:80001-3
+   STAB | 1 | 8.77 | 8.250 | 2.760 | 161.5 | S-135 | 6.625REG | Box | 8.25 | 4.090 | 10 3/8"NMSTAB
+   SINo:DR43576
+   MONEL | 1 | 28.87 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | SINo:DR24762
+   OTHER. | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-135 | 6.625REG | Box | FILTER SUB
+   S/No:DR28684
+   OTHER | 1 | 2.34 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | FLOAT SUB
+   S/No:DR28684
+   OTHER | 1 | 5.02 | 8.250 | 3.250 | 150.7 | S-135 | 6.625REG | Box | DIFFUSER SUB
+   S/No:DHRTDS399
+   DC | 1 | 450.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:RIGS
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 5.0XH | Box | S/No:DR44284
+   HWDP | 1 | 380.76 | 5.500 | 4.776 | 19.9 | S-135 | 5.0XH | Box | SINo:RIGS
+   Total: | 962.49
+   Page|48
+==== page 49: 51 lines; flag words: ['deg']
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 49 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 25: 10-5/8 in. BHA # 10 used with bit #9.
+   BHA No: 10 | Wellbore: Original Wellbore
+   BHA Length (ft): | 963.16
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal): 9.10
+   BHA Wt: | 92,634 | 79.750
+   Drillstring Wt: | 92,634 | 79,750
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth(ft): | 5,821 | 6,700
+   Date/Time: | 11-Jul-2101:00 | 11-Jul-2111:30
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 50 Drilling Hrs.. | 12
+   Build Rate: | Walk Rate:
+   WOB - Avg (lbs): | 65 WOB -Max (bs): | 75
+   Comments: 1.5deg.111rev
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | PIB | Length | OD | OD | Comment
+   BIT | 1.50 | 10.625 | 7.625REG | Pin | S/No:A279692
+   MMTR | 33.00 | 8.250 | 6.250 | 77.4S-135 | 6.625REG | Box | 8.00 | 1.420 | SINo:800-36-7618
+   Mud Motor. | Type: OTHER | Manufacturer. NOV | Model: NOV
+   Lobe Configurafion: 9/10 | Speed: | 0.111 | Stages: | 3.9 | Torque. | 26.270 ftlbs
+   Dir.Company: SLB | Bend Setting: 1.5 | Distance. | 6.93 f
+   Bearing Stab. OD: | ins | Motor Pad | Motor Failure | Failure Time.
+   STAB | 8.02 | 8.313 | 2.750 | 164.39 | S-135 | 6.625REG | Box | 8.00 | 3.55010.375NONMAG STAB
+   SINo:DR43516
+   MWD | 1 | 28.45 | 8.375 | 3.500 | 154.5 S-135 | 6.625REG | Box | S/No:DR34100
+   OTHER. | 1 | 3.66 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | GAP SUB
+   S/No: GSDRSN20
+   OTHER. | 1 | 5.76 | 8.125 | 3.500 | 143.5 | S-135 | 6.625REG | Box | PULSER SUB
+   SINo:80001-3
+   STAB | 1 | 8.77 | 8.250 | 2.750 | 161.5 | S-135 | 6.625REG | Box | 8.25 | 4.090 | 10 3/8" NM STAB
+   SINo:DR43576
+   MONEL | 1 | 28.87 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | SINo:DR24762
+   OTHER. | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-135 | 6.625REG | Box | FILTER SUB
+   S/No:DR28684
+   OTHER. | 1 | 2.34 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | FLOAT SUB
+   SINo:DR28684
+   OTHER. | 1 | 5.02 | 8.250 | 3.250 | 150.7 | S-135 | 6.625REG | Box | DIFFUSER SUB
+   S/No:DHRTDS399
+   DC | 1 | 450.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | SINo:RIGS
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 5.0XH | Box | S/No:DR44284
+   HWDP | 1 | 380.76 | 5.500 | 4.776 | 19.9 | S-135 | 5.0XH | Box | SINo:RIGS
+   Total: | 963.16
+   Page| 49
+==== page 50: 38 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 50 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 26: 10-5/8 in. BHA # 11 used with bit # 10.
+   BHA No: 11 | Wellbore: Original Wellbore
+   BHA Length (ft: | 612.69
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal): 83.00
+   BHA Wt: | 47.376 | -12.728
+   Drillstring Wt: | 47.376 | -12,728
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth (ft): | 6.700 | 6,728
+   Date/Time: | 12-Jul-21 00:30 | 12-Jul-2120:00
+   Inclination:
+   Azimuth:
+   Average RPM: | 50 Drilling Hrs.. | 1.5
+   Build Rate: | Walk Rate:
+   WOB - Avg (lbs): | 22 WOB -Max(Ibs): | 30
+   Comments: 8-3/4" Coring assembly.Recovered approximately 12 of good core.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | PIB | Length | OD | OD | Comment
+   CORBT | 1 | 1.22 | 8.750 | OTHER | Pin | 8-3/4"X4"
+   STAB | 4.00 | 8.468 | 4.000 | 148.7 | OTHER | Box | 1.94 | 7.250 | 8.468
+   CORE | 1 | 26.00 | 7.250 | 5.875 | 48.2 | OTHER | Box
+   STAB | 1 | 4.00 | 8.468 | 5.875 | 99.3 | OTHER | Box | 7.25 | 1.940
+   OTHER | 1.50 | 7.250 | 5.875 | 48.2 | OTHER | Box | Lower sub
+   OTHER | 1 | 1.75 | 6.750 | 5.375 | 44.5 | OTHER | Box | Upper sub
+   FLOAT | 1 | 3.12 | 6.750 | 3.000 | 97.6 | OTHER | Box
+   XO | 1 | 3.20 | 6.750 | 3.000 | 97.6 | OTHER | Box
+   RR | 1 | 6.50 | 10.625 | 3.000 | 277.3 | 6.625REG | Box | 10-5/8"Roller Reamer
+   DC | 3 | 93.20 | 8.000 | 3.000 | 146.8 | 6.625REG | Box
+   XO | 1 | 3.20 | 8.000 | 3.000 | 146.8 | 5.51F | Box
+   HWDP | 15 | 465.00 | 5.500 | 2.750 | 60.6 | 5.51F | Box
+   Total: | 612.69
+   Page| 50
+==== page 51: 36 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 51 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 27: 10-5/8 in. BHA # 12 used with bit # 11.
+   BHA No: 12 | Wellbore:Original Wellbore
+   BHA Length (ft): | 509.79
+   Weights in Air | Buoyed Weight | Mud Wt of (Ibs/gal): 83.00
+   BHA Wt: | 31,578 | -8.484
+   Drillstring Wt: | 31,578 | -8,484
+   Wt Above Jars:
+   Wt Below Jars:
+   In
+   Depth(ft): | 6,723 | 6,740
+   Date/Time: | 12-Jul-2123:00 | 13-Jul-2108:00
+   Inclination:
+   Azimuth: | D | 0
+   Average RPM: | 55 Drilling Hrs.
+   Build Rate: | Walk Rate:
+   WOB - Avg (bs): | 14 WOB -Max (Ibs): | 16
+   Comments: 83/4" core assembly.Corerun#2Recovered9.5 of core.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | PIB | Length | 0D | OD | Comment
+   CORBIT | 1 | 1.22 | 8.750 | OTHER | Pin  | 8-3/4'X4'
+   SINo:12958459
+   STAB | 1 | 4.00 | 8.468 | 4.000 | 148.7 | OTHER | Box | 1.94 | 7.250 | 8.468
+   CORE | 1 | 26.00 | 7.250 | 5.875 | 48.2 | OTHER | Box
+   STAB | 1 | 4.00 | 8.468 | 5.875 | 99.3 | OTHER | Box | 7.25 | 1.940
+   OTHER | 1 | 1.50 | 7.250 | 5.875 | 48.2 | OTHER | Box | Lower sub
+   OTHER | 1 | 1.75 | 6.750 | 5.375 | 44.5 | OTHER | Box | Upper sub
+   FLOAT | 1 | 3.12 | 6.750 | 3.000 | 97.6 | OTHER | Box
+   XO | 1 | 3.20 | 8.000 | 3.000 | 146.8 | 5.51F | Box
+   HWDP | 15 | 465.00 | 5.500 | 2.750 | 60.6 | 5.51F | Box
+   Total: | 509.79
+   Page|51
+==== page 52: 32 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 52 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 28: 10-5/8 in. BHA # 13 used with bit # 12.
+   BHA No: 13 | Wellbore:Original Wellbore
+   BHA Length (ft: | 845.73
+   Weights in Air | Buoyed Weight | Mud Wt of (bs/gal): 9.10
+   BHA Wt: | 78,354 | 67,455
+   Drillstring Wt: | 78,354 | 67,455
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1no
+   Depth (ft): | 6,740 | 6,742
+   Date/Time: | 13-Jul-2109:00 | 13-Jul-2121:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 60 Drilling Hrs.
+   Build Rate: | Walk Rate:
+   WOB -Avg (lbs): | 21WOB -Max (Ibs): | 25
+   Comments: BHAwas used to open hole up from 8.75'to 10-5/8" drilled2 ofnew formation
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | P/B | Lengh | OD | OD | Comment
+   BIT | 1 | 1.50 | 10.625 | 7.625REG | Pin | S/No:1116990
+   DC | 1 | 31.00 | 8.250 | 3.250 | 150.7 | S-135 | 6.625REG | Box | S/No:RIGS
+   RR | 1 | 7.42 | 10.625 | 3.250 | 273.1 | S-135 | 6.625REG | Box
+   DC | 1 | 421.00 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No:RIGS
+   XO | 1 | 4.05 | 8.000 | 2.750 | 150.7 | S-135 | 5.0XH | Box | S/No:DR44284
+   HWDP | 380.76 | 5.500 | 4.776 | 19.9 | S-135 | 5.0XH | Box | S/No:RIGS
+   Total: | 845.73
+   Page|52
+==== page 53: 47 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 53 of 67
+   TAHFORGE
+   U.S. Department of Energy | SeismicMonitoringWell 78B-32 | Issued: 1 December 2021
+   Table 29: 10-5/8 in.BHA # 14 used with bit # 13.
+   BHA No: 14 | Wellbore:Original Wellbore
+   BHA Length (ft): | 1.035.59
+   Weights in Air | Buoyed Weight | Mud Wt of (Ibs/gal): 9.10
+   BHA Wt: | 93,580 | 80,564
+   Drillstring Wt: | 93,580 | 80,564
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth (ft): | 6,742 | 7,613
+   Date/Time: | 14-Jul-2101:00 | 15-Jul-2117:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 45 Drilling Hrs.: | 12.5
+   Build Rate: | Walk Rate:
+   WOB - Avg (lbs): | 65 WOB -Max(Ibs): | 70
+   pieces of rubber from the stator
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | P/B | Length | 0D | OD | Comment
+   118 | 1 | 0.92 | 10.626 | 7.625REG | Pin | S/No:A279638
+   MMTR | 33.29 | 8.250 | 6.250 | 77.4S-135 | 6.625REG | Box | 8.00 | 1.420 | S/No:BPG2800-047
+   Mud Motor. | Type OTHER | Manufacturer. | BICO | Model:Bico
+   Lobe Configuraion: 7/8 | Speed: | 0.166 | Stages: | 4 | Torque. | ftlbs
+   Dir.Company: SDI | Bend Setting: 1.15 | Distance. | 11.00 ft
+   Bearing Stab. OD: | 10.625 ins | Motor Pad | Motor Failure | Failure Time.
+   Comments: | Motortook a high amount oftorqueto drain 45 kf/lbs. Bit had 3-plugged jets with pieces of rubber from the
+   STAB | 5.14 | 8.313 | 2.750 | 164.3S-135 | 6.625REG | Box | 8.00 | 3.550 | 010.26010-1/4NONMAG STAB
+   S/No: 770162
+   MONEL | 1 | 29.79 | 8.375 | 3.500 | 154.5 | S-135 | 6.625REG | Box | S/No: 84-121
+   OTHER | 1 | 9.28 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | PONYCOLLAR
+   S/No: 126-120
+   OTHER | 1 | 5.82 | 8.125 | 3.500 | 143.5 | S-136 | 6.626REG | Box | PULSER SUB
+   S/No:74-124
+   STAB | 1 | 4.30 | 8.250 | 2.750 | 161.5 | 5-135 | 6.625REG | Box | 8.25 | 4.090 | 10 1/2" NM STAB
+   S/No:770132
+   MONEL | 1 | 29.28 | 8.000 | 3.430 | 139.4 | S-135 | 6.625REG | Box | S/No: 84-350
+   OTHER | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-136 | 6.626REG | Box | FILTER SUB
+   DC | 1 | 455.86 | 8.000 | 2.750 | 150.7 | S-135 | 6.625REG | Box | S/No: RIGS
+   XO | 1 | 2.64 | 8.000 | 2.750 | 150.7 | S-135 | 5.0XH | Box | SINo: DR44284
+   HWDP | 1 | 456.31 | 5.500 | 4.776 | 19.9 | S-135 | 6.0XH | Box | S/No: RIGS
+   1,035.59
+   Page |53
+==== page 54: 54 lines; flag words: ['deg']
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 54 of 67
+   TAHFORGE
+   U.S.Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 30: 10-5/8 in. BHA # 15 used with bit # 14.
+   BHA No:15 | Wellbore: | Original Wellbore
+   BHA Length (ft): | 1,049.30
+   Weights in Air | Buoyed Weight | Mud Wt of(Ilbs/gal): 9.10
+   BHA Wt: | 96,636 | 82.247
+   Drillstring Wt: | 95,535 | 82,247
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth (ft): | 7,613 | 8,500
+   Date/Time: | 15-Jul-2123:00 | 16-Jul-2123:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 50 Drilling Hrs.: | 12
+   Build Rate: | Walk Rate:
+   WOB -Avg (bs): | 65 WOB -Max(Ibs): | 70
+   Comments: 1.5 deg .160 rev/gal. Motorhad approximately .5"ofsquatin bearing assembly.Kck pad was wore smooth.
+   Rollerreamer above the motorhad heavy wear on all buttons, 2 oftherollers had bad bearings.
+   Top Stabilizer was .75"under-gauged.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | P/B | Length | OD | OD | Comment
+   BIT | 0.92 | 10.625 | 7.625REG | Pin | SINo:A279691
+   MMTR | 33.29 | 8.250 | 6.250 | 77.45-135 | 6.625REG | Box | 8.00 | 1.420 | S/No:BPG2800-0035
+   Mud Motor. | Type: OTHER | Manufacturer | BICO | Model:Bico
+   Lobe Configuration: 7/8 | Speed: | 0.16 | Stages: | Torque. | ftlbs
+   Dir. Company. SDI | Bend Setting: 1.50 | Distance. | 11.00 ft
+   Bearing Stab. OD: | ins | ]Motor Pad | Motor Failure | Failure Time.
+   Comments: | Slick
+   STAB | 1 | 5.14 | 8.313 | 2.750 | 164.3 S-136 | 6.626REG | Box | 8.00 | 3.550 | 10.25010-5/8" roller reamer
+   OTHER. | 1 | 9.00 | 8.000 | 3.430 | 139.4S-135 | 6.625REG | Box | Pony Collar
+   S/No: 126-120
+   OTHER. | 1 | 2.15 | 8.000 | 2.760 | 150.7 | S-135 | 6.625REG | Box | Cubic sensor
+   SINo:CSS-006
+   MONEL | 1 | 29.79 | 8.375 | 3.500 | 154.5 | 5-135 | 6.625REG | Box | SINo: 84-121
+   OTHER. | 1 | 5.82 | 8.125 | 3.500 | 143.5 | 5-135 | 6.625REG | Box | PULSER SUB
+   SINo:74-124
+   OTHER. | 1 | 9.08 | 8.000 | 3.500 | 138.1 | 5-135 | 6.625REG | Box | Pony Collar
+   S/No: 126-058
+   STAB | 1 | 4.30 | 8.250 | 2.750 | 161.5 | 5-135 | 6.625REG | Box | 8.25 | 4.090 | 10 1/2" NM STAB
+   SINo:770127
+   MONEL | 1 | 29.28 | 8.000 | 3.430 | 139.4 | 5-135 | 6.625REG | Box | SINo:84-350
+   OTHER. | 1 | 2.76 | 8.000 | 2.750 | 150.7 | 5-135 | 6.625REG | Box | Cubic sensor
+   S/No: CS-04
+   OTHER | 1 | 2.96 | 8.063 | 2.750 | 153.4 | S-135 | 6.625REG | Box | FILTER SUB
+   DC | 1 | 455.86 | 8.000 | 2.750 | 150.7 | 5-135 | 6.625REG | Box | SINo:RIGS
+   XO | 1 | 2.64 | 8.000 | 2.750 | 150.7 | S-135 | 5.0XH | Box | S/No:DR44284
+   HWDP | 1 | 456.31 | 5.500 | 4.776 | 19.9 | 5-135 | 5.0XH | Box | SINo:RIGS
+   Total: | 1,049.30
+   Page |54
+==== page 55: 38 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 55 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 31: 8-3/4 in. Coring BHA #16 used with bit #15.
+   BHA No: 16 | Wellbore:Original Wellbore
+   BHALength (ft: | 509.79
+   Weights in Air | Buoyed Weight | Mud Wt of (Ibs/gal): 83.00
+   BHA Wt: | 31,578 | -8,484
+   Drillstring Wt: | 31,578 | -8,484
+   Wt Above Jarst
+   Wt Below Jars:
+   In | 1m0
+   Depth (ft): | 8,500 | 8,530
+   Date/Time: | 17-Jul-21 08:00 | 18-Jul-2101:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 65 Drilling Hrs.:
+   Build Rate: | Wallk Rate:
+   WOB -Avg (llbs): | 8 WOB -Max(Ibs): | 10
+   Comments: Corerun#3.Recovered 23.7'ofcore.
+   50% 2-3"in size with the other 50% 9-12"in size.
+   Note: Inner barrel assembly was pushed up inside ofcore barel approximately 3.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | PIB | Length | OD | OD | Comment
+   CORBIT | 1 | 1.22 | 8.750 | OTHER | Pin | 8-3/4"X4"
+   SINo:13206404
+   STAB | 1 | 4.00 | 8.468 | 4.000 | 148.7 | OTHER | Box | 1.94 | 7.250 | 8.468
+   CORE | 1 | 26.00 | 7.250 | 5.875 | 48.2 | OTHER | Box
+   STAB | 1 | 4.00 | 8.468 | 5.875 | 99.3 | OTHER | Box | 7.25 | 1.940
+   OTHER | 1 | 1.50 | 7.250 | 5.875 | 48.2 | OTHER | Box | Lower sub
+   OTHER. | 1 | 1.75 | 6.750 | 5.375 | 44.5 | OTHER | Box | Upper sub
+   FLOAT | 1 | 3.12 | 6.750 | 3.000 | 97.6 | OTHER | Box
+   XO | 3.20 | 8.000 | 3.000 | 146.8 | 5.5IF | Box
+   HWDP | 15 | 465.00 | 5.500 | 2.750 | 60.6 | 5.5IF | Box
+   Total: | 509.79
+   Page|55
+==== page 56: 61 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 56 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 32: 8-3/4 in. Coring BHA # 17 used with bit # 15.
+   BHA No: 17 | Wellbore: | Original Wellbore
+   BHA Length (ft): | 509.79
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal): 83.00
+   BHA Wt: | 31.578 | -8.484
+   Drillstring Wt: | 31,578 | -8,484
+   Wt Above Jars:
+   WtBelow Jars:
+   In | 1n0
+   Depth (ft): | 8,530 | 8,540
+   Date/Time: | 18-Jul-2102:00 | 18-Jul-2118:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 65 Drilling Hrs.. | 3
+   Build Rate: | Wallk Rate:
+   WOB - Avg (lbs): | 10 WOB -Max(lbs): | 16
+   Comments: 8-3/4" Core assembly run#4
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts |  Length | OD | ID | Weight | Grade | Connection | P/B | Length | OD | OD | Comment
+   CORBIT | 1 | 1.22 | 8.750 | OTHER | Pin | 8-3/4'X4"
+   S/No:13206404
+   STAB | 1 | 4.00 | 8.468 | 4.000 | 148.7 | OTHER | Box | 1.94 | 7.250 | 8.468
+   CORE | 1 | 26.00 | 7.250 | 5.875 | 48.2 | OTHER | Box
+   STAB | 1 | 4.00 | 8.468 | 5.875 | 99.3 | OTHER | Box | 7.25 | 1.940
+   OTHER | 1.50 | 7.250 | 5.875 | 48.2 | OTHER | Box | Lower sub
+   OTHER | 1 | 1.75 | 6.750 | 5.375 | 44.5 | OTHER | Box | Upper sub
+   FLOAT | 1 | 3.12 | 6.750 | 3.000 | 9'16 | OTHER | Box
+   XO | 1 | 3.20 | 8.000 | 3.000 | 146.8 | 5.51F | Box
+   HWDP | 15 | 465.00 | 5.500 | 2.750 | 60.6 | 5.51F | Box
+   Total: | 509.79
+   Table 33: 10-5/8 in.BHA # 18 used with bit # 14.
+   BHA No: 18 | Wellbore: | Original Welbore
+   BHA Length (ft: | 469.42
+   Weights in Air | Buoyed Weight | Mud Wt of (Ibs/gal): 83.00
+   BHA Wt: | 28.767 | -7,729
+   Drillstring Wt: | 28,767 | -7,729
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth (ft): | 8.500 | 8,514
+   Date/Time: | 18-Jul-2119:00 | 19-Jul-2108:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 55 Drilling Hrs..
+   Build Rate: | Walk Rate:
+   WOB - Avg (lbs): | 25 WOB-Max(lbs): | 30
+   Comments:10-5/8"Ream out assembly.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | P/B | Length | 6D | 0D | Comment
+   BIT | 1.22 | 10.625 | OTHER | Pin
+   SINo: A279691
+   BS | 1 | 3.20 | 8.000 | 5.51F | Box | Dressed with float
+   HWDP | 15 | 465.00 | 5.500 | 2.750 | 60.6 | 5.51F | Box
+   Total: | 469.42
+   Page |56
+==== page 57: 55 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 57 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 34: 10-5/8 in. BHA # 19 used with bit # 12.
+   BHA N0: 19 | Wellbore:Original Wellbore
+   BHA Length (ft): | 469.42
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal): 83.00
+   BHA Wt: | 28,767 | -7,729
+   Drillstring Wt: | 28,767 | -7,729
+   Wt Above Jars:
+   Wt Below Jars:
+   In | Out
+   Depth (ft): | 8,514 | 8.540
+   Date/Time: | 19-Jul-2121:00 | 20-Jul-2110:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 50 Drilling Hrs..
+   Build Rate: | Walk Rate:
+   WOB - Avg (lbs): | 23 WOB -Max(Ibs): | 28
+   Comments: BHA was used to open hole from 8-3/4" to 10-58
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | P/B | Length | OD | OD | Comment
+   BIT | 1 | 1.22 | 10.625 | OTHER | Pin | TCIBIT RE-RUN
+   S/No:1116990
+   BS | 3.20 | 8.000 | 5.5IF | Box | Dressed with float
+   HWDP | 15 | 465.00 | 5.500 | 2.750 | 60.6 | 5.5IF | Box
+   Total: | 469.42
+   Table 35: 10-5/8 in. BHA # 20 used with bit # 12.
+   BHA No: 20 | Wellbore: | Original Wellbore
+   BHALength (ft: | 469.42
+   Weights in Air | Buoyed Weight | Mud Wt of (Ibs/gal): 83.00
+   BHA Wt: | 28.767 | -7.729
+   Drillstring Wt: | 28,767 | -7,729
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1no
+   Depth (ft): | 8.540 | 8.545
+   Date/Time: | 20-Jul-2121:30 | 21-Jul-21 11:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 45 Drilling Hrs. | 0.5
+   Build Rate: | Walk Rate:
+   WOB -Avg (lbs): | 25 WOB -Max(bs): | 28
+   Comments: 10-5/8"clean outassemby.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts | Length | OD | ID | Weight | Grade | Connection | PIB | Length | OD | OD | Comment
+   BIT | 1.22 | 10.625 | OTHER | Pin | TCIBIT RE-RUN
+   SINo:1116990
+   85 | 1 | 3.20 | 8.000 | 5.5IF | Box | Dressed with foat
+   HWDP | 15 | 465.00 | 5.500 | 2.750 | 60.6 | 6.51F | Box
+   Total: | 469.42
+   Page |57
+==== page 64: 37 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 64 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 39: Bits used to drill the 5-3/4 in. hole section.
+   Ave. | Ave. | Ave.
+   Bit | Hole | Bit Size | IADC | Ave. |  Jet Size
+   WOB | flow rate | ROP
+   #/Run | made (ft) | (in.) | Code | RPM | (32nd)
+   (KIb) | (gpm) | (fph)
+   16/1 | 10 | 5.75 | 511 | 16 | 208 | 1818 18 | 300 | 10
+   17/1 | 945 | 5.75 | M233 | 30 | 198 | 12 12 12 | 300 | 99.5
+   Table 40: 5-3/4 in. BHA #21 to clean-out cement inside the 7 in. casing.
+   BHANo:21 | Wellbore: Original Wellbore
+   BHA Length (ft): | 921.57
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal):
+   BHA Wt: | 45,656
+   Drillstring Wt: | 45.656
+   Wt Above Jars:
+   Wt Below Jars:
+   In | 1m0
+   Depth (ft): | 8.545 | 8,555
+   Date/Time: | 28-Jul-21 01:00 | 28-Jul-2109:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 40 Drilling Hrs..
+   Build Rate: | Walk Rate:
+   WOB -Avg (bs): | 16 WOB -Max(Ibs): | 18
+   Comments: 5-3/4" TCl clean out assemby.
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | PIB | LengthOD | OD | Comment
+   BIT | 1 | 0.75 | 5.750 | 3.5REG | Pin  | SINo: 5002331
+   BS | 1 | 2.82 | 4.620 | 2.620 | 38.7S-135 | 3.5IF | Box
+   DC | 30 | 918.00 | 4.750 | 2.000 | 49.6 S-135 | 3.5IF | Box
+   921.57
+   Page | 64
+==== page 65: 50 lines; flag words: none
+   End of Well Report | Ref. GRG-10230
+   Utah FORGE | Ver. Final | Page 65 of 67
+   TAHFORGE
+   U.S. Department of Energy | Seismic Monitoring Well 78B-32 | Issued: 1 December 2021
+   Table 41: 5-3/4 in. BHA # 21 used with bit # 17.
+   BHA No: 22 | Wellbore:Original Wellbore
+   BHA Length (ft): | 1,020.17
+   Weights in Air | Buoyed Weight | Mud Wt of (lbs/gal):
+   BHA Wt: | 47,123
+   Drillstring Wt: | 47,123
+   Wt Above Jars!
+   Wt Below Jars:
+   In | 1n0
+   Depth (ft): | 8,665 | 10
+   Date/Time: | 28-Jul-21 18:00 | 29-Jul-2107:00
+   Inclination:
+   Azimuth: | 0 | 0
+   Average RPM: | 50 Drilling Hrs. | 9.5
+   Build Rate: | Wallk Rate:
+   WOB - Avg (bs): | 30 WOB - Max (Ibs): | 32
+   Comments:5-3/4"DirAssemby
+   BHA Component Details
+   No. | Top | Fishing | Blade
+   Item | Jnts Length | OD | ID | Weight | Grade | Connection | P/B | Length | OD | OD | Comment
+   BIT | 0.75 | 5.750 | 3.6REG | Pin  | SINo: A279641
+   MMTR | 23.90 | 5.000 | 2.620 | 48.4S-135 | 3.51F | Box | S/No:BPG2475-0192
+   Mud Motor. | Type: TURB | Manufacturer. | BICO | Model:
+   Lobe Configuration: 7/8 | Speed: | 0.56 | Stages: | 3 | Torque. | 5,175 ftlbs
+   Dir.Company. SDI | Bend Selling: 1.25 | Distance. | 2.95 ft
+   Bearing Stab.OD. | 0.000 ins | Motor Pad | Motor Failure | Failure Time:
+   MONEL | 666 | 4.750 | 2.360 | 45.4S-135 | 3.6IF | Box | PONYCOLLAR
+   SINo: 17-261
+   MONEL | 30.59 | 4.750 | 2.650 | 41.5 | S-135 | 3.5IF | Box | SINo: 121-151
+   OTHER | 1 | 5.58 | 4.750 | 2.650 | 41.5 | S-135 | 3.51F | Box | PULSER SUB
+   SINo:65-258
+   MONEL | 1 | 31.10 | 4.750 | 2.650 | 41.5 | S-135 | 3.5IF | Box | SINo: 121-698
+   DC | 30 | 918.26 | 4.740 | 2.250 | 46.5 | S-135 | 3.51F | Box
+   Total: | 1,020.17
+   7. CORING
+   Two coring runs were performed at 6,700 ft. over July 12-13. A total recovery from the two
+   runs was 21.5 ft. The core barrel size is 7-1/4 in. with 4 in. inner barrel. 30 ft. in length. The
+   core head diameter was 8-3/4". The first run from 6,700 to 6,728 ft. cut 28 ft., recovering 12 ft.
+   (43 % recovery). In the second run, cored from 6728 to 6740 ft., cut 12 ft., recovering 9.4 ft (78
+   % recovery).
+   Once reached to 10-5/8 in. section TD at 8,500 ft., two more runs were performed over July 17-
+   18, recovering an additional 32.4 ft. in total. Core barrel and head had the same specifications
+   for the previous runs. In core run #3 8,500 ft. to 8530 ft, 30 ft. were cut with a recovery of 29.4
+   ft. (83% recovery), and on core run #4 from 8,530 ft. to 8,540 ft. 10 ft. were cut and 8.5 ft.
+   recovered (85 % recovery).
+   Page|65
