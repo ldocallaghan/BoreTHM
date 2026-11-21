@@ -1,0 +1,50 @@
+{
+ "archive": "1330.zip",
+ "archive_sha256": "b56e77dbc8b5081352418fc8976e9c20da1f57bdd67fdc25961134ea99ced79f",
+ "archive_hash_checked": true,
+ "rig": {
+  "rows": 322646,
+  "columns": {
+   "hole_depth_ft": "Hole Depth (feet)",
+   "bit_depth_ft": "Bit Depth (feet)",
+   "tvd_ft": "True Vertical Depth (feet)",
+   "flow_gpm": "Total Pump Output (gal_per_min)",
+   "rop_ft_h": "On Bottom ROP (ft_per_hr)",
+   "rpm": "Rotary RPM (RPM)",
+   "wob_klbf": "Weight on Bit (klbs)",
+   "block_height_ft": "Block Height (feet)",
+   "inlet_temperature_source_degrees": "TEMP IN (Degrees) (no_unit)",
+   "pump1_spm": "Pump 1 strokes/min (SPM)",
+   "pump2_spm": "Pump 2 strokes/min (SPM)",
+   "pump3_spm": "Pump 3 strokes/min (SPM)"
+  }
+ },
+ "reports": {
+  "member": "78B-32-DailyDrillingReports-6-27thru7-31.pdf",
+  "sha256": "e1424b3a73dc878a09e23698a03f3f40bf59e5817bc7847af0c58d1cf384964f",
+  "pages_with_report_date": 92,
+  "report_dates": 35,
+  "operations": 400,
+  "operations_suppressed": 56,
+  "mud_checks": 31,
+  "drilling_parameter_rows": 16,
+  "bit_rows": 38,
+  "bha_lines": 27,
+  "casing_rows": 73
+ },
+ "survey": {
+  "member": "78B-32 directional survey (1).zip!directional survey78B.csv",
+  "sha256": "199426cc6e72f59d55f74dade65a8fdca63321adda09371c6ecbcc48f6575877",
+  "rows": 101
+ },
+ "outputs": {
+  "bha_reports.csv": "35b890db829ad243466160d750e4230ea4932cb5a90a00d4406cef4574ccf6c9",
+  "bit_reports.csv": "cbb1dd8228da84e3b50d09a51aa817d31e82d9948b1fb1a5c15d718cc9557a3c",
+  "casing_reports.csv": "20ef827af024356e6cd1613406efea6223fdd137bf661c92a91341c70176135d",
+  "mud_reports.csv": "82f86419f0902f0b77aaea676657e5376b285ede1f3395e39a1e447dc50bfc94",
+  "operations.csv": "ae144c01abdab6f90812267342a4f7443a188933aaa1a3a5654809c5932191b7",
+  "report_flows.csv": "80b647d7d771921f1475b97aa91109d0444e21cca711037f61d9e80cc3778d5d",
+  "rig_inputs_10s.csv.gz": "7ceb2ece942c8347eab4c0c955bde69594709fa44ba53c332a68c560971b1c19",
+  "survey-source.csv": "199426cc6e72f59d55f74dade65a8fdca63321adda09371c6ecbcc48f6575877"
+ }
+}

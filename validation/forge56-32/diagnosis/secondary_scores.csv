@@ -1,0 +1,40 @@
+set,group,n,bias_C,rmse_C
+all scored (declared),all,401,-11.76863514143072,20.75434653453894
+all scored (declared),assembly 2,21,-32.90340544325524,34.39920359068778
+all scored (declared),assembly 3,2,-39.1502367517387,39.15044933204256
+all scored (declared),assembly 4,60,-37.30018490885168,37.867440076557656
+all scored (declared),assembly 5,53,-28.841129914967368,33.16484205636469
+all scored (declared),assembly 6,33,-1.6058595961628743,2.0879031066908667
+all scored (declared),assembly 7,31,-0.9182306527448153,1.6777687613632288
+all scored (declared),assembly 8,110,-0.44396912370121466,0.8664871338096746
+all scored (declared),assembly 9,11,-1.538432152768136,1.6354638857464434
+all scored (declared),assembly 10,74,-0.32145577774527323,1.2239149470195225
+all scored (declared),assembly 11,6,-2.0590203547186356,2.1353893448417223
+all scored (declared),assemblies 2 to 5,136,-33.35193358703095,35.588184122342255
+all scored (declared),assemblies 6 to 11,265,-0.6919234863302237,1.3477296762534632
+energy-consistent,all,288,-1.7313503835091526,5.540610948505254
+energy-consistent,assembly 2,0,,
+energy-consistent,assembly 3,0,,
+energy-consistent,assembly 4,1,-28.42227940171732,28.42227940171732
+energy-consistent,assembly 5,22,-13.038495780518609,18.527577790172764
+energy-consistent,assembly 6,33,-1.6058595961628743,2.0879031066908667
+energy-consistent,assembly 7,31,-0.9182306527448153,1.6777687613632288
+energy-consistent,assembly 8,110,-0.44396912370121466,0.8664871338096746
+energy-consistent,assembly 9,11,-1.538432152768136,1.6354638857464434
+energy-consistent,assembly 10,74,-0.32145577774527323,1.2239149470195225
+energy-consistent,assembly 11,6,-2.0590203547186356,2.1353893448417223
+energy-consistent,assemblies 2 to 5,23,-13.70735593796203,19.06486755144947
+energy-consistent,assemblies 6 to 11,265,-0.6919234863302237,1.3477296762534632
+energy-inconsistent,all,113,-37.35038744480604,38.083138263744644
+energy-inconsistent,assembly 2,21,-32.90340544325524,34.39920359068778
+energy-inconsistent,assembly 3,2,-39.1502367517387,39.15044933204256
+energy-inconsistent,assembly 4,59,-37.45065788354888,38.00730418443272
+energy-inconsistent,assembly 5,31,-40.05590252651163,40.458298970864604
+energy-inconsistent,assembly 6,0,,
+energy-inconsistent,assembly 7,0,,
+energy-inconsistent,assembly 8,0,,
+energy-inconsistent,assembly 9,0,,
+energy-inconsistent,assembly 10,0,,
+energy-inconsistent,assembly 11,0,,
+energy-inconsistent,assemblies 2 to 5,113,-37.35038744480604,38.083138263744644
+energy-inconsistent,assemblies 6 to 11,0,,

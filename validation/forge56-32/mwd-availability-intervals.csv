@@ -1,0 +1,2 @@
+start,end,seconds,bit_ft_min,bit_ft_max,hole_ft_min,hole_ft_max,pump_gpm_min,pump_gpm_max,pumping_seconds,drilling_candidate_seconds
+2021-02-23 16:10:06,2021-02-23 17:24:58,4493,7184.7,7666.9,7666.1,7666.9,0.0,581.34,2339,2026

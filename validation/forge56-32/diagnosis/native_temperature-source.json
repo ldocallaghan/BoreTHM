@@ -1,0 +1,28 @@
+{
+  "cbl_mtem": {
+    "member": "56-32 Cement Bond.zip!UniversityofUtah_Forge56-32_MonitorWell_CBL_Main_17Aug21_LAS.las",
+    "sha256": "6d30e85c56db0bcacf6ee286e1f583fdab84845367d27fb86d2c4308eff92848",
+    "curve": "MTEM",
+    "unit": "DEGF",
+    "header": {
+      "STRT": "STRT .F      60.0            :START DEPTH",
+      "STOP": "STOP .F      9111.0          :STOP DEPTH",
+      "DATE": "DATE .        17-Aug-2021                              :LOG DATE {DD-MMM-YYYY}"
+    },
+    "samples": 18103
+  },
+  "thrubit_wtep": {
+    "member": "Schlumberger_56-32.zip!Wireline Field Data/A.1008700.02.01_UniversityUtah_Forge-56-32_ThruBit_Main.las",
+    "sha256": "4f74752cdc6152e7e093f9fd90aaf106e16224e4594b6350bc5768e7bf058715",
+    "curve": "WTEP_TMG",
+    "unit": "DEGF",
+    "header": {
+      "STRT": "STRT .F      3450.5          :START DEPTH",
+      "STOP": "STOP .F      9127.0          :STOP DEPTH",
+      "DATE": "DATE .        27-Feb-2021                              :LOG DATE {DD-MMM-YYYY}"
+    },
+    "samples": 11354
+  },
+  "transfer": "validation/forge16a/formation_temperature_216day.csv by TVD (validate_forge16a.formation)",
+  "tvd": "validation/forge56-32/survey.csv (compare_pressure.survey)"
+}

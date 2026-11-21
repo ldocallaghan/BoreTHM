@@ -1,0 +1,21 @@
+{
+  "predictions": {
+    "predictions.csv": "7bc46e07aa03220cd0f3de32d4875662254498e46192702804fdcde76dc4f201",
+    "log-predictions.csv": "388f48de7661b9e940d0429fa35289547fd0b0eecb9ab8b4eb26b681a326e8c4"
+  },
+  "targets": {
+    "return_temperature.csv": "3cff01f6008f18b5c33a21dcb0215d2f3954110b81eb5149b80b97c39dc66739",
+    "log_temperature.csv": "3f059dc60b97e2b2ff58281f7b3281a4a8fe2151dcbbefbfd78c4f00c6eba1d5"
+  },
+  "scorer_sha256": "9b665d0804554497f3351bf55231534e4341602c2f4e744230d50aa103480564",
+  "figures": [
+    "measured_vs_predicted.png",
+    "measured_vs_predicted_secondary_flow.png",
+    "residual_vs_depth.png",
+    "residual_vs_time.png",
+    "residual_vs_flow.png",
+    "energy_consistency.png",
+    "log_profiles_depth.png",
+    "log_profiles_timed.png"
+  ]
+}

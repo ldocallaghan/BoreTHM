@@ -289,6 +289,329 @@ Well 56-32 was drilled in 2021 and supplied nothing to BoreTHM's development. It
 
 On 196 ten-minute drilling windows at 7,219–8,809 ft, with measured standpipe pressure less the reported motor differential as the target, the lower end of the v1.6.0 interval has a median residual of -9.2% for BHA 9 and +7.2% for BHA 10. The v1.5.0 calculation's lower end is -33.4% and -21.7%. Most of the difference comes from the connection losses: removing the NC50 connection scenario lowers the v1.6.0 prediction by 620–730 psi. That scenario is a catalogue transfer with no measured bore behind it, so this comparison supports the hydraulic terms only as far as the connection and motor inputs are right. Two shallow trip events disagree with every calculation, and one window records 0 psi at 376 gal/min; the archive reports them as found.
 
+### FORGE 56-32: blind return temperature
+
+The v1.8.0 model-only predictions for well 56-32 were committed on
+7 November 2026 in `ba56445`, before any 56-32 temperature was read
+([forecast](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge56-32/predictions-v1.8.0/README.md)).
+The [scoring protocol](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge56-32/scoring_protocol.md)
+and [scorer](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge56-32/score_thermal.py) were committed
+and pushed on 15 November 2026 in `7b4ae21` and `93bd21c`. The measured
+return temperature was then extracted and committed on 15 November in
+`741573b` ([targets](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge56-32/targets/return_temperature.csv)),
+and scored with the unchanged scorer in `c1b9e27`
+([scores](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge56-32/scores/summary.csv)).
+
+The measure is the mean of the Pason `Temp OUT` channel over the
+qualified seconds of each half-hour drilling window. Qualified seconds
+are those in 10 s bins with flow above 300 US gal/min, the bit within
+5 ft of hole depth and penetration above 1 ft/h. The channel is labelled
+`Degrees`; it is read as Fahrenheit, the convention used for the inlet,
+and converted to °C. A converted reading at or below 0 °C or above
+120 °C counts as missing, and a window needs 80 % of its qualified
+seconds valid. Errors are model minus measured.
+
+Of 422 drilling windows, 402 have converged predictions. Nineteen have
+no uniquely assigned assembly and one lacks a required input. One
+predicted window, `56b-0506` on assembly 10, has 424 valid seconds of
+1,800 and is excluded under the 80 % rule. The remaining 401 windows
+are scored, 391 of them
+with a persistence value. No scored window has a return more than 5 °C
+below its inlet.
+
+| Windows | Prediction | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill of v1.8.0 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| All scored | v1.8.0 | 401 | -11.77 | 12.05 | 20.75 | 57.6 | 67.8 | |
+| All scored | v1.7.0 | 401 | -11.42 | 11.77 | 20.26 | 57.1 | 67.8 | -0.024 |
+| All scored | Analytical | 401 | -8.52 | 13.32 | 20.17 | 15.2 | 54.9 | -0.029 |
+| With persistence | v1.8.0 | 391 | -11.74 | 12.02 | 20.81 | 58.8 | 68.3 | |
+| With persistence | v1.7.0 | 391 | -11.39 | 11.75 | 20.32 | 58.6 | 68.3 | -0.024 |
+| With persistence | Analytical | 391 | -8.47 | 13.37 | 20.22 | 14.6 | 54.7 | -0.029 |
+| With persistence | Persistence | 391 | -0.10 | 0.86 | 1.40 | 87.0 | 99.0 | -13.884 |
+
+Skill is 1 − RMSE(v1.8.0)/RMSE(comparator) on the same windows.
+The v1.8.0 errors by assembly are:
+
+| Assembly | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % |
+|---|---:|---:|---:|---:|---:|---:|
+| 2 | 21 | -32.90 | 32.90 | 34.40 | 0.0 | 0.0 |
+| 3 | 2 | -39.15 | 39.15 | 39.15 | 0.0 | 0.0 |
+| 4 | 60 | -37.30 | 37.30 | 37.87 | 0.0 | 0.0 |
+| 5 | 53 | -28.84 | 29.75 | 33.16 | 0.0 | 15.1 |
+| 6 | 33 | -1.61 | 1.69 | 2.09 | 63.6 | 100.0 |
+| 7 | 31 | -0.92 | 1.31 | 1.68 | 80.6 | 100.0 |
+| 8 | 110 | -0.44 | 0.61 | 0.87 | 95.5 | 100.0 |
+| 9 | 11 | -1.54 | 1.54 | 1.64 | 81.8 | 100.0 |
+| 10 | 74 | -0.32 | 0.72 | 1.22 | 93.2 | 98.6 |
+| 11 | 6 | -2.06 | 2.06 | 2.14 | 33.3 | 100.0 |
+
+By quartile of the inputs over the 402 predicted windows, the v1.8.0
+errors are:
+
+| Input | Quartile | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Bit depth, ft | 640.70 to 4,812.78 | 101 | -37.20 | 37.20 | 37.95 | 0.0 | 0.0 |
+| Bit depth, ft | 4,812.78 to 6,031.94 | 100 | -8.62 | 9.25 | 16.44 | 47.0 | 73.0 |
+| Bit depth, ft | 6,031.94 to 7,089.27 | 100 | -0.43 | 0.61 | 0.87 | 95.0 | 100.0 |
+| Bit depth, ft | 7,089.27 to 9,115.35 | 100 | -0.57 | 0.87 | 1.31 | 89.0 | 99.0 |
+| Flow, US gal/min | 375.12 to 662.51 | 100 | -16.79 | 16.99 | 25.26 | 47.0 | 56.0 |
+| Flow, US gal/min | 662.51 to 670.13 | 100 | -4.99 | 5.18 | 12.31 | 81.0 | 85.0 |
+| Flow, US gal/min | 670.13 to 680.76 | 100 | -7.00 | 7.58 | 16.06 | 64.0 | 80.0 |
+| Flow, US gal/min | 680.76 to 928.04 | 101 | -18.23 | 18.37 | 25.94 | 38.6 | 50.5 |
+| Inlet, °C | 2.14 to 10.71 | 101 | -37.35 | 37.35 | 37.96 | 0.0 | 0.0 |
+| Inlet, °C | 10.71 to 37.81 | 100 | -8.50 | 8.52 | 16.35 | 67.0 | 74.0 |
+| Inlet, °C | 37.81 to 42.12 | 100 | -0.69 | 1.03 | 1.50 | 83.0 | 99.0 |
+| Inlet, °C | 42.12 to 56.30 | 100 | -0.27 | 1.03 | 1.57 | 81.0 | 99.0 |
+
+The Phase 0 [gap coverage](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/model-development/phase-0/gap-exposure.md),
+labelled inferred, gave development return residual endpoints of
+-12.0 to +2.9 °C for 266 of the 422 return forecasts. The 16A blind
+surface return had a mean error of -6.00 °C and an RMSE of 6.43 °C.
+These were declared as context and were not pass marks.
+
+The test covers the surface return temperature in drilling windows on
+assemblies 2 to 11; the predicted windows span bit depths of 640.70 to
+9,115.35 ft. It does not
+cover pauses, connections, trip stages or downhole temperatures. It
+does not resolve the scale of the `Degrees` label, which is a declared
+convention, or where on the flowline the return is measured. With the
+targets read, 56-32 return temperature is development data.
+
+![FORGE 56-32 measured and predicted return temperature](../../validation/forge56-32/scores/measured_vs_predicted.png?raw=1)
+
+![FORGE 56-32 v1.8.0 return error against bit depth, by assembly](../../validation/forge56-32/scores/residual_vs_depth.png?raw=1)
+
+#### Post-hoc diagnosis of the shallow assemblies
+
+This analysis was done after the forecast was scored, and the declared result above stands unchanged. The [diagnosis](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge56-32/diagnosis/README.md) sets each window's measured heat gain, the mass flow times the mud's heat capacity times the return minus inlet temperature, against an upper bound on the heat that the rock and the pumps could supply. The bound is calculated on the forecast's code at `ba56445` with every setting moved to raise heat gain. In 113 of the 136 windows of assemblies 2 to 5 the measured gain exceeds 1.25 times that bound, and in none of the 265 windows of assemblies 6 to 11. The 56-32 cement bond log temperature of August 2021 lies within 5 °C of the 16A transfer over the shallow hole, and using it changes the shallow bias by 0.12 °C or less. At 18:12 on 15 February the Pason inlet channel lost its signal for 25 minutes and came back 32 K higher, with no step of that size in the return. The diagnosis infers that the Pason inlet before that time does not represent the mud pumped into the well. The reports read do not record where the sensor was.
+
+| Windows | n | v1.8.0 bias, °C | RMSE, °C |
+|---|---:|---:|---:|
+| All scored (declared) | 401 | -11.77 | 20.75 |
+| Energy-consistent (post-hoc) | 288 | -1.73 | 5.54 |
+| Assemblies 2 to 5 with the inlet set to the measured return less 9.13 K (sensitivity) | 136 | -4.23 | 4.31 |
+
+### FORGE 58-32: blind return temperature and recovery logs
+
+Well 58-32 (MU-ESW1) was drilled from July to September 2017. Its pressure records are development data; its temperature records had not been read. The inputs, the [thermal protocol](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge58-32/thermal_protocol.md) and the BoreTHM 1.9.0 model-only predictions ([forecast](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge58-32/predictions-v1.9.0/README.md)) were committed on 17 November 2026 in `aba3da1`, `a2cb31b` and `82ec06c`. GitHub recorded the push of `82ec06c` at 15:57:46 UTC that day. The measured temperatures were then extracted and committed in `3d6d523` ([targets](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge58-32/targets/manifest.json)) and scored in `ff8e85f` ([scores](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge58-32/scores/summary.csv)). The formation boundary is the well's own PT log of 8 November 2018 (PT118), recorded more than a year after drilling.
+
+Part A is the return temperature during drilling. The measure is the mean of the Pason `Temp Out` channel over the qualified seconds of each half-hour drilling window, with the rules of the 56-32 scoring protocol. The return is read as Fahrenheit, the convention used for the inlet. Two flows are forecast. The primary flow is Pason `Flow In` times 0.70551, the median ratio of report flow to Pason flow on eleven September report rows; the secondary flow is Pason `Flow In` as recorded. Part B is the four depth logs and four timed logs recorded on wireline on 3 and 4 September, 7.0 to 24.9 hours after circulation stopped, forecast with the v1.9.0 static fluid column. Errors are model minus measured.
+
+Of 821 drilling windows, 760 have converged predictions for both flows. Fifty-two lie in a run whose reports name two assemblies and nine have no recorded nozzle set. No predicted window is excluded by the reading rules, so 760 are scored, 746 of them with a persistence value. Four scored windows, all on assembly 5, have a return more than 5 °C below their inlet.
+
+| Flow | Windows | Prediction | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill of v1.9.0 |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Primary | All scored | v1.9.0 | 760 | -1.18 | 1.55 | 1.95 | 74.5 | 97.8 | |
+| Primary | All scored | v1.7.0 | 760 | -0.74 | 1.17 | 1.72 | 80.9 | 97.8 | -0.138 |
+| Primary | All scored | Analytical | 760 | -3.51 | 3.67 | 3.89 | 6.4 | 83.9 | 0.497 |
+| Primary | With persistence | Persistence | 746 | -0.05 | 0.30 | 0.56 | 98.7 | 99.7 | -2.442 |
+| Primary | Energy-consistent | v1.9.0 | 693 | -1.27 | 1.68 | 2.04 | 72.0 | 97.5 | |
+| Primary | Energy-consistent | v1.7.0 | 693 | -0.80 | 1.27 | 1.80 | 79.1 | 97.5 | -0.138 |
+| Primary | Energy-consistent | Analytical | 693 | -3.58 | 3.76 | 3.98 | 6.2 | 82.4 | 0.486 |
+| Secondary | All scored | v1.9.0 | 760 | 0.11 | 1.22 | 1.78 | 85.9 | 97.4 | |
+| Secondary | All scored | v1.7.0 | 760 | 0.88 | 1.36 | 1.93 | 79.6 | 96.8 | 0.081 |
+| Secondary | All scored | Analytical | 760 | -3.74 | 3.90 | 4.16 | 7.6 | 80.4 | 0.573 |
+| Secondary | With persistence | Persistence | 746 | -0.05 | 0.30 | 0.56 | 98.7 | 99.7 | -2.133 |
+| Secondary | Energy-consistent | v1.9.0 | 693 | -0.02 | 1.19 | 1.80 | 84.6 | 97.1 | |
+| Secondary | Energy-consistent | v1.7.0 | 693 | 0.80 | 1.33 | 1.95 | 80.5 | 96.5 | 0.075 |
+| Secondary | Energy-consistent | Analytical | 693 | -3.86 | 4.04 | 4.29 | 6.2 | 78.5 | 0.580 |
+
+Skill is 1 − RMSE(v1.9.0)/RMSE(comparator) on the same windows. Persistence is the measured return of the preceding scored window on the same assembly; it is context only, because no forecast sees a measured return. The full table, with the three model predictions on the persistence windows, is in the [summary](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge58-32/scores/summary.csv).
+
+The energy-consistent windows are those whose measured heat gain, ṁ c_p (T_return − T_inlet), is at most 1.25 times the declared bound: the hydraulic power from the measured pump pressure plus the larger of two rock-heat bounds calculated before unsealing. With the primary flow, 67 of the 760 windows exceed it, 65 on assembly 2 and 2 on assembly 1, at bit depths of 288 to 2,133 ft. Their heat gain is 1.01 to 1.93 times the limit. With the secondary flow, 78 exceed it.
+
+With the primary flow, the v1.9.0 errors by assembly are:
+
+| Assembly | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill vs v1.7.0 | Skill vs analytical |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 6 | 0.28 | 0.31 | 0.40 | 100.0 | 100.0 | -0.236 | 0.491 |
+| 2 | 105 | 0.01 | 0.31 | 0.46 | 100.0 | 100.0 | -0.052 | 0.819 |
+| 3 | 63 | -0.93 | 0.97 | 1.01 | 100.0 | 100.0 | -0.347 | 0.654 |
+| 5 | 92 | 0.65 | 1.93 | 2.75 | 72.8 | 89.1 | 0.058 | 0.148 |
+| 6 | 10 | -0.55 | 0.55 | 0.60 | 100.0 | 100.0 | -1.533 | 0.802 |
+| 7 | 42 | -2.59 | 2.66 | 3.11 | 28.6 | 90.5 | -0.222 | 0.401 |
+| 8 | 61 | -1.60 | 1.60 | 1.81 | 80.3 | 98.4 | -0.341 | 0.550 |
+| 9 | 52 | -1.15 | 1.15 | 1.23 | 92.3 | 100.0 | -0.621 | 0.694 |
+| 10 | 158 | -1.67 | 1.67 | 1.78 | 85.4 | 99.4 | -0.556 | 0.513 |
+| 11 | 55 | -1.14 | 1.14 | 1.20 | 98.2 | 100.0 | -0.984 | 0.654 |
+| 13 | 7 | -1.36 | 1.36 | 1.38 | 100.0 | 100.0 | -0.384 | 0.654 |
+| 17 | 67 | -2.70 | 2.70 | 2.81 | 11.9 | 98.5 | -0.088 | 0.494 |
+| 18 | 31 | -2.47 | 2.47 | 2.50 | 6.5 | 100.0 | 0.000 | 0.530 |
+| 20 | 11 | -3.25 | 3.25 | 3.27 | 0.0 | 100.0 | -0.002 | 0.476 |
+
+By quartile of the inputs over the 760 predicted windows, with the primary flow, the v1.9.0 errors are:
+
+| Input | Quartile | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill vs v1.7.0 | Skill vs analytical |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Bit depth, ft | 171.89 to 3,437.33 | 190 | 0.07 | 0.86 | 1.58 | 92.6 | 97.4 | 0.042 | 0.416 |
+| Bit depth, ft | 3,437.33 to 4,636.91 | 190 | -1.17 | 1.71 | 2.20 | 72.1 | 94.7 | -0.140 | 0.449 |
+| Bit depth, ft | 4,636.91 to 5,411.45 | 190 | -1.52 | 1.52 | 1.65 | 88.4 | 99.5 | -0.554 | 0.557 |
+| Bit depth, ft | 5,411.45 to 7,530.58 | 190 | -2.10 | 2.10 | 2.28 | 44.7 | 99.5 | -0.109 | 0.526 |
+| Primary flow, US gal/min | 386.92 to 435.94 | 190 | -2.07 | 2.07 | 2.22 | 54.2 | 99.5 | -0.156 | 0.508 |
+| Primary flow, US gal/min | 435.94 to 487.74 | 190 | -1.51 | 1.52 | 1.67 | 80.5 | 100.0 | -0.345 | 0.568 |
+| Primary flow, US gal/min | 487.74 to 514.29 | 190 | -0.72 | 1.71 | 2.31 | 74.2 | 94.2 | -0.061 | 0.402 |
+| Primary flow, US gal/min | 514.29 to 742.41 | 190 | -0.42 | 0.90 | 1.49 | 88.9 | 97.4 | -0.103 | 0.533 |
+| Inlet, °C | 34.40 to 40.55 | 190 | -1.71 | 1.73 | 1.91 | 76.3 | 98.9 | -0.433 | 0.518 |
+| Inlet, °C | 40.55 to 45.54 | 190 | -1.24 | 1.33 | 1.57 | 88.9 | 99.5 | -0.444 | 0.568 |
+| Inlet, °C | 45.54 to 52.13 | 190 | -1.68 | 1.81 | 2.24 | 45.8 | 98.4 | -0.061 | 0.514 |
+| Inlet, °C | 52.13 to 63.49 | 190 | -0.08 | 1.32 | 2.04 | 86.8 | 94.2 | 0.028 | 0.361 |
+
+In part B every forecast point has a valid reading: 2,723 points on the depth logs at 10 ft spacing and 156 on the timed logs at 10 s spacing, all at 6,798 ft. Above the 2,172 ft casing shoe the headline forecast is the annulus temperature at the end of circulation, as in the v1.9.0 trip column. The analytical comparator has no static solution and gives its circulating annulus temperature, and the PT118 formation temperature is shown for context.
+
+| Flow | Points | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill vs v1.7.0 | Skill vs analytical | Skill vs PT118 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Primary | All depth logs | 2,723 | -1.56 | 6.38 | 9.38 | 31.5 | 59.4 | 0.101 | 0.743 | 0.750 |
+| Primary | Depth logs, cased | 871 | 6.71 | 7.92 | 11.32 | 22.8 | 54.5 | 0.169 | -0.186 | 0.107 |
+| Primary | Depth logs, open hole | 1,852 | -5.45 | 5.65 | 8.32 | 35.6 | 61.7 | 0.027 | 0.810 | 0.814 |
+| Primary | RUN1 | 681 | -2.22 | 7.14 | 10.07 | 14.1 | 56.7 | 0.048 | 0.659 | 0.769 |
+| Primary | RUN2 | 681 | -1.87 | 6.34 | 9.02 | 31.4 | 59.8 | 0.093 | 0.736 | 0.769 |
+| Primary | RUN3 | 680 | -1.11 | 6.01 | 8.90 | 39.1 | 60.1 | 0.137 | 0.770 | 0.744 |
+| Primary | RUN4 | 681 | -1.03 | 6.02 | 9.49 | 41.6 | 61.1 | 0.129 | 0.777 | 0.696 |
+| Primary | All timed logs | 156 | -36.03 | 36.03 | 36.12 | 0.0 | 0.0 | -0.084 | 0.638 | -0.015 |
+| Primary | TIME1 | 22 | -36.57 | 36.57 | 36.61 | 0.0 | 0.0 | -0.226 | 0.559 | 0.272 |
+| Primary | TIME2 | 41 | -35.81 | 35.81 | 35.85 | 0.0 | 0.0 | -0.128 | 0.612 | 0.127 |
+| Primary | TIME3 | 37 | -33.19 | 33.19 | 33.22 | 0.0 | 0.0 | -0.069 | 0.664 | 0.035 |
+| Primary | TIME4 | 56 | -37.87 | 37.87 | 37.93 | 0.0 | 0.0 | -0.027 | 0.657 | -0.669 |
+| Secondary | All depth logs | 2,723 | 7.32 | 9.53 | 10.99 | 5.8 | 14.1 | 0.137 | 0.663 | 0.707 |
+| Secondary | Depth logs, cased | 871 | 13.16 | 13.16 | 14.62 | 0.0 | 0.0 | 0.116 | -0.603 | -0.154 |
+| Secondary | Depth logs, open hole | 1,852 | 4.57 | 7.82 | 8.77 | 8.5 | 20.8 | 0.162 | 0.776 | 0.803 |
+| Secondary | All timed logs | 156 | -31.16 | 31.16 | 31.36 | 0.0 | 0.0 | -0.108 | 0.663 | 0.119 |
+
+The declared sensitivity that reheats the cased section with the wall model at the casing bore gives, with the primary flow, an RMSE of 4.77 °C above the shoe and 7.37 °C over all depth-log points, with biases of +1.60 and −3.19 °C. With the secondary flow the same RMSEs are 8.47 and 8.67 °C.
+
+The 56-32 deep-section RMSE was 0.87 to 2.14 °C by assembly, and the 16A blind surface return had a mean error of −6.00 °C and an RMSE of 6.43 °C. These were declared as context and were not pass marks.
+
+The test covers the surface return in drilling windows on 14 assemblies, numbered 1 to 20, at bit depths of 171.89 to 7,530.58 ft, and the fluid column in the open and cased hole on 3 and 4 September. Every assembly except BHA 2 is modelled as ordinary drill pipe to the bit, because no passage ID is recorded, and motor heat is zero. The pumping recorded during the trip out before the logs, about 9,400 US gal of Pason flow, is not modelled. The logger clock is taken as two hours behind the rig clock from one report time. The scale of the Pason flow is unresolved, and both flows are reported. With the targets read, 58-32 return temperature and the 2017 PT logs are development data.
+
+![FORGE 58-32 measured and predicted return temperature, primary flow](../../validation/forge58-32/scores/measured_vs_predicted.png?raw=1)
+
+![FORGE 58-32 v1.9.0 return error against bit depth, by assembly](../../validation/forge58-32/scores/residual_vs_depth.png?raw=1)
+
+![FORGE 58-32 depth logs, measured and forecast](../../validation/forge58-32/scores/log_profiles_depth.png?raw=1)
+
+![FORGE 58-32 timed logs at 6,798 ft, measured and forecast](../../validation/forge58-32/scores/log_profiles_timed.png?raw=1)
+
+### FORGE 78B-32: blind downhole and return temperature
+
+Well 78B-32 was drilled from 28 June to 29 July 2021 (GDR 1330). Its data had been reserved, and before this test only the column headings and first row of its ten-second Pason export had been read. The inputs, the [thermal protocol](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/thermal_protocol.md) and the BoreTHM 1.9.0 model-only predictions ([forecast](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/predictions-v1.9.0/README.md)) were committed on 21 November 2026 in `12be48a`, `13aa9b7` and `d874e0f`, with a correction to the message of `13aa9b7` in `b6e889f`. GitHub recorded the push of `b6e889f` at 02:56:56 UTC that day. The measured temperatures were then extracted and committed in `39b8647` ([targets](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/targets/downhole.csv)) and scored in `8658be1` ([scores](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/scores/summary.csv)). The formation temperature is the FORGE 16A 216-day survey, transferred by true vertical depth.
+
+Part A is the temperature reported by the MWD tool (`MWD Temp`) in half-hour drilling windows on the assemblies that carry it. The channel updates about once per window and holds its value between updates, so the measure is the mean of the fresh readings in the window's qualified ten-second bins, and a window with no fresh reading is excluded (R3). The forecast is the drill-string fluid temperature at the midpoint of the MWD item. Part B is `EYE TEMP` on the Scientific Drilling assemblies 14 and 15, by the same rules at the lower monel collar; the return temperature `TEMP OUT` from 9 July, with the 56-32 measure; and the two Sanvean sensor subs on assemblies 3, 4 and 15. From 28 June to 8 July the inlet temperature is that of the day's mud check, and from 9 July it is Pason `TEMP IN`. Errors are model minus measured.
+
+Of 214 drilling windows, 160 are on MWD assemblies, and all three predictors converged on all of them. Fifty-one have no fresh reading and one has a valid reading in fewer than 80 % of its qualified bins, so 108 are scored, 102 of them with a persistence value. Of the 108, 90 take the inlet from a mud check and 18, all on assembly 10, take the Pason inlet. No scored window falls on a day with an inlet flag. Part E flags one window, on assembly 1 at 04:30 on 28 June with the bit at 378.8 ft: the mean of its two fresh readings is 103.4 °C, against a formation temperature of 36.7 °C at the sensor and a v1.9.0 forecast of 29.9 °C. No scored window is more than 3 °C below its inlet; the lowest is 2.83 °C below.
+
+| Windows | Prediction | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill of v1.9.0 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| All scored | v1.9.0 | 108 | -3.00 | 4.24 | 9.55 | 58.3 | 78.7 | |
+| All scored | v1.7.0 | 108 | -2.95 | 4.64 | 9.44 | 42.6 | 77.8 | -0.012 |
+| All scored | Analytical | 108 | -9.95 | 10.49 | 13.58 | 8.3 | 26.9 | 0.297 |
+| With persistence | Persistence | 102 | -0.74 | 3.28 | 9.46 | 76.5 | 89.2 | 0.014 |
+| Part E unflagged | v1.9.0 | 107 | -2.34 | 3.59 | 6.44 | 58.9 | 79.4 | |
+| Part E unflagged | v1.7.0 | 107 | -2.30 | 4.00 | 6.28 | 43.0 | 78.5 | -0.026 |
+| Part E unflagged | Analytical | 107 | -9.36 | 9.90 | 11.62 | 8.4 | 27.1 | 0.446 |
+| Part E unflagged, with persistence | Persistence | 101 | -0.05 | 2.61 | 6.40 | 77.2 | 90.1 | 0.083 |
+| Pason inlet only | v1.9.0 | 18 | -3.36 | 3.83 | 6.98 | 61.1 | 77.8 | |
+| Pason inlet only | v1.7.0 | 18 | -4.47 | 4.49 | 7.56 | 50.0 | 77.8 | 0.076 |
+| Pason inlet only | Analytical | 18 | -17.31 | 17.31 | 18.16 | 0.0 | 0.0 | 0.615 |
+| Pason inlet only, with persistence | Persistence | 17 | 0.89 | 1.78 | 2.26 | 76.5 | 94.1 | -0.967 |
+
+Skill is 1 − RMSE(v1.9.0)/RMSE(comparator) on the same windows. Persistence is the measured value of the preceding scored window on the same assembly; it is context only, because no forecast sees a measured value. The headline is the set of all scored windows and the part E unflagged set is the declared secondary. The full table is in the [summary](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/scores/summary.csv).
+
+The v1.9.0 errors by assembly are:
+
+| Assembly | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill vs v1.7.0 | Skill vs analytical |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 3 | -25.78 | 25.78 | 42.47 | 33.3 | 66.7 | -0.000 | 0.006 |
+| 3 | 18 | -3.29 | 4.75 | 5.90 | 22.2 | 66.7 | -0.165 | 0.170 |
+| 4 | 10 | 0.63 | 0.78 | 0.88 | 100.0 | 100.0 | 0.749 | 0.599 |
+| 6 | 15 | -6.56 | 7.84 | 10.42 | 20.0 | 53.3 | -0.153 | -0.077 |
+| 7 | 44 | -0.79 | 2.29 | 5.42 | 77.3 | 88.6 | 0.030 | 0.541 |
+| 10 | 18 | -3.36 | 3.83 | 6.98 | 61.1 | 77.8 | 0.076 | 0.615 |
+
+Assembly 9 has one part A window, which has no fresh reading. By quartile of the inputs over the 160 predicted windows, the v1.9.0 errors are:
+
+| Input | Quartile | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill vs v1.7.0 | Skill vs analytical |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Bit depth, ft | 261.73 to 2,980.78 | 29 | -4.58 | 5.79 | 14.43 | 44.8 | 75.9 | -0.007 | 0.031 |
+| Bit depth, ft | 2,980.78 to 4,059.28 | 25 | -5.21 | 6.19 | 8.48 | 20.0 | 60.0 | -0.103 | 0.152 |
+| Bit depth, ft | 4,059.28 to 5,341.02 | 28 | -0.19 | 0.53 | 0.70 | 100.0 | 100.0 | 0.454 | 0.932 |
+| Bit depth, ft | 5,341.02 to 6,685.71 | 26 | -2.13 | 4.63 | 8.75 | 65.4 | 76.9 | 0.035 | 0.502 |
+| Flow, US gal/min | 495.51 to 810.73 | 26 | -6.64 | 7.47 | 16.14 | 34.6 | 73.1 | -0.033 | 0.067 |
+| Flow, US gal/min | 810.73 to 818.43 | 27 | -2.76 | 3.14 | 5.27 | 63.0 | 74.1 | 0.097 | 0.644 |
+| Flow, US gal/min | 818.43 to 828.25 | 30 | -1.47 | 3.51 | 7.74 | 70.0 | 86.7 | -0.014 | 0.399 |
+| Flow, US gal/min | 828.25 to 1,002.89 | 25 | -1.31 | 2.95 | 4.56 | 64.0 | 80.0 | 0.067 | 0.346 |
+| Inlet, °C | 29.44 to 35.00 | 28 | -6.34 | 9.05 | 17.10 | 39.3 | 60.7 | -0.025 | 0.060 |
+| Inlet, °C | 35.00 to 36.11 | 34 | -0.97 | 1.24 | 2.06 | 79.4 | 94.1 | 0.187 | 0.804 |
+| Inlet, °C | 36.11 to 43.33 | 21 | -2.76 | 4.15 | 5.47 | 33.3 | 71.4 | -0.163 | 0.359 |
+| Inlet, °C | 43.33 to 47.97 | 25 | -2.21 | 3.00 | 5.95 | 72.0 | 84.0 | 0.122 | 0.594 |
+
+The declared secondary measure, the 56-32 mean of the valid readings over all qualified bins with R3 applied to a constant record, scores 110 windows:
+
+| Prediction | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill of v1.9.0 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| v1.9.0 | 110 | -2.64 | 3.60 | 7.06 | 54.5 | 80.9 | |
+| v1.7.0 | 110 | -2.58 | 3.93 | 6.93 | 45.5 | 76.4 | -0.019 |
+| Analytical | 110 | -9.60 | 9.77 | 11.92 | 9.1 | 29.1 | 0.408 |
+
+In part B, `EYE TEMP` has 45 windows, all with converged predictions. Twelve have no fresh reading and three have a valid reading in fewer than 80 % of their qualified bins, two of them failing both rules, so 32 are scored, all with the Pason inlet. The return temperature has 76 windows; 75 are forecast, the window on assembly 19 having no nozzle area, and all 75 are scored, one of them on a day with an inlet flag.
+
+| Target | Windows | Prediction | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill of v1.9.0 |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|
+| `EYE TEMP` | All scored | v1.9.0 | 32 | 0.10 | 14.19 | 19.23 | 9.4 | 31.2 | |
+| `EYE TEMP` | All scored | v1.7.0 | 32 | -1.23 | 14.08 | 19.30 | 15.6 | 34.4 | 0.003 |
+| `EYE TEMP` | All scored | Analytical | 32 | -16.72 | 21.15 | 24.63 | 0.0 | 0.0 | 0.219 |
+| `EYE TEMP` | Assembly 14 | v1.9.0 | 17 | -5.83 | 11.28 | 16.12 | 11.8 | 52.9 | |
+| `EYE TEMP` | Assembly 15 | v1.9.0 | 15 | 6.82 | 17.49 | 22.24 | 6.7 | 6.7 | |
+| Return | All scored | v1.9.0 | 75 | -1.38 | 1.52 | 2.25 | 74.7 | 96.0 | |
+| Return | All scored | v1.7.0 | 75 | -1.50 | 1.59 | 2.32 | 72.0 | 96.0 | 0.031 |
+| Return | All scored | Analytical | 75 | 4.85 | 4.98 | 5.57 | 13.3 | 52.0 | 0.597 |
+| Return | Excluding inlet-flagged days | v1.9.0 | 74 | -1.27 | 1.41 | 1.98 | 75.7 | 97.3 | |
+| Return | Excluding inlet-flagged days | v1.7.0 | 74 | -1.39 | 1.49 | 2.06 | 73.0 | 97.3 | 0.037 |
+| Return | Excluding inlet-flagged days | Analytical | 74 | 4.96 | 5.00 | 5.60 | 13.5 | 51.4 | 0.646 |
+
+The v1.9.0 return errors by assembly are:
+
+| Assembly | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill vs v1.7.0 | Skill vs analytical |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 9 | 1 | -9.42 | 9.42 | 9.42 | 0.0 | 0.0 | 0.010 | -1.685 |
+| 10 | 25 | -2.14 | 2.14 | 2.30 | 60.0 | 100.0 | 0.043 | 0.209 |
+| 11 | 3 | -1.11 | 1.11 | 1.44 | 66.7 | 100.0 | 0.008 | 0.496 |
+| 14 | 22 | -1.01 | 1.25 | 2.10 | 81.8 | 90.9 | 0.027 | 0.630 |
+| 15 | 23 | -0.48 | 0.70 | 1.27 | 91.3 | 100.0 | 0.042 | 0.835 |
+| 21 | 1 | -4.09 | 4.09 | 4.09 | 0.0 | 100.0 | 0.037 | -11.310 |
+
+No Sanvean window is scored. In the three Sanvean files (76,320, 50,762 and 149,675 rows), no row's time matched a time format declared in the extractor, so no clock offset was found, and the 63 windows of each sensor are excluded by the declared alignment rule.
+
+*Post-hoc, after the targets were read.* The files write their times as `2021/06/30 02:06:07.000`; the declared formats include this form without the fraction of a second. With that one format added and every declared rule unchanged ([post-hoc analysis](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/posthoc-sanvean/README.md)), each file aligns at +10 s with a pump-state agreement of 0.996 to 0.998 and a median hole-depth difference of 0.0 to 0.1 ft, and all 63 windows of each sensor are scored:
+
+| Sensor | Prediction | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill of v1.9.0 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Lower | v1.9.0 | 63 | -2.47 | 5.21 | 7.67 | 27.0 | 58.7 | |
+| Lower | v1.7.0 | 63 | -1.54 | 4.43 | 7.37 | 39.7 | 74.6 | -0.042 |
+| Lower | Analytical | 63 | -10.64 | 10.68 | 13.89 | 4.8 | 25.4 | 0.447 |
+| Upper | v1.9.0 | 63 | -2.98 | 5.72 | 7.95 | 12.7 | 55.6 | |
+| Upper | v1.7.0 | 63 | -2.06 | 4.47 | 7.47 | 42.9 | 69.8 | -0.064 |
+| Upper | Analytical | 63 | -11.06 | 11.07 | 13.98 | 3.2 | 17.5 | 0.431 |
+
+By assembly, the v1.9.0 RMSE at the lower and upper sensors is 6.97 and 7.69 °C on assembly 3 (21 windows), 2.04 and 2.94 °C on assembly 4 (19) and 10.65 and 10.58 °C on assembly 15 (23).
+
+In the 16B comparisons the run-average MWD temperature on regular pipe was 180 °F on BHA 10 and 220 °F on BHA 13, against 192 °F and 228 °F from the model with the film coefficient unfitted, and the 58-32 return temperature had an RMSE of 1.95 °C. These were declared as context and were not pass marks.
+
+The test covers the MWD temperature in drilling windows on six assemblies, numbered 1 to 10, from 28 June to 11 July at bit depths of 261.73 to 6,653.34 ft; `EYE TEMP` on assemblies 14 and 15 from 14 to 16 July at 6,793.69 to 8,489.46 ft; and the return temperature on six assemblies from 10 to 28 July at 5,807.19 to 8,549.03 ft. No source states the MWD sensor offset, and the sensor is placed at the midpoint of the MWD item. Motor heat is zero. Of the scored part A windows, 90 take the inlet from a daily mud check. The temperature log of 22 July 2021 is not forecast, and the Sanvean records are scored only in the post-hoc analysis. With the targets read, 78B-32 downhole and return temperature is development data.
+
+![FORGE 78B-32 measured and predicted MWD temperature, part A](../../validation/forge78b-32/scores/part-a-measured-vs-predicted.png?raw=1)
+
+![FORGE 78B-32 measured and v1.9.0 MWD temperature against bit depth, by assembly](../../validation/forge78b-32/scores/part-a-depth-by-assembly.png?raw=1)
+
+![FORGE 78B-32 v1.9.0 MWD temperature error against bit depth, by assembly](../../validation/forge78b-32/scores/part-a-residual-vs-depth.png?raw=1)
+
+![FORGE 78B-32 measured and v1.9.0 EYE temperature against bit depth, by assembly](../../validation/forge78b-32/scores/part-b-eye-depth-by-assembly.png?raw=1)
+
+![FORGE 78B-32 measured and predicted return temperature](../../validation/forge78b-32/scores/part-b-return-measured-vs-predicted.png?raw=1)
+
+![FORGE 78B-32 v1.9.0 return error against bit depth, by assembly](../../validation/forge78b-32/scores/part-b-return-residual-vs-depth.png?raw=1)
+
+![FORGE 78B-32 measured and predicted Sanvean sensor temperature, post-hoc](../../validation/forge78b-32/posthoc-sanvean/scores/sanvean-measured-vs-predicted.png?raw=1)
+
 ## Rock reheating
 
 The reheating of the wall when circulation stops is calculated with a transient model of conduction in the rock around the hole, described in the [physical-model guide](models.md#wall-reheating-and-thermal-stress). It was compared with the return temperature recorded in FORGE 16B when circulation resumed after each of the five trips in the trial (`validate_forge_pauses.py`). While the pumps are off, the fluid in the hole drifts towards the temperature of the rock around it, warming in the deep part of the hole and cooling near surface, and when they restart the annulus column reaches surface over the first bottoms-up, shallowest fluid first. In the model, the rock at points every 200 ft along the hole is taken through its own history of circulation and pauses from the rig's minute-by-minute record, and the column of fluid temperatures is pushed to surface as plug flow. Plug flow ignores the heat the returning fluid exchanges with the string and the rock on its way up, so one factor scales the modelled anomaly in the return temperature. Fitted on four of the five trips and used to predict the fifth, in turn, the factor is 0.56, and the predicted mean anomalies differ from the observed ones by 12 °F (root mean square), against observed anomalies of −10 to +38 °F (Fig. 3). The largest miss is the 33-hour trip, observed at +25 °F and predicted at 0 °F. With the fluid in the hole taken at the wall's temperature, the sensitivity used for the sites, the factor is 0.39 and the misfit 13 °F. The pauses with the bit on bottom could not be used, as most were for gyroscopic surveys or circulation at reduced flow, and their first bottoms-up runs into the next operation. The modelled curves are dominated by the arrival of the hot fluid from the bottom of the hole, which the observed curves do not show, and the fit barely separates the base case from the case with no fluid in the hole. The comparison is therefore too coarse to confirm or reject the reheating model, which rests on the [analytic checks](#analytic-checks). The 16A comparison below supplies a separate conditional check.

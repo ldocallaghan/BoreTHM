@@ -1,0 +1,6 @@
+well,motor,pipe,count
+16A,yes,regular,358
+16B,no,regular,45
+16B,yes,full IDP,10
+16B,yes,partial IDP,10
+16B,yes,regular,44

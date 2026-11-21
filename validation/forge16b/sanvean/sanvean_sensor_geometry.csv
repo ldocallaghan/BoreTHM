@@ -1,0 +1,8 @@
+eow_bha,sanvean_run,sanvean_pdf_page,eowr_page,bit_gauge_in,bit_reported_od_in,bit_reported_bore_in,black_box_od_in,black_box_bore_in,black_box_bottom_ft,black_box_top_ft,mwd_proxy_ft,mwd_basis,pulser,motor,float,notes
+11,4,5,71,9.5,6.375,2.75,6.75,2.25,88.10,94.10,22,EOWR Eye comment,HALO pulser 128-481,7.15 mud motor 7.188 in OD 41.28 ft,EOWR filter sub only,Bit gauge and component OD differ
+12,5,16,75,9.5,9.5,2.75,6.75,2.25,89.14,95.14,22,EOWR Eye comment,HALO pulser 128-474,none,2.45 ft float sub,Black Box carrier limits
+13,6,25,80,9.5,9.5,2.75,6.75,2.25,79.68,85.58,22,EOWR Eye comment,HALO pulser 128-474,none,2.45 ft float sub,Black Box carrier limits
+14,7,37,85,9.5,9.5,2.75,6.75,2.25,99.20,105.20,22,EOWR Eye comment,HALO pulser 213-006,none,2.45 ft float sub,Survey offset 25 ft is a separate measurement
+15,8,46,93,9.5,9.5,2.75,6.75,2.25,99.41,105.41,22,EOWR Eye comment,HALO pulser 122-1243F,none,2.45 ft float sub,Black Box carrier limits
+16,9,57,97,9.5,9.5,2.75,6.75,2.25,99.22,105.19,22,EOWR Eye comment,HALO pulser 213-004F,none,2.45 ft float sub,Black Box carrier limits
+17,10,70,102,9.5,9.5,2.75,6.75,2.25,107.97,113.94,84,trial proxy within EOWR figure pulser span 81.67 to 85.60 ft,6.5 in OD 3.5 in bore 3.93 ft,7.15 Titan 22 6.75 in OD 35 ft,no float sub listed,Appendix B p189 lists 41.87 ft motor and 5.60 ft pulser

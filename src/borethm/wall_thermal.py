@@ -66,10 +66,15 @@ class Grid:
     a: float
     r_max: float
     n: int = 200
+    power: float = 1.
 
     def build(self, radius_m=None):
         """Node radii (log-spaced, the first at the wall), face radii, and the
         volume per unit length of each control volume.
+
+        With power p > 1 the node radii are a (r_max/a)^(xi^p) on uniform xi,
+        which concentrates nodes at the wall for short exposures. The default
+        p = 1 is the logarithmic grid.
 
         radius_m reuses supplied radial coordinates when every coordinate
         differs from the declared logarithmic grid by at most eight units
@@ -77,7 +82,10 @@ class Grid:
         adjacent floating-point numbers at that radius. Geometry and node
         count must agree. The default reproduces the previous grid.
         """
-        r = self.a * (self.r_max / self.a) ** np.linspace(0.0, 1.0, self.n)
+        xi = np.linspace(0.0, 1.0, self.n)
+        if self.power != 1.:
+            xi = xi ** self.power
+        r = self.a * (self.r_max / self.a) ** xi
         if radius_m is not None:
             stored = np.asarray(radius_m, dtype=float)
             # Preserve the authoritative archived grid. Only platform rounding
@@ -99,7 +107,10 @@ def r_max_for(a, alpha, t_total):
 
 def time_steps(duration, dt0=1.0, growth=1.08, dt_max=None):
     """Steps that start small after a change of state and grow geometrically."""
-    dt_max = dt_max or duration / 50.0
+    if dt_max is None:
+        dt_max = duration / 50.0
+    elif not np.isfinite(dt_max) or dt_max <= 0.:
+        raise ValueError("maximum radial step must be finite and positive")
     out, t, dt = [], 0.0, dt0
     while t < duration - 1e-9:
         dt = min(dt, dt_max, duration - t)
@@ -126,7 +137,8 @@ class Result:
 
 
 def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growth=1.08,
-        probe_r=None, observe=None, radius_m=None, carry_static_node=False):
+        probe_r=None, observe=None, radius_m=None, carry_static_node=False, dt_max=None,
+        grid_power=1.):
     """Conduct heat through the history of states. T_rock: far-field and
     initial temperature (or T0, an initial field on the grid).
 
@@ -145,11 +157,13 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
     temperature starts from the preceding static state's final fluid-node
     temperature. By default it starts from the last circulating fluid
     temperature, or the wall temperature when no circulation preceded it.
-    Every default reproduces the previous results.
+    dt_max sets a maximum radial time step in seconds. By default the cap
+    is one fiftieth of each state's duration. grid_power > 1 concentrates
+    the radial nodes at the wall (see Grid); the default is the log grid.
     """
     alpha = k / rhocp
     total = sum(s.duration for s in history)
-    r, faces, vol = Grid(a, r_max or r_max_for(a, alpha, total), n).build(radius_m)
+    r, faces, vol = Grid(a, r_max or r_max_for(a, alpha, total), n, grid_power).build(radius_m)
     T = np.full(n, float(T_rock)) if T0 is None else np.array(T0, float)
     T_start = T.copy()
     # conductance between neighbouring nodes per unit length
@@ -175,9 +189,12 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
                 previous_node if carry_static_node and previous_kind == 'static' and previous_node is not None else
                 T_fluid_last if T_fluid_last is not None else T[0])
         observed(state_index, 'initial' if state_index == 0 else 'event_boundary', 'right', T_node, None)
-        steps = time_steps(s.duration, dt0, growth)
+        steps = time_steps(s.duration, dt0, growth, dt_max)
+        mixed_wall = T_node is not None and np.isinf(s.h)
+        eliminated_node = T_node is not None and not mixed_wall and dt_max is not None
+        bordered = T_node is not None and not (mixed_wall or eliminated_node)
+        m = n + int(bordered)
         for step_index, dt in enumerate(steps):
-            m = n + (1 if T_node is not None else 0)
             ab = np.zeros((3, m))
             rhs = np.zeros(m)
             # rock nodes: cap/dt (T - T_old) = sum G (T_j - T_i)
@@ -200,14 +217,26 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
                 rhs[0] += s.q
             elif s.kind == "fixed":
                 ab[1, 0], ab[0, 1], rhs[0] = 1.0, 0.0, s.T_wall
+            elif mixed_wall:
+                # With zero film resistance the fluid and first rock node share
+                # their new temperature. Sum the two energy equations.
+                ab[1, 0] += s.C / dt
+                rhs[0] += s.C / dt * T_node
+            elif eliminated_node:
+                # Eliminate the liquid equation before the tridiagonal solve.
+                film = s.h * A_w
+                liquid = s.C / dt
+                exchange = film*liquid/(film+liquid)
+                ab[1, 0] += exchange
+                rhs[0] += exchange*T_node
             elif s.kind == "static" and T_node is not None:
                 hA = s.h * A_w
                 ab[1, 0] += hA
                 ab[0, n] = 0.0
                 # couple the wall (0) and the node (n): only adjacent in a full
                 # matrix, so solve this case densely below
-            T_old_wall = T[0]
-            if s.kind == "static" and T_node is not None:
+
+            if bordered:
                 A = np.zeros((m, m))
                 for i in range(n):
                     A[i, i] = ab[1, i]
@@ -222,6 +251,10 @@ def run(history, T_rock, a, k, rhocp, n=200, r_max=None, T0=None, dt0=1.0, growt
                 T_new, T_node = sol[:n], sol[n]
             else:
                 T_new = solve_banded((1, 1), ab[:, :n], rhs[:n])
+                if mixed_wall:
+                    T_node = T_new[0]
+                elif eliminated_node:
+                    T_node = (liquid*T_node+film*T_new[0])/(liquid+film)
             # heat into the rock at the wall over the step, from the wall
             # node's balance: cap0 dT0/dt = q_in + G0 (T1 - T0)
             q_in = cap[0] * (T_new[0] - T[0]) / dt - G[0] * (T_new[1] - T_new[0])

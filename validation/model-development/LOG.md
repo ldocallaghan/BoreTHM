@@ -2675,3 +2675,189 @@ The motor, filter sub, rotary steerable and other float sub rows agree with the 
 **Calculated.** The run-in peak error RMS remains 34.83 °C, as declared, since G4 uses only 16A.
 
 **Open item.** The part of the shallow gap that the corrected allowances do not account for is 163–220 psi at 216–238 US gal/min and 308–353 psi at 423–492 US gal/min, and its source is unknown. This replaces the open item above. The motorless 16B assemblies now read low by 6–92 psi, where the original entry 14 gave 194–282 psi. The tool table, the rule and the package defaults are unchanged.
+
+## Phase 0 checks, November 2026
+
+**Measured data roles, 7 November.** FORGE 16A and 16B supply the
+development comparisons. The GDR 1561 downhole sensor extract adds
+run 17 as development data. Runs 11–16 have a separate reserved
+temperature archive. The standpipe and differential pressure work
+on 56-32 and the pressure work on 58-32 are development comparisons.
+Thermal measurements from both wells are reserved. The 78B-32 data
+remain reserved.
+
+**Measured records, 16A run-in.** All eleven frozen run-in legs use
+the bit-box channel. The export includes rig pressure and flow on
+the tool clock. The records contain no independent downhole pressure
+or flow for these legs. Seven selected peaks precede a detected
+pump-on by 10–720 s. Each of those seven legs has a higher bit-box
+reading within five minutes of restart. Four legs have no detected
+restart within the 15-minute search window. No raw flow above
+100,000 US gal/min occurs inside these eleven leg windows. The
+reported bit-box offset is blank. The carrier dimensions, elapsed
+static time and coverage are in the
+[run-in records](../../validation/model-development/phase-0/README.md).
+The available Sanvean pressure matches the rig at zero minute shift
+after 1 November 2020. The first Sanvean export starts on 14 November,
+so the offset before the clock change is unresolved.
+
+**Calculated and measured, 16A sensor channels.** The v1.8.0 sensor
+table compares the bore temperature at the bit with the bit box and
+the bore 40 ft above the bit with the top sub. For BHA 42 the mean
+bit-box residual is −12.3 °C. For the 22 paired steps with similar
+flow, the measured difference between bit box and top sub changes
+by −0.45 to +0.33 °C. The lower-mandrel runs and earlier top-sub
+runs lack a frozen paired prediction with reviewed geometry.
+[Sensor residuals](../../validation/model-development/phase-0/16a-sensor-residuals.csv)
+and [step comparisons](../../validation/model-development/phase-0/16a-bit-and-top-sub-steps.csv)
+give the paired counts.
+
+**Measured records, 16A equipment.** The 18 and 19 December daily
+reports list 279.30 ft of heavy-weight pipe on BHA 42. The drilling
+summary names heavy-weight push pipe and a Vibe Scout agitator on
+BHAs 41 and 42. It gives no separate push-pipe tally. The daily
+reports list another 3,411.82 ft as drill pipe with 3.25 in bore.
+The inspected pipe class and the agitator's loss curve remain
+unresolved. The circulation calculation uses the depth-indexed
+mud-log inlet temperature. The mud tests do not give a PV or YP
+measurement temperature. See the [equipment and inlet records](../../validation/model-development/phase-0/README.md#16a-records).
+
+**Calculated, 16B formation sensitivity.** The full 16A 216-day
+log was mapped through the 16B survey by true vertical depth, with
+the endpoint held constant. This was compared with the packaged
+tabulation of the same formation survey at 109 frozen samples.
+The mean absolute change was 0.103 °C at the bit and 0.011 °C at
+the return. The signed bit change was −0.289 to +0.089 °C.
+The [paired calculations](../../validation/model-development/phase-0/formation-and-sensor-samples.csv)
+are a sensitivity. The separate 2024 Baker gauge record was
+unavailable for this check.
+
+**Measured, 16B run 17.** Eight trip stages and three drilling
+connections satisfy the input event rule. The Pason clock leads
+the Sanvean export by 7 s in the depth and flow comparison.
+The bit channel peaks at 137.8 °C during stage 7 and at 138.8 °C
+in its first five minutes after pump-on. The Black Box mean peaks
+at 111.2 °C during stage 6 and 114.5 °C within its first five minutes
+after pump-on. The sensors' carrier positions differ. The EYE
+channel changes 147 times while pumping and zero times during
+pumps-off intervals on consecutive finite rows. Some off rows
+still carry a reading. The [extract and event definitions](../../validation/forge16b/sanvean/README.md)
+link to the time and sensor tables.
+
+**Calculated, published circulation comparisons.** The closed
+forms agree with an independent numerical solution to 1.5e-9 K.
+The matched BoreTHM forward and reverse calculations agree with
+the closed forms to 2.4e-7 K using a benchmark harness. The
+Brown et al. steel and insulated cases give 169.56 and 69.82 °C,
+9.14 and 3.78 K below the respective published maxima. Both
+exceed their declared tolerance. The papers' rock heat-transfer
+treatments differ, and the comparison does not quantify each
+difference's contribution. The
+[benchmark definitions](../../validation/benchmarks/README.md)
+also record the recovery cases and tolerances for the static-column
+calculation. The
+[blind comparators](../../validation/comparators/README.md)
+specify how the preceding physics, the analytical solution,
+undisturbed formation and persistence will be evaluated.
+
+**Calculated, 56-32 forecast.** Commit `ba564450f2129fa1adfe522cc3880ce651e4a1d9`
+records the [v1.8.0 model-only predictions](../../validation/forge56-32/predictions-v1.8.0/README.md).
+The 618 input intervals comprise 422 drilling samples, 151 pauses
+and 45 trip stages. Both numerical presets and the analytical
+circulation comparator have predictions for 510 intervals.
+Return temperature is available in all 618. MWD temperature is
+absent from those intervals.
+
+**Inferred, 56-32 coverage.** The
+[gap coverage table](../../validation/model-development/phase-0/gap-exposure.md)
+relates motor use, mud, flow and formation temperature to the
+development cases. Among matched drilling intervals, development
+return residual endpoints span −12.0 to +2.9 °C. The other ranges
+are downhole context. The 56-32 records provide no overlapping
+MWD observations in the selected intervals. The
+[58-32 availability inventory](../../validation/forge58-32/thermal-inventory/README.md)
+identifies which of its pressure-temperature logs can be paired
+with nearby circulation records.
+
+### Entry 15. Run-in column and restart, 7 November 2026
+
+The [declaration](../../validation/model-development/entry-15/declaration.md)
+and [comparison protocol](../../validation/model-development/entry-15/protocol.md)
+record the candidate and the measures. A radial column with a static liquid
+node missed the Well 4 recovery tolerance under conduction-floor coupling.
+The published case leaves static capacity and film unspecified. The
+[verification](../../validation/benchmarks/entry15.md) reports the effect
+of those assumptions. The candidate stopped at this verification step
+before an integrated event forecast or comparison. The default run-in
+calculation remains in use.
+
+### Entry 15 benchmark correction, 7 November 2026
+
+The [wall recovery comparison](../../validation/benchmarks/entry15-wall.md)
+uses zero fluid capacity and an insulated wall during shut-in. The
+maximum errors are 0.152 and 0.091 in recovery fraction for the two
+circulation durations, exceeding the ±0.05 tolerance. The earlier
+fluid-node results describe sensitivity to static coupling. Event
+calculations and scoring remain pending at this benchmark checkpoint.
+
+### Entry 15 recovery verification
+
+Well 4 is a comparison with an adjusted-time line-source calculation.
+The [filled-hole and wall comparisons](../../validation/benchmarks/entry15-wall.md)
+retain the published and calculated fractions. An independent radial
+solver verifies the insulated-wall recovery at the ten tabulated times
+for both durations within 0.005 in recovery fraction.
+
+The revised adoption criterion requires this independent reference
+test and the existing Carslaw and Jaeger and Jaeger (1956) exact-solution
+tests. The primary configuration must reduce RMSE on D1 and D3
+compared with v1.8.0 on the same samples. The original steady
+circulation criterion remains in force, with the formation remapping
+reported separately. Band coverage is reported as a diagnostic.
+
+### Entry 15 bit depth rebuild, 7 November 2026
+
+The constant depth subtractions of the first screen are withdrawn. A
+stand count on run 17 did not support them. The
+[depth rebuild](../../validation/forge16b/sanvean/README.md#depth-rebuild-from-rig-motion-7-november-2026)
+removes rig tally resets and anchors each trip at the drilling bottom.
+It uses rig depth, block height and hook load only. A block-travel
+rebuild agrees within 29 ft on the one-second trips of runs 11 to 17.
+Where only ten-second Pason data exist, resets taken while the string
+hangs leave an uncertainty of up to about 150 ft.
+
+The amended event archive keeps its event counts and eligibility. The
+H3 stage pump-on depths change on six assemblies. Run 17 starts at
+2,094 ft against 2,291 ft recorded. The run 17 descent and connection
+pilot tables predate the rebuild and are to be regenerated before any
+event calculation uses them.
+
+### Entry 15 bit depth from tally entries, 8 November 2026
+
+The 7 November depth rebuild is withdrawn as an input. Most steps it
+removed are depths the driller typed from the pipe tally: they land on a
+whole foot or the hole depth with the block still, and on runs 17 and 20
+successive entries are whole stands of 95.12 ft apart. The block encoder
+drifts by several feet per stand between them, and the block-travel
+check shared that scale. The
+[tally-entry depth](../../validation/forge16b/sanvean/README.md#bit-depth-from-tally-entries-8-november-2026)
+follows the recorded hole depth while drilling, closes each trip on it,
+takes the entries as anchors off bottom, including entries under 20 ft,
+and fits a scale to the rig increments between anchors within each run.
+It reads rig depth, block height and hook load only.
+
+The event archive keeps its counts, ids and eligibility. Run 17 starts
+at about 1,739 ft, against 2,094 ft from the 7 November rebuild and
+2,291 ft recorded, with ±35 ft carried from an offset the reported
+string does not explain. The early run 20 stages are at 4,859 ft. The
+[pump-on depth table](../../validation/model-development/entry-15/pump-on-depths.csv)
+gives every H3 and run 17 stage under each depth reference with its
+uncertainty. Near bottom the depth is the rig's depth of record, to which
+the formation surveys are tied, and closing intervals do not set the
+encoder scale. The last entry of each trip carried to the bottom on the
+run scale closes within 10 ft at 52 of 63 closings; run 7 (+125 ft) and
+run 21 (−261 ft) do not, and on run 21 the encoder scale changes between
+two trips. The rebuilt bit stays within 10 ft of the hole depth.
+The run 17 descent and two-configuration connection pilots are
+regenerated with the new depths, and the connection refinement is written
+separately.

@@ -1,0 +1,3 @@
+case,published_C,calculated_C,difference_K,tolerance_K,converged,passed
+steel,178.7,169.56221268481698,-9.137787315183004,3.574,True,False
+insulated,73.6,69.8242913581261,-3.7757086418738908,1.472,True,False

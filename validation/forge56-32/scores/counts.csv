@@ -1,0 +1,12 @@
+count,windows
+drilling windows,422
+with converged predictions,402
+with return availability in the window,422
+with finite qualified seconds,402
+scored,401
+excluded,1
+not predicted: no uniquely assigned circulation assembly,19
+"not predicted: missing depth, pumped flow, inlet or mud density",1
+excluded by R1 finite seconds below 80 % of qualified seconds,1
+scored with persistence,391
+"unit check, scored with return more than 5 °C below inlet (excludes nothing)",0

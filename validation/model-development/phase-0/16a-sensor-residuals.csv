@@ -1,0 +1,24 @@
+run,channel,compared,bias_C,rms_C,status
+9,lower_mandrel_C,0,,,no frozen sample with model proxy and required coverage
+10,lower_mandrel_C,0,,,no frozen sample with model proxy and required coverage
+14,top_sub_C,0,,,no frozen sample with model proxy and required coverage
+14,lower_mandrel_C,0,,,no frozen sample with model proxy and required coverage
+18,bit_box_C,15,-1.6186911430496187,2.9678887267287544,paired
+18,top_sub_C,15,-1.7524371684304934,3.007602072456304,paired
+21,top_sub_C,0,,,no frozen sample with model proxy and required coverage
+22,top_sub_C,0,,,no frozen sample with model proxy and required coverage
+23,bit_box_C,13,3.0645976202827026,3.379278694407886,paired
+23,top_sub_C,13,2.6022052493639873,2.9659013987039766,paired
+30,bit_box_C,29,7.0303103644666765,7.775048180821858,paired
+30,top_sub_C,27,6.55868347409508,7.343110794880667,paired
+34,bit_box_C,9,2.8898719806689965,9.117726939470101,paired
+34,top_sub_C,9,3.044075659885413,9.233135307156273,paired
+35r1,bit_box_C,5,2.9893199500711405,7.194481580215262,paired
+35r1,top_sub_C,5,3.123170474639849,7.244779823585658,paired
+35r2,bit_box_C,4,-0.6946951495823335,5.084402983711824,paired
+35r2,top_sub_C,4,-0.6706624054464179,5.110140010780252,paired
+38,bit_box_C,20,-0.29296684219711794,3.831524679369547,paired
+38,top_sub_C,20,-0.09960139709723634,3.7833958371831127,paired
+39,bit_box_C,25,-1.9537376439400986,5.933803867925986,paired
+39,top_sub_C,25,-1.7299197232960397,5.862661115262575,paired
+42,bit_box_C,15,-12.315988953129404,13.711452888051026,paired
