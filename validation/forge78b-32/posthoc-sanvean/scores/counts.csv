@@ -1,0 +1,14 @@
+part,count,windows
+"B, Sanvean lower, post-hoc",windows,63
+"B, Sanvean lower, post-hoc",with converged predictions,63
+"B, Sanvean lower, post-hoc",scored,63
+"B, Sanvean lower, post-hoc",scored on inlet-flagged days,0
+"B, Sanvean lower, post-hoc",scored with report inlet,40
+"B, Sanvean upper, post-hoc",windows,63
+"B, Sanvean upper, post-hoc",with converged predictions,63
+"B, Sanvean upper, post-hoc",scored,63
+"B, Sanvean upper, post-hoc",scored on inlet-flagged days,0
+"B, Sanvean upper, post-hoc",scored with report inlet,40
+"B, Sanvean, post-hoc","clock alignment accepted, BHA 3",True
+"B, Sanvean, post-hoc","clock alignment accepted, BHA 4",True
+"B, Sanvean, post-hoc","clock alignment accepted, BHA 15",True
