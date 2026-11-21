@@ -546,9 +546,22 @@ The v1.9.0 return errors by assembly are:
 
 No Sanvean window is scored. In the three Sanvean files (76,320, 50,762 and 149,675 rows), no row's time matched a time format declared in the extractor, so no clock offset was found, and the 63 windows of each sensor are excluded by the declared alignment rule.
 
+*Post-hoc, after the targets were read.* The files write their times as `2021/06/30 02:06:07.000`; the declared formats include this form without the fraction of a second. With that one format added and every declared rule unchanged ([post-hoc analysis](../../validation/forge78b-32/posthoc-sanvean/README.md)), each file aligns at +10 s with a pump-state agreement of 0.996 to 0.998 and a median hole-depth difference of 0.0 to 0.1 ft, and all 63 windows of each sensor are scored:
+
+| Sensor | Prediction | n | Bias, °C | MAE, °C | RMSE, °C | Within 2 °C, % | Within 5 °C, % | Skill of v1.9.0 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Lower | v1.9.0 | 63 | -2.47 | 5.21 | 7.67 | 27.0 | 58.7 | |
+| Lower | v1.7.0 | 63 | -1.54 | 4.43 | 7.37 | 39.7 | 74.6 | -0.042 |
+| Lower | Analytical | 63 | -10.64 | 10.68 | 13.89 | 4.8 | 25.4 | 0.447 |
+| Upper | v1.9.0 | 63 | -2.98 | 5.72 | 7.95 | 12.7 | 55.6 | |
+| Upper | v1.7.0 | 63 | -2.06 | 4.47 | 7.47 | 42.9 | 69.8 | -0.064 |
+| Upper | Analytical | 63 | -11.06 | 11.07 | 13.98 | 3.2 | 17.5 | 0.431 |
+
+By assembly, the v1.9.0 RMSE at the lower and upper sensors is 6.97 and 7.69 °C on assembly 3 (21 windows), 2.04 and 2.94 °C on assembly 4 (19) and 10.65 and 10.58 °C on assembly 15 (23).
+
 In the 16B comparisons the run-average MWD temperature on regular pipe was 180 °F on BHA 10 and 220 °F on BHA 13, against 192 °F and 228 °F from the model with the film coefficient unfitted, and the 58-32 return temperature had an RMSE of 1.95 °C. These were declared as context and were not pass marks.
 
-The test covers the MWD temperature in drilling windows on six assemblies, numbered 1 to 10, from 28 June to 11 July at bit depths of 261.73 to 6,653.34 ft; `EYE TEMP` on assemblies 14 and 15 from 14 to 16 July at 6,793.69 to 8,489.46 ft; and the return temperature on six assemblies from 10 to 28 July at 5,807.19 to 8,549.03 ft. No source states the MWD sensor offset, and the sensor is placed at the midpoint of the MWD item. Motor heat is zero. Of the scored part A windows, 90 take the inlet from a daily mud check. The temperature log of 22 July 2021 is not forecast, and the Sanvean records are not scored. With the targets read, 78B-32 downhole and return temperature is development data.
+The test covers the MWD temperature in drilling windows on six assemblies, numbered 1 to 10, from 28 June to 11 July at bit depths of 261.73 to 6,653.34 ft; `EYE TEMP` on assemblies 14 and 15 from 14 to 16 July at 6,793.69 to 8,489.46 ft; and the return temperature on six assemblies from 10 to 28 July at 5,807.19 to 8,549.03 ft. No source states the MWD sensor offset, and the sensor is placed at the midpoint of the MWD item. Motor heat is zero. Of the scored part A windows, 90 take the inlet from a daily mud check. The temperature log of 22 July 2021 is not forecast, and the Sanvean records are scored only in the post-hoc analysis. With the targets read, 78B-32 downhole and return temperature is development data.
 
 ![FORGE 78B-32 measured and predicted MWD temperature, part A](../../validation/forge78b-32/scores/part-a-measured-vs-predicted.png?raw=1)
 
@@ -561,6 +574,8 @@ The test covers the MWD temperature in drilling windows on six assemblies, numbe
 ![FORGE 78B-32 measured and predicted return temperature](../../validation/forge78b-32/scores/part-b-return-measured-vs-predicted.png?raw=1)
 
 ![FORGE 78B-32 v1.9.0 return error against bit depth, by assembly](../../validation/forge78b-32/scores/part-b-return-residual-vs-depth.png?raw=1)
+
+![FORGE 78B-32 measured and predicted Sanvean sensor temperature, post-hoc](../../validation/forge78b-32/posthoc-sanvean/scores/sanvean-measured-vs-predicted.png?raw=1)
 
 ## Rock reheating
 
