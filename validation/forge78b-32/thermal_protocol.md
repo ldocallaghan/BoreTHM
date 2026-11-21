@@ -27,6 +27,8 @@ Pressure stays held back for a later test.
 
 **Other wells.** FORGE 16B runs 11 to 16 remain sealed and are not used. 16A, 16B runs 1 to 10, 56-32 and 58-32 are development data.
 
+The message of `13aa9b7` says no forecast had been run from its code. A scratch forecast had been run from the uncommitted code to fill the protocol's counts. The declared forecast in `d874e0f` was run from the committed code and is identical.
+
 ## Inputs
 
 All inputs come from `1330.zip` (GDR 1330, 15,431,810,676 bytes, SHA-256 `b56e77dbc8b5081352418fc8976e9c20da1f57bdd67fdc25961134ea99ced79f`). Times are on the Pason clock.
