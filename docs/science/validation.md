@@ -491,6 +491,8 @@ The test covers the surface return in drilling windows on 14 assemblies, numbere
 
 ![FORGE 58-32 timed logs at 6,798 ft, measured and forecast](../../validation/forge58-32/scores/log_profiles_timed.png?raw=1)
 
+The [ECD calculation](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge58-32/ecd-temperature/README.md) uses three of these windows to show how the circulating temperature changes the ECD at the bit.
+
 ### FORGE 78B-32: blind downhole and return temperature
 
 Well 78B-32 was drilled from 28 June to 29 July 2021 (GDR 1330). Its data had been reserved, and before this test only the column headings and first row of its ten-second Pason export had been read. The inputs, the [thermal protocol](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/thermal_protocol.md) and the BoreTHM 1.9.0 model-only predictions ([forecast](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/predictions-v1.9.0/README.md)) were committed on 21 November 2026 in `12be48a`, `13aa9b7` and `d874e0f`, with a correction to the message of `13aa9b7` in `b6e889f`. GitHub recorded the push of `b6e889f` at 02:56:56 UTC that day. The measured temperatures were then extracted and committed in `39b8647` ([targets](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/targets/downhole.csv)) and scored in `8658be1` ([scores](https://github.com/ldocallaghan/BoreTHM/blob/main/validation/forge78b-32/scores/summary.csv)). The formation temperature is the FORGE 16A 216-day survey, transferred by true vertical depth.
