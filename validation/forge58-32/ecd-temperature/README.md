@@ -6,7 +6,7 @@ This calculation asks how much the temperature of the circulating mud changes th
 
 The bottom-hole pressure while drilling is the static mud column plus the annular friction loss (`pressure.bottomhole_pressure`, state `"drilling"`). It is calculated with the same mud under three temperature treatments:
 
-- A: every depth at the mud's reference temperature, `fluids.T_REF`, 20 °C;
+- A: surface temperature, viscosity as reported. Density is at the mud's reference temperature, `fluids.T_REF`, 20 °C, and PV at the report's reference temperature, 48.9 °C;
 - B: the static formation temperature, the PT118 profile used as the forecast's geotherm;
 - C: the circulating temperatures of the BoreTHM 1.9.0 solve.
 
@@ -22,28 +22,28 @@ The settings are the v1.9.0 defaults: the Herschel-Bulkley annulus with the Erge
 
 ## Results
 
+In the deepest window the formation is at 199 °C at the bit and the circulating mud at 53 °C. There, the static formation temperature gives an ECD at the bit 0.0477 SG (0.40 ppg, 155.6 psi) below case C. Surface temperature gives an ECD 0.0158 SG (0.13 ppg, 51.5 psi) above it. A shift of 2 °C in the whole circulating profile changes it by 0.0015 SG (0.013 ppg, 5.0 psi).
+
 ECD at the bit, SG (ppg):
 
 | Window | A | B | C |
 |---|---:|---:|---:|
-| Shallow | 1.1216 (9.36) | 1.1040 (9.21) | 1.0949 (9.14) |
-| Mid-depth | 1.1879 (9.91) | 1.1389 (9.50) | 1.1399 (9.51) |
-| Deepest | 1.0731 (8.96) | 0.9937 (8.29) | 1.0414 (8.69) |
+| Shallow | 1.1085 (9.25) | 1.1040 (9.21) | 1.0949 (9.14) |
+| Mid-depth | 1.1628 (9.70) | 1.1389 (9.50) | 1.1399 (9.51) |
+| Deepest | 1.0572 (8.82) | 0.9937 (8.29) | 1.0414 (8.69) |
 
 | Window | Difference | ECD, SG | ECD, ppg | Total, psi | Column, psi | Friction, psi |
 |---|---|---:|---:|---:|---:|---:|
-| Shallow | C − A | -0.0266 | -0.22 | -21.8 | -10.3 | -11.6 |
 | Shallow | C − B | -0.0091 | -0.08 | -7.5 | -4.3 | -3.2 |
-| Mid-depth | C − A | -0.0481 | -0.40 | -78.5 | -28.5 | -50.0 |
+| Shallow | C − A | -0.0136 | -0.11 | -11.1 | -10.3 | -0.9 |
 | Mid-depth | C − B | +0.0010 | +0.01 | +1.6 | +8.6 | -7.1 |
-| Deepest | C − A | -0.0317 | -0.26 | -103.3 | -44.8 | -58.6 |
+| Mid-depth | C − A | -0.0230 | -0.19 | -37.5 | -28.5 | -9.0 |
 | Deepest | C − B | +0.0477 | +0.40 | +155.6 | +141.2 | +14.4 |
+| Deepest | C − A | -0.0158 | -0.13 | -51.5 | -44.8 | -6.8 |
 
 ![ECD and fluid temperature against depth, deepest window](ecd-profile.png)
 
-In every window the hotter column is the lighter one. The annular friction falls as the mud warms, because PV follows water's viscosity. With PV fixed at its 20 °C value in case C, C − A is -10.1, -27.7 and -44.1 psi in the three windows, from density alone. The viscosity gives the rest: -11.7, -50.8 and -59.2 psi.
-
-Case A takes PV at 20 °C, 1.80 times its value at the 48.9 °C reference. With case A's PV at 48.9 °C, C − A is -11.1, -37.5 and -51.5 psi.
+In every window the hotter column is the lighter one. The column part of each difference comes from density. The friction part comes from PV, which follows water's viscosity and falls as the mud warms. With PV fixed, density alone changes the friction by +0.1 to +0.8 psi (`differences.csv`).
 
 ## Sensitivity
 
@@ -56,7 +56,7 @@ The whole annulus temperature profile of case C in the deepest window was shifte
 | +2 | -0.0015 | -0.013 | -5.0 | -3.3 | -1.7 |
 | +10 | -0.0076 | -0.063 | -24.7 | -17.4 | -7.3 |
 
-Density gives about two thirds of the change through the column. PV gives the rest through the annular friction. With PV fixed at its 20 °C value, the friction changes by less than 0.3 psi for any shift.
+Density gives about two thirds of the change through the column. PV gives the rest through the annular friction. With PV fixed, the friction changes by less than 0.3 psi for any shift (`sensitivity.csv`).
 
 ## Limits
 

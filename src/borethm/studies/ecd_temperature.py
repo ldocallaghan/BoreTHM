@@ -6,16 +6,18 @@ the return temperature is checked against the committed v1.9.0 prediction to
 within 0.01 C. The bottom-hole pressure while drilling and the ECD at the bit
 are then calculated with the same mud under three temperature treatments:
 
-  A  every depth at the mud's reference temperature, fluids.T_REF;
+  A  the mud as reported: density at fluids.T_REF (20 C) and the plastic
+     viscosity at the report's reference temperature, 48.9 C in the forecast;
   B  the static formation temperature at each depth (the PT118 profile the
      forecast uses as its geotherm);
   C  the circulating bore and annulus temperatures of the solve.
 
 Each ECD is split into the static column and the annular friction. The
-deepest window also gives the profile against depth, the change in ECD when
-the annulus temperature profile is shifted by 2 and 10 C each way, and case C
-repeated with the plastic viscosity at T_REF, so that only density follows the
-temperature.
+deepest window also gives the profile against depth and the change in ECD
+when the annulus temperature profile is shifted by 2 and 10 C each way. As
+sensitivities, cases A and C are repeated with the plastic viscosity at
+T_REF, and the shifts with the plastic viscosity fixed at T_REF, so that only
+density follows the temperature.
 
 No pressure measurement is read. The thermal samples carry the mean Pason pump
 pressure of each window, and the forecast's part D values are calculated from
@@ -54,7 +56,11 @@ PREDICTION_COLUMNS = ('sample_id', 'primary_mass_flow_kg_s', 'primary_v1.9.0_sta
 RIG_COLUMNS = ('time', 'hole_depth_ft', 'flow_gpm')
 REPRODUCTION_C = 0.01
 SHIFTS_C = (-10., -2., 2., 10.)
-CASES = {'A': 'Reference temperature', 'B': 'Static formation', 'C': 'Circulating'}
+CASES = {'A': 'surface temperature, viscosity as reported', 'B': 'static formation temperature',
+         'C': 'circulating temperature'}
+# Sensitivity cases: the plastic viscosity at T_REF (20 C).
+A20 = 'A with viscosity at 20 C'
+C20 = 'C with viscosity at 20 C'
 
 
 def columns(path, names, opener=open):
@@ -224,17 +230,18 @@ def figure(path, deepest, cases):
         right.plot(T, tvd_ft, styles[name], color=colours[name], lw=2, label=f'{name}: {CASES[name]}')
     left.set_xlabel('ECD (SG)')
     left.set_ylabel('True vertical depth (ft)')
-    right.set_xlabel('Fluid temperature used (°C)')
+    right.set_xlabel('Fluid temperature (°C)')
     left.invert_yaxis()
     for ax in (left, right):
         ax.grid(alpha=.25, lw=.6)
         ax.set_axisbelow(True)
         for side in ('top', 'right'):
             ax.spines[side].set_visible(False)
-    right.legend(frameon=False, fontsize=8.5, loc='lower left')
+    handles, labels = right.get_legend_handles_labels()
+    fig.legend(handles, labels, frameon=False, fontsize=8.5, loc='lower center', ncol=3)
     fig.suptitle(f"FORGE 58-32, window {deepest['sample_id']}, bit at {float(deepest['bit_ft']):,.0f} ft MD",
                  fontsize=11)
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, .06, 1, 1))
     fig.savefig(path, dpi=200)
     plt.close(fig)
 
@@ -277,24 +284,23 @@ def main(argv=None):
         z_tvd = result['geometry'].survey.tvd(result['z'])
         form_T = forecast.STATE['form'](z_tvd)
         T_ref = np.full_like(z_tvd, fluids.T_REF)
-        b = dict(A=budget(result, kw, T_ref, T_ref, fluid),
-                 B=budget(result, kw, form_T, form_T, fluid),
-                 C=budget(result, kw, result['Tu'], result['Td'], fluid))
-        b['C, viscosity at T_REF'] = budget(result, kw, result['Tu'], result['Td'], fixed_viscosity(fluid))
-        b['A, viscosity at the PV reference'] = budget(result, kw, T_ref, T_ref,
-                                                       fixed_viscosity(fluid, common.PV_REF_T))
-        for name, values in b.items():
-            case_rows.append(dict(case_row(common, label, sample, name, values),
-                                  column_mean_T_C=column_mean_T(values)))
+        b = {A20: budget(result, kw, T_ref, T_ref, fluid),
+             'B': budget(result, kw, form_T, form_T, fluid),
+             'C': budget(result, kw, result['Tu'], result['Td'], fluid)}
+        b[C20] = budget(result, kw, result['Tu'], result['Td'], fixed_viscosity(fluid))
+        b['A'] = budget(result, kw, T_ref, T_ref, fixed_viscosity(fluid, common.PV_REF_T))
+        for name in ('A', 'B', 'C', A20, C20):
+            case_rows.append(dict(case_row(common, label, sample, name, b[name]),
+                                  column_mean_T_C=column_mean_T(b[name])))
         for name, high, low in (('C - A', 'C', 'A'), ('C - B', 'C', 'B'),
-                                ('C - A, density only', 'C, viscosity at T_REF', 'A'),
-                                ('C - A, viscosity', 'C', 'C, viscosity at T_REF'),
-                                ('C - A, viscosity at the PV reference', 'C', 'A, viscosity at the PV reference')):
+                                (f'Sensitivity: C - {A20}', 'C', A20),
+                                (f'Sensitivity: {C20} - {A20}, density only', C20, A20),
+                                (f'Sensitivity: C - {C20}, viscosity only', 'C', C20)):
             difference_rows.append(difference_row(common, label, sample, name, b[high], b[low]))
         if label == 'deepest':
             for shift in SHIFTS_C:
                 for name, fluid_used in (('mud', fluid), ('viscosity at T_REF', fixed_viscosity(fluid))):
-                    base = b['C'] if name == 'mud' else b['C, viscosity at T_REF']
+                    base = b['C'] if name == 'mud' else b[C20]
                     shifted = budget(result, kw, result['Tu']+shift, result['Td'], fluid_used)
                     sensitivity_rows.append(dict(sample_id=sample, shift_C=shift, viscosity=(
                         'follows temperature' if name == 'mud' else 'fixed at T_REF'),
