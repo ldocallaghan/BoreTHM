@@ -1,0 +1,2 @@
+sample_id,density_ppg,rho_kg_m3,g_m_s2,bit_tvd_ft,model_psi,rho_g_tvd_psi,rho_g_tvd_difference_percent,iapws97_column_psi,iapws97_difference_percent,water_rho_T_REF_kg_m3
+58t-0821,8.6,1030.51,9.81,7522.41,3379.28,3361.81,0.519783,3379.27,0.000418465,998.205

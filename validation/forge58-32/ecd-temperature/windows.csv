@@ -1,0 +1,4 @@
+window,sample_id,time,bha,bit_md_ft,bit_tvd_ft,hole_ft,flow_primary_gpm,mass_flow_kg_s,inlet_C,density_ppg,pv_cP,yp_lbf_100ft2,mud_sample,rheology_sample,pv_reference_C,tfa_in2,components_as_drill_pipe,return_committed_C,return_recalculated_C,return_difference_C,bit_recalculated_C,annulus_at_bit_C,scored_windows
+shallow,58t-0074,2017-08-05 18:30:00,2,1887.74,1887.58,1887.75,599.835,40.8323,51.2588,9.1,16,24,2017-08-05 21:15,2017-08-05 21:15,48.9,1.11367,,53.0089,53.0089,0,52.8822,53.2901,760
+mid-depth,58t-0246,2017-08-13 20:00:00,5,3766.09,3765.52,3766.09,512.113,35.8855,58.7915,9.4,15,20,2017-08-13 19:00,2017-08-13 19:00,48.9,0.920388,MMTR;STAB;SHOCK;DCM;STAB;DC;JAR;DC;XO;HWDP,61.3283,61.3283,0,60.6701,61.1216,760
+deepest,58t-0821,2017-09-13 19:00:00,20,7530.58,7522.41,7530.58,439.806,28.3133,49.3559,8.6,6,13,2017-09-13 17:00,2017-09-13 17:00,48.9,0.745515,MMTR;STAB;SHOCK;STAB;DCM;STAB;DC;JAR;DC;XO,56.5898,56.5898,0,52.4926,52.9482,760
