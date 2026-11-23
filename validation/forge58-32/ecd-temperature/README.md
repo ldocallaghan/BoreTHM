@@ -22,7 +22,7 @@ The settings are the v1.9.0 defaults: the Herschel-Bulkley annulus with the Erge
 
 ## Results
 
-In the deepest window the formation is at 199 °C at the bit and the circulating mud at 53 °C. There, the static formation temperature gives an ECD at the bit 0.0477 SG (0.40 ppg, 155.6 psi) below case C. Surface temperature gives an ECD 0.0158 SG (0.13 ppg, 51.5 psi) above it. A shift of 2 °C in the whole circulating profile changes it by 0.0015 SG (0.013 ppg, 5.0 psi).
+In the deepest window the formation is at 199 °C at the bit and the circulating mud at 53 °C. There, the static formation temperature gives an ECD at the bit 0.0477 SG (0.40 ppg, 155.6 psi) below case C. Surface temperature gives an ECD 0.0158 SG (0.13 ppg, 51.5 psi) above it. A shift of 2 °C in the whole circulating profile, about the model's return-temperature error on this well, changes it by 0.0015 SG (0.013 ppg, 5.0 psi).
 
 ECD at the bit, SG (ppg):
 
